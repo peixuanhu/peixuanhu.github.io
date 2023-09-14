@@ -14,8 +14,8 @@
 <meta property="og:description" content="面向对象编程基础三大特性1. 封装每个对象都包含它能进行操作所需要的所有信息，这个特性称为封装，因此对象不必依赖其他对象来完成自己的操作。 好处 良好的封装能够减少耦合（让某类和调用该类方法的其他类分离） 类内部的实现可以自由地修改（不影响其他的类） 类具有清晰的对外接口（其他类只需要关心这些接口，不用管内部实现）  2. 继承继承定义了类如何相互关联，共享特性（is-a, not has-a）。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg">
-<meta property="article:published_time" content="2023-09-13T15:12:09.000Z">
-<meta property="article:modified_time" content="2023-09-13T15:14:06.288Z">
+<meta property="article:published_time" content="2023-09-13T15:30:33.000Z">
+<meta property="article:modified_time" content="2023-09-13T15:30:33.000Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg">
@@ -80,7 +80,7 @@
         <section id="main"><article id="post-design-pattern/0.OOP_basic" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/13/design-pattern/0.OOP_basic/" class="article-date">
-  <time class="dt-published" datetime="2023-09-13T15:12:09.000Z" itemprop="datePublished">2023-09-13</time>
+  <time class="dt-published" datetime="2023-09-13T15:30:33.000Z" itemprop="datePublished">2023-09-13</time>
 </a>
     
   <div class="article-category">
@@ -137,7 +137,8 @@
 <li>应该考虑让抽象类拥有<strong>尽可能多的共同代码</strong>，拥有<strong>尽可能少的数据</strong></li>
 </ul>
 <h5 id="什么时候应该用抽象类？"><a href="#什么时候应该用抽象类？" class="headerlink" title="什么时候应该用抽象类？"></a>什么时候应该用抽象类？</h5><p>抽象类通常代表一个抽象概念，它提供一个<strong>继承的出发点</strong>，当设计一个新的抽象类时，一定是用来继承的。所以，在一个以继承关系形成的等级结构里面，<strong>树叶节点</strong>应当是<strong>具体类</strong>，而<strong>树枝节点</strong>均应当是<strong>抽象类</strong></p>
-<p><img src="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg" alt="抽象类和具体类.jpg"></p>
+<img src="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg" alt="抽象类和具体类.jpg" style="zoom:40%;" />
+
 <h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>接口是把隐式公共方法和属性组合起来，以封装特定功能的一个集合。一旦类实现了接口，类就可以支持接口所指定的所有属性和成员。</p>
 <p>声明接口在语法上与声明抽象类完全相同，但不允许提供接口中任何成员的执行方式。</p>
 <p>实现接口的类就必须要实现接口中的所有方法和属性。</p>
@@ -205,6 +206,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2023/09/14/design-pattern/1.%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          设计模式1-简单工厂模式
+        
+      </div>
+    </a>
+  
   
     <a href="/2023/08/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
@@ -251,6 +261,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/09/14/design-pattern/1.%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式1-简单工厂模式</a>
+          </li>
         
           <li>
             <a href="/2023/09/13/design-pattern/0.OOP_basic/">设计模式0-OOP Basic</a>
