@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>LeetCode146. LRU 缓存 | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="来源CodeTop字节高频题。 https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;lru-cache&#x2F;description&#x2F; 题目描述请你设计并实现一个满足 LRU (最近最少使用) 缓存 约束的数据结构。 实现 LRUCache 类：  LRUCache(int capacity) 以 正整数 作为容量 capacity 初始化 LRU 缓存 int get(int key) 如果关键">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode146. LRU 缓存">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/09/15/algorithm/leetcode/146.LRU%20%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="来源CodeTop字节高频题。 https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;lru-cache&#x2F;description&#x2F; 题目描述请你设计并实现一个满足 LRU (最近最少使用) 缓存 约束的数据结构。 实现 LRUCache 类：  LRUCache(int capacity) 以 正整数 作为容量 capacity 初始化 LRU 缓存 int get(int key) 如果关键">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-15T13:41:38.000Z">
+<meta property="article:modified_time" content="2023-09-15T13:41:38.000Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-algorithm/leetcode/146.LRU 缓存" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/15/algorithm/leetcode/146.LRU%20%E7%BC%93%E5%AD%98/" class="article-date">
+  <time class="dt-published" datetime="2023-09-15T13:41:38.000Z" itemprop="datePublished">2023-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/LeetCode/">LeetCode</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      LeetCode146. LRU 缓存
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p>CodeTop字节高频题。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lru-cache/description/">https://leetcode.cn/problems/lru-cache/description/</a></p>
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>请你设计并实现一个满足 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/LRU">LRU (最近最少使用) 缓存</a> 约束的数据结构。</p>
+<p>实现 <code>LRUCache</code> 类：</p>
+<ul>
+<li><code>LRUCache(int capacity)</code> 以 <strong>正整数</strong> 作为容量 <code>capacity</code> 初始化 LRU 缓存</li>
+<li><code>int get(int key)</code> 如果关键字 <code>key</code> 存在于缓存中，则返回关键字的值，否则返回 <code>-1</code> 。</li>
+<li><code>void put(int key, int value)</code> 如果关键字 <code>key</code> 已经存在，则变更其数据值 <code>value</code> ；如果不存在，则向缓存中插入该组 <code>key-value</code> 。如果插入操作导致关键字数量超过 <code>capacity</code> ，则应该 <strong>逐出</strong> 最久未使用的关键字。</li>
+</ul>
+<p>函数 <code>get</code> 和 <code>put</code> 必须以 <code>O(1)</code> 的平均时间复杂度运行。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">输入</span><br><span class="line">[&quot;LRUCache&quot;, &quot;put&quot;, &quot;put&quot;, &quot;get&quot;, &quot;put&quot;, &quot;get&quot;, &quot;put&quot;, &quot;get&quot;, &quot;get&quot;, &quot;get&quot;]</span><br><span class="line">[[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]</span><br><span class="line">输出</span><br><span class="line">[null, null, null, 1, null, -1, null, -1, 3, 4]</span><br><span class="line"></span><br><span class="line">解释</span><br><span class="line">LRUCache lRUCache = new LRUCache(2);</span><br><span class="line">lRUCache.put(1, 1); // 缓存是 &#123;1=1&#125;</span><br><span class="line">lRUCache.put(2, 2); // 缓存是 &#123;1=1, 2=2&#125;</span><br><span class="line">lRUCache.get(1);    // 返回 1</span><br><span class="line">lRUCache.put(3, 3); // 该操作会使得关键字 2 作废，缓存是 &#123;1=1, 3=3&#125;</span><br><span class="line">lRUCache.get(2);    // 返回 -1 (未找到)</span><br><span class="line">lRUCache.put(4, 4); // 该操作会使得关键字 1 作废，缓存是 &#123;4=4, 3=3&#125;</span><br><span class="line">lRUCache.get(1);    // 返回 -1 (未找到)</span><br><span class="line">lRUCache.get(3);    // 返回 3</span><br><span class="line">lRUCache.get(4);    // 返回 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= capacity &lt;= 3000</code></li>
+<li><code>0 &lt;= key &lt;= 10000</code></li>
+<li><code>0 &lt;= value &lt;= 105</code></li>
+<li>最多调用 <code>2 * 10^5</code> 次 <code>get</code> 和 <code>put</code></li>
+</ul>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><ul>
+<li>哈希表</li>
+<li>双向链表</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>用哈希表和双向链表两个数据结构实现。</p>
+<p>哈希表用来存储key对应的Node，双向链表用来记录每个Node最近使用时间的新旧顺序。</p>
+<p>实现<code>insert</code>和<code>remove</code>两个函数可以在<code>get</code>和<code>put</code>方法中复用。</p>
+<p>注意判断当前哈希表的size是否已经到达capacity，从而决定是否要移除最旧的Node。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LRUCache</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">        <span class="type">int</span> key, val;</span><br><span class="line">        Node *left, *right;</span><br><span class="line">        <span class="built_in">Node</span>(<span class="type">int</span> _key, <span class="type">int</span> _val): <span class="built_in">key</span>(_key), <span class="built_in">val</span>(_val), <span class="built_in">left</span>(<span class="literal">NULL</span>), <span class="built_in">right</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">    &#125;*L, *R;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> capacity;</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, Node*&gt; hash;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">LRUCache</span>(<span class="type">int</span> _capacity) &#123;</span><br><span class="line">        capacity = _capacity;</span><br><span class="line">        L = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">-1</span>, <span class="number">-1</span>), R = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">-1</span>, <span class="number">-1</span>);</span><br><span class="line">        L-&gt;right = R, R-&gt;left = L;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">remove</span><span class="params">(Node *n)</span> </span>&#123;</span><br><span class="line">        n-&gt;left-&gt;right = n-&gt;right;</span><br><span class="line">        n-&gt;right-&gt;left = n-&gt;left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(Node *n)</span> </span>&#123;</span><br><span class="line">        L-&gt;right-&gt;left = n;</span><br><span class="line">        n-&gt;right = L-&gt;right;</span><br><span class="line">        L-&gt;right = n;</span><br><span class="line">        n-&gt;left = L;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">get</span><span class="params">(<span class="type">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hash.<span class="built_in">count</span>(key)) &#123;</span><br><span class="line">            <span class="keyword">auto</span> n = hash[key];</span><br><span class="line">            <span class="built_in">remove</span>(n);</span><br><span class="line">            <span class="built_in">insert</span>(n);</span><br><span class="line">            <span class="keyword">return</span> n-&gt;val;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">put</span><span class="params">(<span class="type">int</span> key, <span class="type">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hash.<span class="built_in">count</span>(key)) &#123;</span><br><span class="line">            <span class="keyword">auto</span> n = hash[key];</span><br><span class="line">            n-&gt;val = value;</span><br><span class="line">            <span class="built_in">remove</span>(n);</span><br><span class="line">            <span class="built_in">insert</span>(n);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">auto</span> n = <span class="keyword">new</span> <span class="built_in">Node</span>(key, value);</span><br><span class="line">            <span class="built_in">insert</span>(n);</span><br><span class="line">            hash[key] = n;</span><br><span class="line">            <span class="keyword">if</span> (hash.<span class="built_in">size</span>() &gt; capacity) &#123;</span><br><span class="line">                <span class="keyword">auto</span> n = R-&gt;left;</span><br><span class="line">                <span class="built_in">remove</span>(n);</span><br><span class="line">                hash.<span class="built_in">erase</span>(n-&gt;key);</span><br><span class="line">                <span class="keyword">delete</span> n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your LRUCache object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * LRUCache* obj = new LRUCache(capacity);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj-&gt;get(key);</span></span><br><span class="line"><span class="comment"> * obj-&gt;put(key,value);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>学习结构体构造函数的简写方法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="type">int</span> key, val;</span><br><span class="line">    Node *left, *right;</span><br><span class="line">    <span class="built_in">Node</span>(<span class="type">int</span> _key, <span class="type">int</span> _val): <span class="built_in">key</span>(_key), <span class="built_in">val</span>(_val), <span class="built_in">left</span>(<span class="literal">NULL</span>), <span class="built_in">right</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;*L, *R;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/15/algorithm/leetcode/146.LRU%20%E7%BC%93%E5%AD%98/" data-id="clmkomz520003ryg1bpzlhqi7" data-title="LeetCode146. LRU 缓存" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/09/15/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode3. 无重复字符的最长子串</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/15/algorithm/leetcode/146.LRU%20%E7%BC%93%E5%AD%98/">LeetCode146. LRU 缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/15/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">LeetCode3. 无重复字符的最长子串</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/15/MyBatis/#%7B%7Dvs$%7B%7D/">MyBatis中</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/15/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/">AOP术语和AspectJ示例</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

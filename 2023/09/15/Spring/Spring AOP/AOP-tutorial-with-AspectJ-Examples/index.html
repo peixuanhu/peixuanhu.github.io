@@ -9,12 +9,12 @@
   <meta name="description" content="TerminologiesStatic - Compile TimeAspectAspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve. Examples Transaction Mana">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AOP术语和AspectJ示例">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/09/14/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/index.html">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
 <meta property="og:description" content="TerminologiesStatic - Compile TimeAspectAspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve. Examples Transaction Mana">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-14T08:29:12.000Z">
-<meta property="article:modified_time" content="2023-09-14T08:29:12.000Z">
+<meta property="article:published_time" content="2023-09-15T01:36:07.000Z">
+<meta property="article:modified_time" content="2023-09-15T01:36:07.000Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary">
   
@@ -77,8 +77,8 @@
       <div class="outer">
         <section id="main"><article id="post-Spring/Spring AOP/AOP-tutorial-with-AspectJ-Examples" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/09/14/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/" class="article-date">
-  <time class="dt-published" datetime="2023-09-14T08:29:12.000Z" itemprop="datePublished">2023-09-14</time>
+    <a href="/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/" class="article-date">
+  <time class="dt-published" datetime="2023-09-15T01:36:07.000Z" itemprop="datePublished">2023-09-15</time>
 </a>
     
   <div class="article-category">
@@ -131,7 +131,7 @@
 <li><p><strong>@Around</strong> （环绕通知）：编程式控制目标对象的方法调用。环绕通知是所有通知类型中可操作范围最大的一种，因为它可以直接拿到目标对象，以及要执行的方法，所以环绕通知可以任意的在目标对象的方法调用前后搞事，甚至不调用目标对象的方法</p>
 </li>
 </ul>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span> <span class="comment">// AspectJ annotation</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">// Managed by Spring</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyAspect</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;)</span> <span class="comment">// 默认等价于pointcut=&quot;execution...&quot;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;Before &quot;</span>);</span><br><span class="line">        System.out.println(joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@AfterReturning(pointcut=&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;, returning=&quot;result&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint, Object result)</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;After &quot;</span>);</span><br><span class="line">        System.out.print(joinPoint.getSignature().getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;, result is &quot;</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith(SpringJUnit4ClassRunner.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(classes = SpringContextAOP.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AOPExampleTest</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> HiByeService service;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSomething</span><span class="params">()</span> &#123;</span><br><span class="line">        service.sayHi();</span><br><span class="line">        service.sayBye();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span> <span class="comment">// AspectJ annotation</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">// Managed by Spring</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyAspect</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;)</span> <span class="comment">// 默认等价于pointcut=&quot;execution...&quot;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;Before &quot;</span>);</span><br><span class="line">        System.out.println(joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@AfterReturning(pointcut=&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;, returning=&quot;result&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterReturning</span><span class="params">(JoinPoint joinPoint, Object result)</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;After &quot;</span>);</span><br><span class="line">        System.out.print(joinPoint.getSignature().getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;, result is &quot;</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith(SpringJUnit4ClassRunner.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(classes = SpringContextAOP.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AOPExampleTest</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> HiByeService service;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSomething</span><span class="params">()</span> &#123;</span><br><span class="line">        service.sayHi();</span><br><span class="line">        service.sayBye();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
 <li>Spring AOP Tutorial - with AspectJ Examples: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Og9Fyew8ltQ">https://www.youtube.com/watch?v=Og9Fyew8ltQ</a></li>
@@ -140,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/14/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/" data-id="clmiwo1ak00019rg16nkzfgu1" data-title="AOP术语和AspectJ示例" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://peixuanhu.github.io/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/" data-id="clmiwo1ak00019rg16nkzfgu1" data-title="AOP术语和AspectJ示例" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -150,11 +150,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2023/09/14/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/09/15/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          LeetCode3. 无重复字符的最长子串
+          设计模式2-策略模式
         
       </div>
     </a>
@@ -179,7 +179,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
     </div>
   </div>
 
@@ -207,23 +207,23 @@
       <ul>
         
           <li>
-            <a href="/2023/09/14/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">LeetCode3. 无重复字符的最长子串</a>
+            <a href="/2023/09/15/algorithm/leetcode/146.LRU%20%E7%BC%93%E5%AD%98/">LeetCode146. LRU 缓存</a>
           </li>
         
           <li>
-            <a href="/2023/09/14/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/">AOP术语和AspectJ示例</a>
+            <a href="/2023/09/15/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">LeetCode3. 无重复字符的最长子串</a>
           </li>
         
           <li>
-            <a href="/2023/09/14/design-pattern/1.%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式1-简单工厂模式</a>
+            <a href="/2023/09/15/MyBatis/#%7B%7Dvs$%7B%7D/">MyBatis中</a>
           </li>
         
           <li>
-            <a href="/2023/09/14/tips/Hexo-doc/">Hexo Doc</a>
+            <a href="/2023/09/15/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
           </li>
         
           <li>
-            <a href="/2023/09/13/design-pattern/0.OOP_basic/">设计模式0-OOP Basic</a>
+            <a href="/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/">AOP术语和AspectJ示例</a>
           </li>
         
       </ul>
