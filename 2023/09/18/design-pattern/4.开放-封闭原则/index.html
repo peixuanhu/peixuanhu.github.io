@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>设计模式3-单一职责原则 | Peixuan&#39;s Page</title>
+  <title>设计模式4-开放封闭原则 | Peixuan&#39;s Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="SOLID原则中的S: Single Responsibility Principle 准确解释就一个类而言，应该仅有一个引起它变化的原因。 如果一个类承担的职责过多，就等于把这些职责耦合在一起，一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力。这种耦合会导致脆弱的设计，当变化发生时，设计会遭受到意想不到的破坏。 如果你能够想到多于一个的动机去改变一个类，那么这个类就具有多于一个的职责，就">
+  <meta name="description" content="SOLID原则中的O: Open-Close Principle 准确解释开放-封闭原则，是说软件实体（类、模块、函数等）应该可以扩展，但是不可修改。 两个特征 Open for extension 对扩展开放 Close for modification 对修改封闭  具体做法面对需求的改变却可以保持相对稳定，从而使得系统可以在第一个版本以后不断推出新的版本，而不会把整个程序推倒重来。 设计的时">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式3-单一职责原则">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/09/16/design-pattern/3.%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/index.html">
+<meta property="og:title" content="设计模式4-开放封闭原则">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/09/18/design-pattern/4.%E5%BC%80%E6%94%BE-%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="SOLID原则中的S: Single Responsibility Principle 准确解释就一个类而言，应该仅有一个引起它变化的原因。 如果一个类承担的职责过多，就等于把这些职责耦合在一起，一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力。这种耦合会导致脆弱的设计，当变化发生时，设计会遭受到意想不到的破坏。 如果你能够想到多于一个的动机去改变一个类，那么这个类就具有多于一个的职责，就">
+<meta property="og:description" content="SOLID原则中的O: Open-Close Principle 准确解释开放-封闭原则，是说软件实体（类、模块、函数等）应该可以扩展，但是不可修改。 两个特征 Open for extension 对扩展开放 Close for modification 对修改封闭  具体做法面对需求的改变却可以保持相对稳定，从而使得系统可以在第一个版本以后不断推出新的版本，而不会把整个程序推倒重来。 设计的时">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-16T11:43:07.000Z">
-<meta property="article:modified_time" content="2023-09-16T11:43:07.000Z">
+<meta property="article:published_time" content="2023-09-18T03:44:52.000Z">
+<meta property="article:modified_time" content="2023-09-18T03:44:52.000Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary">
   
@@ -75,10 +75,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-design-pattern/3.单一职责原则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-design-pattern/4.开放-封闭原则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/09/16/design-pattern/3.%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" class="article-date">
-  <time class="dt-published" datetime="2023-09-16T11:43:07.000Z" itemprop="datePublished">2023-09-16</time>
+    <a href="/2023/09/18/design-pattern/4.%E5%BC%80%E6%94%BE-%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99/" class="article-date">
+  <time class="dt-published" datetime="2023-09-18T03:44:52.000Z" itemprop="datePublished">2023-09-18</time>
 </a>
     
   <div class="article-category">
@@ -93,7 +93,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      设计模式3-单一职责原则
+      设计模式4-开放封闭原则
     </h1>
   
 
@@ -101,27 +101,31 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>SOLID原则中的S: <strong>S</strong>ingle Responsibility Principle</p>
-<h1 id="准确解释"><a href="#准确解释" class="headerlink" title="准确解释"></a>准确解释</h1><p>就一个类而言，应该仅有一个引起它变化的原因。</p>
-<p>如果一个类承担的职责过多，就等于把这些职责耦合在一起，一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力。这种耦合会导致脆弱的设计，当变化发生时，设计会遭受到意想不到的破坏。</p>
-<p>如果你能够想到<strong>多于一个的动机去改变一个类</strong>，那么这个类就具有<strong>多于一个的职责</strong>，就应该考虑类的职责分离。</p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="俄罗斯方块开发"><a href="#俄罗斯方块开发" class="headerlink" title="俄罗斯方块开发"></a>俄罗斯方块开发</h2><p>将游戏界面和游戏逻辑分离开。界面的变化是和游戏本身没有关系的，界面是容易变化的，而游戏逻辑是不太容易变化的，将它们分离开有利于界面的改动。</p>
-<h3 id="游戏界面"><a href="#游戏界面" class="headerlink" title="游戏界面"></a>游戏界面</h3><ul>
-<li>Android</li>
-<li>Web</li>
-<li>Windows</li>
+        <p>SOLID原则中的O: <strong>O</strong>pen-Close Principle</p>
+<h1 id="准确解释"><a href="#准确解释" class="headerlink" title="准确解释"></a>准确解释</h1><p>开放-封闭原则，是说软件实体（类、模块、函数等）应该可以扩展，但是不可修改。</p>
+<h2 id="两个特征"><a href="#两个特征" class="headerlink" title="两个特征"></a>两个特征</h2><ul>
+<li>Open for extension 对扩展开放</li>
+<li>Close for modification 对修改封闭</li>
 </ul>
-<h3 id="游戏逻辑"><a href="#游戏逻辑" class="headerlink" title="游戏逻辑"></a>游戏逻辑</h3><ul>
-<li>移动</li>
-<li>旋转</li>
-<li>消层</li>
-<li>堆积</li>
-</ul>
+<h2 id="具体做法"><a href="#具体做法" class="headerlink" title="具体做法"></a>具体做法</h2><p>面对需求的改变却可以保持相对稳定，从而使得系统可以在第一个版本以后不断推出新的版本，而不会把整个程序推倒重来。</p>
+<p>设计的时候，时刻要考虑，尽量让这个类足够好，写好了就不要去修改了，如果新需求来，我们增加一些类就完事了，原来的代码能不动则不动。</p>
+<p>绝对的对修改关闭是不可能的。无论模块是多么的’封闭’，都会存在一些无法对之封闭的变化。既然不可能完全封闭，设计人员必须对于他设计的模块<strong>应该对哪种变化封闭</strong>做出选择。他必须先猜测出最有可能发生的变化种类，然后<strong>构造抽象</strong>来隔离那些变化。</p>
+<p>我们是很难预先猜测，但我们却可以在发生小变化时，就及早去想办法应对发生更大变化的可能。也就是说，<strong>等到变化发生时立即采取行动</strong>。在我们最初编写代码时，假设变化不会发生。当变化发生时，我们就创建抽象来隔离以后发生的同类变化。</p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>简单工厂模式中的计算器。</p>
+<ol>
+<li>首先加法程序写在client类中。</li>
+<li>然后增加减法功能，发现需要修改原来类，违背OCP -&gt; 考虑重构程序，增加抽象的运算类 -&gt; 能够满足需求，并能应对变化</li>
+<li>增加乘除法功能，无需修改client类，只需增加乘法和除法的子类。</li>
+</ol>
+<p>面对需求，对程序的改动是通过增加新代码进行的，而不是更改现有的代码。</p>
+<p>我们希望的是在开发工作展开不久就知道可能发生的变化。查明可能发生的变化所等待的时间越长，要创建正确的抽象就越困难。（如：加减运算在很多地方应用了，再考虑抽象、考虑分离，就很困难）</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>开放-封闭原则是面向对象设计的核心所在。遵循这个原则可以带来面向对象技术所声称的巨大好处，也就是<strong>可维护、可扩展、可复用、灵活性好</strong>。</p>
+<p>开发人员应该仅对程序中呈现出频繁变化的那些部分做出抽象，然而，对于应用程序中的每个部分都刻意地进行抽象同样不是一个好主意。<strong>拒绝不成熟的抽象和抽象本身一样重要</strong>。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/16/design-pattern/3.%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" data-id="clmm526wj00011eg14snw1ihb" data-title="设计模式3-单一职责原则" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://peixuanhu.github.io/2023/09/18/design-pattern/4.%E5%BC%80%E6%94%BE-%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99/" data-id="clmq4ni2j0001m2g19kwtexve" data-title="设计模式4-开放封闭原则" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -131,19 +135,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2023/09/16/algorithm/leetcode/206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88-List/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          LeetCode206. 反转链表
+          Java集合-List
         
       </div>
     </a>
   
   
-    <a href="/2023/09/16/MyBatis/MyBatis%E5%8F%82%E6%95%B0%E6%9B%BF%E6%8D%A2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2023/09/16/MyBatis/MyBatis%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">MyBatis中#{}和${}的区别是什么？</div>
+      <div class="article-nav-title">MyBatis常用标签</div>
     </a>
   
 </nav>

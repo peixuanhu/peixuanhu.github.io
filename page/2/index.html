@@ -73,6 +73,657 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-design-pattern/3.单一职责原则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/16/design-pattern/3.%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" class="article-date">
+  <time class="dt-published" datetime="2023-09-16T11:43:07.000Z" itemprop="datePublished">2023-09-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/16/design-pattern/3.%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/">设计模式3-单一职责原则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>SOLID原则中的S: <strong>S</strong>ingle Responsibility Principle</p>
+<h1 id="准确解释"><a href="#准确解释" class="headerlink" title="准确解释"></a>准确解释</h1><p>就一个类而言，应该仅有一个引起它变化的原因。</p>
+<p>如果一个类承担的职责过多，就等于把这些职责耦合在一起，一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力。这种耦合会导致脆弱的设计，当变化发生时，设计会遭受到意想不到的破坏。</p>
+<p>如果你能够想到<strong>多于一个的动机去改变一个类</strong>，那么这个类就具有<strong>多于一个的职责</strong>，就应该考虑类的职责分离。</p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="俄罗斯方块开发"><a href="#俄罗斯方块开发" class="headerlink" title="俄罗斯方块开发"></a>俄罗斯方块开发</h2><p>将游戏界面和游戏逻辑分离开。界面的变化是和游戏本身没有关系的，界面是容易变化的，而游戏逻辑是不太容易变化的，将它们分离开有利于界面的改动。</p>
+<h3 id="游戏界面"><a href="#游戏界面" class="headerlink" title="游戏界面"></a>游戏界面</h3><ul>
+<li>Android</li>
+<li>Web</li>
+<li>Windows</li>
+</ul>
+<h3 id="游戏逻辑"><a href="#游戏逻辑" class="headerlink" title="游戏逻辑"></a>游戏逻辑</h3><ul>
+<li>移动</li>
+<li>旋转</li>
+<li>消层</li>
+<li>堆积</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/16/design-pattern/3.%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" data-id="clmm526wj00011eg14snw1ihb" data-title="设计模式3-单一职责原则" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-MyBatis/MyBatis参数替换" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/16/MyBatis/MyBatis%E5%8F%82%E6%95%B0%E6%9B%BF%E6%8D%A2/" class="article-date">
+  <time class="dt-published" datetime="2023-09-16T02:33:26.000Z" itemprop="datePublished">2023-09-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MyBatis/">MyBatis</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/16/MyBatis/MyBatis%E5%8F%82%E6%95%B0%E6%9B%BF%E6%8D%A2/">MyBatis中#{}和${}的区别是什么？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>动态 sql 是 MyBatis 的主要特性之一，在 mapper 中定义的参数传到 xml 中之后，在查询之前 MyBatis 会对其进行动态解析。MyBatis 为我们提供了两种支持动态 sql 的语法：#{} 以及 ${}。</p>
+<h2 id="一句话回答"><a href="#一句话回答" class="headerlink" title="一句话回答"></a>一句话回答</h2><p>#{}是预编译处理，${}是字符串替换。</p>
+<h2 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h2><ul>
+<li><p>MyBatis在处理#{}时，会将SQL中的#{}替换为?号，使用PreparedStatement的set方法来赋值；</p>
+</li>
+<li><p>而MyBatis在处理${}时，直接把${}替换成变量的值。</p>
+</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectPerson&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;int&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;hashmap&quot;</span>&gt;</span></span><br><span class="line">  SELECT * FROM PERSON WHERE ID = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个语句名为 selectPerson，接受一个 int（或 Integer）类型的参数，并返回一个 HashMap 类型的对象，其中的键是列名，值便是结果行中的对应值。</p>
+<p>注意参数符号：#{id}</p>
+<p>这就告诉 MyBatis 创建一个预处理语句（PreparedStatement）参数，在 JDBC 中，这样的一个参数在 SQL 中会由一个“?”来标识，并被传递到一个新的预处理语句中，就像这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 近似的 JDBC 代码，非 MyBatis 代码...</span></span><br><span class="line"><span class="type">String</span> <span class="variable">selectPerson</span> <span class="operator">=</span> <span class="string">&quot;SELECT * FROM PERSON WHERE ID = ?&quot;</span>;</span><br><span class="line"><span class="type">PreparedStatement</span> <span class="variable">ps</span> <span class="operator">=</span> conn.prepareStatement(selectPerson);</span><br><span class="line">ps.setInt(<span class="number">1</span>,id);</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="防止恶意SQL注入示例"><a href="#防止恶意SQL注入示例" class="headerlink" title="防止恶意SQL注入示例"></a>防止恶意SQL注入示例</h3><h4 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;select * from tb_name where name = &#x27;&quot;</span> + varname + <span class="string">&quot;&#x27; and passwd = &#x27;&quot;</span> + varpasswd + <span class="string">&quot;&#x27; &quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们把<code>[ &#39; or&#39;1&#39;=&#39;1&#39;]</code>作为<code>varpasswd</code>传入进来.用户名随意,看看会成为什么?</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_name <span class="operator">=</span> <span class="string">&#x27;随意&#x27;</span> <span class="keyword">and</span> passwd <span class="operator">=</span> <span class="string">&#x27; &#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;1&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>因为’1’&#x3D;’1’肯定成立,所以可以任何通过验证</p>
+<h4 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> $&#123;tableName&#125; <span class="keyword">where</span> name <span class="operator">=</span> #&#123;name&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，如果${tableName}传入<code>user; delete user; --</code></p>
+<p>则动态解析之后 sql 如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span>; <span class="keyword">delete</span> <span class="keyword">user</span>; <span class="comment">-- where name = ?;</span></span><br></pre></td></tr></table></figure>
+
+<p>–之后的语句被注释掉，而原本查询用户的语句变成了查询所有用户信息+删除用户表的语句，会对数据库造成重大损伤，极大可能导致服务器宕机。</p>
+<h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><p>指的是数据库驱动在发送 sql 语句和参数给 DBMS 之前对 sql 语句进行编译，这样 DBMS 执行 sql 时，就不需要重新编译。</p>
+<h5 id="为什么需要预编译"><a href="#为什么需要预编译" class="headerlink" title="为什么需要预编译?"></a>为什么需要预编译?</h5><p>预编译是提前对SQL语句进行预编译，而其后注入的参数将不会再进行SQL编译。我们知道，SQL注入是发生在编译的过程中，因为恶意注入了某些特殊字符，最后被编译成了恶意的执行操作。而预编译机制则可以很好的防止SQL注入。</p>
+<p>JDBC 中使用对象 PreparedStatement 来抽象预编译语句，使用预编译。</p>
+<ol>
+<li><p><strong>预编译阶段可以优化 sql 的执行</strong>。</p>
+<ul>
+<li>预编译之后的 sql 多数情况下可以直接执行，DBMS 不需要再次编译，越复杂的sql，编译的复杂度将越大，预编译阶段可以合并多次操作为一个操作。</li>
+</ul>
+</li>
+<li><p><strong>预编译语句对象可以重复利用</strong>。</p>
+<ul>
+<li>把一个 sql 预编译后产生的 PreparedStatement 对象缓存下来，下次对于同一个sql，可以直接使用这个缓存的 PreparedState 对象。</li>
+</ul>
+</li>
+</ol>
+<p>MyBatis 默认情况下，将对所有的 sql 进行预编译。</p>
+<h3 id="MyBatis-sql-动态解析"><a href="#MyBatis-sql-动态解析" class="headerlink" title="MyBatis sql 动态解析"></a>MyBatis sql 动态解析</h3><p>MyBatis 在调用 connection 进行 sql 预编译之前，会对sql语句进行动态解析，动态解析主要包含如下的功能：</p>
+<ul>
+<li><p>占位符的处理</p>
+</li>
+<li><p>动态sql的处理</p>
+</li>
+<li><p>参数类型校验</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/16/MyBatis/MyBatis%E5%8F%82%E6%95%B0%E6%9B%BF%E6%8D%A2/" data-id="clmq4ni2g0000m2g17i29fj2h" data-title="MyBatis中#{}和${}的区别是什么？" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/leetcode/146.LRU 缓存" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/15/algorithm/leetcode/146.LRU%20%E7%BC%93%E5%AD%98/" class="article-date">
+  <time class="dt-published" datetime="2023-09-15T13:41:38.000Z" itemprop="datePublished">2023-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/LeetCode/">LeetCode</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/15/algorithm/leetcode/146.LRU%20%E7%BC%93%E5%AD%98/">LeetCode146. LRU 缓存</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p>CodeTop字节高频题。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lru-cache/description/">https://leetcode.cn/problems/lru-cache/description/</a></p>
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>请你设计并实现一个满足 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/LRU">LRU (最近最少使用) 缓存</a> 约束的数据结构。</p>
+<p>实现 <code>LRUCache</code> 类：</p>
+<ul>
+<li><code>LRUCache(int capacity)</code> 以 <strong>正整数</strong> 作为容量 <code>capacity</code> 初始化 LRU 缓存</li>
+<li><code>int get(int key)</code> 如果关键字 <code>key</code> 存在于缓存中，则返回关键字的值，否则返回 <code>-1</code> 。</li>
+<li><code>void put(int key, int value)</code> 如果关键字 <code>key</code> 已经存在，则变更其数据值 <code>value</code> ；如果不存在，则向缓存中插入该组 <code>key-value</code> 。如果插入操作导致关键字数量超过 <code>capacity</code> ，则应该 <strong>逐出</strong> 最久未使用的关键字。</li>
+</ul>
+<p>函数 <code>get</code> 和 <code>put</code> 必须以 <code>O(1)</code> 的平均时间复杂度运行。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">输入</span><br><span class="line">[&quot;LRUCache&quot;, &quot;put&quot;, &quot;put&quot;, &quot;get&quot;, &quot;put&quot;, &quot;get&quot;, &quot;put&quot;, &quot;get&quot;, &quot;get&quot;, &quot;get&quot;]</span><br><span class="line">[[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]</span><br><span class="line">输出</span><br><span class="line">[null, null, null, 1, null, -1, null, -1, 3, 4]</span><br><span class="line"></span><br><span class="line">解释</span><br><span class="line">LRUCache lRUCache = new LRUCache(2);</span><br><span class="line">lRUCache.put(1, 1); // 缓存是 &#123;1=1&#125;</span><br><span class="line">lRUCache.put(2, 2); // 缓存是 &#123;1=1, 2=2&#125;</span><br><span class="line">lRUCache.get(1);    // 返回 1</span><br><span class="line">lRUCache.put(3, 3); // 该操作会使得关键字 2 作废，缓存是 &#123;1=1, 3=3&#125;</span><br><span class="line">lRUCache.get(2);    // 返回 -1 (未找到)</span><br><span class="line">lRUCache.put(4, 4); // 该操作会使得关键字 1 作废，缓存是 &#123;4=4, 3=3&#125;</span><br><span class="line">lRUCache.get(1);    // 返回 -1 (未找到)</span><br><span class="line">lRUCache.get(3);    // 返回 3</span><br><span class="line">lRUCache.get(4);    // 返回 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= capacity &lt;= 3000</code></li>
+<li><code>0 &lt;= key &lt;= 10000</code></li>
+<li><code>0 &lt;= value &lt;= 105</code></li>
+<li>最多调用 <code>2 * 10^5</code> 次 <code>get</code> 和 <code>put</code></li>
+</ul>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><ul>
+<li>哈希表</li>
+<li>双向链表</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>用哈希表和双向链表两个数据结构实现。</p>
+<p>哈希表用来存储key对应的Node，双向链表用来记录每个Node最近使用时间的新旧顺序。</p>
+<p>实现<code>insert</code>和<code>remove</code>两个函数可以在<code>get</code>和<code>put</code>方法中复用。</p>
+<p>注意判断当前哈希表的size是否已经到达capacity，从而决定是否要移除最旧的Node。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LRUCache</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">        <span class="type">int</span> key, val;</span><br><span class="line">        Node *left, *right;</span><br><span class="line">        <span class="built_in">Node</span>(<span class="type">int</span> _key, <span class="type">int</span> _val): <span class="built_in">key</span>(_key), <span class="built_in">val</span>(_val), <span class="built_in">left</span>(<span class="literal">NULL</span>), <span class="built_in">right</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">    &#125;*L, *R;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> capacity;</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, Node*&gt; hash;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">LRUCache</span>(<span class="type">int</span> _capacity) &#123;</span><br><span class="line">        capacity = _capacity;</span><br><span class="line">        L = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">-1</span>, <span class="number">-1</span>), R = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">-1</span>, <span class="number">-1</span>);</span><br><span class="line">        L-&gt;right = R, R-&gt;left = L;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">remove</span><span class="params">(Node *n)</span> </span>&#123;</span><br><span class="line">        n-&gt;left-&gt;right = n-&gt;right;</span><br><span class="line">        n-&gt;right-&gt;left = n-&gt;left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(Node *n)</span> </span>&#123;</span><br><span class="line">        L-&gt;right-&gt;left = n;</span><br><span class="line">        n-&gt;right = L-&gt;right;</span><br><span class="line">        L-&gt;right = n;</span><br><span class="line">        n-&gt;left = L;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">get</span><span class="params">(<span class="type">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hash.<span class="built_in">count</span>(key)) &#123;</span><br><span class="line">            <span class="keyword">auto</span> n = hash[key];</span><br><span class="line">            <span class="built_in">remove</span>(n);</span><br><span class="line">            <span class="built_in">insert</span>(n);</span><br><span class="line">            <span class="keyword">return</span> n-&gt;val;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">put</span><span class="params">(<span class="type">int</span> key, <span class="type">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hash.<span class="built_in">count</span>(key)) &#123;</span><br><span class="line">            <span class="keyword">auto</span> n = hash[key];</span><br><span class="line">            n-&gt;val = value;</span><br><span class="line">            <span class="built_in">remove</span>(n);</span><br><span class="line">            <span class="built_in">insert</span>(n);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">auto</span> n = <span class="keyword">new</span> <span class="built_in">Node</span>(key, value);</span><br><span class="line">            <span class="built_in">insert</span>(n);</span><br><span class="line">            hash[key] = n;</span><br><span class="line">            <span class="keyword">if</span> (hash.<span class="built_in">size</span>() &gt; capacity) &#123;</span><br><span class="line">                <span class="keyword">auto</span> n = R-&gt;left;</span><br><span class="line">                <span class="built_in">remove</span>(n);</span><br><span class="line">                hash.<span class="built_in">erase</span>(n-&gt;key);</span><br><span class="line">                <span class="keyword">delete</span> n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your LRUCache object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * LRUCache* obj = new LRUCache(capacity);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj-&gt;get(key);</span></span><br><span class="line"><span class="comment"> * obj-&gt;put(key,value);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>学习结构体构造函数的简写方法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="type">int</span> key, val;</span><br><span class="line">    Node *left, *right;</span><br><span class="line">    <span class="built_in">Node</span>(<span class="type">int</span> _key, <span class="type">int</span> _val): <span class="built_in">key</span>(_key), <span class="built_in">val</span>(_val), <span class="built_in">left</span>(<span class="literal">NULL</span>), <span class="built_in">right</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;*L, *R;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/15/algorithm/leetcode/146.LRU%20%E7%BC%93%E5%AD%98/" data-id="clmkomz520003ryg1bpzlhqi7" data-title="LeetCode146. LRU 缓存" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/leetcode/3.无重复字符的最长子串" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/15/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" class="article-date">
+  <time class="dt-published" datetime="2023-09-15T13:37:41.000Z" itemprop="datePublished">2023-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/LeetCode/">LeetCode</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/15/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">LeetCode3. 无重复字符的最长子串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p>CodeTop字节高频题。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/">https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/</a></p>
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;bbbbb&quot;</span><br><span class="line">输出: 1</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= s.length &lt;= 5 * 10^4</code></li>
+<li><code>s</code> 由英文字母、数字、符号和空格组成</li>
+</ul>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><ul>
+<li>哈希表</li>
+<li>滑动窗口（双指针）</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="原始思路"><a href="#原始思路" class="headerlink" title="原始思路"></a>原始思路</h2><p>从头到尾遍历字符串s，hash存储每个字符最后出现的下标，p作为子串起始点，i为子串当前结束点。</p>
+<p>i每次移动，更新对应字符下标。如果出现重复字符，将子串起点p更新到重复字符上一次出现位置的后一个位置（如果已经在它后面了就不动）。</p>
+<p>i每次移动，都更新全局最大长度res。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>(), res = <span class="number">0</span>;</span><br><span class="line">        s = <span class="string">&quot; &quot;</span> + s;</span><br><span class="line">        unordered_map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="type">int</span> p = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!hash[s[i]]) &#123;</span><br><span class="line">                hash[s[i]] = i;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 将子串起点p更新到重复字符上一次出现位置的后一个位置（如果已经在它后面了就不动）</span></span><br><span class="line">                p = <span class="built_in">max</span>(p, hash[s[i]] + <span class="number">1</span>);</span><br><span class="line">                hash[s[i]] = i;</span><br><span class="line">            &#125;</span><br><span class="line">            res = <span class="built_in">max</span>(res, i - p + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以简写为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>(), res = <span class="number">0</span>;</span><br><span class="line">        s = <span class="string">&quot; &quot;</span> + s;</span><br><span class="line">        unordered_map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="type">int</span> p = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[s[i]]) p = <span class="built_in">max</span>(p, hash[s[i]] + <span class="number">1</span>);</span><br><span class="line">            hash[s[i]] = i;</span><br><span class="line">            res = <span class="built_in">max</span>(res, i - p + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="另一种思路"><a href="#另一种思路" class="headerlink" title="另一种思路"></a>另一种思路</h2><p>i和j为子串右端点和左端点，hash存储每个字符在i和j之间出现的次数，如果出现次数大于1了，把左端点j往右移，直到该字符出现次数为1为止。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>(), res = <span class="number">0</span>;</span><br><span class="line">        unordered_map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">            hash[s[i]] ++;</span><br><span class="line">            <span class="keyword">while</span> (hash[s[i]] &gt; <span class="number">1</span>) hash[s[j ++]] --;</span><br><span class="line">            res = <span class="built_in">max</span>(res, i - j + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/15/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" data-id="clmj512c80000emg1aaf323xo" data-title="LeetCode3. 无重复字符的最长子串" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/2.策略模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/15/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-09-15T02:53:33.000Z" itemprop="datePublished">2023-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/15/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。</p>
+<h3 id="策略模式结构图"><a href="#策略模式结构图" class="headerlink" title="策略模式结构图"></a>策略模式结构图</h3><p><img src="https://s2.loli.net/2023/09/15/yIEHqh67QJ2BUNP.jpg" alt="策略模式结构图.jpg"></p>
+<h3 id="策略模式基本代码"><a href="#策略模式基本代码" class="headerlink" title="策略模式基本代码"></a>策略模式基本代码</h3><p>Strategy类，定义所有支持的算法的公共接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象算法类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="comment">// 算法方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">algorithmInterface</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteStrategy类，封装了具体的算法或行为，继承于Strategy：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体算法A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStrategyA</span> <span class="keyword">extends</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="comment">// 算法A实现方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">algorithmInterface</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;算法A实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体算法B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStrategyB</span> <span class="keyword">extends</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="comment">// 算法A实现方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">algorithmInterface</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;算法B实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体算法C</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStrategyA</span> <span class="keyword">extends</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="comment">// 算法C实现方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">algorithmInterface</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;算法C实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Context类，用一个ConcreteStrategy来配置，维护一个对Strategy对象的引用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 上下文</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Context</span> &#123;</span><br><span class="line">    Strategy strategy;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化时，传入具体的策略对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Context</span><span class="params">(Strategy strategy)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.strategy = strategy;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 上下文接口</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">contextInterface</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 根据具体的策略对象，调用其算法的方法</span></span><br><span class="line">        strategy.algorithmInterface();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Context context;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化不同的策略</span></span><br><span class="line">context = <span class="keyword">new</span> <span class="title class_">Context</span>(<span class="keyword">new</span> <span class="title class_">ConcreteStrategyA</span>());</span><br><span class="line">context.contextInterface();</span><br><span class="line"></span><br><span class="line">context = <span class="keyword">new</span> <span class="title class_">Context</span>(<span class="keyword">new</span> <span class="title class_">ConcreteStrategyA</span>());</span><br><span class="line">context.contextInterface();</span><br><span class="line"></span><br><span class="line">context = <span class="keyword">new</span> <span class="title class_">Context</span>(<span class="keyword">new</span> <span class="title class_">ConcreteStrategyA</span>());</span><br><span class="line">context.contextInterface();</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="例：商场收银软件"><a href="#例：商场收银软件" class="headerlink" title="例：商场收银软件"></a>例：商场收银软件</h1><h2 id="原始版本"><a href="#原始版本" class="headerlink" title="原始版本"></a>原始版本</h2><p>所有内容都写在一个程序中，如要需要修改任意代码，都需要重新安装在商场所有机器中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">price</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 商品单价</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">// 商品数量</span></span><br><span class="line"><span class="type">double</span> <span class="variable">totalPrices</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 当前商品合计费用</span></span><br><span class="line"><span class="type">double</span> <span class="variable">total</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 总计所有商品费用</span></span><br><span class="line"></span><br><span class="line"><span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;请输入商品单价：&quot;</span>);</span><br><span class="line">    price = Double.parseDouble(sc.nextLine());</span><br><span class="line">    System.out.println(<span class="string">&quot;请输入商品数量：&quot;</span>);</span><br><span class="line">    num = Integer.parseInt(sc.nextLine());</span><br><span class="line">    System.out.println();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (price &gt; <span class="number">0</span> &amp;&amp; num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        totalPrices = price * num;</span><br><span class="line">        total += totalPrices;</span><br><span class="line">        </span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">&quot;单价：&quot;</span> + price + <span class="string">&quot;元，数量：&quot;</span> + num + <span class="string">&quot;，合计：&quot;</span> + totalPrices + <span class="string">&quot;元&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">&quot;总计：&quot;</span> + total + <span class="string">&quot;元&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">while</span> (price &gt; <span class="number">0</span> &amp;&amp; num &gt; <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="增加打折"><a href="#增加打折" class="headerlink" title="增加打折"></a>增加打折</h2><p>新增打折&#x2F;返利功能</p>
+<h3 id="硬编码实现版本"><a href="#硬编码实现版本" class="headerlink" title="硬编码实现版本"></a>硬编码实现版本</h3><p>写在客户端程序中。每新增打x折都要重新安装。用下拉框选择销售模式实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">discount</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">// 商品销售模式：1.原价 2.八折 3.七折</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">switch</span> (discount) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        totalPrices = price * num;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        totalPrices = price * num * <span class="number">0.8</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        totalPrices = price * num * <span class="number">0.7</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">total += totalPrices;</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单工厂实现版本"><a href="#简单工厂实现版本" class="headerlink" title="简单工厂实现版本"></a>简单工厂实现版本</h3><p>用收费抽象类，让打折&#x2F;返利继承抽象类，传入对应需要的参数灵活实现具体打几折、满多少返多少，需要新增时在工厂类中添加模式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 收费抽象类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 收费抽象方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正常收费</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashNormal</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 原价返回</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> price * num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打折收费</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashRebate</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyRebate</span> <span class="operator">=</span> <span class="number">1d</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化时输入折扣率</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashRebate</span><span class="params">(<span class="type">double</span> moneyRebate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyRebate = moneyRebate;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 返回乘上折扣率的总价</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> price * num * <span class="built_in">this</span>.moneyRebate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返利收费</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashReturn</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyCondition</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利条件</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyReturn</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利值</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化时输入返利条件和返利值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashRebate</span><span class="params">(<span class="type">double</span> moneyCondition, <span class="type">double</span> moneyReturn)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyCondition = moneyCondition;</span><br><span class="line">        <span class="built_in">this</span>.moneyReturn = moneyReturn;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 返回返利后的总价</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> price * num;</span><br><span class="line">        <span class="keyword">if</span> (moneyCondition &gt; <span class="number">0</span> &amp;&amp; result &gt;= moneyCondition) &#123;</span><br><span class="line">            result -= Math.floor(result / moneyCondition) * moneyReturn;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收费工厂代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> CashSuper <span class="title function_">createCashAccept</span><span class="params">(<span class="type">int</span> cashType)</span> &#123;</span><br><span class="line">        <span class="type">CashSuper</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                cs = <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                cs = <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                cs = <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.7d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                cs = <span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端程序主要部分：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CashSuper</span> <span class="variable">cashSuper</span> <span class="operator">=</span> CashFactory.createCashAccept(cashType);</span><br><span class="line">totalPrices = cashSuper.acceptCash(price, num);</span><br><span class="line">total += totalPrices;</span><br></pre></td></tr></table></figure>
+
+<h3 id="策略模式实现版本"><a href="#策略模式实现版本" class="headerlink" title="策略模式实现版本"></a>策略模式实现版本</h3><p>跟简单工厂很像，只要加一个CashContext类，改写一下客户端代码即可。</p>
+<p>CashContext类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashContext</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> CashSuper cs;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 构造方法传入具体的收费策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashContext</span><span class="params">(CashSuper csuper)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.cs = csuper;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据收费策略的不同，获得计算结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.cs.acceptCash(price, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端主要代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CashContext</span> <span class="variable">cc</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        cc = <span class="keyword">new</span> <span class="title class_">CashContext</span>(<span class="keyword">new</span> <span class="title class_">CashNormal</span>());</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        cc = <span class="keyword">new</span> <span class="title class_">CashContext</span>(<span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>));</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        cc = <span class="keyword">new</span> <span class="title class_">CashContext</span>(<span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.7d</span>));</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        cc = <span class="keyword">new</span> <span class="title class_">CashContext</span>(<span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>));</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过Context的getResult方法调用，得到收费结果</span></span><br><span class="line"><span class="comment">// 让具体算法与客户完全隔离</span></span><br><span class="line">totalPrices = cc.getResult(price, num);</span><br><span class="line">total += totalPrices;</span><br></pre></td></tr></table></figure>
+
+<p>但这样是在客户端判断使用哪种算法，客户能看到具体的收费策略，可以将策略模式与简单工厂模式结合，把判断转移到工厂中。</p>
+<h3 id="策略与简单工厂结合版本"><a href="#策略与简单工厂结合版本" class="headerlink" title="策略与简单工厂结合版本"></a>策略与简单工厂结合版本</h3><p>改进CashContext类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashContext</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> CashSuper cs;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 在构造函数中传入type，根据type来实例化具体的收费策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashContext</span><span class="params">(<span class="type">int</span> cashType)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.7d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据收费策略的不同，获得计算结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.cs.acceptCash(price, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CashContext</span> <span class="variable">cc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashContext</span>(cashType);</span><br><span class="line">totalPrices = cc.getResult(price, num);</span><br><span class="line">total += totalPrices;</span><br></pre></td></tr></table></figure>
+
+<h4 id="与纯简单工厂模式对比"><a href="#与纯简单工厂模式对比" class="headerlink" title="与纯简单工厂模式对比"></a>与纯简单工厂模式对比</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简单工厂模式用法</span></span><br><span class="line"><span class="type">CashSuper</span> <span class="variable">cs</span> <span class="operator">=</span> CashFactory.createCashAccept(cashType);</span><br><span class="line">totalPrices = cs.acceptCash(price, num);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 策略模式与简单工厂模式结合的用法</span></span><br><span class="line"><span class="type">CashContext</span> <span class="variable">cc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashContext</span>(cashType);</span><br><span class="line">totalPrices = cc.getResult(price, num);</span><br></pre></td></tr></table></figure>
+
+<p>简单工厂模式我需要让客户端认识两个类，CashSuper和CashFactory，而策略模式与简单工厂结合的用法，客户端就只需要认识一个类CashContext就可以了。耦合更加降低。</p>
+<p>在客户端实例化的是CashContext的对象，调用的是CashContext的方法GetResult，这使得具体的收费算法彻底地与客户端分离。连算法的父类CashSuper都不让客户端认识了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="策略模式优点"><a href="#策略模式优点" class="headerlink" title="策略模式优点"></a>策略模式优点</h2><ul>
+<li>策略模式是一种定义一系列算法的方法，从概念上来看，所有这些算法完成的都是相同的工作，只是实现不同，它可以以相同的方式调用所有的算法，减少了各种<strong>算法类</strong>与<strong>使用算法类</strong>之间的耦合。<strong>策略模式封装了变化。</strong></li>
+<li>策略模式的Strategy类层次为Context定义了一系列的可供重用的算法或行为。继承有助于<strong>析取</strong>出这些算法中的<strong>公共功能</strong>。如：收费算法公共的功能就是获得计算费用的结果GetResult，这使得算法间有了抽象的父类CashSuper.</li>
+<li>简化了单元测试，因为每个算法都有自己的类，可以通过自己的接口<strong>单独测试</strong>。</li>
+</ul>
+<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h2><p>收银系统中如果要新增折扣，还是需要修改CashContext中的switch语句，可以通过<code>反射技术</code>（抽象工厂模式章节）来解决这个问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/15/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" data-id="clmkomz500001ryg11vrm4pqn" data-title="设计模式2-策略模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Spring/Spring AOP/AOP-tutorial-with-AspectJ-Examples" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/" class="article-date">
+  <time class="dt-published" datetime="2023-09-15T01:36:07.000Z" itemprop="datePublished">2023-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Spring/">Spring</a>►<a class="article-category-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/">AOP术语和AspectJ示例</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Terminologies"><a href="#Terminologies" class="headerlink" title="Terminologies"></a>Terminologies</h1><h2 id="Static-Compile-Time"><a href="#Static-Compile-Time" class="headerlink" title="Static - Compile Time"></a>Static - Compile Time</h2><h3 id="Aspect"><a href="#Aspect" class="headerlink" title="Aspect"></a>Aspect</h3><p>Aspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve.</p>
+<h4 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h4><ul>
+<li>Transaction Management</li>
+<li>Logging (e.g. Every method of business layer called, log the input and output parameters)</li>
+<li>Performance metrics (how much time a method took to execute)</li>
+</ul>
+<h3 id="Pointcut"><a href="#Pointcut" class="headerlink" title="Pointcut"></a>Pointcut</h3><p>A regular expression which determines what are the methods are to be intercepted.</p>
+<p>e.g. execution(* com.example.spring.business.aop.HiByeService.*(..))</p>
+<h3 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a>Advice</h3><p>Action taken by an aspect at a particular join point. What is to be done when the Pointcut is met.</p>
+<h2 id="Dynamic-Runtime"><a href="#Dynamic-Runtime" class="headerlink" title="Dynamic - Runtime"></a>Dynamic - Runtime</h2><h3 id="Join-point"><a href="#Join-point" class="headerlink" title="Join point"></a>Join point</h3><p>A point during the execution of a program. Execution of a specific AOP method.</p>
+<p>All the runtime information about the method call.</p>
+<p>Input parameters of the Advice?</p>
+<h3 id="Weaving"><a href="#Weaving" class="headerlink" title="Weaving"></a>Weaving</h3><p>The entire process of executing the Advice.</p>
+<h1 id="AspectJ"><a href="#AspectJ" class="headerlink" title="AspectJ"></a>AspectJ</h1><h2 id="Annotations"><a href="#Annotations" class="headerlink" title="Annotations"></a>Annotations</h2><h3 id="Aspect类"><a href="#Aspect类" class="headerlink" title="Aspect类"></a>Aspect类</h3><ul>
+<li>@Order(3)，值越小优先级越高</li>
+<li>@Aspect</li>
+<li>@Component</li>
+</ul>
+<h3 id="AspectJ-Advice-Types"><a href="#AspectJ-Advice-Types" class="headerlink" title="AspectJ Advice Types"></a>AspectJ Advice Types</h3><ul>
+<li><p><strong>@Before</strong>（前置通知）：目标对象的方法调用之前触发</p>
+</li>
+<li><p><strong>@After</strong> （后置通知）：目标对象的方法调用之后触发</p>
+</li>
+<li><p><strong>@AfterReturning</strong>（返回通知）：目标对象的方法调用完成，在返回结果值之后触发</p>
+</li>
+<li><p><strong>@AfterThrowing</strong>（异常通知）：目标对象的方法运行中抛出 &#x2F; 触发异常后触发。AfterReturning 和 AfterThrowing 两者互斥。如果方法调用成功无异常，则会有返回值；如果方法抛出了异常，则不会有返回值。</p>
+</li>
+<li><p><strong>@Around</strong> （环绕通知）：编程式控制目标对象的方法调用。环绕通知是所有通知类型中可操作范围最大的一种，因为它可以直接拿到目标对象，以及要执行的方法，所以环绕通知可以任意的在目标对象的方法调用前后搞事，甚至不调用目标对象的方法</p>
+</li>
+</ul>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span> <span class="comment">// AspectJ annotation</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">// Managed by Spring</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyAspect</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;)</span> <span class="comment">// 默认等价于pointcut=&quot;execution...&quot;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;Before &quot;</span>);</span><br><span class="line">        System.out.println(joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@AfterReturning(pointcut=&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;, returning=&quot;result&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterReturning</span><span class="params">(JoinPoint joinPoint, Object result)</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;After &quot;</span>);</span><br><span class="line">        System.out.print(joinPoint.getSignature().getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;, result is &quot;</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith(SpringJUnit4ClassRunner.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(classes = SpringContextAOP.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AOPExampleTest</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> HiByeService service;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSomething</span><span class="params">()</span> &#123;</span><br><span class="line">        service.sayHi();</span><br><span class="line">        service.sayBye();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<li>Spring AOP Tutorial - with AspectJ Examples: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Og9Fyew8ltQ">https://www.youtube.com/watch?v=Og9Fyew8ltQ</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/" data-id="clmiwo1ak00019rg16nkzfgu1" data-title="AOP术语和AspectJ示例" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/1.简单工厂模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/14/design-pattern/1.%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-09-14T08:26:49.000Z" itemprop="datePublished">2023-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/14/design-pattern/1.%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式1-简单工厂模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="业务的封装"><a href="#业务的封装" class="headerlink" title="业务的封装"></a>业务的封装</h1><p>让业务逻辑与界面逻辑分开，让它们之间的耦合度下降。只有分离开，才可以达到容易维护或扩展，且可复用。</p>
+<p>封装业务逻辑，开放特定外部接口，让界面逻辑使用。</p>
+<p>封装业务逻辑前，与界面逻辑糅合在一起，不易维护：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">    System.out.println(<span class="string">&quot;请输入数字A:&quot;</span>);</span><br><span class="line">    <span class="type">double</span> <span class="variable">numberA</span> <span class="operator">=</span> Double.parseDouble(sc.nextLine());</span><br><span class="line">    System.out.println(<span class="string">&quot;请选择运算符号:&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">strOperate</span> <span class="operator">=</span> sc.nextLine();</span><br><span class="line">    System.out.println(<span class="string">&quot;请输入数字B:&quot;</span>);</span><br><span class="line">    <span class="type">double</span> <span class="variable">numberB</span> <span class="operator">=</span> Double.parseDouble(sc.nextLine());</span><br><span class="line">    <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0d</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">switch</span> (strOperate) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;+&quot;</span>:</span><br><span class="line">            result = numberA + numberB;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;-&quot;</span>:</span><br><span class="line">            result = numberA - numberB;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;*&quot;</span>:</span><br><span class="line">            result = numberA * numberB;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;/&quot;</span>:</span><br><span class="line">            result = numberA / numberB;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    System.out.println(<span class="string">&quot;result: &quot;</span> + result);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;wrong input: &quot;</span> + e.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将业务逻辑（计算）封装在Operation类中，与界面逻辑（输出）分离：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Operation类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Operation</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> numberA, <span class="type">double</span> numberB, String operate)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0d</span>;</span><br><span class="line">        <span class="keyword">switch</span> (operate) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;+&quot;</span>:</span><br><span class="line">                result = numberA + numberB;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;-&quot;</span>:</span><br><span class="line">                result = numberA - numberB;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;*&quot;</span>:</span><br><span class="line">                result = numberA * numberB;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;/&quot;</span>:</span><br><span class="line">                result = numberA / numberB;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 客户端代码</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">    System.out.println(<span class="string">&quot;请输入数字A:&quot;</span>);</span><br><span class="line">    <span class="type">double</span> <span class="variable">numberA</span> <span class="operator">=</span> Double.parseDouble(sc.nextLine());</span><br><span class="line">    System.out.println(<span class="string">&quot;请选择运算符号:&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">strOperate</span> <span class="operator">=</span> sc.nextLine();</span><br><span class="line">    System.out.println(<span class="string">&quot;请输入数字B:&quot;</span>);</span><br><span class="line">    <span class="type">double</span> <span class="variable">numberB</span> <span class="operator">=</span> Double.parseDouble(sc.nextLine());</span><br><span class="line">    </span><br><span class="line">    <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> Operation.getResult(numberA, numberB, strOperate);</span><br><span class="line">    </span><br><span class="line">    System.out.println(<span class="string">&quot;result: &quot;</span> + result);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;wrong input: &quot;</span> + e.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="紧耦合vs松耦合"><a href="#紧耦合vs松耦合" class="headerlink" title="紧耦合vs松耦合"></a>紧耦合vs松耦合</h1><p>按照上一节的写法，如果需要增加一个新的运算方式，加减乘除运算都会暴露。</p>
+<p>可以将Operation类变为抽象类，各个运算方式继承这个类。这样新增运算方式只需要创建新类继承Operation不影响其他几个运算。</p>
+<p>Operation类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Operation</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> numberA, <span class="type">double</span> numberB)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0d</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>加减乘除类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Add</span> <span class="keyword">extends</span> <span class="title class_">Operation</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> numberA, <span class="type">double</span> numberB)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> numberA + numberB;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Sub</span> <span class="keyword">extends</span> <span class="title class_">Operation</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> numberA, <span class="type">double</span> numberB)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> numberA - numberB;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Mul</span> <span class="keyword">extends</span> <span class="title class_">Operation</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> numberA, <span class="type">double</span> numberB)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> numberA * numberB;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Div</span> <span class="keyword">extends</span> <span class="title class_">Operation</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> numberA, <span class="type">double</span> numberB)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (numberB == <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;除数不能为0&quot;</span>);</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ArithmeticException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numberA / numberB;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h1><p>解决<code>实例化哪个类的对象</code>的问题。</p>
+<p>简单运算工厂类：根据用户输入的运算符号，决定返回哪一个运算子类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperationFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Operation <span class="title function_">createOperate</span><span class="params">(String operate)</span> &#123;</span><br><span class="line">        <span class="type">Operation</span> <span class="variable">oper</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (operate) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;+&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Add</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;-&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Sub</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;*&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Mul</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;/&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Div</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> oper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Operation</span> <span class="variable">oper</span> <span class="operator">=</span> OperationFactory.createOperate(strOperate);</span><br><span class="line"><span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> oper.getResult(numberA, numberB);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/09/14/uDzxwSonvHCfRrj.jpg" alt="简单工厂类图.jpg"></p>
+<h1 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h1><p><img src="https://s2.loli.net/2023/09/14/lLdVpOa35Z1YWDm.jpg" alt="UML类图图示样例.jpg"></p>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><h3 id="矩形框表示"><a href="#矩形框表示" class="headerlink" title="矩形框表示"></a>矩形框表示</h3><ul>
+<li>第一层：类的名称<ul>
+<li>抽象类用斜体显示</li>
+</ul>
+</li>
+<li>第二层：类的特性（字段和属性）</li>
+<li>第三层：类的操作（方法和行为）<ul>
+<li>+表示public</li>
+<li>-表示private</li>
+<li>#表示protected</li>
+</ul>
+</li>
+</ul>
+<h2 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h2><h3 id="矩形框表示-1"><a href="#矩形框表示-1" class="headerlink" title="矩形框表示"></a>矩形框表示</h3><p>顶端有&lt;&lt;interface&gt;&gt;显示</p>
+<ul>
+<li>第一层：接口名称</li>
+<li>第二层：接口方法</li>
+</ul>
+<h3 id="棒棒糖表示"><a href="#棒棒糖表示" class="headerlink" title="棒棒糖表示"></a>棒棒糖表示</h3><p>如图中唐老鸭类实现“讲人话”接口</p>
+<h2 id="类与类、类与接口的关系"><a href="#类与类、类与接口的关系" class="headerlink" title="类与类、类与接口的关系"></a>类与类、类与接口的关系</h2><h3 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h3><ul>
+<li>用<strong>空心三角形+实线</strong>表示</li>
+</ul>
+<h3 id="实现接口"><a href="#实现接口" class="headerlink" title="实现接口"></a>实现接口</h3><ul>
+<li>用<strong>空心三角形+虚线</strong>表示</li>
+</ul>
+<h3 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h3><ul>
+<li>用<strong>实线箭头</strong>表示</li>
+<li>表示一个类<em>知道</em>另一个类（如企鹅需要知道气候的变化）</li>
+<li>可以有基数</li>
+</ul>
+<h3 id="聚合关系"><a href="#聚合关系" class="headerlink" title="聚合关系"></a>聚合关系</h3><ul>
+<li>用<strong>空心菱形+实线箭头</strong>表示</li>
+<li>表示一种弱的<em>拥有</em>关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分（如雁群拥有大雁）</li>
+<li>可以有基数</li>
+</ul>
+<h3 id="合成关系"><a href="#合成关系" class="headerlink" title="合成关系"></a>合成关系</h3><ul>
+<li><p>用<strong>实心菱形+实线箭头</strong>表示</p>
+</li>
+<li><p>表示一种强的<em>拥有</em>关系，体现了严格的部分和整体的关系（如鸟拥有翅膀）</p>
+</li>
+<li><p>部分和整体的生命周期一样</p>
+</li>
+<li><p>合成关系的连线两端还有一个数字’1’和数字’2’，这被称为基数</p>
+</li>
+</ul>
+<h3 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h3><ul>
+<li>用<strong>虚线箭头</strong>表示</li>
+<li>比如动物依赖氧气和水</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/14/design-pattern/1.%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="clmilhr480000zjg1h7x72c01" data-title="设计模式1-简单工厂模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-tips/Hexo-doc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/14/tips/Hexo-doc/" class="article-date">
+  <time class="dt-published" datetime="2023-09-14T03:28:46.000Z" itemprop="datePublished">2023-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tips/">Tips</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/14/tips/Hexo-doc/">Hexo Doc</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/14/tips/Hexo-doc/" data-id="clmiwo1ah00009rg1h39yc5eo" data-title="Hexo Doc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-design-pattern/0.OOP_basic" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/13/design-pattern/0.OOP_basic/" class="article-date">
@@ -219,7 +870,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
     </div>
   </div>
 
@@ -247,23 +898,23 @@
       <ul>
         
           <li>
-            <a href="/2023/09/16/MyBatis/MyBatis%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/">MyBatis常用标签</a>
+            <a href="/2023/09/19/Java/collection/Java%E9%9B%86%E5%90%88-Map/">Java集合-Map</a>
           </li>
         
           <li>
-            <a href="/2023/09/16/algorithm/leetcode/206.%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">LeetCode206. 反转链表</a>
+            <a href="/2023/09/19/Java/collection/Java%E9%9B%86%E5%90%88-Set/">Java集合-Set</a>
           </li>
         
           <li>
-            <a href="/2023/09/16/design-pattern/3.%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/">设计模式3-单一职责原则</a>
+            <a href="/2023/09/19/design-pattern/5.%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/">设计模式5-依赖倒转原则</a>
           </li>
         
           <li>
-            <a href="/2023/09/16/MyBatis/#%7B%7Dvs$%7B%7D/">MyBatis中#{}和${}的区别是什么？</a>
+            <a href="/2023/09/19/algorithm/leetcode/215.%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACK%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/">LeetCode215. 数组中的第K个最大元素</a>
           </li>
         
           <li>
-            <a href="/2023/09/15/algorithm/leetcode/146.LRU%20%E7%BC%93%E5%AD%98/">LeetCode146. LRU 缓存</a>
+            <a href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88-Queue/">Java集合-Queue</a>
           </li>
         
       </ul>
