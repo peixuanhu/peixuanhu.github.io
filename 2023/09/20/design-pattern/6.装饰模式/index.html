@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>设计模式6-装饰模式 | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="需求：需要把所需的功能按正确的顺序串联起来进行控制 装饰模式定义装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。 装饰模式结构图  Component是定义一个对象接口，可以给这些对象动态地添加职责。  ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。  Decorator，装饰抽象类，继承了C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式6-装饰模式">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="需求：需要把所需的功能按正确的顺序串联起来进行控制 装饰模式定义装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。 装饰模式结构图  Component是定义一个对象接口，可以给这些对象动态地添加职责。  ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。  Decorator，装饰抽象类，继承了C">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2023/09/20/YdCDAhkco9ETLF6.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/09/20/Gx6ynzCtlqogS5F.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/09/20/U2GwI9iXWxH3mTJ.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/09/20/HthTDI9Zpz61acq.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/09/20/Oq4yoQVPExWRgeD.jpg">
+<meta property="article:published_time" content="2023-09-20T08:39:21.000Z">
+<meta property="article:modified_time" content="2023-09-20T08:39:21.000Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/20/YdCDAhkco9ETLF6.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-design-pattern/6.装饰模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-09-20T08:39:21.000Z" itemprop="datePublished">2023-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      设计模式6-装饰模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>需求：需要把所需的功能按正确的顺序串联起来进行控制</p>
+<h1 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</p>
+<h2 id="装饰模式结构图"><a href="#装饰模式结构图" class="headerlink" title="装饰模式结构图"></a>装饰模式结构图</h2><p><img src="https://s2.loli.net/2023/09/20/YdCDAhkco9ETLF6.jpg" alt="装饰模式结构图.jpg"></p>
+<ul>
+<li><p>Component是定义一个对象接口，可以给这些对象动态地添加职责。</p>
+</li>
+<li><p>ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。</p>
+</li>
+<li><p>Decorator，装饰抽象类，继承了Component，从外类来扩展Component类的功能，但对于Component来说，是无须知道Decorator的存在的。</p>
+</li>
+<li><p>ConcreteDecorator就是具体的装饰对象，起到给Component添加职责的功能。</p>
+</li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>Component类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteComponent类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteComponent</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体对象的实际操作&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Decorator类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Decorator</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> Component component;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 装饰一个Component对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setComponent</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 重写operation()，实际调用component的operation方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (component != <span class="literal">null</span>) &#123;</span><br><span class="line">            component.operation();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteDecorator类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConcreteDecoratorA类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreateDecoratorA</span> <span class="keyword">extends</span> <span class="title class_">Decorator</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> String addedState;  <span class="comment">// 本类独有属性</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.operation();  <span class="comment">// 首先执行原有Component的operation()</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">this</span>.addedState = <span class="string">&quot;具体装饰对象A的独有操作&quot;</span>;  <span class="comment">// 再执行本类独有功能</span></span><br><span class="line">        System.out.println(<span class="built_in">this</span>.addedState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ConcreteDecoratorB类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteDecoratorB</span> <span class="keyword">extends</span> <span class="title class_">Decorator</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.operation();  <span class="comment">// 首先执行原有Component的operation()</span></span><br><span class="line">        <span class="built_in">this</span>.addedBehavior(); <span class="comment">// 再执行本类独有功能</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">addedBehavior</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体装饰对象B的独有操作&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ConcreteComponent</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteComponent</span>();</span><br><span class="line"><span class="type">ConcreteDecoratorA</span> <span class="variable">d1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteDecoratorA</span>();</span><br><span class="line"><span class="type">ConcreteDecoratorB</span> <span class="variable">d2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteDecoratorB</span>();</span><br><span class="line"></span><br><span class="line">d1.setComponent(c); <span class="comment">// 首先用d1来包装c</span></span><br><span class="line">d2.setComponent(d1); <span class="comment">// 再用d2来包装d1</span></span><br><span class="line">d2.operation(); <span class="comment">// 最终执行d2的operation()</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/09/20/Gx6ynzCtlqogS5F.jpg" alt="装饰模式对象链.jpg"></p>
+<p>装饰模式是利用<code>setComponent</code>来对对象进行包装的。<br>这样每个装饰对象的实现就和如何使用这个对象分离开了，每个装饰对象只关心自己的功能，不需要关心如何被添加到对象链当中。</p>
+<h2 id="例1：穿不同的服饰"><a href="#例1：穿不同的服饰" class="headerlink" title="例1：穿不同的服饰"></a>例1：穿不同的服饰</h2><p><img src="https://s2.loli.net/2023/09/20/U2GwI9iXWxH3mTJ.jpg" alt="装饰模式例子.jpg"></p>
+<p><code>ICharacter</code>人物形象接口（<code>Component</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ICharacter</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Person</code>类（<code>ConcreteComponent</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">ICharacter</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;装扮的&quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Finery</code>类（<code>Decorater</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Q: Finery不是一个实际存在的事物，为什么不设计成抽象类？</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">abstract</span><span class="params">(?)</span> <span class="keyword">class</span> <span class="title class_">Finery</span> <span class="keyword">implements</span> <span class="title class_">ICharacter</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> ICharacter component;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">decorate</span><span class="params">(ICharacter component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.component != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>.component.show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体服饰类（<code>ConcreteDecorator</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tshirt</span> <span class="keyword">extends</span> <span class="title class_">Finery</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;T恤&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">super</span>.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他服饰同理。</p>
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Alice&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">Sneakers</span> <span class="variable">sneakers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Sneakers</span>();</span><br><span class="line">sneakers.decorate(p);</span><br><span class="line"></span><br><span class="line"><span class="type">Trousers</span> <span class="variable">trousers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Trousers</span>();</span><br><span class="line">trousers.decorate(sneakers);</span><br><span class="line"></span><br><span class="line"><span class="type">Tshirt</span> <span class="variable">tshirt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Tshirt</span>();</span><br><span class="line">tshirt.decorate(trousers);</span><br><span class="line"></span><br><span class="line">tshirt.show(); <span class="comment">// 打印:&quot;T恤裤子运动鞋装扮的Alice&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="例2：升级商场收银程序"><a href="#例2：升级商场收银程序" class="headerlink" title="例2：升级商场收银程序"></a>例2：升级商场收银程序</h2><p>如果需要在打折基础上又返现，不需要添加新的<code>CashReturnRebate</code>子类，依然是<code>CashNormal </code>、<code>CashReturn</code>、<code>CashRebate</code>三种基本算法子类。增加一个接口<code>ISale</code>，用作装饰模式里的<code>Component</code>。</p>
+<p><img src="https://s2.loli.net/2023/09/20/HthTDI9Zpz61acq.jpg" alt="装饰模式例子2.jpg"></p>
+<p>装饰模式有一个重要的优点，把类中的装饰功能从类中搬移去除，这样可以简化原有的类。</p>
+<p><code>CashNormal</code>是最基础的类，可以把它作为<code>ConcreteComponent</code>。</p>
+<p><img src="https://s2.loli.net/2023/09/20/Oq4yoQVPExWRgeD.jpg" alt="装饰模式例子2-改进.jpg"></p>
+<p><code>ISale </code>接口（<code>Component</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ISale</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>CashSuper</code> 实现 <code>ISale </code> 接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">abstract</span><span class="params">(?)</span> <span class="keyword">class</span> <span class="title class_">CashSuper</span> <span class="keyword">implements</span> <span class="title class_">ISale</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> ISale component;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">decorate</span><span class="params">(ISale component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0d</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.component != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 若装饰对象存在，则执行装饰的算法运算</span></span><br><span class="line">            result = <span class="built_in">this</span>.component.acceptCash(price, num);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>CashNormal</code> 类（<code>ConcreteComponent</code>），最基本的原价算法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashNormal</span> <span class="keyword">implements</span> <span class="title class_">ISale</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> price * num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打折和返现的算法都继承自 <code>CashSuper</code> ，都为 <code>ConcreteDecorator</code>。</p>
+<p>从外层向里层依次执行 <code>acceptCash</code> 方法。先执行自己的<code>acceptCash</code>方法，再调用 <code>super(CashSuper).acceptCash()</code> ，会执行 <code>this.component</code> （里层的装饰器）的 <code>acceptCash</code> ，将计算结果 <code>result</code> 传入。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashRebate</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyRebate</span> <span class="operator">=</span> <span class="number">1d</span>; <span class="comment">// 折扣率</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashRebate</span><span class="params">(<span class="type">double</span> moneyRebate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyRebate = moneyRebate;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> price * num * <span class="built_in">this</span>.moneyRebate;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.acceptCash(result, <span class="number">1</span>); <span class="comment">// result作为price传入，数量为1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashReturn</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyCondition</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利条件</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyReturn</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashReturn</span><span class="params">(<span class="type">double</span> moneyCondition, <span class="type">double</span> moneyReturn)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyCondition = moneyCondition;</span><br><span class="line">        <span class="built_in">this</span>.moneyReturn = moneyReturn;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> price * num;</span><br><span class="line">        <span class="keyword">if</span> (moneyCondition &gt; <span class="number">0</span> &amp;&amp; result &gt;= moneyCondition) &#123;</span><br><span class="line">            result -= Math.floor(result / moneyCondition) * moneyReturn;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.acceptCash(result, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重点在 <code>CashContext</code> 类，因为涉及组合算法，所以用装饰模式的方式进行包装，这里需要注意包装的顺序，先打折后满多少返多少，与先满多少返多少，再打折会得到完全不同的结果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashContext</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> ISale cs;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 在构造函数中传入type，根据type来实例化具体的收费策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashContext</span><span class="params">(<span class="type">int</span> cashType)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="comment">// 先打8折，再满300返100</span></span><br><span class="line">                <span class="type">CashNormal</span> <span class="variable">cn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="type">CashReturn</span> <span class="variable">crt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="type">CashRebate</span> <span class="variable">crb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>);</span><br><span class="line">                </span><br><span class="line">                crt.decorate(cn); <span class="comment">// 用 满300返100算法 包装原价算法</span></span><br><span class="line">                crb.decorate(crt); <span class="comment">// 用 打8折算法 装饰 满300返100算法</span></span><br><span class="line">                <span class="built_in">this</span>.cs = crb;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据收费策略的不同，获得计算结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.cs.acceptCash(price, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在无论如何组合算法，哪怕是先打折再返现，再打折再返现，都只需要更改<code>CashContext</code>类，很好地做到了开放封闭。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>装饰模式是为已有功能<strong>动态地添加更多功能</strong>的一种方式。</p>
+<h3 id="用装饰模式前"><a href="#用装饰模式前" class="headerlink" title="用装饰模式前"></a>用装饰模式前</h3><p>当系统需要新功能的时候，是向旧的类中添加新的代码。这些新加的代码通常装饰了原有类的核心职责或主要行为（如：给Person添加新服饰）。</p>
+<p><strong>问题</strong>：它们在主类中加入了新的字段，新的方法和新的逻辑，从而增加了主类的复杂度。而这些新加入的东西仅仅是为了满足一些只在某种<strong>特定情况</strong>下才会执行的特殊行为的需要。</p>
+<h3 id="用装饰模式后"><a href="#用装饰模式后" class="headerlink" title="用装饰模式后"></a>用装饰模式后</h3><p>它把每个要装饰的功能放在<strong>单独的类</strong>中，并让这个类<strong>包装</strong>它所要装饰的对象，因此，当需要执行特殊行为时，客户代码就可以在运行时根据需要有选择地、按顺序地使用装饰功能包装对象了。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>把类中的装饰功能从类中搬移去除，这样可以简化原有的类（如：原价算法）。</li>
+<li>有效地把类的核心职责和装饰功能区分开了。而且可以去除相关类中重复的装饰逻辑（如：无需重复编写 先打折后返现 &amp; 先返现后打折）。对于装饰模式来说，只是多几种组合而已。</li>
+</ul>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p><strong>装饰顺序很重要。</strong></p>
+<p>比如加密数据和过滤词汇都可以是数据持久化前的装饰功能，但若先加密了数据再用过滤功能就会出问题了。</p>
+<p>最理想的情况，是保证装饰类之间彼此独立，这样它们就可以以任意的顺序进行组合了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" data-id="clmrrtpj0000034g16a611skc" data-title="设计模式6-装饰模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LeetCode15. 三数之和
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/20/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式2-策略模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Java集合使用注意事项</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">LeetCode15. 三数之和</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">设计模式6-装饰模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/design-pattern/0.OOP_basic/">设计模式0-OOP Basic</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

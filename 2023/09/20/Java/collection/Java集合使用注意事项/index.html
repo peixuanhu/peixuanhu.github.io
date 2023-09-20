@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java集合使用注意事项 | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="集合判空《阿里巴巴 Java 开发手册》的描述如下：  判断所有集合内部的元素是否为空，使用 isEmpty() 方法，而不是 size()&#x3D;&#x3D;0 的方式。  这是因为 isEmpty() 方法的可读性更好，并且时间复杂度为 O(1)。 绝大部分我们使用的集合的 size() 方法的时间复杂度也是 O(1)，不过，也有很多复杂度不是 O(1) 的，比如 java.util.concurrent 包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合使用注意事项">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="集合判空《阿里巴巴 Java 开发手册》的描述如下：  判断所有集合内部的元素是否为空，使用 isEmpty() 方法，而不是 size()&#x3D;&#x3D;0 的方式。  这是因为 isEmpty() 方法的可读性更好，并且时间复杂度为 O(1)。 绝大部分我们使用的集合的 size() 方法的时间复杂度也是 O(1)，不过，也有很多复杂度不是 O(1) 的，比如 java.util.concurrent 包">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-20T13:10:17.000Z">
+<meta property="article:modified_time" content="2023-09-20T13:10:17.000Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Java/collection/Java集合使用注意事项" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="article-date">
+  <time class="dt-published" datetime="2023-09-20T13:10:17.000Z" itemprop="datePublished">2023-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/Collection/">Collection</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java集合使用注意事项
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="集合判空"><a href="#集合判空" class="headerlink" title="集合判空"></a>集合判空</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>判断所有集合内部的元素是否为空，使用 <code>isEmpty()</code> 方法，而不是 <code>size()==0</code> 的方式。</strong></p>
+</blockquote>
+<p>这是因为 <code>isEmpty()</code> 方法的可读性更好，并且时间复杂度为 O(1)。</p>
+<p>绝大部分我们使用的集合的 <code>size()</code> 方法的时间复杂度也是 O(1)，不过，也有很多复杂度不是 O(1) 的，比如 <code>java.util.concurrent</code> 包下的某些集合（<code>ConcurrentLinkedQueue</code>、<code>ConcurrentHashMap</code>…）。</p>
+<p>下面是 <code>ConcurrentHashMap</code> 的 <code>size()</code> 方法和 <code>isEmpty()</code> 方法的源码。（时间复杂度都是O(1)啊）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">n</span> <span class="operator">=</span> sumCount();</span><br><span class="line">    <span class="keyword">return</span> ((n &lt; <span class="number">0L</span>) ? <span class="number">0</span> :</span><br><span class="line">            (n &gt; (<span class="type">long</span>)Integer.MAX_VALUE) ? Integer.MAX_VALUE :</span><br><span class="line">            (<span class="type">int</span>)n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">final</span> <span class="type">long</span> <span class="title function_">sumCount</span><span class="params">()</span> &#123;</span><br><span class="line">    CounterCell[] as = counterCells; CounterCell a;</span><br><span class="line">    <span class="type">long</span> <span class="variable">sum</span> <span class="operator">=</span> baseCount;</span><br><span class="line">    <span class="keyword">if</span> (as != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; as.length; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((a = as[i]) != <span class="literal">null</span>)</span><br><span class="line">                sum += a.value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> sumCount() &lt;= <span class="number">0L</span>; <span class="comment">// ignore transient negative values</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="集合转-Map"><a href="#集合转-Map" class="headerlink" title="集合转 Map"></a>集合转 Map</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>在使用 <code>java.util.stream.Collectors</code> 类的 <code>toMap()</code> 方法转为 <code>Map</code> 集合时，一定要注意当 value 为 null 时会抛 NPE 异常。</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String phoneNumber;</span><br><span class="line">     <span class="comment">// getters and setters</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; bookList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">bookList.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;jack&quot;</span>,<span class="string">&quot;18163138123&quot;</span>));</span><br><span class="line">bookList.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;martin&quot;</span>,<span class="literal">null</span>));</span><br><span class="line"><span class="comment">// 空指针异常</span></span><br><span class="line">bookList.stream().collect(Collectors.toMap(Person::getName, Person::getPhoneNumber));</span><br></pre></td></tr></table></figure>
+
+<h1 id="集合遍历"><a href="#集合遍历" class="headerlink" title="集合遍历"></a>集合遍历</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>不要在 foreach 循环里进行元素的 <code>remove/add</code> 操作。remove 元素请使用 <code>Iterator</code> 方式，如果并发操作，需要对 <code>Iterator</code> 对象加锁。</strong></p>
+</blockquote>
+<p>通过反编译你会发现 foreach 语法底层其实还是依赖 <code>Iterator</code> 。不过， <code>remove/add</code> 操作直接调用的是集合自己的方法，而不是 <code>Iterator</code> 的 <code>remove/add</code>方法。</p>
+<p>这就导致 <code>Iterator</code> 莫名其妙地发现自己有元素被 <code>remove/add</code> ，然后，它就会抛出一个 <code>ConcurrentModificationException</code> 来提示用户发生了并发修改异常。这就是单线程状态下产生的 <strong>fail-fast 机制</strong>。</p>
+<blockquote>
+<p><strong>fail-fast 机制</strong>：多个线程对 fail-fast 集合进行修改的时候，可能会抛出<code>ConcurrentModificationException</code>。 即使是单线程下也有可能会出现这种情况，上面已经提到过。</p>
+</blockquote>
+<p>Java8 开始，可以使用 <code>Collection#removeIf()</code>方法删除满足特定条件的元素,如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">10</span>; ++i) &#123;</span><br><span class="line">    list.add(i);</span><br><span class="line">&#125;</span><br><span class="line">list.removeIf(filter -&gt; filter % <span class="number">2</span> == <span class="number">0</span>); <span class="comment">/* 删除list中的所有偶数 */</span></span><br><span class="line">System.out.println(list); <span class="comment">/* [1, 3, 5, 7, 9] */</span></span><br></pre></td></tr></table></figure>
+
+<p>除了上面介绍的直接使用 <code>Iterator</code> 进行遍历操作之外，还可以：</p>
+<ul>
+<li>使用<strong>普通的 for 循环</strong></li>
+<li>使用 <strong>fail-safe 的集合类</strong>。<code>java.util</code>包下面的所有的集合类都是 fail-fast 的，而<code>java.util.concurrent</code>包下面的所有的类都是 fail-safe 的。</li>
+</ul>
+<h1 id="集合去重"><a href="#集合去重" class="headerlink" title="集合去重"></a>集合去重</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>可以利用 <code>Set</code> 元素唯一的特性，可以快速对一个集合进行去重操作，避免使用 <code>List</code> 的 <code>contains()</code> 进行遍历去重或者判断包含操作。</strong></p>
+</blockquote>
+<p>以 <code>HashSet</code> 和 <code>ArrayList</code> 为例说明。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set 去重代码示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; Set&lt;T&gt; <span class="title function_">removeDuplicateBySet</span><span class="params">(List&lt;T&gt; data)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (CollectionUtils.isEmpty(data)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// List 去重代码示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; List&lt;T&gt; <span class="title function_">removeDuplicateByList</span><span class="params">(List&lt;T&gt; data)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (CollectionUtils.isEmpty(data)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;T&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(data.size());</span><br><span class="line">    <span class="keyword">for</span> (T current : data) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!result.contains(current)) &#123;</span><br><span class="line">            result.add(current);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两者的核心差别在于 <code>contains()</code> 方法的实现。</p>
+<p><code>HashSet</code> 的 <code>contains()</code> 方法底部依赖的 <code>HashMap</code> 的 <code>containsKey()</code> 方法，时间复杂度接近<code>O(1)</code>（没有出现哈希冲突的时候为 <code>O(1)</code>）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> map.containsKey(o);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们有 N 个元素插入进 Set 中，时间复杂度为 <code>O(n)</code>。</p>
+<p><code>ArrayList</code> 的 <code>contains()</code> 方法是通过遍历所有元素的方法来做的，时间复杂度为 <code>O(n)</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> indexOf(o) &gt;= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (o == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            <span class="keyword">if</span> (elementData[i]==<span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            <span class="keyword">if</span> (o.equals(elementData[i]))</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <code>List</code> 中有 N 个元素，时间复杂度为 <code>O (n^2)</code>。</p>
+<h1 id="集合转数组"><a href="#集合转数组" class="headerlink" title="集合转数组"></a>集合转数组</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>使用集合转数组的方法，必须使用集合的 <code>toArray(T[] array)</code>，传入的是类型完全一致、长度为 0 的空数组。</strong></p>
+</blockquote>
+<p><code>toArray(T[] array)</code> 方法的参数是一个泛型数组，如果 <code>toArray</code> 方法中没有传递任何参数的话返回的是 <code>Object</code>类 型数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String [] s= <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;</span><br><span class="line">    <span class="string">&quot;dog&quot;</span>, <span class="string">&quot;lazy&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;over&quot;</span>, <span class="string">&quot;jumps&quot;</span>, <span class="string">&quot;fox&quot;</span>, <span class="string">&quot;brown&quot;</span>, <span class="string">&quot;quick&quot;</span>, <span class="string">&quot;A&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line">List&lt;String&gt; list = Arrays.asList(s);</span><br><span class="line">Collections.reverse(list);</span><br><span class="line"><span class="comment">//没有指定类型的话会报错</span></span><br><span class="line">s=list.toArray(<span class="keyword">new</span> <span class="title class_">String</span>[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>由于 JVM 优化，<code>new String[0]</code>作为<code>Collection.toArray()</code>方法的参数现在使用更好，<code>new String[0]</code>就是起一个模板的作用，指定了返回数组的类型，0 是为了节省空间，因为它只是为了说明返回的类型。</p>
+<h1 id="数组转集合"><a href="#数组转集合" class="headerlink" title="数组转集合"></a>数组转集合</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>使用工具类 <code>Arrays.asList()</code> 把数组转换成集合时，不能使用其修改集合相关的方法， 它的 <code>add/remove/clear</code> 方法会抛出 <code>UnsupportedOperationException</code> 异常。</strong></p>
+</blockquote>
+<p><code>Arrays.asList()</code>在平时开发中还是比较常见的，我们可以使用它将一个数组转换为一个 <code>List</code> 集合。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] myArray = &#123;<span class="string">&quot;Apple&quot;</span>, <span class="string">&quot;Banana&quot;</span>, <span class="string">&quot;Orange&quot;</span>&#125;;</span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(myArray);</span><br><span class="line"><span class="comment">//上面两个语句等价于下面一条语句</span></span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(<span class="string">&quot;Apple&quot;</span>,<span class="string">&quot;Banana&quot;</span>, <span class="string">&quot;Orange&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>JDK 源码对于这个方法的说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 返回由指定数组支持的固定大小的列表。此方法作为基于数组和基于集合的API之间的桥梁，</span></span><br><span class="line"><span class="comment">  * 与 Collection.toArray()结合使用。返回的List是可序列化并实现RandomAccess接口。</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; List&lt;T&gt; <span class="title function_">asList</span><span class="params">(T... a)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Array-asList-使用注意事项"><a href="#Array-asList-使用注意事项" class="headerlink" title="Array.asList()使用注意事项"></a><code>Array.asList()</code>使用注意事项</h2><p><strong>1、<code>Arrays.asList()</code>是泛型方法，传递的数组的类型必须是对象（如Integer），而不是基本类型（如int）。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] myArray = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.asList(myArray);</span><br><span class="line">System.out.println(myList.size());<span class="comment">//1</span></span><br><span class="line">System.out.println(myList.get(<span class="number">0</span>));<span class="comment">//数组地址值</span></span><br><span class="line">System.out.println(myList.get(<span class="number">1</span>));<span class="comment">//报错：ArrayIndexOutOfBoundsException</span></span><br><span class="line"><span class="type">int</span>[] array = (<span class="type">int</span>[]) myList.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(array[<span class="number">0</span>]);<span class="comment">//1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 要使用包装类型数组</span></span><br><span class="line">Integer[] myArray = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>当传入一个原生数据类型数组时，<code>Arrays.asList()</code> 的真正得到的参数就不是数组中的元素，而是数组对象本身。此时 <code>List</code> 的唯一元素就是这个数组。</p>
+<p><strong>2、使用集合的修改方法: <code>add()</code>、<code>remove()</code>、<code>clear()</code>会抛出异常。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">myList.add(<span class="number">4</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.remove(<span class="number">1</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.clear();<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Arrays.asList()</code> 方法返回的并不是 <code>java.util.ArrayList</code> ，而是 <code>java.util.Arrays</code> 的一个内部类 <code>java.util.Arrays$ArrayList</code> ,这个内部类并没有实现集合的修改方法（并没有重写这些方法）。</p>
+<h2 id="如何正确的将数组转换为-ArrayList"><a href="#如何正确的将数组转换为-ArrayList" class="headerlink" title="如何正确的将数组转换为 ArrayList ?"></a><strong>如何正确的将数组转换为 <code>ArrayList</code> ?</strong></h2><p>使用 Java8 的 <code>Stream</code> (推荐)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer [] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.stream(myArray).collect(Collectors.toList());</span><br><span class="line"><span class="comment">//基本类型也可以实现转换（依赖boxed的装箱操作）</span></span><br><span class="line"><span class="type">int</span> [] myArray2 = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.stream(myArray2).boxed().collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clmrrtpj2000234g1eyeubily" data-title="Java集合使用注意事项" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode15. 三数之和</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Java集合使用注意事项</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">LeetCode15. 三数之和</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">设计模式6-装饰模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/design-pattern/0.OOP_basic/">设计模式0-OOP Basic</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

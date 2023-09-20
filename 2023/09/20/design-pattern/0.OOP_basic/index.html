@@ -9,13 +9,14 @@
   <meta name="description" content="面向对象编程基础三大特性1. 封装每个对象都包含它能进行操作所需要的所有信息，这个特性称为封装，因此对象不必依赖其他对象来完成自己的操作。 好处 良好的封装能够减少耦合（让某类和调用该类方法的其他类分离） 类内部的实现可以自由地修改（不影响其他的类） 类具有清晰的对外接口（其他类只需要关心这些接口，不用管内部实现）  2. 继承继承定义了类如何相互关联，共享特性（is-a, not has-a）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式0-OOP Basic">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/09/13/design-pattern/0.OOP_basic/index.html">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/09/20/design-pattern/0.OOP_basic/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
 <meta property="og:description" content="面向对象编程基础三大特性1. 封装每个对象都包含它能进行操作所需要的所有信息，这个特性称为封装，因此对象不必依赖其他对象来完成自己的操作。 好处 良好的封装能够减少耦合（让某类和调用该类方法的其他类分离） 类内部的实现可以自由地修改（不影响其他的类） 类具有清晰的对外接口（其他类只需要关心这些接口，不用管内部实现）  2. 继承继承定义了类如何相互关联，共享特性（is-a, not has-a）。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg">
-<meta property="article:published_time" content="2023-09-13T15:30:33.000Z">
-<meta property="article:modified_time" content="2023-09-13T15:30:33.000Z">
+<meta property="og:image" content="https://s2.loli.net/2023/09/14/lLdVpOa35Z1YWDm.jpg">
+<meta property="article:published_time" content="2023-09-20T04:04:08.000Z">
+<meta property="article:modified_time" content="2023-09-20T04:04:08.000Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg">
@@ -79,8 +80,8 @@
       <div class="outer">
         <section id="main"><article id="post-design-pattern/0.OOP_basic" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/09/13/design-pattern/0.OOP_basic/" class="article-date">
-  <time class="dt-published" datetime="2023-09-13T15:30:33.000Z" itemprop="datePublished">2023-09-13</time>
+    <a href="/2023/09/20/design-pattern/0.OOP_basic/" class="article-date">
+  <time class="dt-published" datetime="2023-09-20T04:04:08.000Z" itemprop="datePublished">2023-09-20</time>
 </a>
     
   <div class="article-category">
@@ -103,7 +104,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="面向对象编程基础"><a href="#面向对象编程基础" class="headerlink" title="面向对象编程基础"></a>面向对象编程基础</h2><h3 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h3><h4 id="1-封装"><a href="#1-封装" class="headerlink" title="1. 封装"></a>1. 封装</h4><p>每个对象都包含<strong>它能进行操作所需要的所有信息</strong>，这个特性称为封装，因此对象不必依赖其他对象来完成自己的操作。</p>
+        <h1 id="面向对象编程基础"><a href="#面向对象编程基础" class="headerlink" title="面向对象编程基础"></a>面向对象编程基础</h1><h2 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h2><h4 id="1-封装"><a href="#1-封装" class="headerlink" title="1. 封装"></a>1. 封装</h4><p>每个对象都包含<strong>它能进行操作所需要的所有信息</strong>，这个特性称为封装，因此对象不必依赖其他对象来完成自己的操作。</p>
 <h5 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h5><ul>
 <li>良好的封装能够减少耦合（让某类和调用该类方法的其他类分离）</li>
 <li>类内部的实现可以自由地修改（不影响其他的类）</li>
@@ -127,7 +128,7 @@
 <li>子类在工作时以<strong>自己的方式</strong>来实现（子类可以选择使用override关键字，将父类实现替换为它自己的实现，这就是方法重写Override）</li>
 <li>子类以父类的身份出现时，子类<strong>特有的属性和方法不可以使用</strong></li>
 </ul>
-<h3 id="抽象类和接口"><a href="#抽象类和接口" class="headerlink" title="抽象类和接口"></a>抽象类和接口</h3><h4 id="抽象类-方法"><a href="#抽象类-方法" class="headerlink" title="抽象类&#x2F;方法"></a>抽象类&#x2F;方法</h4><p>考虑把实例化没有任何意义的父类改成抽象类；把方法体没有意义的方法改成抽象方法。</p>
+<h2 id="抽象类和接口"><a href="#抽象类和接口" class="headerlink" title="抽象类和接口"></a>抽象类和接口</h2><h4 id="抽象类-方法"><a href="#抽象类-方法" class="headerlink" title="抽象类&#x2F;方法"></a>抽象类&#x2F;方法</h4><p>考虑把实例化没有任何意义的父类改成抽象类；把方法体没有意义的方法改成抽象方法。</p>
 <h5 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h5><ul>
 <li>抽象类不能被实例化（没有意义）</li>
 <li>抽象方法是必须被子类重写的方法（重写之前肯定没有意义）</li>
@@ -155,7 +156,7 @@
 </li>
 <li>从设计角度讲，抽象类是从子类中发现了公共的东西，泛化出父类，然后子类继承父类；而接口是根本不知子类的存在，方法如何实现还不确认，预先定义</li>
 </ol>
-<h3 id="SOLID原则"><a href="#SOLID原则" class="headerlink" title="SOLID原则"></a>SOLID原则</h3><p>SOLID 原则是面向对象 class 设计的五条原则。它们是设计 class 结构时应该遵守的准则和最佳实践。</p>
+<h2 id="SOLID原则"><a href="#SOLID原则" class="headerlink" title="SOLID原则"></a>SOLID原则</h2><p>SOLID 原则是面向对象 class 设计的五条原则。它们是设计 class 结构时应该遵守的准则和最佳实践。</p>
 <h4 id="1-Single-Responsibility-Principle，单一职责原则"><a href="#1-Single-Responsibility-Principle，单一职责原则" class="headerlink" title="1. Single Responsibility Principle，单一职责原则"></a>1. <strong>S</strong>ingle Responsibility Principle，单一职责原则</h4><p>一个 class 应该只做一件事，一个 class 应该只有一个变化的原因。</p>
 <p>应该只有一个软件定义的潜在改变（数据库逻辑、日志逻辑等）能够影响 class 的定义。</p>
 <p>单一职责适用于<strong>接口、类</strong>，同时也适用于<strong>方法</strong>。例如我们需要修改用户密码，有两种方式可以实现，一种是用「修改用户信息接口」实现修改密码，一种是新起一个接口来实现修改密码功能。在单一职责原则的指导下，一个方法只承担一个职能，所以我们应该新起一个接口来实现修改密码的功能。</p>
@@ -192,11 +193,61 @@
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/350291336">https://zhuanlan.zhihu.com/p/350291336</a></li>
 <li><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/understand-solid-principles/">https://insights.thoughtworks.cn/understand-solid-principles/</a></li>
 </ol>
+<h2 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h2><p><img src="https://s2.loli.net/2023/09/14/lLdVpOa35Z1YWDm.jpg" alt="UML类图图示样例.jpg"></p>
+<h3 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h3><h4 id="矩形框表示"><a href="#矩形框表示" class="headerlink" title="矩形框表示"></a>矩形框表示</h4><ul>
+<li>第一层：类的名称<ul>
+<li>抽象类用斜体显示</li>
+</ul>
+</li>
+<li>第二层：类的特性（字段和属性）</li>
+<li>第三层：类的操作（方法和行为）<ul>
+<li>+表示public</li>
+<li>-表示private</li>
+<li>#表示protected</li>
+</ul>
+</li>
+</ul>
+<h3 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h3><h4 id="矩形框表示-1"><a href="#矩形框表示-1" class="headerlink" title="矩形框表示"></a>矩形框表示</h4><p>顶端有&lt;&lt;interface&gt;&gt;显示</p>
+<ul>
+<li>第一层：接口名称</li>
+<li>第二层：接口方法</li>
+</ul>
+<h4 id="棒棒糖表示"><a href="#棒棒糖表示" class="headerlink" title="棒棒糖表示"></a>棒棒糖表示</h4><p>如图中唐老鸭类实现“讲人话”接口</p>
+<h3 id="类与类、类与接口的关系"><a href="#类与类、类与接口的关系" class="headerlink" title="类与类、类与接口的关系"></a>类与类、类与接口的关系</h3><h4 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h4><ul>
+<li>用<strong>空心三角形+实线</strong>表示</li>
+</ul>
+<h4 id="实现接口"><a href="#实现接口" class="headerlink" title="实现接口"></a>实现接口</h4><ul>
+<li>用<strong>空心三角形+虚线</strong>表示</li>
+</ul>
+<h4 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h4><ul>
+<li>用<strong>实线箭头</strong>表示</li>
+<li>表示一个类<em>知道</em>另一个类（如企鹅需要知道气候的变化）</li>
+<li>可以有基数</li>
+</ul>
+<h4 id="聚合关系"><a href="#聚合关系" class="headerlink" title="聚合关系"></a>聚合关系</h4><ul>
+<li>用<strong>空心菱形+实线箭头</strong>表示</li>
+<li>表示一种弱的<em>拥有</em>关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分（如雁群拥有大雁）</li>
+<li>可以有基数</li>
+</ul>
+<h4 id="合成关系"><a href="#合成关系" class="headerlink" title="合成关系"></a>合成关系</h4><ul>
+<li><p>用<strong>实心菱形+实线箭头</strong>表示</p>
+</li>
+<li><p>表示一种强的<em>拥有</em>关系，体现了严格的部分和整体的关系（如鸟拥有翅膀）</p>
+</li>
+<li><p>部分和整体的生命周期一样</p>
+</li>
+<li><p>合成关系的连线两端还有一个数字’1’和数字’2’，这被称为基数</p>
+</li>
+</ul>
+<h4 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h4><ul>
+<li>用<strong>虚线箭头</strong>表示</li>
+<li>比如动物依赖氧气和水</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/13/design-pattern/0.OOP_basic/" data-id="clmq7wwa30004xig1e0by8kz1" data-title="设计模式0-OOP Basic" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://peixuanhu.github.io/2023/09/20/design-pattern/0.OOP_basic/" data-id="clmq7wwa30004xig1e0by8kz1" data-title="设计模式0-OOP Basic" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -206,15 +257,20 @@
     
 <nav id="article-nav">
   
-    <a href="/2023/09/14/tips/Hexo-doc/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/09/20/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Hexo Doc
+          设计模式2-策略模式
         
       </div>
     </a>
   
+  
+    <a href="/2023/09/20/design-pattern/1.%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式1-简单工厂模式</div>
+    </a>
   
 </nav>
 
@@ -230,7 +286,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
     </div>
   </div>
 
@@ -258,23 +314,23 @@
       <ul>
         
           <li>
-            <a href="/2023/09/19/Java/collection/Java%E9%9B%86%E5%90%88-Map/">Java集合-Map</a>
+            <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Java集合使用注意事项</a>
           </li>
         
           <li>
-            <a href="/2023/09/19/Java/collection/Java%E9%9B%86%E5%90%88-Set/">Java集合-Set</a>
+            <a href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">LeetCode15. 三数之和</a>
           </li>
         
           <li>
-            <a href="/2023/09/19/design-pattern/5.%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/">设计模式5-依赖倒转原则</a>
+            <a href="/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">设计模式6-装饰模式</a>
           </li>
         
           <li>
-            <a href="/2023/09/19/algorithm/leetcode/215.%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACK%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/">LeetCode215. 数组中的第K个最大元素</a>
+            <a href="/2023/09/20/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
           </li>
         
           <li>
-            <a href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88-Queue/">Java集合-Queue</a>
+            <a href="/2023/09/20/design-pattern/0.OOP_basic/">设计模式0-OOP Basic</a>
           </li>
         
       </ul>
