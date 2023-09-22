@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>设计模式7-代理模式 | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="代理模式定义代理模式（Proxy），为其他对象提供一种代理以控制对这个对象的访问。 代理模式结构图 代码实现ISubject 接口：定义了 RealSubject 和 Proxy 的共用接口，这样就可以在任何使用 RealSubject 的地方都可以使用 Proxy 。 123interface ISubject &amp;#123;    void request();&amp;#125;  RealSubje">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式7-代理模式">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="代理模式定义代理模式（Proxy），为其他对象提供一种代理以控制对这个对象的访问。 代理模式结构图 代码实现ISubject 接口：定义了 RealSubject 和 Proxy 的共用接口，这样就可以在任何使用 RealSubject 的地方都可以使用 Proxy 。 123interface ISubject &amp;#123;    void request();&amp;#125;  RealSubje">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2023/09/21/PAE9T4Ht7ku6MFY.jpg">
+<meta property="article:published_time" content="2023-09-22T08:12:44.000Z">
+<meta property="article:modified_time" content="2023-09-22T08:12:44.000Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/21/PAE9T4Ht7ku6MFY.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-design-pattern/7.代理模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-09-22T08:12:44.000Z" itemprop="datePublished">2023-09-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      设计模式7-代理模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>代理模式（Proxy），为其他对象提供一种代理以控制对这个对象的访问。</p>
+<h2 id="代理模式结构图"><a href="#代理模式结构图" class="headerlink" title="代理模式结构图"></a>代理模式结构图</h2><p><img src="https://s2.loli.net/2023/09/21/PAE9T4Ht7ku6MFY.jpg" alt="代理模式结构图.jpg"></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p><code>ISubject</code> 接口：定义了 <code>RealSubject</code> 和 <code>Proxy</code> 的共用接口，这样就可以在任何使用 <code>RealSubject</code> 的地方都可以使用 <code>Proxy</code> 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">ISubject</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>RealSubject</code> 类：定义 <code>Proxy</code> 所代表的真实实体</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RealSubject</span> <span class="keyword">implements</span> <span class="title class_">ISubject</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;真实的请求。&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Proxy</code> 类：保存一个 <code>RealSubject</code> 的引用使得 <code>Proxy</code> 可以访问实体，并提供一个与 <code>RealSubject</code> 相同的方法，以替代实体执行方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Proxy</span> <span class="keyword">implements</span> <span class="title class_">ISubject</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> RealSubject rs;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Proxy</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.rs = <span class="keyword">new</span> <span class="title class_">RealSubject</span>(); <span class="comment">// 为什么不是传入参数rs?</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.rs.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用场合"><a href="#应用场合" class="headerlink" title="应用场合"></a>应用场合</h2><h3 id="远程代理"><a href="#远程代理" class="headerlink" title="远程代理"></a>远程代理</h3><p>为一个对象在不同的地址空间提供局部代表。这样可以隐藏一个对象存在于不同地址空间的事实。</p>
+<p>例：WebService在Java中的应用。在项目中加入一个WebService，此时会在项目中生成一个wsdl文件和一些相关文件，其实它们就是代理，这就使得客户端程序调用代理就可以解决远程访问的问题。</p>
+<h3 id="虚拟代理"><a href="#虚拟代理" class="headerlink" title="虚拟代理"></a>虚拟代理</h3><p>是根据需要创建开销很大的对象。通过它来存放实例化需要很长时间的真实对象。</p>
+<p>例：比如说你打开一个很大的HTML网页时，里面可能有很多的文字和图片，但你还是可以很快打开它，此时你所看到的是所有的文字，但图片却是一张一张地下载后才能看到。那些未打开的图片框，就是通过虚拟代理来替代了真实的图片，此时代理存储了真实图片的路径和尺寸。</p>
+<h3 id="安全代理"><a href="#安全代理" class="headerlink" title="安全代理"></a>安全代理</h3><p>用来控制真实对象访问时的权限。一般用于对象应该有不同的访问权限的时候。</p>
+<h3 id="智能指引"><a href="#智能指引" class="headerlink" title="智能指引"></a>智能指引</h3><p>当调用真实的对象时，代理处理另外一些事。</p>
+<p>例：计算真实对象的引用次数，这样当该对象没有引用时，可以自动释放它；或当第一次引用一个持久对象时，将它装入内存；或在访问一个实际对象前，检查是否已经锁定它，以确保其他对象不能改变它。它们都是通过代理在访问一个对象时附加一些内务处理。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>代理模式其实就是在访问对象时引入一定程度的间接性，因为这种间接性，可以附加多种用途。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" data-id="clmus6rpy0000yo9gcplo1lom" data-title="设计模式7-代理模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java集合使用注意事项</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">设计模式7-代理模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Java集合使用注意事项</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">LeetCode15. 三数之和</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">设计模式6-装饰模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/20/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
