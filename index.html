@@ -73,6 +73,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-design-pattern/7.代理模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/21/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-09-21T06:05:58.000Z" itemprop="datePublished">2023-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/21/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">设计模式7-代理模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/21/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" data-id="clmus6rpy0000yo9gcplo1lom" data-title="设计模式7-代理模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Java/collection/Java集合使用注意事项" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="article-date">
@@ -1037,96 +1079,6 @@
 
 
   
-    <article id="post-Java/collection/Java集合-Set" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/19/Java/collection/Java%E9%9B%86%E5%90%88-Set/" class="article-date">
-  <time class="dt-published" datetime="2023-09-19T09:14:07.000Z" itemprop="datePublished">2023-09-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/Collection/">Collection</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/19/Java/collection/Java%E9%9B%86%E5%90%88-Set/">Java集合-Set</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="比较-HashSet、LinkedHashSet-和-TreeSet-三者的异同"><a href="#比较-HashSet、LinkedHashSet-和-TreeSet-三者的异同" class="headerlink" title="比较 HashSet、LinkedHashSet 和 TreeSet 三者的异同"></a>比较 HashSet、LinkedHashSet 和 TreeSet 三者的异同</h2><ul>
-<li><p><code>HashSet</code>、<code>LinkedHashSet</code> 和 <code>TreeSet</code> 都是 <code>Set</code> 接口的实现类，都能保证元素唯一，并且都<strong>不是线程安全的</strong>。</p>
-</li>
-<li><p><code>HashSet</code>、<code>LinkedHashSet</code> 和 <code>TreeSet</code> 的主要区别在于底层数据结构不同。</p>
-<ul>
-<li><code>HashSet</code> 的底层数据结构是哈希表（基于 <code>HashMap</code> 实现）。</li>
-<li><code>LinkedHashSet</code> 的底层数据结构是链表和哈希表，元素的插入和取出顺序满足 FIFO。</li>
-<li><code>TreeSet</code> 底层数据结构是红黑树，元素是有序的，排序的方式有自然排序和定制排序。</li>
-</ul>
-</li>
-<li><p>底层数据结构不同又导致这三者的应用场景不同。</p>
-<ul>
-<li><code>HashSet</code> 用于不需要保证元素插入和取出顺序的场景。</li>
-<li><code>LinkedHashSet</code> 用于保证元素的插入和取出顺序满足 FIFO 的场景。</li>
-<li><code>TreeSet</code> 用于支持对元素自定义排序规则的场景。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Comparable-和-Comparator-的区别"><a href="#Comparable-和-Comparator-的区别" class="headerlink" title="Comparable 和 Comparator 的区别"></a>Comparable 和 Comparator 的区别</h2><p><code>Comparable</code> 接口和 <code>Comparator</code> 接口都是 Java 中用于排序的接口，它们在实现类对象之间比较大小、排序等方面发挥了重要作用：</p>
-<ul>
-<li><code>Comparable</code> 接口出自<code>java.lang</code>包，它有一个 <code>compareTo(Object obj)</code>方法用来排序（拿自己和其他对象比较）</li>
-<li><code>Comparator</code>接口出自 <code>java.util</code> 包，它有一个<code>compare(Object obj1, Object obj2)</code>方法用来排序（传入两个对象比较）</li>
-</ul>
-<p>一般我们需要对一个集合使用自定义排序时，我们就要<strong>重写<code>compareTo()</code>方法或<code>compare()</code>方法</strong>。</p>
-<ul>
-<li>当我们需要对某一个集合实现两种排序方式，比如一个 <code>song</code> 对象中的歌名和歌手名分别采用一种排序方法的话：<ul>
-<li>我们可以重写<code>compareTo()</code>方法和使用自制的<code>Comparator</code>方法来实现歌名排序和歌星名排序</li>
-<li>或者以两个 <code>Comparator</code> 来实现歌名排序和歌星名排序，我们只能使用两个参数版的 <code>Collections.sort(collection, comparator)</code>.</li>
-</ul>
-</li>
-</ul>
-<h2 id="无序性和不可重复性的含义"><a href="#无序性和不可重复性的含义" class="headerlink" title="无序性和不可重复性的含义"></a>无序性和不可重复性的含义</h2><ul>
-<li><p>无序性不等于随机性 ，无序性是指存储的数据在底层数组中并非按照数组索引的顺序添加 ，而是根据数据的哈希值决定的。</p>
-</li>
-<li><p>不可重复性是指添加的元素按照 <code>equals()</code> 判断时 ，返回 false，需要同时重写 <code>equals()</code> 方法和 <code>hashCode()</code> 方法。</p>
-</li>
-</ul>
-<h2 id="HashSet-如何检查重复"><a href="#HashSet-如何检查重复" class="headerlink" title="HashSet 如何检查重复?"></a>HashSet 如何检查重复?</h2><p>先检查<code>hashcode</code>，如果有重复的再调用<code>equals()</code>。</p>
-<blockquote>
-<p>当你把对象加入<code>HashSet</code>时，<code>HashSet</code> 会先计算对象的<code>hashcode</code>值来判断对象加入的位置，同时也会与其他加入的对象的 <code>hashcode</code> 值作比较，如果没有相符的 <code>hashcode</code>，<code>HashSet</code> 会假设对象没有重复出现。但是如果发现有相同 <code>hashcode</code> 值的对象，这时会调用<code>equals()</code>方法来检查 <code>hashcode</code> 相等的对象是否真的相同。如果两者相同，<code>HashSet</code> 就不会让加入操作成功。</p>
-</blockquote>
-<p>在 JDK1.8 中，<code>HashSet</code>的<code>add()</code>方法只是简单的调用了<code>HashMap</code>的<code>put()</code>方法，并且判断了一下返回值以确保是否有重复元素。直接看一下<code>HashSet</code>中的源码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns: true if this set did not already contain the specified element</span></span><br><span class="line"><span class="comment">// 返回值：当 set 中没有包含 add 的元素时返回真</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> map.put(e, PRESENT)==<span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而在<code>HashMap</code>的<code>putVal()</code>方法中也能看到如下说明：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns : previous value, or null if none</span></span><br><span class="line"><span class="comment">// 返回值：如果插入位置没有元素返回null，否则返回上一个元素</span></span><br><span class="line"><span class="keyword">final</span> V <span class="title function_">putVal</span><span class="params">(<span class="type">int</span> hash, K key, V value, <span class="type">boolean</span> onlyIfAbsent,</span></span><br><span class="line"><span class="params">                   <span class="type">boolean</span> evict)</span> &#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>也就是说，在 JDK1.8 中，实际上无论<code>HashSet</code>中是否已经存在了某元素，<code>HashSet</code>都会直接插入，只是会在<code>add()</code>方法的返回值处告诉我们插入前是否存在相同元素。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/19/Java/collection/Java%E9%9B%86%E5%90%88-Set/" data-id="clmq7wwa7000jxig123efetra" data-title="Java集合-Set" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1170,6 +1122,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/21/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">设计模式7-代理模式</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Java集合使用注意事项</a>
           </li>
         
@@ -1183,10 +1139,6 @@
         
           <li>
             <a href="/2023/09/20/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/20/design-pattern/0.OOP_basic/">设计模式0-OOP Basic</a>
           </li>
         
       </ul>
