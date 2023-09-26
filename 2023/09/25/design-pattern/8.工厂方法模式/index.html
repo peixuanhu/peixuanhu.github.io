@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>设计模式8-工厂方法模式 | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="工厂方法模式定义工厂方法模式（Factory Method），定义一个用于创建对象的接口，让子类决定实例化哪一个类。 工厂方法使一个类的实例化延迟到其子类。 工厂方法模式结构图 相比于简单工厂（工厂类只有一个），工厂方法模式中有多个工厂类继承于工厂抽象类&#x2F;实现工厂接口，增加新工厂不会影响原有工厂。此外，产品的实例化延迟到工厂子类中，而不是最外层的工厂类（如计算器中的 OperationF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式8-工厂方法模式">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/09/25/design-pattern/8.%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="工厂方法模式定义工厂方法模式（Factory Method），定义一个用于创建对象的接口，让子类决定实例化哪一个类。 工厂方法使一个类的实例化延迟到其子类。 工厂方法模式结构图 相比于简单工厂（工厂类只有一个），工厂方法模式中有多个工厂类继承于工厂抽象类&#x2F;实现工厂接口，增加新工厂不会影响原有工厂。此外，产品的实例化延迟到工厂子类中，而不是最外层的工厂类（如计算器中的 OperationF">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2023/09/25/ECs5PaBurW7kmyZ.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/09/25/5gty3FUwSMIWdv9.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/09/25/pij2CroZTRvWfIQ.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/09/25/uPfSU2R5J7bxM39.jpg">
+<meta property="article:published_time" content="2023-09-25T09:24:35.000Z">
+<meta property="article:modified_time" content="2023-09-25T09:24:35.000Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/25/ECs5PaBurW7kmyZ.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-design-pattern/8.工厂方法模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/25/design-pattern/8.%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-09-25T09:24:35.000Z" itemprop="datePublished">2023-09-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      设计模式8-工厂方法模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>工厂方法模式（Factory Method），定义一个用于创建对象的接口，让子类决定实例化哪一个类。</p>
+<p>工厂方法使一个类的实例化<strong>延迟到其子类</strong>。</p>
+<h2 id="工厂方法模式结构图"><a href="#工厂方法模式结构图" class="headerlink" title="工厂方法模式结构图"></a>工厂方法模式结构图</h2><p><img src="https://s2.loli.net/2023/09/25/ECs5PaBurW7kmyZ.jpg" alt="工厂方法模式结构图.jpg"></p>
+<p>相比于简单工厂（工厂类只有一个），工厂方法模式中有<strong>多个工厂类</strong>继承于工厂抽象类&#x2F;实现工厂接口，增加新工厂不会影响原有工厂。此外，产品的实例化延迟到工厂子类中，而不是最外层的工厂类（如计算器中的 <code>OperationFactory</code>）。</p>
+<h1 id="例1：计算器"><a href="#例1：计算器" class="headerlink" title="例1：计算器"></a>例1：计算器</h1><h2 id="计算器V1"><a href="#计算器V1" class="headerlink" title="计算器V1"></a>计算器V1</h2><h3 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h3><p><img src="https://s2.loli.net/2023/09/25/5gty3FUwSMIWdv9.jpg" alt="工厂方法结构图.jpg"></p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>工厂接口 <code>IFactory</code> ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Operation <span class="title function_">createOperation</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每种运算各建立一个具体工厂实现 <code>IFactory</code> 接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加法工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AddFactory</span> <span class="keyword">implements</span> <span class="title class_">IFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Operation <span class="title function_">createOperation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Add</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其余运算类似</span></span><br></pre></td></tr></table></figure>
+
+<p>运算工厂类 <code>OperationFactory</code> ：根据用户输入的运算符号，决定返回哪一个运算子类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperationFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Operation <span class="title function_">createOperate</span><span class="params">(String operate)</span> &#123;</span><br><span class="line">        <span class="type">Operation</span> <span class="variable">oper</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">IFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (operate) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;+&quot;</span>:</span><br><span class="line">                factory = <span class="keyword">new</span> <span class="title class_">AddFactory</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;-&quot;</span>:</span><br><span class="line">                factory = <span class="keyword">new</span> <span class="title class_">SubFactory</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;*&quot;</span>:</span><br><span class="line">                factory = <span class="keyword">new</span> <span class="title class_">MulFactory</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;/&quot;</span>:</span><br><span class="line">                factory = <span class="keyword">new</span> <span class="title class_">DivFactory</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        oper = factory.createOperation();</span><br><span class="line">        <span class="keyword">return</span> oper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Operation</span> <span class="variable">oper</span> <span class="operator">=</span> OperationFactory.createOperate(strOperate);</span><br><span class="line"><span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> oper.getResult(numberA, numberB);</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单工厂vs工厂方法"><a href="#简单工厂vs工厂方法" class="headerlink" title="简单工厂vs工厂方法"></a>简单工厂vs工厂方法</h3><h4 id="假如要增加一个指数运算？"><a href="#假如要增加一个指数运算？" class="headerlink" title="假如要增加一个指数运算？"></a>假如要增加一个指数运算？</h4><h5 id="简单工厂"><a href="#简单工厂" class="headerlink" title="简单工厂"></a>简单工厂</h5><p>先增加指数运算的运算类，再更改 <code>OperationFactory</code> 类的 <code>switch</code> 语句。</p>
+<h5 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h5><p>先增加指数运算的运算类，再更改 <code>OperationFactory</code> 类的 <code>switch</code> 语句，还要额外增加一个指数运算工厂类实现 <code>IFacotry</code> 接口。增加了复杂性。</p>
+<h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><ul>
+<li><p><strong>简单工厂模式</strong>：最大优点在于工厂类中包含必要的逻辑判断，根据客户端的选择条件动态实例化相关的类，对于客户端来说，去除了与具体产品的依赖。</p>
+<ul>
+<li>例如计算器，客户端不用管该用哪个类的实例，只需要把’+’给工厂，工厂自动就给出了相应的实例，客户端只要去做运算就可以了，不同的实例会实现不同的运算。但问题也就在这里，如你所说，如果要加一个’求x的n次方（x^n）’的功能，我们需要给OperationFactory类的方法里加’Case’的分支条件。目前来看，这个OperationFactory类，承载了太多功能，这可不是好办法。这就等于说，我们不但对扩展开放了，对修改也开放了，违背了开放-封闭原则。</li>
+</ul>
+</li>
+<li><p><strong>工厂方法模式</strong>：将长的代码切割成小段，再将每一小段’封装’起来，减少每段代码之间的耦合，这样风险就分散了，需要修改或扩展的难度就降低了。</p>
+<ul>
+<li>比如计算器：加减乘除运算统一设计成 <code>基础运算工厂</code> 的产品。增加指数、对数运算类，新开一个工厂 <code>高级运算工厂</code> 类，不需要对 <code>基础运算工厂</code> 做改动。</li>
+</ul>
+</li>
+</ul>
+<h2 id="计算器V2"><a href="#计算器V2" class="headerlink" title="计算器V2"></a>计算器V2</h2><h3 id="结构图-1"><a href="#结构图-1" class="headerlink" title="结构图"></a>结构图</h3><p><img src="https://s2.loli.net/2023/09/25/pij2CroZTRvWfIQ.jpg" alt="工厂方法结构图2.jpg"></p>
+<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><p>增加指数运算类，继承 <code>Operation</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Pow</span> <span class="keyword">extends</span> <span class="title class_">Operation</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> numberA, <span class="type">double</span> numberB)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Math.pow(numberA, numberB);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将加减乘除运算封装到基础运算工厂类 <code>FactoryBasic</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FactoryBasic</span> <span class="keyword">implements</span> <span class="title class_">IFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Operation <span class="title function_">createOperation</span><span class="params">(String operateType)</span> &#123;</span><br><span class="line">        <span class="type">Operation</span> <span class="variable">oper</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (operateType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;+&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Add</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;-&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Sub</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;*&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Mul</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;/&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Div</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> oper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将新运算封装到高级运算工厂类 <code>FactoryAdvanced</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FactoryAdvanced</span> <span class="keyword">implements</span> <span class="title class_">IFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Operation <span class="title function_">createOperation</span><span class="params">(String operateType)</span> &#123;</span><br><span class="line">        <span class="type">Operation</span> <span class="variable">oper</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (operateType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;pow&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Pow</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;log&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Log</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="comment">// 还可扩展其他高级运算类的实例化，但修改当前工厂类不会影响到基础运算工厂类</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> oper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新的 <code>OperationFactory</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperationFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Operation <span class="title function_">createOperate</span><span class="params">(String operate)</span> &#123;</span><br><span class="line">        <span class="type">Operation</span> <span class="variable">oper</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">IFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (operate) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;+&quot;</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;-&quot;</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;*&quot;</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;/&quot;</span>:</span><br><span class="line">                <span class="comment">// 基础运算工厂实例</span></span><br><span class="line">                factory = <span class="keyword">new</span> <span class="title class_">FactoryBasic</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;pow&quot;</span>:</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;log&quot;</span>:</span><br><span class="line">                <span class="comment">// 高级运算工厂实例</span></span><br><span class="line">                factory = <span class="keyword">new</span> <span class="title class_">FactoryAdvanced</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 利用多态返回实际的运算类实例</span></span><br><span class="line">        oper = factory.createOperation(operate);</span><br><span class="line">        <span class="keyword">return</span> oper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对比简单工厂模式中的 <code>OperationFactory</code> ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperationFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Operation <span class="title function_">createOperate</span><span class="params">(String operate)</span> &#123;</span><br><span class="line">        <span class="type">Operation</span> <span class="variable">oper</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (operate) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;+&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Add</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;-&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Sub</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;*&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Mul</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;/&quot;</span>:</span><br><span class="line">                oper = <span class="keyword">new</span> <span class="title class_">Div</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> oper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，新的 <code>OperationFactory</code> 类已经不存在运算子类实例化的代码了。也就是说，在这个代码里，全部是接口与具体工厂类，并不存在具体的实现，与原来的 <code>OperationFactory</code> 类对比，实例化的过程延迟到了工厂子类中。</p>
+<p>遵循<code>依赖倒置原则</code>：针对接口（<code>IFactory</code>）编程，而不是针对实现（<code>Operation</code>）编程。</p>
+<h1 id="例2：再升级商场收银程序"><a href="#例2：再升级商场收银程序" class="headerlink" title="例2：再升级商场收银程序"></a>例2：再升级商场收银程序</h1><blockquote>
+<p>简单工厂+策略+装饰+工厂方法</p>
+</blockquote>
+<p>之前的<code>简单工厂+策略+装饰</code> 版本中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashContext</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> ISale cs;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 在构造函数中传入type，根据type来实例化具体的收费策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashContext</span><span class="params">(<span class="type">int</span> cashType)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="comment">// 先打8折，再满300返100</span></span><br><span class="line">                <span class="type">CashNormal</span> <span class="variable">cn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="type">CashReturn</span> <span class="variable">crt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="type">CashRebate</span> <span class="variable">crb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>);</span><br><span class="line">                </span><br><span class="line">                crt.decorate(cn); <span class="comment">// 用 满300返100算法 包装原价算法</span></span><br><span class="line">                crb.decorate(crt); <span class="comment">// 用 打8折算法 装饰 满300返100算法</span></span><br><span class="line">                <span class="built_in">this</span>.cs = crb;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据收费策略的不同，获得计算结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.cs.acceptCash(price, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>case 5</code>中new的对象太多，应该将其封装成一个工厂。</p>
+<p>所有的case可以抽象成两个工厂类：<code>先打折后满减</code>和<code>先满减后打折</code>。有<code>先打折后满减</code>类存在，那它应该有三个初始化参数：<em>折扣值、满减条件、满减返利值</em>，那么：</p>
+<ul>
+<li>打折类：其实就是满减返利值条件为0的情况</li>
+<li>满减类：就相当于折扣参数为1的情况</li>
+</ul>
+<h2 id="结构图-2"><a href="#结构图-2" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/09/25/uPfSU2R5J7bxM39.jpg" alt="工厂方法结构图3.jpg"></p>
+<h2 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h2><p>增加 <code>IFactory</code> 接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> ISale <span class="title function_">createSalesModel</span><span class="params">()</span>; <span class="comment">// 创建销售模式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>增加实现 <code>IFactory</code> 接口的两个类：<code>先打折后满减</code>和<code>先满减后打折</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先打折后满减类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashRebateReturnFactory</span> <span class="keyword">implements</span> <span class="title class_">IFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyRebate</span> <span class="operator">=</span> <span class="number">1d</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyCondition</span> <span class="operator">=</span> <span class="number">0d</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyReturn</span> <span class="operator">=</span> <span class="number">0d</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashRebateReturnFactory</span><span class="params">(<span class="type">double</span> moneyRebate, <span class="type">double</span> moneyCondition, <span class="type">double</span> moneyReturn)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyRebate = moneyRebate;</span><br><span class="line">        <span class="built_in">this</span>.moneyCondition = moneyCondition;</span><br><span class="line">        <span class="built_in">this</span>.moneyReturn = moneyReturn;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 重写接口方法，先打折后满减</span></span><br><span class="line">    <span class="keyword">public</span> ISale <span class="title function_">createSalesModel</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">CashNormal</span> <span class="variable">cn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">        <span class="type">CashReturn</span> <span class="variable">cr1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="built_in">this</span>.moneyCondition, <span class="built_in">this</span>.moneyReturn);</span><br><span class="line">        <span class="type">CashRebate</span> <span class="variable">cr2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="built_in">this</span>.moneyRebate);</span><br><span class="line">        </span><br><span class="line">        cr1.decorate(cn);</span><br><span class="line">        cr2.decorate(cr1);</span><br><span class="line">        <span class="keyword">return</span> cr2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 先满减后打折类类似。。</span></span><br></pre></td></tr></table></figure>
+
+<p><code>CashContext</code> 类：针对 <code>ISale</code> 和 <code>IFactory</code> 接口和两个工厂类编程， 对于各个打折满减算法CashSuper、CashNormal、CashReturn、CashRebate等具体类一无所知。实现了松耦合的目的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashContext</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> ISale cs;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 构造函数传入收费策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashContext</span><span class="params">(<span class="type">int</span> cashType)</span> &#123;</span><br><span class="line">        <span class="type">IFactory</span> <span class="variable">fs</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// 原价</span></span><br><span class="line">                fs = <span class="keyword">new</span> <span class="title class_">CashRebateReturnFactory</span>(<span class="number">1d</span>, <span class="number">0d</span>, <span class="number">0d</span>); <span class="comment">// 不打折，不满减</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>: <span class="comment">// 打8折</span></span><br><span class="line">                fs = <span class="keyword">new</span> <span class="title class_">CashRebateReturnFactory</span>(<span class="number">0.8d</span>, <span class="number">0d</span>, <span class="number">0d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>: <span class="comment">// 满300返100</span></span><br><span class="line">                fs = <span class="keyword">new</span> <span class="title class_">CashRebateReturnFactory</span>(<span class="number">1d</span>, <span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>: <span class="comment">// 先打8折，再满300返100</span></span><br><span class="line">                fs = <span class="keyword">new</span> <span class="title class_">CashRebateReturnFactory</span>(<span class="number">0.8d</span>, <span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>: <span class="comment">// 先满200返50，再打7折</span></span><br><span class="line">                fs = <span class="keyword">new</span> <span class="title class_">CashReturnRebateFactory</span>(<span class="number">0.7d</span>, <span class="number">200d</span>, <span class="number">50d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">this</span>.cs = fs.createSalesModel();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.cs.acceptCash(price, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>工厂方法模式是简单工厂模式的进一步抽象和推广：当只有一个工厂时，就是简单工厂模式；当有多个工厂时，就是工厂方法模式（当然外层还有一个总的工厂来决定具体选择哪一个工厂）。类似由一维进化成了二维。</p>
+<p>工厂方法本质就是对获取对象过程的抽象，它克服了简单工厂违背开放-封闭原则的缺点，又保持了封装对象创建过程的优点。</p>
+<h2 id="工厂方法模式的好处"><a href="#工厂方法模式的好处" class="headerlink" title="工厂方法模式的好处"></a>工厂方法模式的好处</h2><ul>
+<li><strong>对于复杂的参数的构造对象，可以很好地对外层屏蔽代码的复杂性</strong>，注意是指创建新实例的构造对象。比如说我们用了’先打折再满减’类工厂，其实就屏蔽了装饰模式的一部分代码，让CashContext不再需要了解装饰的过程。</li>
+<li><strong>有很好的解耦能力。</strong>也就是针对接口在编程。当我们要修改具体实现层的代码时，上层代码完全不了解实现层的情况，因此并不会影响到上层代码的调用，这就达到了解耦的目的。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/25/design-pattern/8.%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" data-id="cln0e9hr30000plg148yhhep3" data-title="设计模式8-工厂方法模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/09/25/algorithm/template/2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          算法模板2-二分模板
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/25/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式2-策略模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/26/algorithm/template/4.%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/26/algorithm/template/3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/">算法模板3-前缀和与差分模板</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/25/algorithm/template/2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/">算法模板2-二分模板</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/25/design-pattern/8.%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">设计模式8-工厂方法模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/25/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
