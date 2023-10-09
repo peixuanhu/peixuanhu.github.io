@@ -73,6 +73,335 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-algorithm/template/2-6.堆" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/" class="article-date">
+  <time class="dt-published" datetime="2023-10-09T07:55:06.500Z" itemprop="datePublished">2023-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/">算法模板2-6.堆</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>以小根堆为例：</p>
+<p>堆中的每一个点都是小于等于左右儿子的。</p>
+<p>所以根节点就是整个堆的最小值。</p>
+<h2 id="支持的操作"><a href="#支持的操作" class="headerlink" title="支持的操作"></a>支持的操作</h2><ol>
+<li><p>插入一个数</p>
+<p><code>heap[++ size] = x; up(size);</code></p>
+</li>
+<li><p>求集合当中的最小值</p>
+<p><code>heap[1]</code></p>
+</li>
+<li><p>删除最小值</p>
+<p>用整个堆的最后一个元素覆盖堆顶元素：</p>
+<p><code>heap[1] = heap[size --]; down(1);</code></p>
+</li>
+<li><p>删除任意一个元素</p>
+<p>与删除最小值类似，用最后一个元素覆盖下标为k的元素：</p>
+<p><code>heap[k] = heap[size --]; up(k); down(k);</code></p>
+<p>理论上是需要判断heap[k]的值变大还是变小再决定是up还是down。为了方便，可以直接up和down一遍</p>
+</li>
+<li><p>修改任意一个元素</p>
+<p><code>heap[k] = x; up(k); down(k);</code></p>
+</li>
+</ol>
+<p>其中，插入和删除元素都是 <code>O(logn)</code> 的，求最小值是 <code>O(1)</code> 的。</p>
+<blockquote>
+<p>后两种是手写堆特有的操作，STL无法直接实现。</p>
+</blockquote>
+<p>以上所有操作都可以由两个操作组合实现：</p>
+<h3 id="down"><a href="#down" class="headerlink" title="down"></a>down</h3><p><code>down(x)</code>: 把下标为x的节点的值变大了</p>
+<p>递归：与左右儿子相比，和最小的那个交换位置</p>
+<h3 id="up"><a href="#up" class="headerlink" title="up"></a>up</h3><p><code>up(x)</code>: 把下标为x的节点的值变小了</p>
+<p>递归：与父节点相比，如果比父节点小，则交换位置</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>堆是一个完全二叉树。</p>
+<h2 id="存储方式"><a href="#存储方式" class="headerlink" title="存储方式"></a>存储方式</h2><p>用一个一位数组来存。下标为x的元素的左儿子下标是2x，右儿子的下标是2x + 1。</p>
+<p>注：下标从1开始 </p>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><p>带映射数组版本的模板：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// h[N]存储堆中的值，h[1]是堆顶，x的左儿子是2x，右儿子是2x + 1</span></span><br><span class="line"><span class="comment">// ph[k]存储第k个插入的点在堆中的位置，p是下标，h是堆，ph的意思是插入顺序的下标映射到堆</span></span><br><span class="line"><span class="comment">// hp[k]存储堆中下标是k的点是第几个插入的</span></span><br><span class="line"><span class="type">int</span> h[N], ph[N], hp[N], size;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交换两个点，及其映射关系</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heap_swap</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">swap</span>(ph[hp[a]], ph[hp[b]]);</span><br><span class="line">  <span class="built_in">swap</span>(hp[a], hp[b]);</span><br><span class="line">  <span class="built_in">swap</span>(h[a], h[b]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">down</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> t = u;</span><br><span class="line">  <span class="comment">// t设为u及其左右儿子里值最小的那一个</span></span><br><span class="line">  <span class="keyword">if</span> (u * <span class="number">2</span> &lt;= size &amp;&amp; h[u * <span class="number">2</span>] &lt; h[t]) t = u * <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">if</span> (u * <span class="number">2</span> + <span class="number">1</span> &lt;= size &amp;&amp; h[u * <span class="number">2</span> + <span class="number">1</span>] &lt; h[t]) t = u * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (u != t) &#123;</span><br><span class="line">    <span class="built_in">heap_swap</span>(u, t);</span><br><span class="line">    <span class="built_in">down</span>(t);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">up</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (u / <span class="number">2</span> &amp;&amp; h[u] &lt; h[u / <span class="number">2</span>]) &#123;</span><br><span class="line">    <span class="built_in">heap_swap</span>(u, u / <span class="number">2</span>);</span><br><span class="line">    u &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// O(n)建堆</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i; i --) <span class="built_in">down</span>(i);</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>先把数组建成堆，再依次输出堆顶元素</p>
+<p>时间复杂度： <code>O(nlogn)</code>。</p>
+<h4 id="建堆"><a href="#建堆" class="headerlink" title="建堆"></a>建堆</h4><p>如果一个一个元素插入，时间复杂度是 <code>O(nlogn)</code> 的。</p>
+<p><code>O(n)</code> 的建堆方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i; i --) <span class="built_in">down</span>(i);</span><br></pre></td></tr></table></figure>
+
+<p>从 n&#x2F;2 开始往上的所有元素 down，其实就是从树的倒数第二层开始down。</p>
+<p>时间复杂度证明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n/4 * 1 + n/8 * 2 + n/16 * 3 + ...</span><br><span class="line">= n (1/2^2 + 2/2^3 + 3/2^4 + ...)</span><br><span class="line"></span><br><span class="line">S = 1/2^2 + 2/2^3 + 3/2^4 + ...</span><br><span class="line">2S = 1/2 + 2/2^2 + 3/2^3 + ...</span><br><span class="line">2S - S = S = 1/2 + 1/2^2 + 1/2^3 + ... &lt; 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dijkstra堆优化"><a href="#Dijkstra堆优化" class="headerlink" title="Dijkstra堆优化"></a>Dijkstra堆优化</h3><p>需要用到hp, ph映射数组</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/09/algorithm/template/2-6.%E5%A0%86/" data-id="clnitxwut0002cz9g61li7pos" data-title="算法模板2-6.堆" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/2-5.并查集" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="article-date">
+  <time class="dt-published" datetime="2023-10-09T05:57:36.893Z" itemprop="datePublished">2023-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/">算法模板2-5.并查集</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h1><h2 id="支持的操作"><a href="#支持的操作" class="headerlink" title="支持的操作"></a>支持的操作</h2><p>在近乎 <code>O(1)</code> 的时间复杂度内支持以下两种操作：</p>
+<ol>
+<li>将两个集合合并</li>
+<li>询问两个元素是否在一个集合当中</li>
+</ol>
+<p>注：有时也用于处理图论相关的问题。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>每个集合用一棵树来表示，树根的编号就是整个集合的编号。每个节点存储它的父节点，<code>p[x]</code> 表示 <code>x</code> 的父节点。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><h3 id="问题1-如何判断树根？"><a href="#问题1-如何判断树根？" class="headerlink" title="问题1: 如何判断树根？"></a>问题1: 如何判断树根？</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (p[x] == x) 则为树根</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题2-如何求x的集合编号？"><a href="#问题2-如何求x的集合编号？" class="headerlink" title="问题2: 如何求x的集合编号？"></a>问题2: 如何求x的集合编号？</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (p[x] != x) x = p[x];</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题3-如何合并两个集合？"><a href="#问题3-如何合并两个集合？" class="headerlink" title="问题3: 如何合并两个集合？"></a>问题3: 如何合并两个集合？</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">px是x的集合编号，py是y的集合编号</span><br><span class="line">令p[px] = py即可</span><br></pre></td></tr></table></figure>
+
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="1-路径压缩"><a href="#1-路径压缩" class="headerlink" title="1. 路径压缩"></a>1. 路径压缩</h3><p>在 <code>find</code> 函数中通过 <code> if (p[x] != x) p[x] = find(p[x]);</code> 实现把路径上所有点都直接指向祖宗节点</p>
+<h3 id="2-按秩合并（待补充）"><a href="#2-按秩合并（待补充）" class="headerlink" title="2. 按秩合并（待补充）"></a>2. 按秩合并（待补充）</h3><p>大致意思就是倾向于把短的树接到长的树上面</p>
+<p>用得较少，一般不在代码中实现</p>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><h3 id="朴素并查集"><a href="#朴素并查集" class="headerlink" title="朴素并查集"></a>朴素并查集</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> p[N]; <span class="comment">// 存储每个点的祖宗节点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回x的祖宗节点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (p[x] != x) p[x] = <span class="built_in">find</span>(p[x]); <span class="comment">// 顺手做了路径压缩</span></span><br><span class="line">  <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化，假定节点编号是1～n</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i ++) p[i] = i;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并a和b所在的两个集合</span></span><br><span class="line">p[<span class="built_in">find</span>(a)] = <span class="built_in">find</span>(b); <span class="comment">// 让a的祖宗节点的父亲指向b的祖宗节点</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="维护size的并查集"><a href="#维护size的并查集" class="headerlink" title="维护size的并查集"></a>维护size的并查集</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> p[N], size[N];</span><br><span class="line"><span class="comment">// p[]存储每个点的祖宗节点，size[]只有祖宗节点的有意义，表示祖宗节点所在集合中的点的数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回x的祖宗节点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (p[x] != x) p[x] = <span class="built_in">find</span>(p[x]);</span><br><span class="line">  <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化，假定节点编号是1～n</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  p[i] = i;</span><br><span class="line">  size[i] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并a和b所在的两个集合</span></span><br><span class="line">size[<span class="built_in">find</span>(b)] += size[<span class="built_in">find</span>(a)];</span><br><span class="line">p[<span class="built_in">find</span>(a)] = <span class="built_in">find</span>(b);</span><br></pre></td></tr></table></figure>
+
+<h3 id="维护到祖宗节点距离的并查集"><a href="#维护到祖宗节点距离的并查集" class="headerlink" title="维护到祖宗节点距离的并查集"></a>维护到祖宗节点距离的并查集</h3><p>例题：食物链</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> p[N], d[N];</span><br><span class="line"><span class="comment">// p[]存储每个点的祖宗节点，d[x]存储x到p[x]的距离</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回x的祖宗节点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (p[x] != x) &#123;</span><br><span class="line">    <span class="type">int</span> u = <span class="built_in">find</span>(p[x]);</span><br><span class="line">    d[x] += d[p[x]];</span><br><span class="line">    p[x] = u;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化，假定节点编号是1～n</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  p[i] = i;</span><br><span class="line">  d[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并a和b所在的两个集合</span></span><br><span class="line">p[<span class="built_in">find</span>(a)] = <span class="built_in">find</span>(b); <span class="comment">// 让a的祖宗节点的父亲指向b的祖宗节点</span></span><br><span class="line">d[<span class="built_in">find</span>(a)] = distance; <span class="comment">// 根据具体问题，初始化find(a)的偏移量</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" data-id="clnitxwus0000cz9gdwrz5l4v" data-title="算法模板2-5.并查集" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/2-4.Trie树" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" class="article-date">
+  <time class="dt-published" datetime="2023-10-09T05:23:06.088Z" itemprop="datePublished">2023-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/">算法模板2-4.Trie树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Trie树"><a href="#Trie树" class="headerlink" title="Trie树"></a>Trie树</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>是用于高效<strong>存储</strong>和<strong>查找</strong>字符串集合中各字符串出现次数的数据结构。</p>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> son[N][<span class="number">26</span>], cnt[N], idx;</span><br><span class="line"><span class="comment">// 0号点既是根节点，又是空节点（一个点如果没有子节点，它的son就指向0）</span></span><br><span class="line"><span class="comment">// son[][]存储树中每个节点的子节点</span></span><br><span class="line"><span class="comment">// cnt[]存储以每个节点结尾的单词数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入一个字符串</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">char</span> str[])</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> p = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; str[i]; i ++) &#123;</span><br><span class="line">    <span class="type">int</span> u = str[i] - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (!son[p][u]) son[p][u] = ++ idx; <span class="comment">// 如果没有子节点，创建一个新节点继续走</span></span><br><span class="line">    p = son[p][u];</span><br><span class="line">  &#125;</span><br><span class="line">  cnt[p] ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询字符串出现的次数</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">char</span> str[])</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> p = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; str[i]; i ++) &#123;</span><br><span class="line">    <span class="type">int</span> u = str[i] - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (!son[p][u]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    p = son[p][u];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> cnt[p];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" data-id="clnitxwuu0003cz9gfwoq6ry8" data-title="算法模板2-4.Trie树" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/13.建造者模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/08/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-08T15:38:16.000Z" itemprop="datePublished">2023-10-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/08/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式13-建造者模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
+<p>建造者模式可以将一个产品的<strong>内部表象</strong>与产品的<strong>生成过程</strong>分割开来，从而可以使一个建造过程生成具有不同的内部表象的产品对象。</p>
+<p>用户只需指定需要建造的类型即可，不需要知道具体建造的过程和细节。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><h3 id="Director"><a href="#Director" class="headerlink" title="Director"></a>Director</h3><p>构建一个使用 <code>Builder</code> 接口的对象。</p>
+<p>用于控制建造过程，隔离用户与建造过程的关联。</p>
+<h3 id="Builder"><a href="#Builder" class="headerlink" title="Builder"></a>Builder</h3><p>为创建一个 <code>Product</code> 对象的各个部件指定的抽象接口。</p>
+<h3 id="ConcreteBuilder"><a href="#ConcreteBuilder" class="headerlink" title="ConcreteBuilder"></a>ConcreteBuilder</h3><p>具体建造者，实现 <code>Builder</code> 接口，构造和装配各个部件。</p>
+<h3 id="Product"><a href="#Product" class="headerlink" title="Product"></a>Product</h3><p><code>Builder</code> 建造出来的具体产品。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Product</code> 类：产品类，由多个部件组成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">  </span><br><span class="line">  ArrayList&lt;String&gt; parts = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 添加新的产品部件</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String part)</span> &#123;</span><br><span class="line">    parts.add(part);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 列举所有产品部件</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (String part : parts) &#123;</span><br><span class="line">      System.out.println(part);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Builder</code> 类：抽象建造者类，确定产品由两个部件 <code>PartA</code> 和 <code>PartB</code> 组成，并声明一个得到产品建造后结果的方法 <code>GetResult</code> 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">buildPartA</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">buildPartB</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title function_">getResult</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ConcreteBuilder</code> 类：具体建造者类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体建造者类1</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteBuilder1</span> <span class="keyword">extends</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Product</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartA</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件A-1&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartB</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件B-1&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Product <span class="title function_">getResult</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体建造者类2</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteBuilder2</span> <span class="keyword">extends</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Product</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartA</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件A-2&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartB</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件B-2&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Product <span class="title function_">getResult</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Director</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Director</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">construct</span><span class="params">(Builder builder)</span> &#123;</span><br><span class="line">    builder.buildPartA();</span><br><span class="line">    builder.buildPartB();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：客户不需要知道具体的建造过程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Director</span> <span class="variable">director</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Director</span>();</span><br><span class="line"><span class="type">Builder</span> <span class="variable">b1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteBuilder1</span>();</span><br><span class="line"><span class="type">Builder</span> <span class="variable">b2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteBuilder2</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指挥者用ConcreteBuilder1的方法来建造产品</span></span><br><span class="line">director.construct(b1);</span><br><span class="line"><span class="type">Product</span> <span class="variable">p1</span> <span class="operator">=</span> b1.getResult();</span><br><span class="line">p1.show();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指挥者用ConcreteBuilder2的方法来建造产品</span></span><br><span class="line">director.construct(b2);</span><br><span class="line"><span class="type">Product</span> <span class="variable">p2</span> <span class="operator">=</span> b2.getResult();</span><br><span class="line">p2.show();</span><br><span class="line"></span><br><span class="line"><span class="comment">// p1, p2结果不同</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>建造者模式主要用于创建一些复杂的对象，这些对象内部子对象的建造顺序通常是稳定的，但每个子对象的构建通常面临复杂的变化。</p>
+<p>建造者模式是在当<strong>创建复杂对象的算法</strong>应该独立于<strong>该对象的组成部分</strong>以及<strong>它们的装配方式</strong>时适用的模式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/08/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clnitxwuv000ccz9g1tt1h6j2" data-title="设计模式13-建造者模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/2-3.KMP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/07/algorithm/template/2-3.KMP/" class="article-date">
+  <time class="dt-published" datetime="2023-10-07T12:57:45.000Z" itemprop="datePublished">2023-10-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/07/algorithm/template/2-3.KMP/">算法模板2-3.KMP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>有两个字符串 <code>S</code> 和 <code>p</code>，其中 <code>S</code> 是原串（长），<code>p</code>是模板串（短）。</p>
+<p>KMP用于字符串匹配：找到 <code>S</code> 中所有与 <code>p</code> 相同的子串，并返回每个子串开头字符的下标。</p>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// s[]是长文本，p[]是模式串，n是s的长度，m是p的长度</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 求模式串的next数组</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>, j = <span class="number">0</span>; i &lt;= m; i ++) &#123; <span class="comment">// i从2开始的原因：ne[1]不用算，ne[1]=0，第一个字母失败了只能从头开始</span></span><br><span class="line">  <span class="keyword">while</span> (j &amp;&amp; p[i] != p[j + <span class="number">1</span>]) j = ne[j];</span><br><span class="line">  <span class="keyword">if</span> (p[i] == p[j + <span class="number">1</span>]) j ++;</span><br><span class="line">  ne[i] = j; <span class="comment">// 记录当前i对应的ne[i]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匹配</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  <span class="keyword">while</span> (j &amp;&amp; s[i] != p[j + <span class="number">1</span>]) j = ne[j]; <span class="comment">// j没有回到第一个字符且s[i]和p[j + 1]不能匹配：一直往后移动p串使得p[j + 1]之前的子串是匹配的</span></span><br><span class="line">  <span class="keyword">if</span> (s[i] == p[j + <span class="number">1</span>]) j ++; <span class="comment">// 如果匹配了，j往后移动</span></span><br><span class="line">  <span class="keyword">if</span> (j == m) &#123; <span class="comment">// 整个p串都匹配成功</span></span><br><span class="line">    j = ne[j]; <span class="comment">// j还得退一步（试了下如果不加也能ac，因为在下一次循环的while中如果不匹配的话，反正也会执行j=ne[j]的？）</span></span><br><span class="line">    <span class="comment">// 匹配成功之后的逻辑</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>想不清楚的话拿个例子模拟一下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s=&quot;abababc&quot;</span><br><span class="line">p=&quot;abababab&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="暴力算法"><a href="#暴力算法" class="headerlink" title="暴力算法"></a>暴力算法</h3><h4 id="时间复杂度-O-n-2"><a href="#时间复杂度-O-n-2" class="headerlink" title="时间复杂度 O(n^2)"></a>时间复杂度 <code>O(n^2)</code></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">S[N], p[M]</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  <span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++)</span><br><span class="line">    <span class="keyword">if</span> (S[i + j - <span class="number">1</span>] != p[j]) &#123;</span><br><span class="line">      flag = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">if</span> (flag) res.<span class="built_in">push_back</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><h4 id="时间复杂度-O-n"><a href="#时间复杂度-O-n" class="headerlink" title="时间复杂度 O(n)"></a>时间复杂度 <code>O(n)</code></h4><p>分析：在 <code>i</code> 循环 <code>n</code> 次的过程中，每次循环 <code>j</code> 最多会+1，<code>j</code> 总共最多会+n，因此 <code>j=ne[j]</code> 再怎么减都最多减n</p>
+<p>故总的时间复杂度是 <code>2n</code>，是 <code>O(n)</code> 的。</p>
+<h4 id="next-数组"><a href="#next-数组" class="headerlink" title="next 数组"></a><code>next</code> 数组</h4><p>对于模板串 <code>p</code> 中的每一个字符 <code>p[i]</code>，都进行一个预处理：求出一个最大长度 <code>x</code>，使得以 <code>p[i]</code> 为结尾的长度为 <code>x</code> 的子串和 <code>p</code> 开头的长度为 <code>x</code> 的子串相等。</p>
+<p><code>next[i] = j</code> 含义：<code>p[1, ..., j] = p[i - j + 1, ..., i]</code></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>模板中两个字符串的下标都是从1开始。</p>
+<p><code>p</code> 中每次和<code>S[i]</code> 匹配的是 <code>p[j + 1]</code>，可以理解为 <code>j</code> 比 <code>i</code> 往前错一位，每次都只是试探一下 <code>p[j+1]</code> 能不能和 <code>S[i]</code> 匹配。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/07/algorithm/template/2-3.KMP/" data-id="clnitxwut0001cz9gcv0x2agp" data-title="算法模板2-3.KMP" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-algorithm/template/2-2.栈和队列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" class="article-date">
@@ -380,336 +709,11 @@
 
 
   
-    <article id="post-algorithm/template/1-2.二分模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/algorithm/template/1-2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T13:09:08.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/">算法模板1-2.二分模板</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="整数二分"><a href="#整数二分" class="headerlink" title="整数二分"></a>整数二分</h1><p><code>check</code>函数：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 检查arr[x]是否满足某种性质</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>区间<code>[l, r]</code>被划分成<code>[l, mid]</code>和<code>[mid + 1, r]</code>时使用（要找的是右半段的最左边那个点）：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">binary_search</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>区间<code>[l, r]</code>被划分成<code>[l, mid - 1]</code>和<code>[mid, r]</code>时使用（要找的是左半段的最右边那个点）：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">binary_search</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + r + <span class="number">1</span> &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="浮点数二分"><a href="#浮点数二分" class="headerlink" title="浮点数二分"></a>浮点数二分</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">binary_search</span><span class="params">(<span class="type">double</span> l, <span class="type">double</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">double</span> eps = <span class="number">1e-6</span>;</span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; eps) &#123;  <span class="comment">// eps表示精度，取决于题目对精度的要求</span></span><br><span class="line">        <span class="type">double</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/" data-id="clng10n690008389gc9568k6s" data-title="算法模板1-2.二分模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/1-3.前缀和与差分模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/algorithm/template/1-3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T13:09:06.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/">算法模板1-3.前缀和与差分模板</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h1><h2 id="一维前缀和"><a href="#一维前缀和" class="headerlink" title="一维前缀和"></a>一维前缀和</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>给定a数组，需要构造S数组，使得：<code>S[i] = a[1] + a[2] + ... a[i] (i = 1, 2, ...), S[0] = 0</code></p>
-<blockquote>
-<p>注：a数组下标从1开始，S[i]也从1算起，且S[0]必须赋值0（当l&#x3D;1时会用到，S[l - 1] &#x3D; S[0]）</p>
-</blockquote>
-<h3 id="如何构造-S-i"><a href="#如何构造-S-i" class="headerlink" title="如何构造 S[i] ?"></a>如何构造 <code>S[i]</code> ?</h3><p>从前往后推：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    S[i] = S[i - <span class="number">1</span>] + a[i];</span><br></pre></td></tr></table></figure>
-
-<h3 id="作用？"><a href="#作用？" class="headerlink" title="作用？"></a>作用？</h3><p>求a数组[l, r]的和 <code>a[l] + ... + a[r]</code></p>
-<ul>
-<li><p>如果没有S数组：时间复杂度<code>O(n)</code>，需要累加 <code>a[l] + a[l + 1] + ... + a[r]</code>；</p>
-</li>
-<li><p>有了S数组：时间复杂度 <code>O(1)</code>，直接 <code>S[r] - S[l - 1]</code>。</p>
-</li>
-</ul>
-<h2 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">S[i, j] = 第i行j列格子左上部分所有元素的和</span><br><span class="line">以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵的和为：</span><br><span class="line">S[x2, y2] - S[x1 - 1, y2] - S[x2, y1 - 1] + S[x1 - 1, y1 - 1]</span><br></pre></td></tr></table></figure>
-
-<h3 id="如何构造-S-i-j"><a href="#如何构造-S-i-j" class="headerlink" title="如何构造 S[i, j] ?"></a>如何构造 <code>S[i, j]</code> ?</h3><p>二重循环：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++)</span><br><span class="line">	    S[i, j] = S[i - <span class="number">1</span>, j] + S[i, j - <span class="number">1</span>] - S[i - <span class="number">1</span>, j - <span class="number">1</span>] + a[i, j];</span><br></pre></td></tr></table></figure>
-
-<h3 id="作用？-1"><a href="#作用？-1" class="headerlink" title="作用？"></a>作用？</h3><p>求a矩阵中：以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵的和</p>
-<ul>
-<li><p>如果没有S矩阵：时间复杂度<code>O(n^2)</code>，需要二重循环累加；</p>
-</li>
-<li><p>有了S矩阵：时间复杂度 <code>O(1)</code>，直接 <code>S[x2, y2] - S[x1 - 1, y2] - S[x2, y1 - 1] + S[x1 - 1, y1 - 1]</code>。</p>
-</li>
-</ul>
-<h1 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h1><p>前缀和的逆运算</p>
-<h2 id="一维差分"><a href="#一维差分" class="headerlink" title="一维差分"></a>一维差分</h2><h3 id="问题？"><a href="#问题？" class="headerlink" title="问题？"></a>问题？</h3><p>给定a数组，需要构造b数组，使得：<code>a[i] = b[1] + b[2] + ... + b[i]</code></p>
-<blockquote>
-<p>满足上述条件的b数组称为a的差分</p>
-</blockquote>
-<h3 id="作用？-2"><a href="#作用？-2" class="headerlink" title="作用？"></a>作用？</h3><p>给a数组区间[l, r]中的每个数加上c</p>
-<ul>
-<li>如果没有b数组：时间复杂度<code>O(n)</code>，需要遍历a数组</li>
-<li>有了b数组：时间复杂度<code>O(1)</code>，<code>b[l] += c, b[r + 1] -= c</code></li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> c)</span> </span>&#123;</span><br><span class="line">    b[l] += c;</span><br><span class="line">    b[r + <span class="number">1</span>] -= c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="如何构造-b-i"><a href="#如何构造-b-i" class="headerlink" title="如何构造 b[i] ?"></a>如何构造 <code>b[i]</code> ?</h3><p>首先假定a, b数组所有元素都是0，此时满足前缀和与差分关系。</p>
-<p>然后其实a数组是有初始值的，这里等价于做n次操作：<code>给a数组区间[i, i]中的每个数都加上a[i]</code>，构造b数组：<code>b[i] += a[i], b[i + 1] -= a[i]</code> 即可</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="built_in">insert</span>(i, i, a[i]);</span><br></pre></td></tr></table></figure>
-
-<h3 id="最后用前缀和算法求操作后的a数组"><a href="#最后用前缀和算法求操作后的a数组" class="headerlink" title="最后用前缀和算法求操作后的a数组"></a>最后用前缀和算法求操作后的a数组</h3><p>做完若干+c操作后，用前缀和算法求最终答案</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">    b[i] += b[i - <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, b[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="二维差分"><a href="#二维差分" class="headerlink" title="二维差分"></a>二维差分</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">给以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵中的所有元素加上c：</span><br><span class="line">b[x1, y1] += c, b[x2 + 1, y1] -= c, b[x1, y2 + 1] -= c, b[x2 + 1, y2 + 1] += c</span><br></pre></td></tr></table></figure>
-
-<h3 id="问题？-1"><a href="#问题？-1" class="headerlink" title="问题？"></a>问题？</h3><p>给定a矩阵，需要构造b矩阵，使得：<code>a[i, j] = b矩阵第i行j列格子左上部分所有元素的和</code></p>
-<blockquote>
-<p>也就是构造b矩阵，使得a矩阵是b矩阵的前缀和</p>
-</blockquote>
-<h3 id="作用？-3"><a href="#作用？-3" class="headerlink" title="作用？"></a>作用？</h3><p>给a矩阵以(x1, y1)为左上角，(x2, y2)为右下角的的子矩阵中的每个数加上c</p>
-<ul>
-<li>如果没有b矩阵：时间复杂度<code>O(n^2)</code>，需要遍历a矩阵</li>
-<li>有了b矩阵：时间复杂度<code>O(1)</code>，<code>b[x1, y1] += c, b[x2 + 1, y1] -= c, b[x1, y2 + 1] -= c, b[x2 + 1, y2 + 1] += c</code></li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> x1, <span class="type">int</span> y1, <span class="type">int</span> x2, <span class="type">int</span> y2, <span class="type">int</span> c)</span> </span>&#123;</span><br><span class="line">    b[x1][y1] += c;</span><br><span class="line">    b[x2 + <span class="number">1</span>][y1] -= c;</span><br><span class="line">    b[x1][y2 + <span class="number">1</span>] -= c;</span><br><span class="line">    b[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="如何构造-b-i-j"><a href="#如何构造-b-i-j" class="headerlink" title="如何构造 b[i][j] ?"></a>如何构造 <code>b[i][j]</code> ?</h3><p>与一维差分同理</p>
-<p>其实具体构造不用管，就当作进行了n*m次修改操作即可</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++)</span><br><span class="line">	    <span class="built_in">insert</span>(i, j, i, j, a[i][j]);</span><br></pre></td></tr></table></figure>
-
-<h3 id="最后用前缀和算法求操作后的a矩阵"><a href="#最后用前缀和算法求操作后的a矩阵" class="headerlink" title="最后用前缀和算法求操作后的a矩阵"></a>最后用前缀和算法求操作后的a矩阵</h3><p>做完若干+c操作后，用前缀和算法求最终答案</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++) &#123;</span><br><span class="line">        b[i][j] += b[i][j - <span class="number">1</span>] + b[i - <span class="number">1</span>][j] - b[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, b[i][j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/" data-id="clng10n6a000a389g3a8q304o" data-title="算法模板1-3.前缀和与差分模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/1-4.双指针模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/algorithm/template/1-4.%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T13:09:04.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-4.%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF/">算法模板1-4.双指针模板</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="双指针算法"><a href="#双指针算法" class="headerlink" title="双指针算法"></a>双指针算法</h1><h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">    <span class="keyword">while</span> (j &lt;=  i &amp;&amp; <span class="built_in">check</span>(i, j)) j ++; <span class="comment">// j在合法范围内且满足特定条件，继续往后走</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 具体问题的逻辑</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="常见问题分类"><a href="#常见问题分类" class="headerlink" title="常见问题分类"></a>常见问题分类</h2><ol>
-<li>对于一个序列，用两个指针维护一段区间</li>
-<li>对于两个序列，维护某种次序，比如归并排序中合并两个有序序列的操作</li>
-</ol>
-<h2 id="核心作用"><a href="#核心作用" class="headerlink" title="核心作用"></a>核心作用</h2><p>运用某些单调性质（如i, j都只能往后移动），把 <code>O(n^2)</code> 复杂度的暴力枚举优化为 <code>O(n)</code>。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-4.%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF/" data-id="clng10n6a000c389ghga35ssu" data-title="算法模板1-4.双指针模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/1-5.位运算模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/algorithm/template/1-5.%E4%BD%8D%E8%BF%90%E7%AE%97%E6%A8%A1%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T13:09:01.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-5.%E4%BD%8D%E8%BF%90%E7%AE%97%E6%A8%A1%E6%9D%BF/">算法模板1-5.位运算模板</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">求n的第k位数字: n &gt;&gt; k &amp; <span class="number">1</span></span><br><span class="line">返回n的最后一位<span class="number">1</span>：<span class="built_in">lowbit</span>(n) = n &amp; -n</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-5.%E4%BD%8D%E8%BF%90%E7%AE%97%E6%A8%A1%E6%9D%BF/" data-id="clng10n6a000e389gazbh3d36" data-title="算法模板1-5.位运算模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/1-6.离散化模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/algorithm/template/1-6.%E7%A6%BB%E6%95%A3%E5%8C%96%E6%A8%A1%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T13:08:59.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-6.%E7%A6%BB%E6%95%A3%E5%8C%96%E6%A8%A1%E6%9D%BF/">算法模板1-6.离散化模板</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="整数保序离散化"><a href="#整数保序离散化" class="headerlink" title="整数保序离散化"></a>整数保序离散化</h1><h2 id="适用情景"><a href="#适用情景" class="headerlink" title="适用情景"></a>适用情景</h2><p>值域跨度大，但数非常稀疏。即数的范围比较大，但个数比较少。</p>
-<blockquote>
-<p>如：值域0~10^9^，个数10^5^。</p>
-</blockquote>
-<p>需要以数的值作为数组下标。这时需要用一个数组a[]对它们做映射。</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
-<li>数组a[]中可能有重复元素 -&gt; <strong>需要去重</strong>，用cpp库函数erase()</li>
-<li>如何算出某个数x离散化后的值（在a[]中的下标）是多少？ -&gt; <strong>二分</strong></li>
-</ol>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; alls; <span class="comment">// 存储所有待离散化的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 两行代码实现排序+去重</span></span><br><span class="line"><span class="built_in">sort</span>(alls.<span class="built_in">begin</span>(), alls.<span class="built_in">end</span>()); <span class="comment">// 将所有值排序</span></span><br><span class="line">alls.<span class="built_in">erase</span>(<span class="built_in">unique</span>(alls.<span class="built_in">begin</span>(), alls.<span class="built_in">end</span>()), alls.<span class="built_in">end</span>()); <span class="comment">//去掉重复元素（unique把所有不重复元素放到数组最前面，并返回这一段元素的尾端点的后一个端点，然后就可以用erase把这个端点到整个数组的尾端点这一段，即多余的重复元素删掉）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 二分求出x对应的离散化的值</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span>  </span>&#123; <span class="comment">// 找到第一个大于等于x的值对应的下标</span></span><br><span class="line">    <span class="type">int</span> l = <span class="number">0</span>, r = alls.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (alls[mid] &gt;= x) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r + <span class="number">1</span>; <span class="comment">// 为了方便建立前缀和数组，映射到1, 2, ..., n （如果需要映射到0, 1, ..., n - 1，return r即可）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="例子：区间和"><a href="#例子：区间和" class="headerlink" title="例子：区间和"></a>例子：区间和</h2><p>假定有一个无限长的数轴，数轴上每个坐标上的数都是 0。</p>
-<p>现在，我们首先进行 n 次操作，每次操作将某一位置 x 上的数加 c。</p>
-<p>接下来，进行 m 次询问，每个询问包含两个整数 l 和 r，你需要求出在区间 [l,r] 之间的所有数的和。</p>
-<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行包含两个整数 n 和 m。</p>
-<p>接下来 n 行，每行包含两个整数 x 和 c。</p>
-<p>再接下来 m 行，每行包含两个整数 l 和 r。</p>
-<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>共 m 行，每行输出一个询问中所求的区间内数字和。</p>
-<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>−10^9^≤ x ≤10^9^<br>1≤ n,m ≤10^5^<br>−10^9^≤ l ≤ r ≤10^9^<br>−10000≤ c ≤10000</p>
-<h4 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3 3</span><br><span class="line">1 2</span><br><span class="line">3 6</span><br><span class="line">7 5</span><br><span class="line">1 3</span><br><span class="line">4 6</span><br><span class="line">7 8</span><br></pre></td></tr></table></figure>
-
-<h4 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">0</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
-
-<p>x, l和r都需要离散化存到a[]中，共3×10^5^的空间复杂度</p>
-<p>最后query的区间和用离散化之后的数组求前缀和得出。</p>
-<blockquote>
-<p>注：如果值域跨度小，也可以直接用前缀和来做。</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-6.%E7%A6%BB%E6%95%A3%E5%8C%96%E6%A8%A1%E6%9D%BF/" data-id="clng10n6b000g389g1ao9640v" data-title="算法模板1-6.离散化模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -748,23 +752,23 @@
       <ul>
         
           <li>
-            <a href="/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">算法模板2-2.栈和队列</a>
+            <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/">算法模板2-6.堆</a>
           </li>
         
           <li>
-            <a href="/2023/10/07/algorithm/template/2-1.%E9%93%BE%E8%A1%A8/">算法模板2-1.链表</a>
+            <a href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/">算法模板2-5.并查集</a>
           </li>
         
           <li>
-            <a href="/2023/10/07/design-pattern/12.%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">设计模式12-外观模式</a>
+            <a href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/">算法模板2-4.Trie树</a>
           </li>
         
           <li>
-            <a href="/2023/10/06/algorithm/template/1-7.%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6%E6%A8%A1%E6%9D%BF/">算法模板1-7.区间合并模板</a>
+            <a href="/2023/10/08/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式13-建造者模式</a>
           </li>
         
           <li>
-            <a href="/2023/10/06/algorithm/template/1-1.%E6%8E%92%E5%BA%8F%E6%A8%A1%E6%9D%BF/">算法模板1-1.排序模板</a>
+            <a href="/2023/10/07/algorithm/template/2-3.KMP/">算法模板2-3.KMP</a>
           </li>
         
       </ul>

@@ -73,6 +73,331 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-algorithm/template/1-2.二分模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/06/algorithm/template/1-2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/" class="article-date">
+  <time class="dt-published" datetime="2023-10-06T13:09:08.000Z" itemprop="datePublished">2023-10-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/">算法模板1-2.二分模板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="整数二分"><a href="#整数二分" class="headerlink" title="整数二分"></a>整数二分</h1><p><code>check</code>函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 检查arr[x]是否满足某种性质</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>区间<code>[l, r]</code>被划分成<code>[l, mid]</code>和<code>[mid + 1, r]</code>时使用（要找的是右半段的最左边那个点）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">binary_search</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>区间<code>[l, r]</code>被划分成<code>[l, mid - 1]</code>和<code>[mid, r]</code>时使用（要找的是左半段的最右边那个点）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">binary_search</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + r + <span class="number">1</span> &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="浮点数二分"><a href="#浮点数二分" class="headerlink" title="浮点数二分"></a>浮点数二分</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">binary_search</span><span class="params">(<span class="type">double</span> l, <span class="type">double</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">double</span> eps = <span class="number">1e-6</span>;</span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; eps) &#123;  <span class="comment">// eps表示精度，取决于题目对精度的要求</span></span><br><span class="line">        <span class="type">double</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/" data-id="clng10n690008389gc9568k6s" data-title="算法模板1-2.二分模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/1-3.前缀和与差分模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/06/algorithm/template/1-3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/" class="article-date">
+  <time class="dt-published" datetime="2023-10-06T13:09:06.000Z" itemprop="datePublished">2023-10-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/">算法模板1-3.前缀和与差分模板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h1><h2 id="一维前缀和"><a href="#一维前缀和" class="headerlink" title="一维前缀和"></a>一维前缀和</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>给定a数组，需要构造S数组，使得：<code>S[i] = a[1] + a[2] + ... a[i] (i = 1, 2, ...), S[0] = 0</code></p>
+<blockquote>
+<p>注：a数组下标从1开始，S[i]也从1算起，且S[0]必须赋值0（当l&#x3D;1时会用到，S[l - 1] &#x3D; S[0]）</p>
+</blockquote>
+<h3 id="如何构造-S-i"><a href="#如何构造-S-i" class="headerlink" title="如何构造 S[i] ?"></a>如何构造 <code>S[i]</code> ?</h3><p>从前往后推：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    S[i] = S[i - <span class="number">1</span>] + a[i];</span><br></pre></td></tr></table></figure>
+
+<h3 id="作用？"><a href="#作用？" class="headerlink" title="作用？"></a>作用？</h3><p>求a数组[l, r]的和 <code>a[l] + ... + a[r]</code></p>
+<ul>
+<li><p>如果没有S数组：时间复杂度<code>O(n)</code>，需要累加 <code>a[l] + a[l + 1] + ... + a[r]</code>；</p>
+</li>
+<li><p>有了S数组：时间复杂度 <code>O(1)</code>，直接 <code>S[r] - S[l - 1]</code>。</p>
+</li>
+</ul>
+<h2 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">S[i, j] = 第i行j列格子左上部分所有元素的和</span><br><span class="line">以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵的和为：</span><br><span class="line">S[x2, y2] - S[x1 - 1, y2] - S[x2, y1 - 1] + S[x1 - 1, y1 - 1]</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何构造-S-i-j"><a href="#如何构造-S-i-j" class="headerlink" title="如何构造 S[i, j] ?"></a>如何构造 <code>S[i, j]</code> ?</h3><p>二重循环：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++)</span><br><span class="line">	    S[i, j] = S[i - <span class="number">1</span>, j] + S[i, j - <span class="number">1</span>] - S[i - <span class="number">1</span>, j - <span class="number">1</span>] + a[i, j];</span><br></pre></td></tr></table></figure>
+
+<h3 id="作用？-1"><a href="#作用？-1" class="headerlink" title="作用？"></a>作用？</h3><p>求a矩阵中：以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵的和</p>
+<ul>
+<li><p>如果没有S矩阵：时间复杂度<code>O(n^2)</code>，需要二重循环累加；</p>
+</li>
+<li><p>有了S矩阵：时间复杂度 <code>O(1)</code>，直接 <code>S[x2, y2] - S[x1 - 1, y2] - S[x2, y1 - 1] + S[x1 - 1, y1 - 1]</code>。</p>
+</li>
+</ul>
+<h1 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h1><p>前缀和的逆运算</p>
+<h2 id="一维差分"><a href="#一维差分" class="headerlink" title="一维差分"></a>一维差分</h2><h3 id="问题？"><a href="#问题？" class="headerlink" title="问题？"></a>问题？</h3><p>给定a数组，需要构造b数组，使得：<code>a[i] = b[1] + b[2] + ... + b[i]</code></p>
+<blockquote>
+<p>满足上述条件的b数组称为a的差分</p>
+</blockquote>
+<h3 id="作用？-2"><a href="#作用？-2" class="headerlink" title="作用？"></a>作用？</h3><p>给a数组区间[l, r]中的每个数加上c</p>
+<ul>
+<li>如果没有b数组：时间复杂度<code>O(n)</code>，需要遍历a数组</li>
+<li>有了b数组：时间复杂度<code>O(1)</code>，<code>b[l] += c, b[r + 1] -= c</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> c)</span> </span>&#123;</span><br><span class="line">    b[l] += c;</span><br><span class="line">    b[r + <span class="number">1</span>] -= c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何构造-b-i"><a href="#如何构造-b-i" class="headerlink" title="如何构造 b[i] ?"></a>如何构造 <code>b[i]</code> ?</h3><p>首先假定a, b数组所有元素都是0，此时满足前缀和与差分关系。</p>
+<p>然后其实a数组是有初始值的，这里等价于做n次操作：<code>给a数组区间[i, i]中的每个数都加上a[i]</code>，构造b数组：<code>b[i] += a[i], b[i + 1] -= a[i]</code> 即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="built_in">insert</span>(i, i, a[i]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="最后用前缀和算法求操作后的a数组"><a href="#最后用前缀和算法求操作后的a数组" class="headerlink" title="最后用前缀和算法求操作后的a数组"></a>最后用前缀和算法求操作后的a数组</h3><p>做完若干+c操作后，用前缀和算法求最终答案</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">    b[i] += b[i - <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, b[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二维差分"><a href="#二维差分" class="headerlink" title="二维差分"></a>二维差分</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">给以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵中的所有元素加上c：</span><br><span class="line">b[x1, y1] += c, b[x2 + 1, y1] -= c, b[x1, y2 + 1] -= c, b[x2 + 1, y2 + 1] += c</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题？-1"><a href="#问题？-1" class="headerlink" title="问题？"></a>问题？</h3><p>给定a矩阵，需要构造b矩阵，使得：<code>a[i, j] = b矩阵第i行j列格子左上部分所有元素的和</code></p>
+<blockquote>
+<p>也就是构造b矩阵，使得a矩阵是b矩阵的前缀和</p>
+</blockquote>
+<h3 id="作用？-3"><a href="#作用？-3" class="headerlink" title="作用？"></a>作用？</h3><p>给a矩阵以(x1, y1)为左上角，(x2, y2)为右下角的的子矩阵中的每个数加上c</p>
+<ul>
+<li>如果没有b矩阵：时间复杂度<code>O(n^2)</code>，需要遍历a矩阵</li>
+<li>有了b矩阵：时间复杂度<code>O(1)</code>，<code>b[x1, y1] += c, b[x2 + 1, y1] -= c, b[x1, y2 + 1] -= c, b[x2 + 1, y2 + 1] += c</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> x1, <span class="type">int</span> y1, <span class="type">int</span> x2, <span class="type">int</span> y2, <span class="type">int</span> c)</span> </span>&#123;</span><br><span class="line">    b[x1][y1] += c;</span><br><span class="line">    b[x2 + <span class="number">1</span>][y1] -= c;</span><br><span class="line">    b[x1][y2 + <span class="number">1</span>] -= c;</span><br><span class="line">    b[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何构造-b-i-j"><a href="#如何构造-b-i-j" class="headerlink" title="如何构造 b[i][j] ?"></a>如何构造 <code>b[i][j]</code> ?</h3><p>与一维差分同理</p>
+<p>其实具体构造不用管，就当作进行了n*m次修改操作即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++)</span><br><span class="line">	    <span class="built_in">insert</span>(i, j, i, j, a[i][j]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="最后用前缀和算法求操作后的a矩阵"><a href="#最后用前缀和算法求操作后的a矩阵" class="headerlink" title="最后用前缀和算法求操作后的a矩阵"></a>最后用前缀和算法求操作后的a矩阵</h3><p>做完若干+c操作后，用前缀和算法求最终答案</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++) &#123;</span><br><span class="line">        b[i][j] += b[i][j - <span class="number">1</span>] + b[i - <span class="number">1</span>][j] - b[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, b[i][j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/" data-id="clng10n6a000a389g3a8q304o" data-title="算法模板1-3.前缀和与差分模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/1-4.双指针模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/06/algorithm/template/1-4.%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF/" class="article-date">
+  <time class="dt-published" datetime="2023-10-06T13:09:04.000Z" itemprop="datePublished">2023-10-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-4.%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF/">算法模板1-4.双指针模板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="双指针算法"><a href="#双指针算法" class="headerlink" title="双指针算法"></a>双指针算法</h1><h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">    <span class="keyword">while</span> (j &lt;=  i &amp;&amp; <span class="built_in">check</span>(i, j)) j ++; <span class="comment">// j在合法范围内且满足特定条件，继续往后走</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 具体问题的逻辑</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见问题分类"><a href="#常见问题分类" class="headerlink" title="常见问题分类"></a>常见问题分类</h2><ol>
+<li>对于一个序列，用两个指针维护一段区间</li>
+<li>对于两个序列，维护某种次序，比如归并排序中合并两个有序序列的操作</li>
+</ol>
+<h2 id="核心作用"><a href="#核心作用" class="headerlink" title="核心作用"></a>核心作用</h2><p>运用某些单调性质（如i, j都只能往后移动），把 <code>O(n^2)</code> 复杂度的暴力枚举优化为 <code>O(n)</code>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-4.%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF/" data-id="clng10n6a000c389ghga35ssu" data-title="算法模板1-4.双指针模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/1-5.位运算模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/06/algorithm/template/1-5.%E4%BD%8D%E8%BF%90%E7%AE%97%E6%A8%A1%E6%9D%BF/" class="article-date">
+  <time class="dt-published" datetime="2023-10-06T13:09:01.000Z" itemprop="datePublished">2023-10-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-5.%E4%BD%8D%E8%BF%90%E7%AE%97%E6%A8%A1%E6%9D%BF/">算法模板1-5.位运算模板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">求n的第k位数字: n &gt;&gt; k &amp; <span class="number">1</span></span><br><span class="line">返回n的最后一位<span class="number">1</span>：<span class="built_in">lowbit</span>(n) = n &amp; -n</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-5.%E4%BD%8D%E8%BF%90%E7%AE%97%E6%A8%A1%E6%9D%BF/" data-id="clng10n6a000e389gazbh3d36" data-title="算法模板1-5.位运算模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/1-6.离散化模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/06/algorithm/template/1-6.%E7%A6%BB%E6%95%A3%E5%8C%96%E6%A8%A1%E6%9D%BF/" class="article-date">
+  <time class="dt-published" datetime="2023-10-06T13:08:59.000Z" itemprop="datePublished">2023-10-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-6.%E7%A6%BB%E6%95%A3%E5%8C%96%E6%A8%A1%E6%9D%BF/">算法模板1-6.离散化模板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="整数保序离散化"><a href="#整数保序离散化" class="headerlink" title="整数保序离散化"></a>整数保序离散化</h1><h2 id="适用情景"><a href="#适用情景" class="headerlink" title="适用情景"></a>适用情景</h2><p>值域跨度大，但数非常稀疏。即数的范围比较大，但个数比较少。</p>
+<blockquote>
+<p>如：值域0~10^9^，个数10^5^。</p>
+</blockquote>
+<p>需要以数的值作为数组下标。这时需要用一个数组a[]对它们做映射。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
+<li>数组a[]中可能有重复元素 -&gt; <strong>需要去重</strong>，用cpp库函数erase()</li>
+<li>如何算出某个数x离散化后的值（在a[]中的下标）是多少？ -&gt; <strong>二分</strong></li>
+</ol>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; alls; <span class="comment">// 存储所有待离散化的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 两行代码实现排序+去重</span></span><br><span class="line"><span class="built_in">sort</span>(alls.<span class="built_in">begin</span>(), alls.<span class="built_in">end</span>()); <span class="comment">// 将所有值排序</span></span><br><span class="line">alls.<span class="built_in">erase</span>(<span class="built_in">unique</span>(alls.<span class="built_in">begin</span>(), alls.<span class="built_in">end</span>()), alls.<span class="built_in">end</span>()); <span class="comment">//去掉重复元素（unique把所有不重复元素放到数组最前面，并返回这一段元素的尾端点的后一个端点，然后就可以用erase把这个端点到整个数组的尾端点这一段，即多余的重复元素删掉）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 二分求出x对应的离散化的值</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span>  </span>&#123; <span class="comment">// 找到第一个大于等于x的值对应的下标</span></span><br><span class="line">    <span class="type">int</span> l = <span class="number">0</span>, r = alls.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (alls[mid] &gt;= x) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r + <span class="number">1</span>; <span class="comment">// 为了方便建立前缀和数组，映射到1, 2, ..., n （如果需要映射到0, 1, ..., n - 1，return r即可）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="例子：区间和"><a href="#例子：区间和" class="headerlink" title="例子：区间和"></a>例子：区间和</h2><p>假定有一个无限长的数轴，数轴上每个坐标上的数都是 0。</p>
+<p>现在，我们首先进行 n 次操作，每次操作将某一位置 x 上的数加 c。</p>
+<p>接下来，进行 m 次询问，每个询问包含两个整数 l 和 r，你需要求出在区间 [l,r] 之间的所有数的和。</p>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行包含两个整数 n 和 m。</p>
+<p>接下来 n 行，每行包含两个整数 x 和 c。</p>
+<p>再接下来 m 行，每行包含两个整数 l 和 r。</p>
+<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>共 m 行，每行输出一个询问中所求的区间内数字和。</p>
+<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>−10^9^≤ x ≤10^9^<br>1≤ n,m ≤10^5^<br>−10^9^≤ l ≤ r ≤10^9^<br>−10000≤ c ≤10000</p>
+<h4 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3 3</span><br><span class="line">1 2</span><br><span class="line">3 6</span><br><span class="line">7 5</span><br><span class="line">1 3</span><br><span class="line">4 6</span><br><span class="line">7 8</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">0</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<p>x, l和r都需要离散化存到a[]中，共3×10^5^的空间复杂度</p>
+<p>最后query的区间和用离散化之后的数组求前缀和得出。</p>
+<blockquote>
+<p>注：如果值域跨度小，也可以直接用前缀和来做。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-6.%E7%A6%BB%E6%95%A3%E5%8C%96%E6%A8%A1%E6%9D%BF/" data-id="clng10n6b000g389g1ao9640v" data-title="算法模板1-6.离散化模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-design-pattern/11.迪米特法则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/06/design-pattern/11.%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/" class="article-date">
@@ -211,7 +536,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/cpp%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">cpp输入输出写法总结</a>
+      <a class="p-name article-title" href="/2023/10/06/algorithm/cpp%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">cpp算法相关写法总结</a>
     </h1>
   
 
@@ -225,11 +550,23 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str[<span class="number">1000</span>];</span><br><span class="line"><span class="built_in">gets</span>(str);</span><br></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://www.programiz.com/cpp-programming/library-function/cstdio/gets">https://www.programiz.com/cpp-programming/library-function/cstdio/gets</a></p>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2>
+<h3 id="用scanf读入一个字母-推荐读成字符串的形式"><a href="#用scanf读入一个字母-推荐读成字符串的形式" class="headerlink" title="用scanf读入一个字母 - 推荐读成字符串的形式"></a>用scanf读入一个字母 - 推荐读成字符串的形式</h3><p>例：</p>
+<p><code>Q 2 3</code></p>
+<p>写法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> op[<span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> a, b;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s%d%d&quot;</span>, op, &amp;a, &amp;b);</span><br><span class="line"><span class="comment">// op[0]即为所需字母</span></span><br></pre></td></tr></table></figure>
+
+<p>原因：</p>
+<p>如果用 <code>%c</code> 读op，容易读到空格回车等其他字符，很麻烦</p>
+<p>但用 <code>%s</code> 会自动过滤空格回车（读到空格回车就停了）</p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="比较字符串是否相等"><a href="#比较字符串是否相等" class="headerlink" title="比较字符串是否相等"></a>比较字符串是否相等</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">相等：!<span class="built_in">strcmp</span>(op, <span class="string">&quot;PM&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="无穷大"><a href="#无穷大" class="headerlink" title="无穷大"></a>无穷大</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int类型：常采用0x3f3f3f3f来作为无穷大</span><br><span class="line"></span><br><span class="line">memset(array, 0x3f, sizeof(array))</span><br><span class="line">为数组设初值为0x3f3f3f3f，因为这个数的每个字节都是0x3f</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/cpp%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/" data-id="clng10n620000389g5otjax9v" data-title="cpp输入输出写法总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/cpp%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/" data-id="clng10n620000389g5otjax9v" data-title="cpp算法相关写法总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -470,490 +807,11 @@
 
 
   
-    <article id="post-design-pattern/2.策略模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/25/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-09-25T07:49:29.000Z" itemprop="datePublished">2023-09-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/25/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式2-策略模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。</p>
-<h3 id="策略模式结构图"><a href="#策略模式结构图" class="headerlink" title="策略模式结构图"></a>策略模式结构图</h3><p><img src="https://s2.loli.net/2023/09/25/3FbYVIzrKk2hLA5.jpg" alt="策略模式结构图.jpg"></p>
-<h3 id="策略模式基本代码"><a href="#策略模式基本代码" class="headerlink" title="策略模式基本代码"></a>策略模式基本代码</h3><p>Strategy类，定义所有支持的算法的公共接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象算法类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="comment">// 算法方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">algorithmInterface</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ConcreteStrategy类，封装了具体的算法或行为，继承于Strategy：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体算法A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStrategyA</span> <span class="keyword">extends</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="comment">// 算法A实现方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">algorithmInterface</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;算法A实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体算法B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStrategyB</span> <span class="keyword">extends</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="comment">// 算法A实现方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">algorithmInterface</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;算法B实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体算法C</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStrategyA</span> <span class="keyword">extends</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="comment">// 算法C实现方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">algorithmInterface</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;算法C实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Context类，用一个ConcreteStrategy来配置，维护一个对Strategy对象的引用。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 上下文</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Context</span> &#123;</span><br><span class="line">    Strategy strategy;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化时，传入具体的策略对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Context</span><span class="params">(Strategy strategy)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.strategy = strategy;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 上下文接口</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">contextInterface</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 根据具体的策略对象，调用其算法的方法</span></span><br><span class="line">        strategy.algorithmInterface();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Context context;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化不同的策略</span></span><br><span class="line">context = <span class="keyword">new</span> <span class="title class_">Context</span>(<span class="keyword">new</span> <span class="title class_">ConcreteStrategyA</span>());</span><br><span class="line">context.contextInterface();</span><br><span class="line"></span><br><span class="line">context = <span class="keyword">new</span> <span class="title class_">Context</span>(<span class="keyword">new</span> <span class="title class_">ConcreteStrategyA</span>());</span><br><span class="line">context.contextInterface();</span><br><span class="line"></span><br><span class="line">context = <span class="keyword">new</span> <span class="title class_">Context</span>(<span class="keyword">new</span> <span class="title class_">ConcreteStrategyA</span>());</span><br><span class="line">context.contextInterface();</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="例：商场收银软件"><a href="#例：商场收银软件" class="headerlink" title="例：商场收银软件"></a>例：商场收银软件</h1><h2 id="原始版本"><a href="#原始版本" class="headerlink" title="原始版本"></a>原始版本</h2><p>所有内容都写在一个程序中，如要需要修改任意代码，都需要重新安装在商场所有机器中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">price</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 商品单价</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">// 商品数量</span></span><br><span class="line"><span class="type">double</span> <span class="variable">totalPrices</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 当前商品合计费用</span></span><br><span class="line"><span class="type">double</span> <span class="variable">total</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 总计所有商品费用</span></span><br><span class="line"></span><br><span class="line"><span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;请输入商品单价：&quot;</span>);</span><br><span class="line">    price = Double.parseDouble(sc.nextLine());</span><br><span class="line">    System.out.println(<span class="string">&quot;请输入商品数量：&quot;</span>);</span><br><span class="line">    num = Integer.parseInt(sc.nextLine());</span><br><span class="line">    System.out.println();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (price &gt; <span class="number">0</span> &amp;&amp; num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        totalPrices = price * num;</span><br><span class="line">        total += totalPrices;</span><br><span class="line">        </span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">&quot;单价：&quot;</span> + price + <span class="string">&quot;元，数量：&quot;</span> + num + <span class="string">&quot;，合计：&quot;</span> + totalPrices + <span class="string">&quot;元&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">&quot;总计：&quot;</span> + total + <span class="string">&quot;元&quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">while</span> (price &gt; <span class="number">0</span> &amp;&amp; num &gt; <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="增加打折"><a href="#增加打折" class="headerlink" title="增加打折"></a>增加打折</h2><p>新增打折&#x2F;返利功能</p>
-<h3 id="硬编码实现版本"><a href="#硬编码实现版本" class="headerlink" title="硬编码实现版本"></a>硬编码实现版本</h3><p>写在客户端程序中。每新增打x折都要重新安装。用下拉框选择销售模式实现。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">discount</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">// 商品销售模式：1.原价 2.八折 3.七折</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">switch</span> (discount) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        totalPrices = price * num;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        totalPrices = price * num * <span class="number">0.8</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        totalPrices = price * num * <span class="number">0.7</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">total += totalPrices;</span><br></pre></td></tr></table></figure>
-
-<h3 id="简单工厂实现版本"><a href="#简单工厂实现版本" class="headerlink" title="简单工厂实现版本"></a>简单工厂实现版本</h3><p>用收费抽象类，让打折&#x2F;返利继承抽象类，传入对应需要的参数灵活实现具体打几折、满多少返多少，需要新增时在工厂类中添加模式。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 收费抽象类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 收费抽象方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正常收费</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashNormal</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 原价返回</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> price * num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打折收费</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashRebate</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyRebate</span> <span class="operator">=</span> <span class="number">1d</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化时输入折扣率</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashRebate</span><span class="params">(<span class="type">double</span> moneyRebate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyRebate = moneyRebate;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 返回乘上折扣率的总价</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> price * num * <span class="built_in">this</span>.moneyRebate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返利收费</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashReturn</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyCondition</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利条件</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyReturn</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利值</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化时输入返利条件和返利值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashReturn</span><span class="params">(<span class="type">double</span> moneyCondition, <span class="type">double</span> moneyReturn)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyCondition = moneyCondition;</span><br><span class="line">        <span class="built_in">this</span>.moneyReturn = moneyReturn;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 返回返利后的总价</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> price * num;</span><br><span class="line">        <span class="keyword">if</span> (moneyCondition &gt; <span class="number">0</span> &amp;&amp; result &gt;= moneyCondition) &#123;</span><br><span class="line">            result -= Math.floor(result / moneyCondition) * moneyReturn;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>收费工厂代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> CashSuper <span class="title function_">createCashAccept</span><span class="params">(<span class="type">int</span> cashType)</span> &#123;</span><br><span class="line">        <span class="type">CashSuper</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                cs = <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                cs = <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                cs = <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.7d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                cs = <span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端程序主要部分：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CashSuper</span> <span class="variable">cashSuper</span> <span class="operator">=</span> CashFactory.createCashAccept(cashType);</span><br><span class="line">totalPrices = cashSuper.acceptCash(price, num);</span><br><span class="line">total += totalPrices;</span><br></pre></td></tr></table></figure>
-
-<h3 id="策略模式实现版本"><a href="#策略模式实现版本" class="headerlink" title="策略模式实现版本"></a>策略模式实现版本</h3><p>跟简单工厂很像，只要加一个CashContext类，改写一下客户端代码即可。</p>
-<p>CashContext类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashContext</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> CashSuper cs;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 构造方法传入具体的收费策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashContext</span><span class="params">(CashSuper csuper)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.cs = csuper;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据收费策略的不同，获得计算结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.cs.acceptCash(price, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端主要代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CashContext</span> <span class="variable">cc</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        cc = <span class="keyword">new</span> <span class="title class_">CashContext</span>(<span class="keyword">new</span> <span class="title class_">CashNormal</span>());</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        cc = <span class="keyword">new</span> <span class="title class_">CashContext</span>(<span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>));</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        cc = <span class="keyword">new</span> <span class="title class_">CashContext</span>(<span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.7d</span>));</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        cc = <span class="keyword">new</span> <span class="title class_">CashContext</span>(<span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>));</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过Context的getResult方法调用，得到收费结果</span></span><br><span class="line"><span class="comment">// 让具体算法与客户完全隔离</span></span><br><span class="line">totalPrices = cc.getResult(price, num);</span><br><span class="line">total += totalPrices;</span><br></pre></td></tr></table></figure>
-
-<p>但这样是在客户端判断使用哪种算法，客户能看到具体的收费策略，可以将策略模式与简单工厂模式结合，把判断转移到工厂中。</p>
-<h3 id="策略与简单工厂结合版本"><a href="#策略与简单工厂结合版本" class="headerlink" title="策略与简单工厂结合版本"></a>策略与简单工厂结合版本</h3><p>改进CashContext类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashContext</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> CashSuper cs;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 在构造函数中传入type，根据type来实例化具体的收费策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashContext</span><span class="params">(<span class="type">int</span> cashType)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.7d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据收费策略的不同，获得计算结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.cs.acceptCash(price, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CashContext</span> <span class="variable">cc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashContext</span>(cashType);</span><br><span class="line">totalPrices = cc.getResult(price, num);</span><br><span class="line">total += totalPrices;</span><br></pre></td></tr></table></figure>
-
-<h4 id="与纯简单工厂模式对比"><a href="#与纯简单工厂模式对比" class="headerlink" title="与纯简单工厂模式对比"></a>与纯简单工厂模式对比</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简单工厂模式用法</span></span><br><span class="line"><span class="type">CashSuper</span> <span class="variable">cs</span> <span class="operator">=</span> CashFactory.createCashAccept(cashType);</span><br><span class="line">totalPrices = cs.acceptCash(price, num);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 策略模式与简单工厂模式结合的用法</span></span><br><span class="line"><span class="type">CashContext</span> <span class="variable">cc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashContext</span>(cashType);</span><br><span class="line">totalPrices = cc.getResult(price, num);</span><br></pre></td></tr></table></figure>
-
-<p>简单工厂模式我需要让客户端认识两个类，CashSuper和CashFactory，而策略模式与简单工厂结合的用法，客户端就只需要认识一个类CashContext就可以了。耦合更加降低。</p>
-<p>在客户端实例化的是CashContext的对象，调用的是CashContext的方法GetResult，这使得具体的收费算法彻底地与客户端分离。连算法的父类CashSuper都不让客户端认识了。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="策略模式优点"><a href="#策略模式优点" class="headerlink" title="策略模式优点"></a>策略模式优点</h2><ul>
-<li>策略模式是一种定义一系列算法的方法，从概念上来看，所有这些算法完成的都是相同的工作，只是实现不同，它可以以相同的方式调用所有的算法，减少了各种<strong>算法类</strong>与<strong>使用算法类</strong>之间的耦合。<strong>策略模式封装了变化。</strong></li>
-<li>策略模式的Strategy类层次为Context定义了一系列的可供重用的算法或行为。继承有助于<strong>析取</strong>出这些算法中的<strong>公共功能</strong>。如：收费算法公共的功能就是获得计算费用的结果GetResult，这使得算法间有了抽象的父类CashSuper.</li>
-<li>简化了单元测试，因为每个算法都有自己的类，可以通过自己的接口<strong>单独测试</strong>。</li>
-</ul>
-<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h2><p>收银系统中如果要新增折扣，还是需要修改CashContext中的switch语句，可以通过<code>反射技术</code>（抽象工厂模式章节）来解决这个问题。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/25/design-pattern/2.%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" data-id="clmq7wwa40005xig1apogdvzj" data-title="设计模式2-策略模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/7.代理模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-09-22T08:12:44.000Z" itemprop="datePublished">2023-09-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">设计模式7-代理模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>代理模式（Proxy），为其他对象提供一种代理以控制对这个对象的访问。</p>
-<h2 id="代理模式结构图"><a href="#代理模式结构图" class="headerlink" title="代理模式结构图"></a>代理模式结构图</h2><p><img src="https://s2.loli.net/2023/09/21/PAE9T4Ht7ku6MFY.jpg" alt="代理模式结构图.jpg"></p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p><code>ISubject</code> 接口：定义了 <code>RealSubject</code> 和 <code>Proxy</code> 的共用接口，这样就可以在任何使用 <code>RealSubject</code> 的地方都可以使用 <code>Proxy</code> 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">ISubject</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>RealSubject</code> 类：定义 <code>Proxy</code> 所代表的真实实体</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RealSubject</span> <span class="keyword">implements</span> <span class="title class_">ISubject</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;真实的请求。&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Proxy</code> 类：保存一个 <code>RealSubject</code> 的引用使得 <code>Proxy</code> 可以访问实体，并提供一个与 <code>RealSubject</code> 相同的方法，以替代实体执行方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Proxy</span> <span class="keyword">implements</span> <span class="title class_">ISubject</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> RealSubject rs;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Proxy</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.rs = <span class="keyword">new</span> <span class="title class_">RealSubject</span>(); <span class="comment">// 为什么不是传入参数rs?</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.rs.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="应用场合"><a href="#应用场合" class="headerlink" title="应用场合"></a>应用场合</h2><h3 id="远程代理"><a href="#远程代理" class="headerlink" title="远程代理"></a>远程代理</h3><p>为一个对象在不同的地址空间提供局部代表。这样可以隐藏一个对象存在于不同地址空间的事实。</p>
-<p>例：WebService在Java中的应用。在项目中加入一个WebService，此时会在项目中生成一个wsdl文件和一些相关文件，其实它们就是代理，这就使得客户端程序调用代理就可以解决远程访问的问题。</p>
-<h3 id="虚拟代理"><a href="#虚拟代理" class="headerlink" title="虚拟代理"></a>虚拟代理</h3><p>是根据需要创建开销很大的对象。通过它来存放实例化需要很长时间的真实对象。</p>
-<p>例：比如说你打开一个很大的HTML网页时，里面可能有很多的文字和图片，但你还是可以很快打开它，此时你所看到的是所有的文字，但图片却是一张一张地下载后才能看到。那些未打开的图片框，就是通过虚拟代理来替代了真实的图片，此时代理存储了真实图片的路径和尺寸。</p>
-<h3 id="安全代理"><a href="#安全代理" class="headerlink" title="安全代理"></a>安全代理</h3><p>用来控制真实对象访问时的权限。一般用于对象应该有不同的访问权限的时候。</p>
-<h3 id="智能指引"><a href="#智能指引" class="headerlink" title="智能指引"></a>智能指引</h3><p>当调用真实的对象时，代理处理另外一些事。</p>
-<p>例：计算真实对象的引用次数，这样当该对象没有引用时，可以自动释放它；或当第一次引用一个持久对象时，将它装入内存；或在访问一个实际对象前，检查是否已经锁定它，以确保其他对象不能改变它。它们都是通过代理在访问一个对象时附加一些内务处理。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>代理模式其实就是在访问对象时引入一定程度的间接性，因为这种间接性，可以附加多种用途。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" data-id="clmus6rpy0000yo9gcplo1lom" data-title="设计模式7-代理模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java/collection/Java集合使用注意事项" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="article-date">
-  <time class="dt-published" datetime="2023-09-20T13:10:17.000Z" itemprop="datePublished">2023-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/Collection/">Collection</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Java集合使用注意事项</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="集合判空"><a href="#集合判空" class="headerlink" title="集合判空"></a>集合判空</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
-<blockquote>
-<p><strong>判断所有集合内部的元素是否为空，使用 <code>isEmpty()</code> 方法，而不是 <code>size()==0</code> 的方式。</strong></p>
-</blockquote>
-<p>这是因为 <code>isEmpty()</code> 方法的可读性更好，并且时间复杂度为 O(1)。</p>
-<p>绝大部分我们使用的集合的 <code>size()</code> 方法的时间复杂度也是 O(1)，不过，也有很多复杂度不是 O(1) 的，比如 <code>java.util.concurrent</code> 包下的某些集合（<code>ConcurrentLinkedQueue</code>、<code>ConcurrentHashMap</code>…）。</p>
-<p>下面是 <code>ConcurrentHashMap</code> 的 <code>size()</code> 方法和 <code>isEmpty()</code> 方法的源码。（时间复杂度都是O(1)啊）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">n</span> <span class="operator">=</span> sumCount();</span><br><span class="line">    <span class="keyword">return</span> ((n &lt; <span class="number">0L</span>) ? <span class="number">0</span> :</span><br><span class="line">            (n &gt; (<span class="type">long</span>)Integer.MAX_VALUE) ? Integer.MAX_VALUE :</span><br><span class="line">            (<span class="type">int</span>)n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">final</span> <span class="type">long</span> <span class="title function_">sumCount</span><span class="params">()</span> &#123;</span><br><span class="line">    CounterCell[] as = counterCells; CounterCell a;</span><br><span class="line">    <span class="type">long</span> <span class="variable">sum</span> <span class="operator">=</span> baseCount;</span><br><span class="line">    <span class="keyword">if</span> (as != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; as.length; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((a = as[i]) != <span class="literal">null</span>)</span><br><span class="line">                sum += a.value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> sumCount() &lt;= <span class="number">0L</span>; <span class="comment">// ignore transient negative values</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="集合转-Map"><a href="#集合转-Map" class="headerlink" title="集合转 Map"></a>集合转 Map</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
-<blockquote>
-<p><strong>在使用 <code>java.util.stream.Collectors</code> 类的 <code>toMap()</code> 方法转为 <code>Map</code> 集合时，一定要注意当 value 为 null 时会抛 NPE 异常。</strong></p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String phoneNumber;</span><br><span class="line">     <span class="comment">// getters and setters</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; bookList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">bookList.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;jack&quot;</span>,<span class="string">&quot;18163138123&quot;</span>));</span><br><span class="line">bookList.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;martin&quot;</span>,<span class="literal">null</span>));</span><br><span class="line"><span class="comment">// 空指针异常</span></span><br><span class="line">bookList.stream().collect(Collectors.toMap(Person::getName, Person::getPhoneNumber));</span><br></pre></td></tr></table></figure>
-
-<h1 id="集合遍历"><a href="#集合遍历" class="headerlink" title="集合遍历"></a>集合遍历</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
-<blockquote>
-<p><strong>不要在 foreach 循环里进行元素的 <code>remove/add</code> 操作。remove 元素请使用 <code>Iterator</code> 方式，如果并发操作，需要对 <code>Iterator</code> 对象加锁。</strong></p>
-</blockquote>
-<p>通过反编译你会发现 foreach 语法底层其实还是依赖 <code>Iterator</code> 。不过， <code>remove/add</code> 操作直接调用的是集合自己的方法，而不是 <code>Iterator</code> 的 <code>remove/add</code>方法。</p>
-<p>这就导致 <code>Iterator</code> 莫名其妙地发现自己有元素被 <code>remove/add</code> ，然后，它就会抛出一个 <code>ConcurrentModificationException</code> 来提示用户发生了并发修改异常。这就是单线程状态下产生的 <strong>fail-fast 机制</strong>。</p>
-<blockquote>
-<p><strong>fail-fast 机制</strong>：多个线程对 fail-fast 集合进行修改的时候，可能会抛出<code>ConcurrentModificationException</code>。 即使是单线程下也有可能会出现这种情况，上面已经提到过。</p>
-</blockquote>
-<p>Java8 开始，可以使用 <code>Collection#removeIf()</code>方法删除满足特定条件的元素,如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">10</span>; ++i) &#123;</span><br><span class="line">    list.add(i);</span><br><span class="line">&#125;</span><br><span class="line">list.removeIf(filter -&gt; filter % <span class="number">2</span> == <span class="number">0</span>); <span class="comment">/* 删除list中的所有偶数 */</span></span><br><span class="line">System.out.println(list); <span class="comment">/* [1, 3, 5, 7, 9] */</span></span><br></pre></td></tr></table></figure>
-
-<p>除了上面介绍的直接使用 <code>Iterator</code> 进行遍历操作之外，还可以：</p>
-<ul>
-<li>使用<strong>普通的 for 循环</strong></li>
-<li>使用 <strong>fail-safe 的集合类</strong>。<code>java.util</code>包下面的所有的集合类都是 fail-fast 的，而<code>java.util.concurrent</code>包下面的所有的类都是 fail-safe 的。</li>
-</ul>
-<h1 id="集合去重"><a href="#集合去重" class="headerlink" title="集合去重"></a>集合去重</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
-<blockquote>
-<p><strong>可以利用 <code>Set</code> 元素唯一的特性，可以快速对一个集合进行去重操作，避免使用 <code>List</code> 的 <code>contains()</code> 进行遍历去重或者判断包含操作。</strong></p>
-</blockquote>
-<p>以 <code>HashSet</code> 和 <code>ArrayList</code> 为例说明。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set 去重代码示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; Set&lt;T&gt; <span class="title function_">removeDuplicateBySet</span><span class="params">(List&lt;T&gt; data)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (CollectionUtils.isEmpty(data)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// List 去重代码示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; List&lt;T&gt; <span class="title function_">removeDuplicateByList</span><span class="params">(List&lt;T&gt; data)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (CollectionUtils.isEmpty(data)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;T&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(data.size());</span><br><span class="line">    <span class="keyword">for</span> (T current : data) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!result.contains(current)) &#123;</span><br><span class="line">            result.add(current);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两者的核心差别在于 <code>contains()</code> 方法的实现。</p>
-<p><code>HashSet</code> 的 <code>contains()</code> 方法底部依赖的 <code>HashMap</code> 的 <code>containsKey()</code> 方法，时间复杂度接近<code>O(1)</code>（没有出现哈希冲突的时候为 <code>O(1)</code>）。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> map.containsKey(o);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们有 N 个元素插入进 Set 中，时间复杂度为 <code>O(n)</code>。</p>
-<p><code>ArrayList</code> 的 <code>contains()</code> 方法是通过遍历所有元素的方法来做的，时间复杂度为 <code>O(n)</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> indexOf(o) &gt;= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (o == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            <span class="keyword">if</span> (elementData[i]==<span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            <span class="keyword">if</span> (o.equals(elementData[i]))</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <code>List</code> 中有 N 个元素，时间复杂度为 <code>O (n^2)</code>。</p>
-<h1 id="集合转数组"><a href="#集合转数组" class="headerlink" title="集合转数组"></a>集合转数组</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
-<blockquote>
-<p><strong>使用集合转数组的方法，必须使用集合的 <code>toArray(T[] array)</code>，传入的是类型完全一致、长度为 0 的空数组。</strong></p>
-</blockquote>
-<p><code>toArray(T[] array)</code> 方法的参数是一个泛型数组，如果 <code>toArray</code> 方法中没有传递任何参数的话返回的是 <code>Object</code>类 型数组。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String [] s= <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;</span><br><span class="line">    <span class="string">&quot;dog&quot;</span>, <span class="string">&quot;lazy&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;over&quot;</span>, <span class="string">&quot;jumps&quot;</span>, <span class="string">&quot;fox&quot;</span>, <span class="string">&quot;brown&quot;</span>, <span class="string">&quot;quick&quot;</span>, <span class="string">&quot;A&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line">List&lt;String&gt; list = Arrays.asList(s);</span><br><span class="line">Collections.reverse(list);</span><br><span class="line"><span class="comment">//没有指定类型的话会报错</span></span><br><span class="line">s=list.toArray(<span class="keyword">new</span> <span class="title class_">String</span>[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
-
-<p>由于 JVM 优化，<code>new String[0]</code>作为<code>Collection.toArray()</code>方法的参数现在使用更好，<code>new String[0]</code>就是起一个模板的作用，指定了返回数组的类型，0 是为了节省空间，因为它只是为了说明返回的类型。</p>
-<h1 id="数组转集合"><a href="#数组转集合" class="headerlink" title="数组转集合"></a>数组转集合</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
-<blockquote>
-<p><strong>使用工具类 <code>Arrays.asList()</code> 把数组转换成集合时，不能使用其修改集合相关的方法， 它的 <code>add/remove/clear</code> 方法会抛出 <code>UnsupportedOperationException</code> 异常。</strong></p>
-</blockquote>
-<p><code>Arrays.asList()</code>在平时开发中还是比较常见的，我们可以使用它将一个数组转换为一个 <code>List</code> 集合。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] myArray = &#123;<span class="string">&quot;Apple&quot;</span>, <span class="string">&quot;Banana&quot;</span>, <span class="string">&quot;Orange&quot;</span>&#125;;</span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(myArray);</span><br><span class="line"><span class="comment">//上面两个语句等价于下面一条语句</span></span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(<span class="string">&quot;Apple&quot;</span>,<span class="string">&quot;Banana&quot;</span>, <span class="string">&quot;Orange&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>JDK 源码对于这个方法的说明：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 返回由指定数组支持的固定大小的列表。此方法作为基于数组和基于集合的API之间的桥梁，</span></span><br><span class="line"><span class="comment">  * 与 Collection.toArray()结合使用。返回的List是可序列化并实现RandomAccess接口。</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; List&lt;T&gt; <span class="title function_">asList</span><span class="params">(T... a)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Array-asList-使用注意事项"><a href="#Array-asList-使用注意事项" class="headerlink" title="Array.asList()使用注意事项"></a><code>Array.asList()</code>使用注意事项</h2><p><strong>1、<code>Arrays.asList()</code>是泛型方法，传递的数组的类型必须是对象（如Integer），而不是基本类型（如int）。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] myArray = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.asList(myArray);</span><br><span class="line">System.out.println(myList.size());<span class="comment">//1</span></span><br><span class="line">System.out.println(myList.get(<span class="number">0</span>));<span class="comment">//数组地址值</span></span><br><span class="line">System.out.println(myList.get(<span class="number">1</span>));<span class="comment">//报错：ArrayIndexOutOfBoundsException</span></span><br><span class="line"><span class="type">int</span>[] array = (<span class="type">int</span>[]) myList.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(array[<span class="number">0</span>]);<span class="comment">//1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 要使用包装类型数组</span></span><br><span class="line">Integer[] myArray = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>当传入一个原生数据类型数组时，<code>Arrays.asList()</code> 的真正得到的参数就不是数组中的元素，而是数组对象本身。此时 <code>List</code> 的唯一元素就是这个数组。</p>
-<p><strong>2、使用集合的修改方法: <code>add()</code>、<code>remove()</code>、<code>clear()</code>会抛出异常。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">myList.add(<span class="number">4</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.remove(<span class="number">1</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.clear();<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br></pre></td></tr></table></figure>
-
-<p><code>Arrays.asList()</code> 方法返回的并不是 <code>java.util.ArrayList</code> ，而是 <code>java.util.Arrays</code> 的一个内部类 <code>java.util.Arrays$ArrayList</code> ,这个内部类并没有实现集合的修改方法（并没有重写这些方法）。</p>
-<h2 id="如何正确的将数组转换为-ArrayList"><a href="#如何正确的将数组转换为-ArrayList" class="headerlink" title="如何正确的将数组转换为 ArrayList ?"></a><strong>如何正确的将数组转换为 <code>ArrayList</code> ?</strong></h2><p>使用 Java8 的 <code>Stream</code> (推荐)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer [] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.stream(myArray).collect(Collectors.toList());</span><br><span class="line"><span class="comment">//基本类型也可以实现转换（依赖boxed的装箱操作）</span></span><br><span class="line"><span class="type">int</span> [] myArray2 = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.stream(myArray2).boxed().collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clmrrtpj2000234g1eyeubily" data-title="Java集合使用注意事项" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/leetcode/15. 三数之和" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" class="article-date">
-  <time class="dt-published" datetime="2023-09-20T11:53:17.000Z" itemprop="datePublished">2023-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/LeetCode/">LeetCode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">LeetCode15. 三数之和</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p>CodeTop字节高频题。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/description/">https://leetcode.cn/problems/3sum/description/</a></p>
-<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给你一个整数数组 <code>nums</code> ，判断是否存在三元组 <code>[nums[i], nums[j], nums[k]]</code> 满足 <code>i != j</code>、<code>i != k</code> 且 <code>j != k</code> ，同时还满足 <code>nums[i] + nums[j] + nums[k] == 0</code> 。请</p>
-<p>你返回所有和为 <code>0</code> 且不重复的三元组。</p>
-<p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br><span class="line">解释：</span><br><span class="line">nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。</span><br><span class="line">nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。</span><br><span class="line">nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。</span><br><span class="line">不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。</span><br><span class="line">注意，输出的顺序和三元组的顺序并不重要。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1,1]</span><br><span class="line">输出：[]</span><br><span class="line">解释：唯一可能的三元组和不为 0 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,0,0]</span><br><span class="line">输出：[[0,0,0]]</span><br><span class="line">解释：唯一可能的三元组和为 0 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>3 &lt;= nums.length &lt;= 3000</code></li>
-<li><code>-10^5 &lt;= nums[i] &lt;= 10^5</code></li>
-</ul>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><ul>
-<li>双指针</li>
-</ul>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
-<li>时间复杂度：<code>O(n^2)</code>，i从头到尾：<code>O(n)</code>，对每个i：j和k加起来<code>O(n)</code>。<ul>
-<li>暴力：<code>O(n^3)</code></li>
-</ul>
-</li>
-</ul>
-<p>首先将数组排序（<code>O(nlogn)</code>）。使用双指针算法需要数组有序。</p>
-<p>三个指针i, j, k，首先固定i，然后让j从i+1往后遍历。对于每个i, j：k从最后一个数往左移，直到找到最小的k，使得<code>nums[i] + nums[j] + nums[k] &gt;= 0</code>。此时若三数之和为0，加入res。</p>
-<p>去重方法：判断<code>i</code>和<code>i-1</code>、<code>j</code>和<code>j-1</code>(还得j不为第一个数即<code>j != i + 1</code>)下标对应的值是否相同，相同则代表这种情况已经考虑过了，直接continue。</p>
-<h3 id="自己写的非常不优雅的版本"><a href="#自己写的非常不优雅的版本" class="headerlink" title="自己写的非常不优雅的版本"></a>自己写的非常不优雅的版本</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>() - <span class="number">1</span>; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">// 去除重复情况</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>, k = nums.<span class="built_in">size</span>() - <span class="number">1</span>; j &lt; k; j ++) &#123;</span><br><span class="line">                <span class="keyword">while</span> (nums[j - <span class="number">1</span>] == nums[j] &amp;&amp; i != j - <span class="number">1</span> &amp;&amp; j != k) j ++;</span><br><span class="line">                <span class="keyword">while</span> (j &lt; k - <span class="number">1</span> &amp;&amp; nums[i] + nums[j] + nums[k - <span class="number">1</span>] &gt;= <span class="number">0</span>) k --; <span class="comment">// 获得当前i, j满足条件的k的最小坐标</span></span><br><span class="line">                <span class="keyword">if</span> (j != k &amp;&amp; nums[i] + nums[j] + nums[k] == <span class="number">0</span>) res.<span class="built_in">push_back</span>(&#123;nums[i], nums[j], nums[k]&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="优雅版本"><a href="#优雅版本" class="headerlink" title="优雅版本"></a>优雅版本</h3><p><code>while (nums[j - 1] == nums[j] &amp;&amp; i != j - 1 &amp;&amp; j != k) j ++;</code> 这一步可以用<code>continue</code>语句代替，之后的<code>j != k</code>也不需要判断了（只要在循环里没跳出，就一定满足<code>j &lt; k</code>）。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>() - <span class="number">1</span>; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">// 去除重复情况</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>, k = nums.<span class="built_in">size</span>() - <span class="number">1</span>; j &lt; k; j ++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j &gt; i + <span class="number">1</span> &amp;&amp; nums[j - <span class="number">1</span>] == nums[j]) <span class="keyword">continue</span>; <span class="comment">// 去除重复情况</span></span><br><span class="line">                <span class="keyword">while</span> (j &lt; k - <span class="number">1</span> &amp;&amp; nums[i] + nums[j] + nums[k - <span class="number">1</span>] &gt;= <span class="number">0</span>) k --; <span class="comment">// 获得当前i, j满足条件的k的最小坐标</span></span><br><span class="line">                <span class="keyword">if</span> (nums[i] + nums[j] + nums[k] == <span class="number">0</span>) res.<span class="built_in">push_back</span>(&#123;nums[i], nums[j], nums[k]&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" data-id="clmrrtpj2000334g103787nt5" data-title="LeetCode15. 三数之和" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/6.装饰模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-09-20T08:39:21.000Z" itemprop="datePublished">2023-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">设计模式6-装饰模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>需求：需要把所需的功能按正确的顺序串联起来进行控制</p>
-<h1 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</p>
-<h2 id="装饰模式结构图"><a href="#装饰模式结构图" class="headerlink" title="装饰模式结构图"></a>装饰模式结构图</h2><p><img src="https://s2.loli.net/2023/09/20/YdCDAhkco9ETLF6.jpg" alt="装饰模式结构图.jpg"></p>
-<ul>
-<li><p>Component是定义一个对象接口，可以给这些对象动态地添加职责。</p>
-</li>
-<li><p>ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。</p>
-</li>
-<li><p>Decorator，装饰抽象类，继承了Component，从外类来扩展Component类的功能，但对于Component来说，是无须知道Decorator的存在的。</p>
-</li>
-<li><p>ConcreteDecorator就是具体的装饰对象，起到给Component添加职责的功能。</p>
-</li>
-</ul>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>Component类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ConcreteComponent类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteComponent</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体对象的实际操作&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Decorator类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Decorator</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> Component component;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 装饰一个Component对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setComponent</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 重写operation()，实际调用component的operation方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (component != <span class="literal">null</span>) &#123;</span><br><span class="line">            component.operation();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ConcreteDecorator类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConcreteDecoratorA类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreateDecoratorA</span> <span class="keyword">extends</span> <span class="title class_">Decorator</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> String addedState;  <span class="comment">// 本类独有属性</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.operation();  <span class="comment">// 首先执行原有Component的operation()</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">this</span>.addedState = <span class="string">&quot;具体装饰对象A的独有操作&quot;</span>;  <span class="comment">// 再执行本类独有功能</span></span><br><span class="line">        System.out.println(<span class="built_in">this</span>.addedState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ConcreteDecoratorB类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteDecoratorB</span> <span class="keyword">extends</span> <span class="title class_">Decorator</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.operation();  <span class="comment">// 首先执行原有Component的operation()</span></span><br><span class="line">        <span class="built_in">this</span>.addedBehavior(); <span class="comment">// 再执行本类独有功能</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">addedBehavior</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体装饰对象B的独有操作&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端程序：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ConcreteComponent</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteComponent</span>();</span><br><span class="line"><span class="type">ConcreteDecoratorA</span> <span class="variable">d1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteDecoratorA</span>();</span><br><span class="line"><span class="type">ConcreteDecoratorB</span> <span class="variable">d2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteDecoratorB</span>();</span><br><span class="line"></span><br><span class="line">d1.setComponent(c); <span class="comment">// 首先用d1来包装c</span></span><br><span class="line">d2.setComponent(d1); <span class="comment">// 再用d2来包装d1</span></span><br><span class="line">d2.operation(); <span class="comment">// 最终执行d2的operation()</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://s2.loli.net/2023/09/20/Gx6ynzCtlqogS5F.jpg" alt="装饰模式对象链.jpg"></p>
-<p>装饰模式是利用<code>setComponent</code>来对对象进行包装的。<br>这样每个装饰对象的实现就和如何使用这个对象分离开了，每个装饰对象只关心自己的功能，不需要关心如何被添加到对象链当中。</p>
-<h2 id="例1：穿不同的服饰"><a href="#例1：穿不同的服饰" class="headerlink" title="例1：穿不同的服饰"></a>例1：穿不同的服饰</h2><p><img src="https://s2.loli.net/2023/09/20/U2GwI9iXWxH3mTJ.jpg" alt="装饰模式例子.jpg"></p>
-<p><code>ICharacter</code>人物形象接口（<code>Component</code>）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ICharacter</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Person</code>类（<code>ConcreteComponent</code>）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">ICharacter</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;装扮的&quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Finery</code>类（<code>Decorater</code>）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Q: Finery不是一个实际存在的事物，为什么不设计成抽象类？</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">abstract</span><span class="params">(?)</span> <span class="keyword">class</span> <span class="title class_">Finery</span> <span class="keyword">implements</span> <span class="title class_">ICharacter</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> ICharacter component;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">decorate</span><span class="params">(ICharacter component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.component != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>.component.show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>具体服饰类（<code>ConcreteDecorator</code>）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tshirt</span> <span class="keyword">extends</span> <span class="title class_">Finery</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;T恤&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">super</span>.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其他服饰同理。</p>
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Alice&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">Sneakers</span> <span class="variable">sneakers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Sneakers</span>();</span><br><span class="line">sneakers.decorate(p);</span><br><span class="line"></span><br><span class="line"><span class="type">Trousers</span> <span class="variable">trousers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Trousers</span>();</span><br><span class="line">trousers.decorate(sneakers);</span><br><span class="line"></span><br><span class="line"><span class="type">Tshirt</span> <span class="variable">tshirt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Tshirt</span>();</span><br><span class="line">tshirt.decorate(trousers);</span><br><span class="line"></span><br><span class="line">tshirt.show(); <span class="comment">// 打印:&quot;T恤裤子运动鞋装扮的Alice&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="例2：升级商场收银程序"><a href="#例2：升级商场收银程序" class="headerlink" title="例2：升级商场收银程序"></a>例2：升级商场收银程序</h2><p>如果需要在打折基础上又返现，不需要添加新的<code>CashReturnRebate</code>子类，依然是<code>CashNormal </code>、<code>CashReturn</code>、<code>CashRebate</code>三种基本算法子类。增加一个接口<code>ISale</code>，用作装饰模式里的<code>Component</code>。</p>
-<p><img src="https://s2.loli.net/2023/09/20/HthTDI9Zpz61acq.jpg" alt="装饰模式例子2.jpg"></p>
-<p>装饰模式有一个重要的优点，把类中的装饰功能从类中搬移去除，这样可以简化原有的类。</p>
-<p><code>CashNormal</code>是最基础的类，可以把它作为<code>ConcreteComponent</code>。</p>
-<p><img src="https://s2.loli.net/2023/09/20/Oq4yoQVPExWRgeD.jpg" alt="装饰模式例子2-改进.jpg"></p>
-<p><code>ISale </code>接口（<code>Component</code>）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ISale</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>CashSuper</code> 实现 <code>ISale </code> 接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">abstract</span><span class="params">(?)</span> <span class="keyword">class</span> <span class="title class_">CashSuper</span> <span class="keyword">implements</span> <span class="title class_">ISale</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> ISale component;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">decorate</span><span class="params">(ISale component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0d</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.component != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 若装饰对象存在，则执行装饰的算法运算</span></span><br><span class="line">            result = <span class="built_in">this</span>.component.acceptCash(price, num);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>CashNormal</code> 类（<code>ConcreteComponent</code>），最基本的原价算法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashNormal</span> <span class="keyword">implements</span> <span class="title class_">ISale</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> price * num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>打折和返现的算法都继承自 <code>CashSuper</code> ，都为 <code>ConcreteDecorator</code>。</p>
-<p>从外层向里层依次执行 <code>acceptCash</code> 方法。先执行自己的<code>acceptCash</code>方法，再调用 <code>super(CashSuper).acceptCash()</code> ，会执行 <code>this.component</code> （里层的装饰器）的 <code>acceptCash</code> ，将计算结果 <code>result</code> 传入。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashRebate</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyRebate</span> <span class="operator">=</span> <span class="number">1d</span>; <span class="comment">// 折扣率</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashRebate</span><span class="params">(<span class="type">double</span> moneyRebate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyRebate = moneyRebate;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> price * num * <span class="built_in">this</span>.moneyRebate;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.acceptCash(result, <span class="number">1</span>); <span class="comment">// result作为price传入，数量为1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashReturn</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyCondition</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利条件</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyReturn</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashReturn</span><span class="params">(<span class="type">double</span> moneyCondition, <span class="type">double</span> moneyReturn)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyCondition = moneyCondition;</span><br><span class="line">        <span class="built_in">this</span>.moneyReturn = moneyReturn;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> price * num;</span><br><span class="line">        <span class="keyword">if</span> (moneyCondition &gt; <span class="number">0</span> &amp;&amp; result &gt;= moneyCondition) &#123;</span><br><span class="line">            result -= Math.floor(result / moneyCondition) * moneyReturn;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.acceptCash(result, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>重点在 <code>CashContext</code> 类，因为涉及组合算法，所以用装饰模式的方式进行包装，这里需要注意包装的顺序，先打折后满多少返多少，与先满多少返多少，再打折会得到完全不同的结果。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashContext</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> ISale cs;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 在构造函数中传入type，根据type来实例化具体的收费策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashContext</span><span class="params">(<span class="type">int</span> cashType)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="comment">// 先打8折，再满300返100</span></span><br><span class="line">                <span class="type">CashNormal</span> <span class="variable">cn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="type">CashReturn</span> <span class="variable">crt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="type">CashRebate</span> <span class="variable">crb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>);</span><br><span class="line">                </span><br><span class="line">                crt.decorate(cn); <span class="comment">// 用 满300返100算法 包装原价算法</span></span><br><span class="line">                crb.decorate(crt); <span class="comment">// 用 打8折算法 装饰 满300返100算法</span></span><br><span class="line">                <span class="built_in">this</span>.cs = crb;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据收费策略的不同，获得计算结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.cs.acceptCash(price, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>现在无论如何组合算法，哪怕是先打折再返现，再打折再返现，都只需要更改<code>CashContext</code>类，很好地做到了开放封闭。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>装饰模式是为已有功能<strong>动态地添加更多功能</strong>的一种方式。</p>
-<h3 id="用装饰模式前"><a href="#用装饰模式前" class="headerlink" title="用装饰模式前"></a>用装饰模式前</h3><p>当系统需要新功能的时候，是向旧的类中添加新的代码。这些新加的代码通常装饰了原有类的核心职责或主要行为（如：给Person添加新服饰）。</p>
-<p><strong>问题</strong>：它们在主类中加入了新的字段，新的方法和新的逻辑，从而增加了主类的复杂度。而这些新加入的东西仅仅是为了满足一些只在某种<strong>特定情况</strong>下才会执行的特殊行为的需要。</p>
-<h3 id="用装饰模式后"><a href="#用装饰模式后" class="headerlink" title="用装饰模式后"></a>用装饰模式后</h3><p>它把每个要装饰的功能放在<strong>单独的类</strong>中，并让这个类<strong>包装</strong>它所要装饰的对象，因此，当需要执行特殊行为时，客户代码就可以在运行时根据需要有选择地、按顺序地使用装饰功能包装对象了。</p>
-<p><strong>优点</strong>：</p>
-<ul>
-<li>把类中的装饰功能从类中搬移去除，这样可以简化原有的类（如：原价算法）。</li>
-<li>有效地把类的核心职责和装饰功能区分开了。而且可以去除相关类中重复的装饰逻辑（如：无需重复编写 先打折后返现 &amp; 先返现后打折）。对于装饰模式来说，只是多几种组合而已。</li>
-</ul>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p><strong>装饰顺序很重要。</strong></p>
-<p>比如加密数据和过滤词汇都可以是数据持久化前的装饰功能，但若先加密了数据再用过滤功能就会出问题了。</p>
-<p>最理想的情况，是保证装饰类之间彼此独立，这样它们就可以以任意的顺序进行组合了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" data-id="clmrrtpj0000034g16a611skc" data-title="设计模式6-装饰模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -992,23 +850,23 @@
       <ul>
         
           <li>
-            <a href="/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">算法模板2-2.栈和队列</a>
+            <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/">算法模板2-6.堆</a>
           </li>
         
           <li>
-            <a href="/2023/10/07/algorithm/template/2-1.%E9%93%BE%E8%A1%A8/">算法模板2-1.链表</a>
+            <a href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/">算法模板2-5.并查集</a>
           </li>
         
           <li>
-            <a href="/2023/10/07/design-pattern/12.%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">设计模式12-外观模式</a>
+            <a href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/">算法模板2-4.Trie树</a>
           </li>
         
           <li>
-            <a href="/2023/10/06/algorithm/template/1-7.%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6%E6%A8%A1%E6%9D%BF/">算法模板1-7.区间合并模板</a>
+            <a href="/2023/10/08/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式13-建造者模式</a>
           </li>
         
           <li>
-            <a href="/2023/10/06/algorithm/template/1-1.%E6%8E%92%E5%BA%8F%E6%A8%A1%E6%9D%BF/">算法模板1-1.排序模板</a>
+            <a href="/2023/10/07/algorithm/template/2-3.KMP/">算法模板2-3.KMP</a>
           </li>
         
       </ul>

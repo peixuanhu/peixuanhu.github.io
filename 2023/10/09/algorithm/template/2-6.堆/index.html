@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>算法模板2-6.堆 | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="堆性质以小根堆为例： 堆中的每一个点都是小于等于左右儿子的。 所以根节点就是整个堆的最小值。 支持的操作 插入一个数 heap[++ size] &#x3D; x; up(size);  求集合当中的最小值 heap[1]  删除最小值 用整个堆的最后一个元素覆盖堆顶元素： heap[1] &#x3D; heap[size --]; down(1);  删除任意一个元素 与删除最小值类似，用最后一个元素覆盖下标为k的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法模板2-6.堆">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/10/09/algorithm/template/2-6.%E5%A0%86/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="堆性质以小根堆为例： 堆中的每一个点都是小于等于左右儿子的。 所以根节点就是整个堆的最小值。 支持的操作 插入一个数 heap[++ size] &#x3D; x; up(size);  求集合当中的最小值 heap[1]  删除最小值 用整个堆的最后一个元素覆盖堆顶元素： heap[1] &#x3D; heap[size --]; down(1);  删除任意一个元素 与删除最小值类似，用最后一个元素覆盖下标为k的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-09T07:55:06.500Z">
+<meta property="article:modified_time" content="2023-10-09T09:18:24.498Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-algorithm/template/2-6.堆" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/" class="article-date">
+  <time class="dt-published" datetime="2023-10-09T07:55:06.500Z" itemprop="datePublished">2023-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      算法模板2-6.堆
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>以小根堆为例：</p>
+<p>堆中的每一个点都是小于等于左右儿子的。</p>
+<p>所以根节点就是整个堆的最小值。</p>
+<h2 id="支持的操作"><a href="#支持的操作" class="headerlink" title="支持的操作"></a>支持的操作</h2><ol>
+<li><p>插入一个数</p>
+<p><code>heap[++ size] = x; up(size);</code></p>
+</li>
+<li><p>求集合当中的最小值</p>
+<p><code>heap[1]</code></p>
+</li>
+<li><p>删除最小值</p>
+<p>用整个堆的最后一个元素覆盖堆顶元素：</p>
+<p><code>heap[1] = heap[size --]; down(1);</code></p>
+</li>
+<li><p>删除任意一个元素</p>
+<p>与删除最小值类似，用最后一个元素覆盖下标为k的元素：</p>
+<p><code>heap[k] = heap[size --]; up(k); down(k);</code></p>
+<p>理论上是需要判断heap[k]的值变大还是变小再决定是up还是down。为了方便，可以直接up和down一遍</p>
+</li>
+<li><p>修改任意一个元素</p>
+<p><code>heap[k] = x; up(k); down(k);</code></p>
+</li>
+</ol>
+<p>其中，插入和删除元素都是 <code>O(logn)</code> 的，求最小值是 <code>O(1)</code> 的。</p>
+<blockquote>
+<p>后两种是手写堆特有的操作，STL无法直接实现。</p>
+</blockquote>
+<p>以上所有操作都可以由两个操作组合实现：</p>
+<h3 id="down"><a href="#down" class="headerlink" title="down"></a>down</h3><p><code>down(x)</code>: 把下标为x的节点的值变大了</p>
+<p>递归：与左右儿子相比，和最小的那个交换位置</p>
+<h3 id="up"><a href="#up" class="headerlink" title="up"></a>up</h3><p><code>up(x)</code>: 把下标为x的节点的值变小了</p>
+<p>递归：与父节点相比，如果比父节点小，则交换位置</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>堆是一个完全二叉树。</p>
+<h2 id="存储方式"><a href="#存储方式" class="headerlink" title="存储方式"></a>存储方式</h2><p>用一个一位数组来存。下标为x的元素的左儿子下标是2x，右儿子的下标是2x + 1。</p>
+<p>注：下标从1开始 </p>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><p>带映射数组版本的模板：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// h[N]存储堆中的值，h[1]是堆顶，x的左儿子是2x，右儿子是2x + 1</span></span><br><span class="line"><span class="comment">// ph[k]存储第k个插入的点在堆中的位置，p是下标，h是堆，ph的意思是插入顺序的下标映射到堆</span></span><br><span class="line"><span class="comment">// hp[k]存储堆中下标是k的点是第几个插入的</span></span><br><span class="line"><span class="type">int</span> h[N], ph[N], hp[N], size;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交换两个点，及其映射关系</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heap_swap</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">swap</span>(ph[hp[a]], ph[hp[b]]);</span><br><span class="line">  <span class="built_in">swap</span>(hp[a], hp[b]);</span><br><span class="line">  <span class="built_in">swap</span>(h[a], h[b]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">down</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> t = u;</span><br><span class="line">  <span class="comment">// t设为u及其左右儿子里值最小的那一个</span></span><br><span class="line">  <span class="keyword">if</span> (u * <span class="number">2</span> &lt;= size &amp;&amp; h[u * <span class="number">2</span>] &lt; h[t]) t = u * <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">if</span> (u * <span class="number">2</span> + <span class="number">1</span> &lt;= size &amp;&amp; h[u * <span class="number">2</span> + <span class="number">1</span>] &lt; h[t]) t = u * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (u != t) &#123;</span><br><span class="line">    <span class="built_in">heap_swap</span>(u, t);</span><br><span class="line">    <span class="built_in">down</span>(t);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">up</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (u / <span class="number">2</span> &amp;&amp; h[u] &lt; h[u / <span class="number">2</span>]) &#123;</span><br><span class="line">    <span class="built_in">heap_swap</span>(u, u / <span class="number">2</span>);</span><br><span class="line">    u &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// O(n)建堆</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i; i --) <span class="built_in">down</span>(i);</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>先把数组建成堆，再依次输出堆顶元素</p>
+<p>时间复杂度： <code>O(nlogn)</code>。</p>
+<h4 id="建堆"><a href="#建堆" class="headerlink" title="建堆"></a>建堆</h4><p>如果一个一个元素插入，时间复杂度是 <code>O(nlogn)</code> 的。</p>
+<p><code>O(n)</code> 的建堆方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i; i --) <span class="built_in">down</span>(i);</span><br></pre></td></tr></table></figure>
+
+<p>从 n&#x2F;2 开始往上的所有元素 down，其实就是从树的倒数第二层开始down。</p>
+<p>时间复杂度证明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n/4 * 1 + n/8 * 2 + n/16 * 3 + ...</span><br><span class="line">= n (1/2^2 + 2/2^3 + 3/2^4 + ...)</span><br><span class="line"></span><br><span class="line">S = 1/2^2 + 2/2^3 + 3/2^4 + ...</span><br><span class="line">2S = 1/2 + 2/2^2 + 3/2^3 + ...</span><br><span class="line">2S - S = S = 1/2 + 1/2^2 + 1/2^3 + ... &lt; 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dijkstra堆优化"><a href="#Dijkstra堆优化" class="headerlink" title="Dijkstra堆优化"></a>Dijkstra堆优化</h3><p>需要用到hp, ph映射数组</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/09/algorithm/template/2-6.%E5%A0%86/" data-id="clnitxwut0002cz9g61li7pos" data-title="算法模板2-6.堆" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">算法模板2-5.并查集</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/">算法模板2-6.堆</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/">算法模板2-5.并查集</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/">算法模板2-4.Trie树</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/08/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式13-建造者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/07/algorithm/template/2-3.KMP/">算法模板2-3.KMP</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
