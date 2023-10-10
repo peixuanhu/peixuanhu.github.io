@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>设计模式14-观察者模式 | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="观察者模式定义观察者模式又叫作发布-订阅（Publish&#x2F;Subscribe）模式。 观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。 结构图 Subject类即主题或抽象通知者，一般用一个抽象类或者一个接口实现。 它把所有对观察者对象的引用保存在一个聚集里，每个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式14-观察者模式">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="观察者模式定义观察者模式又叫作发布-订阅（Publish&#x2F;Subscribe）模式。 观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。 结构图 Subject类即主题或抽象通知者，一般用一个抽象类或者一个接口实现。 它把所有对观察者对象的引用保存在一个聚集里，每个">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2023/10/10/LCoseQJmfYubWig.jpg">
+<meta property="article:published_time" content="2023-10-09T16:30:01.000Z">
+<meta property="article:modified_time" content="2023-10-10T02:31:34.527Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/10/LCoseQJmfYubWig.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-design-pattern/14.观察者模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-09T16:30:01.000Z" itemprop="datePublished">2023-10-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      设计模式14-观察者模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>观察者模式又叫作发布-订阅（Publish&#x2F;Subscribe）模式。</p>
+<p>观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/10/LCoseQJmfYubWig.jpg" alt="观察者模式结构图.jpg"></p>
+<h3 id="Subject类"><a href="#Subject类" class="headerlink" title="Subject类"></a>Subject类</h3><p>即主题或抽象通知者，一般用一个抽象类或者一个接口实现。</p>
+<p>它把所有对观察者对象的引用保存在一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象。</p>
+<h3 id="Observer类"><a href="#Observer类" class="headerlink" title="Observer类"></a>Observer类</h3><p>抽象观察者，为所有的具体观察者定义一个接口，在得到主题的通知时更新自己。这个接口叫作更新接口。更新接口通常包含一个update()方法，这个方法叫作更新方法。</p>
+<p>抽象观察者一般用一个抽象类或者一个接口实现。</p>
+<h3 id="ConcreteSubject类"><a href="#ConcreteSubject类" class="headerlink" title="ConcreteSubject类"></a>ConcreteSubject类</h3><p>具体主题或具体通知者，将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。</p>
+<p>具体主题角色通常用一个具体子类实现。</p>
+<h3 id="ConcreteObserver类"><a href="#ConcreteObserver类" class="headerlink" title="ConcreteObserver类"></a>ConcreteObserver类</h3><p>具体观察者，实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。具体观察者角色可以保存一个<strong>指向具体主题对象的引用</strong>。</p>
+<p>具体观察者角色通常用一个具体子类实现。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>Subject类：通知者抽象类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Observer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Observer&gt;(); <span class="comment">// 针对抽象的Observer编程</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 增加观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">attach</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">    list.add(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 减少观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">detach</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">    list.remove(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 通知观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyObserver</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (Observer item : list) &#123;</span><br><span class="line">      item.update();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> String subjectState;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getSubjectState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.subjectState;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSubjectState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.subjectState = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Observer类：抽象观察者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteSubject类：具体通知者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">  <span class="comment">// 具体通知者的方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteObserver类：具体观察者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteObserver</span> <span class="keyword">extends</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> Subject sub;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ConcreteObserver</span><span class="params">(String name, Subject sub)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.sub = sub;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;观察者&quot;</span> + <span class="built_in">this</span>.name + <span class="string">&quot;的新状态是&quot;</span> + <span class="built_in">this</span>.sub.getSubjectState());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Subject</span> <span class="variable">subject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteSubject</span>();</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameX&quot;</span>, subject));</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameY&quot;</span>, subject));</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameZ&quot;</span>, subject));</span><br><span class="line"></span><br><span class="line">subject <span class="title function_">setSubjectState</span><span class="params">(<span class="string">&quot;ABC&quot;</span>)</span>;</span><br><span class="line">subject.notifyObserver();</span><br></pre></td></tr></table></figure>
+
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>将一个系统分割成一系列相互协作的类有一个很不好的副作用，那就是需要维护相关对象间的一致性。我们不希望为了维持一致性而使各类紧密耦合，这样会给维护、扩展和重用都带来不便。</p>
+<h3 id="何时使用观察者模式？"><a href="#何时使用观察者模式？" class="headerlink" title="何时使用观察者模式？"></a>何时使用观察者模式？</h3><ol>
+<li>当一个对象的改变需要同时改变其他对象，而且它不知道具体有多少对象有待改变时</li>
+<li>当一个抽象模型有两个方面，其中一方面依赖于另一方面，这时用观察者模式可以将这两者封装在独立的对象中使它们各自独立地改变和复用</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>观察者模式所做的工作其实就是在解除耦合。让耦合的双方都依赖于抽象，而不是依赖于具体。从而使得各自的变化都不会影响另一边的变化。</p>
+<h2 id="Java内置接口实现"><a href="#Java内置接口实现" class="headerlink" title="Java内置接口实现"></a>Java内置接口实现</h2><p>现实编程中，具体的观察者完全有可能是风马牛不相及的类，但它们都需要根据通知者的通知来做出update()的操作，此时不适合使用继承，要用接口来实现。</p>
+<p>Java已经为观察者模式准备好了相关的接口和抽象类了：<strong>观察者接口java.util.Observer</strong> 和 <strong>通知者类java.util.Observable</strong> 。</p>
+<p>Java内置的Observable是一个类，这样设计是有问题的。一个类，就只能继承它，但我们自己的类可能本身就需要继承其他抽象类，这就产生了麻烦。Java不支持多重继承，这就严重限制了Observable的复用潜力。所以，当你这段代码用javac编译时，会给出提示： <code>警告：［deprecation］ java.util中的Observable已过时。</code> 系统其实是建议你不要复用这样的方法。所以真实编程中，我们也要考虑怎么取舍，如何修改的问题。</p>
+<h3 id="示例版本一"><a href="#示例版本一" class="headerlink" title="示例版本一"></a>示例版本一</h3><h3 id="示例版本二"><a href="#示例版本二" class="headerlink" title="示例版本二"></a>示例版本二</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clnk1a4210000jd9gcok3gxfs" data-title="设计模式14-观察者模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          算法模板2-7.哈希
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式13-建造者模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/">算法模板2-8.字符串哈希</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/">算法模板2-7.哈希</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式14-观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式13-建造者模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

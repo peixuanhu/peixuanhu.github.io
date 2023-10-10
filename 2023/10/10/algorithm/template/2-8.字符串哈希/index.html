@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>算法模板2-8.字符串哈希 | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="字符串哈希适用场景快速判断一个字符串中两个区间对应的子串是否完全相同。  除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。  字符串前缀哈希法12345678str &#x3D; &quot;ABCABCDE&quot;把每一个前缀的哈希值算出来：h[0] &#x3D; 0h[1] &#x3D; &quot;A&quot;的哈希值h[2] &#x3D; &quot;AB&quot;的哈希值h[3] &#x3D; &amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法模板2-8.字符串哈希">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="字符串哈希适用场景快速判断一个字符串中两个区间对应的子串是否完全相同。  除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。  字符串前缀哈希法12345678str &#x3D; &quot;ABCABCDE&quot;把每一个前缀的哈希值算出来：h[0] &#x3D; 0h[1] &#x3D; &quot;A&quot;的哈希值h[2] &#x3D; &quot;AB&quot;的哈希值h[3] &#x3D; &amp;q">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-10T07:24:15.174Z">
+<meta property="article:modified_time" content="2023-10-10T07:37:59.097Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-algorithm/template/2-8.字符串哈希" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" class="article-date">
+  <time class="dt-published" datetime="2023-10-10T07:24:15.174Z" itemprop="datePublished">2023-10-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      算法模板2-8.字符串哈希
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="字符串哈希"><a href="#字符串哈希" class="headerlink" title="字符串哈希"></a>字符串哈希</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>快速判断一个字符串中两个区间对应的子串是否完全相同。</p>
+<blockquote>
+<p>除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。</p>
+</blockquote>
+<h2 id="字符串前缀哈希法"><a href="#字符串前缀哈希法" class="headerlink" title="字符串前缀哈希法"></a>字符串前缀哈希法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str = &quot;ABCABCDE&quot;</span><br><span class="line"></span><br><span class="line">把每一个前缀的哈希值算出来：</span><br><span class="line">h[0] = 0</span><br><span class="line">h[1] = &quot;A&quot;的哈希值</span><br><span class="line">h[2] = &quot;AB&quot;的哈希值</span><br><span class="line">h[3] = &quot;ABC&quot;的哈希值</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong>可以通过这些前缀的哈希值，算出 <strong><code>str</code> 任何一个子串</strong>的哈希值。</p>
+<h2 id="如何定义某一前缀的哈希值？"><a href="#如何定义某一前缀的哈希值？" class="headerlink" title="如何定义某一前缀的哈希值？"></a>如何定义某一前缀的哈希值？</h2><p>把字符串str看成一个p进制的数。str中<strong>每一个字符（的ASCII码）</strong>对应这个<strong>p进制数的每一位数字</strong>。最后一个字符对应最低位。</p>
+<blockquote>
+<p>例：hash(“ABC”) &#x3D; (A * p^2 + B * p^1 + C * p^0)</p>
+</blockquote>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p><strong>目标：</strong>将str映射到0～Q-1的范围内。</p>
+<p><strong>经验值：</strong> <code> p=131或13331</code>, <code>Q = 2^64</code>。用 <code>unsigned long long</code> 来存储哈希值，当它溢出时，刚好等价于取模。</p>
+<h4 id="1-算出这个p进制数x"><a href="#1-算出这个p进制数x" class="headerlink" title="1. 算出这个p进制数x"></a>1. 算出这个p进制数x</h4><h5 id="2-x-mod-Q"><a href="#2-x-mod-Q" class="headerlink" title="2. x mod Q"></a>2. x mod Q</h5><p>由于str的长度可能比较长，x可能为一个很大的数字，不好存。所以算出x之后，需要mod一个比较小的数Q。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>不能把某一个字母映射成0。例：”A”-&gt;0, “AA”-&gt;0，将不同的字符串映射成了同一个数。</li>
+<li>假定无冲突。这个算法没有考虑冲突情况。p和Q取经验值的情况下，起冲突的可能性很小。</li>
+</ol>
+<h2 id="如何算出任意子串的哈希值？"><a href="#如何算出任意子串的哈希值？" class="headerlink" title="如何算出任意子串的哈希值？"></a>如何算出任意子串的哈希值？</h2><p>假设我们要算 <code>str</code> 第 <code>L</code> 位和第<code>R</code> 位之间这个子串的哈希值。</p>
+<p>已知 <code>h[R]</code> 和 <code>h[L-1]</code> ：</p>
+<p><code>h[R] - h[L - 1] * p^(R - L + 1)</code> 即为子串的哈希值。</p>
+<blockquote>
+<p><code>h[R]</code> 中第R个字符对应x的第0位，第1个字符对应x的第R-1位</p>
+<p><code>h[L-1]</code>  中第L-1个字符对应x的第0位，第1个字符对应x的第L-2位</p>
+<p>h[L-1] * p^(R - L + 1)是为了将 <code>h[L-1]</code> 往左移，与 <code>h[R]</code> 对齐。</p>
+</blockquote>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ULL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>, <span class="type">int</span> P = <span class="number">13331</span>;</span><br><span class="line"><span class="type">char</span> str[N];</span><br><span class="line">ULL h[N], p[N]; <span class="comment">// h[k]存储字符串前k个字母的哈希值，p[k]存储 P^k mod 2^64（提前预处理减少重复计算）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化：注意str字符串是从1开始的，scanf(&quot;%s&quot;, str + 1)</span></span><br><span class="line">p[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  h[i] = h[i - <span class="number">1</span>] * P + str[i];</span><br><span class="line">  p[i] = p[i - <span class="number">1</span>] * P;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算子串 str[l ~ r] 的哈希值</span></span><br><span class="line"><span class="function">ULL <span class="title">get</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> h[r] - h[l - <span class="number">1</span>] * p[r - l + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>将字符串看成P进制数，P的经验值是131或13331，取这两个值的冲突概率低</p>
+<h3 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h3><p>取模的数用2^64，这样直接用unsigned long long存储，溢出的结果就是取模的结果</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" data-id="clnk1a4260002jd9g4s4ggh14" data-title="算法模板2-8.字符串哈希" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          STL总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">算法模板2-7.哈希</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/">算法模板2-8.字符串哈希</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/">算法模板2-7.哈希</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式14-观察者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式13-建造者模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
