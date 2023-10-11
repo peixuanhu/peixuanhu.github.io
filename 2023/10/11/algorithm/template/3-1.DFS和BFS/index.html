@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>算法模板3-1.DFS和BFS | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="深度优先遍历 (DFS)一条路走到底，无路可走了之后往回退一步，继续找一条其他的路一直往下走。 形势一般为递归。 概念回溯走到底了，返回的过程叫做回溯。 回来的时候要恢复现场。 123456&#x2F;&#x2F; 恢复现场的代码与修改状态的代码一般是对称的，例：path[u] &#x3D; i;st[i] &#x3D; true;dfs(u + 1); &#x2F;&#x2F; 下一层递归返回之后恢复st[i] &#x3D; false;path[u] &#x3D; 0;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法模板3-1.DFS和BFS">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="深度优先遍历 (DFS)一条路走到底，无路可走了之后往回退一步，继续找一条其他的路一直往下走。 形势一般为递归。 概念回溯走到底了，返回的过程叫做回溯。 回来的时候要恢复现场。 123456&#x2F;&#x2F; 恢复现场的代码与修改状态的代码一般是对称的，例：path[u] &#x3D; i;st[i] &#x3D; true;dfs(u + 1); &#x2F;&#x2F; 下一层递归返回之后恢复st[i] &#x3D; false;path[u] &#x3D; 0;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-11T03:08:50.381Z">
+<meta property="article:modified_time" content="2023-10-11T05:23:38.535Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-algorithm/template/3-1.DFS和BFS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" class="article-date">
+  <time class="dt-published" datetime="2023-10-11T03:08:50.381Z" itemprop="datePublished">2023-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      算法模板3-1.DFS和BFS
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="深度优先遍历-DFS"><a href="#深度优先遍历-DFS" class="headerlink" title="深度优先遍历 (DFS)"></a>深度优先遍历 (DFS)</h1><p>一条路走到底，无路可走了之后往回退<strong>一步</strong>，继续找一条其他的路一直往下走。</p>
+<p>形势一般为递归。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><p>走到底了，返回的过程叫做回溯。</p>
+<p>回来的时候要<strong>恢复现场</strong>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 恢复现场的代码与修改状态的代码一般是对称的，例：</span></span><br><span class="line">path[u] = i;</span><br><span class="line">st[i] = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">dfs</span>(u + <span class="number">1</span>); <span class="comment">// 下一层递归返回之后恢复</span></span><br><span class="line">st[i] = <span class="literal">false</span>;</span><br><span class="line">path[u] = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><p>剪枝可以提高效率。</p>
+<h4 id="可行性剪枝"><a href="#可行性剪枝" class="headerlink" title="可行性剪枝"></a>可行性剪枝</h4><p>在搜索的过程中判断，如果这个节点不合法，那么它的子树上的所有节点也都不合法，直接停止搜索。</p>
+<h4 id="最优性剪枝"><a href="#最优性剪枝" class="headerlink" title="最优性剪枝"></a>最优性剪枝</h4><p>当前路径一定不如最优解，停止搜索。</p>
+<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><p>递归结束条件的选择+状态标记+递归后的恢复</p>
+<h3 id="顺序"><a href="#顺序" class="headerlink" title="顺序"></a>顺序</h3><h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="字典序输出"><a href="#字典序输出" class="headerlink" title="字典序输出"></a>字典序输出</h3><p>每一种输出都是一个叶子节点，第x位的遍历对应第x层的节点。整个搜索过程就是一棵搜索树（当然不需要自己存这棵树，系统栈会帮我们做这件事）。</p>
+<p>path数组下标为当前遍历到的位数，存储的值为这一位填的数字。</p>
+<h3 id="n-皇后"><a href="#n-皇后" class="headerlink" title="n-皇后"></a>n-皇后</h3><h4 id="进阶解法-以-行-为一层来搜索"><a href="#进阶解法-以-行-为一层来搜索" class="headerlink" title="进阶解法 - 以&#x3D;&#x3D;行&#x3D;&#x3D;为一层来搜索"></a>进阶解法 - 以&#x3D;&#x3D;行&#x3D;&#x3D;为一层来搜索</h4><p>col数组记录该列是否有皇后。</p>
+<p>额外开两个数组存储对角线和反对角线上是否有皇后，如果有代表不合法，剪枝。</p>
+<p>对角线数组的长度是 <code>2n - 1</code>。</p>
+<p>判断一个点在哪一条对角线&#x2F;反对角线上：用截距。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x, y分别是行号和列号，b为对角线号。</span><br><span class="line"></span><br><span class="line">y=x+b/ -&gt; b=y-x+n (+n是因为数组下标要为正数)</span><br><span class="line"></span><br><span class="line">y=-x+b -&gt; b=y+x</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度：<code>O(n*n!)</code></p>
+<h4 id="原始解法-按-格子-为一层来搜索"><a href="#原始解法-按-格子-为一层来搜索" class="headerlink" title="原始解法 - 按&#x3D;&#x3D;格子&#x3D;&#x3D;为一层来搜索"></a>原始解法 - 按&#x3D;&#x3D;格子&#x3D;&#x3D;为一层来搜索</h4><p>每一层dfs都往下拓展两种可能：一种是该格子放皇后；一种是该格子不放皇后。</p>
+<blockquote>
+<p>row数组记录该行是否有皇后。</p>
+<p>col数组记录该列是否有皇后。</p>
+<p>额外开两个数组存储对角线和反对角线上是否有皇后，如果有代表不合法，剪枝。</p>
+</blockquote>
+<p>时间复杂度：<code>O(2^(n^2))</code></p>
+<h1 id="宽度优先遍历-BFS"><a href="#宽度优先遍历-BFS" class="headerlink" title="宽度优先遍历 (BFS)"></a>宽度优先遍历 (BFS)</h1><p>一层一层遍历，某一层全部遍历完，再遍历该层第一个节点的第一个子节点，以此类推。</p>
+<p>形势一般为迭代。</p>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">模拟队列 q[N], d[N] 使用d数组标记状态</span><br><span class="line"></span><br><span class="line">queue &lt;- 初始状态</span><br><span class="line">while queue不空</span><br><span class="line">&#123;</span><br><span class="line">	t &lt;- 队头</span><br><span class="line">	拓展t</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="往上下左右四个方向拓展的小技巧"><a href="#往上下左右四个方向拓展的小技巧" class="headerlink" title="往上下左右四个方向拓展的小技巧"></a>往上下左右四个方向拓展的小技巧</h2><p>用向量数组</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> dx[<span class="number">4</span>] = &#123;<span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>&#125;, dy[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i ++)</span><br><span class="line">  <span class="type">int</span> x = a + dx[i], y = b + dy[i];</span><br></pre></td></tr></table></figure>
+
+<h2 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h2><h3 id="走迷宫"><a href="#走迷宫" class="headerlink" title="走迷宫"></a>走迷宫</h3><p>以离起点距离为x的点为第x层</p>
+<h3 id="八数码"><a href="#八数码" class="headerlink" title="八数码"></a>八数码</h3><h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>数据结构</th>
+<th>空间复杂度</th>
+<th>性质</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DFS</td>
+<td>stack</td>
+<td>O(h)</td>
+<td></td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>queue</td>
+<td>O(2^h^)</td>
+<td>最短路（第一次搜到时）</td>
+</tr>
+</tbody></table>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>DFS在空间上占优势；</p>
+<p>但BFS具有“最短路”的性质（前提：边的权重为1）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" data-id="clnlih18g0000a99g5611g381" data-title="算法模板3-1.DFS和BFS" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">算法模板3-3.树与图的遍历</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/">算法模板3-1.DFS和BFS</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/">算法模板3-3.树与图的遍历</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/11/algorithm/template/3-2.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/">算法模板3-2.树与图的存储</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/11/design-pattern/15.%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式15-抽象工厂模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

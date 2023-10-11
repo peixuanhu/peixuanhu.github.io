@@ -73,6 +73,326 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java/collection/Java集合使用注意事项" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="article-date">
+  <time class="dt-published" datetime="2023-09-20T13:10:17.000Z" itemprop="datePublished">2023-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/Collection/">Collection</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Java集合使用注意事项</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="集合判空"><a href="#集合判空" class="headerlink" title="集合判空"></a>集合判空</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>判断所有集合内部的元素是否为空，使用 <code>isEmpty()</code> 方法，而不是 <code>size()==0</code> 的方式。</strong></p>
+</blockquote>
+<p>这是因为 <code>isEmpty()</code> 方法的可读性更好，并且时间复杂度为 O(1)。</p>
+<p>绝大部分我们使用的集合的 <code>size()</code> 方法的时间复杂度也是 O(1)，不过，也有很多复杂度不是 O(1) 的，比如 <code>java.util.concurrent</code> 包下的某些集合（<code>ConcurrentLinkedQueue</code>、<code>ConcurrentHashMap</code>…）。</p>
+<p>下面是 <code>ConcurrentHashMap</code> 的 <code>size()</code> 方法和 <code>isEmpty()</code> 方法的源码。（时间复杂度都是O(1)啊）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">n</span> <span class="operator">=</span> sumCount();</span><br><span class="line">    <span class="keyword">return</span> ((n &lt; <span class="number">0L</span>) ? <span class="number">0</span> :</span><br><span class="line">            (n &gt; (<span class="type">long</span>)Integer.MAX_VALUE) ? Integer.MAX_VALUE :</span><br><span class="line">            (<span class="type">int</span>)n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">final</span> <span class="type">long</span> <span class="title function_">sumCount</span><span class="params">()</span> &#123;</span><br><span class="line">    CounterCell[] as = counterCells; CounterCell a;</span><br><span class="line">    <span class="type">long</span> <span class="variable">sum</span> <span class="operator">=</span> baseCount;</span><br><span class="line">    <span class="keyword">if</span> (as != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; as.length; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((a = as[i]) != <span class="literal">null</span>)</span><br><span class="line">                sum += a.value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> sumCount() &lt;= <span class="number">0L</span>; <span class="comment">// ignore transient negative values</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="集合转-Map"><a href="#集合转-Map" class="headerlink" title="集合转 Map"></a>集合转 Map</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>在使用 <code>java.util.stream.Collectors</code> 类的 <code>toMap()</code> 方法转为 <code>Map</code> 集合时，一定要注意当 value 为 null 时会抛 NPE 异常。</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String phoneNumber;</span><br><span class="line">     <span class="comment">// getters and setters</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; bookList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">bookList.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;jack&quot;</span>,<span class="string">&quot;18163138123&quot;</span>));</span><br><span class="line">bookList.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;martin&quot;</span>,<span class="literal">null</span>));</span><br><span class="line"><span class="comment">// 空指针异常</span></span><br><span class="line">bookList.stream().collect(Collectors.toMap(Person::getName, Person::getPhoneNumber));</span><br></pre></td></tr></table></figure>
+
+<h1 id="集合遍历"><a href="#集合遍历" class="headerlink" title="集合遍历"></a>集合遍历</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>不要在 foreach 循环里进行元素的 <code>remove/add</code> 操作。remove 元素请使用 <code>Iterator</code> 方式，如果并发操作，需要对 <code>Iterator</code> 对象加锁。</strong></p>
+</blockquote>
+<p>通过反编译你会发现 foreach 语法底层其实还是依赖 <code>Iterator</code> 。不过， <code>remove/add</code> 操作直接调用的是集合自己的方法，而不是 <code>Iterator</code> 的 <code>remove/add</code>方法。</p>
+<p>这就导致 <code>Iterator</code> 莫名其妙地发现自己有元素被 <code>remove/add</code> ，然后，它就会抛出一个 <code>ConcurrentModificationException</code> 来提示用户发生了并发修改异常。这就是单线程状态下产生的 <strong>fail-fast 机制</strong>。</p>
+<blockquote>
+<p><strong>fail-fast 机制</strong>：多个线程对 fail-fast 集合进行修改的时候，可能会抛出<code>ConcurrentModificationException</code>。 即使是单线程下也有可能会出现这种情况，上面已经提到过。</p>
+</blockquote>
+<p>Java8 开始，可以使用 <code>Collection#removeIf()</code>方法删除满足特定条件的元素,如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">10</span>; ++i) &#123;</span><br><span class="line">    list.add(i);</span><br><span class="line">&#125;</span><br><span class="line">list.removeIf(filter -&gt; filter % <span class="number">2</span> == <span class="number">0</span>); <span class="comment">/* 删除list中的所有偶数 */</span></span><br><span class="line">System.out.println(list); <span class="comment">/* [1, 3, 5, 7, 9] */</span></span><br></pre></td></tr></table></figure>
+
+<p>除了上面介绍的直接使用 <code>Iterator</code> 进行遍历操作之外，还可以：</p>
+<ul>
+<li>使用<strong>普通的 for 循环</strong></li>
+<li>使用 <strong>fail-safe 的集合类</strong>。<code>java.util</code>包下面的所有的集合类都是 fail-fast 的，而<code>java.util.concurrent</code>包下面的所有的类都是 fail-safe 的。</li>
+</ul>
+<h1 id="集合去重"><a href="#集合去重" class="headerlink" title="集合去重"></a>集合去重</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>可以利用 <code>Set</code> 元素唯一的特性，可以快速对一个集合进行去重操作，避免使用 <code>List</code> 的 <code>contains()</code> 进行遍历去重或者判断包含操作。</strong></p>
+</blockquote>
+<p>以 <code>HashSet</code> 和 <code>ArrayList</code> 为例说明。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set 去重代码示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; Set&lt;T&gt; <span class="title function_">removeDuplicateBySet</span><span class="params">(List&lt;T&gt; data)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (CollectionUtils.isEmpty(data)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// List 去重代码示例</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; List&lt;T&gt; <span class="title function_">removeDuplicateByList</span><span class="params">(List&lt;T&gt; data)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (CollectionUtils.isEmpty(data)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;T&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(data.size());</span><br><span class="line">    <span class="keyword">for</span> (T current : data) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!result.contains(current)) &#123;</span><br><span class="line">            result.add(current);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两者的核心差别在于 <code>contains()</code> 方法的实现。</p>
+<p><code>HashSet</code> 的 <code>contains()</code> 方法底部依赖的 <code>HashMap</code> 的 <code>containsKey()</code> 方法，时间复杂度接近<code>O(1)</code>（没有出现哈希冲突的时候为 <code>O(1)</code>）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> map.containsKey(o);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们有 N 个元素插入进 Set 中，时间复杂度为 <code>O(n)</code>。</p>
+<p><code>ArrayList</code> 的 <code>contains()</code> 方法是通过遍历所有元素的方法来做的，时间复杂度为 <code>O(n)</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> indexOf(o) &gt;= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (o == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            <span class="keyword">if</span> (elementData[i]==<span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            <span class="keyword">if</span> (o.equals(elementData[i]))</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <code>List</code> 中有 N 个元素，时间复杂度为 <code>O (n^2)</code>。</p>
+<h1 id="集合转数组"><a href="#集合转数组" class="headerlink" title="集合转数组"></a>集合转数组</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>使用集合转数组的方法，必须使用集合的 <code>toArray(T[] array)</code>，传入的是类型完全一致、长度为 0 的空数组。</strong></p>
+</blockquote>
+<p><code>toArray(T[] array)</code> 方法的参数是一个泛型数组，如果 <code>toArray</code> 方法中没有传递任何参数的话返回的是 <code>Object</code>类 型数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String [] s= <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;</span><br><span class="line">    <span class="string">&quot;dog&quot;</span>, <span class="string">&quot;lazy&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;over&quot;</span>, <span class="string">&quot;jumps&quot;</span>, <span class="string">&quot;fox&quot;</span>, <span class="string">&quot;brown&quot;</span>, <span class="string">&quot;quick&quot;</span>, <span class="string">&quot;A&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line">List&lt;String&gt; list = Arrays.asList(s);</span><br><span class="line">Collections.reverse(list);</span><br><span class="line"><span class="comment">//没有指定类型的话会报错</span></span><br><span class="line">s=list.toArray(<span class="keyword">new</span> <span class="title class_">String</span>[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>由于 JVM 优化，<code>new String[0]</code>作为<code>Collection.toArray()</code>方法的参数现在使用更好，<code>new String[0]</code>就是起一个模板的作用，指定了返回数组的类型，0 是为了节省空间，因为它只是为了说明返回的类型。</p>
+<h1 id="数组转集合"><a href="#数组转集合" class="headerlink" title="数组转集合"></a>数组转集合</h1><p>《阿里巴巴 Java 开发手册》的描述如下：</p>
+<blockquote>
+<p><strong>使用工具类 <code>Arrays.asList()</code> 把数组转换成集合时，不能使用其修改集合相关的方法， 它的 <code>add/remove/clear</code> 方法会抛出 <code>UnsupportedOperationException</code> 异常。</strong></p>
+</blockquote>
+<p><code>Arrays.asList()</code>在平时开发中还是比较常见的，我们可以使用它将一个数组转换为一个 <code>List</code> 集合。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] myArray = &#123;<span class="string">&quot;Apple&quot;</span>, <span class="string">&quot;Banana&quot;</span>, <span class="string">&quot;Orange&quot;</span>&#125;;</span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(myArray);</span><br><span class="line"><span class="comment">//上面两个语句等价于下面一条语句</span></span><br><span class="line">List&lt;String&gt; myList = Arrays.asList(<span class="string">&quot;Apple&quot;</span>,<span class="string">&quot;Banana&quot;</span>, <span class="string">&quot;Orange&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>JDK 源码对于这个方法的说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 返回由指定数组支持的固定大小的列表。此方法作为基于数组和基于集合的API之间的桥梁，</span></span><br><span class="line"><span class="comment">  * 与 Collection.toArray()结合使用。返回的List是可序列化并实现RandomAccess接口。</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; List&lt;T&gt; <span class="title function_">asList</span><span class="params">(T... a)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Array-asList-使用注意事项"><a href="#Array-asList-使用注意事项" class="headerlink" title="Array.asList()使用注意事项"></a><code>Array.asList()</code>使用注意事项</h2><p><strong>1、<code>Arrays.asList()</code>是泛型方法，传递的数组的类型必须是对象（如Integer），而不是基本类型（如int）。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] myArray = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.asList(myArray);</span><br><span class="line">System.out.println(myList.size());<span class="comment">//1</span></span><br><span class="line">System.out.println(myList.get(<span class="number">0</span>));<span class="comment">//数组地址值</span></span><br><span class="line">System.out.println(myList.get(<span class="number">1</span>));<span class="comment">//报错：ArrayIndexOutOfBoundsException</span></span><br><span class="line"><span class="type">int</span>[] array = (<span class="type">int</span>[]) myList.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(array[<span class="number">0</span>]);<span class="comment">//1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 要使用包装类型数组</span></span><br><span class="line">Integer[] myArray = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>当传入一个原生数据类型数组时，<code>Arrays.asList()</code> 的真正得到的参数就不是数组中的元素，而是数组对象本身。此时 <code>List</code> 的唯一元素就是这个数组。</p>
+<p><strong>2、使用集合的修改方法: <code>add()</code>、<code>remove()</code>、<code>clear()</code>会抛出异常。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">myList.add(<span class="number">4</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.remove(<span class="number">1</span>);<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br><span class="line">myList.clear();<span class="comment">//运行时报错：UnsupportedOperationException</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Arrays.asList()</code> 方法返回的并不是 <code>java.util.ArrayList</code> ，而是 <code>java.util.Arrays</code> 的一个内部类 <code>java.util.Arrays$ArrayList</code> ,这个内部类并没有实现集合的修改方法（并没有重写这些方法）。</p>
+<h2 id="如何正确的将数组转换为-ArrayList"><a href="#如何正确的将数组转换为-ArrayList" class="headerlink" title="如何正确的将数组转换为 ArrayList ?"></a><strong>如何正确的将数组转换为 <code>ArrayList</code> ?</strong></h2><p>使用 Java8 的 <code>Stream</code> (推荐)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer [] myArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.stream(myArray).collect(Collectors.toList());</span><br><span class="line"><span class="comment">//基本类型也可以实现转换（依赖boxed的装箱操作）</span></span><br><span class="line"><span class="type">int</span> [] myArray2 = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line"><span class="type">List</span> <span class="variable">myList</span> <span class="operator">=</span> Arrays.stream(myArray2).boxed().collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/20/Java/collection/Java%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clmrrtpj2000234g1eyeubily" data-title="Java集合使用注意事项" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/leetcode/15. 三数之和" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" class="article-date">
+  <time class="dt-published" datetime="2023-09-20T11:53:17.000Z" itemprop="datePublished">2023-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/LeetCode/">LeetCode</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">LeetCode15. 三数之和</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p>CodeTop字节高频题。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/description/">https://leetcode.cn/problems/3sum/description/</a></p>
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给你一个整数数组 <code>nums</code> ，判断是否存在三元组 <code>[nums[i], nums[j], nums[k]]</code> 满足 <code>i != j</code>、<code>i != k</code> 且 <code>j != k</code> ，同时还满足 <code>nums[i] + nums[j] + nums[k] == 0</code> 。请</p>
+<p>你返回所有和为 <code>0</code> 且不重复的三元组。</p>
+<p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br><span class="line">解释：</span><br><span class="line">nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。</span><br><span class="line">nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。</span><br><span class="line">nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。</span><br><span class="line">不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。</span><br><span class="line">注意，输出的顺序和三元组的顺序并不重要。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1,1]</span><br><span class="line">输出：[]</span><br><span class="line">解释：唯一可能的三元组和不为 0 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,0,0]</span><br><span class="line">输出：[[0,0,0]]</span><br><span class="line">解释：唯一可能的三元组和为 0 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>3 &lt;= nums.length &lt;= 3000</code></li>
+<li><code>-10^5 &lt;= nums[i] &lt;= 10^5</code></li>
+</ul>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><ul>
+<li>双指针</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
+<li>时间复杂度：<code>O(n^2)</code>，i从头到尾：<code>O(n)</code>，对每个i：j和k加起来<code>O(n)</code>。<ul>
+<li>暴力：<code>O(n^3)</code></li>
+</ul>
+</li>
+</ul>
+<p>首先将数组排序（<code>O(nlogn)</code>）。使用双指针算法需要数组有序。</p>
+<p>三个指针i, j, k，首先固定i，然后让j从i+1往后遍历。对于每个i, j：k从最后一个数往左移，直到找到最小的k，使得<code>nums[i] + nums[j] + nums[k] &gt;= 0</code>。此时若三数之和为0，加入res。</p>
+<p>去重方法：判断<code>i</code>和<code>i-1</code>、<code>j</code>和<code>j-1</code>(还得j不为第一个数即<code>j != i + 1</code>)下标对应的值是否相同，相同则代表这种情况已经考虑过了，直接continue。</p>
+<h3 id="自己写的非常不优雅的版本"><a href="#自己写的非常不优雅的版本" class="headerlink" title="自己写的非常不优雅的版本"></a>自己写的非常不优雅的版本</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>() - <span class="number">1</span>; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">// 去除重复情况</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>, k = nums.<span class="built_in">size</span>() - <span class="number">1</span>; j &lt; k; j ++) &#123;</span><br><span class="line">                <span class="keyword">while</span> (nums[j - <span class="number">1</span>] == nums[j] &amp;&amp; i != j - <span class="number">1</span> &amp;&amp; j != k) j ++;</span><br><span class="line">                <span class="keyword">while</span> (j &lt; k - <span class="number">1</span> &amp;&amp; nums[i] + nums[j] + nums[k - <span class="number">1</span>] &gt;= <span class="number">0</span>) k --; <span class="comment">// 获得当前i, j满足条件的k的最小坐标</span></span><br><span class="line">                <span class="keyword">if</span> (j != k &amp;&amp; nums[i] + nums[j] + nums[k] == <span class="number">0</span>) res.<span class="built_in">push_back</span>(&#123;nums[i], nums[j], nums[k]&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优雅版本"><a href="#优雅版本" class="headerlink" title="优雅版本"></a>优雅版本</h3><p><code>while (nums[j - 1] == nums[j] &amp;&amp; i != j - 1 &amp;&amp; j != k) j ++;</code> 这一步可以用<code>continue</code>语句代替，之后的<code>j != k</code>也不需要判断了（只要在循环里没跳出，就一定满足<code>j &lt; k</code>）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>() - <span class="number">1</span>; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">// 去除重复情况</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>, k = nums.<span class="built_in">size</span>() - <span class="number">1</span>; j &lt; k; j ++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j &gt; i + <span class="number">1</span> &amp;&amp; nums[j - <span class="number">1</span>] == nums[j]) <span class="keyword">continue</span>; <span class="comment">// 去除重复情况</span></span><br><span class="line">                <span class="keyword">while</span> (j &lt; k - <span class="number">1</span> &amp;&amp; nums[i] + nums[j] + nums[k - <span class="number">1</span>] &gt;= <span class="number">0</span>) k --; <span class="comment">// 获得当前i, j满足条件的k的最小坐标</span></span><br><span class="line">                <span class="keyword">if</span> (nums[i] + nums[j] + nums[k] == <span class="number">0</span>) res.<span class="built_in">push_back</span>(&#123;nums[i], nums[j], nums[k]&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/20/algorithm/leetcode/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" data-id="clmrrtpj2000334g103787nt5" data-title="LeetCode15. 三数之和" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/6.装饰模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-09-20T08:39:21.000Z" itemprop="datePublished">2023-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">设计模式6-装饰模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>需求：需要把所需的功能按正确的顺序串联起来进行控制</p>
+<h1 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</p>
+<h2 id="装饰模式结构图"><a href="#装饰模式结构图" class="headerlink" title="装饰模式结构图"></a>装饰模式结构图</h2><p><img src="https://s2.loli.net/2023/09/20/YdCDAhkco9ETLF6.jpg" alt="装饰模式结构图.jpg"></p>
+<ul>
+<li><p>Component是定义一个对象接口，可以给这些对象动态地添加职责。</p>
+</li>
+<li><p>ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。</p>
+</li>
+<li><p>Decorator，装饰抽象类，继承了Component，从外类来扩展Component类的功能，但对于Component来说，是无须知道Decorator的存在的。</p>
+</li>
+<li><p>ConcreteDecorator就是具体的装饰对象，起到给Component添加职责的功能。</p>
+</li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>Component类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteComponent类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteComponent</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体对象的实际操作&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Decorator类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Decorator</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> Component component;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 装饰一个Component对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setComponent</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 重写operation()，实际调用component的operation方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (component != <span class="literal">null</span>) &#123;</span><br><span class="line">            component.operation();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteDecorator类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConcreteDecoratorA类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreateDecoratorA</span> <span class="keyword">extends</span> <span class="title class_">Decorator</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> String addedState;  <span class="comment">// 本类独有属性</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.operation();  <span class="comment">// 首先执行原有Component的operation()</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">this</span>.addedState = <span class="string">&quot;具体装饰对象A的独有操作&quot;</span>;  <span class="comment">// 再执行本类独有功能</span></span><br><span class="line">        System.out.println(<span class="built_in">this</span>.addedState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ConcreteDecoratorB类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteDecoratorB</span> <span class="keyword">extends</span> <span class="title class_">Decorator</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.operation();  <span class="comment">// 首先执行原有Component的operation()</span></span><br><span class="line">        <span class="built_in">this</span>.addedBehavior(); <span class="comment">// 再执行本类独有功能</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">addedBehavior</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体装饰对象B的独有操作&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ConcreteComponent</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteComponent</span>();</span><br><span class="line"><span class="type">ConcreteDecoratorA</span> <span class="variable">d1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteDecoratorA</span>();</span><br><span class="line"><span class="type">ConcreteDecoratorB</span> <span class="variable">d2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteDecoratorB</span>();</span><br><span class="line"></span><br><span class="line">d1.setComponent(c); <span class="comment">// 首先用d1来包装c</span></span><br><span class="line">d2.setComponent(d1); <span class="comment">// 再用d2来包装d1</span></span><br><span class="line">d2.operation(); <span class="comment">// 最终执行d2的operation()</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/09/20/Gx6ynzCtlqogS5F.jpg" alt="装饰模式对象链.jpg"></p>
+<p>装饰模式是利用<code>setComponent</code>来对对象进行包装的。<br>这样每个装饰对象的实现就和如何使用这个对象分离开了，每个装饰对象只关心自己的功能，不需要关心如何被添加到对象链当中。</p>
+<h2 id="例1：穿不同的服饰"><a href="#例1：穿不同的服饰" class="headerlink" title="例1：穿不同的服饰"></a>例1：穿不同的服饰</h2><p><img src="https://s2.loli.net/2023/09/20/U2GwI9iXWxH3mTJ.jpg" alt="装饰模式例子.jpg"></p>
+<p><code>ICharacter</code>人物形象接口（<code>Component</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ICharacter</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Person</code>类（<code>ConcreteComponent</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">ICharacter</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;装扮的&quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Finery</code>类（<code>Decorater</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Q: Finery不是一个实际存在的事物，为什么不设计成抽象类？</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">abstract</span><span class="params">(?)</span> <span class="keyword">class</span> <span class="title class_">Finery</span> <span class="keyword">implements</span> <span class="title class_">ICharacter</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> ICharacter component;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">decorate</span><span class="params">(ICharacter component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.component != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>.component.show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体服饰类（<code>ConcreteDecorator</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tshirt</span> <span class="keyword">extends</span> <span class="title class_">Finery</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;T恤&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">super</span>.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他服饰同理。</p>
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Alice&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">Sneakers</span> <span class="variable">sneakers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Sneakers</span>();</span><br><span class="line">sneakers.decorate(p);</span><br><span class="line"></span><br><span class="line"><span class="type">Trousers</span> <span class="variable">trousers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Trousers</span>();</span><br><span class="line">trousers.decorate(sneakers);</span><br><span class="line"></span><br><span class="line"><span class="type">Tshirt</span> <span class="variable">tshirt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Tshirt</span>();</span><br><span class="line">tshirt.decorate(trousers);</span><br><span class="line"></span><br><span class="line">tshirt.show(); <span class="comment">// 打印:&quot;T恤裤子运动鞋装扮的Alice&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="例2：升级商场收银程序"><a href="#例2：升级商场收银程序" class="headerlink" title="例2：升级商场收银程序"></a>例2：升级商场收银程序</h2><p>如果需要在打折基础上又返现，不需要添加新的<code>CashReturnRebate</code>子类，依然是<code>CashNormal </code>、<code>CashReturn</code>、<code>CashRebate</code>三种基本算法子类。增加一个接口<code>ISale</code>，用作装饰模式里的<code>Component</code>。</p>
+<p><img src="https://s2.loli.net/2023/09/20/HthTDI9Zpz61acq.jpg" alt="装饰模式例子2.jpg"></p>
+<p>装饰模式有一个重要的优点，把类中的装饰功能从类中搬移去除，这样可以简化原有的类。</p>
+<p><code>CashNormal</code>是最基础的类，可以把它作为<code>ConcreteComponent</code>。</p>
+<p><img src="https://s2.loli.net/2023/09/20/Oq4yoQVPExWRgeD.jpg" alt="装饰模式例子2-改进.jpg"></p>
+<p><code>ISale </code>接口（<code>Component</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ISale</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>CashSuper</code> 实现 <code>ISale </code> 接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">abstract</span><span class="params">(?)</span> <span class="keyword">class</span> <span class="title class_">CashSuper</span> <span class="keyword">implements</span> <span class="title class_">ISale</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> ISale component;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">decorate</span><span class="params">(ISale component)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.component = component;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0d</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.component != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 若装饰对象存在，则执行装饰的算法运算</span></span><br><span class="line">            result = <span class="built_in">this</span>.component.acceptCash(price, num);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>CashNormal</code> 类（<code>ConcreteComponent</code>），最基本的原价算法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashNormal</span> <span class="keyword">implements</span> <span class="title class_">ISale</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> price * num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打折和返现的算法都继承自 <code>CashSuper</code> ，都为 <code>ConcreteDecorator</code>。</p>
+<p>从外层向里层依次执行 <code>acceptCash</code> 方法。先执行自己的<code>acceptCash</code>方法，再调用 <code>super(CashSuper).acceptCash()</code> ，会执行 <code>this.component</code> （里层的装饰器）的 <code>acceptCash</code> ，将计算结果 <code>result</code> 传入。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashRebate</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyRebate</span> <span class="operator">=</span> <span class="number">1d</span>; <span class="comment">// 折扣率</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashRebate</span><span class="params">(<span class="type">double</span> moneyRebate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyRebate = moneyRebate;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> price * num * <span class="built_in">this</span>.moneyRebate;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.acceptCash(result, <span class="number">1</span>); <span class="comment">// result作为price传入，数量为1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashReturn</span> <span class="keyword">extends</span> <span class="title class_">CashSuper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyCondition</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利条件</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">moneyReturn</span> <span class="operator">=</span> <span class="number">0d</span>; <span class="comment">// 返利值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashReturn</span><span class="params">(<span class="type">double</span> moneyCondition, <span class="type">double</span> moneyReturn)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.moneyCondition = moneyCondition;</span><br><span class="line">        <span class="built_in">this</span>.moneyReturn = moneyReturn;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">double</span> <span class="variable">result</span> <span class="operator">=</span> price * num;</span><br><span class="line">        <span class="keyword">if</span> (moneyCondition &gt; <span class="number">0</span> &amp;&amp; result &gt;= moneyCondition) &#123;</span><br><span class="line">            result -= Math.floor(result / moneyCondition) * moneyReturn;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.acceptCash(result, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重点在 <code>CashContext</code> 类，因为涉及组合算法，所以用装饰模式的方式进行包装，这里需要注意包装的顺序，先打折后满多少返多少，与先满多少返多少，再打折会得到完全不同的结果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CashContext</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> ISale cs;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 在构造函数中传入type，根据type来实例化具体的收费策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CashContext</span><span class="params">(<span class="type">int</span> cashType)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (cashType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">this</span>.cs = <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="comment">// 先打8折，再满300返100</span></span><br><span class="line">                <span class="type">CashNormal</span> <span class="variable">cn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashNormal</span>();</span><br><span class="line">                <span class="type">CashReturn</span> <span class="variable">crt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashReturn</span>(<span class="number">300d</span>, <span class="number">100d</span>);</span><br><span class="line">                <span class="type">CashRebate</span> <span class="variable">crb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CashRebate</span>(<span class="number">0.8d</span>);</span><br><span class="line">                </span><br><span class="line">                crt.decorate(cn); <span class="comment">// 用 满300返100算法 包装原价算法</span></span><br><span class="line">                crb.decorate(crt); <span class="comment">// 用 打8折算法 装饰 满300返100算法</span></span><br><span class="line">                <span class="built_in">this</span>.cs = crb;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> price, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据收费策略的不同，获得计算结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.cs.acceptCash(price, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在无论如何组合算法，哪怕是先打折再返现，再打折再返现，都只需要更改<code>CashContext</code>类，很好地做到了开放封闭。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>装饰模式是为已有功能<strong>动态地添加更多功能</strong>的一种方式。</p>
+<h3 id="用装饰模式前"><a href="#用装饰模式前" class="headerlink" title="用装饰模式前"></a>用装饰模式前</h3><p>当系统需要新功能的时候，是向旧的类中添加新的代码。这些新加的代码通常装饰了原有类的核心职责或主要行为（如：给Person添加新服饰）。</p>
+<p><strong>问题</strong>：它们在主类中加入了新的字段，新的方法和新的逻辑，从而增加了主类的复杂度。而这些新加入的东西仅仅是为了满足一些只在某种<strong>特定情况</strong>下才会执行的特殊行为的需要。</p>
+<h3 id="用装饰模式后"><a href="#用装饰模式后" class="headerlink" title="用装饰模式后"></a>用装饰模式后</h3><p>它把每个要装饰的功能放在<strong>单独的类</strong>中，并让这个类<strong>包装</strong>它所要装饰的对象，因此，当需要执行特殊行为时，客户代码就可以在运行时根据需要有选择地、按顺序地使用装饰功能包装对象了。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>把类中的装饰功能从类中搬移去除，这样可以简化原有的类（如：原价算法）。</li>
+<li>有效地把类的核心职责和装饰功能区分开了。而且可以去除相关类中重复的装饰逻辑（如：无需重复编写 先打折后返现 &amp; 先返现后打折）。对于装饰模式来说，只是多几种组合而已。</li>
+</ul>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p><strong>装饰顺序很重要。</strong></p>
+<p>比如加密数据和过滤词汇都可以是数据持久化前的装饰功能，但若先加密了数据再用过滤功能就会出问题了。</p>
+<p>最理想的情况，是保证装饰类之间彼此独立，这样它们就可以以任意的顺序进行组合了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" data-id="clmrrtpj0000034g16a611skc" data-title="设计模式6-装饰模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-design-pattern/0.OOP_basic" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/20/design-pattern/0.OOP_basic/" class="article-date">
@@ -891,261 +1211,11 @@
 
 
   
-    <article id="post-Java/collection/Java集合概览" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88%E6%A6%82%E8%A7%88/" class="article-date">
-  <time class="dt-published" datetime="2023-09-18T08:00:26.000Z" itemprop="datePublished">2023-09-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/Collection/">Collection</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88%E6%A6%82%E8%A7%88/">Java集合概览</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="https://s2.loli.net/2023/09/18/NSXU8CnfhvgZopd.png" alt="Java集合框架.png"></p>
-<p>Java 集合， 也叫作容器，主要是由两大接口派生而来：</p>
-<ul>
-<li><code>Collection</code>接口，主要用于存放单一元素</li>
-<li><code>List</code>接口(对付顺序的好帮手): 存储的元素是有序的、可重复的。<ul>
-<li><code>ArrayList</code>：<code>Object[]</code> 数组</li>
-<li><code>Vector</code>：<code>Object[]</code> 数组</li>
-<li><code>LinkedList</code>：双向链表(JDK1.6 之前为循环链表，JDK1.7 取消了循环)</li>
-</ul>
-</li>
-<li><code>Set</code>接口(注重独一无二的性质): 存储的元素不可重复的。<ul>
-<li><code>HashSet</code>(无序，唯一): 基于 <code>HashMap</code> 实现的，底层采用 <code>HashMap</code> 来保存元素</li>
-<li><code>LinkedHashSet</code>: <code>LinkedHashSet</code> 是 <code>HashSet</code> 的子类，并且其内部是通过 <code>LinkedHashMap</code> 来实现的。有点类似于我们之前说的 <code>LinkedHashMap</code> 其内部是基于 <code>HashMap</code> 实现一样，不过还是有一点点区别的</li>
-<li><code>TreeSet</code>(有序，唯一): 红黑树(自平衡的排序二叉树)</li>
-</ul>
-</li>
-<li><code>Queue</code>接口(实现排队功能的叫号机): 按特定的排队规则来确定先后顺序，存储的元素是有序的、可重复的。<ul>
-<li><code>PriorityQueue</code>: <code>Object[]</code> 数组来实现二叉堆</li>
-<li><code>ArrayQueue</code>: <code>Object[]</code> 数组 + 双指针</li>
-</ul>
-</li>
-<li><code>Map</code> 接口(用 key 来搜索的专家): 使用键值对（key-value）存储，类似于数学上的函数 y&#x3D;f(x)，”x” 代表 key，”y” 代表 value，key 是无序的、不可重复的，value 是无序的、可重复的，每个键最多映射到一个值。</li>
-<li><code>HashMap</code>：JDK1.8 之前 <code>HashMap</code> 由数组+链表组成的，数组是 <code>HashMap</code> 的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）。JDK1.8 以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间</li>
-<li><code>LinkedHashMap</code>：<code>LinkedHashMap</code> 继承自 <code>HashMap</code>，所以它的底层仍然是基于拉链式散列结构即由数组和链表或红黑树组成。另外，<code>LinkedHashMap</code> 在上面结构的基础上，增加了一条双向链表，使得上面的结构可以保持键值对的插入顺序。同时通过对链表进行相应的操作，实现了访问顺序相关逻辑。</li>
-<li><code>Hashtable</code>：数组+链表组成的，数组是 <code>Hashtable</code> 的主体，链表则是主要为了解决哈希冲突而存在的</li>
-<li><code>TreeMap</code>：红黑树（自平衡的排序二叉树）</li>
-</ul>
-<h2 id="如何选用集合？"><a href="#如何选用集合？" class="headerlink" title="如何选用集合？"></a>如何选用集合？</h2><p>根据集合的特点来选择合适的集合。比如：</p>
-<ul>
-<li>我们需要根据键值获取到元素值时就选用 <code>Map</code> 接口下的集合，需要排序时选择 <code>TreeMap</code>,不需要排序时就选择 <code>HashMap</code>,需要保证线程安全就选用 <code>ConcurrentHashMap</code>。</li>
-<li>我们只需要存放元素值时，就选择实现<code>Collection</code> 接口的集合，需要保证元素唯一时选择实现 <code>Set</code> 接口的集合比如 <code>TreeSet</code> 或 <code>HashSet</code>，不需要就选择实现 <code>List</code> 接口的比如 <code>ArrayList</code> 或 <code>LinkedList</code>，然后再根据实现这些接口的集合的特点来选用。</li>
-</ul>
-<h2 id="为什么要选用集合？"><a href="#为什么要选用集合？" class="headerlink" title="为什么要选用集合？"></a>为什么要选用集合？</h2><p>相较于数组，Java 集合的优势在于它们的<strong>大小可变、支持泛型、具有内建算法</strong>等。总的来说，Java 集合提高了数据的存储和处理灵活性，可以更好地适应现代软件开发中多样化的数据需求，并支持高质量的代码编写。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88%E6%A6%82%E8%A7%88/" data-id="clmq7wwa8000oxig179ylc6o3" data-title="Java集合概览" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java/collection/Java集合-List" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88-List/" class="article-date">
-  <time class="dt-published" datetime="2023-09-18T06:55:07.000Z" itemprop="datePublished">2023-09-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/Collection/">Collection</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88-List/">Java集合-List</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h1><h2 id="ArrayList-和-Array（数组）的区别？"><a href="#ArrayList-和-Array（数组）的区别？" class="headerlink" title="ArrayList 和 Array（数组）的区别？"></a>ArrayList 和 Array（数组）的区别？</h2><p><code>ArrayList</code> 内部基于动态数组实现，比 <code>Array</code>（静态数组） 使用起来更加灵活：</p>
-<ul>
-<li><code>ArrayList</code>会根据实际存储的元素动态地扩容或缩容，而 <code>Array</code> 被创建之后就不能改变它的长度了。</li>
-<li><code>ArrayList</code> 允许你使用泛型来确保类型安全，<code>Array</code> 则不可以。</li>
-<li><code>ArrayList</code> 中只能存储对象。对于基本类型数据，需要使用其对应的包装类（如 Integer、Double 等）。<code>Array</code> 可以直接存储基本类型数据，也可以存储对象。</li>
-<li><code>ArrayList</code> 支持插入、删除、遍历等常见操作，并且提供了丰富的 API 操作方法，比如 <code>add()</code>、<code>remove()</code>等。<code>Array</code> 只是一个固定长度的数组，只能按照下标访问其中的元素，不具备动态添加、删除元素的能力。</li>
-<li><code>ArrayList</code>创建时不需要指定大小，而<code>Array</code>创建时必须指定大小。</li>
-</ul>
-<h3 id="使用对比"><a href="#使用对比" class="headerlink" title="使用对比"></a>使用对比</h3><p><code>Array</code>:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化一个 String 类型的数组</span></span><br><span class="line">String[] stringArr = <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>, <span class="string">&quot;!&quot;</span>&#125;;</span><br><span class="line"><span class="comment">// 修改数组元素的值</span></span><br><span class="line">stringArr[<span class="number">0</span>] = <span class="string">&quot;goodbye&quot;</span>;</span><br><span class="line">System.out.println(Arrays.toString(stringArr));<span class="comment">// [goodbye, world, !]</span></span><br><span class="line"><span class="comment">// 删除数组中的元素，需要手动移动后面的元素</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; stringArr.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">    stringArr[i] = stringArr[i + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line">stringArr[stringArr.length - <span class="number">1</span>] = <span class="literal">null</span>;</span><br><span class="line">System.out.println(Arrays.toString(stringArr));<span class="comment">// [world, !, null]</span></span><br></pre></td></tr></table></figure>
-
-<p><code>ArrayList</code>:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化一个 String 类型的 ArrayList</span></span><br><span class="line"> ArrayList&lt;String&gt; stringList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(Arrays.asList(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>, <span class="string">&quot;!&quot;</span>));</span><br><span class="line"><span class="comment">// 添加元素到 ArrayList 中</span></span><br><span class="line"> stringList.add(<span class="string">&quot;goodbye&quot;</span>);</span><br><span class="line"> System.out.println(stringList);<span class="comment">// [hello, world, !, goodbye]</span></span><br><span class="line"> <span class="comment">// 修改 ArrayList 中的元素</span></span><br><span class="line"> stringList.set(<span class="number">0</span>, <span class="string">&quot;hi&quot;</span>);</span><br><span class="line"> System.out.println(stringList);<span class="comment">// [hi, world, !, goodbye]</span></span><br><span class="line"> <span class="comment">// 删除 ArrayList 中的元素</span></span><br><span class="line"> stringList.remove(<span class="number">0</span>);</span><br><span class="line"> System.out.println(stringList); <span class="comment">// [world, !, goodbye]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="ArrayList-插入和删除元素的时间复杂度？"><a href="#ArrayList-插入和删除元素的时间复杂度？" class="headerlink" title="ArrayList 插入和删除元素的时间复杂度？"></a>ArrayList 插入和删除元素的时间复杂度？</h2><p>对于插入：</p>
-<ul>
-<li>头部插入：由于需要将所有元素都依次向后移动一个位置，因此时间复杂度是 O(n)。</li>
-<li>尾部插入：当 <code>ArrayList</code> 的容量未达到极限时，往列表末尾插入元素的时间复杂度是 O(1)，因为它只需要在数组末尾添加一个元素即可；当容量已达到极限并且需要扩容时，则需要执行一次 O(n) 的操作将原数组复制到新的更大的数组中，然后再执行 O(1) 的操作添加元素。</li>
-<li>指定位置插入：需要将目标位置之后的所有元素都向后移动一个位置，然后再把新元素放入指定位置。这个过程需要移动平均 n&#x2F;2 个元素，因此时间复杂度为 O(n)。</li>
-</ul>
-<p>对于删除：</p>
-<ul>
-<li>头部删除：由于需要将所有元素依次向前移动一个位置，因此时间复杂度是 O(n)。</li>
-<li>尾部删除：当删除的元素位于列表末尾时，时间复杂度为 O(1)。</li>
-<li>指定位置删除：需要将目标元素之后的所有元素向前移动一个位置以填补被删除的空白位置，因此需要移动平均 n&#x2F;2 个元素，时间复杂度为 O(n)。</li>
-</ul>
-<h1 id="Vector-Stack"><a href="#Vector-Stack" class="headerlink" title="Vector &amp; Stack"></a>Vector &amp; Stack</h1><h2 id="ArrayList-和-Vector-的区别-（了解即可）"><a href="#ArrayList-和-Vector-的区别-（了解即可）" class="headerlink" title="ArrayList 和 Vector 的区别?（了解即可）"></a>ArrayList 和 Vector 的区别?（了解即可）</h2><ul>
-<li><code>ArrayList</code> 是 <code>List</code> 的主要实现类，底层使用 <code>Object[]</code>存储，适用于频繁的查找工作，线程不安全 。</li>
-<li><code>Vector</code> 是 <code>List</code> 的古老实现类，底层使用<code>Object[]</code> 存储，线程安全。</li>
-</ul>
-<h2 id="Vector-和-Stack-的区别-（了解即可）"><a href="#Vector-和-Stack-的区别-（了解即可）" class="headerlink" title="Vector 和 Stack 的区别?（了解即可）"></a>Vector 和 Stack 的区别?（了解即可）</h2><ul>
-<li><code>Vector</code> 和 <code>Stack</code> 两者都是线程安全的，都是使用 <code>synchronized</code> 关键字进行同步处理。</li>
-<li><code>Stack</code> 继承自 <code>Vector</code>，是一个后进先出的栈，而 <code>Vector</code> 是一个列表。</li>
-</ul>
-<p>随着 Java 并发编程的发展，<code>Vector</code> 和 <code>Stack</code> 已经被淘汰，推荐使用并发集合类（例如 <code>ConcurrentHashMap</code>、<code>CopyOnWriteArrayList</code> 等）或者手动实现线程安全的方法来提供安全的多线程操作支持。</p>
-<h1 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h1><h2 id="LinkedList-插入和删除元素的时间复杂度？"><a href="#LinkedList-插入和删除元素的时间复杂度？" class="headerlink" title="LinkedList 插入和删除元素的时间复杂度？"></a>LinkedList 插入和删除元素的时间复杂度？</h2><ul>
-<li><p>头部插入&#x2F;删除：只需要修改头结点的指针即可完成插入&#x2F;删除操作，因此时间复杂度为 O(1)。</p>
-</li>
-<li><p>尾部插入&#x2F;删除：只需要修改尾结点的指针即可完成插入&#x2F;删除操作，因此时间复杂度为 O(1)。</p>
-</li>
-<li><p>指定位置插入&#x2F;删除：需要先移动到指定位置，再修改指定节点的指针完成插入&#x2F;删除，因此需要移动平均 n&#x2F;2 个元素，时间复杂度为 O(n)。</p>
-</li>
-</ul>
-<h2 id="LinkedList-为什么不能实现-RandomAccess-接口？"><a href="#LinkedList-为什么不能实现-RandomAccess-接口？" class="headerlink" title="LinkedList 为什么不能实现 RandomAccess 接口？"></a>LinkedList 为什么不能实现 RandomAccess 接口？</h2><p><code>RandomAccess</code> 是一个标记接口，用来表明实现该接口的类支持随机访问（即可以通过索引快速访问元素）。由于 <code>LinkedList</code> 底层数据结构是链表，内存地址不连续，只能通过指针来定位，不支持随机快速访问，所以不能实现 <code>RandomAccess</code> 接口。</p>
-<p><code>ArrayList</code>可以。</p>
-<h3 id="补充：RandomAccess接口"><a href="#补充：RandomAccess接口" class="headerlink" title="补充：RandomAccess接口"></a>补充：RandomAccess接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">RandomAccess</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
-<p>在 <code>binarySearch（)</code> 方法中，它要判断传入的 list 是否 <code>RandomAccess</code> 的实例，如果是，调用<code>indexedBinarySearch()</code>方法，如果不是，那么调用<code>iteratorBinarySearch()</code>方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt;</span><br><span class="line"><span class="type">int</span> <span class="title function_">binarySearch</span><span class="params">(List&lt;? extends Comparable&lt;? <span class="built_in">super</span> T&gt;&gt; list, T key)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (list <span class="keyword">instanceof</span> RandomAccess || list.size()&lt;BINARYSEARCH_THRESHOLD)</span><br><span class="line">        <span class="keyword">return</span> Collections.indexedBinarySearch(list, key);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> Collections.iteratorBinarySearch(list, key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。</p>
-<p> <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的。</p>
-<h2 id="ArrayList-与-LinkedList-区别"><a href="#ArrayList-与-LinkedList-区别" class="headerlink" title="ArrayList 与 LinkedList 区别?"></a>ArrayList 与 LinkedList 区别?</h2><ul>
-<li><p><strong>是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</p>
-</li>
-<li><p><strong>底层数据结构：</strong> <code>ArrayList</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</p>
-</li>
-<li><p><strong>插入和删除是否受元素位置的影响：</strong></p>
-<ul>
-<li><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>），时间复杂度就为 O(n)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位&#x2F;向前移一位的操作。</li>
-<li><code>LinkedList</code> 采用链表存储，所以在头尾插入或者删除元素不受元素位置的影响（<code>add(E e)</code>、<code>addFirst(E e)</code>、<code>addLast(E e)</code>、<code>removeFirst()</code>、 <code>removeLast()</code>），时间复杂度为 O(1)，如果是要在指定位置 <code>i</code> 插入和删除元素的话（<code>add(int index, E element)</code>，<code>remove(Object o)</code>,<code>remove(int index)</code>）， 时间复杂度为 O(n) ，因为需要先移动到指定位置再插入和删除。</li>
-</ul>
-</li>
-<li><p><strong>是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code>（实现了 <code>RandomAccess</code> 接口） 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</p>
-</li>
-<li><p><strong>内存空间占用：</strong> <code>ArrayList</code> 的空间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</p>
-</li>
-</ul>
-<p>我们在项目中一般是不会使用到 <code>LinkedList</code> 的，需要用到 <code>LinkedList</code> 的场景几乎都可以使用 <code>ArrayList</code> 来代替，并且，性能通常会更好！就连 <code>LinkedList</code> 的作者约书亚 · 布洛克（Joshua Bloch）自己都说从来不会使用 <code>LinkedList</code> 。</p>
-<p>不要下意识地认为 <code>LinkedList</code> 作为链表就最适合元素增删的场景。<code>LinkedList</code> 仅仅在头尾插入或者删除元素的时候时间复杂度近似 O(1)，其他情况增删元素的平均时间复杂度都是 O(n) 。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88-List/" data-id="clmq7wwa6000fxig17nbg81d2" data-title="Java集合-List" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/4.开放-封闭原则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/18/design-pattern/4.%E5%BC%80%E6%94%BE-%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99/" class="article-date">
-  <time class="dt-published" datetime="2023-09-18T03:44:52.000Z" itemprop="datePublished">2023-09-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/18/design-pattern/4.%E5%BC%80%E6%94%BE-%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99/">设计模式4-开放封闭原则</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>SOLID原则中的O: <strong>O</strong>pen-Close Principle</p>
-<h1 id="准确解释"><a href="#准确解释" class="headerlink" title="准确解释"></a>准确解释</h1><p>开放-封闭原则，是说软件实体（类、模块、函数等）应该可以扩展，但是不可修改。</p>
-<h2 id="两个特征"><a href="#两个特征" class="headerlink" title="两个特征"></a>两个特征</h2><ul>
-<li>Open for extension 对扩展开放</li>
-<li>Close for modification 对修改封闭</li>
-</ul>
-<h2 id="具体做法"><a href="#具体做法" class="headerlink" title="具体做法"></a>具体做法</h2><p>面对需求的改变却可以保持相对稳定，从而使得系统可以在第一个版本以后不断推出新的版本，而不会把整个程序推倒重来。</p>
-<p>设计的时候，时刻要考虑，尽量让这个类足够好，写好了就不要去修改了，如果新需求来，我们增加一些类就完事了，原来的代码能不动则不动。</p>
-<p>绝对的对修改关闭是不可能的。无论模块是多么的’封闭’，都会存在一些无法对之封闭的变化。既然不可能完全封闭，设计人员必须对于他设计的模块<strong>应该对哪种变化封闭</strong>做出选择。他必须先猜测出最有可能发生的变化种类，然后<strong>构造抽象</strong>来隔离那些变化。</p>
-<p>我们是很难预先猜测，但我们却可以在发生小变化时，就及早去想办法应对发生更大变化的可能。也就是说，<strong>等到变化发生时立即采取行动</strong>。在我们最初编写代码时，假设变化不会发生。当变化发生时，我们就创建抽象来隔离以后发生的同类变化。</p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>简单工厂模式中的计算器。</p>
-<ol>
-<li>首先加法程序写在client类中。</li>
-<li>然后增加减法功能，发现需要修改原来类，违背OCP -&gt; 考虑重构程序，增加抽象的运算类 -&gt; 能够满足需求，并能应对变化</li>
-<li>增加乘除法功能，无需修改client类，只需增加乘法和除法的子类。</li>
-</ol>
-<p>面对需求，对程序的改动是通过增加新代码进行的，而不是更改现有的代码。</p>
-<p>我们希望的是在开发工作展开不久就知道可能发生的变化。查明可能发生的变化所等待的时间越长，要创建正确的抽象就越困难。（如：加减运算在很多地方应用了，再考虑抽象、考虑分离，就很困难）</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>开放-封闭原则是面向对象设计的核心所在。遵循这个原则可以带来面向对象技术所声称的巨大好处，也就是<strong>可维护、可扩展、可复用、灵活性好</strong>。</p>
-<p>开发人员应该仅对程序中呈现出频繁变化的那些部分做出抽象，然而，对于应用程序中的每个部分都刻意地进行抽象同样不是一个好主意。<strong>拒绝不成熟的抽象和抽象本身一样重要</strong>。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/18/design-pattern/4.%E5%BC%80%E6%94%BE-%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99/" data-id="clmq7wwa50008xig1fqi7evad" data-title="设计模式4-开放封闭原则" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -1184,23 +1254,23 @@
       <ul>
         
           <li>
+            <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/">算法模板3-1.DFS和BFS</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/">算法模板3-3.树与图的遍历</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/11/algorithm/template/3-2.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/">算法模板3-2.树与图的存储</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/11/design-pattern/15.%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式15-抽象工厂模式</a>
           </li>
         
           <li>
             <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/">算法模板2-8.字符串哈希</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/">算法模板2-7.哈希</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式14-观察者模式</a>
           </li>
         
       </ul>
