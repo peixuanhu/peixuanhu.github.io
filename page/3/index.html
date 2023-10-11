@@ -73,6 +73,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-design-pattern/11.迪米特法则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/06/design-pattern/11.%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/" class="article-date">
+  <time class="dt-published" datetime="2023-10-06T11:02:52.000Z" itemprop="datePublished">2023-10-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/06/design-pattern/11.%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/">设计模式11-迪米特法则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="迪米特法则-LoD"><a href="#迪米特法则-LoD" class="headerlink" title="迪米特法则 (LoD)"></a>迪米特法则 (LoD)</h1><p>迪米特法则，也叫最少知识原则。</p>
+<p>如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</p>
+<h2 id="根本思想"><a href="#根本思想" class="headerlink" title="根本思想"></a>根本思想</h2><p>强调类之间的松耦合。</p>
+<p>在程序设计时，类之间的耦合越弱，越有利于复用，一个处在弱耦合的类被修改，不会对有关系的类造成波及。</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>在类的结构设计上，每一个类都应当尽量<strong>降低成员的访问权限</strong>。也就是说，一个类包装好自己的private状态，不需要让别的类知道的字段或行为就不要公开。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/06/design-pattern/11.%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/" data-id="clng10n680002389gfuwf84v0" data-title="设计模式11-迪米特法则" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-design-pattern/10.模板方法模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/06/design-pattern/10.%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" class="article-date">
@@ -914,187 +961,6 @@
 
 
   
-    <article id="post-design-pattern/0.OOP_basic" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/20/design-pattern/0.OOP_basic/" class="article-date">
-  <time class="dt-published" datetime="2023-09-20T04:04:08.000Z" itemprop="datePublished">2023-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/20/design-pattern/0.OOP_basic/">设计模式0-OOP Basic</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="面向对象编程基础"><a href="#面向对象编程基础" class="headerlink" title="面向对象编程基础"></a>面向对象编程基础</h1><h2 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h2><h4 id="1-封装"><a href="#1-封装" class="headerlink" title="1. 封装"></a>1. 封装</h4><p>每个对象都包含<strong>它能进行操作所需要的所有信息</strong>，这个特性称为封装，因此对象不必依赖其他对象来完成自己的操作。</p>
-<h5 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h5><ul>
-<li>良好的封装能够减少耦合（让某类和调用该类方法的其他类分离）</li>
-<li>类内部的实现可以自由地修改（不影响其他的类）</li>
-<li>类具有清晰的对外接口（其他类只需要关心这些接口，不用管内部实现）</li>
-</ul>
-<h4 id="2-继承"><a href="#2-继承" class="headerlink" title="2. 继承"></a>2. 继承</h4><p>继承定义了类如何<strong>相互关联，共享特性</strong>（is-a, not has-a）。继承的工作方式是，定义父类和子类，或叫作基类和派生类，其中子类继承父类的所有特性。子类不但继承了父类的所有特性，还可以定义新的特性。</p>
-<h5 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h5><ul>
-<li>子类拥有父类非private的属性和功能</li>
-<li>子类具有自己的属性和功能，即子类可以扩展父类没有的属性和功能</li>
-<li>子类还可以以自己的方式实现父类的功能（方法重写）</li>
-</ul>
-<p>protected表示继承时子类可以对基类有完全访问权。</p>
-<p>不用继承的话，如果要修改功能，就必须在<strong>所有重复的方法中修改</strong>（枚举类同理），代码越多，出错的可能就越大，而继承的优点是，继承使得所有子类公共的部分都放在了父类，使得代码得到了共享，这就避免了重复，另外，继承可使得修改或扩展继承而来的实现都较为容易。</p>
-<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
-<li>父类变，则子类不得不变</li>
-<li>继承会破坏包装，父类实现细节暴露给子类，这其实是增大了两个类之间的耦合性（继承是一种类与类之间<strong>强耦合</strong>的关系）</li>
-</ul>
-<h4 id="3-多态"><a href="#3-多态" class="headerlink" title="3. 多态"></a>3. 多态</h4><p>多态表示不同的对象可以执行相同的动作，但要通过它们自己的实现代码来执行。</p>
-<h5 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h5><ul>
-<li>子类以父类的身份出现</li>
-<li>子类在工作时以<strong>自己的方式</strong>来实现（子类可以选择使用override关键字，将父类实现替换为它自己的实现，这就是方法重写Override）</li>
-<li>子类以父类的身份出现时，子类<strong>特有的属性和方法不可以使用</strong></li>
-</ul>
-<h2 id="抽象类和接口"><a href="#抽象类和接口" class="headerlink" title="抽象类和接口"></a>抽象类和接口</h2><h4 id="抽象类-方法"><a href="#抽象类-方法" class="headerlink" title="抽象类&#x2F;方法"></a>抽象类&#x2F;方法</h4><p>考虑把实例化没有任何意义的父类改成抽象类；把方法体没有意义的方法改成抽象方法。</p>
-<h5 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h5><ul>
-<li>抽象类不能被实例化（没有意义）</li>
-<li>抽象方法是必须被子类重写的方法（重写之前肯定没有意义）</li>
-<li>如果类中包含抽象方法，那么类就必须定义为抽象类，不论是否还包含其他一般方法</li>
-</ul>
-<h5 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h5><ul>
-<li>应该考虑让抽象类拥有<strong>尽可能多的共同代码</strong>，拥有<strong>尽可能少的数据</strong></li>
-</ul>
-<h5 id="什么时候应该用抽象类？"><a href="#什么时候应该用抽象类？" class="headerlink" title="什么时候应该用抽象类？"></a>什么时候应该用抽象类？</h5><p>抽象类通常代表一个抽象概念，它提供一个<strong>继承的出发点</strong>，当设计一个新的抽象类时，一定是用来继承的。所以，在一个以继承关系形成的等级结构里面，<strong>树叶节点</strong>应当是<strong>具体类</strong>，而<strong>树枝节点</strong>均应当是<strong>抽象类</strong></p>
-<img src="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg" alt="抽象类和具体类.jpg" style="zoom:40%;" />
-
-<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>接口是把隐式公共方法和属性组合起来，以封装特定功能的一个集合。一旦类实现了接口，类就可以支持接口所指定的所有属性和成员。</p>
-<p>声明接口在语法上与声明抽象类完全相同，但不允许提供接口中任何成员的执行方式。</p>
-<p>实现接口的类就必须要实现接口中的所有方法和属性。</p>
-<p>一个类可以支持多个接口，多个类也可以支持相同的接口。</p>
-<p>接口中的方法或属性前面不能有修饰符、方法没有方法体。</p>
-<h4 id="抽象类vs接口"><a href="#抽象类vs接口" class="headerlink" title="抽象类vs接口"></a>抽象类vs接口</h4><ol>
-<li>抽象类可以给出一些成员的实现，接口却不包含成员的实现</li>
-<li>抽象类的抽象成员可被子类<strong>部分实现</strong>，接口的成员需要实现类<strong>完全实现</strong></li>
-<li>一个类只能继承<strong>一个抽象类</strong>，但可以实现<strong>多个接口</strong></li>
-<li>类是对对象的抽象，<strong>抽象类</strong>是对<strong>类</strong>的抽象，接口是对<strong>行为</strong>的抽象</li>
-<li>如果行为跨越<strong>不同类的对象</strong>，可使用接口；对于一些<strong>相似的类对象</strong>，用继承抽象类<ul>
-<li>接口类似一个功能（如：飞行），实现某接口的不同类之间也许并没有什么关系；而继承抽象类的不同类之间一般关系紧密</li>
-</ul>
-</li>
-<li>从设计角度讲，抽象类是从子类中发现了公共的东西，泛化出父类，然后子类继承父类；而接口是根本不知子类的存在，方法如何实现还不确认，预先定义</li>
-</ol>
-<h2 id="SOLID原则"><a href="#SOLID原则" class="headerlink" title="SOLID原则"></a>SOLID原则</h2><p>SOLID 原则是面向对象 class 设计的五条原则。它们是设计 class 结构时应该遵守的准则和最佳实践。</p>
-<h4 id="1-Single-Responsibility-Principle，单一职责原则"><a href="#1-Single-Responsibility-Principle，单一职责原则" class="headerlink" title="1. Single Responsibility Principle，单一职责原则"></a>1. <strong>S</strong>ingle Responsibility Principle，单一职责原则</h4><p>一个 class 应该只做一件事，一个 class 应该只有一个变化的原因。</p>
-<p>应该只有一个软件定义的潜在改变（数据库逻辑、日志逻辑等）能够影响 class 的定义。</p>
-<p>单一职责适用于<strong>接口、类</strong>，同时也适用于<strong>方法</strong>。例如我们需要修改用户密码，有两种方式可以实现，一种是用「修改用户信息接口」实现修改密码，一种是新起一个接口来实现修改密码功能。在单一职责原则的指导下，一个方法只承担一个职能，所以我们应该新起一个接口来实现修改密码的功能。</p>
-<p>在设计一个类的时候，可以先从粗粒度的类开始设计，等到业务发展到一定规模，我们发现这个粗粒度的类方法和属性太多，且经常修改的时候，我们就可以对这个类进行重构了，将这个类拆分成粒度更细的类，这就是所谓的持续重构。</p>
-<h4 id="2-Open-Close-Principle，开闭原则"><a href="#2-Open-Close-Principle，开闭原则" class="headerlink" title="2. Open Close Principle，开闭原则"></a>2. <strong>O</strong>pen Close Principle，开闭原则</h4><p>一个软件实体，如类、模块和函数应该<strong>对扩展开放</strong>，<strong>对修改关闭</strong>。</p>
-<p>当别人要修改软件功能的时候，使他不能修改我们原有代码，只能新增代码实现软件功能修改的目的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*反例*/</span></span><br><span class="line"><span class="keyword">if</span>(type == apple)&#123;</span><br><span class="line">    <span class="comment">//deal with apple </span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (type == banana)&#123;</span><br><span class="line">    <span class="comment">//deal with banana</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (type == ......)&#123;</span><br><span class="line">    <span class="comment">//......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*正例*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">PeelOff</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">peelOff</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ApplePeelOff</span> implement PeelOff&#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">peelOff</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="comment">//deal with apple</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BananaPeelOff</span> implement PeelOff&#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">peelOff</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="comment">//deal with banan</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PeelOffFactory</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, PeelOff&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">init</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//init all the Class that implements PeelOff interface </span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">type</span> <span class="operator">=</span> <span class="string">&quot;apple&quot;</span>;</span><br><span class="line">    <span class="type">PeelOff</span> <span class="variable">peelOff</span> <span class="operator">=</span> PeelOffFactory.getPeelOff(type);  <span class="comment">//get ApplePeelOff Class Instance.</span></span><br><span class="line">    peelOff.pealOff();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="3-Liskov-Substitution-Principle，里氏替换原则"><a href="#3-Liskov-Substitution-Principle，里氏替换原则" class="headerlink" title="3. Liskov Substitution Principle，里氏替换原则"></a>3. <strong>L</strong>iskov Substitution Principle，里氏替换原则</h4><p>所有引用基类的地方必须能透明地使用其子类的对象。</p>
-<p>所有父类能出现的地方，子类就可以出现，并且替换了也不会出现任何错误。对使用者来说，能够使用父类的地方，一定可以使用其子类，并且预期结果是一致的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Parent</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Son</span>();</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="type">Son</span> <span class="variable">son</span>  <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Son</span>();</span><br></pre></td></tr></table></figure>
-
-<p>父类的约定，不仅仅指的是语法层面上的约定，还包括实现上的约定。有时候父类会在类注释、方法注释里做了相关约定的说明，当你要覆写父类的方法时，需要弄懂这些约定，否则可能会出现问题。例如子类违背父类声明要实现的功能。比如父类某个排序方法是从小到大来排序，你子类的方法竟然写成了从大到小来排序。</p>
-<h4 id="4-Interface-Segregation-Principle，接口隔离原则"><a href="#4-Interface-Segregation-Principle，接口隔离原则" class="headerlink" title="4. Interface Segregation Principle，接口隔离原则"></a>4. <strong>I</strong>nterface Segregation Principle，接口隔离原则</h4><p>类间的依赖关系应该建立在最小的接口上。简单地说：<strong>接口的内容一定要尽可能地小，能有多小就多小。</strong></p>
-<p>很多客户端特定的接口优于一个多用途接口。客户端不应该强制实现他们不需要的函数。</p>
-<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
-<li>减少改动导致的变化风险</li>
-<li>减少无用功能的理解成本</li>
-</ul>
-<h4 id="5-Dependency-Inversion-Principle，依赖倒置原则"><a href="#5-Dependency-Inversion-Principle，依赖倒置原则" class="headerlink" title="5. Dependency Inversion Principle，依赖倒置原则"></a>5. <strong>D</strong>ependency Inversion Principle，依赖倒置原则</h4><p>高层模块不应该依赖底层模块，两者都应该依赖其抽象。抽象不应该依赖细节，即接口或抽象类不依赖于实现类。细节应该依赖抽象，即实现类不应该依赖于接口或抽象类。<strong>简单地说，我们应该面向接口编程。通过抽象成接口，使各个类的实现彼此独立，实现类之间的松耦合。</strong></p>
-<h4 id="各原则间的联系"><a href="#各原则间的联系" class="headerlink" title="各原则间的联系"></a>各原则间的联系</h4><ul>
-<li>单一职责是所有设计原则的基础，开闭原则是设计的终极目标。</li>
-<li>里氏替换原则强调的是子类替换父类后程序运行时的正确性，它用来帮助实现开闭原则。</li>
-<li>而接口隔离原则用来帮助实现里氏替换原则，同时它也体现了单一职责。</li>
-<li>依赖倒置原则是过程式编程与面向对象编程的分水岭，同时它也被用来指导接口隔离原则。</li>
-</ul>
-<p>依赖倒置原则告诉我们要面向接口编程。当我们面向接口编程之后，接口隔离原则和单一职责原则又告诉我们要注意职责的划分，不要什么东西都塞在一起。当我们职责捋得差不多的时候，里氏替换原则告诉我们在使用继承的时候，要注意遵守父类的约定。而上面说的这四个原则，它们的最终目标都是为了实现开闭原则。</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ol>
-<li><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/chinese/news/solid-principles/">https://www.freecodecamp.org/chinese/news/solid-principles/</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/350291336">https://zhuanlan.zhihu.com/p/350291336</a></li>
-<li><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/understand-solid-principles/">https://insights.thoughtworks.cn/understand-solid-principles/</a></li>
-</ol>
-<h2 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h2><p><img src="https://s2.loli.net/2023/09/14/lLdVpOa35Z1YWDm.jpg" alt="UML类图图示样例.jpg"></p>
-<h3 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h3><h4 id="矩形框表示"><a href="#矩形框表示" class="headerlink" title="矩形框表示"></a>矩形框表示</h4><ul>
-<li>第一层：类的名称<ul>
-<li>抽象类用斜体显示</li>
-</ul>
-</li>
-<li>第二层：类的特性（字段和属性）</li>
-<li>第三层：类的操作（方法和行为）<ul>
-<li>+表示public</li>
-<li>-表示private</li>
-<li>#表示protected</li>
-</ul>
-</li>
-</ul>
-<h3 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h3><h4 id="矩形框表示-1"><a href="#矩形框表示-1" class="headerlink" title="矩形框表示"></a>矩形框表示</h4><p>顶端有&lt;&lt;interface&gt;&gt;显示</p>
-<ul>
-<li>第一层：接口名称</li>
-<li>第二层：接口方法</li>
-</ul>
-<h4 id="棒棒糖表示"><a href="#棒棒糖表示" class="headerlink" title="棒棒糖表示"></a>棒棒糖表示</h4><p>如图中唐老鸭类实现“讲人话”接口</p>
-<h3 id="类与类、类与接口的关系"><a href="#类与类、类与接口的关系" class="headerlink" title="类与类、类与接口的关系"></a>类与类、类与接口的关系</h3><h4 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h4><ul>
-<li>用<strong>空心三角形+实线</strong>表示</li>
-</ul>
-<h4 id="实现接口"><a href="#实现接口" class="headerlink" title="实现接口"></a>实现接口</h4><ul>
-<li>用<strong>空心三角形+虚线</strong>表示</li>
-</ul>
-<h4 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h4><ul>
-<li>用<strong>实线箭头</strong>表示</li>
-<li>表示一个类<em>知道</em>另一个类（如企鹅需要知道气候的变化）</li>
-<li>可以有基数</li>
-</ul>
-<h4 id="聚合关系"><a href="#聚合关系" class="headerlink" title="聚合关系"></a>聚合关系</h4><ul>
-<li>用<strong>空心菱形+实线箭头</strong>表示</li>
-<li>表示一种弱的<em>拥有</em>关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分（如雁群拥有大雁）</li>
-<li>可以有基数</li>
-</ul>
-<h4 id="合成关系"><a href="#合成关系" class="headerlink" title="合成关系"></a>合成关系</h4><ul>
-<li><p>用<strong>实心菱形+实线箭头</strong>表示</p>
-</li>
-<li><p>表示一种强的<em>拥有</em>关系，体现了严格的部分和整体的关系（如鸟拥有翅膀）</p>
-</li>
-<li><p>部分和整体的生命周期一样</p>
-</li>
-<li><p>合成关系的连线两端还有一个数字’1’和数字’2’，这被称为基数</p>
-</li>
-</ul>
-<h4 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h4><ul>
-<li>用<strong>虚线箭头</strong>表示</li>
-<li>比如动物依赖氧气和水</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/20/design-pattern/0.OOP_basic/" data-id="clmq7wwa30004xig1e0by8kz1" data-title="设计模式0-OOP Basic" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1138,6 +1004,10 @@
       <ul>
         
           <li>
+            <a href="/2023/10/11/design-pattern/15.%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式15-抽象工厂模式</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
           </li>
         
@@ -1151,10 +1021,6 @@
         
           <li>
             <a href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式14-观察者模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式13-建造者模式</a>
           </li>
         
       </ul>
