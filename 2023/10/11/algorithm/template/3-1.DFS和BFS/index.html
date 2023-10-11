@@ -14,7 +14,7 @@
 <meta property="og:description" content="深度优先遍历 (DFS)一条路走到底，无路可走了之后往回退一步，继续找一条其他的路一直往下走。 形势一般为递归。 概念回溯走到底了，返回的过程叫做回溯。 回来的时候要恢复现场。 123456&#x2F;&#x2F; 恢复现场的代码与修改状态的代码一般是对称的，例：path[u] &#x3D; i;st[i] &#x3D; true;dfs(u + 1); &#x2F;&#x2F; 下一层递归返回之后恢复st[i] &#x3D; false;path[u] &#x3D; 0;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-11T03:08:50.381Z">
-<meta property="article:modified_time" content="2023-10-11T05:23:38.535Z">
+<meta property="article:modified_time" content="2023-10-11T08:53:55.190Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary">
   
@@ -115,14 +115,14 @@
 <h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><p>递归结束条件的选择+状态标记+递归后的恢复</p>
 <h3 id="顺序"><a href="#顺序" class="headerlink" title="顺序"></a>顺序</h3><h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="字典序输出"><a href="#字典序输出" class="headerlink" title="字典序输出"></a>字典序输出</h3><p>每一种输出都是一个叶子节点，第x位的遍历对应第x层的节点。整个搜索过程就是一棵搜索树（当然不需要自己存这棵树，系统栈会帮我们做这件事）。</p>
 <p>path数组下标为当前遍历到的位数，存储的值为这一位填的数字。</p>
-<h3 id="n-皇后"><a href="#n-皇后" class="headerlink" title="n-皇后"></a>n-皇后</h3><h4 id="进阶解法-以-行-为一层来搜索"><a href="#进阶解法-以-行-为一层来搜索" class="headerlink" title="进阶解法 - 以&#x3D;&#x3D;行&#x3D;&#x3D;为一层来搜索"></a>进阶解法 - 以&#x3D;&#x3D;行&#x3D;&#x3D;为一层来搜索</h4><p>col数组记录该列是否有皇后。</p>
+<h3 id="n-皇后"><a href="#n-皇后" class="headerlink" title="n-皇后"></a>n-皇后</h3><h4 id="进阶解法-以行作为一层来搜索"><a href="#进阶解法-以行作为一层来搜索" class="headerlink" title="进阶解法 - 以行作为一层来搜索"></a>进阶解法 - 以<strong>行</strong>作为一层来搜索</h4><p>col数组记录该列是否有皇后。</p>
 <p>额外开两个数组存储对角线和反对角线上是否有皇后，如果有代表不合法，剪枝。</p>
 <p>对角线数组的长度是 <code>2n - 1</code>。</p>
 <p>判断一个点在哪一条对角线&#x2F;反对角线上：用截距。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x, y分别是行号和列号，b为对角线号。</span><br><span class="line"></span><br><span class="line">y=x+b/ -&gt; b=y-x+n (+n是因为数组下标要为正数)</span><br><span class="line"></span><br><span class="line">y=-x+b -&gt; b=y+x</span><br></pre></td></tr></table></figure>
 
 <p>时间复杂度：<code>O(n*n!)</code></p>
-<h4 id="原始解法-按-格子-为一层来搜索"><a href="#原始解法-按-格子-为一层来搜索" class="headerlink" title="原始解法 - 按&#x3D;&#x3D;格子&#x3D;&#x3D;为一层来搜索"></a>原始解法 - 按&#x3D;&#x3D;格子&#x3D;&#x3D;为一层来搜索</h4><p>每一层dfs都往下拓展两种可能：一种是该格子放皇后；一种是该格子不放皇后。</p>
+<h4 id="原始解法-以格子作为一层来搜索"><a href="#原始解法-以格子作为一层来搜索" class="headerlink" title="原始解法 - 以格子作为一层来搜索"></a>原始解法 - 以<strong>格子</strong>作为一层来搜索</h4><p>每一层dfs都往下拓展两种可能：一种是该格子放皇后；一种是该格子不放皇后。</p>
 <blockquote>
 <p>row数组记录该行是否有皇后。</p>
 <p>col数组记录该列是否有皇后。</p>
