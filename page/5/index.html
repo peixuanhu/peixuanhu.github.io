@@ -73,6 +73,166 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java/collection/Java集合-Queue" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88-Queue/" class="article-date">
+  <time class="dt-published" datetime="2023-09-18T08:07:22.000Z" itemprop="datePublished">2023-09-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>►<a class="article-category-link" href="/categories/Java/Collection/">Collection</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88-Queue/">Java集合-Queue</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Queue-和-Deque-的区别"><a href="#Queue-和-Deque-的区别" class="headerlink" title="Queue 和 Deque 的区别"></a>Queue 和 Deque 的区别</h1><h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><p><code>Queue</code> 是单端队列，只能从一端插入元素，另一端删除元素，实现上一般遵循 <strong>先进先出（FIFO）</strong> 规则。</p>
+<p><code>Queue</code> 扩展了 <code>Collection</code> 的接口，根据 <strong>因为容量问题而导致操作失败后处理方式的不同</strong> 可以分为两类方法: </p>
+<ul>
+<li>一种在操作失败后会抛出异常（如add）</li>
+<li>另一种则会返回特殊值（如offer）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><code>Queue</code> 接口</th>
+<th>抛出异常</th>
+<th>返回特殊值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入队尾</td>
+<td>add(E e)</td>
+<td>offer(E e)</td>
+</tr>
+<tr>
+<td>删除队首</td>
+<td>remove()</td>
+<td>poll()</td>
+</tr>
+<tr>
+<td>查询队首元素</td>
+<td>element()</td>
+<td>peek()</td>
+</tr>
+</tbody></table>
+<h2 id="Deque"><a href="#Deque" class="headerlink" title="Deque"></a>Deque</h2><p><code>Deque</code> 是双端队列，在队列的两端均可以插入或删除元素。</p>
+<p><code>Deque</code> 扩展了 <code>Queue</code> 的接口, 增加了在队首和队尾进行插入和删除的方法，同样根据失败后处理方式的不同分为两类：</p>
+<table>
+<thead>
+<tr>
+<th><code>Deque</code> 接口</th>
+<th>抛出异常</th>
+<th>返回特殊值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入队首</td>
+<td>addFirst(E e)</td>
+<td>offerFirst(E e)</td>
+</tr>
+<tr>
+<td>插入队尾</td>
+<td>addLast(E e)</td>
+<td>offerLast(E e)</td>
+</tr>
+<tr>
+<td>删除队首</td>
+<td>removeFirst()</td>
+<td>pollFirst()</td>
+</tr>
+<tr>
+<td>删除队尾</td>
+<td>removeLast()</td>
+<td>pollLast()</td>
+</tr>
+<tr>
+<td>查询队首元素</td>
+<td>getFirst()</td>
+<td>peekFirst()</td>
+</tr>
+<tr>
+<td>查询队尾元素</td>
+<td>getLast()</td>
+<td>peekLast()</td>
+</tr>
+</tbody></table>
+<p>事实上，<code>Deque</code> 还提供有 <code>push()</code> 和 <code>pop()</code> 等其他方法，可用于模拟栈。</p>
+<h1 id="ArrayDeque-与-LinkedList-的区别"><a href="#ArrayDeque-与-LinkedList-的区别" class="headerlink" title="ArrayDeque 与 LinkedList 的区别"></a>ArrayDeque 与 LinkedList 的区别</h1><p><code>ArrayDeque</code> 和 <code>LinkedList</code> 都实现了 <code>Deque</code> 接口，两者都具有队列的功能。</p>
+<p>区别：</p>
+<ul>
+<li><code>ArrayDeque</code> 是基于可变长的数组和双指针来实现，而 <code>LinkedList</code> 则通过链表来实现。</li>
+<li><code>ArrayDeque</code> 不支持存储 <code>NULL</code> 数据，但 <code>LinkedList</code> 支持。</li>
+<li><code>ArrayDeque</code> 是在 JDK1.6 才被引入的，而<code>LinkedList</code> 早在 JDK1.2 时就已经存在。</li>
+<li>关于插入性能<ul>
+<li><code>ArrayDeque</code> 插入时可能存在扩容过程, 不过均摊后的插入操作依然为 O(1)。</li>
+<li>虽然 <code>LinkedList</code> 不需要扩容，但是每次插入数据时均需要申请新的堆空间，均摊性能相比更慢。</li>
+</ul>
+</li>
+</ul>
+<p>从性能的角度上，选用 <code>ArrayDeque</code> 来实现队列要比 <code>LinkedList</code> 更好。</p>
+<p>此外，<code>ArrayDeque</code> 也可以用于实现栈。</p>
+<h1 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h1><p><code>PriorityQueue</code> 是在 JDK1.5 中被引入的, 其与 <code>Queue</code> 的区别在于元素出队顺序是与优先级相关的，即总是<strong>优先级最高的元素先出队</strong>。（二叉堆是优先队列的一种实现方式。最小堆即元素越小，优先级最高）</p>
+<p>这里列举其相关的一些要点：</p>
+<ul>
+<li><code>PriorityQueue</code> 利用了二叉堆的数据结构来实现的，底层使用可变长的数组来存储数据</li>
+<li><code>PriorityQueue</code> 通过堆元素的上浮和下沉，实现了在 O(logn) 的时间复杂度内插入元素和删除堆顶元素。</li>
+<li><code>PriorityQueue</code> 是非线程安全的，且不支持存储 <code>NULL</code> 和 <code>non-comparable</code> 的对象。</li>
+<li><code>PriorityQueue</code> 默认是小顶堆，但可以接收一个 <code>Comparator</code> 作为构造参数，从而来自定义元素优先级的先后。</li>
+</ul>
+<p><code>PriorityQueue</code> 在面试中可能更多的会出现在手撕算法的时候，典型例题包括堆排序、求第 K 大的数、带权图的遍历等，所以需要会熟练使用才行。</p>
+<h1 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h1><p><code>BlockingQueue</code> （阻塞队列）是一个接口，继承自 <code>Queue</code>。</p>
+<p><code>BlockingQueue</code>支持当队列没有元素时一直阻塞，直到有元素；还支持如果队列已满，一直等到队列可以放入新元素时再放入。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BlockingQueue</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">Queue</span>&lt;E&gt; &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>BlockingQueue</code> 常用于生产者-消费者模型中，生产者线程会向队列中添加数据，而消费者线程会从队列中取出数据进行处理。</p>
+<h2 id="BlockingQueue-的实现类有哪些？"><a href="#BlockingQueue-的实现类有哪些？" class="headerlink" title="BlockingQueue 的实现类有哪些？"></a>BlockingQueue 的实现类有哪些？</h2><p><img src="https://s2.loli.net/2023/09/18/WRSBpaoAXiZzkq4.png" alt="BlockingQueue 的实现类.png"></p>
+<p>Java 中常用的阻塞队列实现类有以下几种：</p>
+<ol>
+<li><code>ArrayBlockingQueue</code>：使用数组实现的有界阻塞队列。在创建时需要指定容量大小，并支持公平和非公平两种方式的锁访问机制。</li>
+<li><code>LinkedBlockingQueue</code>：使用单向链表实现的可选有界阻塞队列。在创建时可以指定容量大小，如果不指定则默认为<code>Integer.MAX_VALUE</code>。和<code>ArrayBlockingQueue</code>类似， 它也支持公平和非公平的锁访问机制。</li>
+<li><code>PriorityBlockingQueue</code>：支持优先级排序的无界阻塞队列。元素必须实现<code>Comparable</code>接口或者在构造函数中传入<code>Comparator</code>对象，并且不能插入 null 元素。</li>
+<li><code>SynchronousQueue</code>：同步队列，是一种不存储元素的阻塞队列。每个插入操作都必须等待对应的删除操作，反之删除操作也必须等待插入操作。因此，<code>SynchronousQueue</code>通常用于线程之间的直接传递数据。</li>
+<li><code>DelayQueue</code>：延迟队列，其中的元素只有到了其指定的延迟时间，才能够从队列中出队。</li>
+<li>……</li>
+</ol>
+<p>日常开发中，这些队列使用的其实都不多，了解即可。</p>
+<h2 id="ArrayBlockingQueue-和-LinkedBlockingQueue-有什么区别？"><a href="#ArrayBlockingQueue-和-LinkedBlockingQueue-有什么区别？" class="headerlink" title="ArrayBlockingQueue 和 LinkedBlockingQueue 有什么区别？"></a>ArrayBlockingQueue 和 LinkedBlockingQueue 有什么区别？</h2><p><code>ArrayBlockingQueue</code> 和 <code>LinkedBlockingQueue</code> 是 Java 并发包中常用的两种阻塞队列实现，它们都是线程安全的。不过，不过它们之间也存在下面这些区别：</p>
+<ul>
+<li>底层实现：<code>ArrayBlockingQueue</code> 基于数组实现，而 <code>LinkedBlockingQueue</code> 基于链表实现。</li>
+<li>是否有界：<code>ArrayBlockingQueue</code> 是有界队列，必须在创建时指定容量大小。<code>LinkedBlockingQueue</code> 创建时可以不指定容量大小，默认是<code>Integer.MAX_VALUE</code>，也就是无界的。但也可以指定队列大小，从而成为有界的。</li>
+<li>锁是否分离： <code>ArrayBlockingQueue</code>中的锁是没有分离的，即生产和消费用的是同一个锁；<code>LinkedBlockingQueue</code>中的锁是分离的，即生产用的是<code>putLock</code>，消费是<code>takeLock</code>，这样可以防止生产者和消费者线程之间的锁争夺。</li>
+<li>内存占用：<code>ArrayBlockingQueue</code> 需要提前分配数组内存，而 <code>LinkedBlockingQueue</code> 则是动态分配链表节点内存。这意味着，<code>ArrayBlockingQueue</code> 在创建时就会占用一定的内存空间，且往往申请的内存比实际所用的内存更大，而<code>LinkedBlockingQueue</code> 则是根据元素的增加而逐渐占用内存空间。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88-Queue/" data-id="clmq7wwa8000lxig1g2rjb2bp" data-title="Java集合-Queue" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Java/collection/Java集合概览" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/09/18/Java/collection/Java%E9%9B%86%E5%90%88%E6%A6%82%E8%A7%88/" class="article-date">
@@ -945,83 +1105,6 @@
 
 
   
-    <article id="post-Spring/Spring AOP/AOP-tutorial-with-AspectJ-Examples" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/" class="article-date">
-  <time class="dt-published" datetime="2023-09-15T01:36:07.000Z" itemprop="datePublished">2023-09-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Spring/">Spring</a>►<a class="article-category-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/">AOP术语和AspectJ示例</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Terminologies"><a href="#Terminologies" class="headerlink" title="Terminologies"></a>Terminologies</h1><h2 id="Static-Compile-Time"><a href="#Static-Compile-Time" class="headerlink" title="Static - Compile Time"></a>Static - Compile Time</h2><h3 id="Aspect"><a href="#Aspect" class="headerlink" title="Aspect"></a>Aspect</h3><p>Aspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve.</p>
-<h4 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h4><ul>
-<li>Transaction Management</li>
-<li>Logging (e.g. Every method of business layer called, log the input and output parameters)</li>
-<li>Performance metrics (how much time a method took to execute)</li>
-</ul>
-<h3 id="Pointcut"><a href="#Pointcut" class="headerlink" title="Pointcut"></a>Pointcut</h3><p>A regular expression which determines what are the methods are to be intercepted.</p>
-<p>e.g. execution(* com.example.spring.business.aop.HiByeService.*(..))</p>
-<h3 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a>Advice</h3><p>Action taken by an aspect at a particular join point. What is to be done when the Pointcut is met.</p>
-<h2 id="Dynamic-Runtime"><a href="#Dynamic-Runtime" class="headerlink" title="Dynamic - Runtime"></a>Dynamic - Runtime</h2><h3 id="Join-point"><a href="#Join-point" class="headerlink" title="Join point"></a>Join point</h3><p>A point during the execution of a program. Execution of a specific AOP method.</p>
-<p>All the runtime information about the method call.</p>
-<p>Input parameters of the Advice?</p>
-<h3 id="Weaving"><a href="#Weaving" class="headerlink" title="Weaving"></a>Weaving</h3><p>The entire process of executing the Advice.</p>
-<h1 id="AspectJ"><a href="#AspectJ" class="headerlink" title="AspectJ"></a>AspectJ</h1><h2 id="Annotations"><a href="#Annotations" class="headerlink" title="Annotations"></a>Annotations</h2><h3 id="Aspect类"><a href="#Aspect类" class="headerlink" title="Aspect类"></a>Aspect类</h3><ul>
-<li>@Order(3)，值越小优先级越高</li>
-<li>@Aspect</li>
-<li>@Component</li>
-</ul>
-<h3 id="AspectJ-Advice-Types"><a href="#AspectJ-Advice-Types" class="headerlink" title="AspectJ Advice Types"></a>AspectJ Advice Types</h3><ul>
-<li><p><strong>@Before</strong>（前置通知）：目标对象的方法调用之前触发</p>
-</li>
-<li><p><strong>@After</strong> （后置通知）：目标对象的方法调用之后触发</p>
-</li>
-<li><p><strong>@AfterReturning</strong>（返回通知）：目标对象的方法调用完成，在返回结果值之后触发</p>
-</li>
-<li><p><strong>@AfterThrowing</strong>（异常通知）：目标对象的方法运行中抛出 &#x2F; 触发异常后触发。AfterReturning 和 AfterThrowing 两者互斥。如果方法调用成功无异常，则会有返回值；如果方法抛出了异常，则不会有返回值。</p>
-</li>
-<li><p><strong>@Around</strong> （环绕通知）：编程式控制目标对象的方法调用。环绕通知是所有通知类型中可操作范围最大的一种，因为它可以直接拿到目标对象，以及要执行的方法，所以环绕通知可以任意的在目标对象的方法调用前后搞事，甚至不调用目标对象的方法</p>
-</li>
-</ul>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span> <span class="comment">// AspectJ annotation</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">// Managed by Spring</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyAspect</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;)</span> <span class="comment">// 默认等价于pointcut=&quot;execution...&quot;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;Before &quot;</span>);</span><br><span class="line">        System.out.println(joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@AfterReturning(pointcut=&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;, returning=&quot;result&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterReturning</span><span class="params">(JoinPoint joinPoint, Object result)</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;After &quot;</span>);</span><br><span class="line">        System.out.print(joinPoint.getSignature().getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;, result is &quot;</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith(SpringJUnit4ClassRunner.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(classes = SpringContextAOP.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AOPExampleTest</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> HiByeService service;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSomething</span><span class="params">()</span> &#123;</span><br><span class="line">        service.sayHi();</span><br><span class="line">        service.sayBye();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
-<li>Spring AOP Tutorial - with AspectJ Examples: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Og9Fyew8ltQ">https://www.youtube.com/watch?v=Og9Fyew8ltQ</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/" data-id="clmq7wwa8000pxig1gohq8288" data-title="AOP术语和AspectJ示例" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1065,6 +1148,10 @@
       <ul>
         
           <li>
+            <a href="/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">设计模式16-状态模式</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/">算法模板3-1.DFS和BFS</a>
           </li>
         
@@ -1078,10 +1165,6 @@
         
           <li>
             <a href="/2023/10/11/design-pattern/15.%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式15-抽象工厂模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
           </li>
         
       </ul>

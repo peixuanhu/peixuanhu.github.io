@@ -73,6 +73,80 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-design-pattern/16.状态模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-12T00:34:18.211Z" itemprop="datePublished">2023-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">设计模式16-状态模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>状态模式（State），当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。</p>
+<blockquote>
+<p>状态模式主要解决的是当控制一个对象<strong>状态转换的条件表达式过于复杂</strong>时的情况。把状态的判断逻辑转移到表示不同状态的一系列类当中，可以把复杂的判断逻辑简化。</p>
+</blockquote>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/12/MP5HFstNdQUkrT1.png" alt="状态模式结构图.png"></p>
+<p><code>State</code> 类：抽象状态类，定义一个接口以封装与 <code>Context</code> 的一个特定状态相关的行为。</p>
+<p><code>ConcreteState</code> 类：具体状态，每一个子类实现一个与 <code>Context</code> 的一个状态相关的行为。</p>
+<p><code>Context</code> 类：维护一个 <code>ConcreteState</code> 类的实例，这个实例定义当前的状态（可以修改 <code>State</code> 的类型）。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>State</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">State</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(Context context)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ConcreteState</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体状态类A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStateA</span> <span class="keyword">extends</span> <span class="title class_">State</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">    <span class="comment">//可以在方法里做一些事情</span></span><br><span class="line">    </span><br><span class="line">    context.setState(<span class="keyword">new</span> <span class="title class_">ConcreteStateB</span>()); <span class="comment">// 设置 ConcreteStateA 的下一状态是 ConcreteStateB</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体状态类B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStateB</span> <span class="keyword">extends</span> <span class="title class_">State</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">    <span class="comment">//可以在方法里做一些事情</span></span><br><span class="line">    </span><br><span class="line">    context.setState(<span class="keyword">new</span> <span class="title class_">ConcreteStateA</span>()); <span class="comment">// 设置 ConcreteStateB 的下一状态是 ConcreteStateA</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Context</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Context</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> State state;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Context</span><span class="params">(State state)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = state; <span class="comment">// 设置 Context 的初始状态</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 可读写的状态属性，用于读取当前状态和设置新状态</span></span><br><span class="line">  <span class="keyword">public</span> State <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(State value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = value;</span><br><span class="line">    System.out.println(<span class="string">&quot;当前状态：&quot;</span> + <span class="built_in">this</span>.state.getClass().getName());</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state.handle(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Context</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Context</span>(<span class="keyword">new</span> <span class="title class_">ConcreteStateA</span>()); <span class="comment">// 设置c的初始状态为 ConcreteStateA</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不断请求，不断更改状态</span></span><br><span class="line">c.request();</span><br><span class="line">c.request();</span><br><span class="line">c.request();</span><br><span class="line">c.request();</span><br></pre></td></tr></table></figure>
+
+<h2 id="好处与使用场景"><a href="#好处与使用场景" class="headerlink" title="好处与使用场景"></a>好处与使用场景</h2><h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><p>将与特定状态相关的行为局部化，并且将不同状态的行为分割开来。</p>
+<blockquote>
+<p>将特定的状态相关的行为都放入一个对象中，由于所有与状态相关的代码都存在于某个ConcreteState中，所以通过定义新的子类可以很容易地增加新的状态和转换。</p>
+</blockquote>
+<p>这样做可以消除 <code>Long Method</code> 中庞大的条件分支语句。大的分支判断会使得它们难以修改和扩展。</p>
+<p>状态模式通过把各种状态转移逻辑分布到 <code>State</code> 的子类之间，来减少相互间的依赖，这样就容易维护和扩展了。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>当一个对象的行为取决于它的状态，并且它必须在运行时刻根据状态改变它的行为时，就可以考虑使用状态模式。</p>
+<blockquote>
+<p>如果业务需求某项业务有多个状态，通常都是一些枚举常量。</p>
+<p>状态的变化都是依靠大量的多分支判断语句来实现，此时应该考虑<strong>将每一种业务状态定义为一个State的子类</strong>，于是这些对象就可以不依赖于其他对象而独立变化了。</p>
+<p>某一天客户需要更改需求，增加或减少业务状态或改变状态流程，就变得不困难了。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" data-id="clnmixzg90000jb9gdopugcnc" data-title="设计模式16-状态模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-algorithm/template/3-1.DFS和BFS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" class="article-date">
@@ -774,97 +848,6 @@ flip(k) 把第k位取反
 
 
   
-    <article id="post-algorithm/template/2-6.堆" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/" class="article-date">
-  <time class="dt-published" datetime="2023-10-09T07:55:06.500Z" itemprop="datePublished">2023-10-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/">算法模板2-6.堆</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>以小根堆为例：</p>
-<p>堆中的每一个点都是小于等于左右儿子的。</p>
-<p>所以根节点就是整个堆的最小值。</p>
-<h2 id="支持的操作"><a href="#支持的操作" class="headerlink" title="支持的操作"></a>支持的操作</h2><ol>
-<li><p>插入一个数</p>
-<p><code>heap[++ size] = x; up(size);</code></p>
-</li>
-<li><p>求集合当中的最小值</p>
-<p><code>heap[1]</code></p>
-</li>
-<li><p>删除最小值</p>
-<p>用整个堆的最后一个元素覆盖堆顶元素：</p>
-<p><code>heap[1] = heap[size --]; down(1);</code></p>
-</li>
-<li><p>删除任意一个元素</p>
-<p>与删除最小值类似，用最后一个元素覆盖下标为k的元素：</p>
-<p><code>heap[k] = heap[size --]; up(k); down(k);</code></p>
-<p>理论上是需要判断heap[k]的值变大还是变小再决定是up还是down。为了方便，可以直接up和down一遍</p>
-</li>
-<li><p>修改任意一个元素</p>
-<p><code>heap[k] = x; up(k); down(k);</code></p>
-</li>
-</ol>
-<p>其中，插入和删除元素都是 <code>O(logn)</code> 的，求最小值是 <code>O(1)</code> 的。</p>
-<blockquote>
-<p>后两种是手写堆特有的操作，STL无法直接实现。</p>
-</blockquote>
-<p>以上所有操作都可以由两个操作组合实现：</p>
-<h3 id="down"><a href="#down" class="headerlink" title="down"></a>down</h3><p><code>down(x)</code>: 把下标为x的节点的值变大了</p>
-<p>递归：与左右儿子相比，和最小的那个交换位置</p>
-<h3 id="up"><a href="#up" class="headerlink" title="up"></a>up</h3><p><code>up(x)</code>: 把下标为x的节点的值变小了</p>
-<p>递归：与父节点相比，如果比父节点小，则交换位置</p>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>堆是一个完全二叉树。</p>
-<h2 id="存储方式"><a href="#存储方式" class="headerlink" title="存储方式"></a>存储方式</h2><p>用一个一位数组来存。下标为x的元素的左儿子下标是2x，右儿子的下标是2x + 1。</p>
-<p>注：下标从1开始 </p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><p>带映射数组版本的模板：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// h[N]存储堆中的值，h[1]是堆顶，x的左儿子是2x，右儿子是2x + 1</span></span><br><span class="line"><span class="comment">// ph[k]存储第k个插入的点在堆中的位置，p是下标，h是堆，ph的意思是插入顺序的下标映射到堆</span></span><br><span class="line"><span class="comment">// hp[k]存储堆中下标是k的点是第几个插入的</span></span><br><span class="line"><span class="type">int</span> h[N], ph[N], hp[N], size;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交换两个点，及其映射关系</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heap_swap</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">swap</span>(ph[hp[a]], ph[hp[b]]);</span><br><span class="line">  <span class="built_in">swap</span>(hp[a], hp[b]);</span><br><span class="line">  <span class="built_in">swap</span>(h[a], h[b]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">down</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> t = u;</span><br><span class="line">  <span class="comment">// t设为u及其左右儿子里值最小的那一个</span></span><br><span class="line">  <span class="keyword">if</span> (u * <span class="number">2</span> &lt;= size &amp;&amp; h[u * <span class="number">2</span>] &lt; h[t]) t = u * <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">if</span> (u * <span class="number">2</span> + <span class="number">1</span> &lt;= size &amp;&amp; h[u * <span class="number">2</span> + <span class="number">1</span>] &lt; h[t]) t = u * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (u != t) &#123;</span><br><span class="line">    <span class="built_in">heap_swap</span>(u, t);</span><br><span class="line">    <span class="built_in">down</span>(t);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">up</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (u / <span class="number">2</span> &amp;&amp; h[u] &lt; h[u / <span class="number">2</span>]) &#123;</span><br><span class="line">    <span class="built_in">heap_swap</span>(u, u / <span class="number">2</span>);</span><br><span class="line">    u &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// O(n)建堆</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i; i --) <span class="built_in">down</span>(i);</span><br></pre></td></tr></table></figure>
-
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>先把数组建成堆，再依次输出堆顶元素</p>
-<p>时间复杂度： <code>O(nlogn)</code>。</p>
-<h4 id="建堆"><a href="#建堆" class="headerlink" title="建堆"></a>建堆</h4><p>如果一个一个元素插入，时间复杂度是 <code>O(nlogn)</code> 的。</p>
-<p><code>O(n)</code> 的建堆方式：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i; i --) <span class="built_in">down</span>(i);</span><br></pre></td></tr></table></figure>
-
-<p>从 n&#x2F;2 开始往上的所有元素 down，其实就是从树的倒数第二层开始down。</p>
-<p>时间复杂度证明：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n/4 * 1 + n/8 * 2 + n/16 * 3 + ...</span><br><span class="line">= n (1/2^2 + 2/2^3 + 3/2^4 + ...)</span><br><span class="line"></span><br><span class="line">S = 1/2^2 + 2/2^3 + 3/2^4 + ...</span><br><span class="line">2S = 1/2 + 2/2^2 + 3/2^3 + ...</span><br><span class="line">2S - S = S = 1/2 + 1/2^2 + 1/2^3 + ... &lt; 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="Dijkstra堆优化"><a href="#Dijkstra堆优化" class="headerlink" title="Dijkstra堆优化"></a>Dijkstra堆优化</h3><p>需要用到hp, ph映射数组</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/09/algorithm/template/2-6.%E5%A0%86/" data-id="clnitxwut0002cz9g61li7pos" data-title="算法模板2-6.堆" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -908,6 +891,10 @@ flip(k) 把第k位取反
       <ul>
         
           <li>
+            <a href="/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">设计模式16-状态模式</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/">算法模板3-1.DFS和BFS</a>
           </li>
         
@@ -921,10 +908,6 @@ flip(k) 把第k位取反
         
           <li>
             <a href="/2023/10/11/design-pattern/15.%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式15-抽象工厂模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
           </li>
         
       </ul>

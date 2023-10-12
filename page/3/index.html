@@ -73,6 +73,115 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-algorithm/template/1-3.前缀和与差分模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/06/algorithm/template/1-3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/" class="article-date">
+  <time class="dt-published" datetime="2023-10-06T13:09:06.000Z" itemprop="datePublished">2023-10-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/">算法模板1-3.前缀和与差分模板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h1><h2 id="一维前缀和"><a href="#一维前缀和" class="headerlink" title="一维前缀和"></a>一维前缀和</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>给定a数组，需要构造S数组，使得：<code>S[i] = a[1] + a[2] + ... a[i] (i = 1, 2, ...), S[0] = 0</code></p>
+<blockquote>
+<p>注：a数组下标从1开始，S[i]也从1算起，且S[0]必须赋值0（当l&#x3D;1时会用到，S[l - 1] &#x3D; S[0]）</p>
+</blockquote>
+<h3 id="如何构造-S-i"><a href="#如何构造-S-i" class="headerlink" title="如何构造 S[i] ?"></a>如何构造 <code>S[i]</code> ?</h3><p>从前往后推：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    S[i] = S[i - <span class="number">1</span>] + a[i];</span><br></pre></td></tr></table></figure>
+
+<h3 id="作用？"><a href="#作用？" class="headerlink" title="作用？"></a>作用？</h3><p>求a数组[l, r]的和 <code>a[l] + ... + a[r]</code></p>
+<ul>
+<li><p>如果没有S数组：时间复杂度<code>O(n)</code>，需要累加 <code>a[l] + a[l + 1] + ... + a[r]</code>；</p>
+</li>
+<li><p>有了S数组：时间复杂度 <code>O(1)</code>，直接 <code>S[r] - S[l - 1]</code>。</p>
+</li>
+</ul>
+<h2 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">S[i, j] = 第i行j列格子左上部分所有元素的和</span><br><span class="line">以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵的和为：</span><br><span class="line">S[x2, y2] - S[x1 - 1, y2] - S[x2, y1 - 1] + S[x1 - 1, y1 - 1]</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何构造-S-i-j"><a href="#如何构造-S-i-j" class="headerlink" title="如何构造 S[i, j] ?"></a>如何构造 <code>S[i, j]</code> ?</h3><p>二重循环：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++)</span><br><span class="line">	    S[i, j] = S[i - <span class="number">1</span>, j] + S[i, j - <span class="number">1</span>] - S[i - <span class="number">1</span>, j - <span class="number">1</span>] + a[i, j];</span><br></pre></td></tr></table></figure>
+
+<h3 id="作用？-1"><a href="#作用？-1" class="headerlink" title="作用？"></a>作用？</h3><p>求a矩阵中：以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵的和</p>
+<ul>
+<li><p>如果没有S矩阵：时间复杂度<code>O(n^2)</code>，需要二重循环累加；</p>
+</li>
+<li><p>有了S矩阵：时间复杂度 <code>O(1)</code>，直接 <code>S[x2, y2] - S[x1 - 1, y2] - S[x2, y1 - 1] + S[x1 - 1, y1 - 1]</code>。</p>
+</li>
+</ul>
+<h1 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h1><p>前缀和的逆运算</p>
+<h2 id="一维差分"><a href="#一维差分" class="headerlink" title="一维差分"></a>一维差分</h2><h3 id="问题？"><a href="#问题？" class="headerlink" title="问题？"></a>问题？</h3><p>给定a数组，需要构造b数组，使得：<code>a[i] = b[1] + b[2] + ... + b[i]</code></p>
+<blockquote>
+<p>满足上述条件的b数组称为a的差分</p>
+</blockquote>
+<h3 id="作用？-2"><a href="#作用？-2" class="headerlink" title="作用？"></a>作用？</h3><p>给a数组区间[l, r]中的每个数加上c</p>
+<ul>
+<li>如果没有b数组：时间复杂度<code>O(n)</code>，需要遍历a数组</li>
+<li>有了b数组：时间复杂度<code>O(1)</code>，<code>b[l] += c, b[r + 1] -= c</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> c)</span> </span>&#123;</span><br><span class="line">    b[l] += c;</span><br><span class="line">    b[r + <span class="number">1</span>] -= c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何构造-b-i"><a href="#如何构造-b-i" class="headerlink" title="如何构造 b[i] ?"></a>如何构造 <code>b[i]</code> ?</h3><p>首先假定a, b数组所有元素都是0，此时满足前缀和与差分关系。</p>
+<p>然后其实a数组是有初始值的，这里等价于做n次操作：<code>给a数组区间[i, i]中的每个数都加上a[i]</code>，构造b数组：<code>b[i] += a[i], b[i + 1] -= a[i]</code> 即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="built_in">insert</span>(i, i, a[i]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="最后用前缀和算法求操作后的a数组"><a href="#最后用前缀和算法求操作后的a数组" class="headerlink" title="最后用前缀和算法求操作后的a数组"></a>最后用前缀和算法求操作后的a数组</h3><p>做完若干+c操作后，用前缀和算法求最终答案</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">    b[i] += b[i - <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, b[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二维差分"><a href="#二维差分" class="headerlink" title="二维差分"></a>二维差分</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">给以(x1, y1)为左上角，(x2, y2)为右下角的子矩阵中的所有元素加上c：</span><br><span class="line">b[x1, y1] += c, b[x2 + 1, y1] -= c, b[x1, y2 + 1] -= c, b[x2 + 1, y2 + 1] += c</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题？-1"><a href="#问题？-1" class="headerlink" title="问题？"></a>问题？</h3><p>给定a矩阵，需要构造b矩阵，使得：<code>a[i, j] = b矩阵第i行j列格子左上部分所有元素的和</code></p>
+<blockquote>
+<p>也就是构造b矩阵，使得a矩阵是b矩阵的前缀和</p>
+</blockquote>
+<h3 id="作用？-3"><a href="#作用？-3" class="headerlink" title="作用？"></a>作用？</h3><p>给a矩阵以(x1, y1)为左上角，(x2, y2)为右下角的的子矩阵中的每个数加上c</p>
+<ul>
+<li>如果没有b矩阵：时间复杂度<code>O(n^2)</code>，需要遍历a矩阵</li>
+<li>有了b矩阵：时间复杂度<code>O(1)</code>，<code>b[x1, y1] += c, b[x2 + 1, y1] -= c, b[x1, y2 + 1] -= c, b[x2 + 1, y2 + 1] += c</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> x1, <span class="type">int</span> y1, <span class="type">int</span> x2, <span class="type">int</span> y2, <span class="type">int</span> c)</span> </span>&#123;</span><br><span class="line">    b[x1][y1] += c;</span><br><span class="line">    b[x2 + <span class="number">1</span>][y1] -= c;</span><br><span class="line">    b[x1][y2 + <span class="number">1</span>] -= c;</span><br><span class="line">    b[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何构造-b-i-j"><a href="#如何构造-b-i-j" class="headerlink" title="如何构造 b[i][j] ?"></a>如何构造 <code>b[i][j]</code> ?</h3><p>与一维差分同理</p>
+<p>其实具体构造不用管，就当作进行了n*m次修改操作即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++)</span><br><span class="line">	    <span class="built_in">insert</span>(i, j, i, j, a[i][j]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="最后用前缀和算法求操作后的a矩阵"><a href="#最后用前缀和算法求操作后的a矩阵" class="headerlink" title="最后用前缀和算法求操作后的a矩阵"></a>最后用前缀和算法求操作后的a矩阵</h3><p>做完若干+c操作后，用前缀和算法求最终答案</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++) &#123;</span><br><span class="line">        b[i][j] += b[i][j - <span class="number">1</span>] + b[i - <span class="number">1</span>][j] - b[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, b[i][j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-3.%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86%E6%A8%A1%E6%9D%BF/" data-id="clng10n6a000a389g3a8q304o" data-title="算法模板1-3.前缀和与差分模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-algorithm/template/1-4.双指针模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/06/algorithm/template/1-4.%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF/" class="article-date">
@@ -748,67 +857,6 @@
 
 
   
-    <article id="post-design-pattern/7.代理模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-09-22T08:12:44.000Z" itemprop="datePublished">2023-09-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">设计模式7-代理模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>代理模式（Proxy），为其他对象提供一种代理以控制对这个对象的访问。</p>
-<h2 id="代理模式结构图"><a href="#代理模式结构图" class="headerlink" title="代理模式结构图"></a>代理模式结构图</h2><p><img src="https://s2.loli.net/2023/09/21/PAE9T4Ht7ku6MFY.jpg" alt="代理模式结构图.jpg"></p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p><code>ISubject</code> 接口：定义了 <code>RealSubject</code> 和 <code>Proxy</code> 的共用接口，这样就可以在任何使用 <code>RealSubject</code> 的地方都可以使用 <code>Proxy</code> 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">ISubject</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>RealSubject</code> 类：定义 <code>Proxy</code> 所代表的真实实体</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RealSubject</span> <span class="keyword">implements</span> <span class="title class_">ISubject</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;真实的请求。&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Proxy</code> 类：保存一个 <code>RealSubject</code> 的引用使得 <code>Proxy</code> 可以访问实体，并提供一个与 <code>RealSubject</code> 相同的方法，以替代实体执行方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Proxy</span> <span class="keyword">implements</span> <span class="title class_">ISubject</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> RealSubject rs;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Proxy</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.rs = <span class="keyword">new</span> <span class="title class_">RealSubject</span>(); <span class="comment">// 为什么不是传入参数rs?</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.rs.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="应用场合"><a href="#应用场合" class="headerlink" title="应用场合"></a>应用场合</h2><h3 id="远程代理"><a href="#远程代理" class="headerlink" title="远程代理"></a>远程代理</h3><p>为一个对象在不同的地址空间提供局部代表。这样可以隐藏一个对象存在于不同地址空间的事实。</p>
-<p>例：WebService在Java中的应用。在项目中加入一个WebService，此时会在项目中生成一个wsdl文件和一些相关文件，其实它们就是代理，这就使得客户端程序调用代理就可以解决远程访问的问题。</p>
-<h3 id="虚拟代理"><a href="#虚拟代理" class="headerlink" title="虚拟代理"></a>虚拟代理</h3><p>是根据需要创建开销很大的对象。通过它来存放实例化需要很长时间的真实对象。</p>
-<p>例：比如说你打开一个很大的HTML网页时，里面可能有很多的文字和图片，但你还是可以很快打开它，此时你所看到的是所有的文字，但图片却是一张一张地下载后才能看到。那些未打开的图片框，就是通过虚拟代理来替代了真实的图片，此时代理存储了真实图片的路径和尺寸。</p>
-<h3 id="安全代理"><a href="#安全代理" class="headerlink" title="安全代理"></a>安全代理</h3><p>用来控制真实对象访问时的权限。一般用于对象应该有不同的访问权限的时候。</p>
-<h3 id="智能指引"><a href="#智能指引" class="headerlink" title="智能指引"></a>智能指引</h3><p>当调用真实的对象时，代理处理另外一些事。</p>
-<p>例：计算真实对象的引用次数，这样当该对象没有引用时，可以自动释放它；或当第一次引用一个持久对象时，将它装入内存；或在访问一个实际对象前，检查是否已经锁定它，以确保其他对象不能改变它。它们都是通过代理在访问一个对象时附加一些内务处理。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>代理模式其实就是在访问对象时引入一定程度的间接性，因为这种间接性，可以附加多种用途。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/09/22/design-pattern/7.%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" data-id="clmus6rpy0000yo9gcplo1lom" data-title="设计模式7-代理模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -852,6 +900,10 @@
       <ul>
         
           <li>
+            <a href="/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">设计模式16-状态模式</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/">算法模板3-1.DFS和BFS</a>
           </li>
         
@@ -865,10 +917,6 @@
         
           <li>
             <a href="/2023/10/11/design-pattern/15.%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式15-抽象工厂模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
           </li>
         
       </ul>
