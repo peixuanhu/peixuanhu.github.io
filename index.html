@@ -73,10 +73,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-algorithm/template/3-4.最短路" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-algorithm/template/4-1.DP-背包问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/10/12/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-12T02:35:04.437Z" itemprop="datePublished">2023-10-12</time>
+    <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2023-10-22T12:39:37.000Z" itemprop="datePublished">2023-10-22</time>
 </a>
     
   <div class="article-category">
@@ -91,7 +91,621 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/12/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/">算法模板3-4.最短路</a>
+      <a class="p-name article-title" href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">算法模板4-1.DP-背包问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h1><h1 id="通用问题描述"><a href="#通用问题描述" class="headerlink" title="通用问题描述"></a>通用问题描述</h1><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
+<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
+<h2 id="01背包问题"><a href="#01背包问题" class="headerlink" title="01背包问题"></a>01背包问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
+<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
+<p><strong>每件物品只能用一次或者不用。</strong></p>
+<h3 id="状态分析"><a href="#状态分析" class="headerlink" title="状态分析"></a>状态分析</h3><h5 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h5><p><code>f(i, j)</code></p>
+<h6 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h6><p>所有选法的集合。</p>
+<p>满足条件：</p>
+<ol>
+<li>只从前 <code>i</code> 个物品中选</li>
+<li>选出来的物品的 <code>总体积 &lt;= j</code></li>
+</ol>
+<h6 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h6><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
+<h2 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
+<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
+<p><strong>每件物品有无限个。</strong></p>
+<h2 id="多重背包问题"><a href="#多重背包问题" class="headerlink" title="多重背包问题"></a>多重背包问题</h2><h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
+<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
+<p><strong>每件物品有 <code>si</code> 个。</strong></p>
+<h3 id="朴素版"><a href="#朴素版" class="headerlink" title="朴素版"></a>朴素版</h3><h3 id="优化版"><a href="#优化版" class="headerlink" title="优化版"></a>优化版</h3><h2 id="分组背包问题"><a href="#分组背包问题" class="headerlink" title="分组背包问题"></a>分组背包问题</h2><h3 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 组物品和容量是为 <code>V</code> 的背包，每组物品里有若干件物品。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
+<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
+<p><strong>每组物品中只能选1件。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" data-id="clo29p1k4000dhh9gbe2od6om" data-title="算法模板4-1.DP-背包问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/4-0.DP理解方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-22T12:35:45.000Z" itemprop="datePublished">2023-10-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/">算法模板4-0.DP理解方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="DP理解"><a href="#DP理解" class="headerlink" title="DP理解"></a>DP理解</h1><h2 id="DP求解过程"><a href="#DP求解过程" class="headerlink" title="DP求解过程"></a>DP求解过程</h2><p>DP求解过程可以分为两步：状态表示</p>
+<h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p>思考：问题需要用几维的状态来表示？</p>
+<blockquote>
+<p>背包问题有两维。</p>
+</blockquote>
+<p><code>f(i, j)</code></p>
+<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p><code>f(i, j)</code>表示的是什么集合？</p>
+<blockquote>
+<p>如背包问题：<code>f(i, j)</code>表示所有选法的集合。</p>
+</blockquote>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p><code>f(i, j)</code>这个数存的是这个集合的什么属性？min, max, cnt?</p>
+<blockquote>
+<p>如背包问题：<code>f(i, j)</code>表示集合里的最大值。</p>
+</blockquote>
+<h3 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h3><p>思考：如何一步一步地把每个状态算出来？</p>
+<h2 id="DP优化"><a href="#DP优化" class="headerlink" title="DP优化"></a>DP优化</h2><p>DP优化一般是对代码&#x2F;状态方程做等价变形。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" data-id="clo29p1k4000chh9ggb91foyw" data-title="算法模板4-0.DP理解方式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/3-6.二分图" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" class="article-date">
+  <time class="dt-published" datetime="2023-10-20T08:38:22.000Z" itemprop="datePublished">2023-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/">算法模板3-6.二分图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a>二分图</h1><p>通俗定义：一个图可以分成两个集合，每个集合内部没有边。</p>
+<h2 id="染色法-DFS"><a href="#染色法-DFS" class="headerlink" title="染色法 (DFS)"></a>染色法 (DFS)</h2><p>时间复杂度：<code>O(n + m)</code></p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>判别一个图是否为二分图。</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>一个图是二分图（等价于这个图可以被2染色），当且仅当图中不含奇数环。</p>
+<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><ul>
+<li><p>必要性（二分图-&gt;不含奇数环）：反证法</p>
+<p>假设有奇数环：把环中每个点依次标记为1, 2, 1, 2, … 标记到最后一个点的时候，应该为1。而它后一个点（也就是第一个点）也为1，矛盾。</p>
+</li>
+<li><p>充分性（不含奇数环-&gt;二分图）：</p>
+<p>先任意标记一个点为1，之后与它连通的所有点的数字都被确定。在不与它连通的点中，又任选一个点标记为1。</p>
+<p>由于图中不含奇数环，所以染色过程中一定没有矛盾。</p>
+<blockquote>
+<p>证明：反证法</p>
+<p>如果染色过程中出现了矛盾，那么一定是1, 2, 1, 2, …, 1, 1这种形式，最后两个1和1一定头尾相接（否则最后一个1可以被标记为2），那么环中点的数量一定为奇数，即图中一定含有奇数环</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">if</span> (i未被染色)</span><br><span class="line">    <span class="built_in">dfs</span>(i, <span class="number">1</span>) <span class="comment">// 1表示染的颜色</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// dfs过程</span></span><br><span class="line">递归将所有相邻的点染成相反的颜色，并且判断能不能成功并返回</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> h[N], e[M], ne[M], idx;</span><br><span class="line"><span class="type">int</span> color[N]; <span class="comment">// 表示每个点的颜色，-1表示为染色，0表示白色，1表示黑色</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数：u表示当前节点，c表示当前点的颜色</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  color[u] = c;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = h[u]; ~i; i = ne[i]) <span class="comment">// 遍历所有相邻点</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">int</span> j = e[i];</span><br><span class="line">    <span class="keyword">if</span> (color[j] == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">dfs</span>(j, !c)) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 如果相邻点还没有染色，递归染色，传递的颜色是与当前点相反的颜色</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (color[j] == c) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(h, <span class="number">-1</span>, <span class="keyword">sizeof</span> h);</span><br><span class="line">  <span class="built_in">memset</span>(color, <span class="number">-1</span>, <span class="keyword">sizeof</span> color);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="keyword">if</span> (color[i] == <span class="number">-1</span>)</span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">dfs</span>(i, <span class="number">0</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h2><p>时间复杂度：理论最坏<code>O(mn)</code>，实际远小于 <code>O(mn)</code>（可能接近线性）</p>
+<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><p>求二分图的成功匹配的情况下，最大的匹配数量。</p>
+<p>匹配：指的是边的数量。</p>
+<p>匹配成功：不存在两条边共用一个点。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设左边集合为S1，右边集合为S2.</span><br><span class="line">依次遍历S1中的每个点i，看能否匹配S2中的点：</span><br><span class="line">  <span class="number">1.</span> 如果有S2中的点没有被匹配，或者它匹配的S1中的点可以换一个点匹配，返回<span class="literal">true</span></span><br><span class="line">  <span class="number">2.</span> 如果i指向的所有点都不能被匹配，返回<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n1, n2; <span class="comment">// n1表示S1中的点数，n2表示S2中的点数</span></span><br><span class="line"><span class="type">int</span> h[N], e[M], ne[M], idx; <span class="comment">// 邻接表存储所有边，匈牙利算法中只会用到从S1指向S2的边</span></span><br><span class="line"><span class="type">int</span> match[N]; <span class="comment">// 存储S2中的每一个点当前匹配的S1中的点是哪个</span></span><br><span class="line"><span class="type">bool</span> st[N]; <span class="comment">// 表示S2中的每个点是否已经被遍历过</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = h[x]; ~i; i = ne[i]) <span class="comment">// 遍历x结点指向S2集合的所有边</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">int</span> j = e[i];</span><br><span class="line">    <span class="keyword">if</span> (!st[j])</span><br><span class="line">    &#123;</span><br><span class="line">      st[j] = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">if</span> (match[j] == <span class="number">0</span> || <span class="built_in">find</span>(match[j])) <span class="comment">// S2中的j结点还没有被匹配，或者能够让j结点当前匹配的S1中的点换一个点匹配</span></span><br><span class="line">      &#123;</span><br><span class="line">        match[j] = x;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求最大匹配数量，依次枚举S1中的每一个点能否匹配S2中的点</span></span><br><span class="line"><span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">memset</span>(st, <span class="literal">false</span>, <span class="keyword">sizeof</span> st); <span class="comment">// 在枚举S1中每个点的时候都要把S2中所有点的状态置0，每个点都只需要考虑一次</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">find</span>(i)) res ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>练习：372</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" data-id="clo29p1k4000bhh9ggfkg3ujf" data-title="算法模板3-6.二分图" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/21.单例模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-20T06:21:30.000Z" itemprop="datePublished">2023-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">设计模式21-单例模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/23/7qNvY9VbhWHPit2.png" alt="单例模式结构图.png"></p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>Singleton类，定义一个GetInstance操作，允许客户访问它的唯一实例。GetInstance是一个静态方法，主要负责创建自己的唯一实例。</p>
+<h3 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h3><p>调用getInstance的时候再来创建instance。</p>
+<h4 id="V1-线程不安全"><a href="#V1-线程不安全" class="headerlink" title="V1 线程不安全"></a>V1 线程不安全</h4><p>在多线程的情况下有可能创建多个实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 构造方法private化，堵死了外部代码利用new创建此类实例的可能</span></span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到Singleton的实例（唯一途径）</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">      instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> instance; <span class="comment">// 当instance为null时创建一个返回，否则直接返回原有实例</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="V2-synchronized锁方法"><a href="#V2-synchronized锁方法" class="headerlink" title="V2 synchronized锁方法"></a>V2 synchronized锁方法</h4><p>每次调用 <code>getInstance</code> 时都需要锁。写起来简单，但比较影响性能。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 构造方法private化</span></span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到Singleton的实例（唯一途径）</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">      instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="V3-Double-Check-Locking"><a href="#V3-Double-Check-Locking" class="headerlink" title="V3 Double-Check Locking"></a>V3 Double-Check Locking</h4><p>不用让线程每次都加锁，而只是在实例未被创建的时候再加锁处理。同时也能保证多线程的安全。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance; <span class="comment">// volatile作用是使得所有线程能够及时得知instance是否被实例化的状态</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">synchronized</span>(Singleton.class) &#123; <span class="comment">// 保证所有线程用的是同一把锁</span></span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">          instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么要两次判断instance是否为null？</p>
+<p>对于instance存在的情况，就直接返回，这没有问题。当instance为null并且同时有两个线程调用getInstance（）方法时，它们将都可以通过第一重instance&#x3D;&#x3D;null的判断。然后由于’锁’机制，这两个线程则只有一个进入，另一个在外排队等候，必须要其中的一个进入并出来后，另一个才能进入。而此时如果没有了第二重的instance是否为null的判断，则第一个线程创建了实例，而第二个线程还是可以继续再创建新的实例，这就没有达到单例的目的。</p>
+<h3 id="饿汉式（静态初始化）"><a href="#饿汉式（静态初始化）" class="headerlink" title="饿汉式（静态初始化）"></a>饿汉式（静态初始化）</h3><p>不管有没有调用getInstance，先在自己被加载时就把instance创建出来。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端代码："><a href="#客户端代码：" class="headerlink" title="客户端代码："></a>客户端代码：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Singleton s0 = new Singleton();</span></span><br><span class="line"><span class="type">Singleton</span> <span class="variable">s1</span> <span class="operator">=</span> Singleton.getInstance();</span><br><span class="line"><span class="type">Singleton</span> <span class="variable">s2</span> <span class="operator">=</span> Singleton.getInstance();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (s1 == s2) &#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;两个对象是相同的实例&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="单例模式好处"><a href="#单例模式好处" class="headerlink" title="单例模式好处"></a>单例模式好处</h2><ol>
+<li>可以保证唯一的实例。</li>
+<li>因为Singleton类封装它的唯一实例，这样它可以严格地控制客户怎样访问它以及何时访问它。简单地说就是对唯一实例的受控访问。</li>
+</ol>
+<h2 id="饿汉式和懒汉式对比"><a href="#饿汉式和懒汉式对比" class="headerlink" title="饿汉式和懒汉式对比"></a>饿汉式和懒汉式对比</h2><p>饿汉式，即静态初始化的方式，它是类一加载就实例化的对象，所以要提前占用系统资源。</p>
+<p>然而懒汉式，又会面临着多线程访问的安全性问题，需要做双重锁定这样的处理才可以保证安全。</p>
+<p>到底使用哪一种方式，取决于实际的需求。从Java语言角度来讲，饿汉式的单例类已经足够满足我们的需求了。</p>
+<h2 id="单例模式-vs-实用类静态方法"><a href="#单例模式-vs-实用类静态方法" class="headerlink" title="单例模式 vs 实用类静态方法"></a>单例模式 vs 实用类静态方法</h2><p>和单例模式类似，实用类通常也会采用私有化的构造方法来避免其有实例。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ol>
+<li>实用类不保存状态，只提供静态方法或静态属性使用；而单例类有状态。</li>
+<li>实用类不能用于继承多态；而单例类虽然实例唯一，但可以有子类来继承。</li>
+<li>实用类是一些方法属性的集合；单例类有唯一的对象实例。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k10002hh9g83386xir" data-title="设计模式21-单例模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/20.迭代器模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-20T06:20:34.000Z" itemprop="datePublished">2023-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">设计模式20-迭代器模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>迭代器模式（Iterator），提供一种方法顺序访问一个聚合对象中的各个元素，而又不暴露该对象的内部表示。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/19/mKfRk7ElDi4Os1p.jpg" alt="迭代器模式结构图.jpg"></p>
+<p>需要有 <code>Iterator</code> 抽象类的原因：遍历方式可能有很多种，需要对不同方式做不同具体实现。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Aggregate</code> 聚集抽象类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Aggregate</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 创建迭代器</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Iterator <span class="title function_">createIterator</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ConcreteAggregate</code> 具体聚集类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteAggregate</span> <span class="keyword">extends</span> <span class="title class_">Aggregate</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 声明一个ArrayList泛型变量，用于存放聚合对象</span></span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Object&gt; items = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Object&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Iterator <span class="title function_">createIterator</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcreteIterator</span>(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 返回聚集总个数</span></span><br><span class="line">  <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getCount</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> items.size();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 增加新对象</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Object object)</span> &#123;</span><br><span class="line">    items.add(object);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到指定索引对象</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">getCurrentItem</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> items.get(index);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Iterator</code> 迭代器抽象类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Iterator</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title function_">first</span><span class="params">()</span>; <span class="comment">// 第一个</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title function_">next</span><span class="params">()</span>; <span class="comment">// 下一个</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">boolean</span> <span class="title function_">isDone</span><span class="params">()</span>; <span class="comment">// 是否到结尾</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title function_">currentItem</span><span class="params">()</span>; <span class="comment">// 当前对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ConcreteIterator</code> 具体迭代器类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteIterator</span> <span class="keyword">extends</span> <span class="title class_">Iterator</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> ConcreteAggregate aggregate;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">int</span> <span class="variable">current</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 初始化时将具体的聚集对象传入</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ConcreteIterator</span><span class="params">(ConcreteAggregate aggregate)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.aggregate = aggregate;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到第一个对象</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">first</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> aggregate.getCurrentItem(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到下一个对象</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">ret</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    current ++;</span><br><span class="line">    <span class="keyword">if</span> (current &lt; aggregate.getCount()) &#123;</span><br><span class="line">      ret = aggregate.getCurrentItem(current);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 判断当前是否遍历到结尾，到结尾返回true</span></span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isDone</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> current &gt;= aggregate.getCount() ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 返回当前的聚集对象</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">currentItem</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> aggregate.getCurrentItem(current);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ConcreteAggregate</span> <span class="variable">ca</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteAggregate</span>();</span><br><span class="line">ca.add(<span class="number">1</span>);</span><br><span class="line">ca.add(<span class="number">2</span>);</span><br><span class="line">ca.add(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">Iterator</span> <span class="variable">i</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteIterator</span>(ca);</span><br><span class="line"></span><br><span class="line">i.first();</span><br><span class="line"><span class="keyword">while</span> (!i.isDone()) &#123;</span><br><span class="line">  System.out.println(i.currentItem());</span><br><span class="line">  i.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Java的迭代器实现"><a href="#Java的迭代器实现" class="headerlink" title="Java的迭代器实现"></a>Java的迭代器实现</h2><p>java.util.Iterator支持对集合的简单迭代接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Iterator</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span>; <span class="comment">// 如果还有下一个元素，返回true</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">next</span><span class="params">()</span>; <span class="comment">// 返回迭代中的下一个元素</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>java.util.ListIterator支持对集合的任意方向上迭代接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ListIterator</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">next</span><span class="params">()</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasPrevious</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">previous</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>迭代器（Iterator）模式就是分离了集合对象的遍历行为，抽象出一个迭代器类来负责。</p>
+<p>这样既可以做到<strong>不暴露集合的内部结构</strong>，又可以让外部代码<strong>透明地访问集合内部的数据</strong>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k00001hh9ggppgalv0" data-title="设计模式20-迭代器模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/19.组合模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/19/design-pattern/19.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-19T05:15:12.000Z" itemprop="datePublished">2023-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/19/design-pattern/19.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">设计模式19-组合模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>组合模式（Composite），将对象组合成树形结构以表示’部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/18/qbGU8Fy4LRCzDvO.jpg" alt="组合模式结构图.jpg"></p>
+<p><code>Component</code> 接口&#x2F;抽象类：为组合中的对象声明接口，在适当情况下，实现所有类共有接口的默认行为。声明一个接口用于访问和管理 <code>Component</code> 的子部件。</p>
+<p><code>Leaf</code> 类：在组合中表示叶节点，无子节点。</p>
+<p><code>Composite</code> 类：定义非叶节点的行为。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Component</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> String name;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Component</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span> depth)</span>;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Leaf</code> 类：add和remove方法没有意义，但好处是可以消除叶节点和非叶节点在抽象层次的区别，它们具备完全一致的接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Leaf</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Leaf</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(name);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Cannot add to a leaf.&quot;</span>); <span class="comment">// 叶子无法增加子节点</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Cannot remove from a leaf.&quot;</span>); <span class="comment">// 叶子无法移除子节点</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span> depth)</span> &#123;</span><br><span class="line">    <span class="comment">// 叶节点的具体显示方法</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; depth; i ++)</span><br><span class="line">      System.out.println(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    System.out.println(name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Composite</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Composite</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Component&gt; children = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(); <span class="comment">// 存储其下属的非叶节点和叶节点</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Composite</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    children.add(component);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    children.remove(component);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span> depth)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; depth; i ++)</span><br><span class="line">      System.out.println(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    System.out.println(name);</span><br><span class="line">    <span class="comment">// 对下一层进行遍历</span></span><br><span class="line">    <span class="keyword">for</span> (Component item : children) &#123;</span><br><span class="line">      item.display(depth + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Composite</span> <span class="variable">root</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">root.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf A&quot;</span>));</span><br><span class="line">root.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf B&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="type">Composite</span> <span class="variable">comp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;Composite X&quot;</span>);</span><br><span class="line">comp.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XA&quot;</span>));</span><br><span class="line">comp.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XB&quot;</span>));</span><br><span class="line">root.add(comp);</span><br><span class="line"></span><br><span class="line"><span class="type">Composite</span> <span class="variable">comp2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;Composite XY&quot;</span>);</span><br><span class="line">comp2.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XYA&quot;</span>));</span><br><span class="line">comp2.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XYB&quot;</span>));</span><br><span class="line">comp.add(comp2);</span><br><span class="line"></span><br><span class="line"><span class="type">Leaf</span> <span class="variable">leaf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf C&quot;</span>);</span><br><span class="line">root.add(leaf);</span><br><span class="line"></span><br><span class="line"><span class="type">Leaf</span> <span class="variable">leaf2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf D&quot;</span>);</span><br><span class="line">root.add(leaf2);</span><br><span class="line">root.remove(leaf2);</span><br><span class="line"></span><br><span class="line">root.display(<span class="number">1</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">展示结果：</span></span><br><span class="line"><span class="comment">-root</span></span><br><span class="line"><span class="comment">--Leaf A</span></span><br><span class="line"><span class="comment">--Leaf B</span></span><br><span class="line"><span class="comment">--Composite X</span></span><br><span class="line"><span class="comment">---Leaf XA</span></span><br><span class="line"><span class="comment">---Leaf XB</span></span><br><span class="line"><span class="comment">---Composite XY</span></span><br><span class="line"><span class="comment">----LeafXYA</span></span><br><span class="line"><span class="comment">----LeafXYB</span></span><br><span class="line"><span class="comment">--Leaf C</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="透明方式与安全方式"><a href="#透明方式与安全方式" class="headerlink" title="透明方式与安全方式"></a>透明方式与安全方式</h2><h3 id="透明方式"><a href="#透明方式" class="headerlink" title="透明方式"></a>透明方式</h3><p>在Component中声明所有用来管理子对象的方法，其中包括add、remove等。这样实现Component接口的所有子类都具备了add和remove。这样做的好处就是叶节点和枝节点对于外界没有区别，它们具备完全一致的行为接口。但问题也很明显，因为Leaf类本身不具备add()、remove()方法的功能，所以实现它是没有意义的。</p>
+<h3 id="安全方式"><a href="#安全方式" class="headerlink" title="安全方式"></a>安全方式</h3><p>安全方式，也就是在Component接口中不去声明add和remove方法，那么子类的Leaf也就不需要去实现它，而是在Composite中声明所有用来管理子类对象的方法，这样做就不会出现Leaf类也需要实现add()、remove()方法的问题，不过由于不够透明，所以树叶和树枝类将不具有相同的接口，客户端的调用需要做相应的判断，带来了不便。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>发现需求中是体现<strong>部分与整体层次的结构</strong>时，以及希望用户可以忽略组合对象与单个对象的不同，<strong>统一地使用组合结构中的所有对象</strong>时，就应该考虑用组合模式了。</p>
+<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><p>组合模式定义了包含基本对象和组合对象的类层次结构。基本对象可以被组合成更复杂的组合对象，而这个组合对象又可以被组合，这样不断地递归下去，客户代码中，任何用到基本对象的地方都可以使用组合对象了。</p>
+<p>并且，用户不用关心到底是处理一个叶节点还是处理一个组合组件，也就不用为定义组合而写一些选择判断语句了。组合模式让客户可以一致地使用组合结构和单个对象。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/19/design-pattern/19.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k20004hh9g00jv1x0q" data-title="设计模式19-组合模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/18.备忘录模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/18/design-pattern/18.%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-18T04:01:48.000Z" itemprop="datePublished">2023-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/18/design-pattern/18.%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/">设计模式18-备忘录模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>备忘录（Memento）：在<strong>不破坏封装性</strong>的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。</p>
+<blockquote>
+<p>如：游戏中的存档。不破坏封装性即不把过多的细节暴露给客户端</p>
+</blockquote>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/17/Af2uqHx4KsjVtWz.jpg" alt="备忘录模式结构图.jpg"></p>
+<p><code>Originator</code>（发起人）：负责创建一个备忘录 <code>Memento</code>，用以记录当前时刻它的内部状态，并可使用备忘录恢复内部状态。<code>Originator</code> 可根据需要决定 <code>Memento</code> 存储 <code>Originator</code> 的哪些内部状态。</p>
+<p> <code>Memento</code> （备忘录）：负责存储 <code>Originator</code> 对象的内部状态，并可防止 <code>Originator</code> 以外的其他对象访问备忘录 <code>Memento</code> 。备忘录有两个接口：<code>Caretaker</code> 只能看到备忘录的窄接口，它只能将备忘录传递给其他对象；<code>Originator</code> 能够看到一个宽接口，允许它访问返回到先前状态所需的所有数据。</p>
+<p><code>CareTaker</code> （管理者）：负责保存好备忘录<code>Memento</code>，不能对备忘录的内容进行操作或检查。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>发起人 <code>Originator</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Originator</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 需要保存的状态，可能有多个</span></span><br><span class="line">  <span class="keyword">private</span> String state;</span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = value;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 显示数据</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;State: &quot;</span> + <span class="built_in">this</span>.state);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 创建备忘录，将当前需要保存的信息（也许不是全部状态）导入，并实例化出一个Memento对象</span></span><br><span class="line">  <span class="keyword">public</span> Memento <span class="title function_">createMemento</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Memento</span>(<span class="built_in">this</span>.state);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 恢复备忘录，将Memento导入并将相关数据恢复</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">recoveryMemento</span><span class="params">(Memento memento)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(memento.getState());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>备忘录 <code>Memento</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Memento</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> String state;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Memento</span><span class="params">(String state)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = state;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>管理者 <code>Caretaker</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Caretaker</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> Memento memento;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Memento <span class="title function_">getMemento</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.memento;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMemento</span><span class="params">(Memento value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.memento = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Originator初始状态：例如状态属性为&quot;On&quot;</span></span><br><span class="line"><span class="type">Originator</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Originator</span>();</span><br><span class="line">o.setState(<span class="string">&quot;On&quot;</span>);</span><br><span class="line">o.show();</span><br><span class="line"></span><br><span class="line"><span class="type">Caretaker</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Caretaker</span>();</span><br><span class="line"><span class="comment">// 保存状态时，由于有了很好的封装，可以隐藏Originator的实现细节</span></span><br><span class="line">c.setMemento(o.createMMento());</span><br><span class="line"></span><br><span class="line"><span class="comment">// Originator改变了状态属性，变为&quot;Off&quot;</span></span><br><span class="line">o.setState(<span class="string">&quot;Off&quot;</span>);</span><br><span class="line">o.show();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 恢复原来的初始状态</span></span><br><span class="line">o.recoveryMemento(c.getMemento());</span><br><span class="line">o.show();</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>要保存的细节给封装在了Memento中了，要更改保存的细节也不用影响客户端了。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>状态需要完整存储到备忘录对象中，如果状态数据很大很多，那么在资源消耗上，备忘录对象会非常耗内存。</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>Memento模式比较适用于功能比较复杂的，但需要维护或记录属性历史的类，或者需要保存的属性只是众多属性中的一小部分时，Originator可以根据保存的Memento信息还原到前一状态。</p>
+<p>有时一些对象的内部信息必须保存在对象以外的地方，但是必须要由对象自己读取，这时，使用备忘录可以把复杂的对象内部信息对其他的对象屏蔽起来，从而可以恰当地保持封装的边界。</p>
+<blockquote>
+<p>管理类是有必要的。其实管理类主要得做两件事，一个是保存快照信息，这个快照信息可以保存多份的（用啥容器都行，栈、列表啥的），游戏状态这个例子里只保存了一份，所以会觉得没有必要；第二个是undo操作（即取出某个快照并恢复原发器状态的操作），该操作最好也要由管理者来提供，这样原发器的职责会更单一。</p>
+<p>还有一个很致命的缺陷，快照Memento的getState是public的，不够安全。应该由Memento持有原发器的引用，且由Memento对象提供方法进行原发器对象的状态恢复，这样就不会有Memento.state的信息泄漏的危险了；当然，还有另一种做法，将Memento设计为原发器的私有内部类。</p>
+</blockquote>
+<blockquote>
+<p>拓展：命令模式也有实现类似撤销的作用，如果在某个系统中使用命令模式时，需要实现命令的撤销功能，那么命令模式可以使用备忘录模式来存储可撤销操作的状态</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/18/design-pattern/18.%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k30006hh9ga62qhulu" data-title="设计模式18-备忘录模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/17.适配器模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/15/design-pattern/17.%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-15T09:23:53.000Z" itemprop="datePublished">2023-10-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/15/design-pattern/17.%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">设计模式17-适配器模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>适配器模式（Adapter），将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</p>
+<blockquote>
+<p>类似于国标转英标的转接头。</p>
+</blockquote>
+<h2 id="适用场景和时机"><a href="#适用场景和时机" class="headerlink" title="适用场景和时机"></a>适用场景和时机</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>系统的数据和行为都相同或类似，但接口不统一时，我们应该考虑用适配器，目的是使控制范围之外的一个原有对象与某个接口匹配。客户代码可以统一调用同一接口就行了，更简单、更直接、更紧凑。</p>
+<p>适配器模式主要应用于希望复用一些现存的类，但是接口又与复用环境要求不一致的情况，比如在需要对早期代码复用一些功能等应用上很有实际价值。</p>
+<h3 id="时机"><a href="#时机" class="headerlink" title="时机"></a>时机</h3><p>在设计阶段，应该把类似的功能类的接口按照规范设计得相同。</p>
+<blockquote>
+<p>设计之初就需要考虑用适配器模式的场景：公司设计一系统时考虑使用第三方开发组件，而这个组件的接口与我们自己的系统接口是不相同的，而我们也没有必要为了迎合它而改动自己的接口</p>
+</blockquote>
+<p>在软件开发后期或维护期，通常应优先考虑通过重构统一接口，其次在双方都不太容易修改的时候再使用适配器模式适配。</p>
+<blockquote>
+<p>用适配器模式是无奈之举，有点’亡羊补牢’的感觉</p>
+</blockquote>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>GoF的设计模式介绍了适配器模式的两种类型：</p>
+<h3 id="类适配器模式"><a href="#类适配器模式" class="headerlink" title="类适配器模式"></a>类适配器模式</h3><p>类适配器模式通过多重继承对一个接口与另一个接口进行匹配，而Java不支持多重继承，故略。</p>
+<h3 id="对象适配器模式"><a href="#对象适配器模式" class="headerlink" title="对象适配器模式"></a>对象适配器模式</h3><h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p>对象适配器模式结构图：</p>
+<p><img src="https://s2.loli.net/2023/10/15/Zv51cel4BIWzA2q.jpg" alt="适配器模式结构图.jpg"></p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Target</code> 接口：客户所期待的接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Target</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;普通请求&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Adaptee</code> 类：需要适配的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Adaptee</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">specificRequest</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;特殊请求&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Adapter</code> 接口：通过在内部包装一个 <code>Adaptee</code> 对象，把源接口转换成目标接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Adapter</span> <span class="keyword">extends</span> <span class="title class_">Target</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="type">Adaptee</span> <span class="variable">adaptee</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Adaptee</span>(); <span class="comment">// 建立一个私有的Adaptee对象</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">    adaptee.specificRequest(); <span class="comment">// 把表面上调用request()方法转换成实际调用specificRequest()方法</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Target</span> <span class="variable">target</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Adapter</span>();</span><br><span class="line"></span><br><span class="line">target.request();</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/15/design-pattern/17.%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" data-id="clo29p1jy0000hh9gcjkl0b1b" data-title="设计模式17-适配器模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/3-5.最小生成树" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/14/algorithm/template/3-5.%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" class="article-date">
+  <time class="dt-published" datetime="2023-10-14T12:25:08.000Z" itemprop="datePublished">2023-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/14/algorithm/template/3-5.%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">算法模板3-5.最小生成树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h1><p>定义：一个<strong>连通加权无向图</strong>中，一棵没有环的、权值最小的生成树。</p>
+<p>注：权重的正负对最小生成树问题没有影响。</p>
+<blockquote>
+<p>应用举例：已知若干个城市的坐标，要在城市间铺设公路，使得各个城市能够连通，且公路长度最小。</p>
+</blockquote>
+<h2 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h2><blockquote>
+<p>和Dijkstra算法的形式非常类似。</p>
+</blockquote>
+<h3 id="朴素版Prim算法"><a href="#朴素版Prim算法" class="headerlink" title="朴素版Prim算法"></a>朴素版Prim算法</h3><p>时间复杂度：<code>O(n^2 + m)</code> ，适合稠密图</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">集合S: 存储当前已经在连通块中的所有点</span><br><span class="line">    </span><br><span class="line">dist[i] &lt;- +<span class="function">INF</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="title">for</span> <span class="params">(i: <span class="number">0</span>~n)</span></span></span><br><span class="line"><span class="function">  t &lt;- 不在S中的距离S最近的点</span></span><br><span class="line"><span class="function">  用t更新其他点到**集合S**的距离，即所有连向集合S的边中权重最小的边 <span class="comment">// 注意：Dijkstra中是到起点的距离</span></span></span><br><span class="line"><span class="function">  st[t] </span>= <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> g[N][N]; <span class="comment">// 稠密图，用邻接矩阵存边权</span></span><br><span class="line"><span class="type">int</span> dist[N]; <span class="comment">// 存储其他点到集合S中的距离</span></span><br><span class="line"><span class="type">bool</span> st[N]; <span class="comment">// 记录每个点是否在S中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果图不连通，则返回INF；否则返回最小生成树的边权之和</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">prim</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dist, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> dist);</span><br><span class="line">    </span><br><span class="line">  <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 找到不在S中的距离S最近的点</span></span><br><span class="line">    <span class="type">int</span> t = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j ++)</span><br><span class="line">      <span class="keyword">if</span> (!st[j] &amp;&amp; (t == <span class="number">-1</span> || dist[j] &lt; dist[t])) t = j;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i &amp;&amp; dist[t] == INF) <span class="keyword">return</span> INF; <span class="comment">// 表示图不连通</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i) res += dist[t]; <span class="comment">// 从第二个点开始累加边权。注意这一步要写在更新距离前，以防负自环把自己的dist更新了</span></span><br><span class="line"></span><br><span class="line">    st[t] = <span class="literal">true</span>; <span class="comment">// 把该点加入S</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j ++) dist[j] = <span class="built_in">min</span>(dist[j], g[t][j]); <span class="comment">// 更新其他点到S的距离</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="堆优化版Prim算法（略）"><a href="#堆优化版Prim算法（略）" class="headerlink" title="堆优化版Prim算法（略）"></a>堆优化版Prim算法（略）</h3><p>时间复杂度：<code>O(mlogn)</code> ，适合稀疏图</p>
+<p>稀疏图一般用Kruskal算法，堆优化Prim算法不常用，因为Kruskal代码短很多，思路也更清晰。</p>
+<h2 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h2><p>时间复杂度：<code>O(mlogm)</code>（瓶颈是对边做排序的步骤），适合稀疏图</p>
+<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">集合S：存储最小生成树中的边</span><br><span class="line"></span><br><span class="line"><span class="comment">// O(mlogm)</span></span><br><span class="line"><span class="number">1.</span> 将所有边按权重从小到大排序</span><br><span class="line"></span><br><span class="line"><span class="comment">// O(m), 因为并查集是O(1)的，一共m条边</span></span><br><span class="line"><span class="number">2.</span> 枚举每条边a-b，权重c</span><br><span class="line">  <span class="keyword">if</span> a,b不连通</span><br><span class="line">    将这条边加入集合S中 <span class="comment">// 并查集的应用</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> p[N]; <span class="comment">// 并查集中父节点数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> <span class="comment">// 由于只需要枚举所有边，可以用结构体来存储所有边</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> a, b, w;</span><br><span class="line">  </span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Edge &amp;W)<span class="type">const</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> w &lt; W.w;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;edges[M];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> <span class="comment">// 并查集</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (p[x] != x) p[x] = <span class="built_in">find</span>(p[x]);</span><br><span class="line">  <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">kruskal</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">sort</span>(edges, edges + m);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) p[i] = i;</span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> res = <span class="number">0</span>, cnt = <span class="number">0</span>; <span class="comment">// res是最小生成树中的边权之和，cnt是最小生成树中的边的数量</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i ++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">int</span> a = edges[i].a, b = edges[i].b, w = edges[i].w;</span><br><span class="line">    </span><br><span class="line">    a = <span class="built_in">find</span>(a), b = <span class="built_in">find</span>(b); <span class="comment">// 查找a和b所在的连通块</span></span><br><span class="line">    <span class="keyword">if</span> (a != b) <span class="comment">// 如果两个连通块不连通，则合并两个连通块</span></span><br><span class="line">    &#123;</span><br><span class="line">      p[a] = b;</span><br><span class="line">      res += w;</span><br><span class="line">      cnt ++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (cnt &lt; n - <span class="number">1</span>) <span class="keyword">return</span> INF;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/14/algorithm/template/3-5.%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" data-id="clo29p1k4000ahh9g9py5b7n8" data-title="算法模板3-5.最小生成树" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/3-4.最短路" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/14/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/" class="article-date">
+  <time class="dt-published" datetime="2023-10-14T04:00:50.000Z" itemprop="datePublished">2023-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/14/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/">算法模板3-4.最短路</a>
     </h1>
   
 
@@ -108,6 +722,7 @@
 <blockquote>
 <p>最短路问题只需要考虑有向图。无向图只需要连两条对称的边就可以。</p>
 </blockquote>
+<h2 id="边权为1的最短路"><a href="#边权为1的最短路" class="headerlink" title="边权为1的最短路"></a>边权为1的最短路</h2><p>比较特殊，可以用BFS来求。单源和多源都可以。</p>
 <h2 id="单源最短路"><a href="#单源最短路" class="headerlink" title="单源最短路"></a>单源最短路</h2><p>求从一个点到其他所有点的最短路。</p>
 <h3 id="所有边权都是正数"><a href="#所有边权都是正数" class="headerlink" title="所有边权都是正数"></a>所有边权都是正数</h3><h4 id="朴素Dijkstra算法"><a href="#朴素Dijkstra算法" class="headerlink" title="朴素Dijkstra算法"></a>朴素Dijkstra算法</h4><p>时间复杂度：<code>O(n^2 + m)</code> ，适合稠密图</p>
 <h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>贪心</p>
@@ -197,712 +812,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/12/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/" data-id="clnmzko5d0000lw9g3g7d6fcr" data-title="算法模板3-4.最短路" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/16.状态模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-12T00:34:18.211Z" itemprop="datePublished">2023-10-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">设计模式16-状态模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>状态模式（State），当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。</p>
-<blockquote>
-<p>状态模式主要解决的是当控制一个对象<strong>状态转换的条件表达式过于复杂</strong>时的情况。把状态的判断逻辑转移到表示不同状态的一系列类当中，可以把复杂的判断逻辑简化。</p>
-</blockquote>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/12/MP5HFstNdQUkrT1.png" alt="状态模式结构图.png"></p>
-<p><code>State</code> 类：抽象状态类，定义一个接口以封装与 <code>Context</code> 的一个特定状态相关的行为。</p>
-<p><code>ConcreteState</code> 类：具体状态，每一个子类实现一个与 <code>Context</code> 的一个状态相关的行为。</p>
-<p><code>Context</code> 类：维护一个 <code>ConcreteState</code> 类的实例，这个实例定义当前的状态（可以修改 <code>State</code> 的类型）。</p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>State</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">State</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(Context context)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ConcreteState</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体状态类A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStateA</span> <span class="keyword">extends</span> <span class="title class_">State</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">    <span class="comment">//可以在方法里做一些事情</span></span><br><span class="line">    </span><br><span class="line">    context.setState(<span class="keyword">new</span> <span class="title class_">ConcreteStateB</span>()); <span class="comment">// 设置 ConcreteStateA 的下一状态是 ConcreteStateB</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体状态类B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStateB</span> <span class="keyword">extends</span> <span class="title class_">State</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(Context context)</span> &#123;</span><br><span class="line">    <span class="comment">//可以在方法里做一些事情</span></span><br><span class="line">    </span><br><span class="line">    context.setState(<span class="keyword">new</span> <span class="title class_">ConcreteStateA</span>()); <span class="comment">// 设置 ConcreteStateB 的下一状态是 ConcreteStateA</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Context</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Context</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> State state;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Context</span><span class="params">(State state)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = state; <span class="comment">// 设置 Context 的初始状态</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 可读写的状态属性，用于读取当前状态和设置新状态</span></span><br><span class="line">  <span class="keyword">public</span> State <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(State value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = value;</span><br><span class="line">    System.out.println(<span class="string">&quot;当前状态：&quot;</span> + <span class="built_in">this</span>.state.getClass().getName());</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state.handle(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Context</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Context</span>(<span class="keyword">new</span> <span class="title class_">ConcreteStateA</span>()); <span class="comment">// 设置c的初始状态为 ConcreteStateA</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不断请求，不断更改状态</span></span><br><span class="line">c.request();</span><br><span class="line">c.request();</span><br><span class="line">c.request();</span><br><span class="line">c.request();</span><br></pre></td></tr></table></figure>
-
-<h2 id="好处与使用场景"><a href="#好处与使用场景" class="headerlink" title="好处与使用场景"></a>好处与使用场景</h2><h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><p>将与特定状态相关的行为局部化，并且将不同状态的行为分割开来。</p>
-<blockquote>
-<p>将特定的状态相关的行为都放入一个对象中，由于所有与状态相关的代码都存在于某个ConcreteState中，所以通过定义新的子类可以很容易地增加新的状态和转换。</p>
-</blockquote>
-<p>这样做可以消除 <code>Long Method</code> 中庞大的条件分支语句。大的分支判断会使得它们难以修改和扩展。</p>
-<p>状态模式通过把各种状态转移逻辑分布到 <code>State</code> 的子类之间，来减少相互间的依赖，这样就容易维护和扩展了。</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>当一个对象的行为取决于它的状态，并且它必须在运行时刻根据状态改变它的行为时，就可以考虑使用状态模式。</p>
-<blockquote>
-<p>如果业务需求某项业务有多个状态，通常都是一些枚举常量。</p>
-<p>状态的变化都是依靠大量的多分支判断语句来实现，此时应该考虑<strong>将每一种业务状态定义为一个State的子类</strong>，于是这些对象就可以不依赖于其他对象而独立变化了。</p>
-<p>某一天客户需要更改需求，增加或减少业务状态或改变状态流程，就变得不困难了。</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" data-id="clnmixzg90000jb9gdopugcnc" data-title="设计模式16-状态模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/3-1.DFS和BFS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" class="article-date">
-  <time class="dt-published" datetime="2023-10-11T03:08:50.381Z" itemprop="datePublished">2023-10-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/">算法模板3-1.DFS和BFS</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="深度优先遍历-DFS"><a href="#深度优先遍历-DFS" class="headerlink" title="深度优先遍历 (DFS)"></a>深度优先遍历 (DFS)</h1><p>一条路走到底，无路可走了之后往回退<strong>一步</strong>，继续找一条其他的路一直往下走。</p>
-<p>形势一般为递归。</p>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><p>走到底了，返回的过程叫做回溯。</p>
-<p>回来的时候要<strong>恢复现场</strong>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 恢复现场的代码与修改状态的代码一般是对称的，例：</span></span><br><span class="line">path[u] = i;</span><br><span class="line">st[i] = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">dfs</span>(u + <span class="number">1</span>); <span class="comment">// 下一层递归返回之后恢复</span></span><br><span class="line">st[i] = <span class="literal">false</span>;</span><br><span class="line">path[u] = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h3><p>剪枝可以提高效率。</p>
-<h4 id="可行性剪枝"><a href="#可行性剪枝" class="headerlink" title="可行性剪枝"></a>可行性剪枝</h4><p>在搜索的过程中判断，如果这个节点不合法，那么它的子树上的所有节点也都不合法，直接停止搜索。</p>
-<h4 id="最优性剪枝"><a href="#最优性剪枝" class="headerlink" title="最优性剪枝"></a>最优性剪枝</h4><p>当前路径一定不如最优解，停止搜索。</p>
-<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><p>递归结束条件的选择+状态标记+递归后的恢复</p>
-<h3 id="顺序"><a href="#顺序" class="headerlink" title="顺序"></a>顺序</h3><h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="字典序输出"><a href="#字典序输出" class="headerlink" title="字典序输出"></a>字典序输出</h3><p>每一种输出都是一个叶子节点，第x位的遍历对应第x层的节点。整个搜索过程就是一棵搜索树（当然不需要自己存这棵树，系统栈会帮我们做这件事）。</p>
-<p>path数组下标为当前遍历到的位数，存储的值为这一位填的数字。</p>
-<h3 id="n-皇后"><a href="#n-皇后" class="headerlink" title="n-皇后"></a>n-皇后</h3><h4 id="进阶解法-以行作为一层来搜索"><a href="#进阶解法-以行作为一层来搜索" class="headerlink" title="进阶解法 - 以行作为一层来搜索"></a>进阶解法 - 以<strong>行</strong>作为一层来搜索</h4><p>col数组记录该列是否有皇后。</p>
-<p>额外开两个数组存储对角线和反对角线上是否有皇后，如果有代表不合法，剪枝。</p>
-<p>对角线数组的长度是 <code>2n - 1</code>。</p>
-<p>判断一个点在哪一条对角线&#x2F;反对角线上：用截距。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x, y分别是行号和列号，b为对角线号。</span><br><span class="line"></span><br><span class="line">y=x+b/ -&gt; b=y-x+n (+n是因为数组下标要为正数)</span><br><span class="line"></span><br><span class="line">y=-x+b -&gt; b=y+x</span><br></pre></td></tr></table></figure>
-
-<p>时间复杂度：<code>O(n*n!)</code></p>
-<h4 id="原始解法-以格子作为一层来搜索"><a href="#原始解法-以格子作为一层来搜索" class="headerlink" title="原始解法 - 以格子作为一层来搜索"></a>原始解法 - 以<strong>格子</strong>作为一层来搜索</h4><p>每一层dfs都往下拓展两种可能：一种是该格子放皇后；一种是该格子不放皇后。</p>
-<blockquote>
-<p>row数组记录该行是否有皇后。</p>
-<p>col数组记录该列是否有皇后。</p>
-<p>额外开两个数组存储对角线和反对角线上是否有皇后，如果有代表不合法，剪枝。</p>
-</blockquote>
-<p>时间复杂度：<code>O(2^(n^2))</code></p>
-<h1 id="宽度优先遍历-BFS"><a href="#宽度优先遍历-BFS" class="headerlink" title="宽度优先遍历 (BFS)"></a>宽度优先遍历 (BFS)</h1><p>一层一层遍历，某一层全部遍历完，再遍历该层第一个节点的第一个子节点，以此类推。</p>
-<p>形势一般为迭代。</p>
-<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">模拟队列 q[N], d[N] 使用d数组标记状态</span><br><span class="line"></span><br><span class="line">queue &lt;- 初始状态</span><br><span class="line">while queue不空</span><br><span class="line">&#123;</span><br><span class="line">	t &lt;- 队头</span><br><span class="line">	拓展t</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="往上下左右四个方向拓展的小技巧"><a href="#往上下左右四个方向拓展的小技巧" class="headerlink" title="往上下左右四个方向拓展的小技巧"></a>往上下左右四个方向拓展的小技巧</h2><p>用向量数组</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> dx[<span class="number">4</span>] = &#123;<span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>&#125;, dy[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i ++)</span><br><span class="line">  <span class="type">int</span> x = a + dx[i], y = b + dy[i];</span><br></pre></td></tr></table></figure>
-
-<h2 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h2><h3 id="走迷宫"><a href="#走迷宫" class="headerlink" title="走迷宫"></a>走迷宫</h3><p>以离起点距离为x的点为第x层</p>
-<h3 id="八数码"><a href="#八数码" class="headerlink" title="八数码"></a>八数码</h3><h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table>
-<thead>
-<tr>
-<th>算法</th>
-<th>数据结构</th>
-<th>空间复杂度</th>
-<th>性质</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DFS</td>
-<td>stack</td>
-<td>O(h)</td>
-<td></td>
-</tr>
-<tr>
-<td>BFS</td>
-<td>queue</td>
-<td>O(2^h^)</td>
-<td>最短路（第一次搜到时）</td>
-</tr>
-</tbody></table>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>DFS在空间上占优势；</p>
-<p>但BFS具有“最短路”的性质（前提：边的权重为1）。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" data-id="clnlih18g0000a99g5611g381" data-title="算法模板3-1.DFS和BFS" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/3-3.树与图的遍历" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" class="article-date">
-  <time class="dt-published" datetime="2023-10-11T02:32:01.302Z" itemprop="datePublished">2023-10-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/">算法模板3-3.树与图的遍历</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="树与图的遍历"><a href="#树与图的遍历" class="headerlink" title="树与图的遍历"></a>树与图的遍历</h1><p>时间复杂度：<code>O(n + m)</code>，其中 <code>n</code> 表示点数， <code>m</code> 表示边数。</p>
-<p>树是特殊的图，同样只需要考虑图的遍历即可。</p>
-<h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><p>一般树和图的遍历，每个点只需要遍历一次。</p>
-<p>需要一个状态数组 <code>st[]</code>，表示该点是否被遍历过。</p>
-<h3 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  st[u] = <span class="literal">true</span>; <span class="comment">// st[u] 表示点u已经遍历过</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = h[u]; ~i; i = ne[i]) &#123;</span><br><span class="line">    <span class="type">int</span> j = e[i]; <span class="comment">// 取到该边对应的点</span></span><br><span class="line">    <span class="keyword">if</span> (!st[j]) <span class="built_in">dfs</span>(j);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="树的重心"><a href="#树的重心" class="headerlink" title="树的重心"></a>树的重心</h4><p>重心定义：重心是指树中的一个结点，如果将这个点删除后，剩余各个连通块中点数的最大值最小，那么这个节点被称为树的重心。</p>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>在dfs的过程中从下往上算出以各个节点为根节点的子树节点的数量。</p>
-<p>对每个节点n：求出<code>以其子节点为根节点的所有子树节点数量</code>和 <code>总节点数量减去以n为根节点的子树节点数量</code> （即剩余连通块点数）的最大值。再求所有最大值的最小值。</p>
-<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><h3 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">st[<span class="number">1</span>] = <span class="literal">true</span>; <span class="comment">// 表示1号点已经被遍历过</span></span><br><span class="line">q.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (q.<span class="built_in">size</span>()) &#123;</span><br><span class="line">  <span class="type">int</span> t = q.<span class="built_in">front</span>();</span><br><span class="line">  q.<span class="built_in">pop</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = h[t]; ~i; i = ne[i]) &#123;</span><br><span class="line">    <span class="type">int</span> j = e[i];</span><br><span class="line">    <span class="keyword">if</span> (!st[j]) &#123;</span><br><span class="line">      st[j] = <span class="literal">true</span>; <span class="comment">// 把j号点标记为已经被遍历过</span></span><br><span class="line">      q.<span class="built_in">push</span>(j);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h3><h4 id="图中点的层次"><a href="#图中点的层次" class="headerlink" title="图中点的层次"></a>图中点的层次</h4><p>即从1号点开始一层层搜，计算每个点到1号点的最短距离。</p>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h4><h5 id="拓扑序列"><a href="#拓扑序列" class="headerlink" title="拓扑序列"></a>拓扑序列</h5><h6 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h6><p>若一个由图中所有点构成的序列 A 满足：对于图中的每条边 (x,y)，x 在 A 中都出现在 y 之前，则称 A 是该图的一个拓扑序列。</p>
-<p>其实也就是把点排成拓扑序列之后，满足所有的边都是从前面的点指向后面的点的。</p>
-<blockquote>
-<p>只有<strong>有向图</strong>有拓扑序列。</p>
-</blockquote>
-<h6 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h6><p>可以证明，一个有向无环图一定存在拓扑序列。</p>
-<blockquote>
-<p>有向无环图也被称为拓扑图。</p>
-<p>一个有向无环图，一定至少存在一个入度为0的点。</p>
-</blockquote>
-<h5 id="拓扑排序-1"><a href="#拓扑排序-1" class="headerlink" title="拓扑排序"></a>拓扑排序</h5><h6 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h6><p>所有入度为0的点都可以作为起点。（所以对于有环的图，这个环上的点永远不会入队，因为入度都不为0）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">用bfs框架：</span><br><span class="line">queue &lt;- 所有入度为0的点</span><br><span class="line"></span><br><span class="line">while queue 不空</span><br><span class="line">&#123;</span><br><span class="line">	t &lt;- 队头</span><br><span class="line">	枚举t的所有出边t-&gt;j</span><br><span class="line">		删掉t-&gt;j 即j号点的入度--：d[j] --;</span><br><span class="line">		if (!d[j]) queue &lt;- j</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>queue里的次序即为拓扑序。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" data-id="clnlih18m0006a99ge5g77t1y" data-title="算法模板3-3.树与图的遍历" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/3-2.树与图的存储" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/11/algorithm/template/3-2.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/" class="article-date">
-  <time class="dt-published" datetime="2023-10-11T02:28:29.120Z" itemprop="datePublished">2023-10-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/11/algorithm/template/3-2.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/">算法模板3-2.树与图的存储</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="树和图的存储"><a href="#树和图的存储" class="headerlink" title="树和图的存储"></a>树和图的存储</h1><p>树是一种特殊的图：无环连通图。与图的存储方式相同。</p>
-<p>对于无向图中的边ab，存储两条有向边a-&gt;b, b-&gt;a。</p>
-<p>因此我们可以只考虑有向图的存储。</p>
-<h2 id="存储方法一：邻接矩阵"><a href="#存储方法一：邻接矩阵" class="headerlink" title="存储方法一：邻接矩阵"></a>存储方法一：邻接矩阵</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g[a][b] 存储边a-&gt;b的权重(int)/有无(bool)</span><br></pre></td></tr></table></figure>
-
-<p>邻接矩阵不能存重边，不过一般存最短的就行。</p>
-<h2 id="存储方法二：邻接表"><a href="#存储方法二：邻接表" class="headerlink" title="存储方法二：邻接表"></a>存储方法二：邻接表</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>, M = N * <span class="number">2</span>; <span class="comment">// N：点的数量，M：边的数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// h[]对应点：对于每个点k，开一个单链表，存储k所有可以走到的点。h[k]存储这个单链表的头节点</span></span><br><span class="line"><span class="comment">// w[], e[], ne[]对应边：它们的下标都是边的编号，w[]值是边的权重，e[]值是指向的节点；ne[]存储某个节点的出边链表中，某条边的下一条边的编号</span></span><br><span class="line"><span class="type">int</span> h[N], w[M], e[M], ne[M], idx;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加一条边a-&gt;b</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">  e[idx] = b, ne[idx] = h[a], h[a] = idx ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">idx = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">memset</span>(h, <span class="number">-1</span>, <span class="keyword">sizeof</span> h); <span class="comment">// 让n个头节点都指向-1</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/11/algorithm/template/3-2.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/" data-id="clnlih18k0001a99g1hkwbd0a" data-title="算法模板3-2.树与图的存储" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/15.抽象工厂模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/11/design-pattern/15.%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-11T00:10:21.874Z" itemprop="datePublished">2023-10-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/11/design-pattern/15.%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">设计模式15-抽象工厂模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>抽象工厂模式（Abstract Factory），提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。</p>
-<blockquote>
-<p>与工厂方法模式的区别：</p>
-<p>以操作不同数据库为例：只有一个User类和User操作类的时候，是只需要工厂方法模式的，但现在显然你数据库中有很多的表，而SQL Server与Access又是两大不同的分类，所以解决这种涉及<strong>多个产品系列</strong>的问题，有一个专门的工厂模式叫抽象工厂模式。</p>
-</blockquote>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/11/RILujqhdlvWVsQF.png" alt="抽象工厂模式结构图.png"></p>
-<p>AbstractProductA和AbstractProductB是两个抽象产品，之所以为抽象，是因为它们都有可能有两种不同的实现，比如对两种数据库中某一张表的操作。</p>
-<p>ProductA1、ProductA2和ProductB1、ProductB2就是对两个抽象产品的具体分类的实现。</p>
-<p>IFactory是一个抽象工厂接口，它里面应该包含所有的产品创建的抽象方法。</p>
-<p>而ConcreteFactory1和ConcreteFactory2就是具体的工厂了，就像SqlserverFactory和AccessFactory一样。</p>
-<blockquote>
-<p>通常是在<strong>运行时刻</strong>再创建一个ConcreteFactory类的实例，这个具体的工厂再创建具有特定实现的产品对象，也就是说，为创建不同的产品对象，客户端应使用不同的具体工厂。</p>
-</blockquote>
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li><p><strong>易于交换产品系列</strong>。由于具体工厂类，例如 <code>IFactory factory =new AccessFactory()</code>，在一个应用中只需要在初始化的时候出现一次，这就使得改变一个应用的具体工厂变得非常容易（只在初始化的地方改一行就行），它只需要改变具体工厂即可使用不同的产品配置。</p>
-<blockquote>
-<p>我们的设计不能去防止需求的更改，那么我们的理想便是让改动变得最小，现在如果你要更改数据库访问，我们只需要更改具体工厂就可以做到。</p>
-</blockquote>
-</li>
-<li><p><strong>让具体的创建实例过程与客户端分离</strong>。客户端是通过它们的抽象接口操纵实例，产品的具体类名也被具体工厂的实现分离，不会出现在客户代码中。</p>
-<blockquote>
-<p>比如换数据库的例子，客户端所认识的只有IUser和IDepartment，至于它是用SQL Server来实现还是Access来实现就不知道了。</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>如果需求来自添加功能（比如添加数据库中的一张表），需要增加三个类： IProject、SqlserverProject、AccessProject ，还需要更改三个类：IFactory 、SqlserverFactory 和AccessFactory才可以完全实现。</li>
-<li>客户端程序类很多的情况下，还是需要改很多行 <code>IFactory factory =new AccessFactory()</code>这样的代码。</li>
-</ul>
-<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="1-用简单工厂来改进抽象工厂"><a href="#1-用简单工厂来改进抽象工厂" class="headerlink" title="1. 用简单工厂来改进抽象工厂"></a>1. 用简单工厂来改进抽象工厂</h3><p>去除IFactory 、SqlserverFactory和AccessFactory三个工厂类，取而代之的是DataAccess类，用一个简单工厂模式来实现。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataAccess</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">db</span> <span class="operator">=</span> <span class="string">&quot;Sqlserver&quot;</span>; <span class="comment">// 数据库预设名称，可换成其他</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> IUser <span class="title function_">createUser</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">IUser</span> <span class="variable">result</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">switch</span>(db) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&quot;Sqlserver&quot;</span>:</span><br><span class="line">        result = <span class="keyword">new</span> <span class="title class_">SqlserverUser</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&quot;Access&quot;</span>:</span><br><span class="line">        result = <span class="keyword">new</span> <span class="title class_">AccessUser</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>这样当新增一个表时，只需要修改DataAccess一个类，而不是IFactory 、SqlserverFactory 和AccessFactory这三个类。</p>
-<p>但当新增Oracle数据库时，抽象工厂只需要增加一个OracleFactory，而简单工厂需要在DataAccess类中的每个方法的switch语句中加对应的case。</p>
-<h3 id="2-反射-抽象工厂"><a href="#2-反射-抽象工厂" class="headerlink" title="2. 反射+抽象工厂"></a>2. 反射+抽象工厂</h3><p>使用一种编程方式：依赖注入（Dependency Injection）。</p>
-<p>方式：</p>
-<ol>
-<li><p>专门的IoC容器提供，比如Spring</p>
-</li>
-<li><p>Java反射技术</p>
-<p>将程序由编译时转为运行时。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常规的写法</span></span><br><span class="line"><span class="type">IUser</span> <span class="variable">result</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlserverUser</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 反射的写法</span></span><br><span class="line"><span class="type">IUser</span> <span class="variable">result</span> <span class="operator">=</span> (IUser)Class.forName(<span class="string">&quot;pathxxx.xxx.abstractfactory.SqlserverUser&quot;</span>).getDeclaredConstructor().newInstance();</span><br></pre></td></tr></table></figure>
-
-<p>由于forName传参是字符串，所以可以用变量来处理，根据需要来更换。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DataAccess类，用反射技术，取代IFactory、SqlserverFactory和AccessFactory</span></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataAccess</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">assemblyName</span> <span class="operator">=</span> <span class="string">&quot;pathxxx.xxx.abstractfactory.&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">db</span> <span class="operator">=</span> <span class="string">&quot;Sqlserver&quot;</span>; <span class="comment">// 数据库预设名称，可换成其他</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> IUser <span class="title function_">createUser</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (IUser)getInstance(assemblyName + db + <span class="string">&quot;User&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Object <span class="title function_">getInstance</span><span class="params">(String className)</span> &#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      result = Class.forName(className).getDeclaredConstructor().newInstance();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IvocationTargetException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>现在如果我们增加了Oracle数据访问，相关类的增加（如OracleUser, OracleDepartment）是不可避免的，这点无论我们用任何办法都解决不了，不过这叫扩展，<strong>开放-封闭原则</strong>告诉我们，<strong>对于扩展，我们开放。但对于修改，我们应该要尽量关闭。</strong></p>
-<p>现在如果需要增加Oracle数据库的访问，只需要更改 <code>private static String db =&quot;Sqlserver&quot;;</code> 为<code>privatestatic String db = &quot;Oracle&quot;;</code></p>
-<p>如果要增加Project表产品，只需要增加三个与Project相关的类 IProject、SqlserverProject、AccessProject，再修改DataAccesss，在其中增加一个public static IProject createProject()方法即可。</p>
-<h3 id="3-反射-配置文件-抽象工厂"><a href="#3-反射-配置文件-抽象工厂" class="headerlink" title="3. 反射+配置文件+抽象工厂"></a>3. 反射+配置文件+抽象工厂</h3><p>反射+抽象工厂问题：</p>
-<p>在更换数据库访问时，我还是需要去改程序（改db这个字符串的值）重编译，如果可以不改程序，那才是真正地符合开放-封闭原则。</p>
-<p>解决：</p>
-<p>利用配置文件来解决更改DataAccess的问题。读文件来给DB字符串赋值，在配置文件中写明是Sqlserver还是Access，这样就连DataAccess类也不用更改了。</p>
-<ol>
-<li><p>添加一个db.properties文件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db=Sqlserver</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>再更改DataAccess类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加与读取文件内容相关的包</span></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.FileReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataAccess</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">assemblyName</span> <span class="operator">=</span> <span class="string">&quot;pathxxx.xxx.abstractfactory.&quot;</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">getDb</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="type">Properties</span> <span class="variable">properties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">      <span class="comment">// 需要将db.properties文件放到要编译的class目录中，并确保下面path路径与实际db.properties文件路径一致。否则会报No such file or directory错误</span></span><br><span class="line">      <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> System.getProperty(<span class="string">&quot;user.dir&quot;</span>) + <span class="string">&quot;/pathxxx/xxx/abstractfactory/db.properties&quot;</span>;</span><br><span class="line">      System.out.println(<span class="string">&quot;path: &quot;</span> + path);</span><br><span class="line">      <span class="type">BufferedReader</span> <span class="variable">bufferedReader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(path));</span><br><span class="line">      properties.load(bufferedReader);</span><br><span class="line">      result = properties.getProperty(<span class="string">&quot;db&quot;</span>); <span class="comment">// 读取db.properties配置文件中db的内容</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOExceprtion e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> IUser <span class="title function_">createUser</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">db</span> <span class="operator">=</span> getDb();</span><br><span class="line">    <span class="keyword">return</span> (IUser)getInstance(assemblyName + db + <span class="string">&quot;User&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>将来要更换数据库，根本无须重新编译任何代码，只需要更改配置文件就好了。应用了反射+配置文件+抽象工厂模式解决了数据库访问时的可维护、可扩展的问题。</p>
-<blockquote>
-<p>所有在用简单工厂的地方，都可以考虑用反射技术来去除switch或if，解除分支判断带来的耦合，解决它们难以应对变化，难以维护和扩展的诟病。</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/11/design-pattern/15.%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="clnl4h65y0000id9ghhwge1ok" data-title="设计模式15-抽象工厂模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/STL总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2023-10-10T07:41:46.601Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="vector-变长数组，倍增的思想"><a href="#vector-变长数组，倍增的思想" class="headerlink" title="vector, 变长数组，倍增的思想"></a>vector, 变长数组，倍增的思想</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">size()  返回元素个数</span><br><span class="line">empty()  返回是否为空</span><br><span class="line">clear()  清空</span><br><span class="line">front()/back()</span><br><span class="line">push_back()/pop_back()</span><br><span class="line">begin()/end()</span><br><span class="line">[]</span><br><span class="line">支持比较运算，按字典序</span><br></pre></td></tr></table></figure>
-
-<h3 id="pair"><a href="#pair" class="headerlink" title="pair&lt;int, int&gt;"></a>pair&lt;int, int&gt;</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">first, 第一个元素</span><br><span class="line">second, 第二个元素</span><br><span class="line">支持比较运算，以first为第一关键字，以second为第二关键字（字典序）</span><br></pre></td></tr></table></figure>
-
-<h3 id="string，字符串"><a href="#string，字符串" class="headerlink" title="string，字符串"></a>string，字符串</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size()/length()  返回字符串长度</span><br><span class="line">empty()</span><br><span class="line">clear()</span><br><span class="line">substr(起始下标，(子串长度))  返回子串</span><br><span class="line">c_str()  返回字符串所在字符数组的起始地址</span><br></pre></td></tr></table></figure>
-
-<h3 id="queue-队列"><a href="#queue-队列" class="headerlink" title="queue, 队列"></a>queue, 队列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">push()  向队尾插入一个元素</span><br><span class="line">front()  返回队头元素</span><br><span class="line">back()  返回队尾元素</span><br><span class="line">pop()  弹出队头元素</span><br></pre></td></tr></table></figure>
-
-<h3 id="priority-queue-优先队列，默认是大根堆"><a href="#priority-queue-优先队列，默认是大根堆" class="headerlink" title="priority_queue, 优先队列，默认是大根堆"></a>priority_queue, 优先队列，默认是大根堆</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">push()  插入一个元素</span><br><span class="line">top()  返回堆顶元素</span><br><span class="line">pop()  弹出堆顶元素</span><br><span class="line">定义成小根堆的方式：priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; q;</span><br></pre></td></tr></table></figure>
-
-<h3 id="stack-栈"><a href="#stack-栈" class="headerlink" title="stack, 栈"></a>stack, 栈</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">push()  向栈顶插入一个元素</span><br><span class="line">top()  返回栈顶元素</span><br><span class="line">pop()  弹出栈顶元素</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="deque-双端队列"><a href="#deque-双端队列" class="headerlink" title="deque, 双端队列"></a>deque, 双端队列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">clear()</span><br><span class="line">front()/back()</span><br><span class="line">push_back()/pop_back()</span><br><span class="line">push_front()/pop_front()</span><br><span class="line">begin()/end()</span><br><span class="line">[]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="set-map-multiset-multimap-基于平衡二叉树（红黑树），动态维护有序序列"><a href="#set-map-multiset-multimap-基于平衡二叉树（红黑树），动态维护有序序列" class="headerlink" title="set, map, multiset, multimap, 基于平衡二叉树（红黑树），动态维护有序序列"></a>set, map, multiset, multimap, 基于平衡二叉树（红黑树），动态维护有序序列</h3><pre><code>size()
-empty()
-clear()
-begin()/end()
-++, -- 返回前驱和后继，时间复杂度 O(logn)
-</code></pre>
-<h4 id="set-multiset"><a href="#set-multiset" class="headerlink" title="set&#x2F;multiset"></a>set&#x2F;multiset</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">insert()  插入一个数</span><br><span class="line">find()  查找一个数</span><br><span class="line">count()  返回某一个数的个数</span><br><span class="line">erase()</span><br><span class="line">    (1) 输入是一个数x，删除所有x   O(k + logn)</span><br><span class="line">    (2) 输入一个迭代器，删除这个迭代器</span><br><span class="line">lower_bound()/upper_bound()</span><br><span class="line">    lower_bound(x)  返回大于等于x的最小的数的迭代器</span><br><span class="line">    upper_bound(x)  返回大于x的最小的数的迭代器</span><br></pre></td></tr></table></figure>
-
-<h4 id="map-multimap"><a href="#map-multimap" class="headerlink" title="map&#x2F;multimap"></a>map&#x2F;multimap</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">insert()  插入的数是一个pair</span><br><span class="line">erase()  输入的参数是pair或者迭代器</span><br><span class="line">find()</span><br><span class="line">[]  注意multimap不支持此操作。 时间复杂度是 O(logn)</span><br><span class="line">lower_bound()/upper_bound()</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="unordered-set-unordered-map-unordered-multiset-unordered-multimap-哈希表"><a href="#unordered-set-unordered-map-unordered-multiset-unordered-multimap-哈希表" class="headerlink" title="unordered_set, unordered_map, unordered_multiset, unordered_multimap, 哈希表"></a>unordered_set, unordered_map, unordered_multiset, unordered_multimap, 哈希表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">和上面类似，增删改查的时间复杂度是 O(1)</span><br><span class="line">不支持 lower_bound()/upper_bound()， 迭代器的++，--</span><br></pre></td></tr></table></figure>
-
-<h3 id="bitset-圧位"><a href="#bitset-圧位" class="headerlink" title="bitset, 圧位"></a>bitset, 圧位</h3><pre><code>bitset&lt;10000&gt; s;
-~, &amp;, |, ^
-&gt;&gt;, &lt;&lt;
-==, !=
-[]
-count()  返回有多少个1
-
-any()  判断是否至少有一个1
-none()  判断是否全为0
-
-set()  把所有位置成1
-set(k, v)  将第k位变成v
-reset()  把所有位变成0
-flip()  等价于~
-flip(k) 把第k位取反
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" data-id="clnk1a4260003jd9g1k7n5bii" data-title="STL总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-8.字符串哈希" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" class="article-date">
-  <time class="dt-published" datetime="2023-10-10T07:24:15.174Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/">算法模板2-8.字符串哈希</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="字符串哈希"><a href="#字符串哈希" class="headerlink" title="字符串哈希"></a>字符串哈希</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>快速判断一个字符串中两个区间对应的子串是否完全相同。</p>
-<blockquote>
-<p>除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。</p>
-</blockquote>
-<h2 id="字符串前缀哈希法"><a href="#字符串前缀哈希法" class="headerlink" title="字符串前缀哈希法"></a>字符串前缀哈希法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str = &quot;ABCABCDE&quot;</span><br><span class="line"></span><br><span class="line">把每一个前缀的哈希值算出来：</span><br><span class="line">h[0] = 0</span><br><span class="line">h[1] = &quot;A&quot;的哈希值</span><br><span class="line">h[2] = &quot;AB&quot;的哈希值</span><br><span class="line">h[3] = &quot;ABC&quot;的哈希值</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p><strong>结果：</strong>可以通过这些前缀的哈希值，算出 <strong><code>str</code> 任何一个子串</strong>的哈希值。</p>
-<h2 id="如何定义某一前缀的哈希值？"><a href="#如何定义某一前缀的哈希值？" class="headerlink" title="如何定义某一前缀的哈希值？"></a>如何定义某一前缀的哈希值？</h2><p>把字符串str看成一个p进制的数。str中<strong>每一个字符（的ASCII码）</strong>对应这个<strong>p进制数的每一位数字</strong>。最后一个字符对应最低位。</p>
-<blockquote>
-<p>例：hash(“ABC”) &#x3D; (A * p^2 + B * p^1 + C * p^0)</p>
-</blockquote>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p><strong>目标：</strong>将str映射到0～Q-1的范围内。</p>
-<p><strong>经验值：</strong> <code> p=131或13331</code>, <code>Q = 2^64</code>。用 <code>unsigned long long</code> 来存储哈希值，当它溢出时，刚好等价于取模。</p>
-<h4 id="1-算出这个p进制数x"><a href="#1-算出这个p进制数x" class="headerlink" title="1. 算出这个p进制数x"></a>1. 算出这个p进制数x</h4><h5 id="2-x-mod-Q"><a href="#2-x-mod-Q" class="headerlink" title="2. x mod Q"></a>2. x mod Q</h5><p>由于str的长度可能比较长，x可能为一个很大的数字，不好存。所以算出x之后，需要mod一个比较小的数Q。</p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>不能把某一个字母映射成0。例：”A”-&gt;0, “AA”-&gt;0，将不同的字符串映射成了同一个数。</li>
-<li>假定无冲突。这个算法没有考虑冲突情况。p和Q取经验值的情况下，起冲突的可能性很小。</li>
-</ol>
-<h2 id="如何算出任意子串的哈希值？"><a href="#如何算出任意子串的哈希值？" class="headerlink" title="如何算出任意子串的哈希值？"></a>如何算出任意子串的哈希值？</h2><p>假设我们要算 <code>str</code> 第 <code>L</code> 位和第<code>R</code> 位之间这个子串的哈希值。</p>
-<p>已知 <code>h[R]</code> 和 <code>h[L-1]</code> ：</p>
-<p><code>h[R] - h[L - 1] * p^(R - L + 1)</code> 即为子串的哈希值。</p>
-<blockquote>
-<p><code>h[R]</code> 中第R个字符对应x的第0位，第1个字符对应x的第R-1位</p>
-<p><code>h[L-1]</code>  中第L-1个字符对应x的第0位，第1个字符对应x的第L-2位</p>
-<p>h[L-1] * p^(R - L + 1)是为了将 <code>h[L-1]</code> 往左移，与 <code>h[R]</code> 对齐。</p>
-</blockquote>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ULL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>, <span class="type">int</span> P = <span class="number">13331</span>;</span><br><span class="line"><span class="type">char</span> str[N];</span><br><span class="line">ULL h[N], p[N]; <span class="comment">// h[k]存储字符串前k个字母的哈希值，p[k]存储 P^k mod 2^64（提前预处理减少重复计算）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化：注意str字符串是从1开始的，scanf(&quot;%s&quot;, str + 1)</span></span><br><span class="line">p[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  h[i] = h[i - <span class="number">1</span>] * P + str[i];</span><br><span class="line">  p[i] = p[i - <span class="number">1</span>] * P;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算子串 str[l ~ r] 的哈希值</span></span><br><span class="line"><span class="function">ULL <span class="title">get</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> h[r] - h[l - <span class="number">1</span>] * p[r - l + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>将字符串看成P进制数，P的经验值是131或13331，取这两个值的冲突概率低</p>
-<h3 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h3><p>取模的数用2^64，这样直接用unsigned long long存储，溢出的结果就是取模的结果</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" data-id="clnk1a4260002jd9g4s4ggh14" data-title="算法模板2-8.字符串哈希" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-7.哈希" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" class="article-date">
-  <time class="dt-published" datetime="2023-10-10T03:42:19.567Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/">算法模板2-7.哈希</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="一般哈希"><a href="#一般哈希" class="headerlink" title="一般哈希"></a>一般哈希</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>把庞大的值域映射到一个比较小的空间。</p>
-<p>如 <code>0~10^9 -&gt; 0~10^5</code>。</p>
-<blockquote>
-<p>与离散化的关系：离散化是需要保序的，可以看作一种特殊的哈希方式</p>
-</blockquote>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-x-mod-n"><a href="#1-x-mod-n" class="headerlink" title="1. x mod n"></a>1. x mod n</h3><p><code>n</code> 即数组长度，它是一个质数，并且这个质数要离2的整数次幂尽可能远。</p>
-<blockquote>
-<p>这样取可以使冲突的概率最小。数学证明待补充</p>
-</blockquote>
-<h3 id="2-解决冲突"><a href="#2-解决冲突" class="headerlink" title="2. 解决冲突"></a>2. 解决冲突</h3><p>有两种方法</p>
-<h4 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h4><p>数组的长度即为<code>n</code>，其中每个元素都是一个链表，取模之后结果相同的数存在链表里</p>
-<h4 id="开放寻址法"><a href="#开放寻址法" class="headerlink" title="开放寻址法"></a>开放寻址法</h4><p>只开一个一维数组，但长度应取为题给数据范围的2～3倍（经验值）。</p>
-<p>取模之后存在数组对应的位置，如已有元素存在，则依次向后面的位置找，直到找到空位存下来。</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><h3 id="拉链法-1"><a href="#拉链法-1" class="headerlink" title="拉链法"></a>拉链法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> h[N], e[N], ne[N], idx;</span><br><span class="line"><span class="comment">// h[]是数组（槽），数组中的每个元素是一个链表，其中有e[]（存值）和ne[]（存下一个节点的下标），idx为当前新插入节点编号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要先初始化h数组元素为-1，代表空链表</span></span><br><span class="line"><span class="built_in">memset</span>(h, <span class="number">-1</span>, <span class="built_in">sizeof</span>(h)); <span class="comment">// -1二进制为11111111，刚好可以按字节设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 向哈希表中插入一个数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// k即为哈希值</span></span><br><span class="line">  <span class="type">int</span> k = (x % N + N) % N; <span class="comment">// 目的：让k在0～N范围内。cpp取模：原数是负数的话取模之后还是负数，所以要+N；但正数+N之后又大于N了，所以需要再取一次模</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 以下代码实现了将新节点插入h[k]，作为新的头节点</span></span><br><span class="line">  e[idx] = x;</span><br><span class="line">  ne[idx] = h[k];</span><br><span class="line">  h[k] = idx ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> k = (x % N + N) % N;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = h[k]; ~i; i = ne[i]) <span class="comment">// 从头节点往后找</span></span><br><span class="line">    <span class="keyword">if</span> (e[i] == x) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="开放寻址法-1"><a href="#开放寻址法-1" class="headerlink" title="开放寻址法"></a>开放寻址法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200003</span>, null = <span class="number">0x3f3f3f3f</span>; <span class="comment">// null的值近似无穷大，代表数组该位置为空</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> h[N];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要先初始化h数组元素为0x3f3f3f3f，代表所有位置都空</span></span><br><span class="line"><span class="built_in">memset</span>(h, <span class="number">0x3f</span>, <span class="built_in">sizeof</span>(h)); <span class="comment">// memset按字节来设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果x在哈希表中，返回x的下标；如果x不在哈希表中，返回x应该插入的位置</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> t = (x % N + N) % N;</span><br><span class="line">  <span class="keyword">while</span> (h[t] != null &amp;&amp; h[t] != x) &#123;</span><br><span class="line">    t ++;</span><br><span class="line">    <span class="keyword">if</span> (t == N) t = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入操作：</span></span><br><span class="line"><span class="type">int</span> k = <span class="built_in">find</span>(x);</span><br><span class="line">h[k] = x;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找操作：</span></span><br><span class="line"><span class="type">int</span> k = <span class="built_in">find</span>(x);</span><br><span class="line"><span class="keyword">if</span> (h[k] == null) <span class="built_in">puts</span>(<span class="string">&quot;No&quot;</span>);</span><br><span class="line"><span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">&quot;Yes&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
-<li>一般不需要删除元素。如果需要考虑删除，一般是另开一个布尔数组，来标记对应元素是否已删除。</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" data-id="clnk1a4250001jd9g2wlw56we" data-title="算法模板2-7.哈希" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/14.观察者模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-09T16:30:01.000Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式14-观察者模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>观察者模式又叫作发布-订阅（Publish&#x2F;Subscribe）模式。</p>
-<p>观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/10/LCoseQJmfYubWig.jpg" alt="观察者模式结构图.jpg"></p>
-<h3 id="Subject类"><a href="#Subject类" class="headerlink" title="Subject类"></a>Subject类</h3><p>即主题或抽象通知者，一般用一个抽象类或者一个接口实现。</p>
-<p>它把所有对观察者对象的引用保存在一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象。</p>
-<h3 id="Observer类"><a href="#Observer类" class="headerlink" title="Observer类"></a>Observer类</h3><p>抽象观察者，为所有的具体观察者定义一个接口，在得到主题的通知时更新自己。这个接口叫作更新接口。更新接口通常包含一个update()方法，这个方法叫作更新方法。</p>
-<p>抽象观察者一般用一个抽象类或者一个接口实现。</p>
-<h3 id="ConcreteSubject类"><a href="#ConcreteSubject类" class="headerlink" title="ConcreteSubject类"></a>ConcreteSubject类</h3><p>具体主题或具体通知者，将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。</p>
-<p>具体主题角色通常用一个具体子类实现。</p>
-<h3 id="ConcreteObserver类"><a href="#ConcreteObserver类" class="headerlink" title="ConcreteObserver类"></a>ConcreteObserver类</h3><p>具体观察者，实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。具体观察者角色可以保存一个<strong>指向具体主题对象的引用</strong>。</p>
-<p>具体观察者角色通常用一个具体子类实现。</p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>Subject类：通知者抽象类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Observer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Observer&gt;(); <span class="comment">// 针对抽象的Observer编程</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 增加观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">attach</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">    list.add(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 减少观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">detach</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">    list.remove(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 通知观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyObserver</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (Observer item : list) &#123;</span><br><span class="line">      item.update();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> String subjectState;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getSubjectState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.subjectState;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSubjectState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.subjectState = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Observer类：抽象观察者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ConcreteSubject类：具体通知者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">  <span class="comment">// 具体通知者的方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ConcreteObserver类：具体观察者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteObserver</span> <span class="keyword">extends</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> Subject sub;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ConcreteObserver</span><span class="params">(String name, Subject sub)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.sub = sub;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;观察者&quot;</span> + <span class="built_in">this</span>.name + <span class="string">&quot;的新状态是&quot;</span> + <span class="built_in">this</span>.sub.getSubjectState());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Subject</span> <span class="variable">subject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteSubject</span>();</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameX&quot;</span>, subject));</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameY&quot;</span>, subject));</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameZ&quot;</span>, subject));</span><br><span class="line"></span><br><span class="line">subject <span class="title function_">setSubjectState</span><span class="params">(<span class="string">&quot;ABC&quot;</span>)</span>;</span><br><span class="line">subject.notifyObserver();</span><br></pre></td></tr></table></figure>
-
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>将一个系统分割成一系列相互协作的类有一个很不好的副作用，那就是需要维护相关对象间的一致性。我们不希望为了维持一致性而使各类紧密耦合，这样会给维护、扩展和重用都带来不便。</p>
-<h3 id="何时使用观察者模式？"><a href="#何时使用观察者模式？" class="headerlink" title="何时使用观察者模式？"></a>何时使用观察者模式？</h3><ol>
-<li>当一个对象的改变需要同时改变其他对象，而且它不知道具体有多少对象有待改变时</li>
-<li>当一个抽象模型有两个方面，其中一方面依赖于另一方面，这时用观察者模式可以将这两者封装在独立的对象中使它们各自独立地改变和复用</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>观察者模式所做的工作其实就是在解除耦合。让耦合的双方都依赖于抽象，而不是依赖于具体。从而使得各自的变化都不会影响另一边的变化。</p>
-<h2 id="Java内置接口实现"><a href="#Java内置接口实现" class="headerlink" title="Java内置接口实现"></a>Java内置接口实现</h2><p>现实编程中，具体的观察者完全有可能是风马牛不相及的类，但它们都需要根据通知者的通知来做出update()的操作，此时不适合使用继承，要用接口来实现。</p>
-<p>Java已经为观察者模式准备好了相关的接口和抽象类了：<strong>观察者接口java.util.Observer</strong> 和 <strong>通知者类java.util.Observable</strong> 。</p>
-<p>Java内置的Observable是一个类，这样设计是有问题的。一个类，就只能继承它，但我们自己的类可能本身就需要继承其他抽象类，这就产生了麻烦。Java不支持多重继承，这就严重限制了Observable的复用潜力。所以，当你这段代码用javac编译时，会给出提示： <code>警告：［deprecation］ java.util中的Observable已过时。</code> 系统其实是建议你不要复用这样的方法。所以真实编程中，我们也要考虑怎么取舍，如何修改的问题。</p>
-<h3 id="示例版本一"><a href="#示例版本一" class="headerlink" title="示例版本一"></a>示例版本一</h3><h3 id="示例版本二"><a href="#示例版本二" class="headerlink" title="示例版本二"></a>示例版本二</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clnk1a4210000jd9gcok3gxfs" data-title="设计模式14-观察者模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://peixuanhu.github.io/2023/10/14/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/" data-id="clnmzko5d0000lw9g3g7d6fcr" data-title="算法模板3-4.最短路" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -918,7 +828,7 @@ flip(k) 把第k位取反
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -957,23 +867,23 @@ flip(k) 把第k位取反
       <ul>
         
           <li>
-            <a href="/2023/10/12/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/">算法模板3-4.最短路</a>
+            <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">算法模板4-1.DP-背包问题</a>
           </li>
         
           <li>
-            <a href="/2023/10/12/design-pattern/16.%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">设计模式16-状态模式</a>
+            <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/">算法模板4-0.DP理解方式</a>
           </li>
         
           <li>
-            <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/">算法模板3-1.DFS和BFS</a>
+            <a href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/">算法模板3-6.二分图</a>
           </li>
         
           <li>
-            <a href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/">算法模板3-3.树与图的遍历</a>
+            <a href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">设计模式21-单例模式</a>
           </li>
         
           <li>
-            <a href="/2023/10/11/algorithm/template/3-2.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/">算法模板3-2.树与图的存储</a>
+            <a href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">设计模式20-迭代器模式</a>
           </li>
         
       </ul>
