@@ -104,23 +104,97 @@
 <h2 id="01背包问题"><a href="#01背包问题" class="headerlink" title="01背包问题"></a>01背包问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
 <p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
 <p><strong>每件物品只能用一次或者不用。</strong></p>
-<h3 id="状态分析"><a href="#状态分析" class="headerlink" title="状态分析"></a>状态分析</h3><h5 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h5><p><code>f(i, j)</code></p>
-<h6 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h6><p>所有选法的集合。</p>
+<h3 id="状态分析"><a href="#状态分析" class="headerlink" title="状态分析"></a>状态分析</h3><h4 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h4><p><code>f(i, j)</code></p>
+<h5 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h5><p>所有选法的集合。</p>
 <p>满足条件：</p>
 <ol>
 <li>只从前 <code>i</code> 个物品中选</li>
 <li>选出来的物品的 <code>总体积 &lt;= j</code></li>
 </ol>
-<h6 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h6><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
+<h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
+<h4 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h4><p>集合划分：<code>f(i, j)</code> 分成不含 <code>i</code> （一定存在）和含 <code>i</code>（不一定存在，只有j &gt;&#x3D; vi才存在） 两种情况的集合。</p>
+<p>得出状态转移方程：</p>
+<p><code>f(i, j) = max(f(i - 1, j), f(i - 1, j - vi) + wi)</code></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="朴素：二维"><a href="#朴素：二维" class="headerlink" title="朴素：二维"></a>朴素：二维</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n, m; <span class="comment">// n: N, m: V</span></span><br><span class="line"><span class="type">int</span> v[N], w[N];</span><br><span class="line"><span class="type">int</span> f[N][N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= m; j ++)</span><br><span class="line">  &#123;</span><br><span class="line">    f[i][j] = f[i - <span class="number">1</span>][j]; <span class="comment">// 不含i，一定存在</span></span><br><span class="line">    <span class="keyword">if</span> (j &gt;= v[i]) f[i][j] = <span class="built_in">max</span>(f[i][j], f[i - <span class="number">1</span>][j - v[i]] + w[i]); <span class="comment">// 含i，需要判断条件</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; f[n][m] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<h4 id="优化：一维"><a href="#优化：一维" class="headerlink" title="优化：一维"></a>优化：一维</h4><p>思路：</p>
+<p>由于 <code>f[i]</code> 这一层只需要用到 <code>f[i - 1]</code> 层，所以可以优化成两层的滚动数组。</p>
+<p>又两种情况：j和j-v[i]都是小于等于j的，说明不会同时用到当前列两边的数据，所以可以进一步优化成一层数组，即优化成一维数组。</p>
+<p>需要注意：由于j-v[i]在j的左边，需要保证第i-1层循环中的<code>f[j - v[i]]</code>在被用到的时候没有被第i层更新过，所以内层循环j应从大到小枚举。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = m; j &gt;= v[i]; j --)</span><br><span class="line">  &#123;</span><br><span class="line">    f[j] = <span class="built_in">max</span>(f[j], f[j - v[i]] + w[i]);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
 <p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
 <p><strong>每件物品有无限个。</strong></p>
+<h3 id="状态分析-1"><a href="#状态分析-1" class="headerlink" title="状态分析"></a>状态分析</h3><h4 id="状态表示-1"><a href="#状态表示-1" class="headerlink" title="状态表示"></a>状态表示</h4><p><code>f(i, j)</code></p>
+<h5 id="集合-1"><a href="#集合-1" class="headerlink" title="集合"></a>集合</h5><p>所有选法的集合。</p>
+<p>满足条件：</p>
+<ol>
+<li>只从前 <code>i</code> 个物品中选</li>
+<li>选出来的物品的 <code>总体积 &lt;= j</code></li>
+</ol>
+<h5 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h5><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
+<h4 id="状态计算-1"><a href="#状态计算-1" class="headerlink" title="状态计算"></a>状态计算</h4><p>集合划分：<code>f(i, j)</code> 分成含<code>0~k</code> 个 <code>i</code> 的集合，其中<code>k</code>满足<code>j &gt;= k*v[i]</code>。</p>
+<p>得出状态转移方程：</p>
+<p><code>f(i, j) = max(f(i - 1, j), f(i - 1, j - k * vi) + k * wi), j &gt;= k*v[i]</code></p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><h4 id="朴素：二维，三重循环"><a href="#朴素：二维，三重循环" class="headerlink" title="朴素：二维，三重循环"></a>朴素：二维，三重循环</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n, m; <span class="comment">// n: N, m: V</span></span><br><span class="line"><span class="type">int</span> v[N], w[N];</span><br><span class="line"><span class="type">int</span> f[N][N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= m; j ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k * v[i] &lt;= j; k ++)</span><br><span class="line">      f[i][j] = <span class="built_in">max</span>(f[i][j], f[i - <span class="number">1</span>][j - k * v[i]] + k * w[i]);</span><br></pre></td></tr></table></figure>
+
+<h4 id="优化：一维，两重循环"><a href="#优化：一维，两重循环" class="headerlink" title="优化：一维，两重循环"></a>优化：一维，两重循环</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f[i, j] = max(f[i - 1][j], f[i - 1][j - v] + w, f[i - 1][j - 2v] + 2w, f[i - 1][j - 3v] + 3w, ...)</span><br><span class="line">=&gt;f[i, j - v] = max(f[i - 1][j - v], f[i - 1][j - 2v] + w, f[i - 1][j - 3v] + 2w, ...)</span><br><span class="line">可以推出：</span><br><span class="line">f[i, j] = max(f[i - 1][j], f[i, j - v] + w)</span><br></pre></td></tr></table></figure>
+
+<p><code>f[i, j - v]</code>用的是第<code>i</code>层的<code>f[j - v[i]]</code> 所以内层循环j从小到大枚举，这样<code>f[j - v[i]]</code> 刚好是被第<code>i</code>层更新过的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = v[i]; j &lt;= m; j ++)</span><br><span class="line">      f[i][j] = <span class="built_in">max</span>(f[j], f[j - v[i]] + w[i]);</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="多重背包问题"><a href="#多重背包问题" class="headerlink" title="多重背包问题"></a>多重背包问题</h2><h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
 <p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
 <p><strong>每件物品有 <code>si</code> 个。</strong></p>
-<h3 id="朴素版"><a href="#朴素版" class="headerlink" title="朴素版"></a>朴素版</h3><h3 id="优化版"><a href="#优化版" class="headerlink" title="优化版"></a>优化版</h3><h2 id="分组背包问题"><a href="#分组背包问题" class="headerlink" title="分组背包问题"></a>分组背包问题</h2><h3 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 组物品和容量是为 <code>V</code> 的背包，每组物品里有若干件物品。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
+<h3 id="状态分析-2"><a href="#状态分析-2" class="headerlink" title="状态分析"></a>状态分析</h3><h4 id="状态表示-2"><a href="#状态表示-2" class="headerlink" title="状态表示"></a>状态表示</h4><p><code>f(i, j)</code></p>
+<h5 id="集合-2"><a href="#集合-2" class="headerlink" title="集合"></a>集合</h5><p>所有选法的集合。</p>
+<p>满足条件：</p>
+<ol>
+<li>只从前 <code>i</code> 个物品中选</li>
+<li>选出来的物品的 <code>总体积 &lt;= j</code></li>
+</ol>
+<h5 id="属性-2"><a href="#属性-2" class="headerlink" title="属性"></a>属性</h5><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
+<h4 id="状态计算-2"><a href="#状态计算-2" class="headerlink" title="状态计算"></a>状态计算</h4><p>集合划分：<code>f(i, j)</code> 分成含<code>0~s[i]</code> 个 <code>i</code> 的集合。</p>
+<p>得出状态转移方程（和完全背包类似，只是k变成了s[i]）：</p>
+<p><code>f(i, j) = max(f(i - 1, j - k * vi) + k * wi), k=0, 1, ..., si</code></p>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><h4 id="朴素"><a href="#朴素" class="headerlink" title="朴素"></a>朴素</h4><p>时间复杂度：<code>N * V * S</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= m; j ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt;= s[i] &amp;&amp; k * v[i] &lt;= j; k ++)</span><br><span class="line">      f[i][j] = <span class="built_in">max</span>(f[i][j], f[i - <span class="number">1</span>][j - k * v[i]] + k * w[i]);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="优化：二进制优化"><a href="#优化：二进制优化" class="headerlink" title="优化：二进制优化"></a>优化：二进制优化</h4><p>能不能像完全背包一样优化呢？</p>
+<p>不能，它们是有区别的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 完全背包</span></span><br><span class="line">f[i][j] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j], f[i - <span class="number">1</span>][j - v] + w, f[i - <span class="number">1</span>][j - <span class="number">2</span>v] + <span class="number">2</span>w, f[i - <span class="number">1</span>][j - <span class="number">3</span>v] + <span class="number">3</span>w, ...)</span><br><span class="line">=&gt;f[i][j - v] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j - v], f[i - <span class="number">1</span>][j - <span class="number">2</span>v] + w, f[i - <span class="number">1</span>][j - <span class="number">3</span>v] + <span class="number">2</span>w, ...)</span><br><span class="line"><span class="comment">// 两个省略号是完全可以对齐的，因为只要满足第二维下标j-kv&gt;=0即可</span></span><br><span class="line">可以推出：</span><br><span class="line">f[i][j] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j], f[i][j - v] + w)</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 多重背包</span></span><br><span class="line">f[i][j] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j], f[i - <span class="number">1</span>][j - v] + w, f[i - <span class="number">1</span>][j - <span class="number">2</span>v] + <span class="number">2</span>w, f[i - <span class="number">1</span>][j - <span class="number">3</span>v] + <span class="number">3</span>w, ..., f[i - <span class="number">1</span>][j - sv] + sw)</span><br><span class="line">=&gt;f[i][j - v] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j - v], f[i - <span class="number">1</span>][j - <span class="number">2</span>v] + w, f[i - <span class="number">1</span>][j - <span class="number">3</span>v] + <span class="number">2</span>w, ..., f[i - <span class="number">1</span>][j - (s+<span class="number">1</span>)v] + sw)</span><br><span class="line"><span class="comment">// 两个省略号不一定是完全可以对齐的，因为有可能j-(s+1)v&gt;=0，那么j-sv&gt;=0也成立，但没有(s+1)那么多个物品，相当于提前结束了，此时第一个等式中没有一项与f[i - 1][j-(s+1)v]对齐</span></span><br><span class="line"><span class="comment">// 无法通过第二个等式来得出第一个等式中f[i][j]的最大值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>优化方式：<strong>二进制优化</strong>，看成若干个01背包问题</p>
+<p>时间复杂度：<code>N * V * logS</code></p>
+<p>对于一个一般的s（即物品个数），把它分成若干个组，其中前k+1组中第i组中有<code>2^i</code>个物品（<code>i=0~k</code>），最后一组中有<code>c</code>个物品（<code>c=(s-前k+1组中物品之和) &amp;&amp; c &lt; 2^(k+1)</code>），这样通过选或不选各个组，可以拼凑出取<code>0～s</code> 个物品的情况。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = n * logs, M = v;</span><br><span class="line"><span class="type">int</span> v[N], w[N];</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 预处理物品</span></span><br><span class="line">cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> a, b, s; <span class="comment">// 分别为当前物品的体积，价值和个数</span></span><br><span class="line">  cin &gt;&gt; a &gt;&gt; b &gt;&gt; s;</span><br><span class="line">  <span class="type">int</span> k = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (k &lt;= s)</span><br><span class="line">  &#123;</span><br><span class="line">    cnt ++;</span><br><span class="line">    v[cnt] = a * k;</span><br><span class="line">    w[cnt] = b * k;</span><br><span class="line">    s -= k;</span><br><span class="line">    k &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (s &gt; <span class="number">0</span>) <span class="comment">// 还剩下c个物品</span></span><br><span class="line">  &#123;</span><br><span class="line">    cnt ++;</span><br><span class="line">    v[cnt] = a * s;</span><br><span class="line">    w[cnt] = b * s;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 转化成01背包求解</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; cnt; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = m; j &gt;= v[i]; j --)</span><br><span class="line">    f[j] = <span class="built_in">max</span>(f[j], f[j - v[i]] + w[i]);</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; f[m] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="分组背包问题"><a href="#分组背包问题" class="headerlink" title="分组背包问题"></a>分组背包问题</h2><h3 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 组物品和容量是为 <code>V</code> 的背包，每组物品里有若干件物品。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
 <p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
 <p><strong>每组物品中只能选1件。</strong></p>
+<h3 id="状态分析-3"><a href="#状态分析-3" class="headerlink" title="状态分析"></a>状态分析</h3><h4 id="状态表示-3"><a href="#状态表示-3" class="headerlink" title="状态表示"></a>状态表示</h4><p><code>f(i, j)</code></p>
+<h5 id="集合-3"><a href="#集合-3" class="headerlink" title="集合"></a>集合</h5><p>所有选法的集合。</p>
+<p>满足条件：</p>
+<ol>
+<li>只从前 <code>i</code> 组物品中选</li>
+<li>选出来的物品的 <code>总体积 &lt;= j</code></li>
+</ol>
+<h5 id="属性-3"><a href="#属性-3" class="headerlink" title="属性"></a>属性</h5><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
+<h4 id="状态计算-3"><a href="#状态计算-3" class="headerlink" title="状态计算"></a>状态计算</h4><p>集合划分：<code>f(i, j)</code> 枚举：选第<code>i</code>组物品中的哪一个或者不选。</p>
+<p>状态转移方程：<code>f(i, j) = max(f(i - 1, j), f(i - 1, j - v[i][k]) + w[i][k])</code></p>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = m; j &gt;= <span class="number">0</span>; j --) <span class="comment">// 这里 j &gt;= 0 而不是 j &gt;= v[i] 是因为一组有多种物品，无法确定一个v[i]，放到循环内部去判断了</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; s[i]; k ++) <span class="comment">// s[i]为该组物品个数</span></span><br><span class="line">      <span class="keyword">if</span> (j &gt;= v[i][k]) f[j] = <span class="built_in">max</span>(f[j], f[j - v[i][k]] + w[i][k]);</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -175,9 +249,10 @@
 </blockquote>
 <h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p><code>f(i, j)</code>这个数存的是这个集合的什么属性？min, max, cnt?</p>
 <blockquote>
-<p>如背包问题：<code>f(i, j)</code>表示集合里的最大值。</p>
+<p>如背包问题：<code>f(i, j)</code>表示集合选法对应的价值的最大值。</p>
 </blockquote>
 <h3 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h3><p>思考：如何一步一步地把每个状态算出来？</p>
+<p>对应集合划分。如何将当前的集合<strong>不重不漏</strong>地划分成若干更小的子集，使得每一个子集都能够被前面的状态表示出来。</p>
 <h2 id="DP优化"><a href="#DP优化" class="headerlink" title="DP优化"></a>DP优化</h2><p>DP优化一般是对代码&#x2F;状态方程做等价变形。</p>
 
       

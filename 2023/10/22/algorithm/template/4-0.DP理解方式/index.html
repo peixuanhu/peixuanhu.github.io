@@ -6,15 +6,15 @@
   
   <title>算法模板4-0.DP理解方式 | Peixuan&#39;s Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="DP理解DP求解过程DP求解过程可以分为两步：状态表示 状态表示思考：问题需要用几维的状态来表示？  背包问题有两维。  f(i, j) 集合f(i, j)表示的是什么集合？  如背包问题：f(i, j)表示所有选法的集合。  属性f(i, j)这个数存的是这个集合的什么属性？min, max, cnt?  如背包问题：f(i, j)表示集合里的最大值。  状态计算思考：如何一步一步地把每个状态算">
+  <meta name="description" content="DP理解DP求解过程DP求解过程可以分为两步：状态表示 状态表示思考：问题需要用几维的状态来表示？  背包问题有两维。  f(i, j) 集合f(i, j)表示的是什么集合？  如背包问题：f(i, j)表示所有选法的集合。  属性f(i, j)这个数存的是这个集合的什么属性？min, max, cnt?  如背包问题：f(i, j)表示集合选法对应的价值的最大值。  状态计算思考：如何一步一步地">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法模板4-0.DP理解方式">
 <meta property="og:url" content="https://peixuanhu.github.io/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="DP理解DP求解过程DP求解过程可以分为两步：状态表示 状态表示思考：问题需要用几维的状态来表示？  背包问题有两维。  f(i, j) 集合f(i, j)表示的是什么集合？  如背包问题：f(i, j)表示所有选法的集合。  属性f(i, j)这个数存的是这个集合的什么属性？min, max, cnt?  如背包问题：f(i, j)表示集合里的最大值。  状态计算思考：如何一步一步地把每个状态算">
+<meta property="og:description" content="DP理解DP求解过程DP求解过程可以分为两步：状态表示 状态表示思考：问题需要用几维的状态来表示？  背包问题有两维。  f(i, j) 集合f(i, j)表示的是什么集合？  如背包问题：f(i, j)表示所有选法的集合。  属性f(i, j)这个数存的是这个集合的什么属性？min, max, cnt?  如背包问题：f(i, j)表示集合选法对应的价值的最大值。  状态计算思考：如何一步一步地">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-22T12:35:45.000Z">
-<meta property="article:modified_time" content="2023-10-22T12:35:45.000Z">
+<meta property="article:modified_time" content="2023-10-23T05:28:07.776Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary">
   
@@ -113,9 +113,10 @@
 </blockquote>
 <h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p><code>f(i, j)</code>这个数存的是这个集合的什么属性？min, max, cnt?</p>
 <blockquote>
-<p>如背包问题：<code>f(i, j)</code>表示集合里的最大值。</p>
+<p>如背包问题：<code>f(i, j)</code>表示集合选法对应的价值的最大值。</p>
 </blockquote>
 <h3 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h3><p>思考：如何一步一步地把每个状态算出来？</p>
+<p>对应集合划分。如何将当前的集合<strong>不重不漏</strong>地划分成若干更小的子集，使得每一个子集都能够被前面的状态表示出来。</p>
 <h2 id="DP优化"><a href="#DP优化" class="headerlink" title="DP优化"></a>DP优化</h2><p>DP优化一般是对代码&#x2F;状态方程做等价变形。</p>
 
       
