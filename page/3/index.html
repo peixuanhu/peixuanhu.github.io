@@ -73,6 +73,217 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-algorithm/template/2-7.哈希" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" class="article-date">
+  <time class="dt-published" datetime="2023-10-10T03:42:19.567Z" itemprop="datePublished">2023-10-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/">算法模板2-7.哈希</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="一般哈希"><a href="#一般哈希" class="headerlink" title="一般哈希"></a>一般哈希</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>把庞大的值域映射到一个比较小的空间。</p>
+<p>如 <code>0~10^9 -&gt; 0~10^5</code>。</p>
+<blockquote>
+<p>与离散化的关系：离散化是需要保序的，可以看作一种特殊的哈希方式</p>
+</blockquote>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-x-mod-n"><a href="#1-x-mod-n" class="headerlink" title="1. x mod n"></a>1. x mod n</h3><p><code>n</code> 即数组长度，它是一个质数，并且这个质数要离2的整数次幂尽可能远。</p>
+<blockquote>
+<p>这样取可以使冲突的概率最小。数学证明待补充</p>
+</blockquote>
+<h3 id="2-解决冲突"><a href="#2-解决冲突" class="headerlink" title="2. 解决冲突"></a>2. 解决冲突</h3><p>有两种方法</p>
+<h4 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h4><p>数组的长度即为<code>n</code>，其中每个元素都是一个链表，取模之后结果相同的数存在链表里</p>
+<h4 id="开放寻址法"><a href="#开放寻址法" class="headerlink" title="开放寻址法"></a>开放寻址法</h4><p>只开一个一维数组，但长度应取为题给数据范围的2～3倍（经验值）。</p>
+<p>取模之后存在数组对应的位置，如已有元素存在，则依次向后面的位置找，直到找到空位存下来。</p>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><h3 id="拉链法-1"><a href="#拉链法-1" class="headerlink" title="拉链法"></a>拉链法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> h[N], e[N], ne[N], idx;</span><br><span class="line"><span class="comment">// h[]是数组（槽），数组中的每个元素是一个链表，其中有e[]（存值）和ne[]（存下一个节点的下标），idx为当前新插入节点编号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要先初始化h数组元素为-1，代表空链表</span></span><br><span class="line"><span class="built_in">memset</span>(h, <span class="number">-1</span>, <span class="built_in">sizeof</span>(h)); <span class="comment">// -1二进制为11111111，刚好可以按字节设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 向哈希表中插入一个数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// k即为哈希值</span></span><br><span class="line">  <span class="type">int</span> k = (x % N + N) % N; <span class="comment">// 目的：让k在0～N范围内。cpp取模：原数是负数的话取模之后还是负数，所以要+N；但正数+N之后又大于N了，所以需要再取一次模</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 以下代码实现了将新节点插入h[k]，作为新的头节点</span></span><br><span class="line">  e[idx] = x;</span><br><span class="line">  ne[idx] = h[k];</span><br><span class="line">  h[k] = idx ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> k = (x % N + N) % N;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = h[k]; ~i; i = ne[i]) <span class="comment">// 从头节点往后找</span></span><br><span class="line">    <span class="keyword">if</span> (e[i] == x) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="开放寻址法-1"><a href="#开放寻址法-1" class="headerlink" title="开放寻址法"></a>开放寻址法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200003</span>, null = <span class="number">0x3f3f3f3f</span>; <span class="comment">// null的值近似无穷大，代表数组该位置为空</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> h[N];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要先初始化h数组元素为0x3f3f3f3f，代表所有位置都空</span></span><br><span class="line"><span class="built_in">memset</span>(h, <span class="number">0x3f</span>, <span class="built_in">sizeof</span>(h)); <span class="comment">// memset按字节来设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果x在哈希表中，返回x的下标；如果x不在哈希表中，返回x应该插入的位置</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> t = (x % N + N) % N;</span><br><span class="line">  <span class="keyword">while</span> (h[t] != null &amp;&amp; h[t] != x) &#123;</span><br><span class="line">    t ++;</span><br><span class="line">    <span class="keyword">if</span> (t == N) t = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入操作：</span></span><br><span class="line"><span class="type">int</span> k = <span class="built_in">find</span>(x);</span><br><span class="line">h[k] = x;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找操作：</span></span><br><span class="line"><span class="type">int</span> k = <span class="built_in">find</span>(x);</span><br><span class="line"><span class="keyword">if</span> (h[k] == null) <span class="built_in">puts</span>(<span class="string">&quot;No&quot;</span>);</span><br><span class="line"><span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">&quot;Yes&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>一般不需要删除元素。如果需要考虑删除，一般是另开一个布尔数组，来标记对应元素是否已删除。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" data-id="clnk1a4250001jd9g2wlw56we" data-title="算法模板2-7.哈希" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/14.观察者模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-09T16:30:01.000Z" itemprop="datePublished">2023-10-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式14-观察者模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>观察者模式又叫作发布-订阅（Publish&#x2F;Subscribe）模式。</p>
+<p>观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/10/LCoseQJmfYubWig.jpg" alt="观察者模式结构图.jpg"></p>
+<h3 id="Subject类"><a href="#Subject类" class="headerlink" title="Subject类"></a>Subject类</h3><p>即主题或抽象通知者，一般用一个抽象类或者一个接口实现。</p>
+<p>它把所有对观察者对象的引用保存在一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象。</p>
+<h3 id="Observer类"><a href="#Observer类" class="headerlink" title="Observer类"></a>Observer类</h3><p>抽象观察者，为所有的具体观察者定义一个接口，在得到主题的通知时更新自己。这个接口叫作更新接口。更新接口通常包含一个update()方法，这个方法叫作更新方法。</p>
+<p>抽象观察者一般用一个抽象类或者一个接口实现。</p>
+<h3 id="ConcreteSubject类"><a href="#ConcreteSubject类" class="headerlink" title="ConcreteSubject类"></a>ConcreteSubject类</h3><p>具体主题或具体通知者，将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。</p>
+<p>具体主题角色通常用一个具体子类实现。</p>
+<h3 id="ConcreteObserver类"><a href="#ConcreteObserver类" class="headerlink" title="ConcreteObserver类"></a>ConcreteObserver类</h3><p>具体观察者，实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。具体观察者角色可以保存一个<strong>指向具体主题对象的引用</strong>。</p>
+<p>具体观察者角色通常用一个具体子类实现。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>Subject类：通知者抽象类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Observer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Observer&gt;(); <span class="comment">// 针对抽象的Observer编程</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 增加观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">attach</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">    list.add(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 减少观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">detach</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">    list.remove(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 通知观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyObserver</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (Observer item : list) &#123;</span><br><span class="line">      item.update();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> String subjectState;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getSubjectState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.subjectState;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSubjectState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.subjectState = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Observer类：抽象观察者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteSubject类：具体通知者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">  <span class="comment">// 具体通知者的方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ConcreteObserver类：具体观察者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteObserver</span> <span class="keyword">extends</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> Subject sub;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ConcreteObserver</span><span class="params">(String name, Subject sub)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.sub = sub;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;观察者&quot;</span> + <span class="built_in">this</span>.name + <span class="string">&quot;的新状态是&quot;</span> + <span class="built_in">this</span>.sub.getSubjectState());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Subject</span> <span class="variable">subject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteSubject</span>();</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameX&quot;</span>, subject));</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameY&quot;</span>, subject));</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameZ&quot;</span>, subject));</span><br><span class="line"></span><br><span class="line">subject <span class="title function_">setSubjectState</span><span class="params">(<span class="string">&quot;ABC&quot;</span>)</span>;</span><br><span class="line">subject.notifyObserver();</span><br></pre></td></tr></table></figure>
+
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>将一个系统分割成一系列相互协作的类有一个很不好的副作用，那就是需要维护相关对象间的一致性。我们不希望为了维持一致性而使各类紧密耦合，这样会给维护、扩展和重用都带来不便。</p>
+<h3 id="何时使用观察者模式？"><a href="#何时使用观察者模式？" class="headerlink" title="何时使用观察者模式？"></a>何时使用观察者模式？</h3><ol>
+<li>当一个对象的改变需要同时改变其他对象，而且它不知道具体有多少对象有待改变时</li>
+<li>当一个抽象模型有两个方面，其中一方面依赖于另一方面，这时用观察者模式可以将这两者封装在独立的对象中使它们各自独立地改变和复用</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>观察者模式所做的工作其实就是在解除耦合。让耦合的双方都依赖于抽象，而不是依赖于具体。从而使得各自的变化都不会影响另一边的变化。</p>
+<h2 id="Java内置接口实现"><a href="#Java内置接口实现" class="headerlink" title="Java内置接口实现"></a>Java内置接口实现</h2><p>现实编程中，具体的观察者完全有可能是风马牛不相及的类，但它们都需要根据通知者的通知来做出update()的操作，此时不适合使用继承，要用接口来实现。</p>
+<p>Java已经为观察者模式准备好了相关的接口和抽象类了：<strong>观察者接口java.util.Observer</strong> 和 <strong>通知者类java.util.Observable</strong> 。</p>
+<p>Java内置的Observable是一个类，这样设计是有问题的。一个类，就只能继承它，但我们自己的类可能本身就需要继承其他抽象类，这就产生了麻烦。Java不支持多重继承，这就严重限制了Observable的复用潜力。所以，当你这段代码用javac编译时，会给出提示： <code>警告：［deprecation］ java.util中的Observable已过时。</code> 系统其实是建议你不要复用这样的方法。所以真实编程中，我们也要考虑怎么取舍，如何修改的问题。</p>
+<h3 id="示例版本一"><a href="#示例版本一" class="headerlink" title="示例版本一"></a>示例版本一</h3><h3 id="示例版本二"><a href="#示例版本二" class="headerlink" title="示例版本二"></a>示例版本二</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clnk1a4210000jd9gcok3gxfs" data-title="设计模式14-观察者模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/13.建造者模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-09T16:29:36.000Z" itemprop="datePublished">2023-10-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式13-建造者模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
+<p>建造者模式可以将一个产品的<strong>内部表象</strong>与产品的<strong>生成过程</strong>分割开来，从而可以使一个建造过程生成具有不同的内部表象的产品对象。</p>
+<p>用户只需指定需要建造的类型即可，不需要知道具体建造的过程和细节。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/10/9L64AUgXlocTGOB.jpg" alt="建造者模式结构图.jpg"></p>
+<h3 id="Director"><a href="#Director" class="headerlink" title="Director"></a>Director</h3><p>构建一个使用 <code>Builder</code> 接口的对象。</p>
+<p>用于控制建造过程，隔离用户与建造过程的关联。</p>
+<h3 id="Builder"><a href="#Builder" class="headerlink" title="Builder"></a>Builder</h3><p>为创建一个 <code>Product</code> 对象的各个部件指定的抽象接口。</p>
+<h3 id="ConcreteBuilder"><a href="#ConcreteBuilder" class="headerlink" title="ConcreteBuilder"></a>ConcreteBuilder</h3><p>具体建造者，实现 <code>Builder</code> 接口，构造和装配各个部件。</p>
+<h3 id="Product"><a href="#Product" class="headerlink" title="Product"></a>Product</h3><p><code>Builder</code> 建造出来的具体产品。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Product</code> 类：产品类，由多个部件组成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">  </span><br><span class="line">  ArrayList&lt;String&gt; parts = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 添加新的产品部件</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String part)</span> &#123;</span><br><span class="line">    parts.add(part);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 列举所有产品部件</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (String part : parts) &#123;</span><br><span class="line">      System.out.println(part);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Builder</code> 类：抽象建造者类，确定产品由两个部件 <code>PartA</code> 和 <code>PartB</code> 组成，并声明一个得到产品建造后结果的方法 <code>GetResult</code> 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">buildPartA</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">buildPartB</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title function_">getResult</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ConcreteBuilder</code> 类：具体建造者类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体建造者类1</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteBuilder1</span> <span class="keyword">extends</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Product</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartA</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件A-1&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartB</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件B-1&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Product <span class="title function_">getResult</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体建造者类2</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteBuilder2</span> <span class="keyword">extends</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Product</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartA</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件A-2&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartB</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件B-2&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Product <span class="title function_">getResult</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Director</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Director</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">construct</span><span class="params">(Builder builder)</span> &#123;</span><br><span class="line">    builder.buildPartA();</span><br><span class="line">    builder.buildPartB();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：客户不需要知道具体的建造过程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Director</span> <span class="variable">director</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Director</span>();</span><br><span class="line"><span class="type">Builder</span> <span class="variable">b1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteBuilder1</span>();</span><br><span class="line"><span class="type">Builder</span> <span class="variable">b2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteBuilder2</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指挥者用ConcreteBuilder1的方法来建造产品</span></span><br><span class="line">director.construct(b1);</span><br><span class="line"><span class="type">Product</span> <span class="variable">p1</span> <span class="operator">=</span> b1.getResult();</span><br><span class="line">p1.show();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指挥者用ConcreteBuilder2的方法来建造产品</span></span><br><span class="line">director.construct(b2);</span><br><span class="line"><span class="type">Product</span> <span class="variable">p2</span> <span class="operator">=</span> b2.getResult();</span><br><span class="line">p2.show();</span><br><span class="line"></span><br><span class="line"><span class="comment">// p1, p2结果不同</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>建造者模式主要用于创建一些复杂的对象，这些对象内部子对象的建造顺序通常是稳定的，但每个子对象的构建通常面临复杂的变化。</p>
+<p>建造者模式是在当<strong>创建复杂对象的算法</strong>应该独立于<strong>该对象的组成部分</strong>以及<strong>它们的装配方式</strong>时适用的模式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clnitxwuv000ccz9g1tt1h6j2" data-title="设计模式13-建造者模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-algorithm/template/2-6.堆" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/" class="article-date">
@@ -531,168 +742,6 @@
 
 
   
-    <article id="post-algorithm/template/1-7.区间合并模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/algorithm/template/1-7.%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6%E6%A8%A1%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T13:59:35.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-7.%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6%E6%A8%A1%E6%9D%BF/">算法模板1-7.区间合并模板</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="区间合并"><a href="#区间合并" class="headerlink" title="区间合并"></a>区间合并</h1><p><strong>快速地</strong>将有交集的区间合并。</p>
-<p>跟区间有关的问题，大概率会用到贪心。按照端点排序。</p>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>有若干个区间，若其中某些区间有交集，则将它们合并。</p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>类似贪心。</p>
-<ol>
-<li>按区间左端点从小到大排序</li>
-<li>当前维护的区间，左端点 <code>st</code>，右端点 <code>ed</code>。第<code>i</code>个区间（左端点 <code>l</code>，右端点 <code>r</code>）与当前维护区间的关系：<ol>
-<li><code>st</code> &lt;&#x3D; <code>l</code> &lt;&#x3D; <code>r</code> &lt;&#x3D; <code>ed</code> &#x3D;&gt; 当前维护区间不变</li>
-<li><code>st</code> &lt;&#x3D; <code>l</code> &lt;&#x3D; <code>ed</code> &lt; <code>r</code> &#x3D;&gt; <code>ed</code> 延长到 <code>r</code></li>
-<li><code>st</code> &lt;&#x3D; <code>ed</code> &lt; <code>l</code> &lt;&#x3D; <code>r</code>  &#x3D;&gt; 当前维护区间放入答案，不会再更改；第 <code>i</code> 个区间作为新的当前维护区间</li>
-</ol>
-</li>
-</ol>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回合并后的区间数组</span></span><br><span class="line"><span class="function">vector&lt;PII&gt; <span class="title">merge</span><span class="params">(vector&lt;PII&gt; &amp;segs)</span> </span>&#123;</span><br><span class="line">    vector&lt;PII&gt; res;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">sort</span>(segs.<span class="built_in">begin</span>(), segs.<span class="built_in">end</span>());</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> st = <span class="number">-2e9</span>, ed = <span class="number">-2e9</span>; <span class="comment">// 初始区间设为负无穷</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> seg : segs) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ed &lt; seg.first) &#123; <span class="comment">// 新区间左端点大于当前维护区间右端点，开始维护新区间</span></span><br><span class="line">            <span class="keyword">if</span> (st != <span class="number">-2e9</span>) res.<span class="built_in">push_back</span>(&#123;st, ed&#125;);</span><br><span class="line">            st = seg.first, ed = seg.second;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ed = <span class="built_in">max</span>(ed, seg.second); <span class="comment">// 合并情况1, 2</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (st != <span class="number">-2e9</span>) res.<span class="built_in">push_back</span>(&#123;st, ed&#125;); <span class="comment">// 最后的区间也要加入答案，并且它不能为初始区间（segs为空的情况下答案也应为空）</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-7.%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6%E6%A8%A1%E6%9D%BF/" data-id="clng10n6b000i389ghx735kqn" data-title="算法模板1-7.区间合并模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/1-1.排序模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/algorithm/template/1-1.%E6%8E%92%E5%BA%8F%E6%A8%A1%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T13:09:10.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-1.%E6%8E%92%E5%BA%8F%E6%A8%A1%E6%9D%BF/">算法模板1-1.排序模板</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>平均，最好：<code>O(nlogn)</code></p>
-<p>最坏：<code>O(n^2)</code></p>
-<h3 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h3><p>从小到大：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">quick_sort</span><span class="params">(<span class="type">int</span> q[], <span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> i = l - <span class="number">1</span>, j = r + <span class="number">1</span>, x = q[l + r &gt;&gt; <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="keyword">do</span> i ++; <span class="keyword">while</span> (q[i] &lt; x);</span><br><span class="line">        <span class="keyword">do</span> j --; <span class="keyword">while</span> (q[j] &gt; x);</span><br><span class="line">        <span class="keyword">if</span> (i &lt; j) <span class="built_in">swap</span>(q[i], q[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">quick_sort</span>(q, l, j), <span class="built_in">quick_sort</span>(q, j + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><h3 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>平均，最好，最坏：<code>O(nlogn)</code></p>
-<h3 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h3><p>从小到大：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge_sort</span><span class="params">(<span class="type">int</span> q[], <span class="type">int</span> tmp[], <span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">merge_sort</span>(q, tmp, l, mid), <span class="built_in">merge_sort</span>(q, tmp, mid + <span class="number">1</span>, r);</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> k = <span class="number">0</span>, i = l, j = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= r) &#123;</span><br><span class="line">        <span class="keyword">if</span> (q[i] &lt;= q[j]) tmp[k ++] = q[i ++];</span><br><span class="line">        <span class="keyword">else</span> tmp[k ++] = q[j ++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= mid) tmp[k ++] = q[i ++];</span><br><span class="line">    <span class="keyword">while</span> (j &lt;= r) tmp[k ++] = q[j ++];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (i = l, j = <span class="number">0</span>; i &lt;= r; i ++, j ++) q[i] = tmp[j];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://s2.loli.net/2023/09/19/aIySX8EKsdhnu4B.png" alt="排序复杂度总结.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-1.%E6%8E%92%E5%BA%8F%E6%A8%A1%E6%9D%BF/" data-id="clng10n690004389g7sbghuk0" data-title="算法模板1-1.排序模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/1-2.二分模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/algorithm/template/1-2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T13:09:08.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/template/1-2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/">算法模板1-2.二分模板</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="整数二分"><a href="#整数二分" class="headerlink" title="整数二分"></a>整数二分</h1><p><code>check</code>函数：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 检查arr[x]是否满足某种性质</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>区间<code>[l, r]</code>被划分成<code>[l, mid]</code>和<code>[mid + 1, r]</code>时使用（要找的是右半段的最左边那个点）：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">binary_search</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>区间<code>[l, r]</code>被划分成<code>[l, mid - 1]</code>和<code>[mid, r]</code>时使用（要找的是左半段的最右边那个点）：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">binary_search</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = l + r + <span class="number">1</span> &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="浮点数二分"><a href="#浮点数二分" class="headerlink" title="浮点数二分"></a>浮点数二分</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">binary_search</span><span class="params">(<span class="type">double</span> l, <span class="type">double</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">double</span> eps = <span class="number">1e-6</span>;</span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; eps) &#123;  <span class="comment">// eps表示精度，取决于题目对精度的要求</span></span><br><span class="line">        <span class="type">double</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/template/1-2.%E4%BA%8C%E5%88%86%E6%A8%A1%E6%9D%BF/" data-id="clng10n690008389gc9568k6s" data-title="算法模板1-2.二分模板" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -736,23 +785,23 @@
       <ul>
         
           <li>
+            <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/">算法模板4-2.DP-线性DP</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">算法模板4-1.DP-背包问题</a>
           </li>
         
           <li>
             <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/">算法模板4-0.DP理解方式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/">算法模板3-6.二分图</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">设计模式21-单例模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">设计模式20-迭代器模式</a>
           </li>
         
       </ul>

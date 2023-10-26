@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>算法模板4-3.DP-区间DP | Peixuan&#39;s Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="区间DP状态分析状态表示f(i, j)一般表示从i到j这个区间中的方案。 要点要保证每次枚举的时候等式右侧的状态已经被更新过了。 所以按照区间长度从小到大来枚举。 三重循环：  区间长度从小到大 区间左端点（右端点可以通过左端点和长度算出来） 左右端点之间的分界点  模板题石子合并时间复杂度：O(n^3)，状态表示2维O(n^2) * 状态计算枚举分界线O(n) 状态分析状态表示 集合：所有将第i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法模板4-3.DP-区间DP">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/index.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="区间DP状态分析状态表示f(i, j)一般表示从i到j这个区间中的方案。 要点要保证每次枚举的时候等式右侧的状态已经被更新过了。 所以按照区间长度从小到大来枚举。 三重循环：  区间长度从小到大 区间左端点（右端点可以通过左端点和长度算出来） 左右端点之间的分界点  模板题石子合并时间复杂度：O(n^3)，状态表示2维O(n^2) * 状态计算枚举分界线O(n) 状态分析状态表示 集合：所有将第i">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-26T04:13:21.204Z">
+<meta property="article:modified_time" content="2023-10-26T04:42:06.082Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Peixuan&#39;s Page</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-algorithm/template/4-3.区间DP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" class="article-date">
+  <time class="dt-published" datetime="2023-10-26T04:13:21.204Z" itemprop="datePublished">2023-10-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      算法模板4-3.DP-区间DP
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="区间DP"><a href="#区间DP" class="headerlink" title="区间DP"></a>区间DP</h1><h2 id="状态分析"><a href="#状态分析" class="headerlink" title="状态分析"></a>状态分析</h2><h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p><code>f(i, j)</code>一般表示从i到j这个区间中的方案。</p>
+<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><p>要保证每次枚举的时候等式右侧的状态已经被更新过了。</p>
+<p>所以按照区间长度从小到大来枚举。</p>
+<p>三重循环：</p>
+<ol>
+<li>区间长度从小到大</li>
+<li>区间左端点（右端点可以通过左端点和长度算出来）</li>
+<li>左右端点之间的分界点</li>
+</ol>
+<h2 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h2><h3 id="石子合并"><a href="#石子合并" class="headerlink" title="石子合并"></a>石子合并</h3><p>时间复杂度：<code>O(n^3)</code>，状态表示2维<code>O(n^2)</code> * 状态计算枚举分界线<code>O(n)</code></p>
+<h4 id="状态分析-1"><a href="#状态分析-1" class="headerlink" title="状态分析"></a>状态分析</h4><h5 id="状态表示-1"><a href="#状态表示-1" class="headerlink" title="状态表示"></a>状态表示</h5><ul>
+<li>集合：所有将第i堆石子到第j堆石子合并成一堆石子的合并方式</li>
+<li>属性：代价的min</li>
+</ul>
+<h5 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h5><p>以最后一次合并的分界线的位置来分类：枚举i到j中的任何一个点x，把x左边和右边的石子合并</p>
+<p>转移方程：<code>f[i][j] = min&#123;f[i][k] + f[k + 1][j] + s[j] - s[i - 1]&#125;, k = i ~ j-1</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" data-id="clo6p99lz0000eu9g7xas7116" data-title="算法模板4-3.DP-区间DP" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">算法模板4-2.DP-线性DP</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/">算法模板4-2.DP-线性DP</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">算法模板4-1.DP-背包问题</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/">算法模板4-0.DP理解方式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Peixuan Hu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

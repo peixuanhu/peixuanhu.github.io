@@ -73,6 +73,212 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-algorithm/template/4-3.区间DP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" class="article-date">
+  <time class="dt-published" datetime="2023-10-26T04:13:21.204Z" itemprop="datePublished">2023-10-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="区间DP"><a href="#区间DP" class="headerlink" title="区间DP"></a>区间DP</h1><h2 id="状态分析"><a href="#状态分析" class="headerlink" title="状态分析"></a>状态分析</h2><h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p><code>f(i, j)</code>一般表示从i到j这个区间中的方案。</p>
+<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><p>要保证每次枚举的时候等式右侧的状态已经被更新过了。</p>
+<p>所以按照区间长度从小到大来枚举。</p>
+<p>三重循环：</p>
+<ol>
+<li>区间长度从小到大</li>
+<li>区间左端点（右端点可以通过左端点和长度算出来）</li>
+<li>左右端点之间的分界点</li>
+</ol>
+<h2 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h2><h3 id="石子合并"><a href="#石子合并" class="headerlink" title="石子合并"></a>石子合并</h3><p>时间复杂度：<code>O(n^3)</code>，状态表示2维<code>O(n^2)</code> * 状态计算枚举分界线<code>O(n)</code></p>
+<h4 id="状态分析-1"><a href="#状态分析-1" class="headerlink" title="状态分析"></a>状态分析</h4><h5 id="状态表示-1"><a href="#状态表示-1" class="headerlink" title="状态表示"></a>状态表示</h5><ul>
+<li>集合：所有将第i堆石子到第j堆石子合并成一堆石子的合并方式</li>
+<li>属性：代价的min</li>
+</ul>
+<h5 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h5><p>以最后一次合并的分界线的位置来分类：枚举i到j中的任何一个点x，把x左边和右边的石子合并</p>
+<p>转移方程：<code>f[i][j] = min&#123;f[i][k] + f[k + 1][j] + s[j] - s[i - 1]&#125;, k = i ~ j-1</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" data-id="clo6p99lz0000eu9g7xas7116" data-title="算法模板4-3.DP-区间DP" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-algorithm/template/4-2.线性DP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/" class="article-date">
+  <time class="dt-published" datetime="2023-10-26T01:58:56.540Z" itemprop="datePublished">2023-10-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/">算法模板4-2.DP-线性DP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="线性DP"><a href="#线性DP" class="headerlink" title="线性DP"></a>线性DP</h1><p>DP的递推顺序是线性的。</p>
+<blockquote>
+<p>比如：<code>f(i, j)</code>中i和j是从小到大递增。</p>
+<p>背包问题就是线性DP。</p>
+</blockquote>
+<h2 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h2><h3 id="数字三角形"><a href="#数字三角形" class="headerlink" title="数字三角形"></a>数字三角形</h3><p><code>f(i, j)</code>表示走到第i行第j列时的最大路径</p>
+<p>方程：<code>f(i, j) = max(f[i - 1][j], f[i - 1][j - 1]) + a[i][j]</code></p>
+<h3 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a>最长上升子序列</h3><p><code>f[i]</code>表示所有以第i个数结尾的上升子序列长度的最大值</p>
+<p>从0到i-1枚举倒数第二位j，找到最长的<code>f[j]</code></p>
+<p>方程：<code>f[i] = max(f[j] + 1), j = 0,1,2,...,i-1 &amp;&amp; a[j] &lt; a[i]</code></p>
+<p>记录方案：用一个g数组记录第i个数对应的最长子序列中倒数第二位j：<code>g[i] = j</code>，最后就可以把路径倒序输出</p>
+<h3 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h3><p><code>f(i, j)</code> 表示所有在第一个序列的前i个字母中出现，且在第二个序列的前j个字母中出现的子序列的长度的最大值</p>
+<p>集合划分：</p>
+<ul>
+<li><p>以<code>a[i]</code>和<code>b[j]</code>是否出现在子序列中划分（4种情况）</p>
+<ul>
+<li>00：<code>f(i - 1, j - 1)</code>（不用写，已经包含在01和10情况内了）</li>
+<li>01：<code>f(i - 1, j)</code></li>
+<li>10：<code>f(i, j - 1)</code></li>
+<li>11：<code>f(i - 1, j - 1) + 1</code>, 且需要满足<code>a[i] == b[j]</code></li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<p>01情况：<code>f(i - 1, j)</code>和01又区别，前者表示在第二个的前j个字母中出现的子序列（第j个字母不一定包含在子序列内），而后者表示第j个字母一定在子序列内。前者包含后者。但由于<code>f(i, j)</code>包含<code>f(i - 1, j)</code>这种状态，属性又为Max（集合划分适当重叠不影响结果的正确性，只要不漏掉某些情况），所以可以这样表示。</p>
+<p>10情况同理。</p>
+<p>不懂再去复习一下题解。</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/" data-id="clo6p99m00001eu9g2uc6dbe9" data-title="算法模板4-2.DP-线性DP" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/22.桥接模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-26T00:28:02.544Z" itemprop="datePublished">2023-10-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="合成-聚合复用原则-CARP"><a href="#合成-聚合复用原则-CARP" class="headerlink" title="合成&#x2F;聚合复用原则 (CARP)"></a>合成&#x2F;聚合复用原则 (CARP)</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>合成／聚合复用原则（CARP），尽量使用合成 (Composition)／聚合 (Aggregation)，尽量不要使用类继承。</p>
+<h2 id="合成和聚合"><a href="#合成和聚合" class="headerlink" title="合成和聚合"></a>合成和聚合</h2><ul>
+<li><p>聚合表示一种弱的’拥有’关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分。</p>
+<ul>
+<li>如：大雁是群居动物，所以每只大雁都是属于一个雁群，一个雁群可以有多只大雁，所以大雁和雁群是聚合关系。</li>
+</ul>
+</li>
+<li><p>合成则是一种强的’拥有’关系，体现了严格的部分和整体的关系，部分和整体的生命周期一样。</p>
+<ul>
+<li>如：大雁有两个翅膀，翅膀与大雁是部分和整体的关系，并且它们的生命周期是相同的，于是大雁和翅膀就是合成关系。</li>
+</ul>
+</li>
+</ul>
+<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><p>优先使用对象的合成／聚合将有助于你保持每个类被封装，并被集中在单个任务上。这样类和类继承层次会保持较小规模，并且不太可能增长为不可控制的庞然大物。</p>
+<h1 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p>桥接模式（Bridge），将抽象部分（如手机品牌）与它的实现部分（如手机软件）分离，使它们都可以独立地变化。</p>
+<blockquote>
+<p>什么叫抽象与它的实现分离？这并不是说，让抽象类与其派生类分离，因为这没有任何意义。实现指的是抽象类和它的派生类用来实现自己的对象。</p>
+<p>实现系统可能有多角度分类，每一种分类都有可能变化，那么就把这种多角度分离出来让它们独立变化，减少它们之间的耦合。</p>
+</blockquote>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/26/pstFy3v7dxHa481.png" alt="桥接模式结构图.png"></p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Implementor</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Implementor</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ConcreteImplementorA</code>和<code>ConcreteImplementorB</code>等派生类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteImplementorA</span> <span class="keyword">extends</span> <span class="title class_">Implementor</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;具体实现A的方法执行&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteImplementorB</span> <span class="keyword">extends</span> <span class="title class_">Implementor</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;具体实现B的方法执行&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Abstraction</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Abstraction</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> Implementor implementor;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setImplementor</span><span class="params">(Implementor implementor)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.implementor = implementor;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>RefinedAbstraction</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RefinedAbstraction</span> <span class="keyword">extends</span> <span class="title class_">Abstraction</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.print(<span class="string">&quot;具体的Abstraction&quot;</span>);</span><br><span class="line">    implementor.operation();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Abstraction ab;</span><br><span class="line">ab = <span class="keyword">new</span> <span class="title class_">RefinedAbstraction</span>();</span><br><span class="line"></span><br><span class="line">ab.setImplementor(<span class="keyword">new</span> <span class="title class_">ConcreteImplementorA</span>());</span><br><span class="line">ab.operation();</span><br><span class="line"></span><br><span class="line">ab.setImplementor(<span class="keyword">new</span> <span class="title class_">ConcreteImplementorB</span>());</span><br><span class="line">ab.operation();</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" data-id="clo6p99m00002eu9g8pl7b2nl" data-title="设计模式22-桥接模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-algorithm/template/4-1.DP-背包问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" class="article-date">
@@ -254,6 +460,8 @@
 <h3 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h3><p>思考：如何一步一步地把每个状态算出来？</p>
 <p>对应集合划分。如何将当前的集合<strong>不重不漏</strong>地划分成若干更小的子集，使得每一个子集都能够被前面的状态表示出来。</p>
 <h2 id="DP优化"><a href="#DP优化" class="headerlink" title="DP优化"></a>DP优化</h2><p>DP优化一般是对代码&#x2F;状态方程做等价变形。</p>
+<p>先把朴素算法写出来，再变形。</p>
+<h1 id="DP时间复杂度分析"><a href="#DP时间复杂度分析" class="headerlink" title="DP时间复杂度分析"></a>DP时间复杂度分析</h1><p>状态数量 * 转移计算量</p>
 
       
     </div>
@@ -626,279 +834,6 @@
 
 
   
-    <article id="post-design-pattern/17.适配器模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/15/design-pattern/17.%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-15T09:23:53.000Z" itemprop="datePublished">2023-10-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/15/design-pattern/17.%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">设计模式17-适配器模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>适配器模式（Adapter），将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</p>
-<blockquote>
-<p>类似于国标转英标的转接头。</p>
-</blockquote>
-<h2 id="适用场景和时机"><a href="#适用场景和时机" class="headerlink" title="适用场景和时机"></a>适用场景和时机</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>系统的数据和行为都相同或类似，但接口不统一时，我们应该考虑用适配器，目的是使控制范围之外的一个原有对象与某个接口匹配。客户代码可以统一调用同一接口就行了，更简单、更直接、更紧凑。</p>
-<p>适配器模式主要应用于希望复用一些现存的类，但是接口又与复用环境要求不一致的情况，比如在需要对早期代码复用一些功能等应用上很有实际价值。</p>
-<h3 id="时机"><a href="#时机" class="headerlink" title="时机"></a>时机</h3><p>在设计阶段，应该把类似的功能类的接口按照规范设计得相同。</p>
-<blockquote>
-<p>设计之初就需要考虑用适配器模式的场景：公司设计一系统时考虑使用第三方开发组件，而这个组件的接口与我们自己的系统接口是不相同的，而我们也没有必要为了迎合它而改动自己的接口</p>
-</blockquote>
-<p>在软件开发后期或维护期，通常应优先考虑通过重构统一接口，其次在双方都不太容易修改的时候再使用适配器模式适配。</p>
-<blockquote>
-<p>用适配器模式是无奈之举，有点’亡羊补牢’的感觉</p>
-</blockquote>
-<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>GoF的设计模式介绍了适配器模式的两种类型：</p>
-<h3 id="类适配器模式"><a href="#类适配器模式" class="headerlink" title="类适配器模式"></a>类适配器模式</h3><p>类适配器模式通过多重继承对一个接口与另一个接口进行匹配，而Java不支持多重继承，故略。</p>
-<h3 id="对象适配器模式"><a href="#对象适配器模式" class="headerlink" title="对象适配器模式"></a>对象适配器模式</h3><h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p>对象适配器模式结构图：</p>
-<p><img src="https://s2.loli.net/2023/10/15/Zv51cel4BIWzA2q.jpg" alt="适配器模式结构图.jpg"></p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Target</code> 接口：客户所期待的接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Target</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;普通请求&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Adaptee</code> 类：需要适配的类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Adaptee</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">specificRequest</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;特殊请求&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Adapter</code> 接口：通过在内部包装一个 <code>Adaptee</code> 对象，把源接口转换成目标接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Adapter</span> <span class="keyword">extends</span> <span class="title class_">Target</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="type">Adaptee</span> <span class="variable">adaptee</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Adaptee</span>(); <span class="comment">// 建立一个私有的Adaptee对象</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">    adaptee.specificRequest(); <span class="comment">// 把表面上调用request()方法转换成实际调用specificRequest()方法</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Target</span> <span class="variable">target</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Adapter</span>();</span><br><span class="line"></span><br><span class="line">target.request();</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/15/design-pattern/17.%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" data-id="clo29p1jy0000hh9gcjkl0b1b" data-title="设计模式17-适配器模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/3-5.最小生成树" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/14/algorithm/template/3-5.%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" class="article-date">
-  <time class="dt-published" datetime="2023-10-14T12:25:08.000Z" itemprop="datePublished">2023-10-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/14/algorithm/template/3-5.%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">算法模板3-5.最小生成树</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h1><p>定义：一个<strong>连通加权无向图</strong>中，一棵没有环的、权值最小的生成树。</p>
-<p>注：权重的正负对最小生成树问题没有影响。</p>
-<blockquote>
-<p>应用举例：已知若干个城市的坐标，要在城市间铺设公路，使得各个城市能够连通，且公路长度最小。</p>
-</blockquote>
-<h2 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h2><blockquote>
-<p>和Dijkstra算法的形式非常类似。</p>
-</blockquote>
-<h3 id="朴素版Prim算法"><a href="#朴素版Prim算法" class="headerlink" title="朴素版Prim算法"></a>朴素版Prim算法</h3><p>时间复杂度：<code>O(n^2 + m)</code> ，适合稠密图</p>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">集合S: 存储当前已经在连通块中的所有点</span><br><span class="line">    </span><br><span class="line">dist[i] &lt;- +<span class="function">INF</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="title">for</span> <span class="params">(i: <span class="number">0</span>~n)</span></span></span><br><span class="line"><span class="function">  t &lt;- 不在S中的距离S最近的点</span></span><br><span class="line"><span class="function">  用t更新其他点到**集合S**的距离，即所有连向集合S的边中权重最小的边 <span class="comment">// 注意：Dijkstra中是到起点的距离</span></span></span><br><span class="line"><span class="function">  st[t] </span>= <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> g[N][N]; <span class="comment">// 稠密图，用邻接矩阵存边权</span></span><br><span class="line"><span class="type">int</span> dist[N]; <span class="comment">// 存储其他点到集合S中的距离</span></span><br><span class="line"><span class="type">bool</span> st[N]; <span class="comment">// 记录每个点是否在S中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果图不连通，则返回INF；否则返回最小生成树的边权之和</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">prim</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dist, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> dist);</span><br><span class="line">    </span><br><span class="line">  <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 找到不在S中的距离S最近的点</span></span><br><span class="line">    <span class="type">int</span> t = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j ++)</span><br><span class="line">      <span class="keyword">if</span> (!st[j] &amp;&amp; (t == <span class="number">-1</span> || dist[j] &lt; dist[t])) t = j;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i &amp;&amp; dist[t] == INF) <span class="keyword">return</span> INF; <span class="comment">// 表示图不连通</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i) res += dist[t]; <span class="comment">// 从第二个点开始累加边权。注意这一步要写在更新距离前，以防负自环把自己的dist更新了</span></span><br><span class="line"></span><br><span class="line">    st[t] = <span class="literal">true</span>; <span class="comment">// 把该点加入S</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j ++) dist[j] = <span class="built_in">min</span>(dist[j], g[t][j]); <span class="comment">// 更新其他点到S的距离</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="堆优化版Prim算法（略）"><a href="#堆优化版Prim算法（略）" class="headerlink" title="堆优化版Prim算法（略）"></a>堆优化版Prim算法（略）</h3><p>时间复杂度：<code>O(mlogn)</code> ，适合稀疏图</p>
-<p>稀疏图一般用Kruskal算法，堆优化Prim算法不常用，因为Kruskal代码短很多，思路也更清晰。</p>
-<h2 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h2><p>时间复杂度：<code>O(mlogm)</code>（瓶颈是对边做排序的步骤），适合稀疏图</p>
-<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">集合S：存储最小生成树中的边</span><br><span class="line"></span><br><span class="line"><span class="comment">// O(mlogm)</span></span><br><span class="line"><span class="number">1.</span> 将所有边按权重从小到大排序</span><br><span class="line"></span><br><span class="line"><span class="comment">// O(m), 因为并查集是O(1)的，一共m条边</span></span><br><span class="line"><span class="number">2.</span> 枚举每条边a-b，权重c</span><br><span class="line">  <span class="keyword">if</span> a,b不连通</span><br><span class="line">    将这条边加入集合S中 <span class="comment">// 并查集的应用</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> p[N]; <span class="comment">// 并查集中父节点数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> <span class="comment">// 由于只需要枚举所有边，可以用结构体来存储所有边</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> a, b, w;</span><br><span class="line">  </span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Edge &amp;W)<span class="type">const</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> w &lt; W.w;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;edges[M];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> <span class="comment">// 并查集</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (p[x] != x) p[x] = <span class="built_in">find</span>(p[x]);</span><br><span class="line">  <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">kruskal</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">sort</span>(edges, edges + m);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) p[i] = i;</span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> res = <span class="number">0</span>, cnt = <span class="number">0</span>; <span class="comment">// res是最小生成树中的边权之和，cnt是最小生成树中的边的数量</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i ++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">int</span> a = edges[i].a, b = edges[i].b, w = edges[i].w;</span><br><span class="line">    </span><br><span class="line">    a = <span class="built_in">find</span>(a), b = <span class="built_in">find</span>(b); <span class="comment">// 查找a和b所在的连通块</span></span><br><span class="line">    <span class="keyword">if</span> (a != b) <span class="comment">// 如果两个连通块不连通，则合并两个连通块</span></span><br><span class="line">    &#123;</span><br><span class="line">      p[a] = b;</span><br><span class="line">      res += w;</span><br><span class="line">      cnt ++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (cnt &lt; n - <span class="number">1</span>) <span class="keyword">return</span> INF;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/14/algorithm/template/3-5.%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" data-id="clo29p1k4000ahh9g9py5b7n8" data-title="算法模板3-5.最小生成树" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/3-4.最短路" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/14/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/" class="article-date">
-  <time class="dt-published" datetime="2023-10-14T04:00:50.000Z" itemprop="datePublished">2023-10-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/14/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/">算法模板3-4.最短路</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h1><p>源点：起点，汇点：终点</p>
-<p>n: 点数，m: 边数</p>
-<p>稠密图：m ~ n^2^，稀疏图：m ~ n</p>
-<blockquote>
-<p>难点：建图，如何把原问题抽象成最短路问题，如何把原模型抽象成图，如何定义点和边</p>
-</blockquote>
-<blockquote>
-<p>最短路问题只需要考虑有向图。无向图只需要连两条对称的边就可以。</p>
-</blockquote>
-<h2 id="边权为1的最短路"><a href="#边权为1的最短路" class="headerlink" title="边权为1的最短路"></a>边权为1的最短路</h2><p>比较特殊，可以用BFS来求。单源和多源都可以。</p>
-<h2 id="单源最短路"><a href="#单源最短路" class="headerlink" title="单源最短路"></a>单源最短路</h2><p>求从一个点到其他所有点的最短路。</p>
-<h3 id="所有边权都是正数"><a href="#所有边权都是正数" class="headerlink" title="所有边权都是正数"></a>所有边权都是正数</h3><h4 id="朴素Dijkstra算法"><a href="#朴素Dijkstra算法" class="headerlink" title="朴素Dijkstra算法"></a>朴素Dijkstra算法</h4><p>时间复杂度：<code>O(n^2 + m)</code> ，适合稠密图</p>
-<h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>贪心</p>
-<h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">S集合：存储当前已确定最短距离的点</span><br><span class="line"></span><br><span class="line">1. dist[1] = 0, dist[i] = +inf</span><br><span class="line">2. for i : 0~n // 每次循环都能确定1个点的最短距离，循环n次结束</span><br><span class="line">	t &lt;- 不在S中的，距离最近的点</span><br><span class="line">	S &lt;- t (t放入S中)</span><br><span class="line">	dist[x] = min(dist[x], dist[t] + w(t, x)) (用t更新其他点x的距离)</span><br></pre></td></tr></table></figure>
-
-<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ol>
-<li><p>处理重边和自环。</p>
-<ul>
-<li>由于边权都是正数，自环直接忽略即可。</li>
-<li>重边保留最小值。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(g, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> g);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) g[i][i] = <span class="number">0</span>; <span class="comment">// 也可以不写，因为边权都为正，最短路不会走自环</span></span><br><span class="line"></span><br><span class="line">对每条边：g[a][b] = <span class="built_in">min</span>(g[a][b], c);</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h5 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 稠密图用邻接矩阵存</span></span><br><span class="line"><span class="type">int</span> g[N][N]; <span class="comment">// 存储每条边</span></span><br><span class="line"><span class="type">int</span> dist[N]; <span class="comment">// 存储1号点到每个点到最短距离</span></span><br><span class="line"><span class="type">bool</span> st[N]; <span class="comment">// 存储每个点到最短路是否已经确定，即步骤里的S集合</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 求1号点到n号点到最短路，如果不存在则返回-1</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(dist, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> dist);</span><br><span class="line">  dist[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i ++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 在还未确定的最短路的点中，寻找距离最小的点</span></span><br><span class="line">    <span class="type">int</span> t = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j ++)</span><br><span class="line">      <span class="keyword">if</span> (!st[j] &amp;&amp; (t == <span class="number">-1</span> || dist[j] &lt; dist[t])) t = j;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 点t放入S集合</span></span><br><span class="line">    st[t] = <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 用t更新其他点的距离</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j ++)</span><br><span class="line">      dist[j] = <span class="built_in">min</span>(dist[j], dist[t] + g[t][j]);</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (dist[n] == <span class="number">0x3f3f3f3f</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">return</span> dist[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="堆优化版Dijkstra算法"><a href="#堆优化版Dijkstra算法" class="headerlink" title="堆优化版Dijkstra算法"></a>堆优化版Dijkstra算法</h4><p>时间复杂度：<code>O(mlogn)</code> ，适合稀疏图（当图为稠密图，也就是 <code>m和n^2一个级别</code> 时，时间复杂度比朴素版高些）</p>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>先看看在稀疏图中，朴素Dijkstra算法循环内部每一步<strong>总共</strong>（循环n次之后）的执行次数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">S集合：存储当前已确定最短距离的点</span><br><span class="line"></span><br><span class="line">1. dist[1] = 0, dist[i] = +inf</span><br><span class="line">2. for i : 0~n</span><br><span class="line">	(1) t &lt;- 不在S中的，距离最近的点 总共执行n^2次（瓶颈）</span><br><span class="line">	(2) S &lt;- t 总共执行n次</span><br><span class="line">	(3) dist[j] = min(dist[j], dist[t] + w(t, j)) 总共执行m次，因为图是用邻接表存，只有t和j之间有边才有可能更新</span><br></pre></td></tr></table></figure>
-
-<p>每次找离1号点最近的点这一步是算法瓶颈。由于是找最小值，可以<code>用堆来存储dist</code>，来优化到每次循环为O(1)，总复杂度为O(n)。但(3)在每次循环中的复杂度会从O(1)变到O(logn)，因为是对堆做更新操作。(3)总共执行m次，所以总的时间复杂度是O(mlogn)。</p>
-<h5 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">S集合：存储当前已确定最短距离的点</span><br><span class="line"></span><br><span class="line">1. dist[1] = 0, dist[i] = +inf, heap.push(&#123;1, 0&#125;) // first: i号点到1号点到距离, second: 点编号i</span><br><span class="line">2. for i : 1~n</span><br><span class="line">	(1) t &lt;- dist.top() 记得要判断t.second是不是已经S里</span><br><span class="line">	(2) S &lt;- t.second</span><br><span class="line">	(3) for (t的所有边对应点j和权重w)</span><br><span class="line">		if (dist[j] &gt; t.first + w) dist.push(&#123;t.first + w, j&#125;) 这里由于STL堆不支持修改任意位置的值，所以只能冗余，插入新的dist，反正小的dist先出来</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n; <span class="comment">// 点的数量</span></span><br><span class="line"><span class="type">int</span> h[N], w[N], e[N], ne[N], idx; <span class="comment">// 稀疏图用邻接表存</span></span><br><span class="line"><span class="type">int</span> dist[N]; <span class="comment">// 所有点到1号点的距离</span></span><br><span class="line"><span class="type">bool</span> st[N]; <span class="comment">// 即S集合</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 求1号点到n号点到最短路，如果不存在则返回-1</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(dist, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> dist);</span><br><span class="line">  dist[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">  priority_queue&lt;PII, vector&lt;PII&gt;, greater&lt;PII&gt;&gt; heap; <span class="comment">// 小根堆</span></span><br><span class="line">  heap.<span class="built_in">push</span>(&#123;<span class="number">0</span>, <span class="number">1</span>&#125;); <span class="comment">// first存储距离，second存储点的编号</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i ++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 在还未确定的最短路的点中，寻找距离最小的点</span></span><br><span class="line">    <span class="keyword">auto</span> t = heap.<span class="built_in">top</span>();</span><br><span class="line">    heap.<span class="built_in">pop</span>();</span><br><span class="line">    <span class="type">int</span> ver = t.second, distance = t.first;</span><br><span class="line">    <span class="keyword">if</span> (st[ver]) <span class="keyword">continue</span>; <span class="comment">// 因为堆存储有冗余，该节点的距离可能已经被确定了，此时跳过</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 点t放入S集合</span></span><br><span class="line">    st[t] = <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 用t更新与其有边连接的其他点的距离</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = h[ver]; ~i; i)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="type">int</span> j = e[i];</span><br><span class="line">      <span class="keyword">if</span> (dist[j] &gt; distance + w[i]) <span class="comment">// 需要更新dist[j]</span></span><br><span class="line">      &#123;</span><br><span class="line">        dist[j] = distance + w[i];</span><br><span class="line">        heap.<span class="built_in">push</span>(&#123;dist[j], j&#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (dist[n] == <span class="number">0x3f3f3f3f</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">return</span> dist[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="存在负权边"><a href="#存在负权边" class="headerlink" title="存在负权边"></a>存在负权边</h3><p>SPFA是BF算法的优化。但如果限制经过的边数（如&lt;&#x3D;k）的话，只能用Bellman-Ford。</p>
-<h4 id="Bellman-Ford算法"><a href="#Bellman-Ford算法" class="headerlink" title="Bellman-Ford算法"></a>Bellman-Ford算法</h4><p>时间复杂度：<code>O(nm)</code></p>
-<blockquote>
-<p>注意：如果有负权回路存在，最短路就<strong>不一定</strong>存在。不一定的原因：只有这个负环1号点到某个点x的路径上，1-&gt;x到最短路才不存在。没在路径上就没有影响。</p>
-</blockquote>
-<h5 id="存边方式"><a href="#存边方式" class="headerlink" title="存边方式"></a>存边方式</h5><p>由于是遍历所有边，所以BF算法存边方式不一定要用邻接表。可以定义struct存边</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> &#123;</span><br><span class="line">  <span class="type">int</span> a, b, w;</span><br><span class="line">&#125; edge[M];</span><br></pre></td></tr></table></figure>
-
-<h5 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n次循环</span><br><span class="line">	<span class="keyword">for</span> 所有边a, b, w</span><br><span class="line">		dist[b] = <span class="built_in">min</span>(dist[b], dist[a] + w); <span class="comment">// 松弛操作</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h5><p><strong>三角不等式：</strong>在循环n*m次之后，对每条边，都有 <code>dist[b] &lt;= dist[a] + w</code>。</p>
-<p><strong>n重循环中迭代k次的含义：</strong>从1号点经过不超过k条边，走到每一个点的最短距离。</p>
-<h5 id="如何判断是否有负环？"><a href="#如何判断是否有负环？" class="headerlink" title="如何判断是否有负环？"></a>如何判断是否有负环？</h5><p>BF算法可以判断是否有负环。但时间复杂度较高，一般用SPFA来做。</p>
-<p>如果第n次迭代时，dist[x]有更新：说明从1号点到x号点，存在一条有n条边的路。但一条路有n条边，说明有n+1个点，即路径上有环。又由于dist[x]更新了，所以这个环一定是负环（因为不包含环的那条路之前已经走过了）。</p>
-<h5 id="代码模板-2"><a href="#代码模板-2" class="headerlink" title="代码模板"></a>代码模板</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> dist[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> &#123;</span><br><span class="line">  <span class="type">int</span> a, b, w;</span><br><span class="line">&#125; edges[M];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求1到n到最短路距离，如果无法从1走到n，则返回-1。</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">bellman_ford</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(dist, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> dist);</span><br><span class="line">  dist[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 如果第n次迭代仍然会松弛三角不等式，就说明存在一条长度是n+1的最短路径，由抽屉原理，路径中至少存在两个相同的点，说明图中存在负权回路。</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; j ++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="type">int</span> a = edges[j].a, b = edges[j].b, w = edges[j].w;</span><br><span class="line">      <span class="keyword">if</span> (dist[b] &gt; dist[a] + w)</span><br><span class="line">      	dist[b] = dist[a] + w;</span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (dist[n] &gt; <span class="number">0x3f3f3f3f</span> / <span class="number">2</span>) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 不直接写 == 0x3f3f3f3f 的原因是，可能有负权边更新距离，使得dist小于0x3f3f3f3f</span></span><br><span class="line">  <span class="keyword">return</span> dist[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="例题：有边数k限制的最短路"><a href="#例题：有边数k限制的最短路" class="headerlink" title="例题：有边数k限制的最短路"></a>例题：有边数k限制的最短路</h5><p>需要加上backup数组，保存上一次循环中所有边更新的结果，保证这一次循环只用上一次循环的结果，以免用到本次循环更新过的距离，这样经过的边实际可能&gt;k，不符合要求。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每重循环复制dist数组到backup数组</span></span><br><span class="line"><span class="built_in">memcpy</span>(backup, dist, <span class="keyword">sizeof</span> dist);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="SPFA算法"><a href="#SPFA算法" class="headerlink" title="SPFA算法"></a>SPFA算法</h4><p>一般时间复杂度：<code>O(m)</code>, 最坏时间复杂度：<code>O(nm)</code></p>
-<h5 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h5><p>图中不含负环。</p>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>类似BFS的思想。</p>
-<p>对于 <code>dist[b] = min(dist[b], dist[a] + w);</code> ，只有 <code>dist[a]</code> 变小了，<code>dist[b]</code> 才有可能被更新。所以用一个队列来存 更新过的点<code>a</code>。</p>
-<blockquote>
-<p>SPFA长得很Dijkstra算法很像。不过前者外循环是通过判断queue不空，后者是循环n次（n个点）。</p>
-</blockquote>
-<h5 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤"></a>步骤</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">st[]数组：记录队列里有没有某个节点</span><br><span class="line">  </span><br><span class="line">queue &lt;- 1</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> queue不空</span><br><span class="line">  1. t &lt;- q.front, q.pop(), st[t] = <span class="literal">false</span>;</span><br><span class="line">	2. 更新t的所有出边 t-w-&gt;<span class="function">b</span></span><br><span class="line"><span class="function">    <span class="title">if</span> <span class="params">(dist[b] 被更新 &amp;&amp; !st[b])</span> queue &lt;- b, st[b] </span>= <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码模板-3"><a href="#代码模板-3" class="headerlink" title="代码模板"></a>代码模板</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n; <span class="comment">// 总点数</span></span><br><span class="line"><span class="type">int</span> h[N], w[N], e[N], ne[N], idx;</span><br><span class="line"><span class="type">int</span> dist[N];</span><br><span class="line"><span class="type">bool</span> st[N]; <span class="comment">// 记录某个点是否在队列中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 求1号点到n号点的最短路距离，如果从1号点无法走到n号点则返回-1</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">spfa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(dist, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> dist);</span><br><span class="line">  dist[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">  q.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line">  st[<span class="number">1</span>] = <span class="literal">true</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> (q.<span class="built_in">size</span>())</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">auto</span> t = q.<span class="built_in">front</span>();</span><br><span class="line">    q.<span class="built_in">pop</span>();</span><br><span class="line">    st[t] = <span class="literal">false</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = h[t]; ~i; i = ne[i])</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="type">int</span> j = e[i];</span><br><span class="line">      <span class="keyword">if</span> (dist[j] &gt; dist[t] + w[i])</span><br><span class="line">      &#123;</span><br><span class="line">        dist[j] = dist[t] + w[i];</span><br><span class="line">        <span class="keyword">if</span> (!st[j])</span><br><span class="line">        &#123;</span><br><span class="line">          q.<span class="built_in">push</span>(j);</span><br><span class="line">          st[j] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (dist[n] == <span class="number">0x3f3f3f3f</span>) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 这里不用/2的原因是，只有它的前置节点被更新（变成非无穷的数）时，它才会被更新，它也一定是非无穷的数+w[i]；而BF算法是暴力更新所有边，可能是INF+w[i]</span></span><br><span class="line">  <span class="keyword">return</span> dist[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="SPFA如何判负环？"><a href="#SPFA如何判负环？" class="headerlink" title="SPFA如何判负环？"></a>SPFA如何判负环？</h5><p>增加一个cnt[]数组，cnt[x]表示当前这个最短路边的数量。</p>
-<p>在更新dist[x]的同时，也更新cnt[x]。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dist[x] = dist[t] + w[i];</span><br><span class="line">cnt[x] = cnt[t] + 1;</span><br></pre></td></tr></table></figure>
-
-<p>当 <code>cnt[x] &gt;= n</code> 时，即最短路上的边数 &gt;&#x3D; n，即路上存在环，这个环一定是负环。</p>
-<h6 id="代码模板-4"><a href="#代码模板-4" class="headerlink" title="代码模板"></a>代码模板</h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n; <span class="comment">// 总点数</span></span><br><span class="line"><span class="type">int</span> h[N], w[N], e[N], ne[N], idx;</span><br><span class="line"><span class="type">int</span> dist[N];</span><br><span class="line"><span class="type">int</span> cnt[N]; <span class="comment">// cnt[x]存储</span></span><br><span class="line"><span class="type">bool</span> st[N]; <span class="comment">// 记录某个点是否在队列中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 求整个图中是否有负环</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 不需要初始化dist数组，不需要距离的绝对值，有相对值的大小作为比较就行</span></span><br><span class="line">  <span class="comment">// memset(dist, 0x3f, sizeof dist);</span></span><br><span class="line">  <span class="comment">// dist[1] = 0;</span></span><br><span class="line">  </span><br><span class="line">  queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">  <span class="comment">// 要求整个图上是否有负环，而不是从1开始的负环，所以把所有的点都加进队列</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  &#123;</span><br><span class="line">    q.<span class="built_in">push</span>(i);</span><br><span class="line">    st[i] = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> (q.<span class="built_in">size</span>())</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">auto</span> t = q.<span class="built_in">front</span>();</span><br><span class="line">    q.<span class="built_in">pop</span>();</span><br><span class="line">    st[t] = <span class="literal">false</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = h[t]; ~i; i = ne[i])</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="type">int</span> j = e[i];</span><br><span class="line">      <span class="keyword">if</span> (dist[j] &gt; dist[t] + w[i])</span><br><span class="line">      &#123;</span><br><span class="line">        dist[j] = dist[t] + w[i];</span><br><span class="line">        cnt[j] = cnt[t] + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (cnt[j] &gt;= n) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (!st[j])</span><br><span class="line">        &#123;</span><br><span class="line">          q.<span class="built_in">push</span>(j);</span><br><span class="line">          st[j] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">      </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以这样理解：</p>
-<ol>
-<li>构造一个虚拟节点 O，单向指向所有的节点，且到所有节点距离为0；</li>
-<li>新图是否有负环等价于原始的图。</li>
-<li>dist[]一开始为0,没有违背算法过程，可以理解为根据算法已经从 O 更新到了各个节点，接下来的代码就是顺理成章。所以dist数组从所有为0的状态开始是有对应意义的。就是先走一步。</li>
-<li>cnt[x]可以认为是从节点O到节点x的最短路中边的数量，由于O和所有其他节点都连通，所以能够判断<strong>整个</strong>图中是否有负环。</li>
-</ol>
-<h2 id="多源汇最短路"><a href="#多源汇最短路" class="headerlink" title="多源汇最短路"></a>多源汇最短路</h2><p>会有多个query，求不同的源点到不同的汇点的最短路。</p>
-<h3 id="Floyd算法"><a href="#Floyd算法" class="headerlink" title="Floyd算法"></a>Floyd算法</h3><p>时间复杂度： <code>O(n^3)</code></p>
-<h4 id="原理：DP"><a href="#原理：DP" class="headerlink" title="原理：DP"></a>原理：DP</h4><h5 id="状态表示："><a href="#状态表示：" class="headerlink" title="状态表示："></a>状态表示：</h5><p><code>d[k, i, j]</code> 的含义：从节点i，只经过1~k这些节点，到达节点j，所有路径中最短路的距离。</p>
-<h5 id="状态转移："><a href="#状态转移：" class="headerlink" title="状态转移："></a>状态转移：</h5><p><code>d[k, i, j] = d[k - 1, i, k] + d[k - 1, k, j]</code></p>
-<p>表示只经过1~k-1这些节点，从i到k再从k到j的最短距离。</p>
-<p>发现第一维无需记录，在循环中自然就是这么算的，所以可以改写为：</p>
-<p><code>d[i, j] = d[i, k] + d[k, j]</code></p>
-<h4 id="代码模板-5"><a href="#代码模板-5" class="headerlink" title="代码模板"></a>代码模板</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> d[N][N]; <span class="comment">// 邻接矩阵</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j ++)</span><br><span class="line">    <span class="keyword">if</span> (i == j) d[i][j] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">else</span> d[i][j] = INF;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然后加入所有边。。。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 算法结束后，d[a][b]表示a到b的最短距离</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">floyd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= n; k ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j ++)</span><br><span class="line">        d[i][j] = <span class="built_in">min</span>(d[i][j], d[i][k] + d[k][j]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否有最短路</span></span><br><span class="line"><span class="keyword">if</span> (d[a][b] &gt; INF / <span class="number">2</span>) <span class="built_in">puts</span>(<span class="string">&quot;impossible&quot;</span>); <span class="comment">// /2的原因与BF相同</span></span><br><span class="line"><span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, d[a][b]);</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/14/algorithm/template/3-4.%E6%9C%80%E7%9F%AD%E8%B7%AF/" data-id="clnmzko5d0000lw9g3g7d6fcr" data-title="算法模板3-4.最短路" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -942,23 +877,23 @@
       <ul>
         
           <li>
+            <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/">算法模板4-2.DP-线性DP</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">算法模板4-1.DP-背包问题</a>
           </li>
         
           <li>
             <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/">算法模板4-0.DP理解方式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/">算法模板3-6.二分图</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">设计模式21-单例模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">设计模式20-迭代器模式</a>
           </li>
         
       </ul>
