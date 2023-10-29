@@ -73,6 +73,143 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-design-pattern/19.组合模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/19/design-pattern/19.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-19T05:15:12.000Z" itemprop="datePublished">2023-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/19/design-pattern/19.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">设计模式19-组合模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>组合模式（Composite），将对象组合成树形结构以表示’部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/18/qbGU8Fy4LRCzDvO.jpg" alt="组合模式结构图.jpg"></p>
+<p><code>Component</code> 接口&#x2F;抽象类：为组合中的对象声明接口，在适当情况下，实现所有类共有接口的默认行为。声明一个接口用于访问和管理 <code>Component</code> 的子部件。</p>
+<p><code>Leaf</code> 类：在组合中表示叶节点，无子节点。</p>
+<p><code>Composite</code> 类：定义非叶节点的行为。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Component</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> String name;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Component</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span> depth)</span>;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Leaf</code> 类：add和remove方法没有意义，但好处是可以消除叶节点和非叶节点在抽象层次的区别，它们具备完全一致的接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Leaf</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Leaf</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(name);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Cannot add to a leaf.&quot;</span>); <span class="comment">// 叶子无法增加子节点</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Cannot remove from a leaf.&quot;</span>); <span class="comment">// 叶子无法移除子节点</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span> depth)</span> &#123;</span><br><span class="line">    <span class="comment">// 叶节点的具体显示方法</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; depth; i ++)</span><br><span class="line">      System.out.println(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    System.out.println(name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Composite</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Composite</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Component&gt; children = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(); <span class="comment">// 存储其下属的非叶节点和叶节点</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Composite</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    children.add(component);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    children.remove(component);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span> depth)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; depth; i ++)</span><br><span class="line">      System.out.println(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    System.out.println(name);</span><br><span class="line">    <span class="comment">// 对下一层进行遍历</span></span><br><span class="line">    <span class="keyword">for</span> (Component item : children) &#123;</span><br><span class="line">      item.display(depth + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Composite</span> <span class="variable">root</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">root.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf A&quot;</span>));</span><br><span class="line">root.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf B&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="type">Composite</span> <span class="variable">comp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;Composite X&quot;</span>);</span><br><span class="line">comp.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XA&quot;</span>));</span><br><span class="line">comp.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XB&quot;</span>));</span><br><span class="line">root.add(comp);</span><br><span class="line"></span><br><span class="line"><span class="type">Composite</span> <span class="variable">comp2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;Composite XY&quot;</span>);</span><br><span class="line">comp2.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XYA&quot;</span>));</span><br><span class="line">comp2.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XYB&quot;</span>));</span><br><span class="line">comp.add(comp2);</span><br><span class="line"></span><br><span class="line"><span class="type">Leaf</span> <span class="variable">leaf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf C&quot;</span>);</span><br><span class="line">root.add(leaf);</span><br><span class="line"></span><br><span class="line"><span class="type">Leaf</span> <span class="variable">leaf2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf D&quot;</span>);</span><br><span class="line">root.add(leaf2);</span><br><span class="line">root.remove(leaf2);</span><br><span class="line"></span><br><span class="line">root.display(<span class="number">1</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">展示结果：</span></span><br><span class="line"><span class="comment">-root</span></span><br><span class="line"><span class="comment">--Leaf A</span></span><br><span class="line"><span class="comment">--Leaf B</span></span><br><span class="line"><span class="comment">--Composite X</span></span><br><span class="line"><span class="comment">---Leaf XA</span></span><br><span class="line"><span class="comment">---Leaf XB</span></span><br><span class="line"><span class="comment">---Composite XY</span></span><br><span class="line"><span class="comment">----LeafXYA</span></span><br><span class="line"><span class="comment">----LeafXYB</span></span><br><span class="line"><span class="comment">--Leaf C</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="透明方式与安全方式"><a href="#透明方式与安全方式" class="headerlink" title="透明方式与安全方式"></a>透明方式与安全方式</h2><h3 id="透明方式"><a href="#透明方式" class="headerlink" title="透明方式"></a>透明方式</h3><p>在Component中声明所有用来管理子对象的方法，其中包括add、remove等。这样实现Component接口的所有子类都具备了add和remove。这样做的好处就是叶节点和枝节点对于外界没有区别，它们具备完全一致的行为接口。但问题也很明显，因为Leaf类本身不具备add()、remove()方法的功能，所以实现它是没有意义的。</p>
+<h3 id="安全方式"><a href="#安全方式" class="headerlink" title="安全方式"></a>安全方式</h3><p>安全方式，也就是在Component接口中不去声明add和remove方法，那么子类的Leaf也就不需要去实现它，而是在Composite中声明所有用来管理子类对象的方法，这样做就不会出现Leaf类也需要实现add()、remove()方法的问题，不过由于不够透明，所以树叶和树枝类将不具有相同的接口，客户端的调用需要做相应的判断，带来了不便。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>发现需求中是体现<strong>部分与整体层次的结构</strong>时，以及希望用户可以忽略组合对象与单个对象的不同，<strong>统一地使用组合结构中的所有对象</strong>时，就应该考虑用组合模式了。</p>
+<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><p>组合模式定义了包含基本对象和组合对象的类层次结构。基本对象可以被组合成更复杂的组合对象，而这个组合对象又可以被组合，这样不断地递归下去，客户代码中，任何用到基本对象的地方都可以使用组合对象了。</p>
+<p>并且，用户不用关心到底是处理一个叶节点还是处理一个组合组件，也就不用为定义组合而写一些选择判断语句了。组合模式让客户可以一致地使用组合结构和单个对象。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/19/design-pattern/19.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k20004hh9g00jv1x0q" data-title="设计模式19-组合模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/18.备忘录模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/18/design-pattern/18.%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-18T04:01:48.000Z" itemprop="datePublished">2023-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/18/design-pattern/18.%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/">设计模式18-备忘录模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>备忘录（Memento）：在<strong>不破坏封装性</strong>的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。</p>
+<blockquote>
+<p>如：游戏中的存档。不破坏封装性即不把过多的细节暴露给客户端</p>
+</blockquote>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/17/Af2uqHx4KsjVtWz.jpg" alt="备忘录模式结构图.jpg"></p>
+<p><code>Originator</code>（发起人）：负责创建一个备忘录 <code>Memento</code>，用以记录当前时刻它的内部状态，并可使用备忘录恢复内部状态。<code>Originator</code> 可根据需要决定 <code>Memento</code> 存储 <code>Originator</code> 的哪些内部状态。</p>
+<p> <code>Memento</code> （备忘录）：负责存储 <code>Originator</code> 对象的内部状态，并可防止 <code>Originator</code> 以外的其他对象访问备忘录 <code>Memento</code> 。备忘录有两个接口：<code>Caretaker</code> 只能看到备忘录的窄接口，它只能将备忘录传递给其他对象；<code>Originator</code> 能够看到一个宽接口，允许它访问返回到先前状态所需的所有数据。</p>
+<p><code>CareTaker</code> （管理者）：负责保存好备忘录<code>Memento</code>，不能对备忘录的内容进行操作或检查。</p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>发起人 <code>Originator</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Originator</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 需要保存的状态，可能有多个</span></span><br><span class="line">  <span class="keyword">private</span> String state;</span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = value;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 显示数据</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;State: &quot;</span> + <span class="built_in">this</span>.state);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 创建备忘录，将当前需要保存的信息（也许不是全部状态）导入，并实例化出一个Memento对象</span></span><br><span class="line">  <span class="keyword">public</span> Memento <span class="title function_">createMemento</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Memento</span>(<span class="built_in">this</span>.state);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 恢复备忘录，将Memento导入并将相关数据恢复</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">recoveryMemento</span><span class="params">(Memento memento)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(memento.getState());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>备忘录 <code>Memento</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Memento</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> String state;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Memento</span><span class="params">(String state)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = state;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>管理者 <code>Caretaker</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Caretaker</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> Memento memento;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Memento <span class="title function_">getMemento</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.memento;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMemento</span><span class="params">(Memento value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.memento = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Originator初始状态：例如状态属性为&quot;On&quot;</span></span><br><span class="line"><span class="type">Originator</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Originator</span>();</span><br><span class="line">o.setState(<span class="string">&quot;On&quot;</span>);</span><br><span class="line">o.show();</span><br><span class="line"></span><br><span class="line"><span class="type">Caretaker</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Caretaker</span>();</span><br><span class="line"><span class="comment">// 保存状态时，由于有了很好的封装，可以隐藏Originator的实现细节</span></span><br><span class="line">c.setMemento(o.createMMento());</span><br><span class="line"></span><br><span class="line"><span class="comment">// Originator改变了状态属性，变为&quot;Off&quot;</span></span><br><span class="line">o.setState(<span class="string">&quot;Off&quot;</span>);</span><br><span class="line">o.show();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 恢复原来的初始状态</span></span><br><span class="line">o.recoveryMemento(c.getMemento());</span><br><span class="line">o.show();</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>要保存的细节给封装在了Memento中了，要更改保存的细节也不用影响客户端了。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>状态需要完整存储到备忘录对象中，如果状态数据很大很多，那么在资源消耗上，备忘录对象会非常耗内存。</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>Memento模式比较适用于功能比较复杂的，但需要维护或记录属性历史的类，或者需要保存的属性只是众多属性中的一小部分时，Originator可以根据保存的Memento信息还原到前一状态。</p>
+<p>有时一些对象的内部信息必须保存在对象以外的地方，但是必须要由对象自己读取，这时，使用备忘录可以把复杂的对象内部信息对其他的对象屏蔽起来，从而可以恰当地保持封装的边界。</p>
+<blockquote>
+<p>管理类是有必要的。其实管理类主要得做两件事，一个是保存快照信息，这个快照信息可以保存多份的（用啥容器都行，栈、列表啥的），游戏状态这个例子里只保存了一份，所以会觉得没有必要；第二个是undo操作（即取出某个快照并恢复原发器状态的操作），该操作最好也要由管理者来提供，这样原发器的职责会更单一。</p>
+<p>还有一个很致命的缺陷，快照Memento的getState是public的，不够安全。应该由Memento持有原发器的引用，且由Memento对象提供方法进行原发器对象的状态恢复，这样就不会有Memento.state的信息泄漏的危险了；当然，还有另一种做法，将Memento设计为原发器的私有内部类。</p>
+</blockquote>
+<blockquote>
+<p>拓展：命令模式也有实现类似撤销的作用，如果在某个系统中使用命令模式时，需要实现命令的撤销功能，那么命令模式可以使用备忘录模式来存储可撤销操作的状态</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/18/design-pattern/18.%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k30006hh9ga62qhulu" data-title="设计模式18-备忘录模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-design-pattern/17.适配器模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/15/design-pattern/17.%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="article-date">
@@ -748,168 +885,6 @@
 
 
   
-    <article id="post-algorithm/STL总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2023-10-10T07:41:46.601Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="vector-变长数组，倍增的思想"><a href="#vector-变长数组，倍增的思想" class="headerlink" title="vector, 变长数组，倍增的思想"></a>vector, 变长数组，倍增的思想</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">size()  返回元素个数</span><br><span class="line">empty()  返回是否为空</span><br><span class="line">clear()  清空</span><br><span class="line">front()/back()</span><br><span class="line">push_back()/pop_back()</span><br><span class="line">begin()/end()</span><br><span class="line">[]</span><br><span class="line">支持比较运算，按字典序</span><br></pre></td></tr></table></figure>
-
-<h3 id="pair"><a href="#pair" class="headerlink" title="pair&lt;int, int&gt;"></a>pair&lt;int, int&gt;</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">first, 第一个元素</span><br><span class="line">second, 第二个元素</span><br><span class="line">支持比较运算，以first为第一关键字，以second为第二关键字（字典序）</span><br></pre></td></tr></table></figure>
-
-<h3 id="string，字符串"><a href="#string，字符串" class="headerlink" title="string，字符串"></a>string，字符串</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size()/length()  返回字符串长度</span><br><span class="line">empty()</span><br><span class="line">clear()</span><br><span class="line">substr(起始下标，(子串长度))  返回子串</span><br><span class="line">c_str()  返回字符串所在字符数组的起始地址</span><br></pre></td></tr></table></figure>
-
-<h3 id="queue-队列"><a href="#queue-队列" class="headerlink" title="queue, 队列"></a>queue, 队列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">push()  向队尾插入一个元素</span><br><span class="line">front()  返回队头元素</span><br><span class="line">back()  返回队尾元素</span><br><span class="line">pop()  弹出队头元素</span><br></pre></td></tr></table></figure>
-
-<h3 id="priority-queue-优先队列，默认是大根堆"><a href="#priority-queue-优先队列，默认是大根堆" class="headerlink" title="priority_queue, 优先队列，默认是大根堆"></a>priority_queue, 优先队列，默认是大根堆</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">push()  插入一个元素</span><br><span class="line">top()  返回堆顶元素</span><br><span class="line">pop()  弹出堆顶元素</span><br><span class="line">定义成小根堆的方式：priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; q;</span><br></pre></td></tr></table></figure>
-
-<h3 id="stack-栈"><a href="#stack-栈" class="headerlink" title="stack, 栈"></a>stack, 栈</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">push()  向栈顶插入一个元素</span><br><span class="line">top()  返回栈顶元素</span><br><span class="line">pop()  弹出栈顶元素</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="deque-双端队列"><a href="#deque-双端队列" class="headerlink" title="deque, 双端队列"></a>deque, 双端队列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">clear()</span><br><span class="line">front()/back()</span><br><span class="line">push_back()/pop_back()</span><br><span class="line">push_front()/pop_front()</span><br><span class="line">begin()/end()</span><br><span class="line">[]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="set-map-multiset-multimap-基于平衡二叉树（红黑树），动态维护有序序列"><a href="#set-map-multiset-multimap-基于平衡二叉树（红黑树），动态维护有序序列" class="headerlink" title="set, map, multiset, multimap, 基于平衡二叉树（红黑树），动态维护有序序列"></a>set, map, multiset, multimap, 基于平衡二叉树（红黑树），动态维护有序序列</h3><pre><code>size()
-empty()
-clear()
-begin()/end()
-++, -- 返回前驱和后继，时间复杂度 O(logn)
-</code></pre>
-<h4 id="set-multiset"><a href="#set-multiset" class="headerlink" title="set&#x2F;multiset"></a>set&#x2F;multiset</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">insert()  插入一个数</span><br><span class="line">find()  查找一个数</span><br><span class="line">count()  返回某一个数的个数</span><br><span class="line">erase()</span><br><span class="line">    (1) 输入是一个数x，删除所有x   O(k + logn)</span><br><span class="line">    (2) 输入一个迭代器，删除这个迭代器</span><br><span class="line">lower_bound()/upper_bound()</span><br><span class="line">    lower_bound(x)  返回大于等于x的最小的数的迭代器</span><br><span class="line">    upper_bound(x)  返回大于x的最小的数的迭代器</span><br></pre></td></tr></table></figure>
-
-<h4 id="map-multimap"><a href="#map-multimap" class="headerlink" title="map&#x2F;multimap"></a>map&#x2F;multimap</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">insert()  插入的数是一个pair</span><br><span class="line">erase()  输入的参数是pair或者迭代器</span><br><span class="line">find()</span><br><span class="line">[]  注意multimap不支持此操作。 时间复杂度是 O(logn)</span><br><span class="line">lower_bound()/upper_bound()</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="unordered-set-unordered-map-unordered-multiset-unordered-multimap-哈希表"><a href="#unordered-set-unordered-map-unordered-multiset-unordered-multimap-哈希表" class="headerlink" title="unordered_set, unordered_map, unordered_multiset, unordered_multimap, 哈希表"></a>unordered_set, unordered_map, unordered_multiset, unordered_multimap, 哈希表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">和上面类似，增删改查的时间复杂度是 O(1)</span><br><span class="line">不支持 lower_bound()/upper_bound()， 迭代器的++，--</span><br></pre></td></tr></table></figure>
-
-<h3 id="bitset-圧位"><a href="#bitset-圧位" class="headerlink" title="bitset, 圧位"></a>bitset, 圧位</h3><pre><code>bitset&lt;10000&gt; s;
-~, &amp;, |, ^
-&gt;&gt;, &lt;&lt;
-==, !=
-[]
-count()  返回有多少个1
-
-any()  判断是否至少有一个1
-none()  判断是否全为0
-
-set()  把所有位置成1
-set(k, v)  将第k位变成v
-reset()  把所有位变成0
-flip()  等价于~
-flip(k) 把第k位取反
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" data-id="clnk1a4260003jd9g1k7n5bii" data-title="STL总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-8.字符串哈希" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" class="article-date">
-  <time class="dt-published" datetime="2023-10-10T07:24:15.174Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/">算法模板2-8.字符串哈希</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="字符串哈希"><a href="#字符串哈希" class="headerlink" title="字符串哈希"></a>字符串哈希</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>快速判断一个字符串中两个区间对应的子串是否完全相同。</p>
-<blockquote>
-<p>除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。</p>
-</blockquote>
-<h2 id="字符串前缀哈希法"><a href="#字符串前缀哈希法" class="headerlink" title="字符串前缀哈希法"></a>字符串前缀哈希法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str = &quot;ABCABCDE&quot;</span><br><span class="line"></span><br><span class="line">把每一个前缀的哈希值算出来：</span><br><span class="line">h[0] = 0</span><br><span class="line">h[1] = &quot;A&quot;的哈希值</span><br><span class="line">h[2] = &quot;AB&quot;的哈希值</span><br><span class="line">h[3] = &quot;ABC&quot;的哈希值</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p><strong>结果：</strong>可以通过这些前缀的哈希值，算出 <strong><code>str</code> 任何一个子串</strong>的哈希值。</p>
-<h2 id="如何定义某一前缀的哈希值？"><a href="#如何定义某一前缀的哈希值？" class="headerlink" title="如何定义某一前缀的哈希值？"></a>如何定义某一前缀的哈希值？</h2><p>把字符串str看成一个p进制的数。str中<strong>每一个字符（的ASCII码）</strong>对应这个<strong>p进制数的每一位数字</strong>。最后一个字符对应最低位。</p>
-<blockquote>
-<p>例：hash(“ABC”) &#x3D; (A * p^2 + B * p^1 + C * p^0)</p>
-</blockquote>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p><strong>目标：</strong>将str映射到0～Q-1的范围内。</p>
-<p><strong>经验值：</strong> <code> p=131或13331</code>, <code>Q = 2^64</code>。用 <code>unsigned long long</code> 来存储哈希值，当它溢出时，刚好等价于取模。</p>
-<h4 id="1-算出这个p进制数x"><a href="#1-算出这个p进制数x" class="headerlink" title="1. 算出这个p进制数x"></a>1. 算出这个p进制数x</h4><h5 id="2-x-mod-Q"><a href="#2-x-mod-Q" class="headerlink" title="2. x mod Q"></a>2. x mod Q</h5><p>由于str的长度可能比较长，x可能为一个很大的数字，不好存。所以算出x之后，需要mod一个比较小的数Q。</p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>不能把某一个字母映射成0。例：”A”-&gt;0, “AA”-&gt;0，将不同的字符串映射成了同一个数。</li>
-<li>假定无冲突。这个算法没有考虑冲突情况。p和Q取经验值的情况下，起冲突的可能性很小。</li>
-</ol>
-<h2 id="如何算出任意子串的哈希值？"><a href="#如何算出任意子串的哈希值？" class="headerlink" title="如何算出任意子串的哈希值？"></a>如何算出任意子串的哈希值？</h2><p>假设我们要算 <code>str</code> 第 <code>L</code> 位和第<code>R</code> 位之间这个子串的哈希值。</p>
-<p>已知 <code>h[R]</code> 和 <code>h[L-1]</code> ：</p>
-<p><code>h[R] - h[L - 1] * p^(R - L + 1)</code> 即为子串的哈希值。</p>
-<blockquote>
-<p><code>h[R]</code> 中第R个字符对应x的第0位，第1个字符对应x的第R-1位</p>
-<p><code>h[L-1]</code>  中第L-1个字符对应x的第0位，第1个字符对应x的第L-2位</p>
-<p>h[L-1] * p^(R - L + 1)是为了将 <code>h[L-1]</code> 往左移，与 <code>h[R]</code> 对齐。</p>
-</blockquote>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ULL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>, <span class="type">int</span> P = <span class="number">13331</span>;</span><br><span class="line"><span class="type">char</span> str[N];</span><br><span class="line">ULL h[N], p[N]; <span class="comment">// h[k]存储字符串前k个字母的哈希值，p[k]存储 P^k mod 2^64（提前预处理减少重复计算）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化：注意str字符串是从1开始的，scanf(&quot;%s&quot;, str + 1)</span></span><br><span class="line">p[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  h[i] = h[i - <span class="number">1</span>] * P + str[i];</span><br><span class="line">  p[i] = p[i - <span class="number">1</span>] * P;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算子串 str[l ~ r] 的哈希值</span></span><br><span class="line"><span class="function">ULL <span class="title">get</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> h[r] - h[l - <span class="number">1</span>] * p[r - l + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>将字符串看成P进制数，P的经验值是131或13331，取这两个值的冲突概率低</p>
-<h3 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h3><p>取模的数用2^64，这样直接用unsigned long long存储，溢出的结果就是取模的结果</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" data-id="clnk1a4260002jd9g4s4ggh14" data-title="算法模板2-8.字符串哈希" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -953,6 +928,14 @@ flip(k) 把第k位取反
       <ul>
         
           <li>
+            <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">设计模式23-命令模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">码出高效读书笔记2-面向对象</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
           </li>
         
@@ -962,14 +945,6 @@ flip(k) 把第k位取反
         
           <li>
             <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">算法模板4-1.DP-背包问题</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/">算法模板4-0.DP理解方式</a>
           </li>
         
       </ul>

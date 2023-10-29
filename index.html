@@ -73,6 +73,184 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-design-pattern/23.命令模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-29T02:29:39.577Z" itemprop="datePublished">2023-10-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">设计模式23-命令模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>命令模式（Command），将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/29/DhKeTdnJQt6GuxX.jpg" alt="命令模式结构图.jpg"></p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Command</code> 类：用来声明执行操作的接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Command</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> Receiver receiver;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Command</span><span class="params">(Receiver receiver)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.receiver = receiver;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 执行命令</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">executeCommand</span><span class="params">()</span>;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ConcreteCommand</code> 类：将一个 <code>Receiver</code> 对象绑定于一个动作，调用 <code>Receiver</code> 相应的操作，以实现 <code>executeCommand</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteCommand</span> <span class="keyword">extends</span> <span class="title class_">Command</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ConcreteCommand</span><span class="params">(Receiver receiver)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(receiver);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">executeCommand</span><span class="params">()</span> &#123;</span><br><span class="line">    receiver.action();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Invoker</code> 类：要求 <code>Command</code> 执行请求。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Invoker</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> Command command;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCommand</span><span class="params">(Command command)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.command = command;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">executeCommand</span><span class="params">()</span> &#123;</span><br><span class="line">    command.executeCommand();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Receiver</code> 类：知道如何实施与执行一个与请求相关的操作，任何类都可能作为一个接收者。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Receiver</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">action</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;执行请求&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Receiver</span> <span class="variable">receiver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Receiver</span>();</span><br><span class="line"><span class="type">Command</span> <span class="variable">command</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteCommand</span>(receiver);</span><br><span class="line"><span class="type">Invoker</span> <span class="variable">invoker</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Invoker</span>();</span><br><span class="line"></span><br><span class="line">invoker.setCommand(command);</span><br><span class="line">invoker.executeCommand();</span><br></pre></td></tr></table></figure>
+
+<h2 id="进一步改进代码"><a href="#进一步改进代码" class="headerlink" title="进一步改进代码"></a>进一步改进代码</h2><p><code>Invoker</code> 类中的 <code>Command</code> 属性可以修改成 <code>List</code>，以实现执行命令的批处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Invoker</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Command&gt; commands = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Command&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 设置命令</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCommand</span><span class="params">(Command command)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> command.getClass().getSimpleName();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (className.equals(<span class="string">&quot;xxx&quot;</span>))&#123; <span class="comment">// 对无法完成的请求给予回绝</span></span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.commands.add(command);</span><br><span class="line">      System.out.println(<span class="string">&quot;增加请求：&quot;</span> + className + <span class="string">&quot;，时间：&quot;</span> + getNowTime());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 取消命令</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">cancelCommand</span><span class="params">(Command command)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> command.getClass().getSimpleName();</span><br><span class="line">    commands.remove(command);</span><br><span class="line">    System.out.println(<span class="string">&quot;取消请求：&quot;</span> + className + <span class="string">&quot;，时间：&quot;</span> + getNowTime());</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 通知执行</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyCommand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (Command command : commands)</span><br><span class="line">      command.executeCommand();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> String <span class="title function_">getNowTime</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">SimpleDataFormat</span> <span class="variable">formatter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;HH:mm:ss&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> formatter.format(<span class="keyword">new</span> <span class="title class_">Date</span>()).toString();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Receiver</span> <span class="variable">receiver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Receiver</span>();</span><br><span class="line"><span class="type">Command</span> <span class="variable">command1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteCommand1</span>(receiver);</span><br><span class="line"><span class="type">Command</span> <span class="variable">command2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteCommand2</span>(receiver);</span><br><span class="line"><span class="type">Invoker</span> <span class="variable">invoker</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Invoker</span>();</span><br><span class="line"></span><br><span class="line">invoker.setCommand(command1);</span><br><span class="line">invoker.setCommand(command2);</span><br><span class="line">invoker.setCommand(command1);</span><br><span class="line">invoker.setCommand(command1);</span><br><span class="line"></span><br><span class="line">invoker.cancelCommand(command1);</span><br><span class="line"></span><br><span class="line">invoker.setCommand(command2);</span><br><span class="line"></span><br><span class="line">invoker.notifyCommand(); <span class="comment">// 执行所有命令</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
+<li>它能较容易地设计一个命令队列</li>
+<li>在需要的情况下，可以较容易地将命令记录进日志</li>
+<li>允许接受请求的一方决定是否要否决请求</li>
+<li>可以容易地实现对请求的撤销与重做</li>
+<li>由于加进新的具体命令类不影响其他的类，因此增加新的具体命令类很容易</li>
+<li>把<strong>请求一个操作</strong>的对象与<strong>知道怎么执行一个操作</strong>的对象分隔开</li>
+</ul>
+<blockquote>
+<p>敏捷开发原则告诉我们，不要为代码添加基于猜测的、实际不需要的功能。如果不清楚一个系统是否需要命令模式，一般就不要着急去实现它，事实上，在需要的时候通过重构实现这个模式并不困难，只有在真正需要如撤销／恢复操作等功能时，把原来的代码重构为命令模式才有意义。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" data-id="cloawz0um0001yv9g3tbobdff" data-title="设计模式23-命令模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java/码出高效笔记2-面向对象" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="article-date">
+  <time class="dt-published" datetime="2023-10-26T07:41:04.356Z" itemprop="datePublished">2023-10-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">码出高效读书笔记2-面向对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="访问权限控制"><a href="#访问权限控制" class="headerlink" title="访问权限控制"></a>访问权限控制</h3><p><img src="https://s2.loli.net/2023/10/26/hlvCdauSt7I6NMA.png" alt="访问权限控制及可见范围.png"></p>
+<ul>
+<li>如果不允许外部直接通过 new 创建对象，构造方法必须是 private。</li>
+<li>工具类不允许有 public 或 default 构造方法。</li>
+</ul>
+<h3 id="this和super"><a href="#this和super" class="headerlink" title="this和super"></a>this和super</h3><p><img src="https://s2.loli.net/2023/10/26/Fx2lKfmdSgryw8X.png" alt="this和super的异同点.png"></p>
+<ul>
+<li><p>在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。</p>
+</li>
+<li><p>由于 this 和 super都在实例化阶段调用，所以不能在<strong>静态方法</strong>和<strong>静态代码块</strong>申使用 this 和 super 关键字。</p>
+</li>
+</ul>
+<h3 id="类关系"><a href="#类关系" class="headerlink" title="类关系"></a>类关系</h3><p>类与类之间的关系可分成两种·有关系与没关系，难点在于确定类与类之间是否存在相互作用。证明类之间没关系是一个涉及业务、架构、模块边界的问 题，往往由于业务模型的抽象角度不同而不同，是一件非常棘手的事情。如果找到了 没有关系的点，就可以如庖丁解牛一样，进行架构隔离、模块解耦等工作。</p>
+<p>类与类有关系的情况，包括以下5种类型：</p>
+<ul>
+<li>【继承】 extends (is-a)。</li>
+<li>【实现】 implements (can-do)。</li>
+<li>【组合】 类是成员变量 (contains-a)。</li>
+<li>【聚合】 类是成员变量(has-a)。</li>
+<li>【依赖】 import类(use-a)。</li>
+</ul>
+<p>随着业务和架构的发展，类与类的关系是会发生变化的，必须用发展的眼光看待类图。</p>
+<p>在业务重构过程中，往往会把原来强组合的关系拆开来，供其他模块调用，这就是类图的一种演变。</p>
+<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>常见的序列化方式有三种：</p>
+<ol>
+<li><strong>Java 原生序列化。</strong>Java类通过实现 Serializable接口来实现该类对象的序列化，这个接口非常特殊，没有任何方法，只起标识作用。<ul>
+<li>实现 Serializable 接口的类要显式设置 serialVersionUID 字段值，否则类源码修改后该值会发生变化。<ul>
+<li>如果是兼容升级，请不要修改 seria!VersionUID 字段 ， 避免反序列化失败。</li>
+<li>如果是不兼容升级，需要修改 serialVersionUID 值，避免反序列化混乱。</li>
+</ul>
+</li>
+<li>Java 反序列化时不会调用类的无参构造方法，而 是调用 native 方法将成员变量赋值为对应类型的初始值。基于性能及兼容性考虑，不 推荐使用 Java 原生序列化。</li>
+</ul>
+</li>
+<li><strong>Hessian 序列化。</strong>压缩编码，比Java原生序列化二进制流小且耗时短。特性：<ul>
+<li>自描述序列化类型。不依赖外部描述文件或接口定义 ， 用一个字节表示常用 基础类型 ， 极大缩短二进制流。</li>
+<li>语言无关，支持脚本语言。</li>
+<li>协议简单，比 Java 原生序列化高效。</li>
+</ul>
+</li>
+<li><strong>JSON 序列化。</strong>JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。JSON 序列化就是将数据对象转换为 JSON 字符串。在序列化过程中抛弃了类型信息，所以反序列化时只有提供类型信息才能准确地反序列化。相比前两种方式， JSON 可读性比较好，方便调试。</li>
+</ol>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h4 id="参数预处理"><a href="#参数预处理" class="headerlink" title="参数预处理"></a>参数预处理</h4><h5 id="1-入参保护"><a href="#1-入参保护" class="headerlink" title="1. 入参保护"></a>1. 入参保护</h5><p>人参保护实质上是对服务提供方的保护，常见于批量接口。</p>
+<p>虽然批量接口能处理批数据，但其处理能力并不是无限的，因此需要<strong>对入参的数据量进行判断和控制</strong>，如果超出处理能力，可以直接返回错误给客户端。</p>
+<h5 id="2-参数校验"><a href="#2-参数校验" class="headerlink" title="2. 参数校验"></a>2. 参数校验</h5><p>需要进行参数校验的场景：</p>
+<ul>
+<li>调用频度低的方法。</li>
+<li>执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退或者错误，则得不偿失。</li>
+<li>需要极高稳定性和可用性的方法。 </li>
+<li>对外提供的开放接口。</li>
+<li>敏感权限入口。</li>
+</ul>
+<p>不需要进行参数校验的场景：</p>
+<ul>
+<li>极有可能被<strong>循环调用</strong>的方法。但在方法说明里必须注明外部参数检查。</li>
+<li><strong>底层调用频度较高</strong>的方法。参数错误不太可能到底层才会暴露问题。一般 DAO 层与 Service 层都在同个应用中，部署在同一台服务器中，所以可以省略 DAO 的参数校验。</li>
+<li>声明成 <strong>private</strong> 只会被自己代码调用的方法。如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。</li>
+</ul>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p><strong>单一职责</strong>对于构造方法同样适用，构造方法的使命就是在构造对象时进行传参操作，所以不应该在构造方法中引入业务逻辑。</p>
+<p>如果在一个对象生产中 ，需要完成初始化上下游对象、分配内存、执行静态方法、赋值句柄等繁重的工作，其中某个步骤出错，导致没有完成对象初始化，再将希望寄托于业务逻辑部分来处理异常就是一件不受控制的事情了。故推荐将初始化业务逻辑放在某个方法中，比如<code>init()</code>， 当对象确认完成所有初始化工作之后，再显式调用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" data-id="cloawz0ui0000yv9gb53b8vcl" data-title="码出高效读书笔记2-面向对象" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-algorithm/template/4-3.区间DP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" class="article-date">
@@ -697,143 +875,6 @@
 
 
   
-    <article id="post-design-pattern/19.组合模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/19/design-pattern/19.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-19T05:15:12.000Z" itemprop="datePublished">2023-10-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/19/design-pattern/19.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">设计模式19-组合模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>组合模式（Composite），将对象组合成树形结构以表示’部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/18/qbGU8Fy4LRCzDvO.jpg" alt="组合模式结构图.jpg"></p>
-<p><code>Component</code> 接口&#x2F;抽象类：为组合中的对象声明接口，在适当情况下，实现所有类共有接口的默认行为。声明一个接口用于访问和管理 <code>Component</code> 的子部件。</p>
-<p><code>Leaf</code> 类：在组合中表示叶节点，无子节点。</p>
-<p><code>Composite</code> 类：定义非叶节点的行为。</p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Component</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> String name;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Component</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span> depth)</span>;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Leaf</code> 类：add和remove方法没有意义，但好处是可以消除叶节点和非叶节点在抽象层次的区别，它们具备完全一致的接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Leaf</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Leaf</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(name);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Cannot add to a leaf.&quot;</span>); <span class="comment">// 叶子无法增加子节点</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Cannot remove from a leaf.&quot;</span>); <span class="comment">// 叶子无法移除子节点</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span> depth)</span> &#123;</span><br><span class="line">    <span class="comment">// 叶节点的具体显示方法</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; depth; i ++)</span><br><span class="line">      System.out.println(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    System.out.println(name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Composite</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Composite</span> <span class="keyword">extends</span> <span class="title class_">Component</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Component&gt; children = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(); <span class="comment">// 存储其下属的非叶节点和叶节点</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Composite</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    children.add(component);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Component component)</span> &#123;</span><br><span class="line">    children.remove(component);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span> depth)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; depth; i ++)</span><br><span class="line">      System.out.println(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    System.out.println(name);</span><br><span class="line">    <span class="comment">// 对下一层进行遍历</span></span><br><span class="line">    <span class="keyword">for</span> (Component item : children) &#123;</span><br><span class="line">      item.display(depth + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Composite</span> <span class="variable">root</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">root.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf A&quot;</span>));</span><br><span class="line">root.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf B&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="type">Composite</span> <span class="variable">comp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;Composite X&quot;</span>);</span><br><span class="line">comp.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XA&quot;</span>));</span><br><span class="line">comp.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XB&quot;</span>));</span><br><span class="line">root.add(comp);</span><br><span class="line"></span><br><span class="line"><span class="type">Composite</span> <span class="variable">comp2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Composite</span>(<span class="string">&quot;Composite XY&quot;</span>);</span><br><span class="line">comp2.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XYA&quot;</span>));</span><br><span class="line">comp2.add(<span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf XYB&quot;</span>));</span><br><span class="line">comp.add(comp2);</span><br><span class="line"></span><br><span class="line"><span class="type">Leaf</span> <span class="variable">leaf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf C&quot;</span>);</span><br><span class="line">root.add(leaf);</span><br><span class="line"></span><br><span class="line"><span class="type">Leaf</span> <span class="variable">leaf2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Leaf</span>(<span class="string">&quot;Leaf D&quot;</span>);</span><br><span class="line">root.add(leaf2);</span><br><span class="line">root.remove(leaf2);</span><br><span class="line"></span><br><span class="line">root.display(<span class="number">1</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">展示结果：</span></span><br><span class="line"><span class="comment">-root</span></span><br><span class="line"><span class="comment">--Leaf A</span></span><br><span class="line"><span class="comment">--Leaf B</span></span><br><span class="line"><span class="comment">--Composite X</span></span><br><span class="line"><span class="comment">---Leaf XA</span></span><br><span class="line"><span class="comment">---Leaf XB</span></span><br><span class="line"><span class="comment">---Composite XY</span></span><br><span class="line"><span class="comment">----LeafXYA</span></span><br><span class="line"><span class="comment">----LeafXYB</span></span><br><span class="line"><span class="comment">--Leaf C</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="透明方式与安全方式"><a href="#透明方式与安全方式" class="headerlink" title="透明方式与安全方式"></a>透明方式与安全方式</h2><h3 id="透明方式"><a href="#透明方式" class="headerlink" title="透明方式"></a>透明方式</h3><p>在Component中声明所有用来管理子对象的方法，其中包括add、remove等。这样实现Component接口的所有子类都具备了add和remove。这样做的好处就是叶节点和枝节点对于外界没有区别，它们具备完全一致的行为接口。但问题也很明显，因为Leaf类本身不具备add()、remove()方法的功能，所以实现它是没有意义的。</p>
-<h3 id="安全方式"><a href="#安全方式" class="headerlink" title="安全方式"></a>安全方式</h3><p>安全方式，也就是在Component接口中不去声明add和remove方法，那么子类的Leaf也就不需要去实现它，而是在Composite中声明所有用来管理子类对象的方法，这样做就不会出现Leaf类也需要实现add()、remove()方法的问题，不过由于不够透明，所以树叶和树枝类将不具有相同的接口，客户端的调用需要做相应的判断，带来了不便。</p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>发现需求中是体现<strong>部分与整体层次的结构</strong>时，以及希望用户可以忽略组合对象与单个对象的不同，<strong>统一地使用组合结构中的所有对象</strong>时，就应该考虑用组合模式了。</p>
-<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><p>组合模式定义了包含基本对象和组合对象的类层次结构。基本对象可以被组合成更复杂的组合对象，而这个组合对象又可以被组合，这样不断地递归下去，客户代码中，任何用到基本对象的地方都可以使用组合对象了。</p>
-<p>并且，用户不用关心到底是处理一个叶节点还是处理一个组合组件，也就不用为定义组合而写一些选择判断语句了。组合模式让客户可以一致地使用组合结构和单个对象。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/19/design-pattern/19.%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k20004hh9g00jv1x0q" data-title="设计模式19-组合模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/18.备忘录模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/18/design-pattern/18.%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-18T04:01:48.000Z" itemprop="datePublished">2023-10-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/18/design-pattern/18.%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/">设计模式18-备忘录模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>备忘录（Memento）：在<strong>不破坏封装性</strong>的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。</p>
-<blockquote>
-<p>如：游戏中的存档。不破坏封装性即不把过多的细节暴露给客户端</p>
-</blockquote>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/17/Af2uqHx4KsjVtWz.jpg" alt="备忘录模式结构图.jpg"></p>
-<p><code>Originator</code>（发起人）：负责创建一个备忘录 <code>Memento</code>，用以记录当前时刻它的内部状态，并可使用备忘录恢复内部状态。<code>Originator</code> 可根据需要决定 <code>Memento</code> 存储 <code>Originator</code> 的哪些内部状态。</p>
-<p> <code>Memento</code> （备忘录）：负责存储 <code>Originator</code> 对象的内部状态，并可防止 <code>Originator</code> 以外的其他对象访问备忘录 <code>Memento</code> 。备忘录有两个接口：<code>Caretaker</code> 只能看到备忘录的窄接口，它只能将备忘录传递给其他对象；<code>Originator</code> 能够看到一个宽接口，允许它访问返回到先前状态所需的所有数据。</p>
-<p><code>CareTaker</code> （管理者）：负责保存好备忘录<code>Memento</code>，不能对备忘录的内容进行操作或检查。</p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>发起人 <code>Originator</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Originator</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 需要保存的状态，可能有多个</span></span><br><span class="line">  <span class="keyword">private</span> String state;</span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = value;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 显示数据</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;State: &quot;</span> + <span class="built_in">this</span>.state);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 创建备忘录，将当前需要保存的信息（也许不是全部状态）导入，并实例化出一个Memento对象</span></span><br><span class="line">  <span class="keyword">public</span> Memento <span class="title function_">createMemento</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Memento</span>(<span class="built_in">this</span>.state);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 恢复备忘录，将Memento导入并将相关数据恢复</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">recoveryMemento</span><span class="params">(Memento memento)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(memento.getState());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>备忘录 <code>Memento</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Memento</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> String state;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Memento</span><span class="params">(String state)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = state;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>管理者 <code>Caretaker</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Caretaker</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> Memento memento;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Memento <span class="title function_">getMemento</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.memento;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMemento</span><span class="params">(Memento value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.memento = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Originator初始状态：例如状态属性为&quot;On&quot;</span></span><br><span class="line"><span class="type">Originator</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Originator</span>();</span><br><span class="line">o.setState(<span class="string">&quot;On&quot;</span>);</span><br><span class="line">o.show();</span><br><span class="line"></span><br><span class="line"><span class="type">Caretaker</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Caretaker</span>();</span><br><span class="line"><span class="comment">// 保存状态时，由于有了很好的封装，可以隐藏Originator的实现细节</span></span><br><span class="line">c.setMemento(o.createMMento());</span><br><span class="line"></span><br><span class="line"><span class="comment">// Originator改变了状态属性，变为&quot;Off&quot;</span></span><br><span class="line">o.setState(<span class="string">&quot;Off&quot;</span>);</span><br><span class="line">o.show();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 恢复原来的初始状态</span></span><br><span class="line">o.recoveryMemento(c.getMemento());</span><br><span class="line">o.show();</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>要保存的细节给封装在了Memento中了，要更改保存的细节也不用影响客户端了。</p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>状态需要完整存储到备忘录对象中，如果状态数据很大很多，那么在资源消耗上，备忘录对象会非常耗内存。</p>
-<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>Memento模式比较适用于功能比较复杂的，但需要维护或记录属性历史的类，或者需要保存的属性只是众多属性中的一小部分时，Originator可以根据保存的Memento信息还原到前一状态。</p>
-<p>有时一些对象的内部信息必须保存在对象以外的地方，但是必须要由对象自己读取，这时，使用备忘录可以把复杂的对象内部信息对其他的对象屏蔽起来，从而可以恰当地保持封装的边界。</p>
-<blockquote>
-<p>管理类是有必要的。其实管理类主要得做两件事，一个是保存快照信息，这个快照信息可以保存多份的（用啥容器都行，栈、列表啥的），游戏状态这个例子里只保存了一份，所以会觉得没有必要；第二个是undo操作（即取出某个快照并恢复原发器状态的操作），该操作最好也要由管理者来提供，这样原发器的职责会更单一。</p>
-<p>还有一个很致命的缺陷，快照Memento的getState是public的，不够安全。应该由Memento持有原发器的引用，且由Memento对象提供方法进行原发器对象的状态恢复，这样就不会有Memento.state的信息泄漏的危险了；当然，还有另一种做法，将Memento设计为原发器的私有内部类。</p>
-</blockquote>
-<blockquote>
-<p>拓展：命令模式也有实现类似撤销的作用，如果在某个系统中使用命令模式时，需要实现命令的撤销功能，那么命令模式可以使用备忘录模式来存储可撤销操作的状态</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/18/design-pattern/18.%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k30006hh9ga62qhulu" data-title="设计模式18-备忘录模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -877,6 +918,14 @@
       <ul>
         
           <li>
+            <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">设计模式23-命令模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">码出高效读书笔记2-面向对象</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
           </li>
         
@@ -886,14 +935,6 @@
         
           <li>
             <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">算法模板4-1.DP-背包问题</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/">算法模板4-0.DP理解方式</a>
           </li>
         
       </ul>

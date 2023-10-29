@@ -73,6 +73,126 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-algorithm/template/2-1.链表" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/07/algorithm/template/2-1.%E9%93%BE%E8%A1%A8/" class="article-date">
+  <time class="dt-published" datetime="2023-10-07T08:12:02.000Z" itemprop="datePublished">2023-10-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/07/algorithm/template/2-1.%E9%93%BE%E8%A1%A8/">算法模板2-1.链表</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h1><h2 id="结构体-指针"><a href="#结构体-指针" class="headerlink" title="结构体+指针"></a>结构体+指针</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    Node *next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> n = <span class="keyword">new</span> <span class="built_in">Node</span>(); <span class="comment">// 非常慢</span></span><br></pre></td></tr></table></figure>
+
+<p>即动态链表。</p>
+<p>一般面试中用得较多，笔试不常用，因为<code>new</code>操作效率低。</p>
+<h2 id="数组模拟（常用）"><a href="#数组模拟（常用）" class="headerlink" title="数组模拟（常用）"></a>数组模拟（常用）</h2><p>即静态链表。</p>
+<h3 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h3><p>主要用途：邻接表。</p>
+<p>邻接表应用：存储树和图。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p><code>e[N]</code>: 存储每个点的 <code>val</code>。<code>ne[N]</code>：存储每个点的 <code>next</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// head存储链表头，e[]存储结点的值，ne[]存储结点的next指针，idx表示当前用到了哪个结点</span></span><br><span class="line"><span class="type">int</span> head, e[N], ne[N], idx;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    head = <span class="number">-1</span>;</span><br><span class="line">    idx = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在链表头插入一个数a (80%的情况都是插到头结点的位置)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert_to_head</span><span class="params">(<span class="type">int</span> a)</span> </span>&#123;</span><br><span class="line">    e[idx] = a, ne[idx] = head, head = idx ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一般的插入操作：将a插入下标是k的结点后面</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> a)</span> </span>&#123;</span><br><span class="line">    e[idx] = a, ne[idx] = ne[k], ne[k] = idx ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将头结点删除，需要保证头结点存在</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">remove_head</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    head = ne[head];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一般的删除操作：将下标是k的点后面的点删掉</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">remove</span><span class="params">(<span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">    ne[k] = ne[ne[k]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="双链表"><a href="#双链表" class="headerlink" title="双链表"></a>双链表</h3><p>主要用途：优化某些问题。</p>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><p>让下标为0的点为<code>head</code>，下标为1的点为<code>tail</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// e[]表示结点的值，l[]表示结点的左指针，r[]表示结点的右指针，idx表示当前用到了哪个结点</span></span><br><span class="line"><span class="type">int</span> e[N], l[N], r[N], idx;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 0是左端点，1是右端点</span></span><br><span class="line">    r[<span class="number">0</span>] = <span class="number">1</span>, l[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    idx = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在结点k的右边插入一个数a</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> a)</span> </span>&#123;</span><br><span class="line">    e[idx] = a;</span><br><span class="line">    l[idx] = k, r[idx] = r[k];</span><br><span class="line">    l[r[k]] = idx, r[k] = idx;</span><br><span class="line">    idx ++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注：如果想在结点k的左边插入a，调用insert(l[k], a)即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除结点k</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">remove</span><span class="params">(<span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">    l[r[k]] = l[k];</span><br><span class="line">    r[l[k]] = r[k];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/07/algorithm/template/2-1.%E9%93%BE%E8%A1%A8/" data-id="clng10n6c000k389g1d7ya8je" data-title="算法模板2-1.链表" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-design-pattern/12.外观模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/07/design-pattern/12.%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-10-07T04:24:40.000Z" itemprop="datePublished">2023-10-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/07/design-pattern/12.%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">设计模式12-外观模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>外观模式（Facade），为子系统中的一组接口提供一个一致的界面，此模式定义了一个<strong>高层接口</strong>，这个接口使得这一子系统更加容易使用。</p>
+<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/07/LyeOAYqbGIl1nKp.jpg" alt="外观模式结构图.jpg"></p>
+<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>四个子系统的类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子系统1</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SubSystemOne</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">methodOne</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;子系统方法一&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 子系统2</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SubSystemTwo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">methodTwo</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;子系统方法二&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 子系统3</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SubSystemThree</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">methodThree</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;子系统方法三&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 子系统4</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SubSystemFour</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">methodFour</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;子系统方法四&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>外观类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 外观类，需要了解所有子系统的方法或属性，进行组合以备外界调用</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Facade</span> &#123;</span><br><span class="line">    SubSystemOne one;</span><br><span class="line">    SubSystemTwo two;</span><br><span class="line">    SubSystemThree three;</span><br><span class="line">    SubSystemFour four;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Facade</span><span class="params">()</span> &#123;</span><br><span class="line">        one = <span class="keyword">new</span> <span class="title class_">SubSystemOne</span>();</span><br><span class="line">        two = <span class="keyword">new</span> <span class="title class_">SubSystemTwo</span>();</span><br><span class="line">        three = <span class="keyword">new</span> <span class="title class_">SubSystemThree</span>();</span><br><span class="line">        four = <span class="keyword">new</span> <span class="title class_">SubSystemFour</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">methodA</span><span class="params">()</span> &#123;</span><br><span class="line">        one.methodOne();</span><br><span class="line">        two.methodTwo();</span><br><span class="line">        three.methodThree();</span><br><span class="line">        four.methodFour();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">methodB</span><span class="params">()</span> &#123;</span><br><span class="line">        two.methodTwo();</span><br><span class="line">        three.methodThree();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 由于Facade的作用，客户端可以根本不知道四个子系统类的存在</span></span><br><span class="line"><span class="type">Facade</span> <span class="variable">facade</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Facade</span>();</span><br><span class="line"></span><br><span class="line">facade.methodA();</span><br><span class="line">facade.methodB();</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>对于面向对象有一定基础的朋友，即使没有听说过外观模式，也完全有可能在很多时候使用它，因为它完美地体现了依赖倒转原则和迪米特法则的思想，所以是非常常用的模式之一。</p>
+<h3 id="何时使用？"><a href="#何时使用？" class="headerlink" title="何时使用？"></a>何时使用？</h3><ol>
+<li>在设计初期阶段，应该要有意识地<strong>将不同的两个层分离</strong>，比如经典的三层架构，就需要考虑在数据访问层和业务逻辑层、业务逻辑层和表示层的<strong>层与层之间建立外观Facade</strong>，这样可以<strong>为复杂的子系统提供一个简单的接口，使得耦合大大降低。</strong></li>
+<li>在开发阶段，子系统往往因为不断的重构演化而变得越来越复杂，大多数的模式使用时也都会产生很多很小的类，这本是好事，但也给外部调用它们的用户程序带来了使用上的困难，增加外观Facade可以<strong>提供一个简单的接口，减少它们之间的依赖。</strong></li>
+<li>在维护一个遗留的大型系统时，可能这个系统已经非常难以维护和扩展了，但因为它包含非常重要的功能，新的需求开发必须要依赖于它。此时用外观模式Facade也是非常合适的。你可以为新系统开发一个外观Facade类，来提供设计粗糙或高度复杂的遗留代码的比较清晰简单的接口，让<strong>新系统与Facade对象交互，Facade与遗留代码交互所有复杂的工作。</strong></li>
+</ol>
+<p><img src="https://s2.loli.net/2023/10/07/jCbN9tF6UzOJE1R.jpg" alt="外观模式使用场景.jpg"></p>
+<h2 id="例：投资"><a href="#例：投资" class="headerlink" title="例：投资"></a>例：投资</h2><h3 id="v1股民直接炒股"><a href="#v1股民直接炒股" class="headerlink" title="v1股民直接炒股"></a>v1股民直接炒股</h3><p><img src="https://s2.loli.net/2023/10/07/y6CFScxOXlfApq5.jpg" alt="外观模式v1.jpg"></p>
+<h3 id="v2股民投资基金"><a href="#v2股民投资基金" class="headerlink" title="v2股民投资基金"></a>v2股民投资基金</h3><p><img src="https://s2.loli.net/2023/10/07/X42AszLPjbJZhHd.jpg" alt="外观模式v2.jpg"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://peixuanhu.github.io/2023/10/07/design-pattern/12.%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" data-id="clng10n690006389gd2ohch14" data-title="设计模式12-外观模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-algorithm/template/1-7.区间合并模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/06/algorithm/template/1-7.%E5%8C%BA%E9%97%B4%E5%90%88%E5%B9%B6%E6%A8%A1%E6%9D%BF/" class="article-date">
@@ -554,148 +674,6 @@
 
 
   
-    <article id="post-design-pattern/10.模板方法模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/design-pattern/10.%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T10:50:18.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/design-pattern/10.%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">设计模式10-模板方法模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>模板方法（Template Method）模式，定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。</p>
-<p>模板方法使得子类可以在不改变一个算法的结构的情况下，重定义该算法的某些特定步骤。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/06/cXdaetYSGvgoiw8.jpg" alt="模板方法模式结构图.jpg"></p>
-<h3 id="AbstractClass"><a href="#AbstractClass" class="headerlink" title="AbstractClass"></a>AbstractClass</h3><p>AbstractClass是抽象类，其实也就是一个抽象模板，定义并实现了一个模板方法。这个模板方法一般是一个具体方法，它给出了一个顶级逻辑的骨架，而逻辑的组成步骤在相应的抽象操作中，推迟到子类实现。顶级逻辑也有可能调用一些具体方法。</p>
-<h3 id="ConcreteClass"><a href="#ConcreteClass" class="headerlink" title="ConcreteClass"></a>ConcreteClass</h3><p>ConcreteClass ， 实现父类所定义的一个或多个抽象方法。每一个AbstractClass 都可以有任意多个ConcreteClass 与之对应， 而每一个ConcreteClass都可以给出这些抽象方法（也就是顶级逻辑的组成步骤）的不同实现，从而使得顶级逻辑的实现各不相同。</p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>模板方法抽象类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AbstractClass</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 模板方法，给出逻辑骨架，而逻辑组成是一些相应的抽象操作，都推迟到子类实现</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">templateMethod</span><span class="params">()</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 写一些可以被子类共享的代码</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">this</span>.primitiveOperation1();</span><br><span class="line">        <span class="built_in">this</span>.primitiveOperation2();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 子类个性的行为，放到子类去实现</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">primitiveOperation1</span><span class="params">()</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">primitiveOperation2</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>模板方法具体类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体类A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteClassA</span> <span class="keyword">extends</span> <span class="title class_">AbstractClass</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">primitiveOperation1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体类A方法1实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">primitiveOperation2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体类A方法2实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体类B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteClassB</span> <span class="keyword">extends</span> <span class="title class_">AbstractClass</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">primitiveOperation1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体类B方法1实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">primitiveOperation2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;具体类B方法2实现&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>模板方法模式是通过把不变行为搬移到超类，去除子类中的重复代码来体现它的优势。</p>
-<p>当不变的和可变的行为在方法的子类实现中混合在一起的时候，不变的行为就会在子类中重复出现。我们通过模板方法模式把这些行为搬移到单一的地方，这样就帮助子类摆脱重复的不变行为的纠缠。</p>
-<p>模板方法模式是很常用的模式，对继承和多态玩得好的人几乎都会在继承体系中多多少少用到它。比如在Java类库的设计中，通常都会利用模板方法模式提取类库中的公共行为到抽象类中。</p>
-<h2 id="例：试卷抄题与作答"><a href="#例：试卷抄题与作答" class="headerlink" title="例：试卷抄题与作答"></a>例：试卷抄题与作答</h2><h3 id="v1学生抄题"><a href="#v1学生抄题" class="headerlink" title="v1学生抄题"></a>v1学生抄题</h3><p>试卷内容和答案都放到具体某个学生类中实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TestPaperA</span> <span class="keyword">extends</span> <span class="title class_">TestPaper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testQuestion1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;问题xxxx。a. xxx b. xxx c. xxx&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;答案：b&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="v2打印试卷"><a href="#v2打印试卷" class="headerlink" title="v2打印试卷"></a>v2打印试卷</h3><p>考题试卷类作为父类，试卷内容在试卷类中实现。</p>
-<p>学生答卷类继承试卷类，答案在学生答卷类中实现。</p>
-<h4 id="v2-1-试题方法在子类调用"><a href="#v2-1-试题方法在子类调用" class="headerlink" title="v2.1 试题方法在子类调用"></a>v2.1 试题方法在子类调用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TestPaperA</span> <span class="keyword">extends</span> <span class="title class_">TestPaper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testQuestion1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.testQuestion1();</span><br><span class="line">        System.out.println(<span class="string">&quot;答案：b&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="v2-2-只有具体答案在子类实现"><a href="#v2-2-只有具体答案在子类实现" class="headerlink" title="v2.2 只有具体答案在子类实现"></a>v2.2 只有具体答案在子类实现</h4><p>所有重复的代码都应该要上升到父类去，而不是让每个子类都去重复。</p>
-<p>增加answer1()抽象方法，在子类重写</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 考题试卷</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">TestPaper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testQuestion1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;问题xxxx。a. xxx b. xxx c. xxx&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;答案：&quot;</span> + <span class="built_in">this</span>.answer1()); <span class="comment">// 改成调用抽象方法answer1</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">abstract</span> String <span class="title function_">answer1</span><span class="params">()</span>; <span class="comment">// 让继承的子类重写，因为每个人的答案不同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生答卷</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestPaperA</span> <span class="keyword">extends</span> <span class="title class_">TestPaper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> String <span class="title function_">answer1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;b&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/design-pattern/10.%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" data-id="clng10n670001389gb8t115to" data-title="设计模式10-模板方法模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/cpp输入输出写法总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/06/algorithm/cpp%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2023-10-06T07:03:12.000Z" itemprop="datePublished">2023-10-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/06/algorithm/cpp%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">cpp算法相关写法总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><h3 id="输入一行字符串到一个字符数组"><a href="#输入一行字符串到一个字符数组" class="headerlink" title="输入一行字符串到一个字符数组"></a>输入一行字符串到一个字符数组</h3><p>例：</p>
-<p><code>abc def ghi</code> 到 <code>char str[1000]</code></p>
-<p>写法：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str[<span class="number">1000</span>];</span><br><span class="line"><span class="built_in">gets</span>(str);</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://www.programiz.com/cpp-programming/library-function/cstdio/gets">https://www.programiz.com/cpp-programming/library-function/cstdio/gets</a></p>
-<h3 id="用scanf读入一个字母-推荐读成字符串的形式"><a href="#用scanf读入一个字母-推荐读成字符串的形式" class="headerlink" title="用scanf读入一个字母 - 推荐读成字符串的形式"></a>用scanf读入一个字母 - 推荐读成字符串的形式</h3><p>例：</p>
-<p><code>Q 2 3</code></p>
-<p>写法：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> op[<span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> a, b;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s%d%d&quot;</span>, op, &amp;a, &amp;b);</span><br><span class="line"><span class="comment">// op[0]即为所需字母</span></span><br></pre></td></tr></table></figure>
-
-<p>原因：</p>
-<p>如果用 <code>%c</code> 读op，容易读到空格回车等其他字符，很麻烦</p>
-<p>但用 <code>%s</code> 会自动过滤空格回车（读到空格回车就停了）</p>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="比较字符串是否相等"><a href="#比较字符串是否相等" class="headerlink" title="比较字符串是否相等"></a>比较字符串是否相等</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">相等：!<span class="built_in">strcmp</span>(op, <span class="string">&quot;PM&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="memset"><a href="#memset" class="headerlink" title="memset"></a>memset</h3><p>头文件：cstring</p>
-<h4 id="0"><a href="#0" class="headerlink" title="0"></a>0</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(array, 0, sizeof(array))</span><br></pre></td></tr></table></figure>
-
-<h4 id="1"><a href="#1" class="headerlink" title="-1"></a>-1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(array, -1, sizeof(array))</span><br></pre></td></tr></table></figure>
-
-<h4 id="无穷大"><a href="#无穷大" class="headerlink" title="无穷大"></a>无穷大</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int类型：常采用0x3f3f3f3f来作为无穷大</span><br><span class="line"></span><br><span class="line">memset(array, 0x3f, sizeof(array))</span><br><span class="line">为数组设初值为0x3f3f3f3f，因为这个数的每个字节都是0x3f</span><br></pre></td></tr></table></figure>
-
-<h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><ol>
-<li>cout</li>
-<li>Segment Fault的时候一段一段删代码</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/06/algorithm/cpp%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/" data-id="clng10n620000389g5otjax9v" data-title="cpp算法相关写法总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -739,6 +717,14 @@
       <ul>
         
           <li>
+            <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">设计模式23-命令模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">码出高效读书笔记2-面向对象</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
           </li>
         
@@ -748,14 +734,6 @@
         
           <li>
             <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">算法模板4-1.DP-背包问题</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/">算法模板4-0.DP理解方式</a>
           </li>
         
       </ul>
