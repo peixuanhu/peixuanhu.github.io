@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -314,10 +314,10 @@
 <p>当你把对象加入<code>HashSet</code>时，<code>HashSet</code> 会先计算对象的<code>hashcode</code>值来判断对象加入的位置，同时也会与其他加入的对象的 <code>hashcode</code> 值作比较，如果没有相符的 <code>hashcode</code>，<code>HashSet</code> 会假设对象没有重复出现。但是如果发现有相同 <code>hashcode</code> 值的对象，这时会调用<code>equals()</code>方法来检查 <code>hashcode</code> 相等的对象是否真的相同。如果两者相同，<code>HashSet</code> 就不会让加入操作成功。</p>
 </blockquote>
 <p>在 JDK1.8 中，<code>HashSet</code>的<code>add()</code>方法只是简单的调用了<code>HashMap</code>的<code>put()</code>方法，并且判断了一下返回值以确保是否有重复元素。直接看一下<code>HashSet</code>中的源码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns: true if this set did not already contain the specified element</span></span><br><span class="line"><span class="comment">// 返回值：当 set 中没有包含 add 的元素时返回真</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> map.put(e, PRESENT)==<span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Returns: true if this set did not already contain the specified element</span><br><span class="hljs-comment">// 返回值：当 set 中没有包含 add 的元素时返回真</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span> &#123;<br>        <span class="hljs-keyword">return</span> map.put(e, PRESENT)==<span class="hljs-literal">null</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>而在<code>HashMap</code>的<code>putVal()</code>方法中也能看到如下说明：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns : previous value, or null if none</span></span><br><span class="line"><span class="comment">// 返回值：如果插入位置没有元素返回null，否则返回上一个元素</span></span><br><span class="line"><span class="keyword">final</span> V <span class="title function_">putVal</span><span class="params">(<span class="type">int</span> hash, K key, V value, <span class="type">boolean</span> onlyIfAbsent,</span></span><br><span class="line"><span class="params">                   <span class="type">boolean</span> evict)</span> &#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Returns : previous value, or null if none</span><br><span class="hljs-comment">// 返回值：如果插入位置没有元素返回null，否则返回上一个元素</span><br><span class="hljs-keyword">final</span> V <span class="hljs-title function_">putVal</span><span class="hljs-params">(<span class="hljs-type">int</span> hash, K key, V value, <span class="hljs-type">boolean</span> onlyIfAbsent,</span><br><span class="hljs-params">                   <span class="hljs-type">boolean</span> evict)</span> &#123;<br>...<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>也就是说，在 JDK1.8 中，实际上无论<code>HashSet</code>中是否已经存在了某元素，<code>HashSet</code>都会直接插入，只是会在<code>add()</code>方法的返回值处告诉我们插入前是否存在相同元素。</p>
 

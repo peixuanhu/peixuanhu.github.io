@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -275,25 +275,25 @@
                 <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><h3 id="输入一行字符串到一个字符数组"><a href="#输入一行字符串到一个字符数组" class="headerlink" title="输入一行字符串到一个字符数组"></a>输入一行字符串到一个字符数组</h3><p>例：</p>
 <p><code>abc def ghi</code> 到 <code>char str[1000]</code></p>
 <p>写法：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str[<span class="number">1000</span>];</span><br><span class="line"><span class="built_in">gets</span>(str);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">char</span> str[<span class="hljs-number">1000</span>];<br><span class="hljs-built_in">gets</span>(str);<br></code></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://www.programiz.com/cpp-programming/library-function/cstdio/gets">https://www.programiz.com/cpp-programming/library-function/cstdio/gets</a></p>
 <h3 id="用scanf读入一个字母-推荐读成字符串的形式"><a href="#用scanf读入一个字母-推荐读成字符串的形式" class="headerlink" title="用scanf读入一个字母 - 推荐读成字符串的形式"></a>用scanf读入一个字母 - 推荐读成字符串的形式</h3><p>例：</p>
 <p><code>Q 2 3</code></p>
 <p>写法：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> op[<span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> a, b;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s%d%d&quot;</span>, op, &amp;a, &amp;b);</span><br><span class="line"><span class="comment">// op[0]即为所需字母</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">char</span> op[<span class="hljs-number">5</span>];<br><span class="hljs-type">int</span> a, b;<br><span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s%d%d&quot;</span>, op, &amp;a, &amp;b);<br><span class="hljs-comment">// op[0]即为所需字母</span><br></code></pre></td></tr></table></figure>
 
 <p>原因：</p>
 <p>如果用 <code>%c</code> 读op，容易读到空格回车等其他字符，很麻烦</p>
 <p>但用 <code>%s</code> 会自动过滤空格回车（读到空格回车就停了）</p>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="比较字符串是否相等"><a href="#比较字符串是否相等" class="headerlink" title="比较字符串是否相等"></a>比较字符串是否相等</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">相等：!<span class="built_in">strcmp</span>(op, <span class="string">&quot;PM&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="比较字符串是否相等"><a href="#比较字符串是否相等" class="headerlink" title="比较字符串是否相等"></a>比较字符串是否相等</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span></span><br><br>相等：!<span class="hljs-built_in">strcmp</span>(op, <span class="hljs-string">&quot;PM&quot;</span>)<br></code></pre></td></tr></table></figure>
 
 <h3 id="memset"><a href="#memset" class="headerlink" title="memset"></a>memset</h3><p>头文件：cstring</p>
-<h4 id="0"><a href="#0" class="headerlink" title="0"></a>0</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(array, 0, sizeof(array))</span><br></pre></td></tr></table></figure>
+<h4 id="0"><a href="#0" class="headerlink" title="0"></a>0</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">memset</span><span class="hljs-params">(array, <span class="hljs-number">0</span>, sizeof(array)</span></span>)<br></code></pre></td></tr></table></figure>
 
-<h4 id="1"><a href="#1" class="headerlink" title="-1"></a>-1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memset(array, -1, sizeof(array))</span><br></pre></td></tr></table></figure>
+<h4 id="1"><a href="#1" class="headerlink" title="-1"></a>-1</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">memset</span><span class="hljs-params">(array, -<span class="hljs-number">1</span>, sizeof(array)</span></span>)<br></code></pre></td></tr></table></figure>
 
-<h4 id="无穷大"><a href="#无穷大" class="headerlink" title="无穷大"></a>无穷大</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int类型：常采用0x3f3f3f3f来作为无穷大</span><br><span class="line"></span><br><span class="line">memset(array, 0x3f, sizeof(array))</span><br><span class="line">为数组设初值为0x3f3f3f3f，因为这个数的每个字节都是0x3f</span><br></pre></td></tr></table></figure>
+<h4 id="无穷大"><a href="#无穷大" class="headerlink" title="无穷大"></a>无穷大</h4><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">int</span>类型：常采用<span class="hljs-number">0x3f3f3f3f</span>来作为无穷大<br><br>memset(array, <span class="hljs-number">0x3f</span>, sizeof(array))<br>为数组设初值为<span class="hljs-number">0x3f3f3f3f</span>，因为这个数的每个字节都是<span class="hljs-number">0x3f</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><ol>
 <li>cout</li>
