@@ -1,988 +1,922 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
   
-  <title>Peixuan&#39;s Page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="Peixuan&#39;s Page">
 <meta property="og:url" content="https://peixuanhu.github.io/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Peixuan Hu">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+<meta name="twitter:card" content="summary_large_image">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
   
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+  <title>Peixuan&#39;s Page</title>
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 6.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Peixuan&#39;s Page</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-design-pattern/23.命令模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-29T02:29:39.577Z" itemprop="datePublished">2023-10-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">设计模式23-命令模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>命令模式（Command），将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/29/DhKeTdnJQt6GuxX.jpg" alt="命令模式结构图.jpg"></p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Command</code> 类：用来声明执行操作的接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Command</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> Receiver receiver;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Command</span><span class="params">(Receiver receiver)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.receiver = receiver;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 执行命令</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">executeCommand</span><span class="params">()</span>;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ConcreteCommand</code> 类：将一个 <code>Receiver</code> 对象绑定于一个动作，调用 <code>Receiver</code> 相应的操作，以实现 <code>executeCommand</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteCommand</span> <span class="keyword">extends</span> <span class="title class_">Command</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ConcreteCommand</span><span class="params">(Receiver receiver)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(receiver);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">executeCommand</span><span class="params">()</span> &#123;</span><br><span class="line">    receiver.action();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Invoker</code> 类：要求 <code>Command</code> 执行请求。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Invoker</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> Command command;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCommand</span><span class="params">(Command command)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.command = command;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">executeCommand</span><span class="params">()</span> &#123;</span><br><span class="line">    command.executeCommand();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Receiver</code> 类：知道如何实施与执行一个与请求相关的操作，任何类都可能作为一个接收者。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Receiver</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">action</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;执行请求&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Receiver</span> <span class="variable">receiver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Receiver</span>();</span><br><span class="line"><span class="type">Command</span> <span class="variable">command</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteCommand</span>(receiver);</span><br><span class="line"><span class="type">Invoker</span> <span class="variable">invoker</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Invoker</span>();</span><br><span class="line"></span><br><span class="line">invoker.setCommand(command);</span><br><span class="line">invoker.executeCommand();</span><br></pre></td></tr></table></figure>
-
-<h2 id="进一步改进代码"><a href="#进一步改进代码" class="headerlink" title="进一步改进代码"></a>进一步改进代码</h2><p><code>Invoker</code> 类中的 <code>Command</code> 属性可以修改成 <code>List</code>，以实现执行命令的批处理。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Invoker</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Command&gt; commands = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Command&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 设置命令</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCommand</span><span class="params">(Command command)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> command.getClass().getSimpleName();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (className.equals(<span class="string">&quot;xxx&quot;</span>))&#123; <span class="comment">// 对无法完成的请求给予回绝</span></span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.commands.add(command);</span><br><span class="line">      System.out.println(<span class="string">&quot;增加请求：&quot;</span> + className + <span class="string">&quot;，时间：&quot;</span> + getNowTime());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 取消命令</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">cancelCommand</span><span class="params">(Command command)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> command.getClass().getSimpleName();</span><br><span class="line">    commands.remove(command);</span><br><span class="line">    System.out.println(<span class="string">&quot;取消请求：&quot;</span> + className + <span class="string">&quot;，时间：&quot;</span> + getNowTime());</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 通知执行</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyCommand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (Command command : commands)</span><br><span class="line">      command.executeCommand();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> String <span class="title function_">getNowTime</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">SimpleDataFormat</span> <span class="variable">formatter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;HH:mm:ss&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> formatter.format(<span class="keyword">new</span> <span class="title class_">Date</span>()).toString();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Receiver</span> <span class="variable">receiver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Receiver</span>();</span><br><span class="line"><span class="type">Command</span> <span class="variable">command1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteCommand1</span>(receiver);</span><br><span class="line"><span class="type">Command</span> <span class="variable">command2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteCommand2</span>(receiver);</span><br><span class="line"><span class="type">Invoker</span> <span class="variable">invoker</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Invoker</span>();</span><br><span class="line"></span><br><span class="line">invoker.setCommand(command1);</span><br><span class="line">invoker.setCommand(command2);</span><br><span class="line">invoker.setCommand(command1);</span><br><span class="line">invoker.setCommand(command1);</span><br><span class="line"></span><br><span class="line">invoker.cancelCommand(command1);</span><br><span class="line"></span><br><span class="line">invoker.setCommand(command2);</span><br><span class="line"></span><br><span class="line">invoker.notifyCommand(); <span class="comment">// 执行所有命令</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
-<li>它能较容易地设计一个命令队列</li>
-<li>在需要的情况下，可以较容易地将命令记录进日志</li>
-<li>允许接受请求的一方决定是否要否决请求</li>
-<li>可以容易地实现对请求的撤销与重做</li>
-<li>由于加进新的具体命令类不影响其他的类，因此增加新的具体命令类很容易</li>
-<li>把<strong>请求一个操作</strong>的对象与<strong>知道怎么执行一个操作</strong>的对象分隔开</li>
-</ul>
-<blockquote>
-<p>敏捷开发原则告诉我们，不要为代码添加基于猜测的、实际不需要的功能。如果不清楚一个系统是否需要命令模式，一般就不要着急去实现它，事实上，在需要的时候通过重构实现这个模式并不困难，只有在真正需要如撤销／恢复操作等功能时，把原来的代码重构为命令模式才有意义。</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" data-id="cloawz0um0001yv9g3tbobdff" data-title="设计模式23-命令模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java/码出高效笔记2-面向对象" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="article-date">
-  <time class="dt-published" datetime="2023-10-26T07:41:04.356Z" itemprop="datePublished">2023-10-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">码出高效读书笔记2-面向对象</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="访问权限控制"><a href="#访问权限控制" class="headerlink" title="访问权限控制"></a>访问权限控制</h3><p><img src="https://s2.loli.net/2023/10/26/hlvCdauSt7I6NMA.png" alt="访问权限控制及可见范围.png"></p>
-<ul>
-<li>如果不允许外部直接通过 new 创建对象，构造方法必须是 private。</li>
-<li>工具类不允许有 public 或 default 构造方法。</li>
-</ul>
-<h3 id="this和super"><a href="#this和super" class="headerlink" title="this和super"></a>this和super</h3><p><img src="https://s2.loli.net/2023/10/26/Fx2lKfmdSgryw8X.png" alt="this和super的异同点.png"></p>
-<ul>
-<li><p>在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。</p>
-</li>
-<li><p>由于 this 和 super都在实例化阶段调用，所以不能在<strong>静态方法</strong>和<strong>静态代码块</strong>申使用 this 和 super 关键字。</p>
-</li>
-</ul>
-<h3 id="类关系"><a href="#类关系" class="headerlink" title="类关系"></a>类关系</h3><p>类与类之间的关系可分成两种·有关系与没关系，难点在于确定类与类之间是否存在相互作用。证明类之间没关系是一个涉及业务、架构、模块边界的问 题，往往由于业务模型的抽象角度不同而不同，是一件非常棘手的事情。如果找到了 没有关系的点，就可以如庖丁解牛一样，进行架构隔离、模块解耦等工作。</p>
-<p>类与类有关系的情况，包括以下5种类型：</p>
-<ul>
-<li>【继承】 extends (is-a)。</li>
-<li>【实现】 implements (can-do)。</li>
-<li>【组合】 类是成员变量 (contains-a)。</li>
-<li>【聚合】 类是成员变量(has-a)。</li>
-<li>【依赖】 import类(use-a)。</li>
-</ul>
-<p>随着业务和架构的发展，类与类的关系是会发生变化的，必须用发展的眼光看待类图。</p>
-<p>在业务重构过程中，往往会把原来强组合的关系拆开来，供其他模块调用，这就是类图的一种演变。</p>
-<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>常见的序列化方式有三种：</p>
-<ol>
-<li><strong>Java 原生序列化。</strong>Java类通过实现 Serializable接口来实现该类对象的序列化，这个接口非常特殊，没有任何方法，只起标识作用。<ul>
-<li>实现 Serializable 接口的类要显式设置 serialVersionUID 字段值，否则类源码修改后该值会发生变化。<ul>
-<li>如果是兼容升级，请不要修改 seria!VersionUID 字段 ， 避免反序列化失败。</li>
-<li>如果是不兼容升级，需要修改 serialVersionUID 值，避免反序列化混乱。</li>
-</ul>
-</li>
-<li>Java 反序列化时不会调用类的无参构造方法，而 是调用 native 方法将成员变量赋值为对应类型的初始值。基于性能及兼容性考虑，不 推荐使用 Java 原生序列化。</li>
-</ul>
-</li>
-<li><strong>Hessian 序列化。</strong>压缩编码，比Java原生序列化二进制流小且耗时短。特性：<ul>
-<li>自描述序列化类型。不依赖外部描述文件或接口定义 ， 用一个字节表示常用 基础类型 ， 极大缩短二进制流。</li>
-<li>语言无关，支持脚本语言。</li>
-<li>协议简单，比 Java 原生序列化高效。</li>
-</ul>
-</li>
-<li><strong>JSON 序列化。</strong>JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。JSON 序列化就是将数据对象转换为 JSON 字符串。在序列化过程中抛弃了类型信息，所以反序列化时只有提供类型信息才能准确地反序列化。相比前两种方式， JSON 可读性比较好，方便调试。</li>
-</ol>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h4 id="参数预处理"><a href="#参数预处理" class="headerlink" title="参数预处理"></a>参数预处理</h4><h5 id="1-入参保护"><a href="#1-入参保护" class="headerlink" title="1. 入参保护"></a>1. 入参保护</h5><p>人参保护实质上是对服务提供方的保护，常见于批量接口。</p>
-<p>虽然批量接口能处理批数据，但其处理能力并不是无限的，因此需要<strong>对入参的数据量进行判断和控制</strong>，如果超出处理能力，可以直接返回错误给客户端。</p>
-<h5 id="2-参数校验"><a href="#2-参数校验" class="headerlink" title="2. 参数校验"></a>2. 参数校验</h5><p>需要进行参数校验的场景：</p>
-<ul>
-<li>调用频度低的方法。</li>
-<li>执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退或者错误，则得不偿失。</li>
-<li>需要极高稳定性和可用性的方法。 </li>
-<li>对外提供的开放接口。</li>
-<li>敏感权限入口。</li>
-</ul>
-<p>不需要进行参数校验的场景：</p>
-<ul>
-<li>极有可能被<strong>循环调用</strong>的方法。但在方法说明里必须注明外部参数检查。</li>
-<li><strong>底层调用频度较高</strong>的方法。参数错误不太可能到底层才会暴露问题。一般 DAO 层与 Service 层都在同个应用中，部署在同一台服务器中，所以可以省略 DAO 的参数校验。</li>
-<li>声明成 <strong>private</strong> 只会被自己代码调用的方法。如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。</li>
-</ul>
-<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p><strong>单一职责</strong>对于构造方法同样适用，构造方法的使命就是在构造对象时进行传参操作，所以不应该在构造方法中引入业务逻辑。</p>
-<p>如果在一个对象生产中 ，需要完成初始化上下游对象、分配内存、执行静态方法、赋值句柄等繁重的工作，其中某个步骤出错，导致没有完成对象初始化，再将希望寄托于业务逻辑部分来处理异常就是一件不受控制的事情了。故推荐将初始化业务逻辑放在某个方法中，比如<code>init()</code>， 当对象确认完成所有初始化工作之后，再显式调用。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" data-id="cloawz0ui0000yv9gb53b8vcl" data-title="码出高效读书笔记2-面向对象" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/4-3.区间DP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" class="article-date">
-  <time class="dt-published" datetime="2023-10-26T04:13:21.204Z" itemprop="datePublished">2023-10-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="区间DP"><a href="#区间DP" class="headerlink" title="区间DP"></a>区间DP</h1><h2 id="状态分析"><a href="#状态分析" class="headerlink" title="状态分析"></a>状态分析</h2><h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p><code>f(i, j)</code>一般表示从i到j这个区间中的方案。</p>
-<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><p>要保证每次枚举的时候等式右侧的状态已经被更新过了。</p>
-<p>所以按照区间长度从小到大来枚举。</p>
-<p>三重循环：</p>
-<ol>
-<li>区间长度从小到大</li>
-<li>区间左端点（右端点可以通过左端点和长度算出来）</li>
-<li>左右端点之间的分界点</li>
-</ol>
-<h2 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h2><h3 id="石子合并"><a href="#石子合并" class="headerlink" title="石子合并"></a>石子合并</h3><p>时间复杂度：<code>O(n^3)</code>，状态表示2维<code>O(n^2)</code> * 状态计算枚举分界线<code>O(n)</code></p>
-<h4 id="状态分析-1"><a href="#状态分析-1" class="headerlink" title="状态分析"></a>状态分析</h4><h5 id="状态表示-1"><a href="#状态表示-1" class="headerlink" title="状态表示"></a>状态表示</h5><ul>
-<li>集合：所有将第i堆石子到第j堆石子合并成一堆石子的合并方式</li>
-<li>属性：代价的min</li>
-</ul>
-<h5 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h5><p>以最后一次合并的分界线的位置来分类：枚举i到j中的任何一个点x，把x左边和右边的石子合并</p>
-<p>转移方程：<code>f[i][j] = min&#123;f[i][k] + f[k + 1][j] + s[j] - s[i - 1]&#125;, k = i ~ j-1</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" data-id="clo6p99lz0000eu9g7xas7116" data-title="算法模板4-3.DP-区间DP" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/4-2.线性DP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/" class="article-date">
-  <time class="dt-published" datetime="2023-10-26T01:58:56.540Z" itemprop="datePublished">2023-10-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/">算法模板4-2.DP-线性DP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="线性DP"><a href="#线性DP" class="headerlink" title="线性DP"></a>线性DP</h1><p>DP的递推顺序是线性的。</p>
-<blockquote>
-<p>比如：<code>f(i, j)</code>中i和j是从小到大递增。</p>
-<p>背包问题就是线性DP。</p>
-</blockquote>
-<h2 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h2><h3 id="数字三角形"><a href="#数字三角形" class="headerlink" title="数字三角形"></a>数字三角形</h3><p><code>f(i, j)</code>表示走到第i行第j列时的最大路径</p>
-<p>方程：<code>f(i, j) = max(f[i - 1][j], f[i - 1][j - 1]) + a[i][j]</code></p>
-<h3 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a>最长上升子序列</h3><p><code>f[i]</code>表示所有以第i个数结尾的上升子序列长度的最大值</p>
-<p>从0到i-1枚举倒数第二位j，找到最长的<code>f[j]</code></p>
-<p>方程：<code>f[i] = max(f[j] + 1), j = 0,1,2,...,i-1 &amp;&amp; a[j] &lt; a[i]</code></p>
-<p>记录方案：用一个g数组记录第i个数对应的最长子序列中倒数第二位j：<code>g[i] = j</code>，最后就可以把路径倒序输出</p>
-<h3 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h3><p><code>f(i, j)</code> 表示所有在第一个序列的前i个字母中出现，且在第二个序列的前j个字母中出现的子序列的长度的最大值</p>
-<p>集合划分：</p>
-<ul>
-<li><p>以<code>a[i]</code>和<code>b[j]</code>是否出现在子序列中划分（4种情况）</p>
-<ul>
-<li>00：<code>f(i - 1, j - 1)</code>（不用写，已经包含在01和10情况内了）</li>
-<li>01：<code>f(i - 1, j)</code></li>
-<li>10：<code>f(i, j - 1)</code></li>
-<li>11：<code>f(i - 1, j - 1) + 1</code>, 且需要满足<code>a[i] == b[j]</code></li>
-</ul>
-<blockquote>
-<p>注意：</p>
-<p>01情况：<code>f(i - 1, j)</code>和01又区别，前者表示在第二个的前j个字母中出现的子序列（第j个字母不一定包含在子序列内），而后者表示第j个字母一定在子序列内。前者包含后者。但由于<code>f(i, j)</code>包含<code>f(i - 1, j)</code>这种状态，属性又为Max（集合划分适当重叠不影响结果的正确性，只要不漏掉某些情况），所以可以这样表示。</p>
-<p>10情况同理。</p>
-<p>不懂再去复习一下题解。</p>
-</blockquote>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/" data-id="clo6p99m00001eu9g2uc6dbe9" data-title="算法模板4-2.DP-线性DP" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/22.桥接模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-26T00:28:02.544Z" itemprop="datePublished">2023-10-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="合成-聚合复用原则-CARP"><a href="#合成-聚合复用原则-CARP" class="headerlink" title="合成&#x2F;聚合复用原则 (CARP)"></a>合成&#x2F;聚合复用原则 (CARP)</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>合成／聚合复用原则（CARP），尽量使用合成 (Composition)／聚合 (Aggregation)，尽量不要使用类继承。</p>
-<h2 id="合成和聚合"><a href="#合成和聚合" class="headerlink" title="合成和聚合"></a>合成和聚合</h2><ul>
-<li><p>聚合表示一种弱的’拥有’关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分。</p>
-<ul>
-<li>如：大雁是群居动物，所以每只大雁都是属于一个雁群，一个雁群可以有多只大雁，所以大雁和雁群是聚合关系。</li>
-</ul>
-</li>
-<li><p>合成则是一种强的’拥有’关系，体现了严格的部分和整体的关系，部分和整体的生命周期一样。</p>
-<ul>
-<li>如：大雁有两个翅膀，翅膀与大雁是部分和整体的关系，并且它们的生命周期是相同的，于是大雁和翅膀就是合成关系。</li>
-</ul>
-</li>
-</ul>
-<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><p>优先使用对象的合成／聚合将有助于你保持每个类被封装，并被集中在单个任务上。这样类和类继承层次会保持较小规模，并且不太可能增长为不可控制的庞然大物。</p>
-<h1 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p>桥接模式（Bridge），将抽象部分（如手机品牌）与它的实现部分（如手机软件）分离，使它们都可以独立地变化。</p>
-<blockquote>
-<p>什么叫抽象与它的实现分离？这并不是说，让抽象类与其派生类分离，因为这没有任何意义。实现指的是抽象类和它的派生类用来实现自己的对象。</p>
-<p>实现系统可能有多角度分类，每一种分类都有可能变化，那么就把这种多角度分离出来让它们独立变化，减少它们之间的耦合。</p>
-</blockquote>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/26/pstFy3v7dxHa481.png" alt="桥接模式结构图.png"></p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Implementor</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Implementor</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ConcreteImplementorA</code>和<code>ConcreteImplementorB</code>等派生类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteImplementorA</span> <span class="keyword">extends</span> <span class="title class_">Implementor</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;具体实现A的方法执行&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteImplementorB</span> <span class="keyword">extends</span> <span class="title class_">Implementor</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;具体实现B的方法执行&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Abstraction</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Abstraction</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> Implementor implementor;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setImplementor</span><span class="params">(Implementor implementor)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.implementor = implementor;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>RefinedAbstraction</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RefinedAbstraction</span> <span class="keyword">extends</span> <span class="title class_">Abstraction</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">operation</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.print(<span class="string">&quot;具体的Abstraction&quot;</span>);</span><br><span class="line">    implementor.operation();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Abstraction ab;</span><br><span class="line">ab = <span class="keyword">new</span> <span class="title class_">RefinedAbstraction</span>();</span><br><span class="line"></span><br><span class="line">ab.setImplementor(<span class="keyword">new</span> <span class="title class_">ConcreteImplementorA</span>());</span><br><span class="line">ab.operation();</span><br><span class="line"></span><br><span class="line">ab.setImplementor(<span class="keyword">new</span> <span class="title class_">ConcreteImplementorB</span>());</span><br><span class="line">ab.operation();</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" data-id="clo6p99m00002eu9g8pl7b2nl" data-title="设计模式22-桥接模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/4-1.DP-背包问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" class="article-date">
-  <time class="dt-published" datetime="2023-10-22T12:39:37.000Z" itemprop="datePublished">2023-10-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">算法模板4-1.DP-背包问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h1><h1 id="通用问题描述"><a href="#通用问题描述" class="headerlink" title="通用问题描述"></a>通用问题描述</h1><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
-<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
-<h2 id="01背包问题"><a href="#01背包问题" class="headerlink" title="01背包问题"></a>01背包问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
-<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
-<p><strong>每件物品只能用一次或者不用。</strong></p>
-<h3 id="状态分析"><a href="#状态分析" class="headerlink" title="状态分析"></a>状态分析</h3><h4 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h4><p><code>f(i, j)</code></p>
-<h5 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h5><p>所有选法的集合。</p>
-<p>满足条件：</p>
-<ol>
-<li>只从前 <code>i</code> 个物品中选</li>
-<li>选出来的物品的 <code>总体积 &lt;= j</code></li>
-</ol>
-<h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
-<h4 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h4><p>集合划分：<code>f(i, j)</code> 分成不含 <code>i</code> （一定存在）和含 <code>i</code>（不一定存在，只有j &gt;&#x3D; vi才存在） 两种情况的集合。</p>
-<p>得出状态转移方程：</p>
-<p><code>f(i, j) = max(f(i - 1, j), f(i - 1, j - vi) + wi)</code></p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="朴素：二维"><a href="#朴素：二维" class="headerlink" title="朴素：二维"></a>朴素：二维</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n, m; <span class="comment">// n: N, m: V</span></span><br><span class="line"><span class="type">int</span> v[N], w[N];</span><br><span class="line"><span class="type">int</span> f[N][N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= m; j ++)</span><br><span class="line">  &#123;</span><br><span class="line">    f[i][j] = f[i - <span class="number">1</span>][j]; <span class="comment">// 不含i，一定存在</span></span><br><span class="line">    <span class="keyword">if</span> (j &gt;= v[i]) f[i][j] = <span class="built_in">max</span>(f[i][j], f[i - <span class="number">1</span>][j - v[i]] + w[i]); <span class="comment">// 含i，需要判断条件</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; f[n][m] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-
-<h4 id="优化：一维"><a href="#优化：一维" class="headerlink" title="优化：一维"></a>优化：一维</h4><p>思路：</p>
-<p>由于 <code>f[i]</code> 这一层只需要用到 <code>f[i - 1]</code> 层，所以可以优化成两层的滚动数组。</p>
-<p>又两种情况：j和j-v[i]都是小于等于j的，说明不会同时用到当前列两边的数据，所以可以进一步优化成一层数组，即优化成一维数组。</p>
-<p>需要注意：由于j-v[i]在j的左边，需要保证第i-1层循环中的<code>f[j - v[i]]</code>在被用到的时候没有被第i层更新过，所以内层循环j应从大到小枚举。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = m; j &gt;= v[i]; j --)</span><br><span class="line">  &#123;</span><br><span class="line">    f[j] = <span class="built_in">max</span>(f[j], f[j - v[i]] + w[i]);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
-<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
-<p><strong>每件物品有无限个。</strong></p>
-<h3 id="状态分析-1"><a href="#状态分析-1" class="headerlink" title="状态分析"></a>状态分析</h3><h4 id="状态表示-1"><a href="#状态表示-1" class="headerlink" title="状态表示"></a>状态表示</h4><p><code>f(i, j)</code></p>
-<h5 id="集合-1"><a href="#集合-1" class="headerlink" title="集合"></a>集合</h5><p>所有选法的集合。</p>
-<p>满足条件：</p>
-<ol>
-<li>只从前 <code>i</code> 个物品中选</li>
-<li>选出来的物品的 <code>总体积 &lt;= j</code></li>
-</ol>
-<h5 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h5><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
-<h4 id="状态计算-1"><a href="#状态计算-1" class="headerlink" title="状态计算"></a>状态计算</h4><p>集合划分：<code>f(i, j)</code> 分成含<code>0~k</code> 个 <code>i</code> 的集合，其中<code>k</code>满足<code>j &gt;= k*v[i]</code>。</p>
-<p>得出状态转移方程：</p>
-<p><code>f(i, j) = max(f(i - 1, j), f(i - 1, j - k * vi) + k * wi), j &gt;= k*v[i]</code></p>
-<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><h4 id="朴素：二维，三重循环"><a href="#朴素：二维，三重循环" class="headerlink" title="朴素：二维，三重循环"></a>朴素：二维，三重循环</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n, m; <span class="comment">// n: N, m: V</span></span><br><span class="line"><span class="type">int</span> v[N], w[N];</span><br><span class="line"><span class="type">int</span> f[N][N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= m; j ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k * v[i] &lt;= j; k ++)</span><br><span class="line">      f[i][j] = <span class="built_in">max</span>(f[i][j], f[i - <span class="number">1</span>][j - k * v[i]] + k * w[i]);</span><br></pre></td></tr></table></figure>
-
-<h4 id="优化：一维，两重循环"><a href="#优化：一维，两重循环" class="headerlink" title="优化：一维，两重循环"></a>优化：一维，两重循环</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f[i, j] = max(f[i - 1][j], f[i - 1][j - v] + w, f[i - 1][j - 2v] + 2w, f[i - 1][j - 3v] + 3w, ...)</span><br><span class="line">=&gt;f[i, j - v] = max(f[i - 1][j - v], f[i - 1][j - 2v] + w, f[i - 1][j - 3v] + 2w, ...)</span><br><span class="line">可以推出：</span><br><span class="line">f[i, j] = max(f[i - 1][j], f[i, j - v] + w)</span><br></pre></td></tr></table></figure>
-
-<p><code>f[i, j - v]</code>用的是第<code>i</code>层的<code>f[j - v[i]]</code> 所以内层循环j从小到大枚举，这样<code>f[j - v[i]]</code> 刚好是被第<code>i</code>层更新过的。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = v[i]; j &lt;= m; j ++)</span><br><span class="line">      f[i][j] = <span class="built_in">max</span>(f[j], f[j - v[i]] + w[i]);</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="多重背包问题"><a href="#多重背包问题" class="headerlink" title="多重背包问题"></a>多重背包问题</h2><h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 个物品和容量是为 <code>V</code> 的背包。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
-<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
-<p><strong>每件物品有 <code>si</code> 个。</strong></p>
-<h3 id="状态分析-2"><a href="#状态分析-2" class="headerlink" title="状态分析"></a>状态分析</h3><h4 id="状态表示-2"><a href="#状态表示-2" class="headerlink" title="状态表示"></a>状态表示</h4><p><code>f(i, j)</code></p>
-<h5 id="集合-2"><a href="#集合-2" class="headerlink" title="集合"></a>集合</h5><p>所有选法的集合。</p>
-<p>满足条件：</p>
-<ol>
-<li>只从前 <code>i</code> 个物品中选</li>
-<li>选出来的物品的 <code>总体积 &lt;= j</code></li>
-</ol>
-<h5 id="属性-2"><a href="#属性-2" class="headerlink" title="属性"></a>属性</h5><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
-<h4 id="状态计算-2"><a href="#状态计算-2" class="headerlink" title="状态计算"></a>状态计算</h4><p>集合划分：<code>f(i, j)</code> 分成含<code>0~s[i]</code> 个 <code>i</code> 的集合。</p>
-<p>得出状态转移方程（和完全背包类似，只是k变成了s[i]）：</p>
-<p><code>f(i, j) = max(f(i - 1, j - k * vi) + k * wi), k=0, 1, ..., si</code></p>
-<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><h4 id="朴素"><a href="#朴素" class="headerlink" title="朴素"></a>朴素</h4><p>时间复杂度：<code>N * V * S</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= m; j ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt;= s[i] &amp;&amp; k * v[i] &lt;= j; k ++)</span><br><span class="line">      f[i][j] = <span class="built_in">max</span>(f[i][j], f[i - <span class="number">1</span>][j - k * v[i]] + k * w[i]);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="优化：二进制优化"><a href="#优化：二进制优化" class="headerlink" title="优化：二进制优化"></a>优化：二进制优化</h4><p>能不能像完全背包一样优化呢？</p>
-<p>不能，它们是有区别的。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 完全背包</span></span><br><span class="line">f[i][j] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j], f[i - <span class="number">1</span>][j - v] + w, f[i - <span class="number">1</span>][j - <span class="number">2</span>v] + <span class="number">2</span>w, f[i - <span class="number">1</span>][j - <span class="number">3</span>v] + <span class="number">3</span>w, ...)</span><br><span class="line">=&gt;f[i][j - v] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j - v], f[i - <span class="number">1</span>][j - <span class="number">2</span>v] + w, f[i - <span class="number">1</span>][j - <span class="number">3</span>v] + <span class="number">2</span>w, ...)</span><br><span class="line"><span class="comment">// 两个省略号是完全可以对齐的，因为只要满足第二维下标j-kv&gt;=0即可</span></span><br><span class="line">可以推出：</span><br><span class="line">f[i][j] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j], f[i][j - v] + w)</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 多重背包</span></span><br><span class="line">f[i][j] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j], f[i - <span class="number">1</span>][j - v] + w, f[i - <span class="number">1</span>][j - <span class="number">2</span>v] + <span class="number">2</span>w, f[i - <span class="number">1</span>][j - <span class="number">3</span>v] + <span class="number">3</span>w, ..., f[i - <span class="number">1</span>][j - sv] + sw)</span><br><span class="line">=&gt;f[i][j - v] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j - v], f[i - <span class="number">1</span>][j - <span class="number">2</span>v] + w, f[i - <span class="number">1</span>][j - <span class="number">3</span>v] + <span class="number">2</span>w, ..., f[i - <span class="number">1</span>][j - (s+<span class="number">1</span>)v] + sw)</span><br><span class="line"><span class="comment">// 两个省略号不一定是完全可以对齐的，因为有可能j-(s+1)v&gt;=0，那么j-sv&gt;=0也成立，但没有(s+1)那么多个物品，相当于提前结束了，此时第一个等式中没有一项与f[i - 1][j-(s+1)v]对齐</span></span><br><span class="line"><span class="comment">// 无法通过第二个等式来得出第一个等式中f[i][j]的最大值</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>优化方式：<strong>二进制优化</strong>，看成若干个01背包问题</p>
-<p>时间复杂度：<code>N * V * logS</code></p>
-<p>对于一个一般的s（即物品个数），把它分成若干个组，其中前k+1组中第i组中有<code>2^i</code>个物品（<code>i=0~k</code>），最后一组中有<code>c</code>个物品（<code>c=(s-前k+1组中物品之和) &amp;&amp; c &lt; 2^(k+1)</code>），这样通过选或不选各个组，可以拼凑出取<code>0～s</code> 个物品的情况。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = n * logs, M = v;</span><br><span class="line"><span class="type">int</span> v[N], w[N];</span><br><span class="line"><span class="type">int</span> f[N];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 预处理物品</span></span><br><span class="line">cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> a, b, s; <span class="comment">// 分别为当前物品的体积，价值和个数</span></span><br><span class="line">  cin &gt;&gt; a &gt;&gt; b &gt;&gt; s;</span><br><span class="line">  <span class="type">int</span> k = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (k &lt;= s)</span><br><span class="line">  &#123;</span><br><span class="line">    cnt ++;</span><br><span class="line">    v[cnt] = a * k;</span><br><span class="line">    w[cnt] = b * k;</span><br><span class="line">    s -= k;</span><br><span class="line">    k &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (s &gt; <span class="number">0</span>) <span class="comment">// 还剩下c个物品</span></span><br><span class="line">  &#123;</span><br><span class="line">    cnt ++;</span><br><span class="line">    v[cnt] = a * s;</span><br><span class="line">    w[cnt] = b * s;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 转化成01背包求解</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; cnt; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = m; j &gt;= v[i]; j --)</span><br><span class="line">    f[j] = <span class="built_in">max</span>(f[j], f[j - v[i]] + w[i]);</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; f[m] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="分组背包问题"><a href="#分组背包问题" class="headerlink" title="分组背包问题"></a>分组背包问题</h2><h3 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定 <code>N</code> 组物品和容量是为 <code>V</code> 的背包，每组物品里有若干件物品。每一个物品 <code>i</code> 有两个属性：体积 <code>vi</code> 和价值 <code>wi</code> 。</p>
-<p>求：在 <code>总体积&lt;=V</code>的情况下，选出一些物品，它们的<code>最大价值之和</code>是多少。</p>
-<p><strong>每组物品中只能选1件。</strong></p>
-<h3 id="状态分析-3"><a href="#状态分析-3" class="headerlink" title="状态分析"></a>状态分析</h3><h4 id="状态表示-3"><a href="#状态表示-3" class="headerlink" title="状态表示"></a>状态表示</h4><p><code>f(i, j)</code></p>
-<h5 id="集合-3"><a href="#集合-3" class="headerlink" title="集合"></a>集合</h5><p>所有选法的集合。</p>
-<p>满足条件：</p>
-<ol>
-<li>只从前 <code>i</code> 组物品中选</li>
-<li>选出来的物品的 <code>总体积 &lt;= j</code></li>
-</ol>
-<h5 id="属性-3"><a href="#属性-3" class="headerlink" title="属性"></a>属性</h5><p><code>f(i, j)</code> 表示所有选法集合里的价值的最大值。</p>
-<h4 id="状态计算-3"><a href="#状态计算-3" class="headerlink" title="状态计算"></a>状态计算</h4><p>集合划分：<code>f(i, j)</code> 枚举：选第<code>i</code>组物品中的哪一个或者不选。</p>
-<p>状态转移方程：<code>f(i, j) = max(f(i - 1, j), f(i - 1, j - v[i][k]) + w[i][k])</code></p>
-<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = m; j &gt;= <span class="number">0</span>; j --) <span class="comment">// 这里 j &gt;= 0 而不是 j &gt;= v[i] 是因为一组有多种物品，无法确定一个v[i]，放到循环内部去判断了</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; s[i]; k ++) <span class="comment">// s[i]为该组物品个数</span></span><br><span class="line">      <span class="keyword">if</span> (j &gt;= v[i][k]) f[j] = <span class="built_in">max</span>(f[j], f[j - v[i][k]] + w[i][k]);</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" data-id="clo29p1k4000dhh9gbe2od6om" data-title="算法模板4-1.DP-背包问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/4-0.DP理解方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-22T12:35:45.000Z" itemprop="datePublished">2023-10-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/">算法模板4-0.DP理解方式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="DP理解"><a href="#DP理解" class="headerlink" title="DP理解"></a>DP理解</h1><h2 id="DP求解过程"><a href="#DP求解过程" class="headerlink" title="DP求解过程"></a>DP求解过程</h2><p>DP求解过程可以分为两步：状态表示</p>
-<h3 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h3><p>思考：问题需要用几维的状态来表示？</p>
-<blockquote>
-<p>背包问题有两维。</p>
-</blockquote>
-<p><code>f(i, j)</code></p>
-<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p><code>f(i, j)</code>表示的是什么集合？</p>
-<blockquote>
-<p>如背包问题：<code>f(i, j)</code>表示所有选法的集合。</p>
-</blockquote>
-<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p><code>f(i, j)</code>这个数存的是这个集合的什么属性？min, max, cnt?</p>
-<blockquote>
-<p>如背包问题：<code>f(i, j)</code>表示集合选法对应的价值的最大值。</p>
-</blockquote>
-<h3 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h3><p>思考：如何一步一步地把每个状态算出来？</p>
-<p>对应集合划分。如何将当前的集合<strong>不重不漏</strong>地划分成若干更小的子集，使得每一个子集都能够被前面的状态表示出来。</p>
-<h2 id="DP优化"><a href="#DP优化" class="headerlink" title="DP优化"></a>DP优化</h2><p>DP优化一般是对代码&#x2F;状态方程做等价变形。</p>
-<p>先把朴素算法写出来，再变形。</p>
-<h1 id="DP时间复杂度分析"><a href="#DP时间复杂度分析" class="headerlink" title="DP时间复杂度分析"></a>DP时间复杂度分析</h1><p>状态数量 * 转移计算量</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" data-id="clo29p1k4000chh9ggb91foyw" data-title="算法模板4-0.DP理解方式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/3-6.二分图" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" class="article-date">
-  <time class="dt-published" datetime="2023-10-20T08:38:22.000Z" itemprop="datePublished">2023-10-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/">算法模板3-6.二分图</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a>二分图</h1><p>通俗定义：一个图可以分成两个集合，每个集合内部没有边。</p>
-<h2 id="染色法-DFS"><a href="#染色法-DFS" class="headerlink" title="染色法 (DFS)"></a>染色法 (DFS)</h2><p>时间复杂度：<code>O(n + m)</code></p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>判别一个图是否为二分图。</p>
-<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>一个图是二分图（等价于这个图可以被2染色），当且仅当图中不含奇数环。</p>
-<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><ul>
-<li><p>必要性（二分图-&gt;不含奇数环）：反证法</p>
-<p>假设有奇数环：把环中每个点依次标记为1, 2, 1, 2, … 标记到最后一个点的时候，应该为1。而它后一个点（也就是第一个点）也为1，矛盾。</p>
-</li>
-<li><p>充分性（不含奇数环-&gt;二分图）：</p>
-<p>先任意标记一个点为1，之后与它连通的所有点的数字都被确定。在不与它连通的点中，又任选一个点标记为1。</p>
-<p>由于图中不含奇数环，所以染色过程中一定没有矛盾。</p>
-<blockquote>
-<p>证明：反证法</p>
-<p>如果染色过程中出现了矛盾，那么一定是1, 2, 1, 2, …, 1, 1这种形式，最后两个1和1一定头尾相接（否则最后一个1可以被标记为2），那么环中点的数量一定为奇数，即图中一定含有奇数环</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">  <span class="keyword">if</span> (i未被染色)</span><br><span class="line">    <span class="built_in">dfs</span>(i, <span class="number">1</span>) <span class="comment">// 1表示染的颜色</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// dfs过程</span></span><br><span class="line">递归将所有相邻的点染成相反的颜色，并且判断能不能成功并返回</span><br></pre></td></tr></table></figure>
-
-<h3 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> h[N], e[M], ne[M], idx;</span><br><span class="line"><span class="type">int</span> color[N]; <span class="comment">// 表示每个点的颜色，-1表示为染色，0表示白色，1表示黑色</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数：u表示当前节点，c表示当前点的颜色</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  color[u] = c;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = h[u]; ~i; i = ne[i]) <span class="comment">// 遍历所有相邻点</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">int</span> j = e[i];</span><br><span class="line">    <span class="keyword">if</span> (color[j] == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">dfs</span>(j, !c)) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 如果相邻点还没有染色，递归染色，传递的颜色是与当前点相反的颜色</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (color[j] == c) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(h, <span class="number">-1</span>, <span class="keyword">sizeof</span> h);</span><br><span class="line">  <span class="built_in">memset</span>(color, <span class="number">-1</span>, <span class="keyword">sizeof</span> color);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    <span class="keyword">if</span> (color[i] == <span class="number">-1</span>)</span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">dfs</span>(i, <span class="number">0</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h2><p>时间复杂度：理论最坏<code>O(mn)</code>，实际远小于 <code>O(mn)</code>（可能接近线性）</p>
-<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><p>求二分图的成功匹配的情况下，最大的匹配数量。</p>
-<p>匹配：指的是边的数量。</p>
-<p>匹配成功：不存在两条边共用一个点。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设左边集合为S1，右边集合为S2.</span><br><span class="line">依次遍历S1中的每个点i，看能否匹配S2中的点：</span><br><span class="line">  <span class="number">1.</span> 如果有S2中的点没有被匹配，或者它匹配的S1中的点可以换一个点匹配，返回<span class="literal">true</span></span><br><span class="line">  <span class="number">2.</span> 如果i指向的所有点都不能被匹配，返回<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n1, n2; <span class="comment">// n1表示S1中的点数，n2表示S2中的点数</span></span><br><span class="line"><span class="type">int</span> h[N], e[M], ne[M], idx; <span class="comment">// 邻接表存储所有边，匈牙利算法中只会用到从S1指向S2的边</span></span><br><span class="line"><span class="type">int</span> match[N]; <span class="comment">// 存储S2中的每一个点当前匹配的S1中的点是哪个</span></span><br><span class="line"><span class="type">bool</span> st[N]; <span class="comment">// 表示S2中的每个点是否已经被遍历过</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = h[x]; ~i; i = ne[i]) <span class="comment">// 遍历x结点指向S2集合的所有边</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">int</span> j = e[i];</span><br><span class="line">    <span class="keyword">if</span> (!st[j])</span><br><span class="line">    &#123;</span><br><span class="line">      st[j] = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">if</span> (match[j] == <span class="number">0</span> || <span class="built_in">find</span>(match[j])) <span class="comment">// S2中的j结点还没有被匹配，或者能够让j结点当前匹配的S1中的点换一个点匹配</span></span><br><span class="line">      &#123;</span><br><span class="line">        match[j] = x;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求最大匹配数量，依次枚举S1中的每一个点能否匹配S2中的点</span></span><br><span class="line"><span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">memset</span>(st, <span class="literal">false</span>, <span class="keyword">sizeof</span> st); <span class="comment">// 在枚举S1中每个点的时候都要把S2中所有点的状态置0，每个点都只需要考虑一次</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">find</span>(i)) res ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>练习：372</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" data-id="clo29p1k4000bhh9ggfkg3ujf" data-title="算法模板3-6.二分图" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/21.单例模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-20T06:21:30.000Z" itemprop="datePublished">2023-10-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">设计模式21-单例模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/23/7qNvY9VbhWHPit2.png" alt="单例模式结构图.png"></p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>Singleton类，定义一个GetInstance操作，允许客户访问它的唯一实例。GetInstance是一个静态方法，主要负责创建自己的唯一实例。</p>
-<h3 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h3><p>调用getInstance的时候再来创建instance。</p>
-<h4 id="V1-线程不安全"><a href="#V1-线程不安全" class="headerlink" title="V1 线程不安全"></a>V1 线程不安全</h4><p>在多线程的情况下有可能创建多个实例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 构造方法private化，堵死了外部代码利用new创建此类实例的可能</span></span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到Singleton的实例（唯一途径）</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">      instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> instance; <span class="comment">// 当instance为null时创建一个返回，否则直接返回原有实例</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="V2-synchronized锁方法"><a href="#V2-synchronized锁方法" class="headerlink" title="V2 synchronized锁方法"></a>V2 synchronized锁方法</h4><p>每次调用 <code>getInstance</code> 时都需要锁。写起来简单，但比较影响性能。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 构造方法private化</span></span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到Singleton的实例（唯一途径）</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">      instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="V3-Double-Check-Locking"><a href="#V3-Double-Check-Locking" class="headerlink" title="V3 Double-Check Locking"></a>V3 Double-Check Locking</h4><p>不用让线程每次都加锁，而只是在实例未被创建的时候再加锁处理。同时也能保证多线程的安全。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance; <span class="comment">// volatile作用是使得所有线程能够及时得知instance是否被实例化的状态</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">synchronized</span>(Singleton.class) &#123; <span class="comment">// 保证所有线程用的是同一把锁</span></span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="literal">null</span>) &#123;</span><br><span class="line">          instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为什么要两次判断instance是否为null？</p>
-<p>对于instance存在的情况，就直接返回，这没有问题。当instance为null并且同时有两个线程调用getInstance（）方法时，它们将都可以通过第一重instance&#x3D;&#x3D;null的判断。然后由于’锁’机制，这两个线程则只有一个进入，另一个在外排队等候，必须要其中的一个进入并出来后，另一个才能进入。而此时如果没有了第二重的instance是否为null的判断，则第一个线程创建了实例，而第二个线程还是可以继续再创建新的实例，这就没有达到单例的目的。</p>
-<h3 id="饿汉式（静态初始化）"><a href="#饿汉式（静态初始化）" class="headerlink" title="饿汉式（静态初始化）"></a>饿汉式（静态初始化）</h3><p>不管有没有调用getInstance，先在自己被加载时就把instance创建出来。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="客户端代码："><a href="#客户端代码：" class="headerlink" title="客户端代码："></a>客户端代码：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Singleton s0 = new Singleton();</span></span><br><span class="line"><span class="type">Singleton</span> <span class="variable">s1</span> <span class="operator">=</span> Singleton.getInstance();</span><br><span class="line"><span class="type">Singleton</span> <span class="variable">s2</span> <span class="operator">=</span> Singleton.getInstance();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (s1 == s2) &#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;两个对象是相同的实例&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="单例模式好处"><a href="#单例模式好处" class="headerlink" title="单例模式好处"></a>单例模式好处</h2><ol>
-<li>可以保证唯一的实例。</li>
-<li>因为Singleton类封装它的唯一实例，这样它可以严格地控制客户怎样访问它以及何时访问它。简单地说就是对唯一实例的受控访问。</li>
-</ol>
-<h2 id="饿汉式和懒汉式对比"><a href="#饿汉式和懒汉式对比" class="headerlink" title="饿汉式和懒汉式对比"></a>饿汉式和懒汉式对比</h2><p>饿汉式，即静态初始化的方式，它是类一加载就实例化的对象，所以要提前占用系统资源。</p>
-<p>然而懒汉式，又会面临着多线程访问的安全性问题，需要做双重锁定这样的处理才可以保证安全。</p>
-<p>到底使用哪一种方式，取决于实际的需求。从Java语言角度来讲，饿汉式的单例类已经足够满足我们的需求了。</p>
-<h2 id="单例模式-vs-实用类静态方法"><a href="#单例模式-vs-实用类静态方法" class="headerlink" title="单例模式 vs 实用类静态方法"></a>单例模式 vs 实用类静态方法</h2><p>和单例模式类似，实用类通常也会采用私有化的构造方法来避免其有实例。</p>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ol>
-<li>实用类不保存状态，只提供静态方法或静态属性使用；而单例类有状态。</li>
-<li>实用类不能用于继承多态；而单例类虽然实例唯一，但可以有子类来继承。</li>
-<li>实用类是一些方法属性的集合；单例类有唯一的对象实例。</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k10002hh9g83386xir" data-title="设计模式21-单例模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/20.迭代器模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-20T06:20:34.000Z" itemprop="datePublished">2023-10-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">设计模式20-迭代器模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>迭代器模式（Iterator），提供一种方法顺序访问一个聚合对象中的各个元素，而又不暴露该对象的内部表示。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/19/mKfRk7ElDi4Os1p.jpg" alt="迭代器模式结构图.jpg"></p>
-<p>需要有 <code>Iterator</code> 抽象类的原因：遍历方式可能有很多种，需要对不同方式做不同具体实现。</p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Aggregate</code> 聚集抽象类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Aggregate</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 创建迭代器</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Iterator <span class="title function_">createIterator</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ConcreteAggregate</code> 具体聚集类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteAggregate</span> <span class="keyword">extends</span> <span class="title class_">Aggregate</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 声明一个ArrayList泛型变量，用于存放聚合对象</span></span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Object&gt; items = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Object&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Iterator <span class="title function_">createIterator</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConcreteIterator</span>(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 返回聚集总个数</span></span><br><span class="line">  <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getCount</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> items.size();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 增加新对象</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Object object)</span> &#123;</span><br><span class="line">    items.add(object);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到指定索引对象</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">getCurrentItem</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> items.get(index);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Iterator</code> 迭代器抽象类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Iterator</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title function_">first</span><span class="params">()</span>; <span class="comment">// 第一个</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title function_">next</span><span class="params">()</span>; <span class="comment">// 下一个</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">boolean</span> <span class="title function_">isDone</span><span class="params">()</span>; <span class="comment">// 是否到结尾</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title function_">currentItem</span><span class="params">()</span>; <span class="comment">// 当前对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ConcreteIterator</code> 具体迭代器类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteIterator</span> <span class="keyword">extends</span> <span class="title class_">Iterator</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> ConcreteAggregate aggregate;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">int</span> <span class="variable">current</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 初始化时将具体的聚集对象传入</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ConcreteIterator</span><span class="params">(ConcreteAggregate aggregate)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.aggregate = aggregate;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到第一个对象</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">first</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> aggregate.getCurrentItem(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 得到下一个对象</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">ret</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    current ++;</span><br><span class="line">    <span class="keyword">if</span> (current &lt; aggregate.getCount()) &#123;</span><br><span class="line">      ret = aggregate.getCurrentItem(current);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 判断当前是否遍历到结尾，到结尾返回true</span></span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isDone</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> current &gt;= aggregate.getCount() ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 返回当前的聚集对象</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">currentItem</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> aggregate.getCurrentItem(current);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ConcreteAggregate</span> <span class="variable">ca</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteAggregate</span>();</span><br><span class="line">ca.add(<span class="number">1</span>);</span><br><span class="line">ca.add(<span class="number">2</span>);</span><br><span class="line">ca.add(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">Iterator</span> <span class="variable">i</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteIterator</span>(ca);</span><br><span class="line"></span><br><span class="line">i.first();</span><br><span class="line"><span class="keyword">while</span> (!i.isDone()) &#123;</span><br><span class="line">  System.out.println(i.currentItem());</span><br><span class="line">  i.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Java的迭代器实现"><a href="#Java的迭代器实现" class="headerlink" title="Java的迭代器实现"></a>Java的迭代器实现</h2><p>java.util.Iterator支持对集合的简单迭代接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Iterator</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span>; <span class="comment">// 如果还有下一个元素，返回true</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">next</span><span class="params">()</span>; <span class="comment">// 返回迭代中的下一个元素</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>java.util.ListIterator支持对集合的任意方向上迭代接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ListIterator</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">next</span><span class="params">()</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasPrevious</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">previous</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>迭代器（Iterator）模式就是分离了集合对象的遍历行为，抽象出一个迭代器类来负责。</p>
-<p>这样既可以做到<strong>不暴露集合的内部结构</strong>，又可以让外部代码<strong>透明地访问集合内部的数据</strong>。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" data-id="clo29p1k00001hh9ggppgalv0" data-title="设计模式20-迭代器模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">设计模式23-命令模式</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
           </li>
+          
         
-          <li>
-            <a href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">码出高效读书笔记2-面向对象</a>
-          </li>
         
-          <li>
-            <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/">算法模板4-2.DP-线性DP</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
     </div>
   </div>
+</nav>
 
   
-</aside>
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="An elegant Material-Design theme for Hexo"></span>
+          
+        </div>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+
       
-      &copy; 2023 Peixuan Hu<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
   </div>
-</footer>
+</div>
 
-    </div>
-    <nav id="mobile-nav">
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式23-命令模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" target="_self">
+        <div>
+          命令模式定义命令模式（Command），将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。 结构图 基本代码Command 类：用来声明执行操作的接口 123456789101112abstract class Command &#123;    protected Receiver receiver;    public Comma
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-29 10:29" pubdate>
+              2023-10-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
   
-    <a href="/" class="mobile-nav-link">Home</a>
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
   
-</nav>
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" target="_self">
+          码出高效读书笔记2-面向对象
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" target="_self">
+        <div>
+          面向对象类访问权限控制  如果不允许外部直接通过 new 创建对象，构造方法必须是 private。 工具类不允许有 public 或 default 构造方法。  this和super  在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。  由于 this 和 super都在实例化阶段调用，所以不能在静态方法
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-26 15:41" pubdate>
+              2023-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" target="_self">
+          算法模板4-3.DP-区间DP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" target="_self">
+        <div>
+          区间DP状态分析状态表示f(i, j)一般表示从i到j这个区间中的方案。 要点要保证每次枚举的时候等式右侧的状态已经被更新过了。 所以按照区间长度从小到大来枚举。 三重循环：  区间长度从小到大 区间左端点（右端点可以通过左端点和长度算出来） 左右端点之间的分界点  模板题石子合并时间复杂度：O(n^3)，状态表示2维O(n^2) * 状态计算枚举分界线O(n) 状态分析状态表示 集合：所有将第i
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-26 12:13" pubdate>
+              2023-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/" target="_self">
+          算法模板4-2.DP-线性DP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/" target="_self">
+        <div>
+          线性DPDP的递推顺序是线性的。  比如：f(i, j)中i和j是从小到大递增。 背包问题就是线性DP。  模板题数字三角形f(i, j)表示走到第i行第j列时的最大路径 方程：f(i, j) = max(f[i - 1][j], f[i - 1][j - 1]) + a[i][j] 最长上升子序列f[i]表示所有以第i个数结尾的上升子序列长度的最大值 从0到i-1枚举倒数第二位j，找到最长的f[
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-26 09:58" pubdate>
+              2023-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式22-桥接模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" target="_self">
+        <div>
+          合成&#x2F;聚合复用原则 (CARP)定义合成／聚合复用原则（CARP），尽量使用合成 (Composition)／聚合 (Aggregation)，尽量不要使用类继承。 合成和聚合 聚合表示一种弱的’拥有’关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分。  如：大雁是群居动物，所以每只大雁都是属于一个雁群，一个雁群可以有多只大雁，所以大雁和雁群是聚合关系。   合成则是一种强
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-26 08:28" pubdate>
+              2023-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" target="_self">
+          算法模板4-1.DP-背包问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          背包问题通用问题描述给定 N 个物品和容量是为 V 的背包。每一个物品 i 有两个属性：体积 vi 和价值 wi 。 求：在 总体积&lt;=V的情况下，选出一些物品，它们的最大价值之和是多少。 01背包问题问题描述给定 N 个物品和容量是为 V 的背包。每一个物品 i 有两个属性：体积 vi 和价值 wi 。 求：在 总体积&lt;=V的情况下，选出一些物品，它们的最大价值之和是多少。 每件物品
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-22 20:39" pubdate>
+              2023-10-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" target="_self">
+          算法模板4-0.DP理解方式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" target="_self">
+        <div>
+          DP理解DP求解过程DP求解过程可以分为两步：状态表示 状态表示思考：问题需要用几维的状态来表示？  背包问题有两维。  f(i, j) 集合f(i, j)表示的是什么集合？  如背包问题：f(i, j)表示所有选法的集合。  属性f(i, j)这个数存的是这个集合的什么属性？min, max, cnt?  如背包问题：f(i, j)表示集合选法对应的价值的最大值。  状态计算思考：如何一步一步地
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-22 20:35" pubdate>
+              2023-10-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" target="_self">
+          算法模板3-6.二分图
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" target="_self">
+        <div>
+          二分图通俗定义：一个图可以分成两个集合，每个集合内部没有边。 染色法 (DFS)时间复杂度：O(n + m) 使用场景判别一个图是否为二分图。 性质一个图是二分图（等价于这个图可以被2染色），当且仅当图中不含奇数环。 证明 必要性（二分图-&gt;不含奇数环）：反证法 假设有奇数环：把环中每个点依次标记为1, 2, 1, 2, … 标记到最后一个点的时候，应该为1。而它后一个点（也就是第一个点）也
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-20 16:38" pubdate>
+              2023-10-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式21-单例模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" target="_self">
+        <div>
+          单例模式定义单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。 结构图 基本代码Singleton类，定义一个GetInstance操作，允许客户访问它的唯一实例。GetInstance是一个静态方法，主要负责创建自己的唯一实例。 懒汉式调用getInstance的时候再来创建instance。 V1 线程不安全在多线程的情况下有可能创建多个实例 1234567
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-20 14:21" pubdate>
+              2023-10-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式20-迭代器模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" target="_self">
+        <div>
+          迭代器模式定义迭代器模式（Iterator），提供一种方法顺序访问一个聚合对象中的各个元素，而又不暴露该对象的内部表示。 结构图 需要有 Iterator 抽象类的原因：遍历方式可能有很多种，需要对不同方式做不同具体实现。 基本代码Aggregate 聚集抽象类： 12345abstract class Aggregate &#123;    // 创建迭代器  public abstract I
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-20 14:20" pubdate>
+              2023-10-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>

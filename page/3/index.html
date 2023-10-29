@@ -1,897 +1,936 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
   
-  <title>Peixuan&#39;s Page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="Peixuan&#39;s Page">
 <meta property="og:url" content="https://peixuanhu.github.io/page/3/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Peixuan Hu">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Peixuan's Page" type="application/atom+xml">
+<meta name="twitter:card" content="summary_large_image">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
   
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+  <title>Peixuan&#39;s Page</title>
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 6.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Peixuan&#39;s Page</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://peixuanhu.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-algorithm/STL总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2023-10-10T07:41:46.601Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/">STL总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="vector-变长数组，倍增的思想"><a href="#vector-变长数组，倍增的思想" class="headerlink" title="vector, 变长数组，倍增的思想"></a>vector, 变长数组，倍增的思想</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">size()  返回元素个数</span><br><span class="line">empty()  返回是否为空</span><br><span class="line">clear()  清空</span><br><span class="line">front()/back()</span><br><span class="line">push_back()/pop_back()</span><br><span class="line">begin()/end()</span><br><span class="line">[]</span><br><span class="line">支持比较运算，按字典序</span><br></pre></td></tr></table></figure>
-
-<h3 id="pair"><a href="#pair" class="headerlink" title="pair&lt;int, int&gt;"></a>pair&lt;int, int&gt;</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">first, 第一个元素</span><br><span class="line">second, 第二个元素</span><br><span class="line">支持比较运算，以first为第一关键字，以second为第二关键字（字典序）</span><br></pre></td></tr></table></figure>
-
-<h3 id="string，字符串"><a href="#string，字符串" class="headerlink" title="string，字符串"></a>string，字符串</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size()/length()  返回字符串长度</span><br><span class="line">empty()</span><br><span class="line">clear()</span><br><span class="line">substr(起始下标，(子串长度))  返回子串</span><br><span class="line">c_str()  返回字符串所在字符数组的起始地址</span><br></pre></td></tr></table></figure>
-
-<h3 id="queue-队列"><a href="#queue-队列" class="headerlink" title="queue, 队列"></a>queue, 队列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">push()  向队尾插入一个元素</span><br><span class="line">front()  返回队头元素</span><br><span class="line">back()  返回队尾元素</span><br><span class="line">pop()  弹出队头元素</span><br></pre></td></tr></table></figure>
-
-<h3 id="priority-queue-优先队列，默认是大根堆"><a href="#priority-queue-优先队列，默认是大根堆" class="headerlink" title="priority_queue, 优先队列，默认是大根堆"></a>priority_queue, 优先队列，默认是大根堆</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">push()  插入一个元素</span><br><span class="line">top()  返回堆顶元素</span><br><span class="line">pop()  弹出堆顶元素</span><br><span class="line">定义成小根堆的方式：priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; q;</span><br></pre></td></tr></table></figure>
-
-<h3 id="stack-栈"><a href="#stack-栈" class="headerlink" title="stack, 栈"></a>stack, 栈</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">push()  向栈顶插入一个元素</span><br><span class="line">top()  返回栈顶元素</span><br><span class="line">pop()  弹出栈顶元素</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="deque-双端队列"><a href="#deque-双端队列" class="headerlink" title="deque, 双端队列"></a>deque, 双端队列</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">empty()</span><br><span class="line">clear()</span><br><span class="line">front()/back()</span><br><span class="line">push_back()/pop_back()</span><br><span class="line">push_front()/pop_front()</span><br><span class="line">begin()/end()</span><br><span class="line">[]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="set-map-multiset-multimap-基于平衡二叉树（红黑树），动态维护有序序列"><a href="#set-map-multiset-multimap-基于平衡二叉树（红黑树），动态维护有序序列" class="headerlink" title="set, map, multiset, multimap, 基于平衡二叉树（红黑树），动态维护有序序列"></a>set, map, multiset, multimap, 基于平衡二叉树（红黑树），动态维护有序序列</h3><pre><code>size()
-empty()
-clear()
-begin()/end()
-++, -- 返回前驱和后继，时间复杂度 O(logn)
-</code></pre>
-<h4 id="set-multiset"><a href="#set-multiset" class="headerlink" title="set&#x2F;multiset"></a>set&#x2F;multiset</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">insert()  插入一个数</span><br><span class="line">find()  查找一个数</span><br><span class="line">count()  返回某一个数的个数</span><br><span class="line">erase()</span><br><span class="line">    (1) 输入是一个数x，删除所有x   O(k + logn)</span><br><span class="line">    (2) 输入一个迭代器，删除这个迭代器</span><br><span class="line">lower_bound()/upper_bound()</span><br><span class="line">    lower_bound(x)  返回大于等于x的最小的数的迭代器</span><br><span class="line">    upper_bound(x)  返回大于x的最小的数的迭代器</span><br></pre></td></tr></table></figure>
-
-<h4 id="map-multimap"><a href="#map-multimap" class="headerlink" title="map&#x2F;multimap"></a>map&#x2F;multimap</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">insert()  插入的数是一个pair</span><br><span class="line">erase()  输入的参数是pair或者迭代器</span><br><span class="line">find()</span><br><span class="line">[]  注意multimap不支持此操作。 时间复杂度是 O(logn)</span><br><span class="line">lower_bound()/upper_bound()</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="unordered-set-unordered-map-unordered-multiset-unordered-multimap-哈希表"><a href="#unordered-set-unordered-map-unordered-multiset-unordered-multimap-哈希表" class="headerlink" title="unordered_set, unordered_map, unordered_multiset, unordered_multimap, 哈希表"></a>unordered_set, unordered_map, unordered_multiset, unordered_multimap, 哈希表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">和上面类似，增删改查的时间复杂度是 O(1)</span><br><span class="line">不支持 lower_bound()/upper_bound()， 迭代器的++，--</span><br></pre></td></tr></table></figure>
-
-<h3 id="bitset-圧位"><a href="#bitset-圧位" class="headerlink" title="bitset, 圧位"></a>bitset, 圧位</h3><pre><code>bitset&lt;10000&gt; s;
-~, &amp;, |, ^
-&gt;&gt;, &lt;&lt;
-==, !=
-[]
-count()  返回有多少个1
-
-any()  判断是否至少有一个1
-none()  判断是否全为0
-
-set()  把所有位置成1
-set(k, v)  将第k位变成v
-reset()  把所有位变成0
-flip()  等价于~
-flip(k) 把第k位取反
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" data-id="clnk1a4260003jd9g1k7n5bii" data-title="STL总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-8.字符串哈希" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" class="article-date">
-  <time class="dt-published" datetime="2023-10-10T07:24:15.174Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/">算法模板2-8.字符串哈希</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="字符串哈希"><a href="#字符串哈希" class="headerlink" title="字符串哈希"></a>字符串哈希</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>快速判断一个字符串中两个区间对应的子串是否完全相同。</p>
-<blockquote>
-<p>除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。</p>
-</blockquote>
-<h2 id="字符串前缀哈希法"><a href="#字符串前缀哈希法" class="headerlink" title="字符串前缀哈希法"></a>字符串前缀哈希法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str = &quot;ABCABCDE&quot;</span><br><span class="line"></span><br><span class="line">把每一个前缀的哈希值算出来：</span><br><span class="line">h[0] = 0</span><br><span class="line">h[1] = &quot;A&quot;的哈希值</span><br><span class="line">h[2] = &quot;AB&quot;的哈希值</span><br><span class="line">h[3] = &quot;ABC&quot;的哈希值</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p><strong>结果：</strong>可以通过这些前缀的哈希值，算出 <strong><code>str</code> 任何一个子串</strong>的哈希值。</p>
-<h2 id="如何定义某一前缀的哈希值？"><a href="#如何定义某一前缀的哈希值？" class="headerlink" title="如何定义某一前缀的哈希值？"></a>如何定义某一前缀的哈希值？</h2><p>把字符串str看成一个p进制的数。str中<strong>每一个字符（的ASCII码）</strong>对应这个<strong>p进制数的每一位数字</strong>。最后一个字符对应最低位。</p>
-<blockquote>
-<p>例：hash(“ABC”) &#x3D; (A * p^2 + B * p^1 + C * p^0)</p>
-</blockquote>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p><strong>目标：</strong>将str映射到0～Q-1的范围内。</p>
-<p><strong>经验值：</strong> <code> p=131或13331</code>, <code>Q = 2^64</code>。用 <code>unsigned long long</code> 来存储哈希值，当它溢出时，刚好等价于取模。</p>
-<h4 id="1-算出这个p进制数x"><a href="#1-算出这个p进制数x" class="headerlink" title="1. 算出这个p进制数x"></a>1. 算出这个p进制数x</h4><h5 id="2-x-mod-Q"><a href="#2-x-mod-Q" class="headerlink" title="2. x mod Q"></a>2. x mod Q</h5><p>由于str的长度可能比较长，x可能为一个很大的数字，不好存。所以算出x之后，需要mod一个比较小的数Q。</p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>不能把某一个字母映射成0。例：”A”-&gt;0, “AA”-&gt;0，将不同的字符串映射成了同一个数。</li>
-<li>假定无冲突。这个算法没有考虑冲突情况。p和Q取经验值的情况下，起冲突的可能性很小。</li>
-</ol>
-<h2 id="如何算出任意子串的哈希值？"><a href="#如何算出任意子串的哈希值？" class="headerlink" title="如何算出任意子串的哈希值？"></a>如何算出任意子串的哈希值？</h2><p>假设我们要算 <code>str</code> 第 <code>L</code> 位和第<code>R</code> 位之间这个子串的哈希值。</p>
-<p>已知 <code>h[R]</code> 和 <code>h[L-1]</code> ：</p>
-<p><code>h[R] - h[L - 1] * p^(R - L + 1)</code> 即为子串的哈希值。</p>
-<blockquote>
-<p><code>h[R]</code> 中第R个字符对应x的第0位，第1个字符对应x的第R-1位</p>
-<p><code>h[L-1]</code>  中第L-1个字符对应x的第0位，第1个字符对应x的第L-2位</p>
-<p>h[L-1] * p^(R - L + 1)是为了将 <code>h[L-1]</code> 往左移，与 <code>h[R]</code> 对齐。</p>
-</blockquote>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ULL;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>, <span class="type">int</span> P = <span class="number">13331</span>;</span><br><span class="line"><span class="type">char</span> str[N];</span><br><span class="line">ULL h[N], p[N]; <span class="comment">// h[k]存储字符串前k个字母的哈希值，p[k]存储 P^k mod 2^64（提前预处理减少重复计算）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化：注意str字符串是从1开始的，scanf(&quot;%s&quot;, str + 1)</span></span><br><span class="line">p[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  h[i] = h[i - <span class="number">1</span>] * P + str[i];</span><br><span class="line">  p[i] = p[i - <span class="number">1</span>] * P;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算子串 str[l ~ r] 的哈希值</span></span><br><span class="line"><span class="function">ULL <span class="title">get</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> h[r] - h[l - <span class="number">1</span>] * p[r - l + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>将字符串看成P进制数，P的经验值是131或13331，取这两个值的冲突概率低</p>
-<h3 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h3><p>取模的数用2^64，这样直接用unsigned long long存储，溢出的结果就是取模的结果</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" data-id="clnk1a4260002jd9g4s4ggh14" data-title="算法模板2-8.字符串哈希" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-7.哈希" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" class="article-date">
-  <time class="dt-published" datetime="2023-10-10T03:42:19.567Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/">算法模板2-7.哈希</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="一般哈希"><a href="#一般哈希" class="headerlink" title="一般哈希"></a>一般哈希</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>把庞大的值域映射到一个比较小的空间。</p>
-<p>如 <code>0~10^9 -&gt; 0~10^5</code>。</p>
-<blockquote>
-<p>与离散化的关系：离散化是需要保序的，可以看作一种特殊的哈希方式</p>
-</blockquote>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-x-mod-n"><a href="#1-x-mod-n" class="headerlink" title="1. x mod n"></a>1. x mod n</h3><p><code>n</code> 即数组长度，它是一个质数，并且这个质数要离2的整数次幂尽可能远。</p>
-<blockquote>
-<p>这样取可以使冲突的概率最小。数学证明待补充</p>
-</blockquote>
-<h3 id="2-解决冲突"><a href="#2-解决冲突" class="headerlink" title="2. 解决冲突"></a>2. 解决冲突</h3><p>有两种方法</p>
-<h4 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h4><p>数组的长度即为<code>n</code>，其中每个元素都是一个链表，取模之后结果相同的数存在链表里</p>
-<h4 id="开放寻址法"><a href="#开放寻址法" class="headerlink" title="开放寻址法"></a>开放寻址法</h4><p>只开一个一维数组，但长度应取为题给数据范围的2～3倍（经验值）。</p>
-<p>取模之后存在数组对应的位置，如已有元素存在，则依次向后面的位置找，直到找到空位存下来。</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><h3 id="拉链法-1"><a href="#拉链法-1" class="headerlink" title="拉链法"></a>拉链法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> h[N], e[N], ne[N], idx;</span><br><span class="line"><span class="comment">// h[]是数组（槽），数组中的每个元素是一个链表，其中有e[]（存值）和ne[]（存下一个节点的下标），idx为当前新插入节点编号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要先初始化h数组元素为-1，代表空链表</span></span><br><span class="line"><span class="built_in">memset</span>(h, <span class="number">-1</span>, <span class="built_in">sizeof</span>(h)); <span class="comment">// -1二进制为11111111，刚好可以按字节设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 向哈希表中插入一个数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// k即为哈希值</span></span><br><span class="line">  <span class="type">int</span> k = (x % N + N) % N; <span class="comment">// 目的：让k在0～N范围内。cpp取模：原数是负数的话取模之后还是负数，所以要+N；但正数+N之后又大于N了，所以需要再取一次模</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 以下代码实现了将新节点插入h[k]，作为新的头节点</span></span><br><span class="line">  e[idx] = x;</span><br><span class="line">  ne[idx] = h[k];</span><br><span class="line">  h[k] = idx ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> k = (x % N + N) % N;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = h[k]; ~i; i = ne[i]) <span class="comment">// 从头节点往后找</span></span><br><span class="line">    <span class="keyword">if</span> (e[i] == x) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="开放寻址法-1"><a href="#开放寻址法-1" class="headerlink" title="开放寻址法"></a>开放寻址法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200003</span>, null = <span class="number">0x3f3f3f3f</span>; <span class="comment">// null的值近似无穷大，代表数组该位置为空</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> h[N];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要先初始化h数组元素为0x3f3f3f3f，代表所有位置都空</span></span><br><span class="line"><span class="built_in">memset</span>(h, <span class="number">0x3f</span>, <span class="built_in">sizeof</span>(h)); <span class="comment">// memset按字节来设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果x在哈希表中，返回x的下标；如果x不在哈希表中，返回x应该插入的位置</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> t = (x % N + N) % N;</span><br><span class="line">  <span class="keyword">while</span> (h[t] != null &amp;&amp; h[t] != x) &#123;</span><br><span class="line">    t ++;</span><br><span class="line">    <span class="keyword">if</span> (t == N) t = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入操作：</span></span><br><span class="line"><span class="type">int</span> k = <span class="built_in">find</span>(x);</span><br><span class="line">h[k] = x;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找操作：</span></span><br><span class="line"><span class="type">int</span> k = <span class="built_in">find</span>(x);</span><br><span class="line"><span class="keyword">if</span> (h[k] == null) <span class="built_in">puts</span>(<span class="string">&quot;No&quot;</span>);</span><br><span class="line"><span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">&quot;Yes&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
-<li>一般不需要删除元素。如果需要考虑删除，一般是另开一个布尔数组，来标记对应元素是否已删除。</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" data-id="clnk1a4250001jd9g2wlw56we" data-title="算法模板2-7.哈希" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/14.观察者模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-09T16:30:01.000Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式14-观察者模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>观察者模式又叫作发布-订阅（Publish&#x2F;Subscribe）模式。</p>
-<p>观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/10/LCoseQJmfYubWig.jpg" alt="观察者模式结构图.jpg"></p>
-<h3 id="Subject类"><a href="#Subject类" class="headerlink" title="Subject类"></a>Subject类</h3><p>即主题或抽象通知者，一般用一个抽象类或者一个接口实现。</p>
-<p>它把所有对观察者对象的引用保存在一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象。</p>
-<h3 id="Observer类"><a href="#Observer类" class="headerlink" title="Observer类"></a>Observer类</h3><p>抽象观察者，为所有的具体观察者定义一个接口，在得到主题的通知时更新自己。这个接口叫作更新接口。更新接口通常包含一个update()方法，这个方法叫作更新方法。</p>
-<p>抽象观察者一般用一个抽象类或者一个接口实现。</p>
-<h3 id="ConcreteSubject类"><a href="#ConcreteSubject类" class="headerlink" title="ConcreteSubject类"></a>ConcreteSubject类</h3><p>具体主题或具体通知者，将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。</p>
-<p>具体主题角色通常用一个具体子类实现。</p>
-<h3 id="ConcreteObserver类"><a href="#ConcreteObserver类" class="headerlink" title="ConcreteObserver类"></a>ConcreteObserver类</h3><p>具体观察者，实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。具体观察者角色可以保存一个<strong>指向具体主题对象的引用</strong>。</p>
-<p>具体观察者角色通常用一个具体子类实现。</p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>Subject类：通知者抽象类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;Observer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Observer&gt;(); <span class="comment">// 针对抽象的Observer编程</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 增加观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">attach</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">    list.add(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 减少观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">detach</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">    list.remove(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 通知观察者</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyObserver</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (Observer item : list) &#123;</span><br><span class="line">      item.update();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">protected</span> String subjectState;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getSubjectState</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.subjectState;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSubjectState</span><span class="params">(String value)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.subjectState = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Observer类：抽象观察者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ConcreteSubject类：具体通知者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">  <span class="comment">// 具体通知者的方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ConcreteObserver类：具体观察者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteObserver</span> <span class="keyword">extends</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> Subject sub;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ConcreteObserver</span><span class="params">(String name, Subject sub)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.sub = sub;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;观察者&quot;</span> + <span class="built_in">this</span>.name + <span class="string">&quot;的新状态是&quot;</span> + <span class="built_in">this</span>.sub.getSubjectState());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Subject</span> <span class="variable">subject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteSubject</span>();</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameX&quot;</span>, subject));</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameY&quot;</span>, subject));</span><br><span class="line">subject.attach(<span class="keyword">new</span> <span class="title class_">ConcreteObserver</span>(<span class="string">&quot;NameZ&quot;</span>, subject));</span><br><span class="line"></span><br><span class="line">subject <span class="title function_">setSubjectState</span><span class="params">(<span class="string">&quot;ABC&quot;</span>)</span>;</span><br><span class="line">subject.notifyObserver();</span><br></pre></td></tr></table></figure>
-
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>将一个系统分割成一系列相互协作的类有一个很不好的副作用，那就是需要维护相关对象间的一致性。我们不希望为了维持一致性而使各类紧密耦合，这样会给维护、扩展和重用都带来不便。</p>
-<h3 id="何时使用观察者模式？"><a href="#何时使用观察者模式？" class="headerlink" title="何时使用观察者模式？"></a>何时使用观察者模式？</h3><ol>
-<li>当一个对象的改变需要同时改变其他对象，而且它不知道具体有多少对象有待改变时</li>
-<li>当一个抽象模型有两个方面，其中一方面依赖于另一方面，这时用观察者模式可以将这两者封装在独立的对象中使它们各自独立地改变和复用</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>观察者模式所做的工作其实就是在解除耦合。让耦合的双方都依赖于抽象，而不是依赖于具体。从而使得各自的变化都不会影响另一边的变化。</p>
-<h2 id="Java内置接口实现"><a href="#Java内置接口实现" class="headerlink" title="Java内置接口实现"></a>Java内置接口实现</h2><p>现实编程中，具体的观察者完全有可能是风马牛不相及的类，但它们都需要根据通知者的通知来做出update()的操作，此时不适合使用继承，要用接口来实现。</p>
-<p>Java已经为观察者模式准备好了相关的接口和抽象类了：<strong>观察者接口java.util.Observer</strong> 和 <strong>通知者类java.util.Observable</strong> 。</p>
-<p>Java内置的Observable是一个类，这样设计是有问题的。一个类，就只能继承它，但我们自己的类可能本身就需要继承其他抽象类，这就产生了麻烦。Java不支持多重继承，这就严重限制了Observable的复用潜力。所以，当你这段代码用javac编译时，会给出提示： <code>警告：［deprecation］ java.util中的Observable已过时。</code> 系统其实是建议你不要复用这样的方法。所以真实编程中，我们也要考虑怎么取舍，如何修改的问题。</p>
-<h3 id="示例版本一"><a href="#示例版本一" class="headerlink" title="示例版本一"></a>示例版本一</h3><h3 id="示例版本二"><a href="#示例版本二" class="headerlink" title="示例版本二"></a>示例版本二</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clnk1a4210000jd9gcok3gxfs" data-title="设计模式14-观察者模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-design-pattern/13.建造者模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2023-10-09T16:29:36.000Z" itemprop="datePublished">2023-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design-Pattern/">Design Pattern</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式13-建造者模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
-<p>建造者模式可以将一个产品的<strong>内部表象</strong>与产品的<strong>生成过程</strong>分割开来，从而可以使一个建造过程生成具有不同的内部表象的产品对象。</p>
-<p>用户只需指定需要建造的类型即可，不需要知道具体建造的过程和细节。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/10/9L64AUgXlocTGOB.jpg" alt="建造者模式结构图.jpg"></p>
-<h3 id="Director"><a href="#Director" class="headerlink" title="Director"></a>Director</h3><p>构建一个使用 <code>Builder</code> 接口的对象。</p>
-<p>用于控制建造过程，隔离用户与建造过程的关联。</p>
-<h3 id="Builder"><a href="#Builder" class="headerlink" title="Builder"></a>Builder</h3><p>为创建一个 <code>Product</code> 对象的各个部件指定的抽象接口。</p>
-<h3 id="ConcreteBuilder"><a href="#ConcreteBuilder" class="headerlink" title="ConcreteBuilder"></a>ConcreteBuilder</h3><p>具体建造者，实现 <code>Builder</code> 接口，构造和装配各个部件。</p>
-<h3 id="Product"><a href="#Product" class="headerlink" title="Product"></a>Product</h3><p><code>Builder</code> 建造出来的具体产品。</p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p><code>Product</code> 类：产品类，由多个部件组成</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">  </span><br><span class="line">  ArrayList&lt;String&gt; parts = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 添加新的产品部件</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String part)</span> &#123;</span><br><span class="line">    parts.add(part);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 列举所有产品部件</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (String part : parts) &#123;</span><br><span class="line">      System.out.println(part);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Builder</code> 类：抽象建造者类，确定产品由两个部件 <code>PartA</code> 和 <code>PartB</code> 组成，并声明一个得到产品建造后结果的方法 <code>GetResult</code> 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">buildPartA</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">buildPartB</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title function_">getResult</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ConcreteBuilder</code> 类：具体建造者类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体建造者类1</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteBuilder1</span> <span class="keyword">extends</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Product</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartA</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件A-1&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartB</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件B-1&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Product <span class="title function_">getResult</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体建造者类2</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteBuilder2</span> <span class="keyword">extends</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Product</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartA</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件A-2&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildPartB</span><span class="params">()</span> &#123;</span><br><span class="line">    product.add(<span class="string">&quot;部件B-2&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Product <span class="title function_">getResult</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Director</code> 类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Director</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">construct</span><span class="params">(Builder builder)</span> &#123;</span><br><span class="line">    builder.buildPartA();</span><br><span class="line">    builder.buildPartB();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>客户端代码：客户不需要知道具体的建造过程</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Director</span> <span class="variable">director</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Director</span>();</span><br><span class="line"><span class="type">Builder</span> <span class="variable">b1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteBuilder1</span>();</span><br><span class="line"><span class="type">Builder</span> <span class="variable">b2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcreteBuilder2</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指挥者用ConcreteBuilder1的方法来建造产品</span></span><br><span class="line">director.construct(b1);</span><br><span class="line"><span class="type">Product</span> <span class="variable">p1</span> <span class="operator">=</span> b1.getResult();</span><br><span class="line">p1.show();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指挥者用ConcreteBuilder2的方法来建造产品</span></span><br><span class="line">director.construct(b2);</span><br><span class="line"><span class="type">Product</span> <span class="variable">p2</span> <span class="operator">=</span> b2.getResult();</span><br><span class="line">p2.show();</span><br><span class="line"></span><br><span class="line"><span class="comment">// p1, p2结果不同</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>建造者模式主要用于创建一些复杂的对象，这些对象内部子对象的建造顺序通常是稳定的，但每个子对象的构建通常面临复杂的变化。</p>
-<p>建造者模式是在当<strong>创建复杂对象的算法</strong>应该独立于<strong>该对象的组成部分</strong>以及<strong>它们的装配方式</strong>时适用的模式。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clnitxwuv000ccz9g1tt1h6j2" data-title="设计模式13-建造者模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-6.堆" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/" class="article-date">
-  <time class="dt-published" datetime="2023-10-09T07:55:06.500Z" itemprop="datePublished">2023-10-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/">算法模板2-6.堆</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>以小根堆为例：</p>
-<p>堆中的每一个点都是小于等于左右儿子的。</p>
-<p>所以根节点就是整个堆的最小值。</p>
-<h2 id="支持的操作"><a href="#支持的操作" class="headerlink" title="支持的操作"></a>支持的操作</h2><ol>
-<li><p>插入一个数</p>
-<p><code>heap[++ size] = x; up(size);</code></p>
-</li>
-<li><p>求集合当中的最小值</p>
-<p><code>heap[1]</code></p>
-</li>
-<li><p>删除最小值</p>
-<p>用整个堆的最后一个元素覆盖堆顶元素：</p>
-<p><code>heap[1] = heap[size --]; down(1);</code></p>
-</li>
-<li><p>删除任意一个元素</p>
-<p>与删除最小值类似，用最后一个元素覆盖下标为k的元素：</p>
-<p><code>heap[k] = heap[size --]; up(k); down(k);</code></p>
-<p>理论上是需要判断heap[k]的值变大还是变小再决定是up还是down。为了方便，可以直接up和down一遍</p>
-</li>
-<li><p>修改任意一个元素</p>
-<p><code>heap[k] = x; up(k); down(k);</code></p>
-</li>
-</ol>
-<p>其中，插入和删除元素都是 <code>O(logn)</code> 的，求最小值是 <code>O(1)</code> 的。</p>
-<blockquote>
-<p>后两种是手写堆特有的操作，STL无法直接实现。</p>
-</blockquote>
-<p>以上所有操作都可以由两个操作组合实现：</p>
-<h3 id="down"><a href="#down" class="headerlink" title="down"></a>down</h3><p><code>down(x)</code>: 把下标为x的节点的值变大了</p>
-<p>递归：与左右儿子相比，和最小的那个交换位置</p>
-<h3 id="up"><a href="#up" class="headerlink" title="up"></a>up</h3><p><code>up(x)</code>: 把下标为x的节点的值变小了</p>
-<p>递归：与父节点相比，如果比父节点小，则交换位置</p>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>堆是一个完全二叉树。</p>
-<h2 id="存储方式"><a href="#存储方式" class="headerlink" title="存储方式"></a>存储方式</h2><p>用一个一位数组来存。下标为x的元素的左儿子下标是2x，右儿子的下标是2x + 1。</p>
-<p>注：下标从1开始 </p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><p>带映射数组版本的模板：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// h[N]存储堆中的值，h[1]是堆顶，x的左儿子是2x，右儿子是2x + 1</span></span><br><span class="line"><span class="comment">// ph[k]存储第k个插入的点在堆中的位置，p是下标，h是堆，ph的意思是插入顺序的下标映射到堆</span></span><br><span class="line"><span class="comment">// hp[k]存储堆中下标是k的点是第几个插入的</span></span><br><span class="line"><span class="type">int</span> h[N], ph[N], hp[N], size;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交换两个点，及其映射关系</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heap_swap</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">swap</span>(ph[hp[a]], ph[hp[b]]);</span><br><span class="line">  <span class="built_in">swap</span>(hp[a], hp[b]);</span><br><span class="line">  <span class="built_in">swap</span>(h[a], h[b]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">down</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> t = u;</span><br><span class="line">  <span class="comment">// t设为u及其左右儿子里值最小的那一个</span></span><br><span class="line">  <span class="keyword">if</span> (u * <span class="number">2</span> &lt;= size &amp;&amp; h[u * <span class="number">2</span>] &lt; h[t]) t = u * <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">if</span> (u * <span class="number">2</span> + <span class="number">1</span> &lt;= size &amp;&amp; h[u * <span class="number">2</span> + <span class="number">1</span>] &lt; h[t]) t = u * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (u != t) &#123;</span><br><span class="line">    <span class="built_in">heap_swap</span>(u, t);</span><br><span class="line">    <span class="built_in">down</span>(t);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">up</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (u / <span class="number">2</span> &amp;&amp; h[u] &lt; h[u / <span class="number">2</span>]) &#123;</span><br><span class="line">    <span class="built_in">heap_swap</span>(u, u / <span class="number">2</span>);</span><br><span class="line">    u &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// O(n)建堆</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i; i --) <span class="built_in">down</span>(i);</span><br></pre></td></tr></table></figure>
-
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>先把数组建成堆，再依次输出堆顶元素</p>
-<p>时间复杂度： <code>O(nlogn)</code>。</p>
-<h4 id="建堆"><a href="#建堆" class="headerlink" title="建堆"></a>建堆</h4><p>如果一个一个元素插入，时间复杂度是 <code>O(nlogn)</code> 的。</p>
-<p><code>O(n)</code> 的建堆方式：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i; i --) <span class="built_in">down</span>(i);</span><br></pre></td></tr></table></figure>
-
-<p>从 n&#x2F;2 开始往上的所有元素 down，其实就是从树的倒数第二层开始down。</p>
-<p>时间复杂度证明：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n/4 * 1 + n/8 * 2 + n/16 * 3 + ...</span><br><span class="line">= n (1/2^2 + 2/2^3 + 3/2^4 + ...)</span><br><span class="line"></span><br><span class="line">S = 1/2^2 + 2/2^3 + 3/2^4 + ...</span><br><span class="line">2S = 1/2 + 2/2^2 + 3/2^3 + ...</span><br><span class="line">2S - S = S = 1/2 + 1/2^2 + 1/2^3 + ... &lt; 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="Dijkstra堆优化"><a href="#Dijkstra堆优化" class="headerlink" title="Dijkstra堆优化"></a>Dijkstra堆优化</h3><p>需要用到hp, ph映射数组</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/09/algorithm/template/2-6.%E5%A0%86/" data-id="clnitxwut0002cz9g61li7pos" data-title="算法模板2-6.堆" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-5.并查集" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="article-date">
-  <time class="dt-published" datetime="2023-10-09T05:57:36.893Z" itemprop="datePublished">2023-10-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/">算法模板2-5.并查集</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h1><h2 id="支持的操作"><a href="#支持的操作" class="headerlink" title="支持的操作"></a>支持的操作</h2><p>在近乎 <code>O(1)</code> 的时间复杂度内支持以下两种操作：</p>
-<ol>
-<li>将两个集合合并</li>
-<li>询问两个元素是否在一个集合当中</li>
-</ol>
-<p>注：有时也用于处理图论相关的问题。</p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>每个集合用一棵树来表示，树根的编号就是整个集合的编号。每个节点存储它的父节点，<code>p[x]</code> 表示 <code>x</code> 的父节点。</p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><h3 id="问题1-如何判断树根？"><a href="#问题1-如何判断树根？" class="headerlink" title="问题1: 如何判断树根？"></a>问题1: 如何判断树根？</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (p[x] == x) 则为树根</span><br></pre></td></tr></table></figure>
-
-<h3 id="问题2-如何求x的集合编号？"><a href="#问题2-如何求x的集合编号？" class="headerlink" title="问题2: 如何求x的集合编号？"></a>问题2: 如何求x的集合编号？</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (p[x] != x) x = p[x];</span><br></pre></td></tr></table></figure>
-
-<h3 id="问题3-如何合并两个集合？"><a href="#问题3-如何合并两个集合？" class="headerlink" title="问题3: 如何合并两个集合？"></a>问题3: 如何合并两个集合？</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">px是x的集合编号，py是y的集合编号</span><br><span class="line">令p[px] = py即可</span><br></pre></td></tr></table></figure>
-
-<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="1-路径压缩"><a href="#1-路径压缩" class="headerlink" title="1. 路径压缩"></a>1. 路径压缩</h3><p>在 <code>find</code> 函数中通过 <code> if (p[x] != x) p[x] = find(p[x]);</code> 实现把路径上所有点都直接指向祖宗节点</p>
-<h3 id="2-按秩合并（待补充）"><a href="#2-按秩合并（待补充）" class="headerlink" title="2. 按秩合并（待补充）"></a>2. 按秩合并（待补充）</h3><p>大致意思就是倾向于把短的树接到长的树上面</p>
-<p>用得较少，一般不在代码中实现</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><h3 id="朴素并查集"><a href="#朴素并查集" class="headerlink" title="朴素并查集"></a>朴素并查集</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> p[N]; <span class="comment">// 存储每个点的祖宗节点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回x的祖宗节点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (p[x] != x) p[x] = <span class="built_in">find</span>(p[x]); <span class="comment">// 顺手做了路径压缩</span></span><br><span class="line">  <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化，假定节点编号是1～n</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i ++) p[i] = i;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并a和b所在的两个集合</span></span><br><span class="line">p[<span class="built_in">find</span>(a)] = <span class="built_in">find</span>(b); <span class="comment">// 让a的祖宗节点的父亲指向b的祖宗节点</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="维护size的并查集"><a href="#维护size的并查集" class="headerlink" title="维护size的并查集"></a>维护size的并查集</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> p[N], size[N];</span><br><span class="line"><span class="comment">// p[]存储每个点的祖宗节点，size[]只有祖宗节点的有意义，表示祖宗节点所在集合中的点的数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回x的祖宗节点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (p[x] != x) p[x] = <span class="built_in">find</span>(p[x]);</span><br><span class="line">  <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化，假定节点编号是1～n</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  p[i] = i;</span><br><span class="line">  size[i] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并a和b所在的两个集合</span></span><br><span class="line">size[<span class="built_in">find</span>(b)] += size[<span class="built_in">find</span>(a)];</span><br><span class="line">p[<span class="built_in">find</span>(a)] = <span class="built_in">find</span>(b);</span><br></pre></td></tr></table></figure>
-
-<h3 id="维护到祖宗节点距离的并查集"><a href="#维护到祖宗节点距离的并查集" class="headerlink" title="维护到祖宗节点距离的并查集"></a>维护到祖宗节点距离的并查集</h3><p>例题：食物链</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> p[N], d[N];</span><br><span class="line"><span class="comment">// p[]存储每个点的祖宗节点，d[x]存储x到p[x]的距离</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回x的祖宗节点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (p[x] != x) &#123;</span><br><span class="line">    <span class="type">int</span> u = <span class="built_in">find</span>(p[x]);</span><br><span class="line">    d[x] += d[p[x]];</span><br><span class="line">    p[x] = u;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化，假定节点编号是1～n</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  p[i] = i;</span><br><span class="line">  d[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并a和b所在的两个集合</span></span><br><span class="line">p[<span class="built_in">find</span>(a)] = <span class="built_in">find</span>(b); <span class="comment">// 让a的祖宗节点的父亲指向b的祖宗节点</span></span><br><span class="line">d[<span class="built_in">find</span>(a)] = distance; <span class="comment">// 根据具体问题，初始化find(a)的偏移量</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" data-id="clnitxwus0000cz9gdwrz5l4v" data-title="算法模板2-5.并查集" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-4.Trie树" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" class="article-date">
-  <time class="dt-published" datetime="2023-10-09T05:23:06.088Z" itemprop="datePublished">2023-10-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/">算法模板2-4.Trie树</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Trie树"><a href="#Trie树" class="headerlink" title="Trie树"></a>Trie树</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>是用于高效<strong>存储</strong>和<strong>查找</strong>字符串集合中各字符串出现次数的数据结构。</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> son[N][<span class="number">26</span>], cnt[N], idx;</span><br><span class="line"><span class="comment">// 0号点既是根节点，又是空节点（一个点如果没有子节点，它的son就指向0）</span></span><br><span class="line"><span class="comment">// son[][]存储树中每个节点的子节点</span></span><br><span class="line"><span class="comment">// cnt[]存储以每个节点结尾的单词数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入一个字符串</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">char</span> str[])</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> p = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; str[i]; i ++) &#123;</span><br><span class="line">    <span class="type">int</span> u = str[i] - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (!son[p][u]) son[p][u] = ++ idx; <span class="comment">// 如果没有子节点，创建一个新节点继续走</span></span><br><span class="line">    p = son[p][u];</span><br><span class="line">  &#125;</span><br><span class="line">  cnt[p] ++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询字符串出现的次数</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">char</span> str[])</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> p = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; str[i]; i ++) &#123;</span><br><span class="line">    <span class="type">int</span> u = str[i] - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (!son[p][u]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    p = son[p][u];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> cnt[p];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" data-id="clnitxwuu0003cz9gfwoq6ry8" data-title="算法模板2-4.Trie树" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-3.KMP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/07/algorithm/template/2-3.KMP/" class="article-date">
-  <time class="dt-published" datetime="2023-10-07T12:57:45.000Z" itemprop="datePublished">2023-10-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/07/algorithm/template/2-3.KMP/">算法模板2-3.KMP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>有两个字符串 <code>S</code> 和 <code>p</code>，其中 <code>S</code> 是原串（长），<code>p</code>是模板串（短）。</p>
-<p>KMP用于字符串匹配：找到 <code>S</code> 中所有与 <code>p</code> 相同的子串，并返回每个子串开头字符的下标。</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// s[]是长文本，p[]是模式串，n是s的长度，m是p的长度</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 求模式串的next数组</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>, j = <span class="number">0</span>; i &lt;= m; i ++) &#123; <span class="comment">// i从2开始的原因：ne[1]不用算，ne[1]=0，第一个字母失败了只能从头开始</span></span><br><span class="line">  <span class="keyword">while</span> (j &amp;&amp; p[i] != p[j + <span class="number">1</span>]) j = ne[j];</span><br><span class="line">  <span class="keyword">if</span> (p[i] == p[j + <span class="number">1</span>]) j ++;</span><br><span class="line">  ne[i] = j; <span class="comment">// 记录当前i对应的ne[i]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匹配</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  <span class="keyword">while</span> (j &amp;&amp; s[i] != p[j + <span class="number">1</span>]) j = ne[j]; <span class="comment">// j没有回到第一个字符且s[i]和p[j + 1]不能匹配：一直往后移动p串使得p[j + 1]之前的子串是匹配的</span></span><br><span class="line">  <span class="keyword">if</span> (s[i] == p[j + <span class="number">1</span>]) j ++; <span class="comment">// 如果匹配了，j往后移动</span></span><br><span class="line">  <span class="keyword">if</span> (j == m) &#123; <span class="comment">// 整个p串都匹配成功</span></span><br><span class="line">    j = ne[j]; <span class="comment">// j还得退一步（试了下如果不加也能ac，因为在下一次循环的while中如果不匹配的话，反正也会执行j=ne[j]的？）</span></span><br><span class="line">    <span class="comment">// 匹配成功之后的逻辑</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>想不清楚的话拿个例子模拟一下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s=&quot;abababc&quot;</span><br><span class="line">p=&quot;abababab&quot;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="暴力算法"><a href="#暴力算法" class="headerlink" title="暴力算法"></a>暴力算法</h3><h4 id="时间复杂度-O-n-2"><a href="#时间复杂度-O-n-2" class="headerlink" title="时间复杂度 O(n^2)"></a>时间复杂度 <code>O(n^2)</code></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">S[N], p[M]</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">  <span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j ++)</span><br><span class="line">    <span class="keyword">if</span> (S[i + j - <span class="number">1</span>] != p[j]) &#123;</span><br><span class="line">      flag = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">if</span> (flag) res.<span class="built_in">push_back</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><h4 id="时间复杂度-O-n"><a href="#时间复杂度-O-n" class="headerlink" title="时间复杂度 O(n)"></a>时间复杂度 <code>O(n)</code></h4><p>分析：在 <code>i</code> 循环 <code>n</code> 次的过程中，每次循环 <code>j</code> 最多会+1，<code>j</code> 总共最多会+n，因此 <code>j=ne[j]</code> 再怎么减都最多减n</p>
-<p>故总的时间复杂度是 <code>2n</code>，是 <code>O(n)</code> 的。</p>
-<h4 id="next-数组"><a href="#next-数组" class="headerlink" title="next 数组"></a><code>next</code> 数组</h4><p>对于模板串 <code>p</code> 中的每一个字符 <code>p[i]</code>，都进行一个预处理：求出一个最大长度 <code>x</code>，使得以 <code>p[i]</code> 为结尾的长度为 <code>x</code> 的子串和 <code>p</code> 开头的长度为 <code>x</code> 的子串相等。</p>
-<p><code>next[i] = j</code> 含义：<code>p[1, ..., j] = p[i - j + 1, ..., i]</code></p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>模板中两个字符串的下标都是从1开始。</p>
-<p><code>p</code> 中每次和<code>S[i]</code> 匹配的是 <code>p[j + 1]</code>，可以理解为 <code>j</code> 比 <code>i</code> 往前错一位，每次都只是试探一下 <code>p[j+1]</code> 能不能和 <code>S[i]</code> 匹配。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/07/algorithm/template/2-3.KMP/" data-id="clnitxwut0001cz9gcv0x2agp" data-title="算法模板2-3.KMP" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-algorithm/template/2-2.栈和队列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" class="article-date">
-  <time class="dt-published" datetime="2023-10-07T12:34:18.000Z" itemprop="datePublished">2023-10-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>►<a class="article-category-link" href="/categories/Algorithm/Template/">Template</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">算法模板2-2.栈和队列</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><p>LIFO</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tt表示栈顶</span></span><br><span class="line"><span class="type">int</span> stk[N], tt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向栈顶插入一个数</span></span><br><span class="line">stk[++ tt] = x;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从栈顶弹出一个数</span></span><br><span class="line">tt --;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获得栈顶的值</span></span><br><span class="line">stk[tt];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断栈是否为空，如果 tt &gt; 0，则表示不为空</span></span><br><span class="line"><span class="keyword">if</span> (tt &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><p>FIFO</p>
-<h2 id="普通队列"><a href="#普通队列" class="headerlink" title="普通队列"></a>普通队列</h2><h3 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hh 表示队头， tt 表示队尾</span></span><br><span class="line"><span class="type">int</span> q[N], hh = <span class="number">0</span>, tt = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向队尾插入一个数</span></span><br><span class="line">q[++ tt] = x;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从队头弹出一个数</span></span><br><span class="line">hh ++;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 队头的值</span></span><br><span class="line">q[hh];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断队列是否为空，如果 hh &lt;= tt，则表示不为空</span></span><br><span class="line"><span class="keyword">if</span> (hh &lt;= tt) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h2><h3 id="代码模板-2"><a href="#代码模板-2" class="headerlink" title="代码模板"></a>代码模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hh 表示队头，tt 表示队尾的后一个位置</span></span><br><span class="line"><span class="type">int</span> q[N], hh = <span class="number">0</span>, tt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向队尾插入一个数</span></span><br><span class="line">q[tt ++] = x;</span><br><span class="line"><span class="keyword">if</span> (tt == N) tt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从队头弹出一个数</span></span><br><span class="line">hh ++;</span><br><span class="line"><span class="keyword">if</span> (hh == N) hh = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 队头的值</span></span><br><span class="line">q[hh];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断队列是否为空，如果hh != tt，则表示不为空</span></span><br><span class="line"><span class="keyword">if</span> (hh != tt) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h1><h2 id="代码模板-3"><a href="#代码模板-3" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> tt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">    <span class="keyword">while</span> (tt &amp;&amp; <span class="built_in">check</span>(stk[tt], a[i])) tt --; <span class="comment">// 栈不空且栈顶元素满足某种性质时，一直弹出栈顶元素</span></span><br><span class="line">    stk[++ tt] = a[i]; <span class="comment">// 当前元素压入栈中</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="常见模型"><a href="#常见模型" class="headerlink" title="常见模型"></a>常见模型</h2><p>找出每个数左边离它最近的比它大&#x2F;小的数</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>先想出暴力思路，再观察有没有单调性</p>
-<h4 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h4><p>两重循环 <code>O(n^2)</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j --)</span><br><span class="line">        <span class="keyword">if</span> (a[j] &lt; a[i]) &#123;</span><br><span class="line">            cout &lt;&lt; a[j] &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="单调栈-1"><a href="#单调栈-1" class="headerlink" title="单调栈"></a>单调栈</h4><p><strong>性质</strong>：如果 <code>a[x] &gt;= a[y] &amp;&amp; x &lt; y</code>，那么 <code>a[x]</code> 一定不会被 <code>y</code> 及 <code>y</code> 后面的元素用到，它可以被删掉</p>
-<p>一重循环 <code>O(n)</code>，每个元素最多入栈一次、出栈一次</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">    <span class="comment">// 弹出不符合条件的元素</span></span><br><span class="line">    <span class="keyword">while</span> (tt &amp;&amp; stk[tt] &gt;= a[i]) tt --;</span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="keyword">if</span> (tt) cout &lt;&lt; stk[tt] &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">else</span> cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// 新元素入栈</span></span><br><span class="line">    stk[++ tt] = a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h1><h2 id="代码模板-4"><a href="#代码模板-4" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> hh = <span class="number">0</span>, tt = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">    <span class="keyword">while</span> (hh &lt;= tt &amp;&amp; <span class="built_in">check_out</span>(q[hh])) hh ++; <span class="comment">// 判断队头是否滑出窗口</span></span><br><span class="line">    <span class="keyword">while</span> (hh &lt;= tt &amp;&amp; <span class="built_in">check</span>(q[tt], i)) tt --;</span><br><span class="line">    q[++ tt] = i; <span class="comment">// 注意：此处队列里存的是下标，不是值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="常见模型-1"><a href="#常见模型-1" class="headerlink" title="常见模型"></a>常见模型</h2><p>找出滑动窗口中的最大值&#x2F;最小值</p>
-<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><h4 id="暴力-1"><a href="#暴力-1" class="headerlink" title="暴力"></a>暴力</h4><p>从头到尾遍历元素，维护滑动窗口，每次遍历窗口内的所有元素找出最小值</p>
-<p>时间复杂度 <code>O(nk)</code>，<code>k</code> 为窗口大小</p>
-<h4 id="单调队列（双端队列）"><a href="#单调队列（双端队列）" class="headerlink" title="单调队列（双端队列）"></a>单调队列（双端队列）</h4><p>时间复杂度 <code>O(n)</code></p>
-<p><strong>性质</strong>：如果 <code>a[x] &gt;= a[y] &amp;&amp; x &lt; y</code>，那么 <code>a[x]</code> 一定不会被用到，可以从队尾移除</p>
-<p>额外维护一个严格单调递增的单调队列，取最小值时从队头取即可（记得判断队头元素是否已经在当前维护的滑动窗口之前了）</p>
-<p>注意：队列里存的是下标，不是值</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> hh = <span class="number">0</span>, tt = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">    <span class="keyword">while</span> (hh &lt;= tt &amp;&amp; q[hh] &lt; i - k + <span class="number">1</span>) hh ++; <span class="comment">// 把滑动窗口之外的元素出队</span></span><br><span class="line">    <span class="keyword">while</span> (hh &lt;= tt &amp;&amp; a[q[tt]] &gt;= a[i]) tt --; <span class="comment">// 把队尾比a[i]大或相等的元素出队</span></span><br><span class="line"></span><br><span class="line">    q[++ tt] = i; <span class="comment">// 当前元素入队</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i &gt;= k - <span class="number">1</span>) <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[q[hh]]); <span class="comment">// 窗口完全进来了，输出队头元素（此时元素一定在滑动窗口范围内）</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://peixuanhu.github.io/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" data-id="clng10n6d000y389g8xr0en1v" data-title="算法模板2-2.栈和队列" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/LeetCode/">LeetCode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Template/">Template</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design-Pattern/">Design Pattern</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Collection/">Collection</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/">MyBatis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/Spring-AOP/">Spring AOP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">设计模式23-命令模式</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
           </li>
+          
         
-          <li>
-            <a href="/2023/10/26/Java/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">码出高效读书笔记2-面向对象</a>
-          </li>
         
-          <li>
-            <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/">算法模板4-3.DP-区间DP</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/26/algorithm/template/4-2.%E7%BA%BF%E6%80%A7DP/">算法模板4-2.DP-线性DP</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/26/design-pattern/22.%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">设计模式22-桥接模式</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
     </div>
   </div>
+</nav>
 
   
-</aside>
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="An elegant Material-Design theme for Hexo"></span>
+          
+        </div>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+
       
-      &copy; 2023 Peixuan Hu<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
   </div>
-</footer>
+</div>
 
-    </div>
-    <nav id="mobile-nav">
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" target="_self">
+          STL总结
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" target="_self">
+        <div>
+          vector, 变长数组，倍增的思想12345678size()  返回元素个数empty()  返回是否为空clear()  清空front()/back()push_back()/pop_back()begin()/end()[]支持比较运算，按字典序  pair&lt;int, int&gt;123first, 第一个元素second, 第二个元素支持比较运算，以first为第一关键字，以s
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-10 15:41" pubdate>
+              2023-10-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
   
-    <a href="/" class="mobile-nav-link">Home</a>
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
   
-</nav>
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" target="_self">
+          算法模板2-8.字符串哈希
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" target="_self">
+        <div>
+          字符串哈希适用场景快速判断一个字符串中两个区间对应的子串是否完全相同。  除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。  字符串前缀哈希法12345678str = &quot;ABCABCDE&quot;把每一个前缀的哈希值算出来：h[0] = 0h[1] = &quot;A&quot;的哈希值h[2] = &quot;AB&quot;的哈希值h[3] = &q
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-10 15:24" pubdate>
+              2023-10-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" target="_self">
+          算法模板2-7.哈希
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" target="_self">
+        <div>
+          一般哈希适用场景把庞大的值域映射到一个比较小的空间。 如 0~10^9 -&gt; 0~10^5。  与离散化的关系：离散化是需要保序的，可以看作一种特殊的哈希方式  步骤1. x mod nn 即数组长度，它是一个质数，并且这个质数要离2的整数次幂尽可能远。  这样取可以使冲突的概率最小。数学证明待补充  2. 解决冲突有两种方法 拉链法数组的长度即为n，其中每个元素都是一个链表，取模之后结果相
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-10 11:42" pubdate>
+              2023-10-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式14-观察者模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self">
+        <div>
+          观察者模式定义观察者模式又叫作发布-订阅（Publish&#x2F;Subscribe）模式。 观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。 结构图 Subject类即主题或抽象通知者，一般用一个抽象类或者一个接口实现。 它把所有对观察者对象的引用保存在一个聚集里，每个
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-10 00:30" pubdate>
+              2023-10-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式13-建造者模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self">
+        <div>
+          建造者模式定义建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 建造者模式可以将一个产品的内部表象与产品的生成过程分割开来，从而可以使一个建造过程生成具有不同的内部表象的产品对象。 用户只需指定需要建造的类型即可，不需要知道具体建造的过程和细节。 结构图 Director构建一个使用 Builder 接口的对象。 用于控制建造过程，隔离用户与
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-10 00:29" pubdate>
+              2023-10-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/" target="_self">
+          算法模板2-6.堆
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/" target="_self">
+        <div>
+          堆性质以小根堆为例： 堆中的每一个点都是小于等于左右儿子的。 所以根节点就是整个堆的最小值。 支持的操作 插入一个数 heap[++ size] = x; up(size);  求集合当中的最小值 heap[1]  删除最小值 用整个堆的最后一个元素覆盖堆顶元素： heap[1] = heap[size --]; down(1);  删除任意一个元素 与删除最小值类似，用最后一个元素覆盖下标为k的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-09 15:55" pubdate>
+              2023-10-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" target="_self">
+          算法模板2-5.并查集
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" target="_self">
+        <div>
+          并查集支持的操作在近乎 O(1) 的时间复杂度内支持以下两种操作：  将两个集合合并 询问两个元素是否在一个集合当中  注：有时也用于处理图论相关的问题。 基本原理每个集合用一棵树来表示，树根的编号就是整个集合的编号。每个节点存储它的父节点，p[x] 表示 x 的父节点。 思考问题1: 如何判断树根？1if (p[x] == x) 则为树根  问题2: 如何求x的集合编号？1while (p[x]
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-09 13:57" pubdate>
+              2023-10-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" target="_self">
+          算法模板2-4.Trie树
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" target="_self">
+        <div>
+          Trie树适用场景是用于高效存储和查找字符串集合中各字符串出现次数的数据结构。 代码模板1234567891011121314151617181920212223242526int son[N][26], cnt[N], idx;// 0号点既是根节点，又是空节点（一个点如果没有子节点，它的son就指向0）// son[][]存储树中每个节点的子节点// cnt[]存储以每个节点结尾的单词数量//
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-09 13:23" pubdate>
+              2023-10-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/07/algorithm/template/2-3.KMP/" target="_self">
+          算法模板2-3.KMP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/07/algorithm/template/2-3.KMP/" target="_self">
+        <div>
+          KMP使用场景有两个字符串 S 和 p，其中 S 是原串（长），p是模板串（短）。 KMP用于字符串匹配：找到 S 中所有与 p 相同的子串，并返回每个子串开头字符的下标。 代码模板123456789101112131415161718// s[]是长文本，p[]是模式串，n是s的长度，m是p的长度// 求模式串的next数组for (int i = 2, j = 0; i &lt;= m; i
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-07 20:57" pubdate>
+              2023-10-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" target="_self">
+          算法模板2-2.栈和队列
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" target="_self">
+        <div>
+          栈LIFO 代码模板12345678910111213141516// tt表示栈顶int stk[N], tt = 0;// 向栈顶插入一个数stk[++ tt] = x;// 从栈顶弹出一个数tt --;// 获得栈顶的值stk[tt];// 判断栈是否为空，如果 tt &gt; 0，则表示不为空if (tt &gt; 0) &#123;    ...&#125;    队列FIFO 普通队列
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-07 20:34" pubdate>
+              2023-10-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>
