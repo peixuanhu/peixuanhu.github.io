@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记忆化搜索模板题滑雪前提：图是拓扑图，不存在环（循环依赖）。 时间复杂度：O(n^2) 状态表示f[i, j]表示所有从点(i, j)开始滑的路径长度的最大值。 状态计算分成四个子集，分别为往四个方向滑的路径的最大值。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#in">
+    <meta name="description" content="Huffman树问题可以看作一颗完全二叉树。 Huffman树的总代价：对于每个叶子节点n，需要的代价是n所处的层级*n的权重，把它们求和 问题：如何排列所有叶子节点，使得总代价最小 解法：每次挑权重最小的两个节点合并。 模板题1. 合并果子 和DP中的石子合并的区别：石子合并必须两堆石子相邻，果子没有这个限制。  Huffman树中所有叶子节点就是要合并的果子堆。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法模板4-8.DP-记忆化搜索">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/01/algorithm/template/4-8.%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A0/index.html">
+<meta property="og:title" content="算法模板5-2.贪心-Huffman树">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/01/algorithm/template/5-2.Huffman%E6%A0%91/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="记忆化搜索模板题滑雪前提：图是拓扑图，不存在环（循环依赖）。 时间复杂度：O(n^2) 状态表示f[i, j]表示所有从点(i, j)开始滑的路径长度的最大值。 状态计算分成四个子集，分别为往四个方向滑的路径的最大值。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#in">
+<meta property="og:description" content="Huffman树问题可以看作一颗完全二叉树。 Huffman树的总代价：对于每个叶子节点n，需要的代价是n所处的层级*n的权重，把它们求和 问题：如何排列所有叶子节点，使得总代价最小 解法：每次挑权重最小的两个节点合并。 模板题1. 合并果子 和DP中的石子合并的区别：石子合并必须两堆石子相邻，果子没有这个限制。  Huffman树中所有叶子节点就是要合并的果子堆。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-01T01:47:47.047Z">
-<meta property="article:modified_time" content="2023-11-01T02:20:07.236Z">
+<meta property="article:published_time" content="2023-11-01T05:57:13.468Z">
+<meta property="article:modified_time" content="2023-11-01T06:06:30.121Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>算法模板4-8.DP-记忆化搜索 - Peixuan&#39;s Page</title>
+  <title>算法模板5-2.贪心-Huffman树 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="算法模板4-8.DP-记忆化搜索"></span>
+            <span id="subtitle" data-typed-text="算法模板5-2.贪心-Huffman树"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-01 09:47" pubdate>
-          November 1, 2023 am
+        <time datetime="2023-11-01 13:57" pubdate>
+          November 1, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          914 words
+          176 words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          8 mins
+          2 mins
         
       </span>
     
@@ -290,17 +290,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">算法模板4-8.DP-记忆化搜索</h1>
+            <h1 id="seo-header">算法模板5-2.贪心-Huffman树</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="记忆化搜索"><a href="#记忆化搜索" class="headerlink" title="记忆化搜索"></a>记忆化搜索</h1><h2 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h2><h3 id="滑雪"><a href="#滑雪" class="headerlink" title="滑雪"></a>滑雪</h3><p>前提：图是拓扑图，不存在环（循环依赖）。</p>
-<p>时间复杂度：<code>O(n^2)</code></p>
-<h4 id="状态表示"><a href="#状态表示" class="headerlink" title="状态表示"></a>状态表示</h4><p><code>f[i, j]</code>表示所有从点(i, j)开始滑的路径长度的最大值。</p>
-<h4 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h4><p>分成四个子集，分别为往四个方向滑的路径的最大值。</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;cstring&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">310</span>;<br><br><span class="hljs-type">int</span> n, m;<br><span class="hljs-type">int</span> h[N][N], f[N][N];<br><span class="hljs-type">int</span> dx[<span class="hljs-number">4</span>] = &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, dy[<span class="hljs-number">4</span>] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> &amp;v = f[x][y];<br>    <br>    <span class="hljs-keyword">if</span> (v != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> v; <span class="hljs-comment">// 如果已经搜索过了，直接返回即可，否则时间复杂度是指数级别</span><br>    <br>    v = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i ++)<br>    &#123;<br>        <span class="hljs-type">int</span> a = x + dx[i], b = y + dy[i];<br>        <span class="hljs-keyword">if</span> (a &gt;= <span class="hljs-number">0</span> &amp;&amp; a &lt; n &amp;&amp; b &gt;= <span class="hljs-number">0</span> &amp;&amp; b &lt; m &amp;&amp; h[a][b] &lt; h[x][y])<br>            v = <span class="hljs-built_in">max</span>(v, <span class="hljs-built_in">dp</span>(a, b) + <span class="hljs-number">1</span>);<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> v;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);<br>    <br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i ++)<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; m; j ++)<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;h[i][j]);<br>    <br>    <span class="hljs-built_in">memset</span>(f, <span class="hljs-number">-1</span>, <span class="hljs-keyword">sizeof</span> f); <span class="hljs-comment">// 初始化，-1表示还没有搜索过</span><br>    <br>    <span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i ++)<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; m; j ++)<br>            res = <span class="hljs-built_in">max</span>(res, <span class="hljs-built_in">dp</span>(i, j)); <span class="hljs-comment">// 枚举起点</span><br>    <br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, res);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
+                <h1 id="Huffman树"><a href="#Huffman树" class="headerlink" title="Huffman树"></a>Huffman树</h1><p>问题可以看作一颗完全二叉树。</p>
+<p>Huffman树的总代价：对于每个叶子节点n，需要的代价是<code>n所处的层级*n的权重</code>，把它们求和</p>
+<p>问题：如何排列所有叶子节点，使得总代价最小</p>
+<p>解法：每次挑权重最小的两个节点合并。</p>
+<h2 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h2><h3 id="1-合并果子"><a href="#1-合并果子" class="headerlink" title="1. 合并果子"></a>1. 合并果子</h3><blockquote>
+<p>和DP中的石子合并的区别：石子合并必须两堆石子相邻，果子没有这个限制。</p>
+</blockquote>
+<p>Huffman树中所有叶子节点就是要合并的果子堆。</p>
 
                 
               </div>
@@ -346,8 +348,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>算法模板4-8.DP-记忆化搜索</div>
-      <div>https://peixuanhu.github.io/2023/11/01/algorithm/template/4-8.记忆化搜素/</div>
+      <div>算法模板5-2.贪心-Huffman树</div>
+      <div>https://peixuanhu.github.io/2023/11/01/algorithm/template/5-2.Huffman树/</div>
     </div>
     <div class="license-meta">
       
@@ -391,18 +393,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/01/algorithm/template/5-1.%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" title="算法模板5-1.贪心-区间问题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法模板5-1.贪心-区间问题</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/01/design-pattern/25.%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/" title="设计模式25-中介者模式">
-                        <span class="hidden-mobile">设计模式25-中介者模式</span>
+                      <a href="/2023/11/01/algorithm/template/5-1.%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" title="算法模板5-1.贪心-区间问题">
+                        <span class="hidden-mobile">算法模板5-1.贪心-区间问题</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
