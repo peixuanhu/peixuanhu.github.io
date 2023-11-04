@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="推公式模板题耍杂技的牛算法按照wi+si从小到大的顺序排，最大的危险系数一定是最小的 证明显然算法得出的答案 &gt;&#x3D; 最优解。 下面证明算法得出的答案 &lt;&#x3D; 最优解： 假设不是按照wi+si从小到大排序，那么从上到下，一定存在两头相邻的牛：w[i] + s[i] &gt; w[i + 1] + s[i + 1]。交换这两头牛，不影响其他牛的危险系数。  对于第i头牛：">
+    <meta name="description" content="时间复杂度由数据范围反推算法复杂度以及算法内容一般ACM或者笔试题的时间限制是1秒或2秒。在这种情况下，C++代码中的操作次数控制在 $10^7∼10^8$ 为最佳。 下面给出在不同数据范围下，代码的时间复杂度和算法该如何选择：  $n≤30$ &#x3D;&gt; 指数级别：dfs+剪枝，状态压缩DP $n≤100$ &#x3D;&gt; $O(n^3)$：Floyd，DP，高斯消元 $n≤10">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法模板5-5.贪心-推公式">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/03/algorithm/template/5-5.%E6%8E%A8%E5%85%AC%E5%BC%8F/index.html">
+<meta property="og:title" content="算法时空复杂度分析">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/04/algorithm/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="推公式模板题耍杂技的牛算法按照wi+si从小到大的顺序排，最大的危险系数一定是最小的 证明显然算法得出的答案 &gt;&#x3D; 最优解。 下面证明算法得出的答案 &lt;&#x3D; 最优解： 假设不是按照wi+si从小到大排序，那么从上到下，一定存在两头相邻的牛：w[i] + s[i] &gt; w[i + 1] + s[i + 1]。交换这两头牛，不影响其他牛的危险系数。  对于第i头牛：">
+<meta property="og:description" content="时间复杂度由数据范围反推算法复杂度以及算法内容一般ACM或者笔试题的时间限制是1秒或2秒。在这种情况下，C++代码中的操作次数控制在 $10^7∼10^8$ 为最佳。 下面给出在不同数据范围下，代码的时间复杂度和算法该如何选择：  $n≤30$ &#x3D;&gt; 指数级别：dfs+剪枝，状态压缩DP $n≤100$ &#x3D;&gt; $O(n^3)$：Floyd，DP，高斯消元 $n≤10">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-03T12:35:39.000Z">
-<meta property="article:modified_time" content="2023-11-03T12:35:39.000Z">
+<meta property="article:published_time" content="2023-11-04T03:41:59.302Z">
+<meta property="article:modified_time" content="2023-11-04T07:43:56.906Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>算法模板5-5.贪心-推公式 - Peixuan&#39;s Page</title>
+  <title>算法时空复杂度分析 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="算法模板5-5.贪心-推公式"></span>
+            <span id="subtitle" data-typed-text="算法时空复杂度分析"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-03 20:35" pubdate>
-          November 3, 2023 pm
+        <time datetime="2023-11-04 11:41" pubdate>
+          November 4, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          908 words
+          1.2k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          8 mins
+          10 mins
         
       </span>
     
@@ -290,31 +290,45 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">算法模板5-5.贪心-推公式</h1>
+            <h1 id="seo-header">算法时空复杂度分析</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="推公式"><a href="#推公式" class="headerlink" title="推公式"></a>推公式</h1><h2 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h2><h3 id="耍杂技的牛"><a href="#耍杂技的牛" class="headerlink" title="耍杂技的牛"></a>耍杂技的牛</h3><h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><p>按照<code>wi+si</code>从小到大的顺序排，最大的危险系数一定是最小的</p>
-<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>显然算法得出的答案 &gt;&#x3D; 最优解。</p>
-<p>下面证明算法得出的答案 &lt;&#x3D; 最优解：</p>
-<p>假设不是按照<code>wi+si</code>从小到大排序，那么从上到下，一定存在两头相邻的牛：<code>w[i] + s[i] &gt; w[i + 1] + s[i + 1]</code>。交换这两头牛，不影响其他牛的危险系数。</p>
-<ul>
-<li><p>对于第<code>i</code>头牛：危险系数从<code>w - s[i]</code>变成了<code>w + w[i + 1] - s[i]</code></p>
+                <h1 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h1><h2 id="由数据范围反推算法复杂度以及算法内容"><a href="#由数据范围反推算法复杂度以及算法内容" class="headerlink" title="由数据范围反推算法复杂度以及算法内容"></a>由数据范围反推算法复杂度以及算法内容</h2><p>一般ACM或者笔试题的时间限制是1秒或2秒。<br>在这种情况下，C++代码中的操作次数控制在 $10^7∼10^8$ 为最佳。</p>
+<p>下面给出在不同数据范围下，代码的时间复杂度和算法该如何选择：</p>
+<ol>
+<li>$n≤30$ &#x3D;&gt; 指数级别：dfs+剪枝，状态压缩DP</li>
+<li>$n≤100$ &#x3D;&gt; $O(n^3)$：Floyd，DP，高斯消元</li>
+<li>$n≤1000$ &#x3D;&gt; $O(n^2), O(n^2logn)$ ：DP，二分，朴素版Dijkstra、朴素版Prim、Bellman-Ford</li>
+<li>$n≤10^4$ &#x3D;&gt; $O(n*\sqrt n)$：块状链表、分块、莫队</li>
+<li>$n≤10^5$ &#x3D;&gt; $O(nlogn)$：各种sort，线段树、树状数组、set&#x2F;map、heap、拓扑排序、Dijkstra+heap、Prim+heap、Kruskal、SPFA、求凸包、求半平面交、二分、CDQ分治、整体二分、后缀数组、树链剖分、动态树</li>
+<li>$n≤10^6$ &#x3D;&gt; $O(n)$： 单调队列、hash、双指针扫描、BFS、并查集，KMP、AC自动机；以及常数比较小的$O(nlogn)$算法：sort、树状数组、heap、Dijkstra、SPFA</li>
+<li>$n≤10^7$ &#x3D;&gt; $O(n)$：双指针扫描、KMP、AC自动机、线性筛素数</li>
+<li>$n≤10^9$ &#x3D;&gt; $O(\sqrt n)$：判断质数</li>
+<li>$n≤10^{18}$ &#x3D;&gt; $O(logn)$：最大公约数，快速幂，数位DP</li>
+<li>$n≤10^{1000}$ &#x3D;&gt; $O((logn)^2)$：高精度加减乘除</li>
+<li>$n≤10^{100000}$ &#x3D;&gt; $O(logk * loglogk)$，k表示位数：高精度加减、FFT&#x2F;NTT</li>
+</ol>
+<blockquote>
+<p>SPFA，匈牙利，最大流的理论复杂度高，但实际几乎为线性</p>
+</blockquote>
+<h2 id="分析时间复杂度的方法"><a href="#分析时间复杂度的方法" class="headerlink" title="分析时间复杂度的方法"></a>分析时间复杂度的方法</h2><ol>
+<li>循环：看循环的层数</li>
+<li>递归：<ol>
+<li>主定理，看递推关系式$T(n) &#x3D; aT(\frac{n}{b}) + f(n)$，然后分情况，较复杂</li>
+<li>看层数，如快排，每层递归是$O(n)$，一共$logn$层，所以时间复杂度为$O(nlogn)$</li>
+</ol>
 </li>
-<li><p>对于第<code>i+1</code>头牛：危险系数从<code>w + w[i] - s[i + 1]</code>变成了<code>w - s[i + 1]</code></p>
-</li>
-</ul>
-<p>给每个数都加上<code>s[i] + s[i + 1] - w</code>：</p>
-<ul>
-<li><p>对于第<code>i</code>头牛：危险系数从<code>s[i + 1]</code>变成了<code>w[i + 1] + s[i + 1]</code></p>
-</li>
-<li><p>对于第<code>i+1</code>头牛：危险系数从<code>w[i] + s[i]</code>变成了<code>s[i]</code></p>
-</li>
-</ul>
-<p>由于<code>w[i] + s[i] &gt; w[i + 1] + s[i + 1]</code>，交换后的结果肯定会变小，所以可以调整为从小到大排序</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">50010</span>;<br><span class="hljs-type">int</span> n;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Cow</span> &#123;<br>    <span class="hljs-type">int</span> w, s;<br>    <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>&lt;(<span class="hljs-type">const</span> Cow &amp;C)<span class="hljs-type">const</span><br>    &#123;<br>        <span class="hljs-keyword">return</span> w + s &lt; C.w + C.s;<br>    &#125;<br>&#125;cow[N];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i ++) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;cow[i].w, &amp;cow[i].s);<br>    <br>    <span class="hljs-built_in">sort</span>(cow, cow + n);<br>    <br>    <span class="hljs-type">int</span> res = <span class="hljs-number">-2e9</span>, sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i ++)<br>    &#123;<br>        res = <span class="hljs-built_in">max</span>(res, sum - cow[i].s);<br>        sum += cow[i].w;<br>    &#125;<br>    <br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, res);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</ol>
+<h1 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h1><p>一般空间限制：$64MB$。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">int</span>: <span class="hljs-number">4</span> <span class="hljs-keyword">Byte</span><br><span class="hljs-keyword">char</span>: <span class="hljs-number">1</span> <span class="hljs-keyword">Byte</span><br><span class="hljs-keyword">double</span>, <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>: <span class="hljs-number">8</span> <span class="hljs-keyword">Byte</span><br><br><span class="hljs-number">64</span>MB = <span class="hljs-number">2</span>^<span class="hljs-number">26</span> <span class="hljs-keyword">Byte</span><br>能开多少<span class="hljs-keyword">int</span>变量？<br><span class="hljs-number">2</span>^<span class="hljs-number">26</span> / <span class="hljs-number">4</span> = <span class="hljs-number">2</span> ^ <span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
 
+<blockquote>
+<p>注：操作系统有优化，数组是用的时候再临时分配内存。</p>
+<p>如果只开了数组，没有用那么多的话，用sizeof算出来超内存也不会MLE。</p>
+</blockquote>
+<p>递归会使用系统栈，即使没有额外开数组，也会占用系统空间。如快排的额外空间复杂度是$O(logn)$的。</p>
 
                 
               </div>
@@ -336,13 +350,6 @@
   <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
   
   
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
-  
 
       </span>
     
@@ -360,8 +367,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>算法模板5-5.贪心-推公式</div>
-      <div>https://peixuanhu.github.io/2023/11/03/algorithm/template/5-5.推公式/</div>
+      <div>算法时空复杂度分析</div>
+      <div>https://peixuanhu.github.io/2023/11/04/algorithm/时空复杂度分析/</div>
     </div>
     <div class="license-meta">
       
@@ -373,7 +380,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 3, 2023</div>
+          <div>November 4, 2023</div>
         </div>
       
       
@@ -405,9 +412,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/04/design-pattern/27.%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="设计模式27-解释器模式">
+                      <a href="/2023/11/04/Java/effective-java/Item1-Consider-static-factory-methods-instead-of-constructors/" title="Effective Java-1. 用静态工厂方法代替构造器">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">设计模式27-解释器模式</span>
+                        <span class="hidden-mobile">Effective Java-1. 用静态工厂方法代替构造器</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -415,8 +422,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/03/algorithm/template/5-4.%E7%BB%9D%E5%AF%B9%E5%80%BC%E4%B8%8D%E7%AD%89%E5%BC%8F/" title="算法模板5-4.贪心-绝对值不等式">
-                        <span class="hidden-mobile">算法模板5-4.贪心-绝对值不等式</span>
+                      <a href="/2023/11/04/design-pattern/27.%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="设计模式27-解释器模式">
+                        <span class="hidden-mobile">设计模式27-解释器模式</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
