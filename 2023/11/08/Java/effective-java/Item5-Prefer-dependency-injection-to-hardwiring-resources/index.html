@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="4. Enforce noninstantiability with a private constructorBackgroundWrite a class that is just a grouping of static methods and static fields. Such utility classes were not designed to be instantiated:">
+    <meta name="description" content="5. Prefer dependency injection to hardwiring resourcesBackgroundMany classes depend on one or more underlying resources. For example, a spell checker depends on a dictionary. It is not uncommon to see">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-4. Enforce noninstantiability with a private constructor">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/08/Java/effective-java/Item4-Enforce-noninstantiability-with-a-private-constructor/index.html">
+<meta property="og:title" content="Effective Java-5. Prefer dependency injection to hardwiring resources">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/08/Java/effective-java/Item5-Prefer-dependency-injection-to-hardwiring-resources/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="4. Enforce noninstantiability with a private constructorBackgroundWrite a class that is just a grouping of static methods and static fields. Such utility classes were not designed to be instantiated:">
+<meta property="og:description" content="5. Prefer dependency injection to hardwiring resourcesBackgroundMany classes depend on one or more underlying resources. For example, a spell checker depends on a dictionary. It is not uncommon to see">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-08T02:52:20.699Z">
-<meta property="article:modified_time" content="2023-11-08T03:40:05.131Z">
+<meta property="article:published_time" content="2023-11-08T03:36:14.546Z">
+<meta property="article:modified_time" content="2023-11-08T04:00:51.024Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-4. Enforce noninstantiability with a private constructor - Peixuan&#39;s Page</title>
+  <title>Effective Java-5. Prefer dependency injection to hardwiring resources - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-4. Enforce noninstantiability with a private constructor"></span>
+            <span id="subtitle" data-typed-text="Effective Java-5. Prefer dependency injection to hardwiring resources"></span>
           
         </div>
 
@@ -209,7 +209,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-08 10:52" pubdate>
+        <time datetime="2023-11-08 11:36" pubdate>
           November 8, 2023 am
         </time>
       </span>
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k words
+          3.6k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          13 mins
+          30 mins
         
       </span>
     
@@ -290,21 +290,44 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-4. Enforce noninstantiability with a private constructor</h1>
+            <h1 id="seo-header">Effective Java-5. Prefer dependency injection to hardwiring resources</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="4-Enforce-noninstantiability-with-a-private-constructor"><a href="#4-Enforce-noninstantiability-with-a-private-constructor" class="headerlink" title="4. Enforce noninstantiability with a private constructor"></a>4. Enforce noninstantiability with a private constructor</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Write a class that is just a grouping of static methods and static fields.</p>
-<p>Such <em>utility classes</em> were not designed to be instantiated: an instance would be nonsensical. In the absence of explicit constructors, however, the compiler pro- vides a public, parameterless <em>default constructor</em>. To a user, this constructor is indistinguishable from any other. It is not uncommon to see unintentionally instantiable classes in published APIs.</p>
-<h2 id="Approaches-for-enforcing-noninstantiability"><a href="#Approaches-for-enforcing-noninstantiability" class="headerlink" title="Approaches for enforcing noninstantiability"></a>Approaches for enforcing noninstantiability</h2><h3 id="1-Making-a-class-abstract"><a href="#1-Making-a-class-abstract" class="headerlink" title="1. Making a class abstract"></a>1. Making a class abstract</h3><p><strong>Attempting to enforce noninstantiability by making a class abstract does not work.</strong> </p>
-<p>The class can be subclassed and the subclass instantiated. Furthermore, it misleads the user into thinking the class was designed for inheritance (Item 19).</p>
-<h3 id="2-Including-a-private-constructor"><a href="#2-Including-a-private-constructor" class="headerlink" title="2. Including a private constructor"></a>2. Including a private constructor</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Noninstantiable utility class</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UtilityClass</span> &#123;<br>  <span class="hljs-comment">// Suppress default constructor for noninstantiablity</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">UtilityClass</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AssertionError</span>();<br>  &#125;<br>  ... <span class="hljs-comment">// Remainder omitted</span><br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="5-Prefer-dependency-injection-to-hardwiring-resources"><a href="#5-Prefer-dependency-injection-to-hardwiring-resources" class="headerlink" title="5. Prefer dependency injection to hardwiring resources"></a>5. Prefer dependency injection to hardwiring resources</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Many classes depend on one or more underlying resources. For example, a spell checker depends on a dictionary.</p>
+<p>It is not uncommon to see such classes implemented as static utility classes (Item 4):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Inappropriate use of static utility - inflexible &amp; untestable!</span><br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpellChecker</span> &#123;<br>     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Lexicon</span> <span class="hljs-variable">dictionary</span> <span class="hljs-operator">=</span> ...;<br>     <span class="hljs-keyword">private</span> <span class="hljs-title function_">SpellChecker</span><span class="hljs-params">()</span> &#123;&#125; <span class="hljs-comment">// Noninstantiable</span><br>     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String word)</span> &#123; ... &#125;<br>     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;String&gt; <span class="hljs-title function_">suggestions</span><span class="hljs-params">(String typo)</span> &#123; ... &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
 
-<h4 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h4><p>Because the explicit constructor is <strong>private</strong>, it is <strong>inaccessible outside the class.</strong></p>
-<p>The <strong>AssertionError</strong> isn’t strictly required, but it provides insurance in case the constructor is accidentally invoked from within the class. It guarantees the class will never be instantiated under any circumstances.</p>
-<p>This idiom is mildly counter- intuitive because the constructor is provided expressly so that it cannot be invoked. It is therefore wise to include a <strong>comment</strong>.</p>
-<h4 id="Disdvantages"><a href="#Disdvantages" class="headerlink" title="Disdvantages"></a>Disdvantages</h4><p>This idiom also prevents the class from being <strong>subclassed</strong>. All constructors must invoke a superclass constructor, explicitly or implicitly, and a subclass would have no accessible superclass constructor to invoke.</p>
+<p>Similarly, it’s not uncommon to see them implemented as singletons (Item 3):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Inappropriate use of singleton - inflexible &amp; untestable!</span><br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpellChecker</span> &#123;<br>     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Lexicon</span> <span class="hljs-variable">dictionary</span> <span class="hljs-operator">=</span> ...;<br>     <span class="hljs-keyword">private</span> <span class="hljs-title function_">SpellChecker</span><span class="hljs-params">(...)</span> &#123;&#125;<br>     <span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-variable">INSTANCE</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SpellChecker</span>(...);<br>     <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String word)</span> &#123; ... &#125;<br>     <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">suggestions</span><span class="hljs-params">(String typo)</span> &#123; ... &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+<p>Neither of these approaches is satisfactory, because they assume that there is only <strong>one dictionary</strong> worth using. In practice, each language has its own dictionary, and special dictionaries are used for special vocabularies. Also, it may be desirable to use a special dictionary for <strong>testing</strong>.</p>
+<blockquote>
+<p>You could try to have SpellChecker support multiple dictionaries by making the dictionary field <strong>nonfinal</strong> and <strong>adding a method to change the dictionary in an existing spell checker</strong>, would be awkward, error-prone, and unworkable in a concurrent setting.</p>
+</blockquote>
+<p><strong>Static utility classes and singletons are inappropriate for classes whose behavior is parameterized by an underlying resource.</strong></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>What is required is the ability to support <strong>multiple instances of the class</strong> (in our example, SpellChecker), each of which uses the <strong>specific type of resource</strong> desired by the client (in our example, the dictionary). </p>
+<h3 id="Dependency-Injection"><a href="#Dependency-Injection" class="headerlink" title="Dependency Injection"></a>Dependency Injection</h3><p><strong>Dependency Injection pattern:</strong> pass the resource into the constructor when creating a new instance.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Dependency injection provides flexibility and testability</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpellChecker</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Lexicon dictionary;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">SpellChecker</span><span class="hljs-params">(Lexicon dictionary)</span> &#123;<br>    <span class="hljs-built_in">this</span>.dictionary = Objects.requireNonNull(dictionary);<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String word)</span> &#123; ... &#125;<br>  <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">suggestions</span><span class="hljs-params">(String typo)</span> &#123; ... &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>It preserves <strong>immutability</strong> (Item 17), so multiple clients can share dependent objects (assuming the clients desire the same underlying resources).</p>
+<p>Dependency injection is equally applicable to <strong>constructors</strong>, <strong>static factories</strong> (Item 1), and <strong>builders</strong> (Item 2).</p>
+<h4 id="Variant"><a href="#Variant" class="headerlink" title="Variant"></a>Variant</h4><p>A useful variant of the pattern is to pass a resource <em>factory</em> to the constructor. A factory is an object that can be called repeatedly to create instances of a type. Such factories embody the <em>Factory Method</em> pattern.</p>
+<p>For example, here is a method that makes a mosaic using a client-provided factory to produce each tile:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Mosaic <span class="hljs-title function_">create</span><span class="hljs-params">(Supplier&lt;? extends Tile&gt; tileFactory)</span> &#123; ... &#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>The <code>Supplier&lt;T&gt;</code> interface, introduced in Java 8, is perfect for representing factories.</p>
+<p>Methods that take a <code>Supplier&lt;T&gt;</code> on input should typically constrain the factory’s type parameter using a <em>bounded wildcard type</em> (Item 31) to allow the client to pass in a factory that creates any <strong>subtype of a specified type.</strong></p>
+</blockquote>
+<h4 id="Pros-Cons"><a href="#Pros-Cons" class="headerlink" title="Pros &amp; Cons"></a>Pros &amp; Cons</h4><p>Dependency injection greatly improves <strong>flexibility</strong> and <strong>testability</strong>.</p>
+<p>But it can <strong>clutter up large projects</strong>, which typically contain <strong>thousands of dependencies</strong>.</p>
+<blockquote>
+<p>This clutter can be all but eliminated by using a <em>dependency injection framework</em>, such as Dagger, Guice, or Spring.</p>
+</blockquote>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Do not use a singleton or static utility class to implement a class that depends on one or more underlying resources whose behavior affects that of the class, and do not have the class create these resources directly.</p>
+<p>Instead, pass the resources, or factories to create them, into the constructor (or static factory or builder). This practice, known as dependency injection, will greatly enhance the <strong>flexibility, reusability, and testability of a class</strong>.</p>
 
                 
               </div>
@@ -350,8 +373,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-4. Enforce noninstantiability with a private constructor</div>
-      <div>https://peixuanhu.github.io/2023/11/08/Java/effective-java/Item4-Enforce-noninstantiability-with-a-private-constructor/</div>
+      <div>Effective Java-5. Prefer dependency injection to hardwiring resources</div>
+      <div>https://peixuanhu.github.io/2023/11/08/Java/effective-java/Item5-Prefer-dependency-injection-to-hardwiring-resources/</div>
     </div>
     <div class="license-meta">
       
@@ -395,18 +418,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/08/Java/effective-java/Item5-Prefer-dependency-injection-to-hardwiring-resources/" title="Effective Java-5. Prefer dependency injection to hardwiring resources">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-5. Prefer dependency injection to hardwiring resources</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/07/Java/effective-java/Item3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type/" title="Effective Java-3. Enforce the singleton property with a private constructor or an enum type">
-                        <span class="hidden-mobile">Effective Java-3. Enforce the singleton property with a private constructor or an enum type</span>
+                      <a href="/2023/11/08/Java/effective-java/Item4-Enforce-noninstantiability-with-a-private-constructor/" title="Effective Java-4. Enforce noninstantiability with a private constructor">
+                        <span class="hidden-mobile">Effective Java-4. Enforce noninstantiability with a private constructor</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
