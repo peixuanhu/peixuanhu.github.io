@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="TerminologiesStatic - Compile TimeAspectAspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve. Examples Transaction Mana">
+    <meta name="description" content="4. Enforce noninstantiability with a private constructorBackgroundWrite a class that is just a grouping of static methods and static fields. Such utility classes were not designed to be instantiated:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AOP术语和AspectJ示例">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/09/15/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/index.html">
+<meta property="og:title" content="Peixuan&#39;s Page">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/08/Java/effective-java/Item4-Enforce-noninstantiability-with-a-private-constructor/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="TerminologiesStatic - Compile TimeAspectAspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve. Examples Transaction Mana">
+<meta property="og:description" content="4. Enforce noninstantiability with a private constructorBackgroundWrite a class that is just a grouping of static methods and static fields. Such utility classes were not designed to be instantiated:">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-15T01:36:07.000Z">
-<meta property="article:modified_time" content="2023-09-15T01:36:07.000Z">
+<meta property="article:published_time" content="2023-11-08T02:52:20.699Z">
+<meta property="article:modified_time" content="2023-11-08T03:05:23.565Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>AOP术语和AspectJ示例 - Peixuan&#39;s Page</title>
+  <title>Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="AOP术语和AspectJ示例"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-15 09:36" pubdate>
-          September 15, 2023 am
+        <time datetime="2023-11-08 10:52" pubdate>
+          November 8, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          1.5k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          19 mins
+          13 mins
         
       </span>
     
@@ -290,46 +290,20 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">AOP术语和AspectJ示例</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Terminologies"><a href="#Terminologies" class="headerlink" title="Terminologies"></a>Terminologies</h1><h2 id="Static-Compile-Time"><a href="#Static-Compile-Time" class="headerlink" title="Static - Compile Time"></a>Static - Compile Time</h2><h3 id="Aspect"><a href="#Aspect" class="headerlink" title="Aspect"></a>Aspect</h3><p>Aspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve.</p>
-<h4 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h4><ul>
-<li>Transaction Management</li>
-<li>Logging (e.g. Every method of business layer called, log the input and output parameters)</li>
-<li>Performance metrics (how much time a method took to execute)</li>
-</ul>
-<h3 id="Pointcut"><a href="#Pointcut" class="headerlink" title="Pointcut"></a>Pointcut</h3><p>A regular expression which determines what are the methods are to be intercepted.</p>
-<p>e.g. execution(* com.example.spring.business.aop.HiByeService.*(..))</p>
-<h3 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a>Advice</h3><p>Action taken by an aspect at a particular join point. What is to be done when the Pointcut is met.</p>
-<h2 id="Dynamic-Runtime"><a href="#Dynamic-Runtime" class="headerlink" title="Dynamic - Runtime"></a>Dynamic - Runtime</h2><h3 id="Join-point"><a href="#Join-point" class="headerlink" title="Join point"></a>Join point</h3><p>A point during the execution of a program. Execution of a specific AOP method.</p>
-<p>All the runtime information about the method call.</p>
-<p>Input parameters of the Advice?</p>
-<h3 id="Weaving"><a href="#Weaving" class="headerlink" title="Weaving"></a>Weaving</h3><p>The entire process of executing the Advice.</p>
-<h1 id="AspectJ"><a href="#AspectJ" class="headerlink" title="AspectJ"></a>AspectJ</h1><h2 id="Annotations"><a href="#Annotations" class="headerlink" title="Annotations"></a>Annotations</h2><h3 id="Aspect类"><a href="#Aspect类" class="headerlink" title="Aspect类"></a>Aspect类</h3><ul>
-<li>@Order(3)，值越小优先级越高</li>
-<li>@Aspect</li>
-<li>@Component</li>
-</ul>
-<h3 id="AspectJ-Advice-Types"><a href="#AspectJ-Advice-Types" class="headerlink" title="AspectJ Advice Types"></a>AspectJ Advice Types</h3><ul>
-<li><p><strong>@Before</strong>（前置通知）：目标对象的方法调用之前触发</p>
-</li>
-<li><p><strong>@After</strong> （后置通知）：目标对象的方法调用之后触发</p>
-</li>
-<li><p><strong>@AfterReturning</strong>（返回通知）：目标对象的方法调用完成，在返回结果值之后触发</p>
-</li>
-<li><p><strong>@AfterThrowing</strong>（异常通知）：目标对象的方法运行中抛出 &#x2F; 触发异常后触发。AfterReturning 和 AfterThrowing 两者互斥。如果方法调用成功无异常，则会有返回值；如果方法抛出了异常，则不会有返回值。</p>
-</li>
-<li><p><strong>@Around</strong> （环绕通知）：编程式控制目标对象的方法调用。环绕通知是所有通知类型中可操作范围最大的一种，因为它可以直接拿到目标对象，以及要执行的方法，所以环绕通知可以任意的在目标对象的方法调用前后搞事，甚至不调用目标对象的方法</p>
-</li>
-</ul>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Aspect</span> <span class="hljs-comment">// AspectJ annotation</span><br><span class="hljs-meta">@Component</span> <span class="hljs-comment">// Managed by Spring</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyAspect</span> &#123;<br>    <br>    <span class="hljs-meta">@Before(&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;)</span> <span class="hljs-comment">// 默认等价于pointcut=&quot;execution...&quot;</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">before</span><span class="hljs-params">(JoinPoint joinPoint)</span> &#123;<br>        System.out.print(<span class="hljs-string">&quot;Before &quot;</span>);<br>        System.out.println(joinPoint.getSignature().getName());<br>    &#125;<br>    <br>    <span class="hljs-meta">@AfterReturning(pointcut=&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;, returning=&quot;result&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">afterReturning</span><span class="hljs-params">(JoinPoint joinPoint, Object result)</span> &#123;<br>        System.out.print(<span class="hljs-string">&quot;After &quot;</span>);<br>        System.out.print(joinPoint.getSignature().getName());<br>        System.out.println(<span class="hljs-string">&quot;, result is &quot;</span> + result);<br>    &#125;<br>&#125;<br><br><span class="hljs-meta">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="hljs-meta">@ContextConfiguration(classes = SpringContextAOP.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AOPExampleTest</span> &#123;<br>    <br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> HiByeService service;<br>    <br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSomething</span><span class="hljs-params">()</span> &#123;<br>        service.sayHi();<br>        service.sayBye();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="4-Enforce-noninstantiability-with-a-private-constructor"><a href="#4-Enforce-noninstantiability-with-a-private-constructor" class="headerlink" title="4. Enforce noninstantiability with a private constructor"></a>4. Enforce noninstantiability with a private constructor</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Write a class that is just a grouping of static methods and static fields.</p>
+<p>Such <em>utility classes</em> were not designed to be instantiated: an instance would be nonsensical. In the absence of explicit constructors, however, the compiler pro- vides a public, parameterless <em>default constructor</em>. To a user, this constructor is indistinguishable from any other. It is not uncommon to see unintentionally instantiable classes in published APIs.</p>
+<h2 id="Approaches-for-enforcing-noninstantiability"><a href="#Approaches-for-enforcing-noninstantiability" class="headerlink" title="Approaches for enforcing noninstantiability"></a>Approaches for enforcing noninstantiability</h2><h3 id="1-Making-a-class-abstract"><a href="#1-Making-a-class-abstract" class="headerlink" title="1. Making a class abstract"></a>1. Making a class abstract</h3><p><strong>Attempting to enforce noninstantiability by making a class abstract does not work.</strong> The class can be subclassed and the subclass instantiated. Furthermore, it misleads the user into thinking the class was designed for inheritance (Item 19).</p>
+<h3 id="2-Including-a-private-constructor"><a href="#2-Including-a-private-constructor" class="headerlink" title="2. Including a private constructor"></a>2. Including a private constructor</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Noninstantiable utility class</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UtilityClass</span> &#123;<br>  <span class="hljs-comment">// Suppress default constructor for noninstantiablity</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">UtilityClass</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AssertionError</span>();<br>  &#125;<br>  ... <span class="hljs-comment">// Remainder omitted</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
-<li>Spring AOP Tutorial - with AspectJ Examples: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Og9Fyew8ltQ">https://www.youtube.com/watch?v=Og9Fyew8ltQ</a></li>
-</ol>
+<h4 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h4><p>Because the explicit constructor is <strong>private</strong>, it is <strong>inaccessible outside the class.</strong></p>
+<p>The <strong>AssertionError</strong> isn’t strictly required, but it provides insurance in case the constructor is accidentally invoked from within the class. It guarantees the class will never be instantiated under any circumstances.</p>
+<p>This idiom is mildly counter- intuitive because the constructor is provided expressly so that it cannot be invoked. It is therefore wise to include a <strong>comment</strong>.</p>
+<h4 id="Disdvantages"><a href="#Disdvantages" class="headerlink" title="Disdvantages"></a>Disdvantages</h4><p>This idiom also prevents the class from being <strong>subclassed</strong>. All constructors must invoke a superclass constructor, explicitly or implicitly, and a subclass would have no accessible superclass constructor to invoke.</p>
 
                 
               </div>
@@ -348,12 +322,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Spring/" class="category-chain-item">Spring</a>
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
   
   
     <span>></span>
     
-  <a href="/categories/Spring/Spring-AOP/" class="category-chain-item">Spring AOP</a>
+  <a href="/categories/Java/Effective-Java/" class="category-chain-item">Effective Java</a>
   
   
 
@@ -375,8 +349,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>AOP术语和AspectJ示例</div>
-      <div>https://peixuanhu.github.io/2023/09/15/Spring/Spring AOP/AOP-tutorial-with-AspectJ-Examples/</div>
+      <div></div>
+      <div>https://peixuanhu.github.io/2023/11/08/Java/effective-java/Item4-Enforce-noninstantiability-with-a-private-constructor/</div>
     </div>
     <div class="license-meta">
       
@@ -388,7 +362,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>September 15, 2023</div>
+          <div>November 8, 2023</div>
         </div>
       
       
@@ -420,18 +394,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/15/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" title="LeetCode3. 无重复字符的最长子串">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LeetCode3. 无重复字符的最长子串</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/14/tips/Hexo-doc/" title="Hexo Doc">
-                        <span class="hidden-mobile">Hexo Doc</span>
+                      <a href="/2023/11/07/Java/effective-java/Item3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type/" title="Effective Java-3. Enforce the singleton property with a private constructor or an enum type">
+                        <span class="hidden-mobile">Effective Java-3. Enforce the singleton property with a private constructor or an enum type</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

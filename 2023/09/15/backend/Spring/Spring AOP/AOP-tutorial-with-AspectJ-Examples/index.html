@@ -16,26 +16,23 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="面向对象类访问权限控制  如果不允许外部直接通过 new 创建对象，构造方法必须是 private。 工具类不允许有 public 或 default 构造方法。  this和super  在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。  由于 this 和 super都在实例化阶段调用，所以不能在静态方法">
+    <meta name="description" content="TerminologiesStatic - Compile TimeAspectAspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve. Examples Transaction Mana">
 <meta property="og:type" content="article">
-<meta property="og:title" content="码出高效读书笔记2-面向对象">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/10/26/Java/easy-coding/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:title" content="AOP术语和AspectJ示例">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/09/15/backend/Spring/Spring%20AOP/AOP-tutorial-with-AspectJ-Examples/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="面向对象类访问权限控制  如果不允许外部直接通过 new 创建对象，构造方法必须是 private。 工具类不允许有 public 或 default 构造方法。  this和super  在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。  由于 this 和 super都在实例化阶段调用，所以不能在静态方法">
+<meta property="og:description" content="TerminologiesStatic - Compile TimeAspectAspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve. Examples Transaction Mana">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s2.loli.net/2023/10/26/hlvCdauSt7I6NMA.png">
-<meta property="og:image" content="https://s2.loli.net/2023/10/26/Fx2lKfmdSgryw8X.png">
-<meta property="article:published_time" content="2023-10-26T07:41:04.356Z">
-<meta property="article:modified_time" content="2023-11-01T08:40:24.085Z">
+<meta property="article:published_time" content="2023-09-15T01:36:07.000Z">
+<meta property="article:modified_time" content="2023-11-08T02:07:33.572Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2023/10/26/hlvCdauSt7I6NMA.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>码出高效读书笔记2-面向对象 - Peixuan&#39;s Page</title>
+  <title>AOP术语和AspectJ示例 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="码出高效读书笔记2-面向对象"></span>
+            <span id="subtitle" data-typed-text="AOP术语和AspectJ示例"></span>
           
         </div>
 
@@ -212,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-26 15:41" pubdate>
-          October 26, 2023 pm
+        <time datetime="2023-09-15 09:36" pubdate>
+          September 15, 2023 am
         </time>
       </span>
     
@@ -224,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          2.2k words
         
       </span>
     
@@ -235,7 +232,7 @@
         
         
         
-          15 mins
+          19 mins
         
       </span>
     
@@ -293,71 +290,46 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">码出高效读书笔记2-面向对象</h1>
+            <h1 id="seo-header">AOP术语和AspectJ示例</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="访问权限控制"><a href="#访问权限控制" class="headerlink" title="访问权限控制"></a>访问权限控制</h3><p><img src="https://s2.loli.net/2023/10/26/hlvCdauSt7I6NMA.png" srcset="/img/loading.gif" lazyload alt="访问权限控制及可见范围.png"></p>
-<ul>
-<li>如果不允许外部直接通过 new 创建对象，构造方法必须是 private。</li>
-<li>工具类不允许有 public 或 default 构造方法。</li>
+                <h1 id="Terminologies"><a href="#Terminologies" class="headerlink" title="Terminologies"></a>Terminologies</h1><h2 id="Static-Compile-Time"><a href="#Static-Compile-Time" class="headerlink" title="Static - Compile Time"></a>Static - Compile Time</h2><h3 id="Aspect"><a href="#Aspect" class="headerlink" title="Aspect"></a>Aspect</h3><p>Aspect is the concern that we are trying to implement generically.  The functionality you want to implement. What you want to achieve.</p>
+<h4 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h4><ul>
+<li>Transaction Management</li>
+<li>Logging (e.g. Every method of business layer called, log the input and output parameters)</li>
+<li>Performance metrics (how much time a method took to execute)</li>
 </ul>
-<h3 id="this和super"><a href="#this和super" class="headerlink" title="this和super"></a>this和super</h3><p><img src="https://s2.loli.net/2023/10/26/Fx2lKfmdSgryw8X.png" srcset="/img/loading.gif" lazyload alt="this和super的异同点.png"></p>
-<ul>
-<li><p>在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。</p>
+<h3 id="Pointcut"><a href="#Pointcut" class="headerlink" title="Pointcut"></a>Pointcut</h3><p>A regular expression which determines what are the methods are to be intercepted.</p>
+<p>e.g. execution(* com.example.spring.business.aop.HiByeService.*(..))</p>
+<h3 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a>Advice</h3><p>Action taken by an aspect at a particular join point. What is to be done when the Pointcut is met.</p>
+<h2 id="Dynamic-Runtime"><a href="#Dynamic-Runtime" class="headerlink" title="Dynamic - Runtime"></a>Dynamic - Runtime</h2><h3 id="Join-point"><a href="#Join-point" class="headerlink" title="Join point"></a>Join point</h3><p>A point during the execution of a program. Execution of a specific AOP method.</p>
+<p>All the runtime information about the method call.</p>
+<p>Input parameters of the Advice?</p>
+<h3 id="Weaving"><a href="#Weaving" class="headerlink" title="Weaving"></a>Weaving</h3><p>The entire process of executing the Advice.</p>
+<h1 id="AspectJ"><a href="#AspectJ" class="headerlink" title="AspectJ"></a>AspectJ</h1><h2 id="Annotations"><a href="#Annotations" class="headerlink" title="Annotations"></a>Annotations</h2><h3 id="Aspect类"><a href="#Aspect类" class="headerlink" title="Aspect类"></a>Aspect类</h3><ul>
+<li>@Order(3)，值越小优先级越高</li>
+<li>@Aspect</li>
+<li>@Component</li>
+</ul>
+<h3 id="AspectJ-Advice-Types"><a href="#AspectJ-Advice-Types" class="headerlink" title="AspectJ Advice Types"></a>AspectJ Advice Types</h3><ul>
+<li><p><strong>@Before</strong>（前置通知）：目标对象的方法调用之前触发</p>
 </li>
-<li><p>由于 this 和 super都在实例化阶段调用，所以不能在<strong>静态方法</strong>和<strong>静态代码块</strong>申使用 this 和 super 关键字。</p>
+<li><p><strong>@After</strong> （后置通知）：目标对象的方法调用之后触发</p>
+</li>
+<li><p><strong>@AfterReturning</strong>（返回通知）：目标对象的方法调用完成，在返回结果值之后触发</p>
+</li>
+<li><p><strong>@AfterThrowing</strong>（异常通知）：目标对象的方法运行中抛出 &#x2F; 触发异常后触发。AfterReturning 和 AfterThrowing 两者互斥。如果方法调用成功无异常，则会有返回值；如果方法抛出了异常，则不会有返回值。</p>
+</li>
+<li><p><strong>@Around</strong> （环绕通知）：编程式控制目标对象的方法调用。环绕通知是所有通知类型中可操作范围最大的一种，因为它可以直接拿到目标对象，以及要执行的方法，所以环绕通知可以任意的在目标对象的方法调用前后搞事，甚至不调用目标对象的方法</p>
 </li>
 </ul>
-<h3 id="类关系"><a href="#类关系" class="headerlink" title="类关系"></a>类关系</h3><p>类与类之间的关系可分成两种·有关系与没关系，难点在于确定类与类之间是否存在相互作用。证明类之间没关系是一个涉及业务、架构、模块边界的问 题，往往由于业务模型的抽象角度不同而不同，是一件非常棘手的事情。如果找到了 没有关系的点，就可以如庖丁解牛一样，进行架构隔离、模块解耦等工作。</p>
-<p>类与类有关系的情况，包括以下5种类型：</p>
-<ul>
-<li>【继承】 extends (is-a)。</li>
-<li>【实现】 implements (can-do)。</li>
-<li>【组合】 类是成员变量 (contains-a)。</li>
-<li>【聚合】 类是成员变量(has-a)。</li>
-<li>【依赖】 import类(use-a)。</li>
-</ul>
-<p>随着业务和架构的发展，类与类的关系是会发生变化的，必须用发展的眼光看待类图。</p>
-<p>在业务重构过程中，往往会把原来强组合的关系拆开来，供其他模块调用，这就是类图的一种演变。</p>
-<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>常见的序列化方式有三种：</p>
-<ol>
-<li><strong>Java 原生序列化。</strong>Java类通过实现 Serializable接口来实现该类对象的序列化，这个接口非常特殊，没有任何方法，只起标识作用。<ul>
-<li>实现 Serializable 接口的类要显式设置 serialVersionUID 字段值，否则类源码修改后该值会发生变化。<ul>
-<li>如果是兼容升级，请不要修改 seria!VersionUID 字段 ， 避免反序列化失败。</li>
-<li>如果是不兼容升级，需要修改 serialVersionUID 值，避免反序列化混乱。</li>
-</ul>
-</li>
-<li>Java 反序列化时不会调用类的无参构造方法，而 是调用 native 方法将成员变量赋值为对应类型的初始值。基于性能及兼容性考虑，不 推荐使用 Java 原生序列化。</li>
-</ul>
-</li>
-<li><strong>Hessian 序列化。</strong>压缩编码，比Java原生序列化二进制流小且耗时短。特性：<ul>
-<li>自描述序列化类型。不依赖外部描述文件或接口定义 ， 用一个字节表示常用 基础类型 ， 极大缩短二进制流。</li>
-<li>语言无关，支持脚本语言。</li>
-<li>协议简单，比 Java 原生序列化高效。</li>
-</ul>
-</li>
-<li><strong>JSON 序列化。</strong>JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。JSON 序列化就是将数据对象转换为 JSON 字符串。在序列化过程中抛弃了类型信息，所以反序列化时只有提供类型信息才能准确地反序列化。相比前两种方式， JSON 可读性比较好，方便调试。</li>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Aspect</span> <span class="hljs-comment">// AspectJ annotation</span><br><span class="hljs-meta">@Component</span> <span class="hljs-comment">// Managed by Spring</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyAspect</span> &#123;<br>    <br>    <span class="hljs-meta">@Before(&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;)</span> <span class="hljs-comment">// 默认等价于pointcut=&quot;execution...&quot;</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">before</span><span class="hljs-params">(JoinPoint joinPoint)</span> &#123;<br>        System.out.print(<span class="hljs-string">&quot;Before &quot;</span>);<br>        System.out.println(joinPoint.getSignature().getName());<br>    &#125;<br>    <br>    <span class="hljs-meta">@AfterReturning(pointcut=&quot;execution(* com.example.spring.business.aop.HiByeService.*(..))&quot;, returning=&quot;result&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">afterReturning</span><span class="hljs-params">(JoinPoint joinPoint, Object result)</span> &#123;<br>        System.out.print(<span class="hljs-string">&quot;After &quot;</span>);<br>        System.out.print(joinPoint.getSignature().getName());<br>        System.out.println(<span class="hljs-string">&quot;, result is &quot;</span> + result);<br>    &#125;<br>&#125;<br><br><span class="hljs-meta">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="hljs-meta">@ContextConfiguration(classes = SpringContextAOP.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AOPExampleTest</span> &#123;<br>    <br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> HiByeService service;<br>    <br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSomething</span><span class="hljs-params">()</span> &#123;<br>        service.sayHi();<br>        service.sayBye();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<li>Spring AOP Tutorial - with AspectJ Examples: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Og9Fyew8ltQ">https://www.youtube.com/watch?v=Og9Fyew8ltQ</a></li>
 </ol>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h4 id="参数预处理"><a href="#参数预处理" class="headerlink" title="参数预处理"></a>参数预处理</h4><h5 id="1-入参保护"><a href="#1-入参保护" class="headerlink" title="1. 入参保护"></a>1. 入参保护</h5><p>人参保护实质上是对服务提供方的保护，常见于批量接口。</p>
-<p>虽然批量接口能处理批数据，但其处理能力并不是无限的，因此需要<strong>对入参的数据量进行判断和控制</strong>，如果超出处理能力，可以直接返回错误给客户端。</p>
-<h5 id="2-参数校验"><a href="#2-参数校验" class="headerlink" title="2. 参数校验"></a>2. 参数校验</h5><p>需要进行参数校验的场景：</p>
-<ul>
-<li>调用频度低的方法。</li>
-<li>执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退或者错误，则得不偿失。</li>
-<li>需要极高稳定性和可用性的方法。 </li>
-<li>对外提供的开放接口。</li>
-<li>敏感权限入口。</li>
-</ul>
-<p>不需要进行参数校验的场景：</p>
-<ul>
-<li>极有可能被<strong>循环调用</strong>的方法。但在方法说明里必须注明外部参数检查。</li>
-<li><strong>底层调用频度较高</strong>的方法。参数错误不太可能到底层才会暴露问题。一般 DAO 层与 Service 层都在同个应用中，部署在同一台服务器中，所以可以省略 DAO 的参数校验。</li>
-<li>声明成 <strong>private</strong> 只会被自己代码调用的方法。如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。</li>
-</ul>
-<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p><strong>单一职责</strong>对于构造方法同样适用，构造方法的使命就是在构造对象时进行传参操作，所以不应该在构造方法中引入业务逻辑。</p>
-<p>如果在一个对象生产中 ，需要完成初始化上下游对象、分配内存、执行静态方法、赋值句柄等繁重的工作，其中某个步骤出错，导致没有完成对象初始化，再将希望寄托于业务逻辑部分来处理异常就是一件不受控制的事情了。故推荐将初始化业务逻辑放在某个方法中，比如<code>init()</code>， 当对象确认完成所有初始化工作之后，再显式调用。</p>
 
                 
               </div>
@@ -376,13 +348,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/Backend/" class="category-chain-item">Backend</a>
   
   
     <span>></span>
     
-  <a href="/categories/Java/Easy-Coding/" class="category-chain-item">Easy Coding</a>
+  <a href="/categories/Backend/Spring/" class="category-chain-item">Spring</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Backend/Spring/Spring-AOP/" class="category-chain-item">Spring AOP</a>
+  
+  
+
   
 
   
@@ -403,8 +382,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>码出高效读书笔记2-面向对象</div>
-      <div>https://peixuanhu.github.io/2023/10/26/Java/easy-coding/码出高效笔记2-面向对象/</div>
+      <div>AOP术语和AspectJ示例</div>
+      <div>https://peixuanhu.github.io/2023/09/15/backend/Spring/Spring AOP/AOP-tutorial-with-AspectJ-Examples/</div>
     </div>
     <div class="license-meta">
       
@@ -416,7 +395,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 26, 2023</div>
+          <div>September 15, 2023</div>
         </div>
       
       
@@ -448,9 +427,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="设计模式23-命令模式">
+                      <a href="/2023/09/15/algorithm/leetcode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" title="LeetCode3. 无重复字符的最长子串">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">设计模式23-命令模式</span>
+                        <span class="hidden-mobile">LeetCode3. 无重复字符的最长子串</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -458,8 +437,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" title="算法模板4-3.DP-区间DP">
-                        <span class="hidden-mobile">算法模板4-3.DP-区间DP</span>
+                      <a href="/2023/09/14/tips/Hexo-doc/" title="Hexo Doc">
+                        <span class="hidden-mobile">Hexo Doc</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
