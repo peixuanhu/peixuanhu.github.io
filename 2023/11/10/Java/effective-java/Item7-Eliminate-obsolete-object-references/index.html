@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="5. Prefer dependency injection to hardwiring resourcesBackgroundMany classes depend on one or more underlying resources. For example, a spell checker depends on a dictionary. It is not uncommon to see">
+    <meta name="description" content="Item 7: Eliminate obsolete object referencesExample of memory leak1234567891011121314151617181920212223242526&#x2F;&#x2F; Can you spot the &quot;memory leak&quot;?public class Stack &amp;#123;  private Object[] ele">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-5. Prefer dependency injection to hardwiring resources">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/08/Java/effective-java/Item5-Prefer-dependency-injection-to-hardwiring-resources/index.html">
+<meta property="og:title" content="Effective Java-7. Eliminate obsolete object references">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/10/Java/effective-java/Item7-Eliminate-obsolete-object-references/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="5. Prefer dependency injection to hardwiring resourcesBackgroundMany classes depend on one or more underlying resources. For example, a spell checker depends on a dictionary. It is not uncommon to see">
+<meta property="og:description" content="Item 7: Eliminate obsolete object referencesExample of memory leak1234567891011121314151617181920212223242526&#x2F;&#x2F; Can you spot the &quot;memory leak&quot;?public class Stack &amp;#123;  private Object[] ele">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-08T03:36:14.546Z">
-<meta property="article:modified_time" content="2023-11-08T04:00:51.024Z">
+<meta property="article:published_time" content="2023-11-10T07:50:56.000Z">
+<meta property="article:modified_time" content="2023-11-10T07:50:56.000Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-5. Prefer dependency injection to hardwiring resources - Peixuan&#39;s Page</title>
+  <title>Effective Java-7. Eliminate obsolete object references - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-5. Prefer dependency injection to hardwiring resources"></span>
+            <span id="subtitle" data-typed-text="Effective Java-7. Eliminate obsolete object references"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-08 11:36" pubdate>
-          November 8, 2023 am
+        <time datetime="2023-11-10 15:50" pubdate>
+          November 10, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k words
+          3.1k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          30 mins
+          27 mins
         
       </span>
     
@@ -290,44 +290,45 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-5. Prefer dependency injection to hardwiring resources</h1>
+            <h1 id="seo-header">Effective Java-7. Eliminate obsolete object references</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="5-Prefer-dependency-injection-to-hardwiring-resources"><a href="#5-Prefer-dependency-injection-to-hardwiring-resources" class="headerlink" title="5. Prefer dependency injection to hardwiring resources"></a>5. Prefer dependency injection to hardwiring resources</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Many classes depend on one or more underlying resources. For example, a spell checker depends on a dictionary.</p>
-<p>It is not uncommon to see such classes implemented as static utility classes (Item 4):</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Inappropriate use of static utility - inflexible &amp; untestable!</span><br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpellChecker</span> &#123;<br>     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Lexicon</span> <span class="hljs-variable">dictionary</span> <span class="hljs-operator">=</span> ...;<br>     <span class="hljs-keyword">private</span> <span class="hljs-title function_">SpellChecker</span><span class="hljs-params">()</span> &#123;&#125; <span class="hljs-comment">// Noninstantiable</span><br>     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String word)</span> &#123; ... &#125;<br>     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;String&gt; <span class="hljs-title function_">suggestions</span><span class="hljs-params">(String typo)</span> &#123; ... &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="Item-7-Eliminate-obsolete-object-references"><a href="#Item-7-Eliminate-obsolete-object-references" class="headerlink" title="Item 7: Eliminate obsolete object references"></a>Item 7: Eliminate obsolete object references</h1><h2 id="Example-of-memory-leak"><a href="#Example-of-memory-leak" class="headerlink" title="Example of memory leak"></a>Example of memory leak</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Can you spot the &quot;memory leak&quot;?</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Stack</span> &#123;<br>  <span class="hljs-keyword">private</span> Object[] elements;<br>  <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_INITIAL_CAPACITY</span> <span class="hljs-operator">=</span> <span class="hljs-number">16</span>;<br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">Stack</span><span class="hljs-params">()</span> &#123;<br>    elements = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[DEFAULT_INITIAL_CAPACITY];<br>  &#125;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(Object e)</span> &#123;<br>    ensureCapacity();<br>    elements[size++] = e;<br>  &#125;<br>  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>)<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmptyStackException</span>();<br>    <span class="hljs-keyword">return</span> elements[--size];<br>  &#125;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">  * Ensure space for at least one more element, roughly</span><br><span class="hljs-comment">  * doubling the capacity each time the array needs to grow.</span><br><span class="hljs-comment">  */</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureCapacity</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">if</span> (elements.length == size)<br>      elements = Arrays.copyOf(elements, <span class="hljs-number">2</span> * size + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>Similarly, it’s not uncommon to see them implemented as singletons (Item 3):</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Inappropriate use of singleton - inflexible &amp; untestable!</span><br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpellChecker</span> &#123;<br>     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Lexicon</span> <span class="hljs-variable">dictionary</span> <span class="hljs-operator">=</span> ...;<br>     <span class="hljs-keyword">private</span> <span class="hljs-title function_">SpellChecker</span><span class="hljs-params">(...)</span> &#123;&#125;<br>     <span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-variable">INSTANCE</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SpellChecker</span>(...);<br>     <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String word)</span> &#123; ... &#125;<br>     <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">suggestions</span><span class="hljs-params">(String typo)</span> &#123; ... &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
 
-<p>Neither of these approaches is satisfactory, because they assume that there is only <strong>one dictionary</strong> worth using. In practice, each language has its own dictionary, and special dictionaries are used for special vocabularies. Also, it may be desirable to use a special dictionary for <strong>testing</strong>.</p>
+
+<h3 id="Where-is-the-memory-leak"><a href="#Where-is-the-memory-leak" class="headerlink" title="Where is the memory leak?"></a>Where is the memory leak?</h3><p>If a stack grows and then shrinks, the objects that were popped off the stack will not be garbage collected, even if the program using the stack has no more references to them. This is because the stack maintains <strong>obsolete references</strong> to these objects. An obsolete reference is simply a reference that will never be dereferenced again.</p>
 <blockquote>
-<p>You could try to have SpellChecker support multiple dictionaries by making the dictionary field <strong>nonfinal</strong> and <strong>adding a method to change the dictionary in an existing spell checker</strong>, would be awkward, error-prone, and unworkable in a concurrent setting.</p>
+<p>The memory leak can silently manifest itself as reduced performance due to increased garbage collector activity or increased memory footprint. In extreme cases, such memory leaks can cause <strong>disk paging</strong> and even program failure with an <strong>OutOfMemoryError</strong>, but such failures are relatively rare.</p>
 </blockquote>
-<p><strong>Static utility classes and singletons are inappropriate for classes whose behavior is parameterized by an underlying resource.</strong></p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>What is required is the ability to support <strong>multiple instances of the class</strong> (in our example, SpellChecker), each of which uses the <strong>specific type of resource</strong> desired by the client (in our example, the dictionary). </p>
-<h3 id="Dependency-Injection"><a href="#Dependency-Injection" class="headerlink" title="Dependency Injection"></a>Dependency Injection</h3><p><strong>Dependency Injection pattern:</strong> pass the resource into the constructor when creating a new instance.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Dependency injection provides flexibility and testability</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpellChecker</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Lexicon dictionary;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">SpellChecker</span><span class="hljs-params">(Lexicon dictionary)</span> &#123;<br>    <span class="hljs-built_in">this</span>.dictionary = Objects.requireNonNull(dictionary);<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String word)</span> &#123; ... &#125;<br>  <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">suggestions</span><span class="hljs-params">(String typo)</span> &#123; ... &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Fix-for-the-memory-leak"><a href="#Fix-for-the-memory-leak" class="headerlink" title="Fix for the memory leak"></a>Fix for the memory leak</h3><p>Fix: null out references once they become obsolete.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> Object <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>)<br>  	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmptyStackException</span>();<br>  <span class="hljs-type">Object</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> elements[--size];<br>  elements[size] = <span class="hljs-literal">null</span>; <span class="hljs-comment">// Eliminate obsolete reference</span><br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>It preserves <strong>immutability</strong> (Item 17), so multiple clients can share dependent objects (assuming the clients desire the same underlying resources).</p>
-<p>Dependency injection is equally applicable to <strong>constructors</strong>, <strong>static factories</strong> (Item 1), and <strong>builders</strong> (Item 2).</p>
-<h4 id="Variant"><a href="#Variant" class="headerlink" title="Variant"></a>Variant</h4><p>A useful variant of the pattern is to pass a resource <em>factory</em> to the constructor. A factory is an object that can be called repeatedly to create instances of a type. Such factories embody the <em>Factory Method</em> pattern.</p>
-<p>For example, here is a method that makes a mosaic using a client-provided factory to produce each tile:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Mosaic <span class="hljs-title function_">create</span><span class="hljs-params">(Supplier&lt;? extends Tile&gt; tileFactory)</span> &#123; ... &#125;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>The <code>Supplier&lt;T&gt;</code> interface, introduced in Java 8, is perfect for representing factories.</p>
-<p>Methods that take a <code>Supplier&lt;T&gt;</code> on input should typically constrain the factory’s type parameter using a <em>bounded wildcard type</em> (Item 31) to allow the client to pass in a factory that creates any <strong>subtype of a specified type.</strong></p>
-</blockquote>
-<h4 id="Pros-Cons"><a href="#Pros-Cons" class="headerlink" title="Pros &amp; Cons"></a>Pros &amp; Cons</h4><p>Dependency injection greatly improves <strong>flexibility</strong> and <strong>testability</strong>.</p>
-<p>But it can <strong>clutter up large projects</strong>, which typically contain <strong>thousands of dependencies</strong>.</p>
-<blockquote>
-<p>This clutter can be all but eliminated by using a <em>dependency injection framework</em>, such as Dagger, Guice, or Spring.</p>
-</blockquote>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Do not use a singleton or static utility class to implement a class that depends on one or more underlying resources whose behavior affects that of the class, and do not have the class create these resources directly.</p>
-<p>Instead, pass the resources, or factories to create them, into the constructor (or static factory or builder). This practice, known as dependency injection, will greatly enhance the <strong>flexibility, reusability, and testability of a class</strong>.</p>
+<h2 id="Nulling-out-obsolete-references"><a href="#Nulling-out-obsolete-references" class="headerlink" title="Nulling out obsolete references"></a>Nulling out obsolete references</h2><h3 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h3><ul>
+<li>avoid memory leak</li>
+<li>if they are subsequently dereferenced by mistake, the program will immediately fail with a NullPointerException, rather than quietly doing the wrong thing. It is always beneficial to detect programming errors as quickly as possible.</li>
+</ul>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><p><strong>Nulling out object references should be the exception rather than the norm.</strong> The best way to eliminate an obsolete reference is to let the variable that contained the reference fall out of scope. This occurs naturally if you define each variable in the narrowest possible scope (Item 57).</p>
+<h2 id="Sources-of-memory-leaks"><a href="#Sources-of-memory-leaks" class="headerlink" title="Sources of memory leaks"></a>Sources of memory leaks</h2><h3 id="1-A-class-manages-its-own-memory"><a href="#1-A-class-manages-its-own-memory" class="headerlink" title="1. A class manages its own memory"></a>1. A class manages its own memory</h3><p>Whenever a class manages its own memory, the programmer should be alert for memory leaks. Whenever an element is freed, any object references contained in the element should be nulled out.</p>
+<h3 id="2-Caches"><a href="#2-Caches" class="headerlink" title="2. Caches"></a>2. Caches</h3><p>Once you put an object reference into a cache, it’s easy to forget that it’s there and leave it in the cache long after it becomes irrelevant.</p>
+<h4 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h4><ul>
+<li><p>Represent the cache as a <strong>WeakHashMap</strong></p>
+<ul>
+<li><p>Situation: an entry is relevant(有意义) exactly when there are references to its key outside of the cache, entries will be removed automatically after they become obsolete.</p>
+</li>
+<li><p>Remember that <em>WeakHashMap</em> is useful only if the desired lifetime of cache entries is determined by external references to the <strong>key</strong>, not the value.</p>
+</li>
+</ul>
+</li>
+<li><p>Use a background thread (perhaps a <strong>ScheduledThreadPoolExecutor</strong>) to cleanse the cache occasionally, or as a side effect of adding new entries to the cache(method <strong>removeEldestEntry</strong> of <strong>LinkedHashMap</strong>).</p>
+</li>
+<li><p>For more sophisticated caches, you may need to use <strong>java.lang.ref</strong> directly.</p>
+</li>
+</ul>
+<h3 id="3-Listeners-and-callbacks"><a href="#3-Listeners-and-callbacks" class="headerlink" title="3. Listeners and callbacks"></a>3. Listeners and callbacks</h3><p>If you implement an API where clients register callbacks but <strong>don’t deregister them explicitly</strong>, they will accumulate unless you take some action.</p>
+<p>One way to ensure that callbacks are garbage collected promptly is to <strong>store only weak references to them</strong>, for instance, by storing them only as keys in a <em>WeakHashMap</em>.</p>
 
                 
               </div>
@@ -373,8 +374,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-5. Prefer dependency injection to hardwiring resources</div>
-      <div>https://peixuanhu.github.io/2023/11/08/Java/effective-java/Item5-Prefer-dependency-injection-to-hardwiring-resources/</div>
+      <div>Effective Java-7. Eliminate obsolete object references</div>
+      <div>https://peixuanhu.github.io/2023/11/10/Java/effective-java/Item7-Eliminate-obsolete-object-references/</div>
     </div>
     <div class="license-meta">
       
@@ -386,7 +387,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 8, 2023</div>
+          <div>November 10, 2023</div>
         </div>
       
       
@@ -418,18 +419,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/09/Java/effective-java/Item6-Avoid-creating-unnecessary-objects/" title="Effective Java-6. Avoid creating unnecessary objects">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-6. Avoid creating unnecessary objects</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/08/Java/effective-java/Item4-Enforce-noninstantiability-with-a-private-constructor/" title="Effective Java-4. Enforce noninstantiability with a private constructor">
-                        <span class="hidden-mobile">Effective Java-4. Enforce noninstantiability with a private constructor</span>
+                      <a href="/2023/11/10/Java/effective-java/Item1-Consider-static-factory-methods-instead-of-constructors/" title="Effective Java-1. Consider static factory methods instead of constructors">
+                        <span class="hidden-mobile">Effective Java-1. Consider static factory methods instead of constructors</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

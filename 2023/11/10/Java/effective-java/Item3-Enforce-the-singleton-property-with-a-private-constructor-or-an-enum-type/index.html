@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="6. Avoid creating unnecessary objectsReuse object instead of creating new equivalent objectIt is often appropriate to reuse a single object instead of creating a new functionally equivalent object eac">
+    <meta name="description" content="Item 3: Enforce the singleton property with a private constructor or an enum typeBackgroundA singleton is simply a class that is instantiated exactly once. Singletons typically represent either a stat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-6. Avoid creating unnecessary objects">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/09/Java/effective-java/Item6-Avoid-creating-unnecessary-objects/index.html">
+<meta property="og:title" content="Effective Java-3. Enforce the singleton property with a private constructor or an enum type">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/10/Java/effective-java/Item3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="6. Avoid creating unnecessary objectsReuse object instead of creating new equivalent objectIt is often appropriate to reuse a single object instead of creating a new functionally equivalent object eac">
+<meta property="og:description" content="Item 3: Enforce the singleton property with a private constructor or an enum typeBackgroundA singleton is simply a class that is instantiated exactly once. Singletons typically represent either a stat">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-09T00:46:22.530Z">
-<meta property="article:modified_time" content="2023-11-09T01:19:53.725Z">
+<meta property="article:published_time" content="2023-11-10T06:39:51.000Z">
+<meta property="article:modified_time" content="2023-11-10T06:39:51.000Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-6. Avoid creating unnecessary objects - Peixuan&#39;s Page</title>
+  <title>Effective Java-3. Enforce the singleton property with a private constructor or an enum type - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-6. Avoid creating unnecessary objects"></span>
+            <span id="subtitle" data-typed-text="Effective Java-3. Enforce the singleton property with a private constructor or an enum type"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-09 08:46" pubdate>
-          November 9, 2023 am
+        <time datetime="2023-11-10 14:39" pubdate>
+          November 10, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k words
+          2.6k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          28 mins
+          22 mins
         
       </span>
     
@@ -290,34 +290,46 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-6. Avoid creating unnecessary objects</h1>
+            <h1 id="seo-header">Effective Java-3. Enforce the singleton property with a private constructor or an enum type</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="6-Avoid-creating-unnecessary-objects"><a href="#6-Avoid-creating-unnecessary-objects" class="headerlink" title="6. Avoid creating unnecessary objects"></a>6. Avoid creating unnecessary objects</h1><h2 id="Reuse-object-instead-of-creating-new-equivalent-object"><a href="#Reuse-object-instead-of-creating-new-equivalent-object" class="headerlink" title="Reuse object instead of creating new equivalent object"></a>Reuse object instead of creating new equivalent object</h2><p>It is often appropriate to reuse a single object instead of creating a new functionally equivalent object each time it is needed. Reuse can be both faster and more stylish. An object can always be reused if it is <strong>immutable</strong> (Item 17). In addition, you can also reuse mutable objects if you know they won’t be modified.</p>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>For example, suppose you want to write a method to determine whether a string is a valid Roman numeral.</p>
-<p>The easiest way:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Performance can be greatly improved</span><br><span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isRomanNumeral</span><span class="hljs-params">(String s)</span> &#123;<br>  <span class="hljs-keyword">return</span> s.matches(<span class="hljs-string">&quot;^(?=.)M*(C[MD]|D?C&#123;0,3&#125;)&quot;</span><br>		+ <span class="hljs-string">&quot;(X[CL]|L?X&#123;0,3&#125;)(I[XV]|V?I&#123;0,3&#125;)$&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type"><a href="#Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type" class="headerlink" title="Item 3: Enforce the singleton property with a private constructor or an enum type"></a>Item 3: Enforce the singleton property with a private constructor or an enum type</h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>A <em>singleton</em> is simply a class that is instantiated exactly once. Singletons typically represent either a stateless object such as a function (Item 24) or a system component that is intrinsically unique.</p>
+<h2 id="Implementations"><a href="#Implementations" class="headerlink" title="Implementations"></a>Implementations</h2><h3 id="Public-field-approach"><a href="#Public-field-approach" class="headerlink" title="Public field approach"></a>Public field approach</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Singleton with public final field</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Elvis</span> &#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Elvis</span> <span class="hljs-variable">INSTANCE</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Elvis</span>();<br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">Elvis</span><span class="hljs-params">()</span> &#123; ... &#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">leaveTheBuilding</span><span class="hljs-params">()</span> &#123; ... &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><strong>While</strong> <strong>String.matches</strong> <strong>is the easiest way to check if a string matches a regular expression, it’s not suitable for repeated use in performance-critical situations.</strong> The problem is that it internally creates a Pattern instance for the regular expression and uses it only once, after which it becomes eligible for garbage collection.</p>
-<p>To improve the performance, explicitly compile the regular expression into a Pattern instance (which is immutable) as part of class initialization, cache it, and reuse the same instance for every invocation of the isRomanNumeral method:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Reusing expensive object for improved performance</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RomanNumerals</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Pattern</span> <span class="hljs-variable">ROMAN</span> <span class="hljs-operator">=</span> Pattern.compile(<br>           <span class="hljs-string">&quot;^(?=.)M*(C[MD]|D?C&#123;0,3&#125;)&quot;</span><br>           + <span class="hljs-string">&quot;(X[CL]|L?X&#123;0,3&#125;)(I[XV]|V?I&#123;0,3&#125;)$&quot;</span>);<br>  <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isRomanNumeral</span><span class="hljs-params">(String s)</span> &#123;<br>      <span class="hljs-keyword">return</span> ROMAN.matcher(s).matches();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="Use-static-factory-methods-in-preference-to-constructors-on-immutable-classes"><a href="#Use-static-factory-methods-in-preference-to-constructors-on-immutable-classes" class="headerlink" title="Use static factory methods in preference to constructors on immutable classes"></a>Use <em>static factory methods</em> in preference to <em>constructors</em> on immutable classes</h2><p>You can often avoid creating unnecessary objects by using <em>static factory methods</em> (Item 1) in preference to constructors on <strong>immutable classes</strong> that provide both. The constructor <em>must</em> create a new object each time it’s called, while the factory method is never required to do so and won’t in practice.</p>
+<p>Advantages:</p>
+<ul>
+<li>the API makes it clear that the class is a singleton: the public static field is final, so it will always contain the same object reference.</li>
+<li>it’s simpler.</li>
+</ul>
 <blockquote>
-<p>For example, the factory method Boolean.valueOf(String) is preferable to the constructor Boolean(String), which was deprecated in Java 9. </p>
+<p>A privileged client can <strong>invoke the private constructor reflectively</strong> (Item 65) with the aid of the AccessibleObject.setAccessible method. If you need to defend against this attack, modify the <strong>constructor</strong> to make it <strong>throw an exception</strong> if it’s asked to create a second instance.</p>
 </blockquote>
-<h2 id="Prefer-primitives-to-boxed-primitives-and-watch-out-for-unintentional-autoboxing"><a href="#Prefer-primitives-to-boxed-primitives-and-watch-out-for-unintentional-autoboxing" class="headerlink" title="Prefer primitives to boxed primitives, and watch out for unintentional autoboxing"></a>Prefer primitives to boxed primitives, and watch out for unintentional autoboxing</h2><p><strong>Autoboxing blurs but does not erase the distinction between primitive and boxed primitive types.</strong></p>
-<p>Consider the following method, which calculates the sum of all the positive int values. To do this, the program has to use long arithmetic because an int is not big enough to hold the sum of all the positive int values:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Hideously slow! Can you spot the object creation?</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">long</span> <span class="hljs-title function_">sum</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-type">Long</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0L</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= Integer.MAX_VALUE; i++)<br>     sum += i;<br>  <span class="hljs-keyword">return</span> sum;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Static-factory-approach"><a href="#Static-factory-approach" class="headerlink" title="Static factory approach"></a>Static factory approach</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Singleton with static factory</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Elvis</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Elvis</span> <span class="hljs-variable">INSTANCE</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Elvis</span>();<br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">Elvis</span><span class="hljs-params">()</span> &#123; ... &#125;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Elvis <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123; <span class="hljs-keyword">return</span> INSTANCE; &#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">leaveTheBuilding</span><span class="hljs-params">()</span> &#123; ... &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>The variable sum is declared as a Long instead of a long, which means that the program constructs about 231 unnecessary Long instances (roughly one for each time the long i is added to the Long sum).</p>
-<p>The lesson is clear: <strong>prefer primitives to boxed primitives, and watch out for unintentional autoboxing.</strong></p>
-<h2 id="Additional-information"><a href="#Additional-information" class="headerlink" title="Additional information"></a>Additional information</h2><p>This item should not be misconstrued to imply that object creation is expensive and should be avoided. On the contrary, the creation and reclamation of small objects whose constructors do little explicit work is cheap, especially on modern JVM implementations. <strong>Creating additional objects to enhance the clarity, simplicity, or power of a program is generally a good thing.</strong></p>
-<p>Conversely, avoiding object creation by maintaining your own <em>object pool</em> is a bad idea unless the objects in the pool are extremely heavyweight. The <strong>classic example</strong> of an object that <em>does</em> justify an object pool is a <strong>database connection</strong>. The cost of establishing the connection is sufficiently high that it makes sense to reuse these objects. </p>
+<p>Advantages:</p>
+<ul>
+<li>it gives you the flexibility to change your mind about whether the class is a singleton without changing its API.</li>
+<li>you can write a <em>generic singleton factory</em> if your application requires it (Item 30).</li>
+<li>a <em>method reference</em> can be used as a supplier, for example <code>Elvis::instance</code> is a <code>Supplier&lt;Elvis&gt;</code>.</li>
+</ul>
+<blockquote>
+<p>Unless one of these advantages is relevant, the public field approach is preferable.</p>
+</blockquote>
+<h3 id="Single-element-enum-approach"><a href="#Single-element-enum-approach" class="headerlink" title="Single-element enum approach"></a>Single-element enum approach</h3><p><strong>A single-element enum type is often the best way to implement a singleton</strong>.</p>
+<p>This approach is similar to the public field approach, but it is more concise, provides the serialization machinery for free, and provides an <strong>ironclad guarantee against multiple instantiation</strong>, even in the face of <strong>sophisticated serialization</strong> or <strong>reflection attacks</strong>.</p>
+<blockquote>
+<p>Note that you <strong>can’t</strong> use this approach if your singleton must <strong>extend a superclass other than Enum</strong> (though you <em>can</em> declare an enum to implement interfaces).</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Enum singleton - the preferred approach</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">Elvis</span> &#123;<br>  INSTANCE;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">leaveTheBuilding</span><span class="hljs-params">()</span> &#123; ... &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>To make a singleton class that uses either of <strong>public field &#x2F; static factory approaches</strong> <em>serializable</em> (Chapter 12), it is not sufficient merely to add implements Serializable to its declaration.</p>
+<p>To maintain the singleton guarantee, declare all instance fields transient and provide a <em>readResolve</em> method (Item 89). Otherwise, each time a serialized instance is deserialized, a new instance will be created, leading, in the case of our example, to spurious Elvis sightings.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// readResolve method to preserve singleton property</span><br><span class="hljs-keyword">private</span> Object <span class="hljs-title function_">readResolve</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-comment">// Return the one true Elvis and let the garbage collector take care of the Elvis impersonator</span><br>  <span class="hljs-keyword">return</span> INSTANCE;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -363,8 +375,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-6. Avoid creating unnecessary objects</div>
-      <div>https://peixuanhu.github.io/2023/11/09/Java/effective-java/Item6-Avoid-creating-unnecessary-objects/</div>
+      <div>Effective Java-3. Enforce the singleton property with a private constructor or an enum type</div>
+      <div>https://peixuanhu.github.io/2023/11/10/Java/effective-java/Item3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type/</div>
     </div>
     <div class="license-meta">
       
@@ -376,7 +388,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 9, 2023</div>
+          <div>November 10, 2023</div>
         </div>
       
       
@@ -408,12 +420,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/11/10/Java/effective-java/Item2-Consider-a-builder-when-faced-with-many-constructor-parameters/" title="Effective Java-2. Consider a builder when faced with many constructor parameters">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Effective Java-2. Consider a builder when faced with many constructor parameters</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/08/Java/effective-java/Item5-Prefer-dependency-injection-to-hardwiring-resources/" title="Effective Java-5. Prefer dependency injection to hardwiring resources">
-                        <span class="hidden-mobile">Effective Java-5. Prefer dependency injection to hardwiring resources</span>
+                      <a href="/2023/11/10/Java/effective-java/Item4-Enforce-noninstantiability-with-a-private-constructor/" title="Effective Java-4. Enforce noninstantiability with a private constructor">
+                        <span class="hidden-mobile">Effective Java-4. Enforce noninstantiability with a private constructor</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
