@@ -16,25 +16,23 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="单例模式定义单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。 结构图 基本代码Singleton类，定义一个GetInstance操作，允许客户访问它的唯一实例。GetInstance是一个静态方法，主要负责创建自己的唯一实例。 懒汉式调用getInstance的时候再来创建instance。 V1 线程不安全在多线程的情况下有可能创建多个实例 1234567">
+    <meta name="description" content="Item 8: Avoid finalizers and cleanersFinalizers are unpredictable, often dangerous, and generally unnecessary. Cleaners (Java 9) are less dangerous than finalizers, but still unpredictable, slow, and">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式21-单例模式">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="Effective Java-8. Avoid finalizers and cleaners">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/11/Java/effective-java/Item8-Avoid-finalizers-and-cleaners/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="单例模式定义单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。 结构图 基本代码Singleton类，定义一个GetInstance操作，允许客户访问它的唯一实例。GetInstance是一个静态方法，主要负责创建自己的唯一实例。 懒汉式调用getInstance的时候再来创建instance。 V1 线程不安全在多线程的情况下有可能创建多个实例 1234567">
+<meta property="og:description" content="Item 8: Avoid finalizers and cleanersFinalizers are unpredictable, often dangerous, and generally unnecessary. Cleaners (Java 9) are less dangerous than finalizers, but still unpredictable, slow, and">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s2.loli.net/2023/10/23/7qNvY9VbhWHPit2.png">
-<meta property="article:published_time" content="2023-10-20T06:21:30.000Z">
-<meta property="article:modified_time" content="2023-10-23T02:16:54.927Z">
+<meta property="article:published_time" content="2023-11-11T02:59:45.922Z">
+<meta property="article:modified_time" content="2023-11-11T04:08:57.480Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2023/10/23/7qNvY9VbhWHPit2.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>设计模式21-单例模式 - Peixuan&#39;s Page</title>
+  <title>Effective Java-8. Avoid finalizers and cleaners - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="设计模式21-单例模式"></span>
+            <span id="subtitle" data-typed-text="Effective Java-8. Avoid finalizers and cleaners"></span>
           
         </div>
 
@@ -211,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-20 14:21" pubdate>
-          October 20, 2023 pm
+        <time datetime="2023-11-11 10:59" pubdate>
+          November 11, 2023 am
         </time>
       </span>
     
@@ -223,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k words
+          5.1k words
         
       </span>
     
@@ -234,7 +232,7 @@
         
         
         
-          20 mins
+          43 mins
         
       </span>
     
@@ -292,46 +290,51 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">设计模式21-单例模式</h1>
+            <h1 id="seo-header">Effective Java-8. Avoid finalizers and cleaners</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/23/7qNvY9VbhWHPit2.png" srcset="/img/loading.gif" lazyload alt="单例模式结构图.png"></p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>Singleton类，定义一个GetInstance操作，允许客户访问它的唯一实例。GetInstance是一个静态方法，主要负责创建自己的唯一实例。</p>
-<h3 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h3><p>调用getInstance的时候再来创建instance。</p>
-<h4 id="V1-线程不安全"><a href="#V1-线程不安全" class="headerlink" title="V1 线程不安全"></a>V1 线程不安全</h4><p>在多线程的情况下有可能创建多个实例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span> &#123;<br>  <br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance;<br>  <br>  <span class="hljs-comment">// 构造方法private化，堵死了外部代码利用new创建此类实例的可能</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton</span><span class="hljs-params">()</span> &#123;&#125;<br>  <br>  <span class="hljs-comment">// 得到Singleton的实例（唯一途径）</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;<br>    <br>    <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123;<br>      instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>();<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> instance; <span class="hljs-comment">// 当instance为null时创建一个返回，否则直接返回原有实例</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h4 id="V2-synchronized锁方法"><a href="#V2-synchronized锁方法" class="headerlink" title="V2 synchronized锁方法"></a>V2 synchronized锁方法</h4><p>每次调用 <code>getInstance</code> 时都需要锁。写起来简单，但比较影响性能。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span> &#123;<br>  <br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance;<br>  <br>  <span class="hljs-comment">// 构造方法private化</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton</span><span class="hljs-params">()</span> &#123;&#125;<br>  <br>  <span class="hljs-comment">// 得到Singleton的实例（唯一途径）</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> Singleton <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;<br>    <br>    <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123;<br>      instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>();<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> instance;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h4 id="V3-Double-Check-Locking"><a href="#V3-Double-Check-Locking" class="headerlink" title="V3 Double-Check Locking"></a>V3 Double-Check Locking</h4><p>不用让线程每次都加锁，而只是在实例未被创建的时候再加锁处理。同时也能保证多线程的安全。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span> &#123;<br>  <br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">static</span> Singleton instance; <span class="hljs-comment">// volatile作用是使得所有线程能够及时得知instance是否被实例化的状态</span><br>  <br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton</span><span class="hljs-params">()</span> &#123;&#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;<br>    <br>    <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123;<br>      <span class="hljs-keyword">synchronized</span>(Singleton.class) &#123; <span class="hljs-comment">// 保证所有线程用的是同一把锁</span><br>        <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123;<br>          instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>();<br>        &#125;<br>      &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> instance;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>为什么要两次判断instance是否为null？</p>
-<p>对于instance存在的情况，就直接返回，这没有问题。当instance为null并且同时有两个线程调用getInstance（）方法时，它们将都可以通过第一重instance&#x3D;&#x3D;null的判断。然后由于’锁’机制，这两个线程则只有一个进入，另一个在外排队等候，必须要其中的一个进入并出来后，另一个才能进入。而此时如果没有了第二重的instance是否为null的判断，则第一个线程创建了实例，而第二个线程还是可以继续再创建新的实例，这就没有达到单例的目的。</p>
-<h3 id="饿汉式（静态初始化）"><a href="#饿汉式（静态初始化）" class="headerlink" title="饿汉式（静态初始化）"></a>饿汉式（静态初始化）</h3><p>不管有没有调用getInstance，先在自己被加载时就把instance创建出来。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span> &#123;<br>  <br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Singleton</span> <span class="hljs-variable">instance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>();<br>  <br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton</span><span class="hljs-params">()</span> &#123;&#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> instance;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="客户端代码："><a href="#客户端代码：" class="headerlink" title="客户端代码："></a>客户端代码：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Singleton s0 = new Singleton();</span><br><span class="hljs-type">Singleton</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> Singleton.getInstance();<br><span class="hljs-type">Singleton</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> Singleton.getInstance();<br><br><span class="hljs-keyword">if</span> (s1 == s2) &#123;<br>  System.out.println(<span class="hljs-string">&quot;两个对象是相同的实例&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="单例模式好处"><a href="#单例模式好处" class="headerlink" title="单例模式好处"></a>单例模式好处</h2><ol>
-<li>可以保证唯一的实例。</li>
-<li>因为Singleton类封装它的唯一实例，这样它可以严格地控制客户怎样访问它以及何时访问它。简单地说就是对唯一实例的受控访问。</li>
-</ol>
-<h2 id="饿汉式和懒汉式对比"><a href="#饿汉式和懒汉式对比" class="headerlink" title="饿汉式和懒汉式对比"></a>饿汉式和懒汉式对比</h2><p>饿汉式，即静态初始化的方式，它是类一加载就实例化的对象，所以要提前占用系统资源。</p>
-<p>然而懒汉式，又会面临着多线程访问的安全性问题，需要做双重锁定这样的处理才可以保证安全。</p>
-<p>到底使用哪一种方式，取决于实际的需求。从Java语言角度来讲，饿汉式的单例类已经足够满足我们的需求了。</p>
-<h2 id="单例模式-vs-实用类静态方法"><a href="#单例模式-vs-实用类静态方法" class="headerlink" title="单例模式 vs 实用类静态方法"></a>单例模式 vs 实用类静态方法</h2><p>和单例模式类似，实用类通常也会采用私有化的构造方法来避免其有实例。</p>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ol>
-<li>实用类不保存状态，只提供静态方法或静态属性使用；而单例类有状态。</li>
-<li>实用类不能用于继承多态；而单例类虽然实例唯一，但可以有子类来继承。</li>
-<li>实用类是一些方法属性的集合；单例类有唯一的对象实例。</li>
-</ol>
+                <h1 id="Item-8-Avoid-finalizers-and-cleaners"><a href="#Item-8-Avoid-finalizers-and-cleaners" class="headerlink" title="Item 8: Avoid finalizers and cleaners"></a>Item 8: Avoid finalizers and cleaners</h1><p><strong>Finalizers are unpredictable, often dangerous, and generally unnecessary.</strong></p>
+<p><strong>Cleaners (Java 9) are less dangerous than finalizers, but still unpredictable, slow, and generally unnecessary.</strong></p>
+<h2 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h2><h3 id="1-There-is-no-guarantee-they’ll-be-executed-promptly"><a href="#1-There-is-no-guarantee-they’ll-be-executed-promptly" class="headerlink" title="1. There is no guarantee they’ll be executed (promptly)"></a>1. There is no guarantee they’ll be executed (promptly)</h3><h4 id="never-do-anything-time-critical-in-a-finalizer-or-cleaner"><a href="#never-do-anything-time-critical-in-a-finalizer-or-cleaner" class="headerlink" title="never do anything time-critical in a finalizer or cleaner"></a>never do anything time-critical in a finalizer or cleaner</h4><p>It can take arbitrarily long between the time that an object becomes unreachable and the time its finalizer or cleaner runs. This means that you should <strong>never do anything time-critical in a finalizer or cleaner.</strong></p>
+<blockquote>
+<p>For example, it is a grave error to depend on a finalizer or cleaner to close files because open file descriptors are a limited resource. If many files are left open as a result of the system’s tardiness in running finalizers or cleaners, a program may fail because it can no longer open files.</p>
+</blockquote>
+<p>The promptness with which finalizers and cleaners are executed is primarily a function of the <em>garbage collection algorithm</em>, which varies widely across implementations. The behavior of a program that depends on the promptness of finalizer or cleaner execution may likewise vary.</p>
+<blockquote>
+<p>It is entirely possible that such a program will run perfectly on the JVM on which you test it and then fail miserably on the one favored by your most important customer.</p>
+</blockquote>
+<h4 id="never-depend-on-a-finalizer-or-cleaner-to-update-persistent-state"><a href="#never-depend-on-a-finalizer-or-cleaner-to-update-persistent-state" class="headerlink" title="never depend on a finalizer or cleaner to update persistent state"></a>never depend on a finalizer or cleaner to update persistent state</h4><p>Not only does the specification provide no guarantee that finalizers or cleaners will run promptly; it provides <strong>no guarantee that they’ll run at all</strong>. It is entirely possible, even likely, that a program terminates without running finalizer or cleaner on some objects that are no longer reachable. As a consequence, you should <strong>never depend on a finalizer or cleaner to update persistent state.</strong></p>
+<blockquote>
+<p>For example, depending on a finalizer or cleaner to release a persistent lock on a shared resource such as a database is a good way to bring your entire distributed system to a grinding halt.</p>
+</blockquote>
+<h3 id="2-An-uncaught-exception-thrown-during-finalization-is-ignored"><a href="#2-An-uncaught-exception-thrown-during-finalization-is-ignored" class="headerlink" title="2. An uncaught exception thrown during finalization is ignored"></a>2. An uncaught exception thrown during finalization is ignored</h3><p>Another problem with finalizers is that an uncaught exception thrown during finalization is ignored, and finalization of that object terminates. Uncaught exceptions can leave other objects in a corrupt state.</p>
+<p>If another thread attempts to use such a corrupted object, arbitrary nondeterministic behavior may result. Normally, an uncaught exception will terminate the thread and print a stack trace, but not if it occurs in a finalizer—it won’t even print a warning.</p>
+<blockquote>
+<p>Cleaners do not have this problem because a library using a cleaner has control over its thread.</p>
+</blockquote>
+<h3 id="3-There-is-a-severe-performance-penalty-for-using-finalizers-and-cleaners"><a href="#3-There-is-a-severe-performance-penalty-for-using-finalizers-and-cleaners" class="headerlink" title="3. There is a severe performance penalty for using finalizers and cleaners"></a>3. There is a severe performance penalty for using finalizers and cleaners</h3><p>It is about 50 times slower to create and destroy objects with finalizers compared to using <em>try-with-resources</em>. This is primarily because finalizers inhibit efficient garbage collection.</p>
+<p>Cleaners are comparable in speed to finalizers if you use them to clean all instances of the class, but cleaners are much faster if you use them only as a <strong>safety net</strong>.</p>
+<h3 id="4-Security-problem-finalizers-open-your-class-up-to-finalizer-attacks"><a href="#4-Security-problem-finalizers-open-your-class-up-to-finalizer-attacks" class="headerlink" title="4. Security problem: finalizers open your class up to finalizer attacks"></a>4. Security problem: finalizers <strong>open your class up to</strong> <em>finalizer attacks</em></h3><blockquote>
+<p>The idea behind a finalizer attack is simple: If an exception is thrown from a constructor or its serialization equivalents—the <em>readObject</em> and <em>readResolve</em> methods (Chapter 12)—the finalizer of a malicious subclass can run on the partially constructed object that should have “died on the vine.”(半途夭折) This finalizer can record a reference to the object in a static field, preventing it from being garbage collected. Once the malformed object has been recorded, it is a simple matter to invoke arbitrary methods on this object that should never have been allowed to exist in the first place. <strong>Throwing an exception from a constructor should be sufficient to prevent an object from coming into existence; in the presence of finalizers, it is not.</strong> </p>
+</blockquote>
+<p>Final classes are immune to finalizer attacks because no one can write a malicious subclass of a final class. <strong>To protect nonfinal classes from finalizer attacks, write a final</strong> <strong>finalize</strong> <strong>method that does nothing.</strong></p>
+<h2 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h2><h3 id="1-Can-act-as-a-safety-net-in-case-the-owner-of-a-resource-neglects-to-call-its-close-method"><a href="#1-Can-act-as-a-safety-net-in-case-the-owner-of-a-resource-neglects-to-call-its-close-method" class="headerlink" title="1. Can act as a safety net in case the owner of a resource neglects to call its close method"></a>1. Can act as a safety net in case the owner of a resource neglects to call its close method</h3><p>While there’s no guarantee that the cleaner or finalizer will run promptly (or at all), it is better to free the resource late than never if the client fails to do so. If you’re considering writing such a safety-net finalizer, think long and hard about whether the protection is <strong>worth the cost</strong>.</p>
+<blockquote>
+<p>Some Java library classes, such as FileInputStream, FileOutputStream, ThreadPoolExecutor, and java.sql.Connection, have finalizers that serve as safety nets.</p>
+</blockquote>
+<h3 id="2-Concerns-objects-with-native-peers"><a href="#2-Concerns-objects-with-native-peers" class="headerlink" title="2. Concerns objects with native peers"></a>2. Concerns objects with <em>native peers</em></h3><blockquote>
+<p>A native peer is a native (non-Java) object to which a normal object delegates via native methods. </p>
+</blockquote>
+<p>Because a native peer is not a normal object, the garbage collector doesn’t know about it and can’t reclaim it when its Java peer is reclaimed.</p>
+<p>A cleaner or finalizer may be an appropriate vehicle for this task, assuming the performance is acceptable and the native peer holds no critical resources. If the performance is unacceptable or the native peer holds resources that must be reclaimed promptly, the class should have a <em>close</em> method, as described earlier.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>What should you do instead of writing a finalizer or cleaner for a class whose objects encapsulate resources that require termination, such as files or threads?</p>
+<p>Just <strong>have your class implement</strong> <strong>AutoCloseable</strong>, and require its clients to invoke the close method on each instance when it is no longer needed, typically using try-with-resources to ensure termination even in the face of exceptions (Item 9).</p>
+<blockquote>
+<p>One detail worth mentioning is that the instance must keep track of whether it has been closed: <strong>the close method must record in a field that the object is no longer valid</strong>, and other methods must check this field and throw an <strong>IllegalStateException</strong> if they are called after the object has been closed.</p>
+</blockquote>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, don’t use cleaners, or in releases prior to Java 9, finalizers, except as a safety net or to terminate noncritical native resources. Even then, beware the indeterminacy and performance consequences.</p>
 
                 
               </div>
@@ -350,8 +353,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Effective-Java/" class="category-chain-item">Effective Java</a>
+  
+  
+
   
 
       </span>
@@ -370,8 +380,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>设计模式21-单例模式</div>
-      <div>https://peixuanhu.github.io/2023/10/20/design-pattern/21.单例模式/</div>
+      <div>Effective Java-8. Avoid finalizers and cleaners</div>
+      <div>https://peixuanhu.github.io/2023/11/11/Java/effective-java/Item8-Avoid-finalizers-and-cleaners/</div>
     </div>
     <div class="license-meta">
       
@@ -383,13 +393,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 20, 2023</div>
+          <div>November 11, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>October 23, 2023</div>
+          <div>November 11, 2023</div>
         </div>
       
       
@@ -420,18 +430,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" title="算法模板3-6.二分图">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法模板3-6.二分图</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="设计模式20-迭代器模式">
-                        <span class="hidden-mobile">设计模式20-迭代器模式</span>
+                      <a href="/2023/11/10/Java/effective-java/Item7-Eliminate-obsolete-object-references/" title="Effective Java-7. Eliminate obsolete object references">
+                        <span class="hidden-mobile">Effective Java-7. Eliminate obsolete object references</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
