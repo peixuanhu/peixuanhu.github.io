@@ -4,7 +4,7 @@
   
   
   <entry>
-    <title>Effective Java-9. Avoid finalizers and cleaners</title>
+    <title>Effective Java-9. Prefer *try-with-resources* to *try-finally*</title>
     <link href="/2023/11/12/Java/effective-java/Item9-Prefer-try-with-resources-to-try-finally/"/>
     <url>/2023/11/12/Java/effective-java/Item9-Prefer-try-with-resources-to-try-finally/</url>
     
