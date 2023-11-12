@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 8: Avoid finalizers and cleanersFinalizers are unpredictable, often dangerous, and generally unnecessary. Cleaners (Java 9) are less dangerous than finalizers, but still unpredictable, slow, and">
+    <meta name="description" content="Item 9: Prefer try-with-resources to try-finallyBackgroundThe Java libraries include many resources that must be closed manually by invok- ing a close method. Examples include InputStream, OutputStrea">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-8. Avoid finalizers and cleaners">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/11/Java/effective-java/Item8-Avoid-finalizers-and-cleaners/index.html">
+<meta property="og:title" content="Effective Java-9. Avoid finalizers and cleaners">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/12/Java/effective-java/Item9-Prefer-try-with-resources-to-try-finally/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 8: Avoid finalizers and cleanersFinalizers are unpredictable, often dangerous, and generally unnecessary. Cleaners (Java 9) are less dangerous than finalizers, but still unpredictable, slow, and">
+<meta property="og:description" content="Item 9: Prefer try-with-resources to try-finallyBackgroundThe Java libraries include many resources that must be closed manually by invok- ing a close method. Examples include InputStream, OutputStrea">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-11T02:59:45.922Z">
-<meta property="article:modified_time" content="2023-11-11T04:08:57.480Z">
+<meta property="article:published_time" content="2023-11-12T05:16:40.818Z">
+<meta property="article:modified_time" content="2023-11-12T05:43:52.539Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-8. Avoid finalizers and cleaners - Peixuan&#39;s Page</title>
+  <title>Effective Java-9. Avoid finalizers and cleaners - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-8. Avoid finalizers and cleaners"></span>
+            <span id="subtitle" data-typed-text="Effective Java-9. Avoid finalizers and cleaners"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-11 10:59" pubdate>
-          November 11, 2023 am
+        <time datetime="2023-11-12 13:16" pubdate>
+          November 12, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k words
+          4.3k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          43 mins
+          36 mins
         
       </span>
     
@@ -290,51 +290,47 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-8. Avoid finalizers and cleaners</h1>
+            <h1 id="seo-header">Effective Java-9. Avoid finalizers and cleaners</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-8-Avoid-finalizers-and-cleaners"><a href="#Item-8-Avoid-finalizers-and-cleaners" class="headerlink" title="Item 8: Avoid finalizers and cleaners"></a>Item 8: Avoid finalizers and cleaners</h1><p><strong>Finalizers are unpredictable, often dangerous, and generally unnecessary.</strong></p>
-<p><strong>Cleaners (Java 9) are less dangerous than finalizers, but still unpredictable, slow, and generally unnecessary.</strong></p>
-<h2 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h2><h3 id="1-There-is-no-guarantee-they’ll-be-executed-promptly"><a href="#1-There-is-no-guarantee-they’ll-be-executed-promptly" class="headerlink" title="1. There is no guarantee they’ll be executed (promptly)"></a>1. There is no guarantee they’ll be executed (promptly)</h3><h4 id="never-do-anything-time-critical-in-a-finalizer-or-cleaner"><a href="#never-do-anything-time-critical-in-a-finalizer-or-cleaner" class="headerlink" title="never do anything time-critical in a finalizer or cleaner"></a>never do anything time-critical in a finalizer or cleaner</h4><p>It can take arbitrarily long between the time that an object becomes unreachable and the time its finalizer or cleaner runs. This means that you should <strong>never do anything time-critical in a finalizer or cleaner.</strong></p>
+                <h1 id="Item-9-Prefer-try-with-resources-to-try-finally"><a href="#Item-9-Prefer-try-with-resources-to-try-finally" class="headerlink" title="Item 9: Prefer try-with-resources to try-finally"></a>Item 9: Prefer <em>try-with-resources</em> to <em>try-finally</em></h1><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>The Java libraries include many resources that must be closed manually by invok- ing a close method. Examples include InputStream, OutputStream, and java.sql.Connection.</p>
+<p>Closing resources is often overlooked by clients, with predictably dire performance consequences. While many of these resources use finalizers as a safety net, finalizers don’t work very well (Item 8).</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="1-try-finally"><a href="#1-try-finally" class="headerlink" title="1. try-finally"></a>1. try-finally</h3><p>Historically, a try-finally statement was the best way to guarantee that a resource would be closed properly, even in the face of an exception or return.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// try-finally - No longer the best way to close resources!</span><br><span class="hljs-keyword">static</span> String <span class="hljs-title function_">firstLineOfFile</span><span class="hljs-params">(String path)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>  <span class="hljs-type">BufferedReader</span> <span class="hljs-variable">br</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>(path));<br>  <span class="hljs-keyword">try</span> &#123;<br>       <span class="hljs-keyword">return</span> br.readLine();<br>   &#125; <span class="hljs-keyword">finally</span> &#123;<br>       br.close();<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>But it gets worse when you add a second resource:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// try-finally is ugly when used with more than one resource!</span><br> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">copy</span><span class="hljs-params">(String src, String dst)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>     <span class="hljs-type">InputStream</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(src);<br>     <span class="hljs-keyword">try</span> &#123;<br>         <span class="hljs-type">OutputStream</span> <span class="hljs-variable">out</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(dst);<br>         <span class="hljs-keyword">try</span> &#123;<br>             <span class="hljs-type">byte</span>[] buf = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[BUFFER_SIZE];<br>             <span class="hljs-type">int</span> n;<br>             <span class="hljs-keyword">while</span> ((n = in.read(buf)) &gt;= <span class="hljs-number">0</span>)<br>                 out.write(buf, <span class="hljs-number">0</span>, n);<br>         &#125; <span class="hljs-keyword">finally</span> &#123;<br>             out.close();<br>         &#125;<br>     &#125; <span class="hljs-keyword">finally</span> &#123;<br>         in.close();<br>     &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h4><ul>
+<li><p>It’s complicated when dealing with multiple resources. It may be hard to believe, but even good programmers got this wrong most of the time.</p>
+</li>
+<li><p>The code in both the try block and the finally block is capable of throwing exceptions. There is no record of the first exception in the exception stack trace, which can greatly complicate debugging in real systems—usually it’s the first exception that you want to see in order to diagnose the problem.</p>
 <blockquote>
-<p>For example, it is a grave error to depend on a finalizer or cleaner to close files because open file descriptors are a limited resource. If many files are left open as a result of the system’s tardiness in running finalizers or cleaners, a program may fail because it can no longer open files.</p>
+<p>For example, in the <em>firstLineOfFile</em> method, the call to readLine could throw an exception due to a failure in the underlying physical device, and the call to close could then fail for the same reason. Under these circumstances, the second exception completely obliterates the first one.</p>
 </blockquote>
-<p>The promptness with which finalizers and cleaners are executed is primarily a function of the <em>garbage collection algorithm</em>, which varies widely across implementations. The behavior of a program that depends on the promptness of finalizer or cleaner execution may likewise vary.</p>
+</li>
+</ul>
+<h3 id="2-try-with-resources"><a href="#2-try-with-resources" class="headerlink" title="2. try-with-resources"></a>2. try-with-resources</h3><p>All of these problems were solved in one fell swoop when Java 7 introduced the try-with-resources statement.</p>
+<p>To be usable with this construct, a resource must implement the <strong>AutoCloseable</strong> interface, which consists of a single void-returning close method.</p>
 <blockquote>
-<p>It is entirely possible that such a program will run perfectly on the JVM on which you test it and then fail miserably on the one favored by your most important customer.</p>
+<p>Many classes and interfaces in the Java libraries and in third-party libraries now implement or extend AutoCloseable. If you write a class that represents a resource that must be closed, your class should implement AutoCloseable too.</p>
 </blockquote>
-<h4 id="never-depend-on-a-finalizer-or-cleaner-to-update-persistent-state"><a href="#never-depend-on-a-finalizer-or-cleaner-to-update-persistent-state" class="headerlink" title="never depend on a finalizer or cleaner to update persistent state"></a>never depend on a finalizer or cleaner to update persistent state</h4><p>Not only does the specification provide no guarantee that finalizers or cleaners will run promptly; it provides <strong>no guarantee that they’ll run at all</strong>. It is entirely possible, even likely, that a program terminates without running finalizer or cleaner on some objects that are no longer reachable. As a consequence, you should <strong>never depend on a finalizer or cleaner to update persistent state.</strong></p>
+<p>Examples:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// try-with-resources - the the best way to close resources!</span><br> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">firstLineOfFile</span><span class="hljs-params">(String path)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>     <span class="hljs-keyword">try</span> (<span class="hljs-type">BufferedReader</span> <span class="hljs-variable">br</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<br>             <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>(path))) &#123;<br>         <span class="hljs-keyword">return</span> br.readLine();<br>     &#125;<br> &#125;<br><br><span class="hljs-comment">// try-with-resources on multiple resources - short and sweet</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">copy</span><span class="hljs-params">(String src, String dst)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>  <span class="hljs-keyword">try</span> (<span class="hljs-type">InputStream</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(src);<br>      <span class="hljs-type">OutputStream</span> <span class="hljs-variable">out</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(dst)) &#123;<br>    <span class="hljs-type">byte</span>[] buf = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[BUFFER_SIZE];<br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-keyword">while</span> ((n = in.read(buf)) &gt;= <span class="hljs-number">0</span>)<br>      out.write(buf, <span class="hljs-number">0</span>, n);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Not only are the try-with-resources versions shorter and more <strong>readable</strong> than the originals, but they provide far better <strong>diagnostics</strong>.</p>
 <blockquote>
-<p>For example, depending on a finalizer or cleaner to release a persistent lock on a shared resource such as a database is a good way to bring your entire distributed system to a grinding halt.</p>
+<p>Consider the <em>firstLineOfFile</em> method. If exceptions are thrown by both the readLine call and the (invisible) close, <strong>the latter exception is <em>suppressed</em> in favor of the former</strong>. In fact, multiple exceptions may be suppressed in order to preserve the exception that you actually want to see.</p>
+<p>These suppressed exceptions are not merely discarded; they are printed in the stack trace with a notation saying that they were suppressed. You can also <strong>access</strong> them programmatically with the <strong>getSuppressed</strong> method, which was added to Throwable in Java 7.</p>
 </blockquote>
-<h3 id="2-An-uncaught-exception-thrown-during-finalization-is-ignored"><a href="#2-An-uncaught-exception-thrown-during-finalization-is-ignored" class="headerlink" title="2. An uncaught exception thrown during finalization is ignored"></a>2. An uncaught exception thrown during finalization is ignored</h3><p>Another problem with finalizers is that an uncaught exception thrown during finalization is ignored, and finalization of that object terminates. Uncaught exceptions can leave other objects in a corrupt state.</p>
-<p>If another thread attempts to use such a corrupted object, arbitrary nondeterministic behavior may result. Normally, an uncaught exception will terminate the thread and print a stack trace, but not if it occurs in a finalizer—it won’t even print a warning.</p>
-<blockquote>
-<p>Cleaners do not have this problem because a library using a cleaner has control over its thread.</p>
-</blockquote>
-<h3 id="3-There-is-a-severe-performance-penalty-for-using-finalizers-and-cleaners"><a href="#3-There-is-a-severe-performance-penalty-for-using-finalizers-and-cleaners" class="headerlink" title="3. There is a severe performance penalty for using finalizers and cleaners"></a>3. There is a severe performance penalty for using finalizers and cleaners</h3><p>It is about 50 times slower to create and destroy objects with finalizers compared to using <em>try-with-resources</em>. This is primarily because finalizers inhibit efficient garbage collection.</p>
-<p>Cleaners are comparable in speed to finalizers if you use them to clean all instances of the class, but cleaners are much faster if you use them only as a <strong>safety net</strong>.</p>
-<h3 id="4-Security-problem-finalizers-open-your-class-up-to-finalizer-attacks"><a href="#4-Security-problem-finalizers-open-your-class-up-to-finalizer-attacks" class="headerlink" title="4. Security problem: finalizers open your class up to finalizer attacks"></a>4. Security problem: finalizers <strong>open your class up to</strong> <em>finalizer attacks</em></h3><blockquote>
-<p>The idea behind a finalizer attack is simple: If an exception is thrown from a constructor or its serialization equivalents—the <em>readObject</em> and <em>readResolve</em> methods (Chapter 12)—the finalizer of a malicious subclass can run on the partially constructed object that should have “died on the vine.”(半途夭折) This finalizer can record a reference to the object in a static field, preventing it from being garbage collected. Once the malformed object has been recorded, it is a simple matter to invoke arbitrary methods on this object that should never have been allowed to exist in the first place. <strong>Throwing an exception from a constructor should be sufficient to prevent an object from coming into existence; in the presence of finalizers, it is not.</strong> </p>
-</blockquote>
-<p>Final classes are immune to finalizer attacks because no one can write a malicious subclass of a final class. <strong>To protect nonfinal classes from finalizer attacks, write a final</strong> <strong>finalize</strong> <strong>method that does nothing.</strong></p>
-<h2 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h2><h3 id="1-Can-act-as-a-safety-net-in-case-the-owner-of-a-resource-neglects-to-call-its-close-method"><a href="#1-Can-act-as-a-safety-net-in-case-the-owner-of-a-resource-neglects-to-call-its-close-method" class="headerlink" title="1. Can act as a safety net in case the owner of a resource neglects to call its close method"></a>1. Can act as a safety net in case the owner of a resource neglects to call its close method</h3><p>While there’s no guarantee that the cleaner or finalizer will run promptly (or at all), it is better to free the resource late than never if the client fails to do so. If you’re considering writing such a safety-net finalizer, think long and hard about whether the protection is <strong>worth the cost</strong>.</p>
-<blockquote>
-<p>Some Java library classes, such as FileInputStream, FileOutputStream, ThreadPoolExecutor, and java.sql.Connection, have finalizers that serve as safety nets.</p>
-</blockquote>
-<h3 id="2-Concerns-objects-with-native-peers"><a href="#2-Concerns-objects-with-native-peers" class="headerlink" title="2. Concerns objects with native peers"></a>2. Concerns objects with <em>native peers</em></h3><blockquote>
-<p>A native peer is a native (non-Java) object to which a normal object delegates via native methods. </p>
-</blockquote>
-<p>Because a native peer is not a normal object, the garbage collector doesn’t know about it and can’t reclaim it when its Java peer is reclaimed.</p>
-<p>A cleaner or finalizer may be an appropriate vehicle for this task, assuming the performance is acceptable and the native peer holds no critical resources. If the performance is unacceptable or the native peer holds resources that must be reclaimed promptly, the class should have a <em>close</em> method, as described earlier.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>What should you do instead of writing a finalizer or cleaner for a class whose objects encapsulate resources that require termination, such as files or threads?</p>
-<p>Just <strong>have your class implement</strong> <strong>AutoCloseable</strong>, and require its clients to invoke the close method on each instance when it is no longer needed, typically using try-with-resources to ensure termination even in the face of exceptions (Item 9).</p>
-<blockquote>
-<p>One detail worth mentioning is that the instance must keep track of whether it has been closed: <strong>the close method must record in a field that the object is no longer valid</strong>, and other methods must check this field and throw an <strong>IllegalStateException</strong> if they are called after the object has been closed.</p>
-</blockquote>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, don’t use cleaners, or in releases prior to Java 9, finalizers, except as a safety net or to terminate noncritical native resources. Even then, beware the indeterminacy and performance consequences.</p>
+<h4 id="catch-clauses"><a href="#catch-clauses" class="headerlink" title="catch clauses"></a>catch clauses</h4><p>You can put catch clauses on try-with-resources statements, just as you can on regular try-finally statements. This allows you to handle exceptions without sullying your code with another layer of nesting.</p>
+<p>Here’s a version our firstLineOfFile method that does not throw exceptions, but takes a default value to return if it can’t open the file or read from it:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// try-with-resources with a catch clause</span><br><span class="hljs-keyword">static</span> String <span class="hljs-title function_">firstLineOfFile</span><span class="hljs-params">(String path, String defaultVal)</span> &#123;<br>   <span class="hljs-keyword">try</span> (<span class="hljs-type">BufferedReader</span> <span class="hljs-variable">br</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<br>           <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>(path))) &#123;<br>       <span class="hljs-keyword">return</span> br.readLine();<br>   &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>       <span class="hljs-keyword">return</span> defaultVal;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p><strong>Always use try-with-resources</strong> in preference to try- finally when working with <strong>resources that must be closed</strong>.</p>
+<p>The resulting code is shorter and clearer, and the exceptions that it generates are more useful. The try-with-resources statement makes it easy to write correct code using resources that must be closed, which was practically impossible using try-finally.</p>
 
                 
               </div>
@@ -380,8 +376,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-8. Avoid finalizers and cleaners</div>
-      <div>https://peixuanhu.github.io/2023/11/11/Java/effective-java/Item8-Avoid-finalizers-and-cleaners/</div>
+      <div>Effective Java-9. Avoid finalizers and cleaners</div>
+      <div>https://peixuanhu.github.io/2023/11/12/Java/effective-java/Item9-Prefer-try-with-resources-to-try-finally/</div>
     </div>
     <div class="license-meta">
       
@@ -393,13 +389,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 11, 2023</div>
+          <div>November 12, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 11, 2023</div>
+          <div>November 12, 2023</div>
         </div>
       
       
@@ -430,18 +426,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/12/Java/effective-java/Item9-Prefer-try-with-resources-to-try-finally/" title="Effective Java-9. Avoid finalizers and cleaners">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-9. Avoid finalizers and cleaners</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/10/Java/effective-java/Item7-Eliminate-obsolete-object-references/" title="Effective Java-7. Eliminate obsolete object references">
-                        <span class="hidden-mobile">Effective Java-7. Eliminate obsolete object references</span>
+                      <a href="/2023/11/11/Java/effective-java/Item8-Avoid-finalizers-and-cleaners/" title="Effective Java-8. Avoid finalizers and cleaners">
+                        <span class="hidden-mobile">Effective Java-8. Avoid finalizers and cleaners</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
