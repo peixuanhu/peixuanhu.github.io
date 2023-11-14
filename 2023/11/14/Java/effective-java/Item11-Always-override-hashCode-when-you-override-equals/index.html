@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 10: Obey the general contract when overriding equalsConditions for not overriding the equals method Each instance of the class is inherently unique. This is true for classes such as Thread that r">
+    <meta name="description" content="Item 11: Always override hashCode when you override equalsGeneral contract for hashCode When the hashCode method is invoked on an object repeatedly during an execution of an application, it must consi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-10. Obey the general contract when overriding equals">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/13/Java/effective-java/Item10-Obey-the-general-contract-when-overriding-equals/index.html">
+<meta property="og:title" content="Effective Java-11. Always override hashCode when you override equals">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/14/Java/effective-java/Item11-Always-override-hashCode-when-you-override-equals/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 10: Obey the general contract when overriding equalsConditions for not overriding the equals method Each instance of the class is inherently unique. This is true for classes such as Thread that r">
+<meta property="og:description" content="Item 11: Always override hashCode when you override equalsGeneral contract for hashCode When the hashCode method is invoked on an object repeatedly during an execution of an application, it must consi">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-13T04:08:58.398Z">
-<meta property="article:modified_time" content="2023-11-14T03:49:08.938Z">
+<meta property="article:published_time" content="2023-11-14T03:48:54.052Z">
+<meta property="article:modified_time" content="2023-11-14T05:08:50.596Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-10. Obey the general contract when overriding equals - Peixuan&#39;s Page</title>
+  <title>Effective Java-11. Always override hashCode when you override equals - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-10. Obey the general contract when overriding equals"></span>
+            <span id="subtitle" data-typed-text="Effective Java-11. Always override hashCode when you override equals"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-13 12:08" pubdate>
-          November 13, 2023 pm
+        <time datetime="2023-11-14 11:48" pubdate>
+          November 14, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.1k words
+          5.9k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          59 mins
+          50 mins
         
       </span>
     
@@ -290,85 +290,71 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-10. Obey the general contract when overriding equals</h1>
+            <h1 id="seo-header">Effective Java-11. Always override hashCode when you override equals</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-10-Obey-the-general-contract-when-overriding-equals"><a href="#Item-10-Obey-the-general-contract-when-overriding-equals" class="headerlink" title="Item 10: Obey the general contract when overriding equals"></a>Item 10: Obey the general contract when overriding <em>equals</em></h1><h2 id="Conditions-for-not-overriding-the-equals-method"><a href="#Conditions-for-not-overriding-the-equals-method" class="headerlink" title="Conditions for not overriding the equals method"></a>Conditions for <strong>not</strong> overriding the <em>equals</em> method</h2><ul>
-<li><p><strong>Each instance of the class is inherently unique.</strong> This is true for classes such as <strong>Thread</strong> that represent active entities rather than values. The equals implementation provided by Object has exactly the right behavior for these classes.</p>
-</li>
-<li><p><strong>There is no need for the class to provide a “logical equality” test.</strong> For example, java.util.regex.Pattern could have overridden equals to check whether two Pattern instances represented exactly the same regular expression, but the designers didn’t think that clients would need or want this functionality. Under these circumstances, the <em>equals</em> implementation inherited from <em>Object</em> is ideal.</p>
-</li>
-<li><p><strong>A super class has already overridden <em>equals</em>, and the superclass behavior is appropriate for this class.</strong> For example, most <em>Set</em> implementations inherit their equals implementation from <em>AbstractSet</em>, <em>List</em> implementations from <em>AbstractList</em>, and <em>Map</em> implementations from <em>AbstractMap</em>.</p>
-</li>
-<li><p><strong>The class is private or package-private,and you are certain that its <em>equals</em> method will never be invoked.</strong> If you are extremely risk-averse, you can over- ride the equals method to ensure that it isn’t invoked accidentally:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object o)</span> &#123;<br>  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AssertionError</span>(); <span class="hljs-comment">// Method is never called</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+                <h1 id="Item-11-Always-override-hashCode-when-you-override-equals"><a href="#Item-11-Always-override-hashCode-when-you-override-equals" class="headerlink" title="Item 11: Always override hashCode when you override equals"></a>Item 11: Always override <em>hashCode</em> when you override <em>equals</em></h1><h2 id="General-contract-for-hashCode"><a href="#General-contract-for-hashCode" class="headerlink" title="General contract for hashCode"></a>General contract for <em>hashCode</em></h2><ul>
+<li>When the <em>hashCode</em> method is invoked on an object repeatedly during <strong>an execution of an application</strong>, it <strong>must consistently return the same value</strong>, provided no information used in equals comparisons is modified. This value need not remain consistent from one execution of an application to another.</li>
+<li>If two objects are <strong>equal</strong> according to the <em>equals(Object)</em> method,then calling <em><strong>hashCode</strong></em> on the two objects must produce the <strong>same integer result</strong>.</li>
+<li>If two objects are unequal according to the <em>equals(Object)</em> method,it is <em>not</em> required that calling hashCode on each of the objects must produce distinct results. However, the programmer should be aware that producing distinct results for unequal objects may improve the performance of hash tables.</li>
 </ul>
-<h2 id="Overriding-the-equals-method"><a href="#Overriding-the-equals-method" class="headerlink" title="Overriding the equals method"></a>Overriding the <em>equals</em> method</h2><h3 id="When"><a href="#When" class="headerlink" title="When?"></a>When?</h3><p>when a class has a notion of <em>logical equality</em> that differs from mere object identity and a superclass has not already overridden equals. This is generally the case for <em>value classes.</em></p>
-<blockquote>
-<p>A value class is simply a class that represents a value, such as Integer or String.</p>
-</blockquote>
-<p>A programmer who compares references to value objects using the <em>equals</em> method expects to find out whether they are <strong>logically equivalent</strong>, not whether they refer to the same object.</p>
-<p>Not only is overriding the equals method necessary to satisfy programmer expectations, it enables instances to serve as <strong>map keys or set elements</strong> with predictable, desirable behavior.</p>
-<blockquote>
-<p>One kind of value class that does <em>not</em> require the <em>equals</em> method to be overridden is a class that uses <strong>instance control</strong> (Item 1) to ensure that <strong>at most one object exists with each value</strong>. <em>Enum</em> types (Item 34) fall into this category. For these classes, logical equality is the same as object identity, so Object’s <em>equals</em> method functions as a logical equals method.</p>
-</blockquote>
-<h3 id="General-contract-of-overriding-equals"><a href="#General-contract-of-overriding-equals" class="headerlink" title="General contract of overriding equals"></a>General contract of overriding <em>equals</em></h3><ul>
-<li><p><em><strong>Reflexivity</strong></em>: For any non-null reference value x, <strong>x.equals(x)</strong> must return <strong>true</strong>.</p>
+<p><strong>The key provision that is violated when you fail to override</strong> <em><strong>hashCode</strong></em> <strong>is the second one: equal objects must have equal hash codes.</strong> Two distinct instances may be logically equal according to a class’s equals method, but to Object’s <em>hashCode</em> method, they’re just two objects with nothing much in common. Therefore, Object’s <em>hashCode</em> method returns two seemingly random numbers instead of two equal numbers as required by the contract.</p>
+<h2 id="The-recipe-to-implement-a-good-hashCode-method"><a href="#The-recipe-to-implement-a-good-hashCode-method" class="headerlink" title="The recipe to implement a good hashCode method"></a>The recipe to implement a good <em>hashCode</em> method</h2><ol>
+<li><p>Declare an int variable named <code>result</code>, and initialize it to the hash code <code>c</code> for the <strong>first significant field</strong> in your object, as computed in step 2.a. (Recall from Item 10 that a significant field is a field that affects equals comparisons.)</p>
 </li>
-<li><p><em><strong>Symmetry</strong></em>: For any non-null reference values x and  y, <strong>x.equals(y)</strong> must return true if and only if <strong>y.equals(x)</strong> returns true.</p>
+<li><p>For every <strong>remaining significant field</strong> <code>f</code> in your object, do the following: </p>
+<p>a. Compute an int hash code <code>c</code> for the field:</p>
+<ol>
+<li><p>If the field is of a primitive type, compute <code>Type.hashCode(f)</code>, where Type is the boxed primitive class corresponding to <code>f</code>’ s type.</p>
 </li>
-<li><p><em><strong>Transitivity</strong></em>: For any non-null reference values x, y, z, if <strong>x.equals(y)</strong>  returns true and <strong>y.equals(z)</strong> returns true, then <strong>x.equals(z)</strong> must return true.</p>
+<li><p>If the field is an <strong>object reference</strong> and this class’s <em>equals</em> method compares the field by recursively invoking <em>equals</em>, <strong>recursively invoke hashCode on the field</strong>.</p>
+<p>If a more complex comparison is required, compute a “canonical representation” for this field and invoke hashCode on the canonical representation. If the value of the field is null, use 0 (or some other constant, but 0 is traditional).</p>
 </li>
-<li><p><em><strong>Consistency</strong></em>: For any non-null reference values x and y, <strong>multiple invocations</strong> of x.equals(y) must consistently return true or consistently return false, provided no information used in equals comparisons is modified.</p>
-</li>
-<li><p><em><strong>Non-nullity</strong></em>: For any non-null reference value x, <strong>x.equals(null) must return false.</strong></p>
-<p>Type check is enough, no need to test “if o &#x3D;&#x3D; null”. The <em>instanceof</em> operator is specified to return false if its first operand is null, regardless of what type appears in the second operand.</p>
-</li>
-</ul>
-<h3 id="Recipe-for-a-high-quality-equals-method"><a href="#Recipe-for-a-high-quality-equals-method" class="headerlink" title="Recipe for a high-quality equals method"></a>Recipe for a high-quality <em>equals</em> method</h3><ol>
-<li><p><strong>Use the</strong> <strong>&#x3D;&#x3D;</strong> <strong>operator to check if the argument is a reference to this object.</strong> If so, return true. This is just a performance optimization but one that is worth doing if the <strong>comparison is potentially expensive</strong>.</p>
-</li>
-<li><p><strong>Use the <em>instanceof</em> operator to check if the argument has the correct type.</strong> If not, return false. Typically, the correct type is the <strong>class</strong> in which the method occurs.</p>
-<blockquote>
-<p>Occasionally, it is some interface implemented by this class. Use an interface if the class implements an interface that refines the equals contract to permit comparisons across classes that implement the interface. Collection interfaces such as Set, List, Map, and Map.Entry have this property.</p>
-</blockquote>
-</li>
-<li><p><strong>Cast the argument to the correct type.</strong> Because this cast was preceded by an instanceof test, it is guaranteed to succeed.</p>
-</li>
-<li><p><strong>For each “significant” field in the class, check if that field of the argument matches the corresponding field of this object.</strong> If all these tests succeed, re- turn true; otherwise, return false. If the type in Step 2 is an interface, you must access the argument’s fields via interface methods; if the type is a class, you may be able to access the fields directly, depending on their accessibility.</p>
-<p>For primitive fields whose type is not float or double, use the &#x3D;&#x3D; operator for comparisons.</p>
-<p>For object reference fields, call the equals method recursively.</p>
-<p>For float fields, use the static <em>Float.compare(float, float)</em> method; and for double fields, use <em>Double.compare(double, double)</em>. The special treatment of float and double fields is made necessary by the existence of Float.NaN, -0.0f and the analogous double values.</p>
-<p>For array fields, apply these guidelines to each element. If every element in an array field is significant, use one of the Arrays.equals methods.</p>
-<blockquote>
-<p>Some object reference fields may <strong>legitimately contain null</strong>. To avoid the possibility of a NullPointerException, check such fields for equality using the static method <strong>Objects.equals(Object, Object)</strong>.</p>
-</blockquote>
-</li>
-<li><p>The performance of the equals method may be affected by the <strong>order</strong> in which fields are compared. For best performance, you should first compare fields that are <strong>more likely to differ, less expensive to compare</strong>, or, ideally, both.</p>
-<p>You must <strong>not compare fields that are not part of an object’s logical state</strong>, such as lock fields used to synchronize operations.</p>
-<p>You need <strong>not compare <em>derived fields</em></strong>, which can be calculated from “significant fields,” but doing so may improve the performance of the equals method. If a derived field amounts to a summary description of the entire object, comparing this field will save you the expense of comparing the actual data if the comparison fails.</p>
-</li>
-<li><p>Write unit tests to check, unless you used <em>AutoValue</em> to generate your equals method, in which case you can safely omit the tests.</p>
+<li><p>If the field is an array, treat it as if each significant element were a separate field. That is, compute a hash code for each significant element by applying these rules recursively, and combine the values per step 2.b. If the array has no significant elements, use a constant, preferably not 0. If all elements are significant, use <code>Arrays.hashCode</code>.</p>
 </li>
 </ol>
-<h3 id="Final-caveats"><a href="#Final-caveats" class="headerlink" title="Final caveats"></a>Final caveats</h3><ul>
-<li><p><strong>Always override hashCode when you override <em>equals</em></strong>(Item11).</p>
-</li>
-<li><p><strong>Don’t try to be too clever.</strong> If you simply test fields for equality, it’s not hard to adhere to the equals contract. If you are overly aggressive in searching for equivalence, it’s easy to get into trouble. It is generally a bad idea to take any form of aliasing into account. For example, the File class shouldn’t attempt to equate symbolic links referring to the same file. Thankfully, it doesn’t.</p>
-</li>
-<li><p>**Don’t substitute another type for <em>Object</em> in the <em>equals</em> declaration.**Itisnot uncommon for a programmer to write an equals method that looks like this and then spend hours puzzling over why it doesn’t work properly:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Broken - parameter type must be Object!</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(MyClass o)</span> &#123;<br>   ...<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>b. Combine the hash code c computed in step 2.a into result as follows: </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">result = <span class="hljs-number">31</span> * result + c;<br></code></pre></td></tr></table></figure>
 
-<p>The problem is that this method does not <em>override</em> Object.equals, whose argument is of type Object, but <em>overloads</em> it instead (Item 52).</p>
-<p>Consistent use of the <em>@Override</em> annotation, will prevent you from making this mistake (Item 40), it won’t compile and the error message will tell you exactly what is wrong.</p>
+<blockquote>
+<p>Makes the result depend on the <strong>order</strong> of the fields, yielding a much better hash function if the class has multiple similar fields.</p>
+</blockquote>
 </li>
-</ul>
-<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><p>Writing and testing equals (and hashCode) methods is tedious, and the resulting code is mundane. An excellent alternative to writing and testing these methods manually is to use <strong>Google’s open source AutoValue framework</strong>, which automatically generates these methods for you, triggered by a single annotation on the class . In most cases, the methods generated by AutoValue are essentially identical to those you’d write yourself.</p>
-<p><strong>IDEs</strong>, too, have facilities to generate equals and hashCode methods, but the resulting source code is more verbose and less readable than code that uses AutoValue, does not track changes in the class automatically, and therefore requires testing. That said, having IDEs generate equals (and hashCode) methods is generally preferable to implementing them manually because IDEs do not make careless mistakes, and humans do.</p>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, don’t override the <em>equals</em> method unless you have to: <strong>in many cases, the implementation inherited from Object does exactly what you want.</strong></p>
-<p>If you do override equals, make sure to compare all of the class’s significant fields and to compare them in a manner that preserves all **five provisions of the equals contract.</p>
+<li><p>Return result.</p>
+</li>
+</ol>
+<p>Example for the <code>PhoneNumber</code> class:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Typical hashCode method</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> Short.hashCode(areaCode);<br>  result = <span class="hljs-number">31</span> * result + Short.hashCode(prefix);<br>  result = <span class="hljs-number">31</span> * result + Short.hashCOde(lineNum);<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Exclude <em>derived fields</em> from the hash code computation.</p>
+</blockquote>
+<blockquote>
+<p>While the recipe in this item yields reasonably good hash functions, they are not state-of-the-art. They are comparable in quality to the hash functions found in the Java platform libraries’ value types and are adequate for most uses. If you have a bona fide need for hash functions <strong>less likely to produce collisions</strong>, see Guava’s <code>com.google.common.hash.Hashing</code> [Guava].</p>
+</blockquote>
+<h3 id="Objects-hash-static-method"><a href="#Objects-hash-static-method" class="headerlink" title="Objects.hash static method"></a>Objects.hash static method</h3><p>The <em>Objects</em> class has a static method that takes an arbitrary number of objects and returns a hash code for them. This method, named <code>hash</code>, lets you write <strong>one-line</strong> hashCode methods whose quality is comparable to those written according to the recipe in this item.</p>
+<p>Unfortunately, they <strong>run more slowly</strong> because they entail array creation to pass a variable number of arguments, as well as boxing and unboxing if any of the arguments are of primitive type. This style of hash function is recommended for use only in situations where <strong>performance is not critical</strong>. </p>
+<p>Example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// One-line hashCode method - mediocre performance</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-keyword">return</span> Objects.hash(lineNum, prefix, areaCode);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Cache-hashCode"><a href="#Cache-hashCode" class="headerlink" title="Cache hashCode"></a>Cache hashCode</h3><p>If a class is <strong>immutable</strong> and the <strong>cost of computing the hash code is significant</strong>, you might consider <strong>caching</strong> the hash code in the object rather than recalculating it each time it is requested.</p>
+<p>If you believe that most objects of this type will be used as <strong>hash keys</strong>, then you should calculate the hash code <strong>when the instance is created</strong>. Otherwise, you might choose to <em><strong>lazily initialize</strong></em> the hash code the first time <em>hashCode</em> is invoked. Some care is required to ensure that the class remains thread-safe in the presence of a lazily initialized field (Item 83).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// hashCode method with lazily initialized cached hash Code</span><br><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> hashCode; <span class="hljs-comment">// Automatically initialized to 0</span><br><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> hashCode;<br>  <span class="hljs-keyword">if</span> (result == <span class="hljs-number">0</span>) &#123;<br>    result = Short.hashCode(areaCode);<br>    result = <span class="hljs-number">31</span> * result + Short.hashCode(prefix);<br>    result = <span class="hljs-number">31</span> * result + Short.hashCOde(lineNum);<br>    hashCode = result;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Note that the initial value for the hashCode field (in this case, 0) should not be the hash code of a commonly created instance:</p>
+</blockquote>
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><ol>
+<li><p><strong>Do not be tempted to exclude significant fields from the hash code com- putation to improve performance.</strong> While the resulting hash function may run faster, its poor quality may degrade hash tables’ performance to the point where they become unusable.</p>
+<p>In particular, the hash function may be confronted with a large collection of instances that differ mainly in regions you’ve chosen to ignore. If this happens, the hash function will map all these instances to a few hash codes, and programs that should run in linear time will instead run in quadratic time.</p>
+</li>
+<li><p><strong>Don’t provide a detailed specification for the value returned by <em>hashCode</em>, so clients can’t reasonably depend on it; this gives you the flexibility to change it.</strong> Many classes in the Java libraries, such as <em>String</em> and <em>Integer</em>, specify the exact value returned by their <em>hashCode</em> method as <em>a function of the instance value</em>. This is <em>not</em> a good idea but a mistake that we’re forced to live with: It impedes the ability to improve the hash function in future releases. If you leave the details unspecified and a flaw is found in the hash function or a better hash function is discovered, you can change it in a subsequent release.</p>
+</li>
+</ol>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, you <em>must</em> override <em>hashCode</em> every time you override <em>equals</em>, or your program will not run correctly. Your <em>hashCode</em> method must obey the <strong>general contract specified in <em>Object</em></strong> and must do a reasonable job assigning unequal hash codes to unequal instances. This is easy to achieve, if slightly tedious, using the <strong>recipe</strong>.</p>
+<p>As mentioned in Item 10, the <em><strong>AutoValue</strong></em> framework provides a fine alternative to writing <em>equals</em> and <em>hashCode</em> methods manually, and <em><strong>IDEs</strong></em> also provide some of this functionality.</p>
 
                 
               </div>
@@ -414,8 +400,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-10. Obey the general contract when overriding equals</div>
-      <div>https://peixuanhu.github.io/2023/11/13/Java/effective-java/Item10-Obey-the-general-contract-when-overriding-equals/</div>
+      <div>Effective Java-11. Always override hashCode when you override equals</div>
+      <div>https://peixuanhu.github.io/2023/11/14/Java/effective-java/Item11-Always-override-hashCode-when-you-override-equals/</div>
     </div>
     <div class="license-meta">
       
@@ -427,7 +413,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 13, 2023</div>
+          <div>November 14, 2023</div>
         </div>
       
       
@@ -464,18 +450,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/14/Java/effective-java/Item11-Always-override-hashCode-when-you-override-equals/" title="Effective Java-11. Always override hashCode when you override equals">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-11. Always override hashCode when you override equals</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/13/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%851/" title="浪潮之巅读书笔记1-AT\&amp;T, IBM">
-                        <span class="hidden-mobile">浪潮之巅读书笔记1-AT\&amp;T, IBM</span>
+                      <a href="/2023/11/13/Java/effective-java/Item10-Obey-the-general-contract-when-overriding-equals/" title="Effective Java-10. Obey the general contract when overriding equals">
+                        <span class="hidden-mobile">Effective Java-10. Obey the general contract when overriding equals</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
