@@ -24,7 +24,7 @@
 <meta property="og:description" content="Item 11: Always override hashCode when you override equalsGeneral contract for hashCode When the hashCode method is invoked on an object repeatedly during an execution of an application, it must consi">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-14T03:48:54.052Z">
-<meta property="article:modified_time" content="2023-11-14T05:08:50.596Z">
+<meta property="article:modified_time" content="2023-11-14T06:12:49.002Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -347,7 +347,7 @@
 <p>Note that the initial value for the hashCode field (in this case, 0) should not be the hash code of a commonly created instance:</p>
 </blockquote>
 <h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><ol>
-<li><p><strong>Do not be tempted to exclude significant fields from the hash code com- putation to improve performance.</strong> While the resulting hash function may run faster, its poor quality may degrade hash tables’ performance to the point where they become unusable.</p>
+<li><p><strong>Do not be tempted to exclude significant fields from the hash code computation to improve performance.</strong> While the resulting hash function may run faster, its poor quality may degrade hash tables’ performance to the point where they become unusable.</p>
 <p>In particular, the hash function may be confronted with a large collection of instances that differ mainly in regions you’ve chosen to ignore. If this happens, the hash function will map all these instances to a few hash codes, and programs that should run in linear time will instead run in quadratic time.</p>
 </li>
 <li><p><strong>Don’t provide a detailed specification for the value returned by <em>hashCode</em>, so clients can’t reasonably depend on it; this gives you the flexibility to change it.</strong> Many classes in the Java libraries, such as <em>String</em> and <em>Integer</em>, specify the exact value returned by their <em>hashCode</em> method as <em>a function of the instance value</em>. This is <em>not</em> a good idea but a mistake that we’re forced to live with: It impedes the ability to improve the hash function in future releases. If you leave the details unspecified and a flaw is found in the hash function or a better hash function is discovered, you can change it in a subsequent release.</p>
