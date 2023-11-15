@@ -24,7 +24,7 @@
 <meta property="og:description" content="Item 10: Obey the general contract when overriding equalsConditions for not overriding the equals method Each instance of the class is inherently unique. This is true for classes such as Thread that r">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-13T04:08:58.398Z">
-<meta property="article:modified_time" content="2023-11-14T03:49:08.938Z">
+<meta property="article:modified_time" content="2023-11-15T02:46:08.827Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -302,7 +302,7 @@
 </li>
 <li><p><strong>A super class has already overridden <em>equals</em>, and the superclass behavior is appropriate for this class.</strong> For example, most <em>Set</em> implementations inherit their equals implementation from <em>AbstractSet</em>, <em>List</em> implementations from <em>AbstractList</em>, and <em>Map</em> implementations from <em>AbstractMap</em>.</p>
 </li>
-<li><p><strong>The class is private or package-private,and you are certain that its <em>equals</em> method will never be invoked.</strong> If you are extremely risk-averse, you can over- ride the equals method to ensure that it isn’t invoked accidentally:</p>
+<li><p><strong>The class is private or package-private,and you are certain that its <em>equals</em> method will never be invoked.</strong> If you are extremely risk-averse, you can override the equals method to ensure that it isn’t invoked accidentally:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object o)</span> &#123;<br>  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AssertionError</span>(); <span class="hljs-comment">// Method is never called</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="Overriding-the-equals-method"><a href="#Overriding-the-equals-method" class="headerlink" title="Overriding the equals method"></a>Overriding the <em>equals</em> method</h2><h3 id="When"><a href="#When" class="headerlink" title="When?"></a>When?</h3><p>when a class has a notion of <em>logical equality</em> that differs from mere object identity and a superclass has not already overridden equals. This is generally the case for <em>value classes.</em></p>
@@ -337,7 +337,7 @@
 </li>
 <li><p><strong>Cast the argument to the correct type.</strong> Because this cast was preceded by an instanceof test, it is guaranteed to succeed.</p>
 </li>
-<li><p><strong>For each “significant” field in the class, check if that field of the argument matches the corresponding field of this object.</strong> If all these tests succeed, re- turn true; otherwise, return false. If the type in Step 2 is an interface, you must access the argument’s fields via interface methods; if the type is a class, you may be able to access the fields directly, depending on their accessibility.</p>
+<li><p><strong>For each “significant” field in the class, check if that field of the argument matches the corresponding field of this object.</strong> If all these tests succeed, return true; otherwise, return false. If the type in Step 2 is an interface, you must access the argument’s fields via interface methods; if the type is a class, you may be able to access the fields directly, depending on their accessibility.</p>
 <p>For primitive fields whose type is not float or double, use the &#x3D;&#x3D; operator for comparisons.</p>
 <p>For object reference fields, call the equals method recursively.</p>
 <p>For float fields, use the static <em>Float.compare(float, float)</em> method; and for double fields, use <em>Double.compare(double, double)</em>. The special treatment of float and double fields is made necessary by the existence of Float.NaN, -0.0f and the analogous double values.</p>
@@ -433,7 +433,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 14, 2023</div>
+          <div>November 15, 2023</div>
         </div>
       
       

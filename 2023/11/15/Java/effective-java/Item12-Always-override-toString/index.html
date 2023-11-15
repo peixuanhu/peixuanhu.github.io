@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 11: Always override hashCode when you override equalsGeneral contract for hashCode When the hashCode method is invoked on an object repeatedly during an execution of an application, it must consi">
+    <meta name="description" content="Item 12: Always override toStringWhile Object provides an implementation of the toString method, the string that it returns is generally not what the user of your class wants to see. It consists of th">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-11. Always override hashCode when you override equals">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/14/Java/effective-java/Item11-Always-override-hashCode-when-you-override-equals/index.html">
+<meta property="og:title" content="Effective Java-12. Always override toString">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/15/Java/effective-java/Item12-Always-override-toString/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 11: Always override hashCode when you override equalsGeneral contract for hashCode When the hashCode method is invoked on an object repeatedly during an execution of an application, it must consi">
+<meta property="og:description" content="Item 12: Always override toStringWhile Object provides an implementation of the toString method, the string that it returns is generally not what the user of your class wants to see. It consists of th">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-14T03:48:54.052Z">
-<meta property="article:modified_time" content="2023-11-14T06:12:49.002Z">
+<meta property="article:published_time" content="2023-11-15T02:41:52.397Z">
+<meta property="article:modified_time" content="2023-11-15T03:12:07.544Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-11. Always override hashCode when you override equals - Peixuan&#39;s Page</title>
+  <title>Effective Java-12. Always override toString - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-11. Always override hashCode when you override equals"></span>
+            <span id="subtitle" data-typed-text="Effective Java-12. Always override toString"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-14 11:48" pubdate>
-          November 14, 2023 am
+        <time datetime="2023-11-15 10:41" pubdate>
+          November 15, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.9k words
+          4.2k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          50 mins
+          35 mins
         
       </span>
     
@@ -290,71 +290,58 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-11. Always override hashCode when you override equals</h1>
+            <h1 id="seo-header">Effective Java-12. Always override toString</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-11-Always-override-hashCode-when-you-override-equals"><a href="#Item-11-Always-override-hashCode-when-you-override-equals" class="headerlink" title="Item 11: Always override hashCode when you override equals"></a>Item 11: Always override <em>hashCode</em> when you override <em>equals</em></h1><h2 id="General-contract-for-hashCode"><a href="#General-contract-for-hashCode" class="headerlink" title="General contract for hashCode"></a>General contract for <em>hashCode</em></h2><ul>
-<li>When the <em>hashCode</em> method is invoked on an object repeatedly during <strong>an execution of an application</strong>, it <strong>must consistently return the same value</strong>, provided no information used in equals comparisons is modified. This value need not remain consistent from one execution of an application to another.</li>
-<li>If two objects are <strong>equal</strong> according to the <em>equals(Object)</em> method,then calling <em><strong>hashCode</strong></em> on the two objects must produce the <strong>same integer result</strong>.</li>
-<li>If two objects are unequal according to the <em>equals(Object)</em> method,it is <em>not</em> required that calling hashCode on each of the objects must produce distinct results. However, the programmer should be aware that producing distinct results for unequal objects may improve the performance of hash tables.</li>
+                <h1 id="Item-12-Always-override-toString"><a href="#Item-12-Always-override-toString" class="headerlink" title="Item 12: Always override toString"></a>Item 12: Always override <em>toString</em></h1><p>While <em>Object</em> provides an implementation of the <em>toString</em> method, the string that it returns is generally not what the user of your class wants to see. It consists of <strong>the class name</strong> followed by an “at” sign (<strong>@</strong>) and the unsigned hexadecimal representation of the <strong>hash code</strong>, for example, <code>PhoneNumber@163b91</code>.</p>
+<p>The general contract for <em>toString</em> says:</p>
+<ul>
+<li>The returned string should be “a <strong>concise but informative</strong> representation that is easy for a person to read.”</li>
+<li>It is recommended that <strong>all subclasses</strong> override this method.</li>
 </ul>
-<p><strong>The key provision that is violated when you fail to override</strong> <em><strong>hashCode</strong></em> <strong>is the second one: equal objects must have equal hash codes.</strong> Two distinct instances may be logically equal according to a class’s equals method, but to Object’s <em>hashCode</em> method, they’re just two objects with nothing much in common. Therefore, Object’s <em>hashCode</em> method returns two seemingly random numbers instead of two equal numbers as required by the contract.</p>
-<h2 id="The-recipe-to-implement-a-good-hashCode-method"><a href="#The-recipe-to-implement-a-good-hashCode-method" class="headerlink" title="The recipe to implement a good hashCode method"></a>The recipe to implement a good <em>hashCode</em> method</h2><ol>
-<li><p>Declare an int variable named <code>result</code>, and initialize it to the hash code <code>c</code> for the <strong>first significant field</strong> in your object, as computed in step 2.a. (Recall from Item 10 that a significant field is a field that affects equals comparisons.)</p>
+<p>While it isn’t as critical as obeying the equals and hashCode contracts (Items 10 and 11), <strong>providing a good</strong> <strong>toString</strong> <strong>implementation makes your class much more pleasant to use and makes systems using the class easier to debug</strong>.</p>
+<blockquote>
+<p>The toString method is automatically invoked when an object is passed to <strong>println</strong>, <strong>printf</strong>, the string concatenation operator (<strong>+</strong>), or <em><strong>assert</strong></em>, or is printed by a debugger. </p>
+</blockquote>
+<h2 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h2><p><strong>When practical, the</strong> <strong>toString</strong> <strong>method should return</strong> <strong>all</strong> <strong>of the interesting information contained in the object</strong>. Ideally, the string should be self-explanatory.</p>
+<blockquote>
+<p>It is impractical if the object is large or if it contains state that is not conducive to string representation. Under these circumstances, <em>toString</em> should return a <strong>summary</strong>.</p>
+</blockquote>
+<h2 id="Important-decision"><a href="#Important-decision" class="headerlink" title="Important decision"></a>Important decision</h2><p>One important decision you’ll have to make when implementing a <em>toString</em> method is <strong>whether to specify the format of the return value in the documentation</strong>.</p>
+<p>It is recommended that you do this for <em><strong>value classes</strong></em>, such as phone number or matrix.</p>
+<blockquote>
+<p>If you specify the format, it’s usually a good idea to provide a matching <strong>static factory</strong> or <strong>constructor</strong>, so programmers can easily translate back and forth between the <strong>object</strong> and <strong>its string representation</strong>.</p>
+</blockquote>
+<h3 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h3><p>It serves as a standard, unambiguous, human-readable representation of the object. This representation can be used for input and output and in persistent human-readable data objects, such as CSV files.</p>
+<h3 id="Disadvantage"><a href="#Disadvantage" class="headerlink" title="Disadvantage"></a>Disadvantage</h3><p>Once you’ve specified it, you’re stuck with it for life, assuming your class is widely used. Programmers will write code to parse the representation, to generate it, and to embed it into persistent data. If you change the representation in a future release, you’ll break their code and data, and they will yowl.</p>
+<p>By choosing not to specify a format, you preserve the flexibility to add information or improve the format in a subsequent release.</p>
+<h3 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a>Advice</h3><ol>
+<li><p>Whether or not you decide to specify the format, <strong>you should clearly document your intentions.</strong></p>
+<p>If you specify the format, you should do so precisely. Example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* Returns the string representation of this phone number.</span><br><span class="hljs-comment">* The string consists of twelve characters whose format is</span><br><span class="hljs-comment">* &quot;XXX-YYY-ZZZZ&quot;, where XXX is the area code, YYY is the</span><br><span class="hljs-comment">* prefix, and ZZZZ is the line number. Each of the capital</span><br><span class="hljs-comment">* letters represents a single decimal digit.</span><br><span class="hljs-comment">*</span><br><span class="hljs-comment">* If any of the three parts of this phone number is too small</span><br><span class="hljs-comment">* to fill up its field, the field is padded with leading zeros.</span><br><span class="hljs-comment">* For example, if the value of the line number is 123, the last * four characters of the string representation will be &quot;0123&quot;.</span><br><span class="hljs-comment">*/</span><br><span class="hljs-meta">@Override</span> <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;<br>   <span class="hljs-keyword">return</span> String.format(<span class="hljs-string">&quot;%03d-%03d-%04d&quot;</span>, areaCode, prefix, lineNum);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>If you decide not to specify a format, the documentation comment should read something like this:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* Returns a brief description of this potion. The exact details * of the representation are unspecified and subject to change, * but the following may be regarded as typical:</span><br><span class="hljs-comment">*</span><br><span class="hljs-comment">* &quot;[Potion #9: type=love, smell=turpentine, look=india ink]&quot;</span><br><span class="hljs-comment">*/</span><br><span class="hljs-meta">@Override</span> <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123; ... &#125;<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>For every <strong>remaining significant field</strong> <code>f</code> in your object, do the following: </p>
-<p>a. Compute an int hash code <code>c</code> for the field:</p>
-<ol>
-<li><p>If the field is of a primitive type, compute <code>Type.hashCode(f)</code>, where Type is the boxed primitive class corresponding to <code>f</code>’ s type.</p>
-</li>
-<li><p>If the field is an <strong>object reference</strong> and this class’s <em>equals</em> method compares the field by recursively invoking <em>equals</em>, <strong>recursively invoke hashCode on the field</strong>.</p>
-<p>If a more complex comparison is required, compute a “canonical representation” for this field and invoke hashCode on the canonical representation. If the value of the field is null, use 0 (or some other constant, but 0 is traditional).</p>
-</li>
-<li><p>If the field is an array, treat it as if each significant element were a separate field. That is, compute a hash code for each significant element by applying these rules recursively, and combine the values per step 2.b. If the array has no significant elements, use a constant, preferably not 0. If all elements are significant, use <code>Arrays.hashCode</code>.</p>
+<li><p>Whether or not you specify the format, <strong>provide programmatic access to the information contained in the value returned by <em>toString</em>.</strong> </p>
+<blockquote>
+<p>For example, the PhoneNumber class should contain accessors for the area code, prefix, and line number.</p>
+</blockquote>
+<p>If you fail to do this, you <em>force</em> programmers who need this information to parse the string. Besides reducing performance and making unnecessary work for programmers, this process is error-prone and results in fragile systems that break if you change the format.</p>
 </li>
 </ol>
-<p>b. Combine the hash code c computed in step 2.a into result as follows: </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">result = <span class="hljs-number">31</span> * result + c;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Makes the result depend on the <strong>order</strong> of the fields, yielding a much better hash function if the class has multiple similar fields.</p>
-</blockquote>
-</li>
-<li><p>Return result.</p>
-</li>
-</ol>
-<p>Example for the <code>PhoneNumber</code> class:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Typical hashCode method</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> Short.hashCode(areaCode);<br>  result = <span class="hljs-number">31</span> * result + Short.hashCode(prefix);<br>  result = <span class="hljs-number">31</span> * result + Short.hashCOde(lineNum);<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Exclude <em>derived fields</em> from the hash code computation.</p>
-</blockquote>
-<blockquote>
-<p>While the recipe in this item yields reasonably good hash functions, they are not state-of-the-art. They are comparable in quality to the hash functions found in the Java platform libraries’ value types and are adequate for most uses. If you have a bona fide need for hash functions <strong>less likely to produce collisions</strong>, see Guava’s <code>com.google.common.hash.Hashing</code> [Guava].</p>
-</blockquote>
-<h3 id="Objects-hash-static-method"><a href="#Objects-hash-static-method" class="headerlink" title="Objects.hash static method"></a>Objects.hash static method</h3><p>The <em>Objects</em> class has a static method that takes an arbitrary number of objects and returns a hash code for them. This method, named <code>hash</code>, lets you write <strong>one-line</strong> hashCode methods whose quality is comparable to those written according to the recipe in this item.</p>
-<p>Unfortunately, they <strong>run more slowly</strong> because they entail array creation to pass a variable number of arguments, as well as boxing and unboxing if any of the arguments are of primitive type. This style of hash function is recommended for use only in situations where <strong>performance is not critical</strong>. </p>
-<p>Example:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// One-line hashCode method - mediocre performance</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-keyword">return</span> Objects.hash(lineNum, prefix, areaCode);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="Cache-hashCode"><a href="#Cache-hashCode" class="headerlink" title="Cache hashCode"></a>Cache hashCode</h3><p>If a class is <strong>immutable</strong> and the <strong>cost of computing the hash code is significant</strong>, you might consider <strong>caching</strong> the hash code in the object rather than recalculating it each time it is requested.</p>
-<p>If you believe that most objects of this type will be used as <strong>hash keys</strong>, then you should calculate the hash code <strong>when the instance is created</strong>. Otherwise, you might choose to <em><strong>lazily initialize</strong></em> the hash code the first time <em>hashCode</em> is invoked. Some care is required to ensure that the class remains thread-safe in the presence of a lazily initialized field (Item 83).</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// hashCode method with lazily initialized cached hash Code</span><br><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> hashCode; <span class="hljs-comment">// Automatically initialized to 0</span><br><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> hashCode;<br>  <span class="hljs-keyword">if</span> (result == <span class="hljs-number">0</span>) &#123;<br>    result = Short.hashCode(areaCode);<br>    result = <span class="hljs-number">31</span> * result + Short.hashCode(prefix);<br>    result = <span class="hljs-number">31</span> * result + Short.hashCOde(lineNum);<br>    hashCode = result;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Note that the initial value for the hashCode field (in this case, 0) should not be the hash code of a commonly created instance:</p>
-</blockquote>
 <h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><ol>
-<li><p><strong>Do not be tempted to exclude significant fields from the hash code computation to improve performance.</strong> While the resulting hash function may run faster, its poor quality may degrade hash tables’ performance to the point where they become unusable.</p>
-<p>In particular, the hash function may be confronted with a large collection of instances that differ mainly in regions you’ve chosen to ignore. If this happens, the hash function will map all these instances to a few hash codes, and programs that should run in linear time will instead run in quadratic time.</p>
+<li><p>It <strong>makes no sense</strong> to write a <em>toString</em> method in a <strong>static utility class</strong> (Item 4). Nor should you write a <em>toString</em> method in most <strong>enum types</strong> (Item 34) because Java provides a perfectly good one for you. </p>
 </li>
-<li><p><strong>Don’t provide a detailed specification for the value returned by <em>hashCode</em>, so clients can’t reasonably depend on it; this gives you the flexibility to change it.</strong> Many classes in the Java libraries, such as <em>String</em> and <em>Integer</em>, specify the exact value returned by their <em>hashCode</em> method as <em>a function of the instance value</em>. This is <em>not</em> a good idea but a mistake that we’re forced to live with: It impedes the ability to improve the hash function in future releases. If you leave the details unspecified and a flaw is found in the hash function or a better hash function is discovered, you can change it in a subsequent release.</p>
+<li><p>You <strong>should</strong> write a <em>toString</em> method in <strong>any abstract class whose subclasses share a common string representation</strong>.</p>
+<blockquote>
+<p>For example, the toString methods on most collection implemen- tations are inherited from the abstract collection classes.</p>
+</blockquote>
 </li>
 </ol>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, you <em>must</em> override <em>hashCode</em> every time you override <em>equals</em>, or your program will not run correctly. Your <em>hashCode</em> method must obey the <strong>general contract specified in <em>Object</em></strong> and must do a reasonable job assigning unequal hash codes to unequal instances. This is easy to achieve, if slightly tedious, using the <strong>recipe</strong>.</p>
-<p>As mentioned in Item 10, the <em><strong>AutoValue</strong></em> framework provides a fine alternative to writing <em>equals</em> and <em>hashCode</em> methods manually, and <em><strong>IDEs</strong></em> also provide some of this functionality.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>To recap, override <em>Object</em>’s <em>toString</em> implementation in <strong>every instantiable class you write</strong>, unless a superclass has already done so. It makes classes much more pleasant to use and aids in debugging. The <em>toString</em> method should return a concise, useful description of the object, in an aesthetically pleasing format.</p>
 
                 
               </div>
@@ -400,8 +387,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-11. Always override hashCode when you override equals</div>
-      <div>https://peixuanhu.github.io/2023/11/14/Java/effective-java/Item11-Always-override-hashCode-when-you-override-equals/</div>
+      <div>Effective Java-12. Always override toString</div>
+      <div>https://peixuanhu.github.io/2023/11/15/Java/effective-java/Item12-Always-override-toString/</div>
     </div>
     <div class="license-meta">
       
@@ -413,13 +400,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 14, 2023</div>
+          <div>November 15, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 14, 2023</div>
+          <div>November 15, 2023</div>
         </div>
       
       
@@ -450,18 +437,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/15/Java/effective-java/Item12-Always-override-toString/" title="Effective Java-12. Always override toString">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-12. Always override toString</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/13/Java/effective-java/Item10-Obey-the-general-contract-when-overriding-equals/" title="Effective Java-10. Obey the general contract when overriding equals">
-                        <span class="hidden-mobile">Effective Java-10. Obey the general contract when overriding equals</span>
+                      <a href="/2023/11/14/Java/effective-java/Item11-Always-override-hashCode-when-you-override-equals/" title="Effective Java-11. Always override hashCode when you override equals">
+                        <span class="hidden-mobile">Effective Java-11. Always override hashCode when you override equals</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
