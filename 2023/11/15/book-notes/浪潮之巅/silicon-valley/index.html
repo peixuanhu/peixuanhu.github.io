@@ -16,27 +16,23 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="面向对象类访问权限控制  如果不允许外部直接通过 new 创建对象，构造方法必须是 private。 工具类不允许有 public 或 default 构造方法。  this和super  在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。  由于 this 和 super都在实例化阶段调用，所以不能在静态方法">
+    <meta name="description" content="“八叛徒”与硅谷肖克利半导体公司1947年，肖克利发现了半导体P-N结的单向导电等诸多特性，并利用这一原理发明了晶体管。同 时巴丁和布拉顿也发现了一种三极管。从此，人类进人半导体时代。这三名科学家后来获得了诺贝尔物理学奖，那也是贝尔实验室所获得的众多诺贝尔奖中的第一个。 1956年，肖克利搬到加州的山景城，以便照顾住在帕洛阿尔托乡下的母亲。他的朋友贝克曼出资，肖克利在加州办起了自己的实验室一一肖克">
 <meta property="og:type" content="article">
-<meta property="og:title" content="码出高效读书笔记2-面向对象">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/10/26/Java/OOP/%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E7%AC%94%E8%AE%B02-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:title" content="浪潮之巅读书笔记2-硅谷">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/15/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/silicon-valley/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="面向对象类访问权限控制  如果不允许外部直接通过 new 创建对象，构造方法必须是 private。 工具类不允许有 public 或 default 构造方法。  this和super  在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。  由于 this 和 super都在实例化阶段调用，所以不能在静态方法">
+<meta property="og:description" content="“八叛徒”与硅谷肖克利半导体公司1947年，肖克利发现了半导体P-N结的单向导电等诸多特性，并利用这一原理发明了晶体管。同 时巴丁和布拉顿也发现了一种三极管。从此，人类进人半导体时代。这三名科学家后来获得了诺贝尔物理学奖，那也是贝尔实验室所获得的众多诺贝尔奖中的第一个。 1956年，肖克利搬到加州的山景城，以便照顾住在帕洛阿尔托乡下的母亲。他的朋友贝克曼出资，肖克利在加州办起了自己的实验室一一肖克">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s2.loli.net/2023/10/26/hlvCdauSt7I6NMA.png">
-<meta property="og:image" content="https://s2.loli.net/2023/10/26/Fx2lKfmdSgryw8X.png">
-<meta property="article:published_time" content="2023-10-26T07:41:04.356Z">
-<meta property="article:modified_time" content="2023-11-08T02:02:20.474Z">
+<meta property="article:published_time" content="2023-11-15T11:28:56.381Z">
+<meta property="article:modified_time" content="2023-11-15T13:22:03.289Z">
 <meta property="article:author" content="Peixuan Hu">
-<meta property="article:tag" content="Easy Coding">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2023/10/26/hlvCdauSt7I6NMA.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>码出高效读书笔记2-面向对象 - Peixuan&#39;s Page</title>
+  <title>浪潮之巅读书笔记2-硅谷 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="码出高效读书笔记2-面向对象"></span>
+            <span id="subtitle" data-typed-text="浪潮之巅读书笔记2-硅谷"></span>
           
         </div>
 
@@ -213,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-26 15:41" pubdate>
-          October 26, 2023 pm
+        <time datetime="2023-11-15 19:28" pubdate>
+          November 15, 2023 pm
         </time>
       </span>
     
@@ -225,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          4.1k words
         
       </span>
     
@@ -236,7 +232,7 @@
         
         
         
-          15 mins
+          34 mins
         
       </span>
     
@@ -294,71 +290,56 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">码出高效读书笔记2-面向对象</h1>
+            <h1 id="seo-header">浪潮之巅读书笔记2-硅谷</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="访问权限控制"><a href="#访问权限控制" class="headerlink" title="访问权限控制"></a>访问权限控制</h3><p><img src="https://s2.loli.net/2023/10/26/hlvCdauSt7I6NMA.png" srcset="/img/loading.gif" lazyload alt="访问权限控制及可见范围.png"></p>
-<ul>
-<li>如果不允许外部直接通过 new 创建对象，构造方法必须是 private。</li>
-<li>工具类不允许有 public 或 default 构造方法。</li>
-</ul>
-<h3 id="this和super"><a href="#this和super" class="headerlink" title="this和super"></a>this和super</h3><p><img src="https://s2.loli.net/2023/10/26/Fx2lKfmdSgryw8X.png" srcset="/img/loading.gif" lazyload alt="this和super的异同点.png"></p>
-<ul>
-<li><p>在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。</p>
-</li>
-<li><p>由于 this 和 super都在实例化阶段调用，所以不能在<strong>静态方法</strong>和<strong>静态代码块</strong>申使用 this 和 super 关键字。</p>
-</li>
-</ul>
-<h3 id="类关系"><a href="#类关系" class="headerlink" title="类关系"></a>类关系</h3><p>类与类之间的关系可分成两种·有关系与没关系，难点在于确定类与类之间是否存在相互作用。证明类之间没关系是一个涉及业务、架构、模块边界的问 题，往往由于业务模型的抽象角度不同而不同，是一件非常棘手的事情。如果找到了 没有关系的点，就可以如庖丁解牛一样，进行架构隔离、模块解耦等工作。</p>
-<p>类与类有关系的情况，包括以下5种类型：</p>
-<ul>
-<li>【继承】 extends (is-a)。</li>
-<li>【实现】 implements (can-do)。</li>
-<li>【组合】 类是成员变量 (contains-a)。</li>
-<li>【聚合】 类是成员变量(has-a)。</li>
-<li>【依赖】 import类(use-a)。</li>
-</ul>
-<p>随着业务和架构的发展，类与类的关系是会发生变化的，必须用发展的眼光看待类图。</p>
-<p>在业务重构过程中，往往会把原来强组合的关系拆开来，供其他模块调用，这就是类图的一种演变。</p>
-<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>常见的序列化方式有三种：</p>
+                <h1 id="“八叛徒”与硅谷"><a href="#“八叛徒”与硅谷" class="headerlink" title="“八叛徒”与硅谷"></a>“八叛徒”与硅谷</h1><h2 id="肖克利半导体公司"><a href="#肖克利半导体公司" class="headerlink" title="肖克利半导体公司"></a>肖克利半导体公司</h2><p>1947年，肖克利发现了半导体P-N结的单向导电等诸多特性，并利用这一原理发明了晶体管。同 时巴丁和布拉顿也发现了一种三极管。从此，人类进人半导体时代。这三名科学家后来获得了诺贝尔物理学奖，那也是贝尔实验室所获得的众多诺贝尔奖中的第一个。</p>
+<p>1956年，肖克利搬到加州的山景城，以便照顾住在帕洛阿尔托乡下的母亲。他的朋友贝克曼出资，肖克利在加州办起了自己的实验室一一肖克利半导体实验室(Shockley Semiconductor Laboratory)，专门研制和生产肖克利所发明的半导体。</p>
+<p>他主动打电话邀请了诺伊斯和摩尔等英才加入，而大家愿意追随他，完全是出于对这位大发明家的崇拜，对这一点，后来发明集成电路的诺伊斯讲得很清楚。</p>
+<p>肖克利是个非常有个性的科学家，很难共事，贝尔实验室的同事都知道他的这一不足之处，以至于大家不愿意跟随他创业。公司办到第二年，摩尔等七人实在忍受不了肖克利的独裁作风，打算集体“叛逃”，在“叛逃”之前他们去劝说公司的二号人物诺伊斯和他们一起走。出乎他们的意料，诺伊斯马上爽快地答应了，因为他也在肖克利手底下受够了。</p>
+<h2 id="仙童公司"><a href="#仙童公司" class="headerlink" title="仙童公司"></a>仙童公司</h2><h3 id="“八叛徒”"><a href="#“八叛徒”" class="headerlink" title="“八叛徒”"></a>“八叛徒”</h3><p>诺伊斯和摩尔等人准备离开肖克利的公司另起炉灶单干，但是却没有资金。如果放在今天，以他们八个人的水平，很容易找到风险投资。但是在1957年，今天意义上的风险投资并不存在，融资并不容易。</p>
+<p>阿瑟·洛克(Arthur Rock)和老板科伊尔(Alfred Coyle)对新兴的半导体很有兴趣，于是说服了自己的，两人一起来到旧金山和诺伊斯等人会面。在听了这八个人对未来将要开始的一场电子工业革命的描述后，洛克和科伊尔动了心。</p>
+<blockquote>
+<p>不过，由于来得匆忙，洛克和科伊尔根本没有准备合同，甚至没有带办公用纸，所幸的是科伊尔脑子转得很快，当即掏出10张一美元的钞票，放在桌子上。”接下来，信息行业伟大的时刻来到了，诺伊斯、摩尔、洛克和科伊尔等10人分别在这10张钞票上签了名。这10张钞票后来很多已经丢失，但其中的一张保存在斯坦福大学图书馆里，成为硅谷诞生的历史见证。</p>
+</blockquote>
+<p>IBM当时最大的股东菲尔柴尔德家族愿意投资半导体技术。在说服菲尔柴尔德的过程中，诺伊斯是这样形容未来的半导体产业的一一这些本质上是沙子和金属导线的基本物质将使未来晶体管材料的成本趋近于零，于是竞争将转向制造工艺，如果菲尔柴尔德投资，他将赢得这场竞争。届时，廉价的晶体管将使得消费电子产品的成本急剧下降，以至于制造它们比修理它们更便宜。</p>
+<p>八个人委托洛克设计了未来公司的股权结构：公司分为1325股，诺伊斯等人每人100股，洛克和科伊尔所在的海登–斯通投资公司(Hayden， Stone &amp; Co.)占225股，剩下300股留给公司日后的管理层和员工。菲尔柴尔德给即将成立的公司一笔138万美元的18个月贷款，作为回报条件，他虽然不占股，但是拥有对公司的决策权(投票权)，并目有权在8年内的任何时间以300万美元的价格收购所有股份。</p>
+<p>1957年9月18日，他们八人向肖克利提交了辞职报告，这一天后来被《纽约时报》称为人类历史上10个最重要的日子之一，因为他们将创办一个伟大的公司，开创一个巨大的产业。但是，这对肖克利来讲却是无法忍受的。肖克利当时大怒，称他们为“八叛徒”(Traitorous Eight) ，因为在肖克利这位旧式科学家看来，他们的行为不同于一般的辞职，而是学生背叛老师。在加入公司之前，这八个人除了诺伊斯有一些晶体管的研究经验外，其他人都是在他的指导下才掌握了晶体管技术，因此在他看来这如同欺师灭祖。</p>
+<h3 id="蒸蒸日上"><a href="#蒸蒸日上" class="headerlink" title="蒸蒸日上"></a>蒸蒸日上</h3><p>由于技术先进以及菲尔柴尔德和IBM的关系，仙童拿到了大量晶体管合同，确立了它在世界半导体行业的领先地位。</p>
+<p>1959年，菲尔柴尔德根据协议回购了全部的股份。诺伊斯等每人大约获得了25万美元，这在当时是相当大的一笔钱，抵得上他们半辈子的工资。</p>
+<blockquote>
+<p>不过没有了公司股权，诺伊斯等人最终是要和菲尔柴尔德分手的，只不过当时公司快速发展，业绩掩盖了一切潜在的矛盾。</p>
+</blockquote>
+<h3 id="集成电路"><a href="#集成电路" class="headerlink" title="集成电路"></a>集成电路</h3><p>当时用来制造晶体管的半导体锗容易破碎，而目热稳定性较差。为了解决这个问题，诺伊斯等人就尝试用非常结实的硅来取代锗。相比锗，硅太硬，不好加工。最后霍尔尼的小组发明了一种平面工艺，可以将硅加工成晶体管。使用这种工艺，仙童公司制造出很可靠的硅三极管，而且成本下降很多。</p>
+<blockquote>
+<p>步骤：</p>
 <ol>
-<li><strong>Java 原生序列化。</strong>Java类通过实现 Serializable接口来实现该类对象的序列化，这个接口非常特殊，没有任何方法，只起标识作用。<ul>
-<li>实现 Serializable 接口的类要显式设置 serialVersionUID 字段值，否则类源码修改后该值会发生变化。<ul>
-<li>如果是兼容升级，请不要修改 seria!VersionUID 字段 ， 避免反序列化失败。</li>
-<li>如果是不兼容升级，需要修改 serialVersionUID 值，避免反序列化混乱。</li>
-</ul>
-</li>
-<li>Java 反序列化时不会调用类的无参构造方法，而 是调用 native 方法将成员变量赋值为对应类型的初始值。基于性能及兼容性考虑，不 推荐使用 Java 原生序列化。</li>
-</ul>
-</li>
-<li><strong>Hessian 序列化。</strong>压缩编码，比Java原生序列化二进制流小且耗时短。特性：<ul>
-<li>自描述序列化类型。不依赖外部描述文件或接口定义 ， 用一个字节表示常用 基础类型 ， 极大缩短二进制流。</li>
-<li>语言无关，支持脚本语言。</li>
-<li>协议简单，比 Java 原生序列化高效。</li>
-</ul>
-</li>
-<li><strong>JSON 序列化。</strong>JSON (JavaScript Object Notation) 是一种轻量级的数据交换格式。JSON 序列化就是将数据对象转换为 JSON 字符串。在序列化过程中抛弃了类型信息，所以反序列化时只有提供类型信息才能准确地反序列化。相比前两种方式， JSON 可读性比较好，方便调试。</li>
+<li>将设计好的晶体管内部的电路拍照</li>
+<li>复制很多份，铺在一个平面上</li>
+<li>把硅片放到底版(阻光膜)下面，用光照在上面进行光刻。这样就在硅片上一次刻出很多个三极管</li>
+<li>把刻好的一个个三极管切割下来进行封装</li>
 </ol>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h4 id="参数预处理"><a href="#参数预处理" class="headerlink" title="参数预处理"></a>参数预处理</h4><h5 id="1-入参保护"><a href="#1-入参保护" class="headerlink" title="1. 入参保护"></a>1. 入参保护</h5><p>人参保护实质上是对服务提供方的保护，常见于批量接口。</p>
-<p>虽然批量接口能处理批数据，但其处理能力并不是无限的，因此需要<strong>对入参的数据量进行判断和控制</strong>，如果超出处理能力，可以直接返回错误给客户端。</p>
-<h5 id="2-参数校验"><a href="#2-参数校验" class="headerlink" title="2. 参数校验"></a>2. 参数校验</h5><p>需要进行参数校验的场景：</p>
-<ul>
-<li>调用频度低的方法。</li>
-<li>执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退或者错误，则得不偿失。</li>
-<li>需要极高稳定性和可用性的方法。 </li>
-<li>对外提供的开放接口。</li>
-<li>敏感权限入口。</li>
-</ul>
-<p>不需要进行参数校验的场景：</p>
-<ul>
-<li>极有可能被<strong>循环调用</strong>的方法。但在方法说明里必须注明外部参数检查。</li>
-<li><strong>底层调用频度较高</strong>的方法。参数错误不太可能到底层才会暴露问题。一般 DAO 层与 Service 层都在同个应用中，部署在同一台服务器中，所以可以省略 DAO 的参数校验。</li>
-<li>声明成 <strong>private</strong> 只会被自己代码调用的方法。如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。</li>
-</ul>
-<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p><strong>单一职责</strong>对于构造方法同样适用，构造方法的使命就是在构造对象时进行传参操作，所以不应该在构造方法中引入业务逻辑。</p>
-<p>如果在一个对象生产中 ，需要完成初始化上下游对象、分配内存、执行静态方法、赋值句柄等繁重的工作，其中某个步骤出错，导致没有完成对象初始化，再将希望寄托于业务逻辑部分来处理异常就是一件不受控制的事情了。故推荐将初始化业务逻辑放在某个方法中，比如<code>init()</code>， 当对象确认完成所有初始化工作之后，再显式调用。</p>
+</blockquote>
+<p>1958年，诺伊斯从霍尔尼的平面工艺中受到启发。他在想，与其把一个个晶体管的硅片切割下来，让生产线上的女工们用细小的镊子在放大镜下装上导线，封装成一个个晶体管成品，最后等到制造电子设备时再将一个个晶体管焊到电路板上，还不如将电子设备的所有电路和一个个元件都制成底版，然后刻在一个硅片上。就这样，诺伊斯发明了集成电路。</p>
+<p>集成电路的发明改变了世界。和过去的分立元件电路相比，集成电路不仅体积小，重量轻，可靠性高，而目它的性能可以呈指数提升(即摩尔定律)。</p>
+<h3 id="不断拆分"><a href="#不断拆分" class="headerlink" title="不断拆分"></a>不断拆分</h3><p>早在1959年，当仙童公司的投资人菲尔柴尔德收回公司股权之后，总经理(当时还不习惯于使用CEO一词)爱德华·鲍德温(Edward Baldwin) 就带领八名员工创办了自己的半导体公司Rheem，Rheem也成为仙童公司下出的第一枚“金蛋”。</p>
+<p>当鲍德温等人离开仙童后，不断有人也离开仙童出去创业，而诺伊斯也不断吸引新的人才加入，这种进出的平衡维持了一段时间，终于随着一位重量级创始人的离开而打破，这个人就是“八叛徒”之一的拉斯特。不过，拉斯特等人的离开虽然让仙童公司损失巨大，却也促成了该公司所在的旧金山湾区整个地区半导体产业的发展。后来这个地区便成长为今天人们熟知的硅谷。</p>
+<p>在诺伊斯等人发明了集成电路之后的头两年里，集成电路的制造成本比较高，以至于放弃掉原有的晶体管业务单独发展集成电路是无法挣钱的。仙童的老板菲尔柴尔德和公司内的高管在公司的业务上就发生了严重的分歧。以“八叛徒”之一的拉斯特为代表的一部分经理认为应该优先发展集成电路，并且在做新的一年的预算时，提出应该优先建一个制造集成电路的工厂。而菲尔柴尔德则认为应该优先制造当时技术成熟市场需求更大的晶体管，并且首先将钱用于扩大晶体管的产能。1961年，拉斯特拉上“八叛徒”中的霍尔尼和罗伯茨在洛克和Teledyne公司的支持下创办了Amelco半导体公司。Amelco和它的母公司Teledyne很快成为了美国军方(包括航天工业)重要的半导体器件提供商，并且直接和仙童公司竞争。</p>
+<p>1968年，诺伊斯和摩尔希望发展超大规模集成电路，即将过去很多小规模的集成电路集成到一个芯片中，这样对顾客有很大的好处，而作为公司老板的菲尔柴尔德则希望多卖芯片。如果将十个芯片减少为一个芯片，仙童公司短期内的收入必然会减少。最终，诺伊斯和摩尔发现在这家他们创办的公司中，两人已经没有发言权了，就干脆离开仙童，创办了一家新的半导体公司——英特尔公司。</p>
+<p>就在诺伊斯和摩尔离开仙童之后，“八叛徒”中的另外两个人格里尼克和布兰克也陆续离开了，至此，仙童公司的传奇画上了句号。它对世界半导体产业的影响力就此结束，一个时代终结了。</p>
+<p>仙童公司成就半导体产业的做法听起来匪夷所思，它并非靠自身发明了多少产品，创造了多大的市场，而是靠不断地分离出子公司和孙公司，让半导体公司在旧金山湾区遍地开花。截止到2017年，从仙童公司直接和间接分离出去的大中型公司多达近百家，它们包括英特尔、AMD等知名公司。另外，苹果公司第三位创始人、公司第一任董事长马库拉也来自于仙童公司。这些公司的市值加起来接近30000亿美元。可以说，旧金山湾区之所以能成为硅谷，很大程度上是因为有了仙童公司。（区域经济）</p>
+<h2 id="摘抄与思考"><a href="#摘抄与思考" class="headerlink" title="摘抄与思考"></a>摘抄与思考</h2><p>肖克利以及诺伊斯等八个人一起创造了“八叛徒”这个词。此后，“叛徒”这个词在硅谷的文化中成了褒义词，它代表着一种叛逆传统的创业精神。这种精神不仅缔造了硅谷的传奇，而目激励着硅谷的几代人不断调整传统，勇于开拓未来。</p>
+<p>诺伊斯在正式成为仙童公司的总经理之后，吸取了肖克利的教训，努力营造一种轻松的工作氛围和没有等级差异的公司文化。在这样的氛围里，上下级之间只是分工不同而已，没有传统公司里那种发号施令和服从的关系，而是可以自由争论的合作关系。员工之间可以充分信任，对现有的员工来讲可以激励他们工作的主动性，对于外部的人才则可以将他们吸引进公司。（对硅谷工作氛围的影响）</p>
+<p>仙童公司股权结构的问题（菲尔柴尔德将股权全部收走）直接导致了鲍德温等人的离职创业。当创始团队和管理团队不拥有公司的股份时，他们除了在经济利益上与公司老板会有冲突外，在管理上出现矛盾时，没有股权的前者也缺乏话语权。</p>
+<p>信息时代企业的一个重要特征：一家公司很难也没有必要像工业时代那样通过拥有生产资料来把大家组织到一起了，另立门户的成本非常低。这也促成了硅谷的另一种文化——从现有的著名公司中离职，直接创业。（信息产业的生产资料价格造成了它与传统工业的本质区别）</p>
+<h1 id="硅谷的出现"><a href="#硅谷的出现" class="headerlink" title="硅谷的出现"></a>硅谷的出现</h1><p>硅谷为什么出现在旧金山湾区，这里面有很多巧合的因素，而那些巧合的背后，又有着必然的联系。在诸多因素中，有三个因素具有决定性。</p>
+<ol>
+<li>1951年，斯坦福大学的特曼教授为了帮助大学解决财政问题，提议大学拿出2.7平方公里(600多英亩)土地创立了斯坦福工业园(今天叫做斯坦福研究园)，吸引来很多高科技公司。</li>
+<li>1952年，IBM在旧金山南部100公里的圣荷西市建立了西海岸研究实验室，即今天的IBM爱曼登研究中心(Almanden Research Center)，让远离东部科技中心的北加州地区有机会站在了科技产业前沿。</li>
+<li>有能够不断生出“金蛋”的仙童公司，在当地孕育出完整的半导体产业，当然这同时也伴随着仙童公司最终的解体。在这个过程中，拉斯特等创始人的离开使得半导体技术的扩散和仙童公司的解体变得无法逆转。</li>
+</ol>
 
                 
               </div>
@@ -377,12 +358,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/Book-Notes/" class="category-chain-item">Book Notes</a>
   
   
     <span>></span>
     
-  <a href="/categories/Java/OOP/" class="category-chain-item">OOP</a>
+  <a href="/categories/Book-Notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/" class="category-chain-item">浪潮之巅</a>
   
   
 
@@ -396,13 +377,6 @@
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Easy-Coding/" class="print-no-link">#Easy Coding</a>
-      
-    </div>
-  
 </div>
 
 
@@ -411,8 +385,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>码出高效读书笔记2-面向对象</div>
-      <div>https://peixuanhu.github.io/2023/10/26/Java/OOP/码出高效笔记2-面向对象/</div>
+      <div>浪潮之巅读书笔记2-硅谷</div>
+      <div>https://peixuanhu.github.io/2023/11/15/book-notes/浪潮之巅/silicon-valley/</div>
     </div>
     <div class="license-meta">
       
@@ -424,13 +398,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 26, 2023</div>
+          <div>November 15, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 8, 2023</div>
+          <div>November 15, 2023</div>
         </div>
       
       
@@ -461,18 +435,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="设计模式23-命令模式">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">设计模式23-命令模式</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/26/algorithm/template/4-3.%E5%8C%BA%E9%97%B4DP/" title="算法模板4-3.DP-区间DP">
-                        <span class="hidden-mobile">算法模板4-3.DP-区间DP</span>
+                      <a href="/2023/11/15/Java/effective-java/Item12-Always-override-toString/" title="Effective Java-12. Always override toString">
+                        <span class="hidden-mobile">Effective Java-12. Always override toString</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
