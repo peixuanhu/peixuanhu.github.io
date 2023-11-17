@@ -226,6 +226,128 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" target="_self">
+          算法模板4-0.DP理解方式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" target="_self">
+        <div>
+          DP理解DP求解过程DP求解过程可以分为两步：状态表示 状态表示思考：问题需要用几维的状态来表示？  背包问题有两维。  f(i, j) 集合f(i, j)表示的是什么集合？  如背包问题：f(i, j)表示所有选法的集合。  属性f(i, j)这个数存的是这个集合的什么属性？min, max, cnt?  如背包问题：f(i, j)表示集合选法对应的价值的最大值。  状态计算思考：如何一步一步地
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-22 20:35" pubdate>
+              2023-10-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" target="_self">
+          算法模板3-6.二分图
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" target="_self">
+        <div>
+          二分图通俗定义：一个图可以分成两个集合，每个集合内部没有边。 染色法 (DFS)时间复杂度：O(n + m) 使用场景判别一个图是否为二分图。 性质一个图是二分图（等价于这个图可以被2染色），当且仅当图中不含奇数环。 证明 必要性（二分图-&gt;不含奇数环）：反证法 假设有奇数环：把环中每个点依次标记为1, 2, 1, 2, … 标记到最后一个点的时候，应该为1。而它后一个点（也就是第一个点）也
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-20 16:38" pubdate>
+              2023-10-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" target="_self">
           设计模式21-单例模式
         </a>
@@ -666,133 +788,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" target="_self">
-          算法模板3-1.DFS和BFS
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" target="_self">
-        <div>
-          深度优先遍历 (DFS)一条路走到底，无路可走了之后往回退一步，继续找一条其他的路一直往下走。 形势一般为递归。 概念回溯走到底了，返回的过程叫做回溯。 回来的时候要恢复现场。 123456// 恢复现场的代码与修改状态的代码一般是对称的，例：path[u] = i;st[i] = true;dfs(u + 1); // 下一层递归返回之后恢复st[i] = false;path[u] = 0;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-11 11:08" pubdate>
-              2023-10-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" target="_self">
-          算法模板3-3.树与图的遍历
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" target="_self">
-        <div>
-          树与图的遍历时间复杂度：O(n + m)，其中 n 表示点数， m 表示边数。 树是特殊的图，同样只需要考虑图的遍历即可。 DFS一般树和图的遍历，每个点只需要遍历一次。 需要一个状态数组 st[]，表示该点是否被遍历过。 代码模板123456789int dfs(int u) &#123;    st[u] = true; // st[u] 表示点u已经遍历过    for (int i = h
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-11 10:32" pubdate>
-              2023-10-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

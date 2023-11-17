@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 10: Obey the general contract when overriding equalsConditions for not overriding the equals method Each instance of the class is inherently unique. This is true for classes such as Thread that r">
+    <meta name="description" content="Item 14: Consider implementing ComparableIf you are writing a value class with an obvious natural ordering, such as alphabetical order, numerical order, or chronological order, you should implement th">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-10. Obey the general contract when overriding equals">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/13/Java/effective-java/Item10-Obey-the-general-contract-when-overriding-equals/index.html">
+<meta property="og:title" content="Effective Java-14. Consider implmenting Comparable">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/17/Java/effective-java/Item14-Consider-implementing-Comparable/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 10: Obey the general contract when overriding equalsConditions for not overriding the equals method Each instance of the class is inherently unique. This is true for classes such as Thread that r">
+<meta property="og:description" content="Item 14: Consider implementing ComparableIf you are writing a value class with an obvious natural ordering, such as alphabetical order, numerical order, or chronological order, you should implement th">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-13T04:08:58.398Z">
-<meta property="article:modified_time" content="2023-11-17T09:39:53.882Z">
+<meta property="article:published_time" content="2023-11-17T08:52:01.709Z">
+<meta property="article:modified_time" content="2023-11-17T12:08:56.364Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-10. Obey the general contract when overriding equals - Peixuan&#39;s Page</title>
+  <title>Effective Java-14. Consider implmenting Comparable - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-10. Obey the general contract when overriding equals"></span>
+            <span id="subtitle" data-typed-text="Effective Java-14. Consider implmenting Comparable"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-13 12:08" pubdate>
-          November 13, 2023 pm
+        <time datetime="2023-11-17 16:52" pubdate>
+          November 17, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.7k words
+          3.6k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          64 mins
+          30 mins
         
       </span>
     
@@ -290,89 +290,45 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-10. Obey the general contract when overriding equals</h1>
+            <h1 id="seo-header">Effective Java-14. Consider implmenting Comparable</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-10-Obey-the-general-contract-when-overriding-equals"><a href="#Item-10-Obey-the-general-contract-when-overriding-equals" class="headerlink" title="Item 10: Obey the general contract when overriding equals"></a>Item 10: Obey the general contract when overriding <em>equals</em></h1><h2 id="Conditions-for-not-overriding-the-equals-method"><a href="#Conditions-for-not-overriding-the-equals-method" class="headerlink" title="Conditions for not overriding the equals method"></a>Conditions for <strong>not</strong> overriding the <em>equals</em> method</h2><ul>
-<li><p><strong>Each instance of the class is inherently unique.</strong> This is true for classes such as <strong>Thread</strong> that represent active entities rather than values. The equals implementation provided by Object has exactly the right behavior for these classes.</p>
-</li>
-<li><p><strong>There is no need for the class to provide a “logical equality” test.</strong> For example, java.util.regex.Pattern could have overridden equals to check whether two Pattern instances represented exactly the same regular expression, but the designers didn’t think that clients would need or want this functionality. Under these circumstances, the <em>equals</em> implementation inherited from <em>Object</em> is ideal.</p>
-</li>
-<li><p><strong>A super class has already overridden <em>equals</em>, and the superclass behavior is appropriate for this class.</strong> For example, most <em>Set</em> implementations inherit their equals implementation from <em>AbstractSet</em>, <em>List</em> implementations from <em>AbstractList</em>, and <em>Map</em> implementations from <em>AbstractMap</em>.</p>
-</li>
-<li><p><strong>The class is private or package-private,and you are certain that its <em>equals</em> method will never be invoked.</strong> If you are extremely risk-averse, you can override the equals method to ensure that it isn’t invoked accidentally:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object o)</span> &#123;<br>  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AssertionError</span>(); <span class="hljs-comment">// Method is never called</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Overriding-the-equals-method"><a href="#Overriding-the-equals-method" class="headerlink" title="Overriding the equals method"></a>Overriding the <em>equals</em> method</h2><p>Example:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Adds a value component without violating the equals contract</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ColorPoint</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Point point;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Color color;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">ColorPoint</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, Color color)</span> &#123;<br>     point = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Point</span>(x, y);<br>     <span class="hljs-built_in">this</span>.color = Objects.requireNonNull(color);<br>  &#125;<br>  <br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * Returns the point-view of this color point.</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-keyword">public</span> Point <span class="hljs-title function_">asPoint</span><span class="hljs-params">()</span> &#123;<br>	  <span class="hljs-keyword">return</span> point;<br>  &#125;<br>  <br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object o)</span> &#123;<br>   <span class="hljs-keyword">if</span> (!(o <span class="hljs-keyword">instanceof</span> ColorPoint))<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>   <span class="hljs-type">ColorPoint</span> <span class="hljs-variable">cp</span> <span class="hljs-operator">=</span> (ColorPoint) o;<br>   <span class="hljs-keyword">return</span> cp.point.equals(point) &amp;&amp; cp.color.equals(color);<br>	&#125;<br>  ...  <span class="hljs-comment">// Remainder omitted</span><br>&#125;<br></code></pre></td></tr></table></figure>
+                <h2 id="Item-14-Consider-implementing-Comparable"><a href="#Item-14-Consider-implementing-Comparable" class="headerlink" title="Item 14: Consider implementing Comparable"></a>Item 14: Consider implementing <em>Comparable</em></h2><p>If you are writing <strong>a value class with an obvious natural ordering</strong>, such as alphabetical order, numerical order, or chronological order, you should implement the <code>Comparable</code> interface:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt; &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(T t)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>“Favor composition over inheritance.”</p>
-<h3 id="When"><a href="#When" class="headerlink" title="When?"></a>When?</h3><p>When a class has a notion of <em>logical equality</em> that differs from mere object identity and a superclass has not already overridden equals. This is generally the case for <em>value classes.</em></p>
-<blockquote>
-<p>A value class is simply a class that represents a value, such as Integer or String.</p>
-</blockquote>
-<p>A programmer who compares references to value objects using the <em>equals</em> method expects to find out whether they are <strong>logically equivalent</strong>, not whether they refer to the same object.</p>
-<p>Not only is overriding the equals method necessary to satisfy programmer expectations, it enables instances to serve as <strong>map keys or set elements</strong> with predictable, desirable behavior.</p>
-<blockquote>
-<p>One kind of value class that does <em>not</em> require the <em>equals</em> method to be overridden is a class that uses <strong>instance control</strong> (Item 1) to ensure that <strong>at most one object exists with each value</strong>. <em>Enum</em> types (Item 34) fall into this category. For these classes, logical equality is the same as object identity, so Object’s <em>equals</em> method functions as a logical equals method.</p>
-</blockquote>
-<h3 id="General-contract-of-overriding-equals"><a href="#General-contract-of-overriding-equals" class="headerlink" title="General contract of overriding equals"></a>General contract of overriding <em>equals</em></h3><ul>
-<li><p><em><strong>Reflexivity</strong></em>: For any non-null reference value x, <strong>x.equals(x)</strong> must return <strong>true</strong>.</p>
+<h2 id="General-contract-of-compareTo-method"><a href="#General-contract-of-compareTo-method" class="headerlink" title="General contract of compareTo method"></a>General contract of <em>compareTo</em> method</h2><p>Compares this object with the specified object for order.</p>
+<p>Returns a <strong>negative integer, zero, or a positive integer</strong> as this object is <strong>less than, equal to, or greater than</strong> the specified object.</p>
+<p>Throws <code>ClassCastException</code> if the specified object’s type prevents it from being compared to this object.</p>
+<ul>
+<li><p>The implementor must ensure that <code>sgn(x.compareTo(y)) == -sgn(y. compareTo(x))</code> for all x and y.</p>
 </li>
-<li><p><em><strong>Symmetry</strong></em>: For any non-null reference values x and  y, <strong>x.equals(y)</strong> must return true if and only if <strong>y.equals(x)</strong> returns true.</p>
+<li><p>The implementor must also ensure that the relation is transitive: <code>(x. compareTo(y) &gt; 0 &amp;&amp; y.compareTo(z) &gt; 0)</code> implies <code>x.compareTo(z) &gt; 0</code>.</p>
 </li>
-<li><p><em><strong>Transitivity</strong></em>: For any non-null reference values x, y, z, if <strong>x.equals(y)</strong>  returns true and <strong>y.equals(z)</strong> returns true, then <strong>x.equals(z)</strong> must return true.</p>
+<li><p>Finally, the implementor must ensure that <code>x.compareTo(y) == 0</code> implies that <code>sgn(x.compareTo(z)) == sgn(y.compareTo(z))</code>, for all z.</p>
 </li>
-<li><p><em><strong>Consistency</strong></em>: For any non-null reference values x and y, <strong>multiple invocations</strong> of x.equals(y) must consistently return true or consistently return false, provided no information used in equals comparisons is modified.</p>
-</li>
-<li><p><em><strong>Non-nullity</strong></em>: For any non-null reference value x, <strong>x.equals(null) must return false.</strong></p>
-<p>Type check is enough, no need to test “if o &#x3D;&#x3D; null”. The <em>instanceof</em> operator is specified to return false if its first operand is null, regardless of what type appears in the second operand.</p>
+<li><p>It is strongly recommended, but not required, that <code>(x.compareTo(y) == 0) == (x.equals(y))</code>.</p>
+<p>Generally speaking, any class that implements the <code>Comparable</code> interface and violates this condition should <strong>clearly indicate this fact</strong>. The recommended language is “Note: This class has a natural ordering that is inconsistent with equals.”</p>
 </li>
 </ul>
-<h3 id="Recipe-for-a-high-quality-equals-method"><a href="#Recipe-for-a-high-quality-equals-method" class="headerlink" title="Recipe for a high-quality equals method"></a>Recipe for a high-quality <em>equals</em> method</h3><ol>
-<li><p><strong>Use the</strong> <strong>&#x3D;&#x3D;</strong> <strong>operator to check if the argument is a reference to this object.</strong> If so, return true. This is just a performance optimization but one that is worth doing if the <strong>comparison is potentially expensive</strong>.</p>
-</li>
-<li><p><strong>Use the <em>instanceof</em> operator to check if the argument has the correct type.</strong> If not, return false. Typically, the correct type is the <strong>class</strong> in which the method occurs.</p>
-<blockquote>
-<p>Occasionally, it is some interface implemented by this class. Use an interface if the class implements an interface that refines the equals contract to permit comparisons across classes that implement the interface. Collection interfaces such as Set, List, Map, and Map.Entry have this property.</p>
-</blockquote>
-</li>
-<li><p><strong>Cast the argument to the correct type.</strong> Because this cast was preceded by an instanceof test, it is guaranteed to succeed.</p>
-</li>
-<li><p><strong>For each “significant” field in the class, check if that field of the argument matches the corresponding field of this object.</strong> If all these tests succeed, return true; otherwise, return false. If the type in Step 2 is an interface, you must access the argument’s fields via interface methods; if the type is a class, you may be able to access the fields directly, depending on their accessibility.</p>
-<p>For primitive fields whose type is not float or double, use the &#x3D;&#x3D; operator for comparisons.</p>
-<p>For object reference fields, call the equals method recursively.</p>
-<p>For float fields, use the static <em>Float.compare(float, float)</em> method; and for double fields, use <em>Double.compare(double, double)</em>. The special treatment of float and double fields is made necessary by the existence of Float.NaN, -0.0f and the analogous double values.</p>
-<p>For array fields, apply these guidelines to each element. If every element in an array field is significant, use one of the Arrays.equals methods.</p>
-<blockquote>
-<p>Some object reference fields may <strong>legitimately contain null</strong>. To avoid the possibility of a NullPointerException, check such fields for equality using the static method <strong>Objects.equals(Object, Object)</strong>.</p>
-</blockquote>
-</li>
-<li><p>The performance of the equals method may be affected by the <strong>order</strong> in which fields are compared. For best performance, you should first compare fields that are <strong>more likely to differ, less expensive to compare</strong>, or, ideally, both.</p>
-<p>You must <strong>not compare fields that are not part of an object’s logical state</strong>, such as lock fields used to synchronize operations.</p>
-<p>You need <strong>not compare <em>derived fields</em></strong>, which can be calculated from “significant fields,” but doing so may improve the performance of the equals method. If a derived field amounts to a summary description of the entire object, comparing this field will save you the expense of comparing the actual data if the comparison fails.</p>
-</li>
-<li><p>Write unit tests to check, unless you used <em>AutoValue</em> to generate your equals method, in which case you can safely omit the tests.</p>
-</li>
-</ol>
-<h3 id="Final-caveats"><a href="#Final-caveats" class="headerlink" title="Final caveats"></a>Final caveats</h3><ul>
-<li><p><strong>Always override hashCode when you override <em>equals</em></strong>(Item11).</p>
-</li>
-<li><p><strong>Don’t try to be too clever.</strong> If you simply test fields for equality, it’s not hard to adhere to the equals contract. If you are overly aggressive in searching for equivalence, it’s easy to get into trouble. It is generally a bad idea to take any form of aliasing into account. For example, the File class shouldn’t attempt to equate symbolic links referring to the same file. Thankfully, it doesn’t.</p>
-</li>
-<li><p>**Don’t substitute another type for <em>Object</em> in the <em>equals</em> declaration.**Itisnot uncommon for a programmer to write an equals method that looks like this and then spend hours puzzling over why it doesn’t work properly:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Broken - parameter type must be Object!</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(MyClass o)</span> &#123;<br>   ...<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="compareTo-and-equals"><a href="#compareTo-and-equals" class="headerlink" title="compareTo and equals"></a><em>compareTo</em> and <em>equals</em></h2><p>Unlike the <code>equals</code> method, which imposes a global equivalence relation on all objects, <code>compareTo</code> <strong>doesn’t have to work across objects of different types</strong>: when confronted with objects of different types, <code>compareTo</code> is permitted to throw <code>ClassCastException</code>.</p>
+<p>Writing a <code>compareTo</code> method is similar to writing an <code>equals</code> method, but there are a few key differences. Because the <code>Comparable</code> interface is parameterized, the <code>compareTo</code> method is statically typed, so you <strong>don’t need to type check or cast its argument</strong>. If the argument is of the wrong type, the invocation won’t even compile. If the argument is null, the invocation should throw a <code>NullPointerException</code>, and it will, as soon as the method attempts to access its members.</p>
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>If a class has <strong>multiple significant fields</strong>, the order in which you compare them is critical. Start with <strong>the most significant field</strong> and work your way down.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Multiple-field Comparable with primitive fields</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(PhoneNumber pn)</span> &#123;<br>   <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> Short.compare(areaCode, pn.areaCode);<br>   <span class="hljs-keyword">if</span> (result == <span class="hljs-number">0</span>)  &#123;<br>       result = Short.compare(prefix, pn.prefix);<br>       <span class="hljs-keyword">if</span> (result == <span class="hljs-number">0</span>)<br>           result = Short.compare(lineNum, pn.lineNum);<br>	&#125;<br>   <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>The problem is that this method does not <em>override</em> Object.equals, whose argument is of type Object, but <em>overloads</em> it instead (Item 52).</p>
-<p>Consistent use of the <em>@Override</em> annotation, will prevent you from making this mistake (Item 40), it won’t compile and the error message will tell you exactly what is wrong.</p>
-</li>
-</ul>
-<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><p>Writing and testing equals (and hashCode) methods is tedious, and the resulting code is mundane. An excellent alternative to writing and testing these methods manually is to use <strong>Google’s open source AutoValue framework</strong>, which automatically generates these methods for you, triggered by a single annotation on the class . In most cases, the methods generated by AutoValue are essentially identical to those you’d write yourself.</p>
-<p><strong>IDEs</strong>, too, have facilities to generate equals and hashCode methods, but the resulting source code is more verbose and less readable than code that uses AutoValue, does not track changes in the class automatically, and therefore requires testing. That said, having IDEs generate equals (and hashCode) methods is generally preferable to implementing them manually because IDEs do not make careless mistakes, and humans do.</p>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, don’t override the <em>equals</em> method unless you have to: <strong>in many cases, the implementation inherited from Object does exactly what you want.</strong></p>
-<p>If you do override equals, make sure to compare all of the class’s significant fields and to compare them in a manner that preserves all **five provisions of the equals contract.</p>
+<p>In Java 8, the <code>Comparator</code> interface was outfitted with a set of <em>comparator construction methods</em>, which enable fluent construction of comparators. These comparators can then be used to implement a <code>compareTo</code> method, as required by the <code>Comparable</code> interface.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Comparable with comparator construction methods</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Comparator&lt;PhoneNumber&gt; COMPARATOR =<br>       comparingInt((PhoneNumber pn) -&gt; pn.areaCode)<br>         .thenComparingInt(pn -&gt; pn.prefix)<br>         .thenComparingInt(pn -&gt; pn.lineNum);<br><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(PhoneNumber pn)</span> &#123;<br>   <span class="hljs-keyword">return</span> COMPARATOR.compare(<span class="hljs-built_in">this</span>, pn);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>There are also comparator construction methods for object reference types. The static method, named <code>comparing</code>.</p>
+</blockquote>
+<h2 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a><em>Comparator</em></h2><p>If a class does not implement <code>Comparable</code> or you need a nonstandard ordering, use a <code>Comparator</code> instead.</p>
+<p>Example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Comparator based on static compare method</span><br> <span class="hljs-keyword">static</span> Comparator&lt;Object&gt; hashCodeOrder = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Comparator</span>&lt;&gt;() &#123;<br>   <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(Object o1, Object o2)</span> &#123;<br>     <span class="hljs-keyword">return</span> Integer.compare(o1.hashCode(), o2.hashCode());<br>   &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, whenever you implement a value class that has a sensible ordering, you should have the class implement the <code>Comparable</code> interface so that <strong>its instances can be easily sorted, searched, and used in comparison-based collections.</strong> </p>
+<p>When comparing field values in the implementations of the <code>compareTo</code> methods, avoid the use of the &lt; and &gt; operators. Instead, use the <strong>static <code>compare</code> methods</strong> in the boxed primitive classes or the <strong>comparator construction methods</strong> in the <code>Comparator</code> interface.</p>
 
                 
               </div>
@@ -418,8 +374,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-10. Obey the general contract when overriding equals</div>
-      <div>https://peixuanhu.github.io/2023/11/13/Java/effective-java/Item10-Obey-the-general-contract-when-overriding-equals/</div>
+      <div>Effective Java-14. Consider implmenting Comparable</div>
+      <div>https://peixuanhu.github.io/2023/11/17/Java/effective-java/Item14-Consider-implementing-Comparable/</div>
     </div>
     <div class="license-meta">
       
@@ -431,7 +387,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 13, 2023</div>
+          <div>November 17, 2023</div>
         </div>
       
       
@@ -468,18 +424,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/14/Java/effective-java/Item11-Always-override-hashCode-when-you-override-equals/" title="Effective Java-11. Always override hashCode when you override equals">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-11. Always override hashCode when you override equals</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/13/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/AT&amp;T-and-IBM/" title="浪潮之巅读书笔记1-AT&amp;T与IBM">
-                        <span class="hidden-mobile">浪潮之巅读书笔记1-AT&amp;T与IBM</span>
+                      <a href="/2023/11/16/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/Apple-and-Microsoft/" title="浪潮之巅读书笔记3-苹果与微软">
+                        <span class="hidden-mobile">浪潮之巅读书笔记3-苹果与微软</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

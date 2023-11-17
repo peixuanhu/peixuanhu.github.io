@@ -226,6 +226,128 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" target="_self">
+          算法模板3-1.DFS和BFS
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" target="_self">
+        <div>
+          深度优先遍历 (DFS)一条路走到底，无路可走了之后往回退一步，继续找一条其他的路一直往下走。 形势一般为递归。 概念回溯走到底了，返回的过程叫做回溯。 回来的时候要恢复现场。 123456// 恢复现场的代码与修改状态的代码一般是对称的，例：path[u] = i;st[i] = true;dfs(u + 1); // 下一层递归返回之后恢复st[i] = false;path[u] = 0;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-11 11:08" pubdate>
+              2023-10-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" target="_self">
+          算法模板3-3.树与图的遍历
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/11/algorithm/template/3-3.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" target="_self">
+        <div>
+          树与图的遍历时间复杂度：O(n + m)，其中 n 表示点数， m 表示边数。 树是特殊的图，同样只需要考虑图的遍历即可。 DFS一般树和图的遍历，每个点只需要遍历一次。 需要一个状态数组 st[]，表示该点是否被遍历过。 代码模板123456789int dfs(int u) &#123;    st[u] = true; // st[u] 表示点u已经遍历过    for (int i = h
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-11 10:32" pubdate>
+              2023-10-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2023/10/11/algorithm/template/3-2.%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/" target="_self">
           算法模板3-2.树与图的存储
         </a>
@@ -680,133 +802,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" target="_self">
-          算法模板2-5.并查集
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" target="_self">
-        <div>
-          并查集支持的操作在近乎 O(1) 的时间复杂度内支持以下两种操作：  将两个集合合并 询问两个元素是否在一个集合当中  注：有时也用于处理图论相关的问题。 基本原理每个集合用一棵树来表示，树根的编号就是整个集合的编号。每个节点存储它的父节点，p[x] 表示 x 的父节点。 思考问题1: 如何判断树根？1if (p[x] == x) 则为树根  问题2: 如何求x的集合编号？1while (p[x]
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-09 13:57" pubdate>
-              2023-10-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" target="_self">
-          算法模板2-4.Trie树
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" target="_self">
-        <div>
-          Trie树适用场景是用于高效存储和查找字符串集合中各字符串出现次数的数据结构。 代码模板1234567891011121314151617181920212223242526int son[N][26], cnt[N], idx;// 0号点既是根节点，又是空节点（一个点如果没有子节点，它的son就指向0）// son[][]存储树中每个节点的子节点// cnt[]存储以每个节点结尾的单词数量//
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-09 13:23" pubdate>
-              2023-10-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
