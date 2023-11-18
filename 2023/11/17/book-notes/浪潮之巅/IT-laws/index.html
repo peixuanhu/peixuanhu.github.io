@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 14: Consider implementing ComparableIf you are writing a value class with an obvious natural ordering, such as alphabetical order, numerical order, or chronological order, you should implement th">
+    <meta name="description" content="信息产业的生态链摩尔定律计算机和整个IT行业的发展比传统工业要快得多。比尔·盖茨说，如果汽车工业能够像计算机领域一样发展，那么今天，买一辆汽车只需要25美元，一升汽油能跑400公里。 英特尔公司的创始人戈登·摩尔(Gordon Moore) 博士最早看到了这个现象。在1965年，他就提出，至多在10年内，集成电路的集成度会每两年翻一番。后来，大家把这个周期缩短到18个月。 当今世界经济的前五大行业">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-14. Consider implmenting Comparable">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/17/Java/effective-java/Item14-Consider-implementing-Comparable/index.html">
+<meta property="og:title" content="浪潮之巅读书笔记4-信息产业的发展规律">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/17/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/IT-laws/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 14: Consider implementing ComparableIf you are writing a value class with an obvious natural ordering, such as alphabetical order, numerical order, or chronological order, you should implement th">
+<meta property="og:description" content="信息产业的生态链摩尔定律计算机和整个IT行业的发展比传统工业要快得多。比尔·盖茨说，如果汽车工业能够像计算机领域一样发展，那么今天，买一辆汽车只需要25美元，一升汽油能跑400公里。 英特尔公司的创始人戈登·摩尔(Gordon Moore) 博士最早看到了这个现象。在1965年，他就提出，至多在10年内，集成电路的集成度会每两年翻一番。后来，大家把这个周期缩短到18个月。 当今世界经济的前五大行业">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-17T08:52:01.709Z">
-<meta property="article:modified_time" content="2023-11-18T02:49:03.845Z">
+<meta property="article:published_time" content="2023-11-17T12:31:06.421Z">
+<meta property="article:modified_time" content="2023-11-18T03:33:58.385Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-14. Consider implmenting Comparable - Peixuan&#39;s Page</title>
+  <title>浪潮之巅读书笔记4-信息产业的发展规律 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-14. Consider implmenting Comparable"></span>
+            <span id="subtitle" data-typed-text="浪潮之巅读书笔记4-信息产业的发展规律"></span>
           
         </div>
 
@@ -209,7 +209,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-17 16:52" pubdate>
+        <time datetime="2023-11-17 20:31" pubdate>
           November 17, 2023 pm
         </time>
       </span>
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k words
+          4k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          30 mins
+          34 mins
         
       </span>
     
@@ -290,45 +290,74 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-14. Consider implmenting Comparable</h1>
+            <h1 id="seo-header">浪潮之巅读书笔记4-信息产业的发展规律</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Item-14-Consider-implementing-Comparable"><a href="#Item-14-Consider-implementing-Comparable" class="headerlink" title="Item 14: Consider implementing Comparable"></a>Item 14: Consider implementing <em>Comparable</em></h2><p>If you are writing <strong>a value class with an obvious natural ordering</strong>, such as alphabetical order, numerical order, or chronological order, you should implement the <code>Comparable</code> interface:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt; &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(T t)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="General-contract-of-compareTo-method"><a href="#General-contract-of-compareTo-method" class="headerlink" title="General contract of compareTo method"></a>General contract of <em>compareTo</em> method</h2><p>Compares this object with the specified object for order.</p>
-<p>Returns a <strong>negative integer, zero, or a positive integer</strong> as this object is <strong>less than, equal to, or greater than</strong> the specified object.</p>
-<p>Throws <code>ClassCastException</code> if the specified object’s type prevents it from being compared to this object.</p>
-<ul>
-<li><p>The implementor must ensure that <code>sgn(x.compareTo(y)) == -sgn(y. compareTo(x))</code> for all x and y.</p>
-</li>
-<li><p>The implementor must also ensure that the relation is transitive: <code>(x. compareTo(y) &gt; 0 &amp;&amp; y.compareTo(z) &gt; 0)</code> implies <code>x.compareTo(z) &gt; 0</code>.</p>
-</li>
-<li><p>Finally, the implementor must ensure that <code>x.compareTo(y) == 0</code> implies that <code>sgn(x.compareTo(z)) == sgn(y.compareTo(z))</code>, for all z.</p>
-</li>
-<li><p>It is strongly recommended, but not required, that <code>(x.compareTo(y) == 0) == (x.equals(y))</code>.</p>
-<p>Generally speaking, any class that implements the <code>Comparable</code> interface and violates this condition should <strong>clearly indicate this fact</strong>. The recommended language is “Note: This class has a natural ordering that is inconsistent with equals.”</p>
-</li>
-</ul>
-<h2 id="compareTo-and-equals"><a href="#compareTo-and-equals" class="headerlink" title="compareTo and equals"></a><em>compareTo</em> and <em>equals</em></h2><p>Unlike the <code>equals</code> method, which imposes a global equivalence relation on all objects, <code>compareTo</code> <strong>doesn’t have to work across objects of different types</strong>: when confronted with objects of different types, <code>compareTo</code> is permitted to throw <code>ClassCastException</code>.</p>
-<p>Writing a <code>compareTo</code> method is similar to writing an <code>equals</code> method, but there are a few key differences. Because the <code>Comparable</code> interface is parameterized, the <code>compareTo</code> method is statically typed, so you <strong>don’t need to type check or cast its argument</strong>. If the argument is of the wrong type, the invocation won’t even compile. If the argument is null, the invocation should throw a <code>NullPointerException</code>, and it will, as soon as the method attempts to access its members.</p>
-<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>If a class has <strong>multiple significant fields</strong>, the order in which you compare them is critical. Start with <strong>the most significant field</strong> and work your way down.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Multiple-field Comparable with primitive fields</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(PhoneNumber pn)</span> &#123;<br>   <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> Short.compare(areaCode, pn.areaCode);<br>   <span class="hljs-keyword">if</span> (result == <span class="hljs-number">0</span>)  &#123;<br>       result = Short.compare(prefix, pn.prefix);<br>       <span class="hljs-keyword">if</span> (result == <span class="hljs-number">0</span>)<br>           result = Short.compare(lineNum, pn.lineNum);<br>	&#125;<br>   <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>In Java 8, the <code>Comparator</code> interface was outfitted with a set of <em>comparator construction methods</em>, which enable fluent construction of comparators. These comparators can then be used to implement a <code>compareTo</code> method, as required by the <code>Comparable</code> interface.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Comparable with comparator construction methods</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Comparator&lt;PhoneNumber&gt; COMPARATOR =<br>       comparingInt((PhoneNumber pn) -&gt; pn.areaCode)<br>         .thenComparingInt(pn -&gt; pn.prefix)<br>         .thenComparingInt(pn -&gt; pn.lineNum);<br><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(PhoneNumber pn)</span> &#123;<br>   <span class="hljs-keyword">return</span> COMPARATOR.compare(<span class="hljs-built_in">this</span>, pn);<br>&#125;<br></code></pre></td></tr></table></figure>
-
+                <h1 id="信息产业的生态链"><a href="#信息产业的生态链" class="headerlink" title="信息产业的生态链"></a>信息产业的生态链</h1><h2 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h2><p>计算机和整个IT行业的发展比传统工业要快得多。比尔·盖茨说，如果汽车工业能够像计算机领域一样发展，那么今天，买一辆汽车只需要25美元，一升汽油能跑400公里。</p>
+<p>英特尔公司的创始人戈登·摩尔(Gordon Moore) 博士最早看到了这个现象。在1965年，他就提出，至多在10年内，集成电路的集成度会每两年翻一番。后来，大家把这个周期缩短到18个月。</p>
+<p>当今世界经济的前五大行业，即<strong>金融、IT(包括电信)、医疗和制药、能源及日用消费品</strong>，只有IT一个行业能够以持续翻番的速度进步。在人类文明史上，还没有任何其他行业能够做到这一点。</p>
+<p>和任何其他商品相比，制造IT产品所需的原材料非常少，成本几乎是零。IT行业硬件的成本主要是<strong>制造设备的成本和研发成本</strong>。</p>
+<h3 id="摩尔定律主导着IT行业的发展"><a href="#摩尔定律主导着IT行业的发展" class="headerlink" title="摩尔定律主导着IT行业的发展"></a>摩尔定律主导着IT行业的发展</h3><p><strong>首先，为了不断提升芯片性能，IT公司必须在比较短的时间内完成下一代产品的开发。这</strong>就要求IT公司在研发上必须投入大量的资金，这使得每个产品的市场都不会有太多的竞争者。</p>
 <blockquote>
-<p>There are also comparator construction methods for object reference types. The static method, named <code>comparing</code>.</p>
+<p>在美国，主要IT市场大都只有一大一小两个主要竞争者。比如，在计算机处理器芯片方面，只有英特尔和AMD两家;在高性能图形处理器(GPU)方面，只有英伟达一家;在手机处理器方面，只有高通(Qualcomm)、三星、苹果和华为旗下的海思这几家(后两家只自用，不外卖)，而它们使用的都还是ARM公司设计好的系统结构。</p>
 </blockquote>
-<h2 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a><em>Comparator</em></h2><p>If a class does not implement <code>Comparable</code> or you need a nonstandard ordering, use a <code>Comparator</code> instead.</p>
-<p>Example:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Comparator based on static compare method</span><br> <span class="hljs-keyword">static</span> Comparator&lt;Object&gt; hashCodeOrder = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Comparator</span>&lt;&gt;() &#123;<br>   <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(Object o1, Object o2)</span> &#123;<br>     <span class="hljs-keyword">return</span> Integer.compare(o1.hashCode(), o2.hashCode());<br>   &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, whenever you implement a value class that has a sensible ordering, you should have the class implement the <code>Comparable</code> interface so that <strong>its instances can be easily sorted, searched, and used in comparison-based collections.</strong> </p>
-<p>When comparing field values in the implementations of the <code>compareTo</code> methods, avoid the use of the &lt; and &gt; operators. Instead, use the <strong>static <code>compare</code> methods</strong> in the boxed primitive classes or the <strong>comparator construction methods</strong> in the <code>Comparator</code> interface.</p>
+<p><strong>其次，由于有了强有力的硬件支持，以前想都不敢想的应用会不断涌现。</strong></p>
+<blockquote>
+<p>比如，20多年前，将高清晰度电影(1920×1080分辨率)数字化的计算量连IBM的大型机也无法胜任;现在，一台笔记本大小的索尼游戏机就可以做到，而新的一代电视机则能播放4K(即4000线的分辨率)的视频节目了。</p>
+<p>这就为一些新兴公司的诞生创造了条件。比如，在2000年以前，不会有人想办一家YouTube这样的公司，因为那时候网络的速度无法满足在网上看录像的要求，而现在YouTube已经融入了许多人的生活。</p>
+</blockquote>
+<p><strong>第三，摩尔定律使得各个公司现在的研发必须针对多年后的市场。</strong></p>
+<blockquote>
+<p>在 Google内部，每一次基础架构(Infrastructure)的升级，都要按照目前计算能力和存储量的10倍来设计，因为达到那个水平，不过是三四年的时间，这在传统行业是无法想象的。</p>
+</blockquote>
+<p>从1965年到2019年，摩尔定律历经了半个多世纪的时光。在未来的20年里，工程师们考虑的将是在<strong>单位能耗</strong>的基础上争取让处理器的性能和容量翻番，而不是简单地追求每一颗芯片本身性能的翻番。</p>
+<blockquote>
+<p>英伟达和Google的人工智能芯片就是很好的例子，它们在机器学习等领域可以将单位能耗的计算能力提高近千倍。与50年前不同的是，今天各种处理器无所不在，它们消耗了大量的能源，而在50年前，半导体芯片耗能总量在全球能源消耗中的占比非常低。因此，在未来我们依然能看到摩尔定律给我们带来的惊喜。</p>
+</blockquote>
+<h2 id="安迪-比尔定律"><a href="#安迪-比尔定律" class="headerlink" title="安迪 - 比尔定律"></a>安迪 - 比尔定律</h2><p>摩尔定律给所有的计算机消费者带来一个希望，即如果我今天嫌计算机太贵买不起，那么我等18个月就可以用一半的价钱来买。要真是这么简单的话，计算机的销售量就上不去了。想要买计算机的人会多等几个月，已经有计算机的人也没有动力更新计算机。其他的IT产品也将是如此。IT行业也就成了传统行业，没有什么发展了。</p>
+<p>是什么动力促使人们不断地主动更新自己的硬件呢？IT界把它总结成安迪–比尔定律，它的原话是“比尔要拿走安迪所给的 (<strong>What Andy gives， Bill takes away.</strong>)。”</p>
+<blockquote>
+<p>安迪是英特尔公司已故的带有传奇色彩的CEO安迪·格鲁夫 (Andy Grove)，而比尔是微软公司创始人比尔·盖茨。</p>
+</blockquote>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>在过去的40多年里，英特尔处理器的处理速度每18个月翻一番，计算机内存和硬盘的容量则以更快的速度增长。但是，微软的操作系统和应用软件却越来越慢，也越做越大。所以，现在的计算机虽然比10年前快了100倍，软件的运行速度感觉上还是和以前差不多。</p>
+<p>为什么操作系统和应用软件越做越大？是因为现在的软件开发人员不再像二三十年前那样精打细算了。用汇编语言编程，工作效率是极低的，而且写出来的程序可读性很差，不符合软件工程的要求，也无法完成越来越复杂的功能。今天，有了足够的硬件资源，软件工程师做事情更讲究开发效率、程序的规范化和可读性，等等。</p>
+<blockquote>
+<p>另外，由于人工成本的提高，为了节省软件工程师编写和调试程序的时间，编程语言越来越好用，同时执行效率却越来越低。比如，今天的那些脚本语言比十年前用的Java效率低得多，Java则比C++效率低得多，C++又比30多年前的C效率低。因此，即使是同样功能的软件，今天的比昨天的占用硬件资源多就在所难免。</p>
+</blockquote>
+<h3 id="影响"><a href="#影响" class="headerlink" title="影响"></a>影响</h3><p>虽然用户很是反感新的软件把硬件提升所带来的好处几乎全部用光了，但是在IT领域，各个硬件厂商恰恰是靠软件开发商用光自己提供的硬件资源得以生存的。</p>
+<h4 id="PC时代产业格局：WinTel"><a href="#PC时代产业格局：WinTel" class="headerlink" title="PC时代产业格局：WinTel"></a>PC时代产业格局：WinTel</h4><p><strong>个人电脑工业的整个生态链</strong>：以微软为首的软件开发商吃掉硬件提升带来的全部好处，迫使用户更新机器，让惠普和戴尔等公司受益，而这些PC厂商再向英特尔等半导体公司订购新的芯片，同时向希捷等外设厂商购买新的外设。</p>
+<blockquote>
+<p>软件开发商-&gt;PC厂商-&gt;芯片厂商&amp;外设厂商</p>
+</blockquote>
+<p>在安迪–比尔定律中，“安迪”像是个天使，他总在不断给用户更多的东西，而“比尔”则像是个魔鬼，总和大家做对。但是，如果比尔这个魔鬼消失了，安迪就不复存在了。</p>
+<p>从2011年开始，由于个人电脑产业受到移动智能设备的冲击而不再景气，软件厂商在PC上更新旧软件和开发新软件的动力就不足。在人们通常的想象中，如果软件不再占用更多的资源，硬件还在进步，我们应该感到计算机越来越快，越来越好用才对，但这件事情并没有发生。</p>
+<p>个人电脑进步慢，是因为它性能的提升压力减小了。在Windows 7之后，微软在PC上也没有做出什么新产品，用了几十年的 Office功能和过去还是差不多。这样一来，英特尔就不再重视个人电脑处理器性能的提升了，它在这方面主要是做改进工作，然后将科研的重点转到了服务器的处理器以及其他产品上了。</p>
+<blockquote>
+<p>在IT工业的产业链中，处于上游的是“看不见摸不着”的软件和IT服务业，而下游才是“看得见摸得着”的硬件和半导体。因此，从事IT业，<strong>要想获得高额利润，就得从上游入手</strong>。从微软，到Google，再到Facebook，无不如此。唯一的例外是苹果公司，它是通过硬件实现软件的价值，因为在过去10多年里它的产品已经成为了一种时尚和潮流。</p>
+</blockquote>
+<h4 id="智能手机时代产业格局：Android-ARM"><a href="#智能手机时代产业格局：Android-ARM" class="headerlink" title="智能手机时代产业格局：Android-ARM"></a>智能手机时代产业格局：Android-ARM</h4><p>有趣的是，在手机领域，魔鬼比尔还存在，天使安迪不得不努力工作，于是十多年下来此消彼长，今天手机的很多功能，特别是图像处理功能，已经超过了PC。</p>
+<p>2007年，Google成立了安卓(Android)联盟，它包括世界上一大半处理器芯片制造商、手机厂商和移动运营商，其核心是围绕开源的安卓手机操作系统，打造一个开放而兼容的移动通信产业。</p>
+<p>很快一个类似于当年WinTel的格局就形成了。只不过起到当年微软 Windows作用的是Google的<strong>Android</strong>，而高通、博通和美满电子这一大两小的基于 <strong>ARM</strong> (Advanced RISC Machine)的手机芯片公司起到了当年英特尔和AMD的作用。这个格局可以描述成 Android-ARM，甚至可以简单地把它看成是2.0版的安迪–比尔定律。</p>
+<blockquote>
+<p>随后三星和海思(华为的半导体子公司)取代了博通和美满电子，小米、华为和OPPO &#x2F;vivo在手机市场分到了一杯羹。</p>
+</blockquote>
+<h2 id="反摩尔定律"><a href="#反摩尔定律" class="headerlink" title="反摩尔定律"></a>反摩尔定律</h2><p>Google前CEO埃里克·施密特(Eric Schmidt)在一次采访中指出，如果你反过来看摩尔定律，<strong>一个IT公司如果今天和18个月前卖掉同样多的、同样的产品，它的营业额就要降一半</strong>。</p>
+<h3 id="消极影响"><a href="#消极影响" class="headerlink" title="消极影响"></a>消极影响</h3><p>对于IT公司而言，反摩尔定律是非常可怕的，因为一个IT公司付出同样的劳动，却只得到以前一半的收入。<strong>反摩尔定律逼着所有的硬件设备公司都必须赶上摩尔定律规定的更新速度</strong>。事实上，所有的硬件和设备生产商活得都非常辛苦。</p>
+<h3 id="积极影响"><a href="#积极影响" class="headerlink" title="积极影响"></a>积极影响</h3><p><strong>它促成了科技领域质的进步，并为新兴公司提供生存和发展的可能。</strong></p>
+<p>和所有事物的发展一样，IT领域的技术进步也有量变和质变两种。比如说，同一种处理器在系统结构上没有太大变化，而只是主频提高了，这种进步就是量变的进步。当处理器由16位上升到32位，再到64位时，就有了小的质变。如果哪一天能用到纳米技术或生物技术，那么就做到了质的飞跃，半导体的集成度会有上百倍的提高。为了赶上摩尔定律预测的发展速度，光靠量变是不够的。每一种技术，过不了多少年，量变的潜力就会被挖掘光，这时就必须要有革命性的创造发明诞生。</p>
+<p>在科技进步<strong>量变的过程中，新的小公司是无法和老的大公司竞争的</strong>，因为后者在老的技术方面拥有无与伦比的优势。</p>
+<blockquote>
+<p>比如，木工厂出身的诺基亚在老式模拟手机上是无法和传统的通信设备老大摩托罗拉竞争的。</p>
+</blockquote>
+<p>但是，在<strong>抓住质变的机遇上，有些小公司会做得比大公司更好而后来居上</strong>，因为它们没有包袱，也比大公司灵活。</p>
+<blockquote>
+<p>2015年后，当3G手机逐步取代2G手机时，PC时代不起眼的三星公司一跃成为全球最大的智能手机厂商，而过去没有做过手机的华为，以前默默无闻的小米和OPPO&#x2F;vivo也及时踏上安卓的快船。苹果和众多安卓手机厂商把诺基亚这个2G时代的龙头老大逼上了当年摩托罗拉的老路。这也是硅谷等新兴地区出现了众多新技术公司的原因。</p>
+</blockquote>
+<blockquote>
+<p>数字电话传输率本身限制在64kbit&#x2F;s，因此调制解调器的传输率最大到56kbit&#x2F;s就到顶了。但是，到了上个世纪90年代后期，出现了DSL技术，可以将电话线上的数据传输速度提高近200倍，斯坦福大学的约翰·查菲教授带着自己的几个学生，办起了一家做DSL的小公司Amati，之后以4亿美元的高价把Amati公司卖给了德州仪器。在调制解调器发展的量变阶段，不会出现Amati这样的小公司，即使出现了，也无法和德州仪器竞争。但是，一旦调制解调器速度接近原有的极限，能够突破这个极限的新兴公司就有机会登上历史的舞台。</p>
+</blockquote>
 
                 
               </div>
@@ -347,15 +376,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/Book-Notes%EF%BC%8C-%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/" class="category-chain-item">Book Notes， 浪潮之巅</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Java/Effective-Java/" class="category-chain-item">Effective Java</a>
-  
-  
-
   
 
       </span>
@@ -374,8 +396,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-14. Consider implmenting Comparable</div>
-      <div>https://peixuanhu.github.io/2023/11/17/Java/effective-java/Item14-Consider-implementing-Comparable/</div>
+      <div>浪潮之巅读书笔记4-信息产业的发展规律</div>
+      <div>https://peixuanhu.github.io/2023/11/17/book-notes/浪潮之巅/IT-laws/</div>
     </div>
     <div class="license-meta">
       
@@ -424,9 +446,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/17/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/IT-laws/" title="浪潮之巅读书笔记4-信息产业的发展规律">
+                      <a href="/2023/11/18/Java/effective-java/Item15-Minimize-the-accessibility-of-classes-and-members/" title="Effective Java-15. Minimize the accessibility of classes and members">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">浪潮之巅读书笔记4-信息产业的发展规律</span>
+                        <span class="hidden-mobile">Effective Java-15. Minimize the accessibility of classes and members</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -434,8 +456,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/16/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/Apple-and-Microsoft/" title="浪潮之巅读书笔记3-苹果与微软">
-                        <span class="hidden-mobile">浪潮之巅读书笔记3-苹果与微软</span>
+                      <a href="/2023/11/17/Java/effective-java/Item14-Consider-implementing-Comparable/" title="Effective Java-14. Consider implmenting Comparable">
+                        <span class="hidden-mobile">Effective Java-14. Consider implmenting Comparable</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

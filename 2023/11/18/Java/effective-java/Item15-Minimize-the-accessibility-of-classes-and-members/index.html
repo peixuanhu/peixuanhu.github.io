@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 14: Consider implementing ComparableIf you are writing a value class with an obvious natural ordering, such as alphabetical order, numerical order, or chronological order, you should implement th">
+    <meta name="description" content="Item 15: Minimize the accessibility of classes and membersThe single most important factor that distinguishes a well-designed component from a poorly designed one is the degree to which the component">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-14. Consider implmenting Comparable">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/17/Java/effective-java/Item14-Consider-implementing-Comparable/index.html">
+<meta property="og:title" content="Effective Java-15. Minimize the accessibility of classes and members">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/18/Java/effective-java/Item15-Minimize-the-accessibility-of-classes-and-members/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 14: Consider implementing ComparableIf you are writing a value class with an obvious natural ordering, such as alphabetical order, numerical order, or chronological order, you should implement th">
+<meta property="og:description" content="Item 15: Minimize the accessibility of classes and membersThe single most important factor that distinguishes a well-designed component from a poorly designed one is the degree to which the component">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-17T08:52:01.709Z">
-<meta property="article:modified_time" content="2023-11-18T02:49:03.845Z">
+<meta property="article:published_time" content="2023-11-18T02:48:48.317Z">
+<meta property="article:modified_time" content="2023-11-18T05:45:43.201Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-14. Consider implmenting Comparable - Peixuan&#39;s Page</title>
+  <title>Effective Java-15. Minimize the accessibility of classes and members - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-14. Consider implmenting Comparable"></span>
+            <span id="subtitle" data-typed-text="Effective Java-15. Minimize the accessibility of classes and members"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-17 16:52" pubdate>
-          November 17, 2023 pm
+        <time datetime="2023-11-18 10:48" pubdate>
+          November 18, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k words
+          6.4k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          30 mins
+          53 mins
         
       </span>
     
@@ -290,45 +290,66 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-14. Consider implmenting Comparable</h1>
+            <h1 id="seo-header">Effective Java-15. Minimize the accessibility of classes and members</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Item-14-Consider-implementing-Comparable"><a href="#Item-14-Consider-implementing-Comparable" class="headerlink" title="Item 14: Consider implementing Comparable"></a>Item 14: Consider implementing <em>Comparable</em></h2><p>If you are writing <strong>a value class with an obvious natural ordering</strong>, such as alphabetical order, numerical order, or chronological order, you should implement the <code>Comparable</code> interface:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt; &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(T t)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="General-contract-of-compareTo-method"><a href="#General-contract-of-compareTo-method" class="headerlink" title="General contract of compareTo method"></a>General contract of <em>compareTo</em> method</h2><p>Compares this object with the specified object for order.</p>
-<p>Returns a <strong>negative integer, zero, or a positive integer</strong> as this object is <strong>less than, equal to, or greater than</strong> the specified object.</p>
-<p>Throws <code>ClassCastException</code> if the specified object’s type prevents it from being compared to this object.</p>
-<ul>
-<li><p>The implementor must ensure that <code>sgn(x.compareTo(y)) == -sgn(y. compareTo(x))</code> for all x and y.</p>
+                <h1 id="Item-15-Minimize-the-accessibility-of-classes-and-members"><a href="#Item-15-Minimize-the-accessibility-of-classes-and-members" class="headerlink" title="Item 15: Minimize the accessibility of classes and members"></a>Item 15: Minimize the accessibility of classes and members</h1><p>The single most important factor that distinguishes a well-designed component from a poorly designed one is the degree to which <strong>the component hides its internal data and other implementation details from other components</strong>.</p>
+<p>A well-designed component <strong>hides all its implementation details, cleanly separating its API from its implementation</strong>. Components then <strong>communicate only through their APIs</strong> and are oblivious to each others’ inner workings. This concept, known as <em>information hiding</em> or <em><strong>encapsulation</strong></em>, is a fundamental tenet of software design.</p>
+<h2 id="The-importance-of-information-hiding"><a href="#The-importance-of-information-hiding" class="headerlink" title="The importance of information hiding"></a>The importance of <em>information hiding</em></h2><ul>
+<li><p>It <em><strong>decouples</strong></em> the components that comprise a system, allowing them to be developed, tested, optimized, used, understood, and modified <strong>in isolation</strong>. This speeds up system development because components can be developed in parallel.</p>
 </li>
-<li><p>The implementor must also ensure that the relation is transitive: <code>(x. compareTo(y) &gt; 0 &amp;&amp; y.compareTo(z) &gt; 0)</code> implies <code>x.compareTo(z) &gt; 0</code>.</p>
+<li><p>It eases the burden of <strong>maintenance</strong> because components can be understood more quickly and debugged or replaced with little fear of harming other components.</p>
+<blockquote>
+<p>Once a system is complete and profiling has determined which components are causing performance problems (Item 67), those components can be optimized without affecting the correctness of others.</p>
+</blockquote>
 </li>
-<li><p>Finally, the implementor must ensure that <code>x.compareTo(y) == 0</code> implies that <code>sgn(x.compareTo(z)) == sgn(y.compareTo(z))</code>, for all z.</p>
+<li><p>It increases software <strong>reuse</strong> because components that aren’t tightly coupled often prove useful in other contexts besides the ones for which they were developed.</p>
 </li>
-<li><p>It is strongly recommended, but not required, that <code>(x.compareTo(y) == 0) == (x.equals(y))</code>.</p>
-<p>Generally speaking, any class that implements the <code>Comparable</code> interface and violates this condition should <strong>clearly indicate this fact</strong>. The recommended language is “Note: This class has a natural ordering that is inconsistent with equals.”</p>
+<li><p>It decreases the risk in building large systems because individual components may prove successful even if the system does not.</p>
 </li>
 </ul>
-<h2 id="compareTo-and-equals"><a href="#compareTo-and-equals" class="headerlink" title="compareTo and equals"></a><em>compareTo</em> and <em>equals</em></h2><p>Unlike the <code>equals</code> method, which imposes a global equivalence relation on all objects, <code>compareTo</code> <strong>doesn’t have to work across objects of different types</strong>: when confronted with objects of different types, <code>compareTo</code> is permitted to throw <code>ClassCastException</code>.</p>
-<p>Writing a <code>compareTo</code> method is similar to writing an <code>equals</code> method, but there are a few key differences. Because the <code>Comparable</code> interface is parameterized, the <code>compareTo</code> method is statically typed, so you <strong>don’t need to type check or cast its argument</strong>. If the argument is of the wrong type, the invocation won’t even compile. If the argument is null, the invocation should throw a <code>NullPointerException</code>, and it will, as soon as the method attempts to access its members.</p>
-<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>If a class has <strong>multiple significant fields</strong>, the order in which you compare them is critical. Start with <strong>the most significant field</strong> and work your way down.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Multiple-field Comparable with primitive fields</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(PhoneNumber pn)</span> &#123;<br>   <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> Short.compare(areaCode, pn.areaCode);<br>   <span class="hljs-keyword">if</span> (result == <span class="hljs-number">0</span>)  &#123;<br>       result = Short.compare(prefix, pn.prefix);<br>       <span class="hljs-keyword">if</span> (result == <span class="hljs-number">0</span>)<br>           result = Short.compare(lineNum, pn.lineNum);<br>	&#125;<br>   <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>In Java 8, the <code>Comparator</code> interface was outfitted with a set of <em>comparator construction methods</em>, which enable fluent construction of comparators. These comparators can then be used to implement a <code>compareTo</code> method, as required by the <code>Comparable</code> interface.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Comparable with comparator construction methods</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Comparator&lt;PhoneNumber&gt; COMPARATOR =<br>       comparingInt((PhoneNumber pn) -&gt; pn.areaCode)<br>         .thenComparingInt(pn -&gt; pn.prefix)<br>         .thenComparingInt(pn -&gt; pn.lineNum);<br><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(PhoneNumber pn)</span> &#123;<br>   <span class="hljs-keyword">return</span> COMPARATOR.compare(<span class="hljs-built_in">this</span>, pn);<br>&#125;<br></code></pre></td></tr></table></figure>
-
+<h2 id="Approach-to-aid-in-information-hiding-access-control"><a href="#Approach-to-aid-in-information-hiding-access-control" class="headerlink" title="Approach to aid in information hiding - access control"></a>Approach to aid in information hiding - <em>access control</em></h2><p>The <em>access control</em> mechanism specifies the <em>accessibility</em> of classes, interfaces, and members. The accessibility of an entity is determined by the <strong>location of its declaration</strong> and by which, if any, of the <strong>access modifiers</strong> (<code>private</code>, <code>protected</code>, and <code>public</code>) is present on the declaration. Proper use of these modifiers is essential to information hiding.</p>
+<h3 id="Specific-rules-for-classes"><a href="#Specific-rules-for-classes" class="headerlink" title="Specific rules for classes"></a>Specific rules for classes</h3><p>The rule of thumb is simple: <strong>make each class or member as inaccessible as possible.</strong> In other words, <strong>use the lowest possible access level</strong> consistent with the proper functioning of the software that you are writing.</p>
+<p>If a top-level class or interface can be made package-private, it should be. By making it <strong>package-private</strong>, you make it part of the implementation rather than the exported API, and <strong>you can modify it, replace it, or eliminate it in a subsequent release without fear of harming existing clients</strong>. If you make it public, you are obligated to support it forever to maintain compatibility.</p>
+<p>If a package-private top-level class or interface is used by <strong>only one class</strong>, consider making the top-level class <strong>a private static nested class</strong> of the sole class that uses it (Item 24).</p>
 <blockquote>
-<p>There are also comparator construction methods for object reference types. The static method, named <code>comparing</code>.</p>
+<p>But it is far more important to reduce the accessibility of a <strong>gratuitously public class</strong> than of a package-private top-level class: the public class is part of the package’s API, while the package-private top- level class is already part of its implementation.</p>
 </blockquote>
-<h2 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a><em>Comparator</em></h2><p>If a class does not implement <code>Comparable</code> or you need a nonstandard ordering, use a <code>Comparator</code> instead.</p>
-<p>Example:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Comparator based on static compare method</span><br> <span class="hljs-keyword">static</span> Comparator&lt;Object&gt; hashCodeOrder = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Comparator</span>&lt;&gt;() &#123;<br>   <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(Object o1, Object o2)</span> &#123;<br>     <span class="hljs-keyword">return</span> Integer.compare(o1.hashCode(), o2.hashCode());<br>   &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="Specific-rules-for-members"><a href="#Specific-rules-for-members" class="headerlink" title="Specific rules for members"></a>Specific rules for members</h3><p>For members (fields, methods, nested classes, and nested interfaces), there are four possible access levels, listed here in order of increasing accessibility:</p>
+<ul>
+<li><strong>private</strong>—The member is accessible only from the top-level class where it is declared.</li>
+<li><strong>package-private</strong>—The member is accessible from any class in the package where it is declared. Technically known as <em>default</em> access, this is the access level you get if no access modifier is specified (except for interface members, which are public by default).</li>
+<li><strong>protected</strong>—The member is accessible from subclasses of the class where it is declared (subject to a few restrictions [JLS, 6.6.2]) and from any class in the package where it is declared.</li>
+<li><strong>public</strong>—The member is accessible from anywhere.</li>
+</ul>
+<p>After carefully designing your class’s <strong>public API</strong>, your reflex should be to make all other members <strong>private</strong>. Only if another class in the same package really needs to access a member should you remove the private modifier, making the member package-private.</p>
+<blockquote>
+<p>These fields can, however, “leak” into the exported API if the class implements <code>Serializable</code> (Items 86 and 87).</p>
+</blockquote>
+<h4 id="Override"><a href="#Override" class="headerlink" title="Override"></a>Override</h4><p>If a method <strong>overrides a superclass method</strong>, it <strong>cannot</strong> have a <strong>more restrictive access level</strong> in the subclass than in the superclass. This is necessary to ensure that an instance of the subclass is usable anywhere that an instance of the superclass is usable (the <em>Liskov substitution principle</em>).</p>
+<h4 id="Members-of-public-classes"><a href="#Members-of-public-classes" class="headerlink" title="Members of public classes"></a>Members of public classes</h4><p>For members of public classes, a huge increase in accessibility occurs when the access level goes from <strong>package-private</strong> to <strong>protected</strong>. A protected member is part of the class’s exported API and must be supported forever. Also, a protected member of an exported class represents a public commitment to an implementa- tion detail (Item 19). <strong>The need for protected members should be relatively rare.</strong></p>
+<p><strong>Instance fields of public classes should rarely be public</strong> (Item 16). If an instance field is <strong>nonfinal</strong> or is a reference to a mutable object, then by making it public, you <strong>give up the ability to limit the values</strong> that can be stored in the field. Also, you <strong>give up the ability to take any action when the field is modified</strong>, so classes with public mutable fields are <strong>not</strong> generally <strong>thread-safe</strong>.</p>
+<blockquote>
+<p>Even if a field is <strong>final</strong> and refers to an immutable object, by making it public you <strong>give up the flexibility to switch to a new internal data representation</strong> in which the field does not exist.</p>
+</blockquote>
+<h4 id="Array-field"><a href="#Array-field" class="headerlink" title="Array field"></a>Array field</h4><p>Note that a nonzero-length array is always mutable, so <strong>it is wrong for a class to have a public static final array field, or an accessor that returns such a field.</strong> If a class has such a field or accessor, clients will be able to modify the contents of the array. This is a frequent source of security holes:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Potential security hole!</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Things[] VALUES = &#123; ... &#125;;<br></code></pre></td></tr></table></figure>
 
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, whenever you implement a value class that has a sensible ordering, you should have the class implement the <code>Comparable</code> interface so that <strong>its instances can be easily sorted, searched, and used in comparison-based collections.</strong> </p>
-<p>When comparing field values in the implementations of the <code>compareTo</code> methods, avoid the use of the &lt; and &gt; operators. Instead, use the <strong>static <code>compare</code> methods</strong> in the boxed primitive classes or the <strong>comparator construction methods</strong> in the <code>Comparator</code> interface.</p>
+<p>Beware of the fact that some IDEs generate accessors that return references to pri- vate array fields, resulting in exactly this problem.</p>
+<h5 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h5><p>You can make the public array private and add a public immutable list:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Thing[] PRIVATE_VALUES = &#123; ... &#125;;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> List&lt;Thing&gt; VALUES =<br>    Collections.unmodifiableList(Arrays.asList(PRIVATE_VALUES));<br></code></pre></td></tr></table></figure>
+
+<h5 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h5><p>Alternatively, you can make the array private and add a public method that returns a copy of a private array:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Thing[] PRIVATE_VALUES = &#123; ... &#125;;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Thing[] values() &#123;<br>   <span class="hljs-keyword">return</span> PRIVATE_VALUES.clone();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>As of Java 9, there are two additional, implicit access levels introduced as part of the <em>module system</em>.</p>
+<p>A module may explicitly export some of its packages via <em>export declarations</em> in its <em>module declaration</em> (which is by convention contained in a source file named <code>module-info.java</code>).</p>
+<p>Public and protected members of unexported packages in a module are inaccessible outside the module; within the module, accessibility is unaffected by export declarations. Using the module system allows you to <strong>share classes among packages within a module without making them visible to the entire world</strong>.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>To summarize, you should reduce accessibility of program elements as much as possible (within reason).</p>
+<p>After carefully designing a <strong>minimal public API</strong>, you should prevent any stray classes, interfaces, or members from becoming part of the API.</p>
+<p>With the exception of public static final fields (which serve as constants), <strong>public classes should have no public fields</strong>. Ensure that objects referenced by public static final fields are immutable.</p>
 
                 
               </div>
@@ -374,8 +395,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-14. Consider implmenting Comparable</div>
-      <div>https://peixuanhu.github.io/2023/11/17/Java/effective-java/Item14-Consider-implementing-Comparable/</div>
+      <div>Effective Java-15. Minimize the accessibility of classes and members</div>
+      <div>https://peixuanhu.github.io/2023/11/18/Java/effective-java/Item15-Minimize-the-accessibility-of-classes-and-members/</div>
     </div>
     <div class="license-meta">
       
@@ -387,7 +408,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 17, 2023</div>
+          <div>November 18, 2023</div>
         </div>
       
       
@@ -424,18 +445,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/17/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/IT-laws/" title="浪潮之巅读书笔记4-信息产业的发展规律">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">浪潮之巅读书笔记4-信息产业的发展规律</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/16/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/Apple-and-Microsoft/" title="浪潮之巅读书笔记3-苹果与微软">
-                        <span class="hidden-mobile">浪潮之巅读书笔记3-苹果与微软</span>
+                      <a href="/2023/11/17/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/IT-laws/" title="浪潮之巅读书笔记4-信息产业的发展规律">
+                        <span class="hidden-mobile">浪潮之巅读书笔记4-信息产业的发展规律</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
