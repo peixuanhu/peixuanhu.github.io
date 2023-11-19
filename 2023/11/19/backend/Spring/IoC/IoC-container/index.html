@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Apple大事记1976 苹果计算机公司成立，推出Apple I个人电脑。 1977 推出第一款系列个人电脑Apple II。 1984 推出采用图像视窗界面操作系统的麦金托什(Macintosh)电脑。 1985 乔布斯和新CEO斯卡利开始权力斗争，前者失败离开苹果公司。 1994 苹果告微软的视窗操作系统抄袭麦金托什操作系统，官司最终和解。 1997 乔布斯以顾问的身份回到苹果公司，经过权力斗">
+    <meta name="description" content="IoC容器什么是容器？容器是一种为某种特定组件的运行提供必要支持的一个软件环境。例如，Tomcat就是一个Servlet容器，它可以为Servlet的运行提供运行环境。类似Docker这样的软件也是一个容器，它提供了必要的Linux环境以便运行一个特定的Linux进程。 Spring的核心就是提供了一个IoC容器，它可以管理所有轻量级的JavaBean组件，提供的底层服务包括组件的生命周期管理、配">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浪潮之巅读书笔记3-苹果与微软">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/16/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/Apple-and-Microsoft/index.html">
+<meta property="og:title" content="IoC容器">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/19/backend/Spring/IoC/IoC-container/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Apple大事记1976 苹果计算机公司成立，推出Apple I个人电脑。 1977 推出第一款系列个人电脑Apple II。 1984 推出采用图像视窗界面操作系统的麦金托什(Macintosh)电脑。 1985 乔布斯和新CEO斯卡利开始权力斗争，前者失败离开苹果公司。 1994 苹果告微软的视窗操作系统抄袭麦金托什操作系统，官司最终和解。 1997 乔布斯以顾问的身份回到苹果公司，经过权力斗">
+<meta property="og:description" content="IoC容器什么是容器？容器是一种为某种特定组件的运行提供必要支持的一个软件环境。例如，Tomcat就是一个Servlet容器，它可以为Servlet的运行提供运行环境。类似Docker这样的软件也是一个容器，它提供了必要的Linux环境以便运行一个特定的Linux进程。 Spring的核心就是提供了一个IoC容器，它可以管理所有轻量级的JavaBean组件，提供的底层服务包括组件的生命周期管理、配">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-16T14:01:25.286Z">
-<meta property="article:modified_time" content="2023-11-19T13:39:40.810Z">
+<meta property="article:published_time" content="2023-11-19T13:38:57.944Z">
+<meta property="article:modified_time" content="2023-11-19T14:01:11.856Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>浪潮之巅读书笔记3-苹果与微软 - Peixuan&#39;s Page</title>
+  <title>IoC容器 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="浪潮之巅读书笔记3-苹果与微软"></span>
+            <span id="subtitle" data-typed-text="IoC容器"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-16 22:01" pubdate>
-          November 16, 2023 pm
+        <time datetime="2023-11-19 21:38" pubdate>
+          November 19, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k words
+          2.1k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          34 mins
+          18 mins
         
       </span>
     
@@ -290,67 +290,48 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">浪潮之巅读书笔记3-苹果与微软</h1>
+            <h1 id="seo-header">IoC容器</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Apple"><a href="#Apple" class="headerlink" title="Apple"></a>Apple</h1><h2 id="大事记"><a href="#大事记" class="headerlink" title="大事记"></a>大事记</h2><p>1976 苹果计算机公司成立，推出Apple I个人电脑。</p>
-<p>1977 推出第一款系列个人电脑Apple II。</p>
-<p>1984 推出采用图像视窗界面操作系统的麦金托什(Macintosh)电脑。</p>
-<p>1985 乔布斯和新CEO斯卡利开始权力斗争，前者失败离开苹果公司。</p>
-<p>1994 苹果告微软的视窗操作系统抄袭麦金托什操作系统，官司最终和解。</p>
-<p>1997 乔布斯以顾问的身份回到苹果公司，经过权力斗争，1997年9月接管了多年亏损的公司;同年，与微软的官司以微软注资苹果而得到和解。</p>
-<p>1998 iMac诞生，苹果重新盈利。</p>
-<p>2001 iPod诞生，颠覆了音乐产业。</p>
-<p>2007 iPhone诞生，颠覆了整个手机行业。</p>
-<p>2010 iPad诞生，同年苹果公司的市值再次超过微软，成为全球最值钱的IT公司。</p>
-<p>2011 苹果创始人乔布斯去世，此前，他将CEO一职交给了蒂姆·库克，同年苹果超过埃克森美孚石油公司，成为全球市值最高的公司。</p>
-<p>2015 苹果公司推出智能手表Apple Watch。</p>
-<p>2018 苹果公司的市值一度突破1万亿美元，成为有史以来第一个达到这个市值规模的西方公司。</p>
-<h2 id="苹果的发展"><a href="#苹果的发展" class="headerlink" title="苹果的发展"></a>苹果的发展</h2><h3 id="计算机"><a href="#计算机" class="headerlink" title="计算机"></a>计算机</h3><p>麦金托什是世界上第一款普通老百姓买得起、拥有交互式图形界面并且使用鼠标的个人电脑。</p>
-<p>但苹果走了一条封闭的道路，不允许别人制造兼容机，后来导致市场越来越小。但苹果将计就计，走高端产品路线，避免了与微软、戴尔和惠普的正面竞争。慢慢地，苹果的产品成了时尚的象征。</p>
+                <h1 id="IoC容器"><a href="#IoC容器" class="headerlink" title="IoC容器"></a>IoC容器</h1><h2 id="什么是容器？"><a href="#什么是容器？" class="headerlink" title="什么是容器？"></a>什么是容器？</h2><p>容器是一种为某种特定组件的运行提供必要支持的一个软件环境。例如，Tomcat就是一个Servlet容器，它可以为Servlet的运行提供运行环境。类似Docker这样的软件也是一个容器，它提供了必要的Linux环境以便运行一个特定的Linux进程。</p>
+<p>Spring的核心就是提供了一个IoC容器，它可以管理所有轻量级的JavaBean组件，提供的底层服务包括组件的生命周期管理、配置和组装服务、AOP支持，以及建立在AOP基础上的声明式事务服务等。</p>
+<h2 id="IoC原理"><a href="#IoC原理" class="headerlink" title="IoC原理"></a>IoC原理</h2><p>IoC全称Inversion of Control，直译为控制反转。</p>
+<p>如果一个系统有大量的组件，其生命周期和相互之间的依赖关系如果由组件自身来维护，不但大大增加了系统的复杂度，而且会导致组件之间极为紧密的耦合，继而给测试和维护带来了极大的困难。</p>
+<p>传统的应用程序中，控制权在程序本身，程序的控制流程完全由开发者控制。这种模式的缺点是，一个组件如果要使用另一个组件，必须先知道如何正确地创建它。</p>
+<p>在IoC模式下，控制权发生了反转，即从应用程序转移到了IoC容器，所有组件不再由应用程序自己创建和配置，而是由IoC容器负责，这样，应用程序只需要直接使用已经创建好并且配置好的组件。为了能让组件在IoC容器中被“装配”出来，需要某种“注入”机制。</p>
+<p>不直接<code>new</code>一个<code>DataSource</code>，而是注入一个<code>DataSource</code>，这个小小的改动虽然简单，却带来了一系列好处：</p>
+<ol>
+<li><code>BookService</code>不再关心如何创建<code>DataSource</code>，因此，不必编写读取数据库配置之类的代码；</li>
+<li><code>DataSource</code>实例被注入到<code>BookService</code>，同样也可以注入到<code>UserService</code>，因此，共享一个组件非常简单；</li>
+<li>测试<code>BookService</code>更容易，因为注入的是<code>DataSource</code>，可以使用内存数据库，而不是真实的MySQL配置。</li>
+</ol>
 <blockquote>
-<p>不过乔布斯后来在苹果电脑中逐渐采用了英特尔的通用处理器，同时采用FreeBSD作为新的苹果操作系统内核。用相对开放的体系吸引全社会大量有兴趣的开源工程师，让他们能很容易地为苹果开发软件。</p>
+<p>因此，IoC又称为依赖注入（DI：Dependency Injection），它解决了一个最主要的问题：将组件的创建+配置与组件的使用相分离，并且，由IoC容器负责管理组件的生命周期。</p>
 </blockquote>
-<h3 id="iPod"><a href="#iPod" class="headerlink" title="iPod"></a>iPod</h3><p>上个世纪最后10年，以互联网和多媒体技术为核心的一场技术革命开始了。随着声音和图像压缩技术的出现，数字化了的音乐和录像很容易在互联网上传播。同时，市场上出现了一些小型音乐播放器。</p>
-<p>乔布斯看到了两点最重要的事实:</p>
-<ul>
-<li><p>第一，虽然已经有了不少音乐播放器，但是做得都不好，尤其是在音乐数量多了以后，查找和管理都很难。从一千首歌里面顺序找到自己想听的可能要花几分钟时间。另外，要将几十张CD上的歌曲导到播放器上更是麻烦。</p>
-<p>解决：</p>
-<ul>
-<li>2000年3月，苹果公司收购SoundJam，在此基础上开发了iTunes软件，并于2001年1月发布。</li>
-<li>2001年10月，苹果公司又推出了iPod音乐播放器，并在次年发布的第二代iPod上采用了手转圈划动查找音乐的方法，用户很快就能找到自己要听的歌曲。</li>
-<li>同时，iTunes可与iPod无缝对接，自动将电脑和光盘上的音乐传到iPod中。</li>
-<li>另外，iPod充电一次，播放时长可达10小时，比以往的各种播放器都要长得多。苹果iPod的外观设计非常漂亮，一经推出，就俘获了大批爱听音乐的年轻人。</li>
-</ul>
-</li>
-<li><p>第二，广大用户已经习惯戴着耳机从播放器中听歌而不是随身带着便携的CD唱机和几十张光盘。因此，它不需要花钱和时间培养出一个市场。</p>
-</li>
-</ul>
-<h3 id="iPhone"><a href="#iPhone" class="headerlink" title="iPhone"></a>iPhone</h3><p>iPod彻底改变了音乐市场，而iPhone继而颠覆了通信行业。制造手机本来是摩托罗拉和诺基亚这些公司的事情，和计算机公司似乎无关。但是随着手机中信号处理的重要性逐渐下降，或者说这些技术难点已经不存在了，打电话的功能在逐渐淡化；性能的要求、上网的需求在上升，智能手机制造商开始崛起。最早的智能手机代表是黑莓手机(Blackberry)，制造该手机的RIM公司一度垄断了智能手机市场，接下来是诺基亚。它们的智能手机基本上还没有摆脱传统手机的框框，手机加上E-mail的功能，只是比传统的手机好用些。</p>
-<p>但是，智能手机到了乔布斯的手里，就完全不同了。它已经超出一个普通手机加iPod播放器，它还具有一个完整的、联网的计算机和一般电视机的主要功能。</p>
-<h3 id="iPad"><a href="#iPad" class="headerlink" title="iPad"></a>iPad</h3><p>2010年，苹果公司又推出了极具人气的iPad触摸型平板电脑，可以通过触摸输入文字和指令来上网或使用各种应用软件，对PC产业同样具有颠覆性，是颠覆整个PC工业生态链(WinTel体系)的重要一环。</p>
-<p>从功能上讲，iPad可以替代90%，甚至更多我们对个人电脑的需求。而且，iPad方便易用，在大多数场合，我们更倾向于使用iPad，而不是台式计算机甚至笔记本电脑。</p>
-<h3 id="最近"><a href="#最近" class="headerlink" title="最近"></a>最近</h3><p>乔布斯去世后苹果真正自主发布的第一款产品新 iPad(即iPad 3)的销路并不是很好，2012年，苹果公司在美国以半价回购iPad 2，希望对新版iPad销售有所提振。iPad 3的优点不如大家想象的明显，但是使用起来明显烫手这个产品缺陷，乔布斯还在世的话是一定不会允许出现的。</p>
-<p>从2010年开始，外界就在期待苹果公司能推出可穿戴式设备—一智能手表，竞争对手也都先后推出了各种各样的智能手表。直到2015年，苹果才推出市场反应并不算良好的Apple Watch，但至今它都没有能够成为该公司主要的收入增长点。</p>
-<p>此后，苹果一直在靠每年翻新一次苹果手机挣老用户的钱。今天，苹果依然是全球市值最高的公司之一，但是它不断推出新产品的黄金期已经过去了。</p>
-<h2 id="乔布斯与盛田昭夫"><a href="#乔布斯与盛田昭夫" class="headerlink" title="乔布斯与盛田昭夫"></a>乔布斯与盛田昭夫</h2><p>乔布斯退学后，继续在学校旁听自己感兴趣的课，比如书法课。事实证明，乔布斯的艺术修养使得苹果公司所有的产品都设计得非常漂亮。比如 Macintosh 计算机漂亮的界面和字体。</p>
-<p>上个世纪八九十年代，工作站很红火，乔布斯在被逐出苹果公司后创立了一家设计制造工作站的公司NeXT，不是很成功。1986年，乔布斯用500万美元买下了电影《星球大战》导演卢卡斯创办的一个极不成功的动画制作室，将它重构成一个用图形工作站做动画的工作室Pixar公司，这是今天世界上最好的动画工作室，后来被迪士尼公司以74亿美元的高价收购。乔布斯从Pixar挣到的钱比他从苹果挣到的还多。</p>
-<p>苹果的每一款产品都非它的原创，但是，苹果把每一款产品做到了极致，这很大程度上是因为乔布斯达到了一个将技术和艺术结合得炉火纯青的境界。</p>
-<p>“当键盘越变越好用的时候，乔布斯想要的却是另一个东西:只有屏幕，没有键盘的电脑”。这些想法导致了后来的麦金托什和iPad。可见乔布斯这些改变世界的发明绝非一时的灵感所致，而是数十年的深思熟虑和经验的积累。</p>
-<p>当第一次看到CD的时候，乔布斯拿起一张，里面也就只存5首歌。他把CD插进硕大的播放器，回来后穿过董事会的桌子，对大家说，看，这个东西会成为未来！那个年代，他已经在琢磨里面的内容(音乐)意味着什么。<strong>他的远见，经常穿透时间，直接看到他想象中的结果。</strong>从现在看，也是乔布斯，通过他的产品iPod，一手把CD送往终点。从见到CD到iPod问世，又是20年的时间，看似是灵机一动，岂不知已经孕育了两个十年。</p>
-<p>乔布斯安在洛斯加托斯的家，是一座很大的西班牙式建筑。院子里停着一辆黑色的宝马自行车(他极少碰那辆车，只是喜欢它的设计)，偌大的房间里，只有餐桌和旁边的两把椅子，加上客厅里的一架白色的Bösendorfer三角钢琴。房间里面空空荡荡，因为对产品品质格外偏执的乔布斯几乎看不上任何家具。这就是他生活的样子，简单，少量，专注。</p>
-<p>而盛田昭夫是上个世纪70年代的乔布斯。或者说乔布斯是21世纪初期的盛田昭夫。</p>
-<p>在苹果进入i十年以前，索尼公司在电子产品上的地位和今天的苹果相当，这在很大程度上是盛田昭夫的功劳。作为优秀的产品设计者，盛田昭夫直接领导了Walkman随声听的设计和开发，这款听音乐的产品当时在世界上的轰动效应完全抵得上后来的iPod。</p>
-<p>作为领导者的盛田昭夫，是少有的能够和西方人无隔阂沟通的东方人，兼具东方式的文雅谦和与西方式的坦诚直白，打动了许多西方的企业家和政治家。在盛田昭夫的努力下，索尼不仅成为日本第一个被全球认可，同时在美国上市的公司，而且把索尼从一个简单的日本制造的公司变成引领全球电子产品时尚的跨国公司。</p>
-<p>乔布斯和盛田昭夫有很多相似之处。首先，两个人都有着<strong>通过产品改变人们生活</strong>的远大抱负。两个人又都有着无穷的好奇心和与凡人不同的新思维，导致两家公司不断推出出众而广为人知的新产品。两个人都将品牌视为生命，乔布斯对产品品质的执著和苛刻自不必说，而盛田昭夫一生为“让索尼享誉全球”而工作。</p>
-<p>盛田昭夫和乔布斯另一个有趣的相似之处是都不看重学历。乔布斯自己辍学不必说了，盛田昭夫虽然是大阪大学的毕业生，但是在用人上一直强调注重个人能力而非学业背景。他还为此写了一本《学历无用论》的书，从上个世纪60年代起多次再版，成为畅销书。</p>
-<p>另一方面，乔布斯和盛田昭夫的经历和为人又有很大的不同。盛田昭夫作为家族企业盛田酒业原本的继承人，虽然经历了二战后的贫困，但作为社会上层人士，给人留下的总是积极向上的活力和可亲品行。乔布斯是个被遗弃的孤儿，从小品行乖张，同时对别人缺乏信任。盛田昭夫和他的合作伙伴、索尼的另一位创始人井深大一辈子兄弟般的友谊一直被业界誉为美谈。</p>
-<h2 id="摘抄与思考"><a href="#摘抄与思考" class="headerlink" title="摘抄与思考"></a>摘抄与思考</h2><p>关于股票期权制度：在传统的公司里，一个员工的薪酬福利包括奖金和退休金等现金。一般员工并不拥有公司的一部分。很多高科技公司为了将员工的利益和公司的前途绑在一起，发给员工一些股票的期权。所谓期权(Option)就是在一定时间，比如十年内，按一定价格，比如当前市场价购买股票的权利。获得期权的员工，会对公司有主人翁般的责任感。如果公司股价上涨，那么拥有股票期权的人可以以过去较低的价格买进股票，即所谓的行权(Exercise)，然后以现在较高的价格卖出，从中赚到差价。当然，期权只有在公司股价不断上涨时才有意义。</p>
-<p>在乔布斯做的大多数“改变世界”的事情中，原创并非他自己，但是拿着魔术棒“点石成金”的人却是他。如果我们承认乔布斯的创作力，那么创新就远不止是原创，而更多的是发现价值，点石成金。</p>
-<p>大多数产品经理之所以做不出改变世界的产品，是因为他们只看见了成功者最后的临门一脚，而忽视了别人的长期思考。</p>
-<p>永远渴望，大智若愚。 Stay Hungry, Stay Foolish.</p>
+<p>因为IoC容器要负责实例化所有的组件，因此，有必要告诉容器如何创建组件，以及各组件的依赖关系。一种最简单的配置是通过XML文件来实现，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;dataSource&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;HikariDataSource&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;bookService&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;BookService&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;dataSource&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;dataSource&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userService&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;UserService&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;dataSource&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;dataSource&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>上述XML配置文件指示IoC容器创建3个JavaBean组件，并把id为<code>dataSource</code>的组件通过属性<code>dataSource</code>（即调用<code>setDataSource()</code>方法）注入到另外两个组件中。</p>
+<p>在Spring的IoC容器中，我们把所有组件统称为JavaBean，即配置一个组件就是配置一个Bean。</p>
+<h2 id="依赖注入方式"><a href="#依赖注入方式" class="headerlink" title="依赖注入方式"></a>依赖注入方式</h2><p>Spring的IoC容器同时支持属性注入和构造方法注入，并允许混合使用。</p>
+<h3 id="1-set"><a href="#1-set" class="headerlink" title="1. set()"></a>1. set()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BookService</span> &#123;<br>    <span class="hljs-keyword">private</span> DataSource dataSource;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setDataSource</span><span class="hljs-params">(DataSource dataSource)</span> &#123;<br>        <span class="hljs-built_in">this</span>.dataSource = dataSource;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2. 构造方法"></a>2. 构造方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BookService</span> &#123;<br>    <span class="hljs-keyword">private</span> DataSource dataSource;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">BookService</span><span class="hljs-params">(DataSource dataSource)</span> &#123;<br>        <span class="hljs-built_in">this</span>.dataSource = dataSource;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="无侵入容器"><a href="#无侵入容器" class="headerlink" title="无侵入容器"></a>无侵入容器</h2><p>在设计上，Spring的IoC容器是一个高度可扩展的无侵入容器。所谓无侵入，是指应用程序的组件无需实现Spring的特定接口，或者说，组件根本不知道自己在Spring的容器中运行。这种无侵入的设计有以下好处：</p>
+<ol>
+<li>应用程序组件既可以在Spring的IoC容器中运行，也可以自己编写代码自行组装配置；</li>
+<li>测试的时候并不依赖Spring容器，可单独进行测试，大大提高了开发效率。</li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1252599548343744/1282381977747489">https://www.liaoxuefeng.com/wiki/1252599548343744/1282381977747489</a></li>
+</ol>
 
                 
               </div>
@@ -369,13 +350,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Book-Notes/" class="category-chain-item">Book Notes</a>
+  <a href="/categories/Backend/" class="category-chain-item">Backend</a>
   
   
     <span>></span>
     
-  <a href="/categories/Book-Notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/" class="category-chain-item">浪潮之巅</a>
+  <a href="/categories/Backend/Spring/" class="category-chain-item">Spring</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Backend/Spring/IoC/" class="category-chain-item">IoC</a>
+  
+  
+
   
 
   
@@ -396,8 +384,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>浪潮之巅读书笔记3-苹果与微软</div>
-      <div>https://peixuanhu.github.io/2023/11/16/book-notes/浪潮之巅/Apple-and-Microsoft/</div>
+      <div>IoC容器</div>
+      <div>https://peixuanhu.github.io/2023/11/19/backend/Spring/IoC/IoC-container/</div>
     </div>
     <div class="license-meta">
       
@@ -409,7 +397,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 16, 2023</div>
+          <div>November 19, 2023</div>
         </div>
       
       
@@ -446,18 +434,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/17/Java/effective-java/Item14-Consider-implementing-Comparable/" title="Effective Java-14. Consider implmenting Comparable">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-14. Consider implmenting Comparable</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/16/Java/effective-java/Item13-Override-clone-judiciously/" title="Effective Java-13. Override clone judiciously">
-                        <span class="hidden-mobile">Effective Java-13. Override clone judiciously</span>
+                      <a href="/2023/11/19/Java/effective-java/Item16-In-public-classes,use-accessor-methods,not-public-fields/" title="Effective Java-16. In public classes, use accessor methods, not public fields">
+                        <span class="hidden-mobile">Effective Java-16. In public classes, use accessor methods, not public fields</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

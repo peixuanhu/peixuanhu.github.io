@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>IoC容器</title>
+    <link href="/2023/11/19/backend/Spring/IoC/IoC-container/"/>
+    <url>/2023/11/19/backend/Spring/IoC/IoC-container/</url>
+    
+    <content type="html"><![CDATA[<h1 id="IoC容器"><a href="#IoC容器" class="headerlink" title="IoC容器"></a>IoC容器</h1><h2 id="什么是容器？"><a href="#什么是容器？" class="headerlink" title="什么是容器？"></a>什么是容器？</h2><p>容器是一种为某种特定组件的运行提供必要支持的一个软件环境。例如，Tomcat就是一个Servlet容器，它可以为Servlet的运行提供运行环境。类似Docker这样的软件也是一个容器，它提供了必要的Linux环境以便运行一个特定的Linux进程。</p><p>Spring的核心就是提供了一个IoC容器，它可以管理所有轻量级的JavaBean组件，提供的底层服务包括组件的生命周期管理、配置和组装服务、AOP支持，以及建立在AOP基础上的声明式事务服务等。</p><h2 id="IoC原理"><a href="#IoC原理" class="headerlink" title="IoC原理"></a>IoC原理</h2><p>IoC全称Inversion of Control，直译为控制反转。</p><p>如果一个系统有大量的组件，其生命周期和相互之间的依赖关系如果由组件自身来维护，不但大大增加了系统的复杂度，而且会导致组件之间极为紧密的耦合，继而给测试和维护带来了极大的困难。</p><p>传统的应用程序中，控制权在程序本身，程序的控制流程完全由开发者控制。这种模式的缺点是，一个组件如果要使用另一个组件，必须先知道如何正确地创建它。</p><p>在IoC模式下，控制权发生了反转，即从应用程序转移到了IoC容器，所有组件不再由应用程序自己创建和配置，而是由IoC容器负责，这样，应用程序只需要直接使用已经创建好并且配置好的组件。为了能让组件在IoC容器中被“装配”出来，需要某种“注入”机制。</p><p>不直接<code>new</code>一个<code>DataSource</code>，而是注入一个<code>DataSource</code>，这个小小的改动虽然简单，却带来了一系列好处：</p><ol><li><code>BookService</code>不再关心如何创建<code>DataSource</code>，因此，不必编写读取数据库配置之类的代码；</li><li><code>DataSource</code>实例被注入到<code>BookService</code>，同样也可以注入到<code>UserService</code>，因此，共享一个组件非常简单；</li><li>测试<code>BookService</code>更容易，因为注入的是<code>DataSource</code>，可以使用内存数据库，而不是真实的MySQL配置。</li></ol><blockquote><p>因此，IoC又称为依赖注入（DI：Dependency Injection），它解决了一个最主要的问题：将组件的创建+配置与组件的使用相分离，并且，由IoC容器负责管理组件的生命周期。</p></blockquote><p>因为IoC容器要负责实例化所有的组件，因此，有必要告诉容器如何创建组件，以及各组件的依赖关系。一种最简单的配置是通过XML文件来实现，例如：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;dataSource&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;HikariDataSource&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;bookService&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;BookService&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;dataSource&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;dataSource&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userService&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;UserService&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;dataSource&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;dataSource&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span><br></code></pre></td></tr></table></figure><p>上述XML配置文件指示IoC容器创建3个JavaBean组件，并把id为<code>dataSource</code>的组件通过属性<code>dataSource</code>（即调用<code>setDataSource()</code>方法）注入到另外两个组件中。</p><p>在Spring的IoC容器中，我们把所有组件统称为JavaBean，即配置一个组件就是配置一个Bean。</p><h2 id="依赖注入方式"><a href="#依赖注入方式" class="headerlink" title="依赖注入方式"></a>依赖注入方式</h2><p>Spring的IoC容器同时支持属性注入和构造方法注入，并允许混合使用。</p><h3 id="1-set"><a href="#1-set" class="headerlink" title="1. set()"></a>1. set()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BookService</span> &#123;<br>    <span class="hljs-keyword">private</span> DataSource dataSource;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setDataSource</span><span class="hljs-params">(DataSource dataSource)</span> &#123;<br>        <span class="hljs-built_in">this</span>.dataSource = dataSource;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h3 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2. 构造方法"></a>2. 构造方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BookService</span> &#123;<br>    <span class="hljs-keyword">private</span> DataSource dataSource;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">BookService</span><span class="hljs-params">(DataSource dataSource)</span> &#123;<br>        <span class="hljs-built_in">this</span>.dataSource = dataSource;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="无侵入容器"><a href="#无侵入容器" class="headerlink" title="无侵入容器"></a>无侵入容器</h2><p>在设计上，Spring的IoC容器是一个高度可扩展的无侵入容器。所谓无侵入，是指应用程序的组件无需实现Spring的特定接口，或者说，组件根本不知道自己在Spring的容器中运行。这种无侵入的设计有以下好处：</p><ol><li>应用程序组件既可以在Spring的IoC容器中运行，也可以自己编写代码自行组装配置；</li><li>测试的时候并不依赖Spring容器，可单独进行测试，大大提高了开发效率。</li></ol><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol><li><a href="https://www.liaoxuefeng.com/wiki/1252599548343744/1282381977747489">https://www.liaoxuefeng.com/wiki/1252599548343744/1282381977747489</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Backend</category>
+      
+      <category>Spring</category>
+      
+      <category>IoC</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Effective Java-16. In public classes, use accessor methods, not public fields</title>
     <link href="/2023/11/19/Java/effective-java/Item16-In-public-classes,use-accessor-methods,not-public-fields/"/>
     <url>/2023/11/19/Java/effective-java/Item16-In-public-classes,use-accessor-methods,not-public-fields/</url>
@@ -55,7 +78,9 @@
     
     <categories>
       
-      <category>Book Notes， 浪潮之巅</category>
+      <category>Book Notes</category>
+      
+      <category>浪潮之巅</category>
       
     </categories>
     
@@ -95,7 +120,9 @@
     
     <categories>
       
-      <category>Book Notes， 浪潮之巅</category>
+      <category>Book Notes</category>
+      
+      <category>浪潮之巅</category>
       
     </categories>
     
