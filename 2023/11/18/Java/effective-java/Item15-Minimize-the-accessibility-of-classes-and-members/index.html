@@ -24,7 +24,7 @@
 <meta property="og:description" content="Item 15: Minimize the accessibility of classes and membersThe single most important factor that distinguishes a well-designed component from a poorly designed one is the degree to which the component">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-18T02:48:48.317Z">
-<meta property="article:modified_time" content="2023-11-18T05:45:43.201Z">
+<meta property="article:modified_time" content="2023-11-20T02:29:59.789Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.4k words
+          6.3k words
         
       </span>
     
@@ -347,7 +347,7 @@
 <h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>As of Java 9, there are two additional, implicit access levels introduced as part of the <em>module system</em>.</p>
 <p>A module may explicitly export some of its packages via <em>export declarations</em> in its <em>module declaration</em> (which is by convention contained in a source file named <code>module-info.java</code>).</p>
 <p>Public and protected members of unexported packages in a module are inaccessible outside the module; within the module, accessibility is unaffected by export declarations. Using the module system allows you to <strong>share classes among packages within a module without making them visible to the entire world</strong>.</p>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>To summarize, you should reduce accessibility of program elements as much as possible (within reason).</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>To summarize, you should reduce accessibility of program elements as much as possible (within reason).</p>
 <p>After carefully designing a <strong>minimal public API</strong>, you should prevent any stray classes, interfaces, or members from becoming part of the API.</p>
 <p>With the exception of public static final fields (which serve as constants), <strong>public classes should have no public fields</strong>. Ensure that objects referenced by public static final fields are immutable.</p>
 
@@ -414,7 +414,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 18, 2023</div>
+          <div>November 20, 2023</div>
         </div>
       
       
