@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 11: Always override hashCode when you override equalsGeneral contract for hashCode When the hashCode method is invoked on an object repeatedly during an execution of an application, it must consi">
+    <meta name="description" content="Git常用命令学习推荐一个可视化git学习网站：https:&#x2F;&#x2F;learngitbranching.js.org&#x2F; 常用命令举例本地 git branch -f main HEAD~3 # git branch -f main HEAD^: 往上移一个 12345678   作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。2. &#96;&#96;&#96;bash   git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-11. Always override hashCode when you override equals">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/14/Java/effective-java/Item11-Always-override-hashCode-when-you-override-equals/index.html">
+<meta property="og:title" content="Git常用命令学习">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/20/Git/git-learning/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 11: Always override hashCode when you override equalsGeneral contract for hashCode When the hashCode method is invoked on an object repeatedly during an execution of an application, it must consi">
+<meta property="og:description" content="Git常用命令学习推荐一个可视化git学习网站：https:&#x2F;&#x2F;learngitbranching.js.org&#x2F; 常用命令举例本地 git branch -f main HEAD~3 # git branch -f main HEAD^: 往上移一个 12345678   作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。2. &#96;&#96;&#96;bash   git">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-14T03:48:54.052Z">
-<meta property="article:modified_time" content="2023-11-21T01:21:52.025Z">
+<meta property="article:published_time" content="2023-11-20T12:27:23.800Z">
+<meta property="article:modified_time" content="2023-11-21T00:30:00.792Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-11. Always override hashCode when you override equals - Peixuan&#39;s Page</title>
+  <title>Git常用命令学习 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-11. Always override hashCode when you override equals"></span>
+            <span id="subtitle" data-typed-text="Git常用命令学习"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-14 11:48" pubdate>
-          November 14, 2023 am
+        <time datetime="2023-11-20 20:27" pubdate>
+          November 20, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.9k words
+          1.8k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          49 mins
+          16 mins
         
       </span>
     
@@ -290,71 +290,77 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-11. Always override hashCode when you override equals</h1>
+            <h1 id="seo-header">Git常用命令学习</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-11-Always-override-hashCode-when-you-override-equals"><a href="#Item-11-Always-override-hashCode-when-you-override-equals" class="headerlink" title="Item 11: Always override hashCode when you override equals"></a>Item 11: Always override <em>hashCode</em> when you override <em>equals</em></h1><h2 id="General-contract-for-hashCode"><a href="#General-contract-for-hashCode" class="headerlink" title="General contract for hashCode"></a>General contract for <em>hashCode</em></h2><ul>
-<li>When the <em>hashCode</em> method is invoked on an object repeatedly during <strong>an execution of an application</strong>, it <strong>must consistently return the same value</strong>, provided no information used in equals comparisons is modified. This value need not remain consistent from one execution of an application to another.</li>
-<li>If two objects are <strong>equal</strong> according to the <em>equals(Object)</em> method,then calling <em><strong>hashCode</strong></em> on the two objects must produce the <strong>same integer result</strong>.</li>
-<li>If two objects are unequal according to the <em>equals(Object)</em> method,it is <em>not</em> required that calling hashCode on each of the objects must produce distinct results. However, the programmer should be aware that producing distinct results for unequal objects may improve the performance of hash tables.</li>
-</ul>
-<p><strong>The key provision that is violated when you fail to override</strong> <em><strong>hashCode</strong></em> <strong>is the second one: equal objects must have equal hash codes.</strong> Two distinct instances may be logically equal according to a class’s equals method, but to Object’s <em>hashCode</em> method, they’re just two objects with nothing much in common. Therefore, Object’s <em>hashCode</em> method returns two seemingly random numbers instead of two equal numbers as required by the contract.</p>
-<h2 id="The-recipe-to-implement-a-good-hashCode-method"><a href="#The-recipe-to-implement-a-good-hashCode-method" class="headerlink" title="The recipe to implement a good hashCode method"></a>The recipe to implement a good <em>hashCode</em> method</h2><ol>
-<li><p>Declare an int variable named <code>result</code>, and initialize it to the hash code <code>c</code> for the <strong>first significant field</strong> in your object, as computed in step 2.a. (Recall from Item 10 that a significant field is a field that affects equals comparisons.)</p>
+                <h1 id="Git常用命令学习"><a href="#Git常用命令学习" class="headerlink" title="Git常用命令学习"></a>Git常用命令学习</h1><p>推荐一个可视化git学习网站：<a target="_blank" rel="noopener" href="https://learngitbranching.js.org/">https://learngitbranching.js.org/</a></p>
+<h2 id="常用命令举例"><a href="#常用命令举例" class="headerlink" title="常用命令举例"></a>常用命令举例</h2><h3 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h3><ol>
+<li><pre><code class="bash">git branch -f main HEAD~3
+# git branch -f main HEAD^: 往上移一个
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><br>   作用：（強制）移動 <span class="hljs-selector-tag">main</span> 指向從 HEAD 往上數的第三個 parent commit。<br><br><span class="hljs-number">2</span>. ```bash<br>   git rebase <span class="hljs-selector-tag">a</span> <span class="hljs-selector-tag">b</span><br>   <br>   # 等价于现在HEAD在<span class="hljs-selector-tag">b</span>，执行以下命令：<br>   git rebase <span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+
+作用：把b及往父亲方向走直到和a的公共祖宗节点之前的路径上节点接到a的后面
+
+&gt; 如果b是a的祖宗，则没有效果
+
+怎么记？rebase a也就是换base为a，把当前commit（b）的base换成a，b接到a的后面
+</code></pre>
 </li>
-<li><p>For every <strong>remaining significant field</strong> <code>f</code> in your object, do the following: </p>
-<p>a. Compute an int hash code <code>c</code> for the field:</p>
-<ol>
-<li><p>If the field is of a primitive type, compute <code>Type.hashCode(f)</code>, where Type is the boxed primitive class corresponding to <code>f</code>’ s type.</p>
+<li><pre><code class="bash">git checkout -b bugFix
+# 等价于：
+git branch bugFix
+git checkout bugFix
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>   从当前commit新建一条分支`bugFix`，并切换到`bugFix`<br><br><span class="hljs-number">4</span>. 取消git修改：`git reset`或者`git revert`，例：<br><br>   ```bash<br>   git reset HEAD~<span class="hljs-number">3</span><br>   git revert HEAD<br></code></pre></td></tr></table></figure>
+</code></pre>
 </li>
-<li><p>If the field is an <strong>object reference</strong> and this class’s <em>equals</em> method compares the field by recursively invoking <em>equals</em>, <strong>recursively invoke hashCode on the field</strong>.</p>
-<p>If a more complex comparison is required, compute a “canonical representation” for this field and invoke hashCode on the canonical representation. If the value of the field is null, use 0 (or some other constant, but 0 is traditional).</p>
+<li><pre><code class="bash">git cherry-pick a b c
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>   把commit a, b, c依次接到当前指针所在commit的后面<br><br>### 远端<br><br><span class="hljs-number">1.</span> ```bash<br>   git pull --rebase<br></code></pre></td></tr></table></figure>
+
+表示的是一個 fetch 以及一個 rebase。用于远端其他人提交新commit之后更新到本地，并与本地自己的更新合并（适用于在同一个分支开发）
+
+&gt; 本地在dev分支开发，如果远端master更新了，需要把变更合并到本地dev（本地的master一般不会动，如果动了就加个`--rebase`）：
+&gt;
+&gt; <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout master<br>git pull<br>git rebase dev<br></code></pre></td></tr></table></figure>
+&gt;
+&gt; 
+</code></pre>
 </li>
-<li><p>If the field is an array, treat it as if each significant element were a separate field. That is, compute a hash code for each significant element by applying these rules recursively, and combine the values per step 2.b. If the array has no significant elements, use a constant, preferably not 0. If all elements are significant, use <code>Arrays.hashCode</code>.</p>
+<li><pre><code class="bash">git checkout -b totallyNotMain origin/main
+# 等价于
+git branch -u origin/main totallyNotMain
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><br>   建立一個新的 totallyNotMain branch 並且它會 <span class="hljs-built_in">track</span> <span class="hljs-built_in">origin</span>/main。<br><br><span class="hljs-number">3</span>. ```bash<br>   git <span class="hljs-built_in">push</span> &lt;remote&gt; &lt;place&gt;<br>   # 如：<br>   git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> main<br></code></pre></td></tr></table></figure>
+
+先到我的 repo 中的 &quot;main&quot; branch，抓下所有的 commit，然後到叫作 &quot;origin&quot; 的 remote 的 &quot;main&quot; branch，檢查 remote 的 commit 有沒有跟我的 repo 一致，如果沒有，就更新。
+
+&gt; 这个命令就不需要local当前指针一定指向main了
+</code></pre>
+</li>
+<li><pre><code class="bash">git push origin &lt;source&gt;:&lt;destination&gt;
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><br>   當我們的 source 以及 destination 是不同的<span class="hljs-keyword">branch的時候用</span><br><span class="hljs-keyword"></span><br><span class="hljs-number">5</span>. ```<span class="hljs-keyword">bash</span><br><span class="hljs-keyword"></span>   git fetch <span class="hljs-keyword">origin </span>foo<br></code></pre></td></tr></table></figure>
+
+git 會到 remote 上的 foo branch，抓下所有不在 local 上的 commit，然後將它們放到 local 的 o/foo branch。
+</code></pre>
+</li>
+<li><pre><code class="bash">git pull origin foo
+# 等价于
+git fetch origin foo; git merge o/foo
+
+git pull origin bar~1:bugFix
+# 等价于
+git fetch origin bar~1:bugFix; git merge bugFix
+</code></pre>
+<p>git pull 表示 fetch 之後再 merge 所 fetch 的 commit，當使用 git fetch 時使用一樣的參數，之後再從 fetch 下來的 commit 所放置的位置做 merge。</p>
 </li>
 </ol>
-<p>b. Combine the hash code c computed in step 2.a into result as follows: </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">result = <span class="hljs-number">31</span> * result + c;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Makes the result depend on the <strong>order</strong> of the fields, yielding a much better hash function if the class has multiple similar fields.</p>
-</blockquote>
-</li>
-<li><p>Return result.</p>
-</li>
+<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><h3 id="reset-vs-revert"><a href="#reset-vs-revert" class="headerlink" title="reset vs revert"></a>reset vs revert</h3><ol>
+<li><code>reset</code>参数指针为当前指针所在branch需要回退到的位置；而<code>revert</code>参数指针为需要修改的那个指针</li>
+<li><code>reset</code>可以往回退很多个commit；而<code>revert</code>只能取消修改一个commit（后面跟的参数是指针）</li>
+<li><code>reset</code>相当于只把指针往回移动若干步，别人无法看到这个变化；而<code>revert</code>是把当前commit的前一个commit接到当前commit后面，对其他人也可见。</li>
 </ol>
-<p>Example for the <code>PhoneNumber</code> class:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Typical hashCode method</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> Short.hashCode(areaCode);<br>  result = <span class="hljs-number">31</span> * result + Short.hashCode(prefix);<br>  result = <span class="hljs-number">31</span> * result + Short.hashCOde(lineNum);<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Exclude <em>derived fields</em> from the hash code computation.</p>
-</blockquote>
-<blockquote>
-<p>While the recipe in this item yields reasonably good hash functions, they are not state-of-the-art. They are comparable in quality to the hash functions found in the Java platform libraries’ value types and are adequate for most uses. If you have a bona fide need for hash functions <strong>less likely to produce collisions</strong>, see Guava’s <code>com.google.common.hash.Hashing</code> [Guava].</p>
-</blockquote>
-<h3 id="Objects-hash-static-method"><a href="#Objects-hash-static-method" class="headerlink" title="Objects.hash static method"></a>Objects.hash static method</h3><p>The <em>Objects</em> class has a static method that takes an arbitrary number of objects and returns a hash code for them. This method, named <code>hash</code>, lets you write <strong>one-line</strong> hashCode methods whose quality is comparable to those written according to the recipe in this item.</p>
-<p>Unfortunately, they <strong>run more slowly</strong> because they entail array creation to pass a variable number of arguments, as well as boxing and unboxing if any of the arguments are of primitive type. This style of hash function is recommended for use only in situations where <strong>performance is not critical</strong>. </p>
-<p>Example:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// One-line hashCode method - mediocre performance</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-keyword">return</span> Objects.hash(lineNum, prefix, areaCode);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="Cache-hashCode"><a href="#Cache-hashCode" class="headerlink" title="Cache hashCode"></a>Cache hashCode</h3><p>If a class is <strong>immutable</strong> and the <strong>cost of computing the hash code is significant</strong>, you might consider <strong>caching</strong> the hash code in the object rather than recalculating it each time it is requested.</p>
-<p>If you believe that most objects of this type will be used as <strong>hash keys</strong>, then you should calculate the hash code <strong>when the instance is created</strong>. Otherwise, you might choose to <em><strong>lazily initialize</strong></em> the hash code the first time <em>hashCode</em> is invoked. Some care is required to ensure that the class remains thread-safe in the presence of a lazily initialized field (Item 83).</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// hashCode method with lazily initialized cached hash Code</span><br><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> hashCode; <span class="hljs-comment">// Automatically initialized to 0</span><br><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> hashCode;<br>  <span class="hljs-keyword">if</span> (result == <span class="hljs-number">0</span>) &#123;<br>    result = Short.hashCode(areaCode);<br>    result = <span class="hljs-number">31</span> * result + Short.hashCode(prefix);<br>    result = <span class="hljs-number">31</span> * result + Short.hashCOde(lineNum);<br>    hashCode = result;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Note that the initial value for the hashCode field (in this case, 0) should not be the hash code of a commonly created instance:</p>
-</blockquote>
-<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><ol>
-<li><p><strong>Do not be tempted to exclude significant fields from the hash code computation to improve performance.</strong> While the resulting hash function may run faster, its poor quality may degrade hash tables’ performance to the point where they become unusable.</p>
-<p>In particular, the hash function may be confronted with a large collection of instances that differ mainly in regions you’ve chosen to ignore. If this happens, the hash function will map all these instances to a few hash codes, and programs that should run in linear time will instead run in quadratic time.</p>
-</li>
-<li><p><strong>Don’t provide a detailed specification for the value returned by <em>hashCode</em>, so clients can’t reasonably depend on it; this gives you the flexibility to change it.</strong> Many classes in the Java libraries, such as <em>String</em> and <em>Integer</em>, specify the exact value returned by their <em>hashCode</em> method as <em>a function of the instance value</em>. This is <em>not</em> a good idea but a mistake that we’re forced to live with: It impedes the ability to improve the hash function in future releases. If you leave the details unspecified and a flaw is found in the hash function or a better hash function is discovered, you can change it in a subsequent release.</p>
-</li>
-</ol>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, you <em>must</em> override <em>hashCode</em> every time you override <em>equals</em>, or your program will not run correctly. Your <em>hashCode</em> method must obey the <strong>general contract specified in <em>Object</em></strong> and must do a reasonable job assigning unequal hash codes to unequal instances. This is easy to achieve, if slightly tedious, using the <strong>recipe</strong>.</p>
-<p>As mentioned in Item 10, the <em><strong>AutoValue</strong></em> framework provides a fine alternative to writing <em>equals</em> and <em>hashCode</em> methods manually, and <em><strong>IDEs</strong></em> also provide some of this functionality.</p>
+<h3 id="rebase-vs-merge"><a href="#rebase-vs-merge" class="headerlink" title="rebase vs merge"></a>rebase vs merge</h3><p><code>rebase</code>优点：rebase 使得你的 commit tree 看起來更為簡潔，因為任何的 commit 都在一條直線上面。</p>
+<p><code>rebase</code>缺点：rebase 修改了 commit tree 的歷史紀錄。</p>
 
                 
               </div>
@@ -373,15 +379,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/Git/" class="category-chain-item">Git</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Java/Effective-Java/" class="category-chain-item">Effective Java</a>
-  
-  
-
   
 
       </span>
@@ -400,8 +399,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-11. Always override hashCode when you override equals</div>
-      <div>https://peixuanhu.github.io/2023/11/14/Java/effective-java/Item11-Always-override-hashCode-when-you-override-equals/</div>
+      <div>Git常用命令学习</div>
+      <div>https://peixuanhu.github.io/2023/11/20/Git/git-learning/</div>
     </div>
     <div class="license-meta">
       
@@ -413,7 +412,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 14, 2023</div>
+          <div>November 20, 2023</div>
         </div>
       
       
@@ -450,9 +449,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/15/Java/effective-java/Item12-Always-override-toString/" title="Effective Java-12. Always override toString">
+                      <a href="/2023/11/21/Java/effective-java/Item18-Favor-composition-over-inheritance/" title="Effective Java-18. Favor composition over inheritance">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-12. Always override toString</span>
+                        <span class="hidden-mobile">Effective Java-18. Favor composition over inheritance</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -460,8 +459,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/13/Java/effective-java/Item10-Obey-the-general-contract-when-overriding-equals/" title="Effective Java-10. Obey the general contract when overriding equals">
-                        <span class="hidden-mobile">Effective Java-10. Obey the general contract when overriding equals</span>
+                      <a href="/2023/11/20/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/Intel-and-Motorola/" title="浪潮之巅读书笔记5-英特尔与摩托罗拉">
+                        <span class="hidden-mobile">浪潮之巅读书笔记5-英特尔与摩托罗拉</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

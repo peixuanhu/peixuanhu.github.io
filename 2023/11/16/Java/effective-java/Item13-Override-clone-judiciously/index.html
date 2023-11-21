@@ -24,7 +24,7 @@
 <meta property="og:description" content="Item 13: Override clone judiciouslyThe Cloneable interface was intended as a mixin interface (Item 20) for classes to advertise that they permit cloning. Unfortunately, it fails to serve this purpose.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-16T03:53:22.574Z">
-<meta property="article:modified_time" content="2023-11-16T07:09:07.195Z">
+<meta property="article:modified_time" content="2023-11-21T01:21:37.450Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -389,7 +389,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="Conclusion-1"><a href="#Conclusion-1" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Given all the problems associated with <code>Cloneable</code>, new <strong>interfaces</strong> should not extend it, and new <strong>extendable classes</strong> should not implement it.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Given all the problems associated with <code>Cloneable</code>, new <strong>interfaces</strong> should not extend it, and new <strong>extendable classes</strong> should not implement it.</p>
 <p>While it’s less harmful for <strong>final classes</strong> to implement <code>Cloneable</code>, this should be viewed as a performance optimization, reserved for the rare cases where it is justified (Item 67).</p>
 <p>As a rule, <em>copy</em> functionality is best provided by <strong>constructors or factories</strong>.</p>
 <blockquote>
@@ -459,7 +459,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 16, 2023</div>
+          <div>November 21, 2023</div>
         </div>
       
       

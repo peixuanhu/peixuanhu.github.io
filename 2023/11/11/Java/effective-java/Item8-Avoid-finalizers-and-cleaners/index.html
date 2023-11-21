@@ -24,7 +24,7 @@
 <meta property="og:description" content="Item 8: Avoid finalizers and cleanersFinalizers are unpredictable, often dangerous, and generally unnecessary. Cleaners (Java 9) are less dangerous than finalizers, but still unpredictable, slow, and">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-11T02:59:45.922Z">
-<meta property="article:modified_time" content="2023-11-11T04:08:57.480Z">
+<meta property="article:modified_time" content="2023-11-21T01:22:17.293Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -334,7 +334,7 @@
 <blockquote>
 <p>One detail worth mentioning is that the instance must keep track of whether it has been closed: <strong>the close method must record in a field that the object is no longer valid</strong>, and other methods must check this field and throw an <strong>IllegalStateException</strong> if they are called after the object has been closed.</p>
 </blockquote>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>In summary, don’t use cleaners, or in releases prior to Java 9, finalizers, except as a safety net or to terminate noncritical native resources. Even then, beware the indeterminacy and performance consequences.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, don’t use cleaners, or in releases prior to Java 9, finalizers, except as a safety net or to terminate noncritical native resources. Even then, beware the indeterminacy and performance consequences.</p>
 
                 
               </div>
@@ -399,7 +399,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 11, 2023</div>
+          <div>November 21, 2023</div>
         </div>
       
       
