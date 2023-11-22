@@ -24,7 +24,7 @@
 <meta property="og:description" content="Item 13: Override clone judiciouslyThe Cloneable interface was intended as a mixin interface (Item 20) for classes to advertise that they permit cloning. Unfortunately, it fails to serve this purpose.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-16T03:53:22.574Z">
-<meta property="article:modified_time" content="2023-11-21T01:21:37.450Z">
+<meta property="article:modified_time" content="2023-11-22T06:16:33.337Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -335,7 +335,7 @@
 <h4 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h4><p>Add a <code>deepCopy</code> method to the inner class.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Iteratively copy the linked list headed by this Entry</span><br>Entry <span class="hljs-title function_">deepCopy</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-type">Entry</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Entry</span>(key, value, next);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">Entry</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> result; p.next != <span class="hljs-literal">null</span>; p = p.next)<br>    p.next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Entry</span>(p.next.key, p.next.value, p.next.next);<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><code>clone</code> method of <em>HashTble</em> class:</p>
+<p><code>clone</code> method of <em>HashTable</em> class:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> HashTable <span class="hljs-title function_">clone</span><span class="hljs-params">()</span> &#123;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-type">HashTable</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> (HashTable) <span class="hljs-built_in">super</span>.clone();<br>    result.buckets = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Entry</span>[buckets.length];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; buckets.length; i ++)<br>      <span class="hljs-keyword">if</span> (buckets[i] != <span class="hljs-literal">null</span>)<br>        result.buckets[i] = buckets[i].deepCopy();<br>    <span class="hljs-keyword">return</span> result;<br>  &#125; <span class="hljs-keyword">catch</span> (CloneNotSupportedException e) &#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AssertionError</span>();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h4 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h4><p>Call <code>super.clone</code>, set all of the fields in the resulting object to their <strong>initial state</strong>, and then call higher-level methods to regenerate the state of the original object.</p>
@@ -459,7 +459,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 21, 2023</div>
+          <div>November 22, 2023</div>
         </div>
       
       
