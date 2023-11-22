@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Git常用命令学习推荐一个可视化git学习网站：https:&#x2F;&#x2F;learngitbranching.js.org&#x2F; 常用命令举例本地 git branch -f main HEAD~3 # git branch -f main HEAD^: 往上移一个 12345678   作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。2. &#96;&#96;&#96;bash   git">
+    <meta name="description" content="Git常用命令学习推荐一个可视化git学习网站：https:&#x2F;&#x2F;learngitbranching.js.org&#x2F; 常用命令举例本地 作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。 12git branch -f main HEAD~3# git branch -f main HEAD^: 往上移一个  作用：把b及往父亲方向走直到和a的公共祖宗节点之">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git常用命令学习">
 <meta property="og:url" content="https://peixuanhu.github.io/2023/11/20/Git/git-learning/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Git常用命令学习推荐一个可视化git学习网站：https:&#x2F;&#x2F;learngitbranching.js.org&#x2F; 常用命令举例本地 git branch -f main HEAD~3 # git branch -f main HEAD^: 往上移一个 12345678   作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。2. &#96;&#96;&#96;bash   git">
+<meta property="og:description" content="Git常用命令学习推荐一个可视化git学习网站：https:&#x2F;&#x2F;learngitbranching.js.org&#x2F; 常用命令举例本地 作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。 12git branch -f main HEAD~3# git branch -f main HEAD^: 往上移一个  作用：把b及往父亲方向走直到和a的公共祖宗节点之">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-20T12:27:23.800Z">
-<meta property="article:modified_time" content="2023-11-21T00:30:00.792Z">
+<meta property="article:modified_time" content="2023-11-22T09:36:39.408Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -232,7 +232,7 @@
         
         
         
-          16 mins
+          15 mins
         
       </span>
     
@@ -297,62 +297,56 @@
                 
                 <h1 id="Git常用命令学习"><a href="#Git常用命令学习" class="headerlink" title="Git常用命令学习"></a>Git常用命令学习</h1><p>推荐一个可视化git学习网站：<a target="_blank" rel="noopener" href="https://learngitbranching.js.org/">https://learngitbranching.js.org/</a></p>
 <h2 id="常用命令举例"><a href="#常用命令举例" class="headerlink" title="常用命令举例"></a>常用命令举例</h2><h3 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h3><ol>
-<li><pre><code class="bash">git branch -f main HEAD~3
-# git branch -f main HEAD^: 往上移一个
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><br>   作用：（強制）移動 <span class="hljs-selector-tag">main</span> 指向從 HEAD 往上數的第三個 parent commit。<br><br><span class="hljs-number">2</span>. ```bash<br>   git rebase <span class="hljs-selector-tag">a</span> <span class="hljs-selector-tag">b</span><br>   <br>   # 等价于现在HEAD在<span class="hljs-selector-tag">b</span>，执行以下命令：<br>   git rebase <span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+<li><p>作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch -f main HEAD~3<br><span class="hljs-comment"># git branch -f main HEAD^: 往上移一个</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>作用：把b及往父亲方向走直到和a的公共祖宗节点之前的路径上节点接到a的后面</p>
+<blockquote>
+<p>如果b是a的祖宗，则没有效果</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">git rebase a b<br><br><span class="hljs-comment"># 等价于现在HEAD在b，执行以下命令：</span><br>git rebase a<br></code></pre></td></tr></table></figure>
 
-作用：把b及往父亲方向走直到和a的公共祖宗节点之前的路径上节点接到a的后面
+<p>怎么记？rebase a也就是换base为a，把当前commit（b）的base换成a，b接到a的后面</p>
+</li>
+<li><p>从当前commit新建一条分支<code>bugFix</code>，并切换到<code>bugFix</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout -b bugFix<br><span class="hljs-comment"># 等价于：</span><br>git branch bugFix<br>git checkout bugFix<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>取消git修改：<code>git reset</code>或者<code>git revert</code>，例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git reset HEAD~3<br>git revert HEAD<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>把commit a, b, c依次接到当前指针所在commit的后面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git cherry-pick a b c<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="远端"><a href="#远端" class="headerlink" title="远端"></a>远端</h3><ol>
+<li><p>表示一個 fetch 以及一個 rebase。用于远端其他人提交新commit之后更新到本地，并与本地自己的更新合并（适用于在同一个分支开发）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git pull --rebase<br></code></pre></td></tr></table></figure>
 
-&gt; 如果b是a的祖宗，则没有效果
+<blockquote>
+<p>本地在dev分支开发，如果远端master更新了，需要把变更合并到本地dev（本地的master一般不会动，如果动了就加个<code>--rebase</code>）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout master<br>git pull<br>git rebase dev<br></code></pre></td></tr></table></figure>
 
-怎么记？rebase a也就是换base为a，把当前commit（b）的base换成a，b接到a的后面
+
+</blockquote>
+</li>
+<li><p>建立一個新的 totallyNotMain branch 並且它會 track origin&#x2F;main。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout -b totallyNotMain origin/main<br><span class="hljs-comment"># 等价于</span><br>git branch -u origin/main totallyNotMain<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><pre><code class="bash">git push &lt;remote&gt; &lt;place&gt;
+# 如：
+git push origin main
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><br>   先到我的 repo 中的 <span class="hljs-string">&quot;main&quot;</span> <span class="hljs-keyword">branch，抓下所有的 </span>commit，然後到叫作 <span class="hljs-string">&quot;origin&quot;</span> 的 remote 的 <span class="hljs-string">&quot;main&quot;</span> <span class="hljs-keyword">branch，檢查 </span>remote 的 commit 有沒有跟我的 repo 一致，如果沒有，就更新。<br><br>   &gt; 这个命令就不需要local当前指针一定指向main了<br><br><span class="hljs-number">4</span>. 當我們的 source 以及 destination 是不同的<span class="hljs-keyword">branch的時候用</span><br><span class="hljs-keyword"></span>   <br>   ```<span class="hljs-keyword">bash</span><br><span class="hljs-keyword"></span>   git push <span class="hljs-keyword">origin </span>&lt;source&gt;:&lt;destination&gt;<br></code></pre></td></tr></table></figure>
+
 </code></pre>
 </li>
-<li><pre><code class="bash">git checkout -b bugFix
-# 等价于：
-git branch bugFix
-git checkout bugFix
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>   从当前commit新建一条分支`bugFix`，并切换到`bugFix`<br><br><span class="hljs-number">4</span>. 取消git修改：`git reset`或者`git revert`，例：<br><br>   ```bash<br>   git reset HEAD~<span class="hljs-number">3</span><br>   git revert HEAD<br></code></pre></td></tr></table></figure>
-</code></pre>
+<li><p>git 會到 remote 上的 foo branch，抓下所有不在 local 上的 commit，然後將它們放到 local 的 o&#x2F;foo branch。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git fetch origin foo<br></code></pre></td></tr></table></figure>
+
+
 </li>
-<li><pre><code class="bash">git cherry-pick a b c
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>   把commit a, b, c依次接到当前指针所在commit的后面<br><br>### 远端<br><br><span class="hljs-number">1.</span> ```bash<br>   git pull --rebase<br></code></pre></td></tr></table></figure>
-
-表示的是一個 fetch 以及一個 rebase。用于远端其他人提交新commit之后更新到本地，并与本地自己的更新合并（适用于在同一个分支开发）
-
-&gt; 本地在dev分支开发，如果远端master更新了，需要把变更合并到本地dev（本地的master一般不会动，如果动了就加个`--rebase`）：
-&gt;
-&gt; <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout master<br>git pull<br>git rebase dev<br></code></pre></td></tr></table></figure>
-&gt;
-&gt; 
-</code></pre>
-</li>
-<li><pre><code class="bash">git checkout -b totallyNotMain origin/main
-# 等价于
-git branch -u origin/main totallyNotMain
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><br>   建立一個新的 totallyNotMain branch 並且它會 <span class="hljs-built_in">track</span> <span class="hljs-built_in">origin</span>/main。<br><br><span class="hljs-number">3</span>. ```bash<br>   git <span class="hljs-built_in">push</span> &lt;remote&gt; &lt;place&gt;<br>   # 如：<br>   git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> main<br></code></pre></td></tr></table></figure>
-
-先到我的 repo 中的 &quot;main&quot; branch，抓下所有的 commit，然後到叫作 &quot;origin&quot; 的 remote 的 &quot;main&quot; branch，檢查 remote 的 commit 有沒有跟我的 repo 一致，如果沒有，就更新。
-
-&gt; 这个命令就不需要local当前指针一定指向main了
-</code></pre>
-</li>
-<li><pre><code class="bash">git push origin &lt;source&gt;:&lt;destination&gt;
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><br>   當我們的 source 以及 destination 是不同的<span class="hljs-keyword">branch的時候用</span><br><span class="hljs-keyword"></span><br><span class="hljs-number">5</span>. ```<span class="hljs-keyword">bash</span><br><span class="hljs-keyword"></span>   git fetch <span class="hljs-keyword">origin </span>foo<br></code></pre></td></tr></table></figure>
-
-git 會到 remote 上的 foo branch，抓下所有不在 local 上的 commit，然後將它們放到 local 的 o/foo branch。
-</code></pre>
-</li>
-<li><pre><code class="bash">git pull origin foo
-# 等价于
-git fetch origin foo; git merge o/foo
-
-git pull origin bar~1:bugFix
-# 等价于
-git fetch origin bar~1:bugFix; git merge bugFix
-</code></pre>
-<p>git pull 表示 fetch 之後再 merge 所 fetch 的 commit，當使用 git fetch 時使用一樣的參數，之後再從 fetch 下來的 commit 所放置的位置做 merge。</p>
-</li>
+<li><p>git pull 表示 fetch 之後再 merge 所 fetch 的 commit，當使用 git fetch 時使用一樣的參數，之後再從 fetch 下來的 commit 所放置的位置做 merge。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">git pull origin foo<br><span class="hljs-comment"># 等价于</span><br>git fetch origin foo; git merge o/foo<br><br>git pull origin bar~1:bugFix<br><span class="hljs-comment"># 等价于</span><br>git fetch origin bar~1:bugFix; git merge bugFix<br></code></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><h3 id="reset-vs-revert"><a href="#reset-vs-revert" class="headerlink" title="reset vs revert"></a>reset vs revert</h3><ol>
 <li><code>reset</code>参数指针为当前指针所在branch需要回退到的位置；而<code>revert</code>参数指针为需要修改的那个指针</li>
@@ -418,7 +412,7 @@ git fetch origin bar~1:bugFix; git merge bugFix
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 21, 2023</div>
+          <div>November 22, 2023</div>
         </div>
       
       
