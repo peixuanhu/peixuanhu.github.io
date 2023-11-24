@@ -16,25 +16,23 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="观察者模式定义观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。 结构图 Subject类即主题或抽象通知者，一般用一个抽象类或者一个接口实现。 它把所有对观察者对象的引用保存在一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象。 O">
+    <meta name="description" content="Item20: Prefer interfaces to abstract classesJava has two mechanisms to define a type that permits multiple implementations: interfaces and abstract classes. Since the introduction of default methods">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式14-观察者模式">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/10/10/design-pattern/14.%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="Effective Java-20. Prefer interfaces to abstract classes">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/23/Java/effective-java/Item20-Prefer-interfaces-to-abstract-classes/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="观察者模式定义观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。 结构图 Subject类即主题或抽象通知者，一般用一个抽象类或者一个接口实现。 它把所有对观察者对象的引用保存在一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象。 O">
+<meta property="og:description" content="Item20: Prefer interfaces to abstract classesJava has two mechanisms to define a type that permits multiple implementations: interfaces and abstract classes. Since the introduction of default methods">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s2.loli.net/2023/10/10/LCoseQJmfYubWig.jpg">
-<meta property="article:published_time" content="2023-10-09T16:30:01.000Z">
-<meta property="article:modified_time" content="2023-11-23T07:50:39.205Z">
+<meta property="article:published_time" content="2023-11-23T01:21:02.061Z">
+<meta property="article:modified_time" content="2023-11-23T02:19:35.816Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2023/10/10/LCoseQJmfYubWig.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>设计模式14-观察者模式 - Peixuan&#39;s Page</title>
+  <title>Effective Java-20. Prefer interfaces to abstract classes - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="设计模式14-观察者模式"></span>
+            <span id="subtitle" data-typed-text="Effective Java-20. Prefer interfaces to abstract classes"></span>
           
         </div>
 
@@ -211,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-10 00:30" pubdate>
-          October 10, 2023 am
+        <time datetime="2023-11-23 09:21" pubdate>
+          November 23, 2023 am
         </time>
       </span>
     
@@ -223,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k words
+          7.6k words
         
       </span>
     
@@ -234,7 +232,7 @@
         
         
         
-          23 mins
+          64 mins
         
       </span>
     
@@ -292,47 +290,78 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">设计模式14-观察者模式</h1>
+            <h1 id="seo-header">Effective Java-20. Prefer interfaces to abstract classes</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>观察者模式（Observer）定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</p>
-<h2 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h2><p><img src="https://s2.loli.net/2023/10/10/LCoseQJmfYubWig.jpg" srcset="/img/loading.gif" lazyload alt="观察者模式结构图.jpg"></p>
-<h3 id="Subject类"><a href="#Subject类" class="headerlink" title="Subject类"></a>Subject类</h3><p>即主题或抽象通知者，一般用一个抽象类或者一个接口实现。</p>
-<p>它把所有对观察者对象的引用保存在一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象。</p>
-<h3 id="Observer类"><a href="#Observer类" class="headerlink" title="Observer类"></a>Observer类</h3><p>抽象观察者，为所有的具体观察者定义一个接口，在得到主题的通知时更新自己。这个接口叫作更新接口。更新接口通常包含一个update()方法，这个方法叫作更新方法。</p>
-<p>抽象观察者一般用一个抽象类或者一个接口实现。</p>
-<h3 id="ConcreteSubject类"><a href="#ConcreteSubject类" class="headerlink" title="ConcreteSubject类"></a>ConcreteSubject类</h3><p>具体主题或具体通知者，将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。</p>
-<p>具体主题角色通常用一个具体子类实现。</p>
-<h3 id="ConcreteObserver类"><a href="#ConcreteObserver类" class="headerlink" title="ConcreteObserver类"></a>ConcreteObserver类</h3><p>具体观察者，实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。具体观察者角色可以保存一个<strong>指向具体主题对象的引用</strong>。</p>
-<p>具体观察者角色通常用一个具体子类实现。</p>
-<h2 id="基本代码"><a href="#基本代码" class="headerlink" title="基本代码"></a>基本代码</h2><p>Subject类：通知者抽象类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Subject</span> &#123;<br>  <span class="hljs-keyword">private</span> ArrayList&lt;Observer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Observer&gt;(); <span class="hljs-comment">// 针对抽象的Observer编程</span><br>  <br>  <span class="hljs-comment">// 增加观察者</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">attach</span><span class="hljs-params">(Observer observer)</span> &#123;<br>    list.add(observer);<br>  &#125;<br>  <br>  <span class="hljs-comment">// 减少观察者</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">detach</span><span class="hljs-params">(Observer observer)</span> &#123;<br>    list.remove(observer);<br>  &#125;<br>  <br>  <span class="hljs-comment">// 通知观察者</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">notifyObserver</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">for</span> (Observer item : list) &#123;<br>      item.update();<br>    &#125;<br>  &#125;<br>  <br>  <span class="hljs-keyword">protected</span> String subjectState;<br>  <br>  <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getSubjectState</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.subjectState;<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setSubjectState</span><span class="hljs-params">(String value)</span> &#123;<br>    <span class="hljs-built_in">this</span>.subjectState = value;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>Observer类：抽象观察者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Observer</span> &#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>ConcreteSubject类：具体通知者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ConcreteSubject</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Subject</span> &#123;<br>  <span class="hljs-comment">// 具体通知者的方法</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>ConcreteObserver类：具体观察者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ConcreteObserver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Observer</span> &#123;<br>  <span class="hljs-keyword">private</span> String name;<br>  <span class="hljs-keyword">private</span> Subject sub;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">ConcreteObserver</span><span class="hljs-params">(String name, Subject sub)</span> &#123;<br>    <span class="hljs-built_in">this</span>.name = name;<br>    <span class="hljs-built_in">this</span>.sub = sub;<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">()</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;观察者&quot;</span> + <span class="hljs-built_in">this</span>.name + <span class="hljs-string">&quot;的新状态是&quot;</span> + <span class="hljs-built_in">this</span>.sub.getSubjectState());<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>客户端代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Subject</span> <span class="hljs-variable">subject</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcreteSubject</span>();<br>subject.attach(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcreteObserver</span>(<span class="hljs-string">&quot;NameX&quot;</span>, subject));<br>subject.attach(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcreteObserver</span>(<span class="hljs-string">&quot;NameY&quot;</span>, subject));<br>subject.attach(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcreteObserver</span>(<span class="hljs-string">&quot;NameZ&quot;</span>, subject));<br><br>subject <span class="hljs-title function_">setSubjectState</span><span class="hljs-params">(<span class="hljs-string">&quot;ABC&quot;</span>)</span>;<br>subject.notifyObserver();<br></code></pre></td></tr></table></figure>
-
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>将一个系统分割成一系列相互协作的类有一个很不好的副作用，那就是需要维护相关对象间的一致性。我们不希望为了维持一致性而使各类紧密耦合，这样会给维护、扩展和重用都带来不便。</p>
-<h3 id="何时使用观察者模式？"><a href="#何时使用观察者模式？" class="headerlink" title="何时使用观察者模式？"></a>何时使用观察者模式？</h3><ol>
-<li>当一个对象的改变需要同时改变其他对象，而且它不知道具体有多少对象有待改变时</li>
-<li>当一个抽象模型有两个方面，其中一方面依赖于另一方面，这时用观察者模式可以将这两者封装在独立的对象中使它们各自独立地改变和复用</li>
+                <h1 id="Item20-Prefer-interfaces-to-abstract-classes"><a href="#Item20-Prefer-interfaces-to-abstract-classes" class="headerlink" title="Item20: Prefer interfaces to abstract classes"></a>Item20: Prefer interfaces to abstract classes</h1><p>Java has two mechanisms to define a type that permits multiple implementations: <strong>interfaces</strong> and <strong>abstract classes</strong>. Since the introduction of <em>default methods</em> for interfaces in Java 8, both mechanisms allow you to provide implementations for some instance methods. </p>
+<p>A major difference is that to implement the type defined by an abstract class, a class must be a subclass of the abstract class. Because Java permits only <strong>single inheritance</strong>, this restriction on abstract classes severely <strong>constrains their use as type definitions</strong>. Any class that defines all the required methods and obeys the general contract is permitted to implement an interface, regardless of where the class resides in the class hierarchy.</p>
+<h2 id="Advantages-of-interfaces"><a href="#Advantages-of-interfaces" class="headerlink" title="Advantages of interfaces"></a>Advantages of interfaces</h2><h3 id="1-Easy-to-retrofit"><a href="#1-Easy-to-retrofit" class="headerlink" title="1. Easy to retrofit"></a>1. Easy to retrofit</h3><p><strong>Existing classes can easily be retrofitted to implement a new interface.</strong> All you have to do is to add the required methods, if they don’t yet exist, and to add an implements clause to the class declaration.</p>
+<blockquote>
+<p>Existing classes <strong>cannot</strong>, in general, be retrofitted to extend a new <strong>abstract class</strong>. If you want to have two classes extend the same abstract class, you have to place it high up in the type hierarchy where it is an ancestor of both classes. Unfortunately, this can cause great collateral damage to the type hierarchy, forcing all descendants of the new abstract class to subclass it, whether or not it is appropriate.</p>
+</blockquote>
+<h3 id="2-Ideal-for-defining-mixins"><a href="#2-Ideal-for-defining-mixins" class="headerlink" title="2. Ideal for defining mixins"></a>2. Ideal for defining mixins</h3><p><strong>Interfaces are ideal for defining mixins.</strong> An interface is called a mixin because it allows the optional functionality to be “mixed in” to the type’s primary functionality.</p>
+<blockquote>
+<p>Loosely speaking, a <em>mixin</em> is a type that a class can implement in addition to its “primary type,” to declare that it provides some optional behavior.</p>
+</blockquote>
+<blockquote>
+<p>Abstract classes can’t be used to define mixins for the same reason that they can’t be retrofitted onto existing classes: a class cannot have more than one parent, and there is no reasonable place in the class hierarchy to insert a mixin.</p>
+</blockquote>
+<h3 id="3-Nonhierarchical"><a href="#3-Nonhierarchical" class="headerlink" title="3. Nonhierarchical"></a>3. Nonhierarchical</h3><p><strong>Interfaces allow for the construction of nonhierarchical type frameworks.</strong></p>
+<p><em>Type</em> hierarchies are great for organizing some things, but other things don’t fall neatly into a rigid hierarchy.</p>
+<p>You don’t always need this level of flexibility, but when you do, interfaces are a lifesaver.</p>
+<blockquote>
+<p>The alternative is a bloated class hierarchy containing a separate class for every supported combination of attributes. If there are $n$ attributes in the type system, there are $2^n$ possible combinations that you might have to support. This is what’s known as a <em>combinatorial explosion</em>. Bloated class hierarchies can lead to bloated classes with many methods that differ only in the type of their arguments because there are no types in the class hierarchy to capture common behaviors.</p>
+</blockquote>
+<h3 id="4-Safe-and-powerful-to-enhance-functionality"><a href="#4-Safe-and-powerful-to-enhance-functionality" class="headerlink" title="4. Safe and powerful to enhance functionality"></a>4. Safe and powerful to enhance functionality</h3><p><strong>Interfaces enable safe, powerful functionality enhancements</strong> via the <em>wrapper class</em> idiom (Item 18). If you use abstract classes to define types, you leave the programmer who wants to add functionality with no alternative but inheritance. The resulting classes are less powerful and more fragile than wrapper classes.</p>
+<h2 id="Skeletal-implementation"><a href="#Skeletal-implementation" class="headerlink" title="Skeletal implementation"></a>Skeletal implementation</h2><p>When there is an <strong>obvious implementation</strong> of an interface method in terms of other interface methods, consider providing implementation assistance to programmers in the form of a <strong>default method</strong>.</p>
+<h3 id="Limits-of-default-methods"><a href="#Limits-of-default-methods" class="headerlink" title="Limits of default methods"></a>Limits of default methods</h3><ol>
+<li><p>Although many interfaces specify the behavior of <strong><em>Object</em> methods</strong> such as <code>equals</code> and <code>hashCode</code>, you are not permitted to provide default methods for them.</p>
+</li>
+<li><p>Also, interfaces are not permitted to contain <strong>instance fields or nonpublic static members</strong> (with the exception of private static methods).</p>
+</li>
+<li><p>Finally, you can’t add default methods to an interface that <strong>you don’t control</strong>.</p>
+</li>
 </ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>观察者模式所做的工作其实就是在解除耦合。让耦合的双方都依赖于抽象，而不是依赖于具体。从而使得各自的变化都不会影响另一边的变化。</p>
-<h2 id="Java内置接口实现"><a href="#Java内置接口实现" class="headerlink" title="Java内置接口实现"></a>Java内置接口实现</h2><p>现实编程中，具体的观察者完全有可能是风马牛不相及的类，但它们都需要根据通知者的通知来做出update()的操作，此时不适合使用继承，要用接口来实现。</p>
-<p>Java已经为观察者模式准备好了相关的接口和抽象类了：<strong>观察者接口java.util.Observer</strong> 和 <strong>通知者类java.util.Observable</strong> 。</p>
-<p>Java内置的Observable是一个类，这样设计是有问题的。一个类，就只能继承它，但我们自己的类可能本身就需要继承其他抽象类，这就产生了麻烦。Java不支持多重继承，这就严重限制了Observable的复用潜力。所以，当你这段代码用javac编译时，会给出提示： <code>警告：［deprecation］ java.util中的Observable已过时。</code> 系统其实是建议你不要复用这样的方法。所以真实编程中，我们也要考虑怎么取舍，如何修改的问题。</p>
-<h3 id="Java其他内建支持"><a href="#Java其他内建支持" class="headerlink" title="Java其他内建支持"></a>Java其他内建支持</h3><p>JavaBean通过<code>PropertyChangeEvent</code>提供内建的支持。当一个Bean改变特定种类的属性时，该事件产生，并发送通知给<code>PropertyChangeListener</code>。</p>
-<p>在处理异步流的Flow API中，也有相关的出版者&#x2F;订阅者组件。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>You can, however, combine the advantages of interfaces and abstract classes by providing an abstract <em><strong>skeletal implementation class</strong></em> to go with an interface.</p>
+<ul>
+<li><p>The <em>interface</em> defines the <strong>type</strong>, perhaps providing some <strong>default methods</strong>;</p>
+</li>
+<li><p>The <em>skeletal implementation class</em> implements the <strong>remaining non-primitive interface methods</strong> atop the primitive interface methods.</p>
+<blockquote>
+<p>This is the <em>Template Method</em> pattern.</p>
+</blockquote>
+</li>
+</ul>
+<p>Extending a skeletal implementation takes most of the work out of implementing an interface.</p>
+<p>By convention, skeletal implementation classes are called <strong>Abstract<em>Interface</em></strong>, where <em>Interface</em> is the name of the interface they implement. For example, the Collections Framework provides a skeletal implementation to go along with each main collection interface: <code>AbstractCollection</code>, <code>AbstractSet</code>, <code>AbstractList</code>, and <code>AbstractMap</code>.</p>
+<h3 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h3><p>The beauty of skeletal implementation classes is that they provide all of the implementation assistance of abstract classes without imposing the severe constraints that abstract classes impose when they serve as type definitions. For most implementors of an interface with a skeletal implementation class, extending this class is the obvious choice, but it is strictly optional. If a class cannot be made to extend the skeletal implementation, the class can always implement the interface directly. The class still benefits from any default methods present on the interface itself.</p>
+<p>Furthermore, the skeletal implementation can still aid the implementor’s task. <strong>The class implementing the interface</strong> can <strong>forward invocations of interface methods</strong> to a <strong>contained instance of a private inner class that extends the skeletal implementation</strong>. This technique, known as <em>simulated multiple inheritance</em>, is closely related to the wrapper class idiom (Item 18). It provides many of the benefits of multiple inheritance, while avoiding the pitfalls.</p>
+<h3 id="How-to-write-a-skeletal-implementation"><a href="#How-to-write-a-skeletal-implementation" class="headerlink" title="How to write a skeletal implementation"></a>How to write a skeletal implementation</h3><ul>
+<li><p>First, study the interface and decide which methods are the <strong>primitives</strong> in terms of which the others can be implemented. These primitives will be the <strong>abstract methods in your skeletal implementation</strong>.</p>
+</li>
+<li><p>Next, provide <strong>default methods</strong> in the interface for all of the methods that <strong>can be implemented directly atop the primitives</strong>, but recall that you may not provide default methods for <em>Object</em> methods such as <code>equals</code> and <code>hashCode</code>.</p>
+<ul>
+<li>If the primitives and default methods cover the interface, you’re done, and have no need for a skeletal implementation class.</li>
+<li>Otherwise, write a class declared to implement the interface, with <strong>implementations of all of the remaining interface methods</strong>. The class may contain any nonpublic fields ands methods appropriate to the task.</li>
+</ul>
+</li>
+</ul>
+<p>Example: <code>Map.Entry</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Skeletal implementation class</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstractMapEntry</span>&lt;K,V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map</span>.Entry&lt;K,V&gt; &#123;<br>  <span class="hljs-comment">// Entries in a modifiable map must override this method</span><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-keyword">public</span> V <span class="hljs-title function_">setValue</span><span class="hljs-params">(V value)</span> &#123;<br>     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UnsupportedOperationException</span>();<br>  &#125;<br>  <br>  <span class="hljs-comment">// Implements the general contract of Map.Entry.equals</span><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object o)</span> &#123;<br>    <span class="hljs-keyword">if</span> (o == <span class="hljs-built_in">this</span>)<br>     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">if</span> (!(o <span class="hljs-keyword">instanceof</span> Map.Entry))<br>     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    Map.Entry&lt;?, ?&gt; e = (Map.Entry) o;<br>    <span class="hljs-keyword">return</span> Objects.equals(e.getKey(), getKey())<br>      &amp;&amp; Objects.equals(e.getValue(), getValue());<br>  &#125;<br>  <br>  <span class="hljs-comment">// Implements the general contract of Map.Entry.hashCode</span><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span> &#123;<br>     <span class="hljs-keyword">return</span> Objects.hashCode(getKey()) ^ Objects.hashCode(getValue());<br>  &#125;<br>  <br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-keyword">return</span> getKey() + <span class="hljs-string">&quot;=&quot;</span> + getValue();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>The obvious primitives are <code>getKey</code>, <code>getValue</code>, and (optionally) <code>setValue</code>. The interface specifies the behavior of <code>equals</code> and <code>hashCode</code>, and there is an obvious implementation of <code>toString</code> in terms of the <strong>primitives</strong>.</p>
+<p>Since you are not allowed to provide default implementations for the <em>Object</em> methods, all implementations are placed in the skeletal implementation class.</p>
+<blockquote>
+<p>Note that this skeletal implementation could not be implemented in the <code>Map.Entry</code> <strong>interface</strong> or as a <strong>subinterface</strong> because <strong>default methods are not permitted to override <em>Object</em> methods</strong> such as <code>equals</code>, <code>hashCode</code>, and <code>toString</code>.</p>
+</blockquote>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><ol>
+<li>Because skeletal implementations are designed for inheritance, <strong>good documentation is absolutely essential in a skeletal implementation,</strong> whether it consists of default methods on an interface or a separate abstract class.</li>
+<li>A minor variant on the skeletal implementation is the <em>simple implementation,</em> exemplified by <code>AbstractMap.SimpleEntry</code>. It differs in that it isn’t abstract: it is the simplest possible working implementation.</li>
+</ol>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>To summarize, an interface is generally the best way to define a type that permits multiple implementations. If you export a nontrivial interface, you should strongly consider providing a <strong>skeletal implementation</strong> to go with it.</p>
+<p>To the extent possible, you should provide the skeletal implementation via <strong>default methods</strong> on the interface so that all implementors of the interface can make use of it. That said, restrictions on interfaces typically mandate that a skeletal implementation take the form of an abstract class (not a subinterface).</p>
 
                 
               </div>
@@ -351,8 +380,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Effective-Java/" class="category-chain-item">Effective Java</a>
+  
+  
+
   
 
       </span>
@@ -371,8 +407,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>设计模式14-观察者模式</div>
-      <div>https://peixuanhu.github.io/2023/10/10/design-pattern/14.观察者模式/</div>
+      <div>Effective Java-20. Prefer interfaces to abstract classes</div>
+      <div>https://peixuanhu.github.io/2023/11/23/Java/effective-java/Item20-Prefer-interfaces-to-abstract-classes/</div>
     </div>
     <div class="license-meta">
       
@@ -384,7 +420,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 10, 2023</div>
+          <div>November 23, 2023</div>
         </div>
       
       
@@ -421,9 +457,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" title="算法模板2-7.哈希">
+                      <a href="/2023/11/24/Java/effective-java/Item21-Design-interfaces-for-posterity/" title="Effective Java-21. Design interfaces for posterity">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法模板2-7.哈希</span>
+                        <span class="hidden-mobile">Effective Java-21. Design interfaces for posterity</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -431,8 +467,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" title="设计模式13-建造者模式">
-                        <span class="hidden-mobile">设计模式13-建造者模式</span>
+                      <a href="/2023/11/22/Java/effective-java/Item19-Design-and-document-for-inheritance-or-else-prohibit-it/" title="Effective Java-19. Design and document for inheritance or else prohibit it">
+                        <span class="hidden-mobile">Effective Java-19. Design and document for inheritance or else prohibit it</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
