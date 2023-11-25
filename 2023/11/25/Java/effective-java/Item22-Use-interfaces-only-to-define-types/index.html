@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 16: In public classes, use accessor methods, not public fieldsPublic classIf a class is accessible outside its package, provide accessor methods to preserve the flexibility to change the class’s">
+    <meta name="description" content="Item 22: Use interfaces only to define typesWhen a class implements an interface, the interface serves as a type that can be used to refer to instances of the class. That a class implements an interfa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-16. In public classes, use accessor methods, not public fields">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/19/Java/effective-java/Item16-In-public-classes,use-accessor-methods,not-public-fields/index.html">
+<meta property="og:title" content="Effective Java-22. Use interfaces only to define types">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/25/Java/effective-java/Item22-Use-interfaces-only-to-define-types/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 16: In public classes, use accessor methods, not public fieldsPublic classIf a class is accessible outside its package, provide accessor methods to preserve the flexibility to change the class’s">
+<meta property="og:description" content="Item 22: Use interfaces only to define typesWhen a class implements an interface, the interface serves as a type that can be used to refer to instances of the class. That a class implements an interfa">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-19T13:02:19.647Z">
-<meta property="article:modified_time" content="2023-11-25T06:17:45.569Z">
+<meta property="article:published_time" content="2023-11-25T06:09:54.326Z">
+<meta property="article:modified_time" content="2023-11-25T06:30:10.132Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-16. In public classes, use accessor methods, not public fields - Peixuan&#39;s Page</title>
+  <title>Effective Java-22. Use interfaces only to define types - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-16. In public classes, use accessor methods, not public fields"></span>
+            <span id="subtitle" data-typed-text="Effective Java-22. Use interfaces only to define types"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-19 21:02" pubdate>
-          November 19, 2023 pm
+        <time datetime="2023-11-25 14:09" pubdate>
+          November 25, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k words
+          2.3k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          23 mins
+          19 mins
         
       </span>
     
@@ -290,28 +290,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-16. In public classes, use accessor methods, not public fields</h1>
+            <h1 id="seo-header">Effective Java-22. Use interfaces only to define types</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-16-In-public-classes-use-accessor-methods-not-public-fields"><a href="#Item-16-In-public-classes-use-accessor-methods-not-public-fields" class="headerlink" title="Item 16: In public classes, use accessor methods, not public fields"></a>Item 16: In public classes, use accessor methods, not public fields</h1><h2 id="Public-class"><a href="#Public-class" class="headerlink" title="Public class"></a>Public class</h2><p><strong>If a class is accessible outside its package, provide accessor methods</strong> to preserve the flexibility to change the class’s internal representation. If a public class exposes its data fields, all hope of changing its representation is lost because client code can be distributed far and wide.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Encapsulation of data by accessor methods and mutators</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-type">double</span> x;<br>  <span class="hljs-keyword">private</span> <span class="hljs-type">double</span> y;<br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">Point</span><span class="hljs-params">(<span class="hljs-type">double</span> x, <span class="hljs-type">double</span> y)</span> &#123;<br>    <span class="hljs-built_in">this</span>.x = x;<br>    <span class="hljs-built_in">this</span>.y = y;<br>  &#125;<br>  <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">getX</span><span class="hljs-params">()</span> &#123; <span class="hljs-keyword">return</span> x; &#125;<br>  <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">getY</span><span class="hljs-params">()</span> &#123; <span class="hljs-keyword">return</span> y; &#125;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setX</span><span class="hljs-params">(<span class="hljs-type">double</span> x)</span> &#123; <span class="hljs-built_in">this</span>.x = x; &#125;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setY</span><span class="hljs-params">(<span class="hljs-type">double</span> y)</span> &#123; <span class="hljs-built_in">this</span>.y = y; &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>If <strong>a class has no access control identifier</strong>, it has default access control characteristics. This default access control stipulates that <strong>the class can only be accessed and referenced by classes in the same package</strong>, and cannot be used by classes in other packages, even if there are subclasses of this class in other packages. This access feature is also called package access (package private).</p>
-</blockquote>
-<p>While it’s never a good idea for a public class to expose fields directly, it is less harmful if the fields are <strong>immutable</strong>. You can’t change the representation of such a class without changing its API, and you can’t take auxiliary actions when a field is read, but you can enforce invariants.</p>
+                <h1 id="Item-22-Use-interfaces-only-to-define-types"><a href="#Item-22-Use-interfaces-only-to-define-types" class="headerlink" title="Item 22: Use interfaces only to define types"></a>Item 22: Use interfaces only to define types</h1><p>When a class implements an interface, the interface serves as a <strong><em>type</em> that can be used to refer to instances of the class</strong>. That a class implements an interface should therefore say something about what a client can do with instances of the class. It is inappropriate to define an interface for any other purpose. </p>
+<h2 id="Inappropriate-example-export-constants"><a href="#Inappropriate-example-export-constants" class="headerlink" title="Inappropriate example - export constants"></a>Inappropriate example - export constants</h2><p>One kind of interface that fails this test is the so-called <em>constant interface</em>. Such an interface contains no methods; it consists solely of static final fields, each exporting a constant. Classes using these constants implement the interface to avoid the need to qualify constant names with a class name.</p>
 <p>Example:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Public class with exposed immutable fields - questionable</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Time</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">HOURS_PER_DAY</span>    <span class="hljs-operator">=</span> <span class="hljs-number">24</span>;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MINUTES_PER_HOUR</span> <span class="hljs-operator">=</span> <span class="hljs-number">60</span>;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> hour;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> minute;<br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">Time</span><span class="hljs-params">(<span class="hljs-type">int</span> hour, <span class="hljs-type">int</span> minute)</span> &#123;<br>    <span class="hljs-keyword">if</span> (hour &lt; <span class="hljs-number">0</span> || hour &gt;= HOURS_PER_DAY)<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Hour: &quot;</span> + hour);<br>    <span class="hljs-keyword">if</span> (minute &lt; <span class="hljs-number">0</span> || minute &gt;= MINUTES_PER_HOUR)<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Min: &quot;</span> + minute);<br>    <span class="hljs-built_in">this</span>.hour = hour;<br>    <span class="hljs-built_in">this</span>.minute = minute;<br>	&#125;<br>   ... <span class="hljs-comment">// Remainder omitted</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Constant interface antipattern - do not use!</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">PhysicalConstants</span> &#123;<br>   <span class="hljs-comment">// Avogadro&#x27;s number (1/mol)</span><br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">AVOGADROS_NUMBER</span>   <span class="hljs-operator">=</span> <span class="hljs-number">6.022_140_857e23</span>;<br>   <span class="hljs-comment">// Boltzmann constant (J/K)</span><br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">BOLTZMANN_CONSTANT</span> <span class="hljs-operator">=</span> <span class="hljs-number">1.380_648_52e-23</span>;<br>   <span class="hljs-comment">// Mass of the electron (kg)</span><br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">ELECTRON_MASS</span>      <span class="hljs-operator">=</span> <span class="hljs-number">9.109_383_56e-31</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="Package-private-private-nested-class"><a href="#Package-private-private-nested-class" class="headerlink" title="Package-private &#x2F; private nested class"></a>Package-private &#x2F; private nested class</h2><p>However, <strong>if a class is package-private or is a private nested class, there is nothing inherently wrong with exposing its data fields</strong>—assuming they do an adequate job of describing the abstraction provided by the class.</p>
-<p>This approach generates less visual clutter than the accessor-method approach, both in the class definition and in the client code that uses it.</p>
+<p><strong>The constant interface pattern is a poor use of interfaces.</strong></p>
+<ul>
+<li><p>That a class uses some constants internally is an implementation detail. Implementing a constant interface causes this implementation detail to leak into the class’s exported API.</p>
+</li>
+<li><p>Worse, it represents a commitment: if in a future release the class is modified so that it no longer needs to use the constants, it still must implement the interface to ensure binary compatibility.</p>
+</li>
+<li><p>If a nonfinal class implements a constant interface, all of its subclasses will have their namespaces polluted by the constants in the interface.</p>
+</li>
+</ul>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><ol>
+<li><p>If the constants are <strong>strongly tied</strong> to an existing class or interface, you should <strong>add them to the class or interface</strong>.</p>
 <blockquote>
-<p>While the client code is tied to the class’s internal representation, this code is <strong>confined to the package</strong> containing the class. If a change in representation becomes desirable, you can make the change without touching any code outside the package. In the case of a private nested class, the scope of the change is further restricted to the enclosing class.</p>
+<p>For example, all of the boxed numerical primitive classes, such as Integer and Double, export MIN_VALUE and MAX_VALUE constants.</p>
 </blockquote>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, <strong>public classes should never expose mutable fields</strong>. It is less harmful, though still questionable, for public classes to expose immutable fields.</p>
-<p>It is, however, sometimes desirable for <strong>package-private or private nested classes</strong> to <strong>expose fields</strong>, whether mutable or immutable.</p>
+</li>
+<li><p>If the constants are best viewed as members of an enumerated type, you should export them with an <em><strong>enum type</strong></em> (Item 34).</p>
+</li>
+<li><p>Otherwise, you should export the constants with a noninstantiable <em><strong>utility class</strong></em> (Item 4).</p>
+<p>Utility class version of the <code>PhysicalConstants</code> example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Constant utility class</span><br><span class="hljs-keyword">package</span> com.effectivejava.science;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PhysicalConstants</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">PhysicalConstants</span><span class="hljs-params">()</span> &#123; &#125;  <span class="hljs-comment">// Prevents instantiation</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">AVOGADROS_NUMBER</span> <span class="hljs-operator">=</span> <span class="hljs-number">6.022_140_857e23</span>;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">BOLTZMANN_CONST</span> <span class="hljs-operator">=</span><span class="hljs-number">1.380_648_52e-23</span>;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">ELECTRON_MASS</span> <span class="hljs-operator">=</span> <span class="hljs-number">9.109_383_56e-31</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, interfaces should be used only to define types. They should not be used merely to export constants.</p>
 
                 
               </div>
@@ -357,8 +367,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-16. In public classes, use accessor methods, not public fields</div>
-      <div>https://peixuanhu.github.io/2023/11/19/Java/effective-java/Item16-In-public-classes,use-accessor-methods,not-public-fields/</div>
+      <div>Effective Java-22. Use interfaces only to define types</div>
+      <div>https://peixuanhu.github.io/2023/11/25/Java/effective-java/Item22-Use-interfaces-only-to-define-types/</div>
     </div>
     <div class="license-meta">
       
@@ -370,7 +380,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 19, 2023</div>
+          <div>November 25, 2023</div>
         </div>
       
       
@@ -407,18 +417,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/19/backend/Spring/IoC/IoC-container/" title="IoC容器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">IoC容器</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/18/Java/effective-java/Item15-Minimize-the-accessibility-of-classes-and-members/" title="Effective Java-15. Minimize the accessibility of classes and members">
-                        <span class="hidden-mobile">Effective Java-15. Minimize the accessibility of classes and members</span>
+                      <a href="/2023/11/24/Java/effective-java/Item21-Design-interfaces-for-posterity/" title="Effective Java-21. Design interfaces for posterity">
+                        <span class="hidden-mobile">Effective Java-21. Design interfaces for posterity</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

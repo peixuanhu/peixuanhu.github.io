@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item18: Favor composition over inheritanceInheritance is a powerful way to achieve code reuse, but it is not always the best tool for the job. Used inappropriately, it leads to fragile software. It is">
+    <meta name="description" content="Item 18: Favor composition over inheritanceInheritance is a powerful way to achieve code reuse, but it is not always the best tool for the job. Used inappropriately, it leads to fragile software. It i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Effective Java-18. Favor composition over inheritance">
 <meta property="og:url" content="https://peixuanhu.github.io/2023/11/21/Java/effective-java/Item18-Favor-composition-over-inheritance/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item18: Favor composition over inheritanceInheritance is a powerful way to achieve code reuse, but it is not always the best tool for the job. Used inappropriately, it leads to fragile software. It is">
+<meta property="og:description" content="Item 18: Favor composition over inheritanceInheritance is a powerful way to achieve code reuse, but it is not always the best tool for the job. Used inappropriately, it leads to fragile software. It i">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-21T01:01:06.036Z">
-<meta property="article:modified_time" content="2023-11-21T01:25:11.260Z">
+<meta property="article:modified_time" content="2023-11-25T06:17:56.293Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -295,7 +295,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Item18-Favor-composition-over-inheritance"><a href="#Item18-Favor-composition-over-inheritance" class="headerlink" title="Item18: Favor composition over inheritance"></a>Item18: Favor <em>composition</em> over <em>inheritance</em></h1><p>Inheritance is a powerful way to achieve code reuse, but it is not always the best tool for the job. Used inappropriately, it leads to fragile software. It is safe to use inheritance within a package, where the subclass and the superclass implementations are under the control of the same programmers. It is also safe to use inheritance when extending classes specifically designed and documented for extension (Item 19). Inheriting from ordinary concrete classes across package boundaries, however, is dangerous.</p>
+                <h1 id="Item-18-Favor-composition-over-inheritance"><a href="#Item-18-Favor-composition-over-inheritance" class="headerlink" title="Item 18: Favor composition over inheritance"></a>Item 18: Favor <em>composition</em> over <em>inheritance</em></h1><p>Inheritance is a powerful way to achieve code reuse, but it is not always the best tool for the job. Used inappropriately, it leads to fragile software. It is safe to use inheritance within a package, where the subclass and the superclass implementations are under the control of the same programmers. It is also safe to use inheritance when extending classes specifically designed and documented for extension (Item 19). Inheriting from ordinary concrete classes across package boundaries, however, is dangerous.</p>
 <p><strong>Unlike method invocation, inheritance violates encapsulation.</strong> In other words, a subclass depends on the implementation details of its superclass for its proper function. The superclass’s implementation may change from release to release, and if it does, the subclass may break, even though its code has not been touched. As a consequence, a subclass must evolve in tandem with its superclass, unless the superclass’s authors have designed and documented it specifically for the purpose of being extended.</p>
 <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="Forwarding-class"><a href="#Forwarding-class" class="headerlink" title="Forwarding  class"></a>Forwarding  class</h3><p>Instead of extending an existing class, give your new class <strong>a private field that references an instance of the existing class</strong>. This design is called <em><strong>composition</strong></em> because the existing class becomes a component of the new one.</p>
 <p>Each instance method in the new class invokes the corresponding method on the contained instance of the existing class and returns the results. This is known as <em><strong>forwarding</strong></em>, and the methods in the new class are known as <em>forwarding methods</em>.</p>
@@ -373,7 +373,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 21, 2023</div>
+          <div>November 25, 2023</div>
         </div>
       
       

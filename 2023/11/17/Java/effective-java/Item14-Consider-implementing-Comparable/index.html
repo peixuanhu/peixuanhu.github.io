@@ -24,7 +24,7 @@
 <meta property="og:description" content="Item 14: Consider implementing ComparableIf you are writing a value class with an obvious natural ordering, such as alphabetical order, numerical order, or chronological order, you should implement th">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-17T08:52:01.709Z">
-<meta property="article:modified_time" content="2023-11-20T02:30:17.805Z">
+<meta property="article:modified_time" content="2023-11-25T06:17:38.622Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -295,7 +295,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Item-14-Consider-implementing-Comparable"><a href="#Item-14-Consider-implementing-Comparable" class="headerlink" title="Item 14: Consider implementing Comparable"></a>Item 14: Consider implementing <em>Comparable</em></h2><p>If you are writing <strong>a value class with an obvious natural ordering</strong>, such as alphabetical order, numerical order, or chronological order, you should implement the <code>Comparable</code> interface:</p>
+                <h1 id="Item-14-Consider-implementing-Comparable"><a href="#Item-14-Consider-implementing-Comparable" class="headerlink" title="Item 14: Consider implementing Comparable"></a>Item 14: Consider implementing <em>Comparable</em></h1><p>If you are writing <strong>a value class with an obvious natural ordering</strong>, such as alphabetical order, numerical order, or chronological order, you should implement the <code>Comparable</code> interface:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt; &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(T t)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="General-contract-of-compareTo-method"><a href="#General-contract-of-compareTo-method" class="headerlink" title="General contract of compareTo method"></a>General contract of <em>compareTo</em> method</h2><p>Compares this object with the specified object for order.</p>
@@ -393,7 +393,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 20, 2023</div>
+          <div>November 25, 2023</div>
         </div>
       
       

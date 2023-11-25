@@ -16,12 +16,12 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="需求：需要把所需的功能按正确的顺序串联起来进行控制 装饰模式定义装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。 装饰模式结构图  Component是定义一个对象接口，可以给这些对象动态地添加职责。  ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。  Decorator，装饰抽象类，继承了C">
+    <meta name="description" content="需求：需要把所需的功能按正确的顺序串联起来进行控制 装饰模式定义装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加&#x2F;扩展功能来说，装饰模式比生成子类更为灵活。 装饰模式结构图  Component是定义一个对象接口，可以给这些对象动态地添加职责。  ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。  Decorator，装饰">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式6-装饰模式">
 <meta property="og:url" content="https://peixuanhu.github.io/2023/09/20/design-pattern/6.%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="需求：需要把所需的功能按正确的顺序串联起来进行控制 装饰模式定义装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。 装饰模式结构图  Component是定义一个对象接口，可以给这些对象动态地添加职责。  ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。  Decorator，装饰抽象类，继承了C">
+<meta property="og:description" content="需求：需要把所需的功能按正确的顺序串联起来进行控制 装饰模式定义装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加&#x2F;扩展功能来说，装饰模式比生成子类更为灵活。 装饰模式结构图  Component是定义一个对象接口，可以给这些对象动态地添加职责。  ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。  Decorator，装饰">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/09/20/YdCDAhkco9ETLF6.jpg">
 <meta property="og:image" content="https://s2.loli.net/2023/09/20/Gx6ynzCtlqogS5F.jpg">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/09/20/HthTDI9Zpz61acq.jpg">
 <meta property="og:image" content="https://s2.loli.net/2023/09/20/Oq4yoQVPExWRgeD.jpg">
 <meta property="article:published_time" content="2023-09-20T08:39:21.000Z">
-<meta property="article:modified_time" content="2023-09-21T10:20:54.000Z">
+<meta property="article:modified_time" content="2023-11-24T05:20:37.798Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://s2.loli.net/2023/09/20/YdCDAhkco9ETLF6.jpg">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.9k words
+          6.1k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          50 mins
+          51 mins
         
       </span>
     
@@ -302,7 +302,7 @@
               <div class="markdown-body">
                 
                 <p>需求：需要把所需的功能按正确的顺序串联起来进行控制</p>
-<h1 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</p>
+<h1 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加&#x2F;扩展功能来说，装饰模式比生成子类更为灵活。</p>
 <h2 id="装饰模式结构图"><a href="#装饰模式结构图" class="headerlink" title="装饰模式结构图"></a>装饰模式结构图</h2><p><img src="https://s2.loli.net/2023/09/20/YdCDAhkco9ETLF6.jpg" srcset="/img/loading.gif" lazyload alt="装饰模式结构图.jpg"></p>
 <ul>
 <li><p>Component是定义一个对象接口，可以给这些对象动态地添加职责。</p>
@@ -371,6 +371,12 @@
 
 <p>现在无论如何组合算法，哪怕是先打折再返现，再打折再返现，都只需要更改<code>CashContext</code>类，很好地做到了开放封闭。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>装饰模式是为已有功能<strong>动态地添加更多功能</strong>的一种方式。</p>
+<ul>
+<li>装饰者有和所装饰对象同样的超类型。</li>
+<li>可以用任意多个装饰者包裹一个对象。</li>
+<li><strong>装饰者在委托给所装饰对象之前或（与）之后添加自己的行为，来做剩下的工作。</strong></li>
+</ul>
+<p>缺点：带来了大量的小类，对使用者来说没那么直白（如Java I&#x2F;O库中的一系列InpurStream）。</p>
 <h3 id="用装饰模式前"><a href="#用装饰模式前" class="headerlink" title="用装饰模式前"></a>用装饰模式前</h3><p>当系统需要新功能的时候，是向旧的类中添加新的代码。这些新加的代码通常装饰了原有类的核心职责或主要行为（如：给Person添加新服饰）。</p>
 <p><strong>问题</strong>：它们在主类中加入了新的字段，新的方法和新的逻辑，从而增加了主类的复杂度。而这些新加入的东西仅仅是为了满足一些只在某种<strong>特定情况</strong>下才会执行的特殊行为的需要。</p>
 <h3 id="用装饰模式后"><a href="#用装饰模式后" class="headerlink" title="用装饰模式后"></a>用装饰模式后</h3><p>它把每个要装饰的功能放在<strong>单独的类</strong>中，并让这个类<strong>包装</strong>它所要装饰的对象，因此，当需要执行特殊行为时，客户代码就可以在运行时根据需要有选择地、按顺序地使用装饰功能包装对象了。</p>
@@ -439,7 +445,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>September 21, 2023</div>
+          <div>November 24, 2023</div>
         </div>
       
       

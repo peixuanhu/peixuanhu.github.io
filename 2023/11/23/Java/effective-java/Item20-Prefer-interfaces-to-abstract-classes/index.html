@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item20: Prefer interfaces to abstract classesJava has two mechanisms to define a type that permits multiple implementations: interfaces and abstract classes. Since the introduction of default methods">
+    <meta name="description" content="Item 20: Prefer interfaces to abstract classesJava has two mechanisms to define a type that permits multiple implementations: interfaces and abstract classes. Since the introduction of default methods">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Effective Java-20. Prefer interfaces to abstract classes">
 <meta property="og:url" content="https://peixuanhu.github.io/2023/11/23/Java/effective-java/Item20-Prefer-interfaces-to-abstract-classes/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item20: Prefer interfaces to abstract classesJava has two mechanisms to define a type that permits multiple implementations: interfaces and abstract classes. Since the introduction of default methods">
+<meta property="og:description" content="Item 20: Prefer interfaces to abstract classesJava has two mechanisms to define a type that permits multiple implementations: interfaces and abstract classes. Since the introduction of default methods">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-23T01:21:02.061Z">
-<meta property="article:modified_time" content="2023-11-23T02:19:35.816Z">
+<meta property="article:modified_time" content="2023-11-25T06:18:04.943Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -295,7 +295,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Item20-Prefer-interfaces-to-abstract-classes"><a href="#Item20-Prefer-interfaces-to-abstract-classes" class="headerlink" title="Item20: Prefer interfaces to abstract classes"></a>Item20: Prefer interfaces to abstract classes</h1><p>Java has two mechanisms to define a type that permits multiple implementations: <strong>interfaces</strong> and <strong>abstract classes</strong>. Since the introduction of <em>default methods</em> for interfaces in Java 8, both mechanisms allow you to provide implementations for some instance methods. </p>
+                <h1 id="Item-20-Prefer-interfaces-to-abstract-classes"><a href="#Item-20-Prefer-interfaces-to-abstract-classes" class="headerlink" title="Item 20: Prefer interfaces to abstract classes"></a>Item 20: Prefer interfaces to abstract classes</h1><p>Java has two mechanisms to define a type that permits multiple implementations: <strong>interfaces</strong> and <strong>abstract classes</strong>. Since the introduction of <em>default methods</em> for interfaces in Java 8, both mechanisms allow you to provide implementations for some instance methods. </p>
 <p>A major difference is that to implement the type defined by an abstract class, a class must be a subclass of the abstract class. Because Java permits only <strong>single inheritance</strong>, this restriction on abstract classes severely <strong>constrains their use as type definitions</strong>. Any class that defines all the required methods and obeys the general contract is permitted to implement an interface, regardless of where the class resides in the class hierarchy.</p>
 <h2 id="Advantages-of-interfaces"><a href="#Advantages-of-interfaces" class="headerlink" title="Advantages of interfaces"></a>Advantages of interfaces</h2><h3 id="1-Easy-to-retrofit"><a href="#1-Easy-to-retrofit" class="headerlink" title="1. Easy to retrofit"></a>1. Easy to retrofit</h3><p><strong>Existing classes can easily be retrofitted to implement a new interface.</strong> All you have to do is to add the required methods, if they don’t yet exist, and to add an implements clause to the class declaration.</p>
 <blockquote>
@@ -426,7 +426,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 23, 2023</div>
+          <div>November 25, 2023</div>
         </div>
       
       
