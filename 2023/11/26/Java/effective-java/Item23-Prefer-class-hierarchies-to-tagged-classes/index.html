@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 22: Use interfaces only to define typesWhen a class implements an interface, the interface serves as a type that can be used to refer to instances of the class. That a class implements an interfa">
+    <meta name="description" content="Item 23: Prefer class hierarchies to tagged classesTagged classOccasionally you may run across a class whose instances come in two or more flavors and contain a tag field (enum type) indicating the fl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-22. Use interfaces only to define types">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/25/Java/effective-java/Item22-Use-interfaces-only-to-define-types/index.html">
+<meta property="og:title" content="Effective Java-23. Prefer class hierarchies to tagged classes">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/26/Java/effective-java/Item23-Prefer-class-hierarchies-to-tagged-classes/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 22: Use interfaces only to define typesWhen a class implements an interface, the interface serves as a type that can be used to refer to instances of the class. That a class implements an interfa">
+<meta property="og:description" content="Item 23: Prefer class hierarchies to tagged classesTagged classOccasionally you may run across a class whose instances come in two or more flavors and contain a tag field (enum type) indicating the fl">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-25T06:09:54.326Z">
-<meta property="article:modified_time" content="2023-11-25T06:30:10.132Z">
+<meta property="article:published_time" content="2023-11-26T03:31:07.382Z">
+<meta property="article:modified_time" content="2023-11-26T03:54:22.957Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-22. Use interfaces only to define types - Peixuan&#39;s Page</title>
+  <title>Effective Java-23. Prefer class hierarchies to tagged classes - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-22. Use interfaces only to define types"></span>
+            <span id="subtitle" data-typed-text="Effective Java-23. Prefer class hierarchies to tagged classes"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-25 14:09" pubdate>
-          November 25, 2023 pm
+        <time datetime="2023-11-26 11:31" pubdate>
+          November 26, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k words
+          4k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          19 mins
+          34 mins
         
       </span>
     
@@ -290,38 +290,47 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-22. Use interfaces only to define types</h1>
+            <h1 id="seo-header">Effective Java-23. Prefer class hierarchies to tagged classes</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-22-Use-interfaces-only-to-define-types"><a href="#Item-22-Use-interfaces-only-to-define-types" class="headerlink" title="Item 22: Use interfaces only to define types"></a>Item 22: Use interfaces only to define types</h1><p>When a class implements an interface, the interface serves as a <strong><em>type</em> that can be used to refer to instances of the class</strong>. That a class implements an interface should therefore say something about what a client can do with instances of the class. It is inappropriate to define an interface for any other purpose. </p>
-<h2 id="Inappropriate-example-export-constants"><a href="#Inappropriate-example-export-constants" class="headerlink" title="Inappropriate example - export constants"></a>Inappropriate example - export constants</h2><p>One kind of interface that fails this test is the so-called <em>constant interface</em>. Such an interface contains no methods; it consists solely of static final fields, each exporting a constant. Classes using these constants implement the interface to avoid the need to qualify constant names with a class name.</p>
-<p>Example:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Constant interface antipattern - do not use!</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">PhysicalConstants</span> &#123;<br>   <span class="hljs-comment">// Avogadro&#x27;s number (1/mol)</span><br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">AVOGADROS_NUMBER</span>   <span class="hljs-operator">=</span> <span class="hljs-number">6.022_140_857e23</span>;<br>   <span class="hljs-comment">// Boltzmann constant (J/K)</span><br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">BOLTZMANN_CONSTANT</span> <span class="hljs-operator">=</span> <span class="hljs-number">1.380_648_52e-23</span>;<br>   <span class="hljs-comment">// Mass of the electron (kg)</span><br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">ELECTRON_MASS</span>      <span class="hljs-operator">=</span> <span class="hljs-number">9.109_383_56e-31</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="Item-23-Prefer-class-hierarchies-to-tagged-classes"><a href="#Item-23-Prefer-class-hierarchies-to-tagged-classes" class="headerlink" title="Item 23: Prefer class hierarchies to tagged classes"></a>Item 23: Prefer class hierarchies to tagged classes</h1><h2 id="Tagged-class"><a href="#Tagged-class" class="headerlink" title="Tagged class"></a>Tagged class</h2><p>Occasionally you may run across a class whose instances come in two or more flavors and contain a <em>tag</em> field (enum type) indicating the flavor of the instance. For example, consider this class, which is capable of representing a circle or a rectangle:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Tagged class - vastly inferior to a class hierarchy!</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Figure</span> &#123;<br>   <span class="hljs-keyword">enum</span> <span class="hljs-title class_">Shape</span> &#123; RECTANGLE, CIRCLE &#125;;<br>  <br>   <span class="hljs-comment">// Tag field - the shape of this figure</span><br>   <span class="hljs-keyword">final</span> Shape shape;<br>  <br>   <span class="hljs-comment">// These fields are used only if shape is RECTANGLE</span><br>   <span class="hljs-type">double</span> length;<br>   <span class="hljs-type">double</span> width;<br>  <br>   <span class="hljs-comment">// This field is used only if shape is CIRCLE</span><br>   <span class="hljs-type">double</span> radius;<br>  <br>   <span class="hljs-comment">// Constructor for circle</span><br>   Figure(<span class="hljs-type">double</span> radius) &#123;<br>       shape = Shape.CIRCLE;<br>       <span class="hljs-built_in">this</span>.radius = radius;<br>   &#125;<br>  <br>   <span class="hljs-comment">// Constructor for rectangle</span><br>   Figure(<span class="hljs-type">double</span> length, <span class="hljs-type">double</span> width) &#123;<br>       shape = Shape.RECTANGLE;<br>       <span class="hljs-built_in">this</span>.length = length;<br>       <span class="hljs-built_in">this</span>.width = width;<br>   &#125;<br>  <br>   <span class="hljs-type">double</span> <span class="hljs-title function_">area</span><span class="hljs-params">()</span> &#123;<br>       <span class="hljs-keyword">switch</span>(shape) &#123;<br>         <span class="hljs-keyword">case</span> RECTANGLE:<br>           <span class="hljs-keyword">return</span> length * width;<br>         <span class="hljs-keyword">case</span> CIRCLE:<br>           <span class="hljs-keyword">return</span> Math.PI * (radius * radius);<br>         <span class="hljs-keyword">default</span>:<br>           <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AssertionError</span>(shape);<br>       &#125;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><strong>The constant interface pattern is a poor use of interfaces.</strong></p>
+<p><strong>Tagged classes are verbose, error-prone, and inefficient.</strong></p>
 <ul>
-<li><p>That a class uses some constants internally is an implementation detail. Implementing a constant interface causes this implementation detail to leak into the class’s exported API.</p>
+<li><p>They are cluttered with boilerplate, including enum declarations, tag fields, and switch statements. Readability is further harmed because multiple implementations are jumbled together in a single class. The data type of an instance gives no clue as to its flavor.</p>
 </li>
-<li><p>Worse, it represents a commitment: if in a future release the class is modified so that it no longer needs to use the constants, it still must implement the interface to ensure binary compatibility.</p>
+<li><p>Fields can’t be made <em>final</em> unless constructors initialize irrelevant fields, resulting in more boilerplate.</p>
+<p>Constructors must set the tag field and initialize the right data fields with no help from the compiler: if you initialize the wrong fields, the program will fail at runtime.</p>
+<p>You can’t add a flavor to a tagged class unless you can modify its source file. If you do add a flavor, you must remember to add a case to every switch statement, or the class will fail at runtime.</p>
 </li>
-<li><p>If a nonfinal class implements a constant interface, all of its subclasses will have their namespaces polluted by the constants in the interface.</p>
+<li><p>Memory footprint is increased because instances are burdened with irrelevant fields belonging to other flavors.</p>
 </li>
 </ul>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><ol>
-<li><p>If the constants are <strong>strongly tied</strong> to an existing class or interface, you should <strong>add them to the class or interface</strong>.</p>
+<h2 id="Solution-Subtyping"><a href="#Solution-Subtyping" class="headerlink" title="Solution: Subtyping"></a>Solution: Subtyping</h2><blockquote>
+<p>Example: make a abstract class: Figure, let Circle and Rectangle extend it.</p>
+</blockquote>
+<p>To transform a tagged class into a class hierarchy, first define an abstract class containing an abstract method for each method in the tagged class whose behavior depends on the tag value. In the <code>Figure</code> class, there is only one such method, which is area. This abstract class is the root of the class hierarchy. If there are any methods whose behavior does not depend on the value of the tag, put them in this class. Similarly, if there are any data fields used by all the flavors, put them in this class. There are no such flavor-independent methods or fields in the Figure class.</p>
+<p>Next, define a concrete subclass of the root class for each flavor of the original tagged class. In our example, there are two: <code>circle</code> and <code>rectangle</code>. Include in each subclass the data fields particular to its flavor. In our example, radius is particular to circle, and length and width are particular to rectangle. Also include in each subclass the appropriate implementation of each abstract method in the root class.</p>
+<h3 id="Pros"><a href="#Pros" class="headerlink" title="Pros"></a>Pros</h3><ul>
+<li><p>Class hierarchy corrects every shortcoming of tagged classes noted previously.</p>
+<ul>
+<li>The code is simple and clear, containing none of the boilerplate found in the original.</li>
+<li>The implementation of each flavor is allotted its own class, and none of these classes is encumbered by irrelevant data fields.</li>
+<li>All fields are final.</li>
+<li>The compiler ensures that each class’s constructor initializes its data fields and that each class has an implementation for every abstract method declared in the root class. This eliminates the possibility of a runtime failure due to a missing switch case.</li>
+<li>Multiple programmers can extend the hierarchy independently and interoperably without access to the source for the root class. There is a separate data type associated with each flavor, allowing programmers to indicate the flavor of a variable and to restrict variables and input parameters to a particular flavor.</li>
+</ul>
+</li>
+<li><p>Another advantage of class hierarchies is that they can be made to reflect <strong>natural hierarchical relationships among types</strong>, allowing for increased flexibility and better compile-time type checking.</p>
 <blockquote>
-<p>For example, all of the boxed numerical primitive classes, such as Integer and Double, export MIN_VALUE and MAX_VALUE constants.</p>
+<p>Suppose the tagged class in the original example also allowed for <code>squares</code>. The class hierarchy could be made to reflect the fact that a square is a special kind of rectangle (assuming both are immutable)</p>
 </blockquote>
 </li>
-<li><p>If the constants are best viewed as members of an enumerated type, you should export them with an <em><strong>enum type</strong></em> (Item 34).</p>
-</li>
-<li><p>Otherwise, you should export the constants with a noninstantiable <em><strong>utility class</strong></em> (Item 4).</p>
-<p>Utility class version of the <code>PhysicalConstants</code> example:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Constant utility class</span><br><span class="hljs-keyword">package</span> com.effectivejava.science;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PhysicalConstants</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">PhysicalConstants</span><span class="hljs-params">()</span> &#123; &#125;  <span class="hljs-comment">// Prevents instantiation</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">AVOGADROS_NUMBER</span> <span class="hljs-operator">=</span> <span class="hljs-number">6.022_140_857e23</span>;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">BOLTZMANN_CONST</span> <span class="hljs-operator">=</span><span class="hljs-number">1.380_648_52e-23</span>;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">ELECTRON_MASS</span> <span class="hljs-operator">=</span> <span class="hljs-number">9.109_383_56e-31</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, interfaces should be used only to define types. They should not be used merely to export constants.</p>
+</ul>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, tagged classes are seldom appropriate. If you’re tempted to write a class with an explicit tag field, think about whether the tag could be eliminated and the class replaced by a hierarchy. When you encounter an existing class with a tag field, consider refactoring it into a hierarchy.</p>
 
                 
               </div>
@@ -367,8 +376,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-22. Use interfaces only to define types</div>
-      <div>https://peixuanhu.github.io/2023/11/25/Java/effective-java/Item22-Use-interfaces-only-to-define-types/</div>
+      <div>Effective Java-23. Prefer class hierarchies to tagged classes</div>
+      <div>https://peixuanhu.github.io/2023/11/26/Java/effective-java/Item23-Prefer-class-hierarchies-to-tagged-classes/</div>
     </div>
     <div class="license-meta">
       
@@ -380,13 +389,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 25, 2023</div>
+          <div>November 26, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 25, 2023</div>
+          <div>November 26, 2023</div>
         </div>
       
       
@@ -417,18 +426,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/26/Java/effective-java/Item23-Prefer-class-hierarchies-to-tagged-classes/" title="Effective Java-23. Prefer class hierarchies to tagged classes">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-23. Prefer class hierarchies to tagged classes</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/24/Java/effective-java/Item21-Design-interfaces-for-posterity/" title="Effective Java-21. Design interfaces for posterity">
-                        <span class="hidden-mobile">Effective Java-21. Design interfaces for posterity</span>
+                      <a href="/2023/11/25/Java/effective-java/Item22-Use-interfaces-only-to-define-types/" title="Effective Java-22. Use interfaces only to define types">
+                        <span class="hidden-mobile">Effective Java-22. Use interfaces only to define types</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
