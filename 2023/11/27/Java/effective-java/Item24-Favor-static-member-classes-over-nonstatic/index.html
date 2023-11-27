@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 23: Prefer class hierarchies to tagged classesTagged classOccasionally you may run across a class whose instances come in two or more flavors and contain a tag field (enum type) indicating the fl">
+    <meta name="description" content="Item 24: Favor static member classes over nonstaticA nested class is a class defined within another class.  A nested class should exist only to serve its enclosing class. If a nested class would be us">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-23. Prefer class hierarchies to tagged classes">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/26/Java/effective-java/Item23-Prefer-class-hierarchies-to-tagged-classes/index.html">
+<meta property="og:title" content="Effective Java-24. Favor static member classes over nonstatic">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/27/Java/effective-java/Item24-Favor-static-member-classes-over-nonstatic/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 23: Prefer class hierarchies to tagged classesTagged classOccasionally you may run across a class whose instances come in two or more flavors and contain a tag field (enum type) indicating the fl">
+<meta property="og:description" content="Item 24: Favor static member classes over nonstaticA nested class is a class defined within another class.  A nested class should exist only to serve its enclosing class. If a nested class would be us">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-26T03:31:07.382Z">
-<meta property="article:modified_time" content="2023-11-26T03:54:22.957Z">
+<meta property="article:published_time" content="2023-11-27T01:30:57.608Z">
+<meta property="article:modified_time" content="2023-11-27T02:14:33.757Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-23. Prefer class hierarchies to tagged classes - Peixuan&#39;s Page</title>
+  <title>Effective Java-24. Favor static member classes over nonstatic - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-23. Prefer class hierarchies to tagged classes"></span>
+            <span id="subtitle" data-typed-text="Effective Java-24. Favor static member classes over nonstatic"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-26 11:31" pubdate>
-          November 26, 2023 am
+        <time datetime="2023-11-27 09:30" pubdate>
+          November 27, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k words
+          5.3k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          34 mins
+          45 mins
         
       </span>
     
@@ -290,47 +290,73 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-23. Prefer class hierarchies to tagged classes</h1>
+            <h1 id="seo-header">Effective Java-24. Favor static member classes over nonstatic</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-23-Prefer-class-hierarchies-to-tagged-classes"><a href="#Item-23-Prefer-class-hierarchies-to-tagged-classes" class="headerlink" title="Item 23: Prefer class hierarchies to tagged classes"></a>Item 23: Prefer class hierarchies to tagged classes</h1><h2 id="Tagged-class"><a href="#Tagged-class" class="headerlink" title="Tagged class"></a>Tagged class</h2><p>Occasionally you may run across a class whose instances come in two or more flavors and contain a <em>tag</em> field (enum type) indicating the flavor of the instance. For example, consider this class, which is capable of representing a circle or a rectangle:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Tagged class - vastly inferior to a class hierarchy!</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Figure</span> &#123;<br>   <span class="hljs-keyword">enum</span> <span class="hljs-title class_">Shape</span> &#123; RECTANGLE, CIRCLE &#125;;<br>  <br>   <span class="hljs-comment">// Tag field - the shape of this figure</span><br>   <span class="hljs-keyword">final</span> Shape shape;<br>  <br>   <span class="hljs-comment">// These fields are used only if shape is RECTANGLE</span><br>   <span class="hljs-type">double</span> length;<br>   <span class="hljs-type">double</span> width;<br>  <br>   <span class="hljs-comment">// This field is used only if shape is CIRCLE</span><br>   <span class="hljs-type">double</span> radius;<br>  <br>   <span class="hljs-comment">// Constructor for circle</span><br>   Figure(<span class="hljs-type">double</span> radius) &#123;<br>       shape = Shape.CIRCLE;<br>       <span class="hljs-built_in">this</span>.radius = radius;<br>   &#125;<br>  <br>   <span class="hljs-comment">// Constructor for rectangle</span><br>   Figure(<span class="hljs-type">double</span> length, <span class="hljs-type">double</span> width) &#123;<br>       shape = Shape.RECTANGLE;<br>       <span class="hljs-built_in">this</span>.length = length;<br>       <span class="hljs-built_in">this</span>.width = width;<br>   &#125;<br>  <br>   <span class="hljs-type">double</span> <span class="hljs-title function_">area</span><span class="hljs-params">()</span> &#123;<br>       <span class="hljs-keyword">switch</span>(shape) &#123;<br>         <span class="hljs-keyword">case</span> RECTANGLE:<br>           <span class="hljs-keyword">return</span> length * width;<br>         <span class="hljs-keyword">case</span> CIRCLE:<br>           <span class="hljs-keyword">return</span> Math.PI * (radius * radius);<br>         <span class="hljs-keyword">default</span>:<br>           <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AssertionError</span>(shape);<br>       &#125;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><strong>Tagged classes are verbose, error-prone, and inefficient.</strong></p>
-<ul>
-<li><p>They are cluttered with boilerplate, including enum declarations, tag fields, and switch statements. Readability is further harmed because multiple implementations are jumbled together in a single class. The data type of an instance gives no clue as to its flavor.</p>
-</li>
-<li><p>Fields can’t be made <em>final</em> unless constructors initialize irrelevant fields, resulting in more boilerplate.</p>
-<p>Constructors must set the tag field and initialize the right data fields with no help from the compiler: if you initialize the wrong fields, the program will fail at runtime.</p>
-<p>You can’t add a flavor to a tagged class unless you can modify its source file. If you do add a flavor, you must remember to add a case to every switch statement, or the class will fail at runtime.</p>
-</li>
-<li><p>Memory footprint is increased because instances are burdened with irrelevant fields belonging to other flavors.</p>
-</li>
-</ul>
-<h2 id="Solution-Subtyping"><a href="#Solution-Subtyping" class="headerlink" title="Solution: Subtyping"></a>Solution: Subtyping</h2><blockquote>
-<p>Example: make a abstract class: Figure, let Circle and Rectangle extend it.</p>
-</blockquote>
-<p>To transform a tagged class into a class hierarchy, first define an abstract class containing an abstract method for each method in the tagged class whose behavior depends on the tag value. In the <code>Figure</code> class, there is only one such method, which is area. This abstract class is the root of the class hierarchy. If there are any methods whose behavior does not depend on the value of the tag, put them in this class. Similarly, if there are any data fields used by all the flavors, put them in this class. There are no such flavor-independent methods or fields in the Figure class.</p>
-<p>Next, define a concrete subclass of the root class for each flavor of the original tagged class. In our example, there are two: <code>circle</code> and <code>rectangle</code>. Include in each subclass the data fields particular to its flavor. In our example, radius is particular to circle, and length and width are particular to rectangle. Also include in each subclass the appropriate implementation of each abstract method in the root class.</p>
-<h3 id="Pros"><a href="#Pros" class="headerlink" title="Pros"></a>Pros</h3><ul>
-<li><p>Class hierarchy corrects every shortcoming of tagged classes noted previously.</p>
-<ul>
-<li>The code is simple and clear, containing none of the boilerplate found in the original.</li>
-<li>The implementation of each flavor is allotted its own class, and none of these classes is encumbered by irrelevant data fields.</li>
-<li>All fields are final.</li>
-<li>The compiler ensures that each class’s constructor initializes its data fields and that each class has an implementation for every abstract method declared in the root class. This eliminates the possibility of a runtime failure due to a missing switch case.</li>
-<li>Multiple programmers can extend the hierarchy independently and interoperably without access to the source for the root class. There is a separate data type associated with each flavor, allowing programmers to indicate the flavor of a variable and to restrict variables and input parameters to a particular flavor.</li>
-</ul>
-</li>
-<li><p>Another advantage of class hierarchies is that they can be made to reflect <strong>natural hierarchical relationships among types</strong>, allowing for increased flexibility and better compile-time type checking.</p>
+                <h1 id="Item-24-Favor-static-member-classes-over-nonstatic"><a href="#Item-24-Favor-static-member-classes-over-nonstatic" class="headerlink" title="Item 24: Favor static member classes over nonstatic"></a>Item 24: Favor static member classes over nonstatic</h1><p>A <em>nested class</em> is a class defined <strong>within</strong> another class.</p>
 <blockquote>
-<p>Suppose the tagged class in the original example also allowed for <code>squares</code>. The class hierarchy could be made to reflect the fact that a square is a special kind of rectangle (assuming both are immutable)</p>
+<p>A nested class should exist only to serve its enclosing class. If a nested class would be useful in some other context, then it should be a top-level class.</p>
 </blockquote>
-</li>
+<p>There are four kinds of nested classes: <em>static member classes</em>, <em>nonstatic member classes</em>, <em>anonymous classes</em>, and <em>local classes</em>. All but the first kind are known as <em>inner classes</em>.</p>
+<h2 id="Static-member-class"><a href="#Static-member-class" class="headerlink" title="Static member class"></a>Static member class</h2><p>A static member class is the simplest kind of nested class. It is best thought of as an ordinary class that happens to be declared inside another class and has access to all of the enclosing class’s members, even those declared private.</p>
+<p>A static member class is a static member of its enclosing class and obeys the same accessibility rules as other static members. If it is declared private, it is accessible only within the enclosing class, and so forth.</p>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><p>One common use of a static member class is as a <strong>public helper class</strong>, useful only in conjunction with its outer class.</p>
+<blockquote>
+<p>For example, consider an enum describing the operations supported by a calculator (Item 34). The Operation enum should be a public static member class of the Calculator class. Clients of Calculator could then refer to operations using names like Calculator.Operation.PLUS and Calculator.Operation.MINUS.</p>
+</blockquote>
+<p>A common use of private static member classes is to <strong>represent components</strong> of the object represented by their enclosing class.</p>
+<blockquote>
+<p>For example, consider a <code>Map</code> instance, which associates <code>keys</code> with <code>values</code>. Many <code>Map</code> implementations have an internal <code>Entry</code> object for each key-value pair in the map.</p>
+<p>While each entry is associated with a map, the methods on an entry (<code>getKey</code>, <code>getValue</code>, and <code>setValue</code>) do not need access to the map.</p>
+<p>Therefore, it would be wasteful to use a nonstatic member class to represent entries: <strong>a private static member class is best.</strong></p>
+</blockquote>
+<h2 id="Nonstatic-member-class"><a href="#Nonstatic-member-class" class="headerlink" title="Nonstatic member class"></a>Nonstatic member class</h2><p>Each instance of a nonstatic member class is implicitly associated with an <em>enclosing instance</em> of its containing class. Within instance methods of a nonstatic member class, you can invoke methods on the enclosing instance or obtain a reference to the enclosing instance using the <em>qualified this</em> construct.</p>
+<h3 id="Usage-1"><a href="#Usage-1" class="headerlink" title="Usage"></a>Usage</h3><p>One common use of a nonstatic member class is to define an <em>Adapter</em> that allows an instance of the outer class to be viewed as an instance of some unrelated class.</p>
+<blockquote>
+<p>For example, implementations of the collection interfaces, such as <code>Set</code> and <code>List</code>, typically use nonstatic member classes to implement their iterators:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Typical use of a nonstatic member class</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MySet</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractSet</span>&lt;E&gt; &#123;<br>   ... <span class="hljs-comment">// Bulk of the class omitted</span><br>     <br>  <span class="hljs-meta">@Override</span> <span class="hljs-keyword">public</span> Iterator&lt;E&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span> &#123;<br>     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyIterator</span>();<br>  &#125;<br>  <br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterator</span>&lt;E&gt; &#123;<br>    ...<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="Anonymous-class"><a href="#Anonymous-class" class="headerlink" title="Anonymous class"></a>Anonymous class</h2><p>An anonymous class has no name. It is not a member of its enclosing class. Rather than being declared along with other members, it is simultaneously declared and instantiated at the point of use.</p>
+<p>Anonymous classes are permitted at any point in the code where an expression is legal. Anonymous classes have enclosing instances if and only if they occur in a nonstatic context.</p>
+<blockquote>
+<p>But even if they occur in a static context, they <strong>cannot have any static members</strong> other than <em>constant variables</em>, which are final primitive or string fields initialized to constant expressions.</p>
+</blockquote>
+<h3 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h3><ul>
+<li>You can’t instantiate them except at the point they’re declared. </li>
+<li>You can’t perform <code>instanceof</code> tests or do anything else that requires you to name the class. </li>
+<li>You can’t declare an anonymous class to implement multiple interfaces or to extend a class and implement an interface at the same time. </li>
+<li>Clients of an anonymous class can’t invoke any members except those it inherits from its supertype. </li>
+<li>Because anonymous classes occur in the midst of expressions, they must be kept short— about ten lines or fewer—or readability will suffer.</li>
 </ul>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, tagged classes are seldom appropriate. If you’re tempted to write a class with an explicit tag field, think about whether the tag could be eliminated and the class replaced by a hierarchy. When you encounter an existing class with a tag field, consider refactoring it into a hierarchy.</p>
+<h3 id="Usage-2"><a href="#Usage-2" class="headerlink" title="Usage"></a>Usage</h3><ul>
+<li>Before lambdas were added to Java (Chapter 6), anonymous classes were the preferred means of <strong>creating small <em>function objects</em> and <em>process objects</em> on the fly</strong>, but lambdas are now preferred (Item 42). </li>
+<li>Another common use of anonymous classes is in the <strong>implementation of static factory methods</strong> (see <code>intArrayAsList</code> in Item 20).</li>
+</ul>
+<h2 id="Local-class"><a href="#Local-class" class="headerlink" title="Local class"></a>Local class</h2><blockquote>
+<p>Local classes are the least frequently used of the four kinds of nested classes. </p>
+</blockquote>
+<p>A local class can be declared practically anywhere a <strong>local variable</strong> can be declared and obeys the same scoping rules. </p>
+<p>Local classes have attributes in common with each of the other kinds of nested classes. </p>
+<ul>
+<li>Like member classes, they have names and can be used repeatedly. </li>
+<li>Like anonymous classes, they have enclosing instances only if they are defined in a nonstatic context, and they cannot contain static members. </li>
+<li>And like anonymous classes, they should be kept short so as not to harm readability.</li>
+</ul>
+<h2 id="Static-member-class-vs-nonstatic-member-class"><a href="#Static-member-class-vs-nonstatic-member-class" class="headerlink" title="Static member class vs nonstatic member class"></a>Static member class vs nonstatic member class</h2><p>If an instance of a nested class can <strong>exist in isolation</strong> from an instance of its enclosing class, then the nested class <em>must</em> be a static member class: it is impossible to create an instance of a nonstatic member class without an enclosing instance.</p>
+<h3 id="Rule"><a href="#Rule" class="headerlink" title="Rule"></a>Rule</h3><p>If you declare a member class that <strong>does not require access to an enclosing instance</strong>, always put the <strong><code>static</code></strong> modifier in its declaration, making it a <strong>static</strong> rather than a nonstatic member class.</p>
+<blockquote>
+<p>If you omit this modifier, each instance will have a hidden extraneous reference to its enclosing instance.</p>
+<ul>
+<li>Storing this reference takes time and space.</li>
+<li>More seriously, it can result in the enclosing instance being retained when it would otherwise be eligible for garbage collection (Item 7). The resulting memory leak can be catastrophic.</li>
+</ul>
+</blockquote>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>To recap, there are four different kinds of nested classes, and each has its place. </p>
+<p>If a nested class needs to be visible outside of a single method or is too long to fit comfortably inside a method, use a member class. </p>
+<p>If each instance of a member class needs a reference to its enclosing instance, make it nonstatic; otherwise, make it static. </p>
+<p>Assuming the class belongs inside a method, if you need to create instances from only one location and there is a preexisting type that characterizes the class, make it an anonymous class; otherwise, make it a local class.</p>
 
                 
               </div>
@@ -376,8 +402,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-23. Prefer class hierarchies to tagged classes</div>
-      <div>https://peixuanhu.github.io/2023/11/26/Java/effective-java/Item23-Prefer-class-hierarchies-to-tagged-classes/</div>
+      <div>Effective Java-24. Favor static member classes over nonstatic</div>
+      <div>https://peixuanhu.github.io/2023/11/27/Java/effective-java/Item24-Favor-static-member-classes-over-nonstatic/</div>
     </div>
     <div class="license-meta">
       
@@ -389,13 +415,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 26, 2023</div>
+          <div>November 27, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 26, 2023</div>
+          <div>November 27, 2023</div>
         </div>
       
       
@@ -426,18 +452,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/27/Java/effective-java/Item24-Favor-static-member-classes-over-nonstatic/" title="Effective Java-24. Favor static member classes over nonstatic">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-24. Favor static member classes over nonstatic</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/25/Java/effective-java/Item22-Use-interfaces-only-to-define-types/" title="Effective Java-22. Use interfaces only to define types">
-                        <span class="hidden-mobile">Effective Java-22. Use interfaces only to define types</span>
+                      <a href="/2023/11/26/Java/effective-java/Item23-Prefer-class-hierarchies-to-tagged-classes/" title="Effective Java-23. Prefer class hierarchies to tagged classes">
+                        <span class="hidden-mobile">Effective Java-23. Prefer class hierarchies to tagged classes</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
