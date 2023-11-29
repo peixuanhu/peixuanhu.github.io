@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item25: Limit source files to a single top-level classWhile the Java compiler lets you define multiple top-level classes in a single source file, there are no benefits associated with doing so, and th">
+    <meta name="description" content="Item 26: Don’t use raw typesIt is legal to use raw types (generic types without their type parameters), but you should never do it. If you use raw types, you lose all the safety and expressiveness ben">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-25. Limit source files to a single top-level class">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/28/Java/effective-java/Item25-Limit-source-files-to-a-single-top-level-class/index.html">
+<meta property="og:title" content="Effective Java-26. Don’t use raw types">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/11/29/Java/effective-java/Item26-Don%E2%80%99t-use-raw-types/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item25: Limit source files to a single top-level classWhile the Java compiler lets you define multiple top-level classes in a single source file, there are no benefits associated with doing so, and th">
+<meta property="og:description" content="Item 26: Don’t use raw typesIt is legal to use raw types (generic types without their type parameters), but you should never do it. If you use raw types, you lose all the safety and expressiveness ben">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-28T07:11:24.393Z">
-<meta property="article:modified_time" content="2023-11-28T07:33:46.568Z">
+<meta property="article:published_time" content="2023-11-29T01:12:58.970Z">
+<meta property="article:modified_time" content="2023-11-29T02:14:08.552Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-25. Limit source files to a single top-level class - Peixuan&#39;s Page</title>
+  <title>Effective Java-26. Don’t use raw types - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-25. Limit source files to a single top-level class"></span>
+            <span id="subtitle" data-typed-text="Effective Java-26. Don’t use raw types"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-28 15:11" pubdate>
-          November 28, 2023 pm
+        <time datetime="2023-11-29 09:12" pubdate>
+          November 29, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          4.9k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          19 mins
+          41 mins
         
       </span>
     
@@ -290,37 +290,76 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-25. Limit source files to a single top-level class</h1>
+            <h1 id="seo-header">Effective Java-26. Don’t use raw types</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item25-Limit-source-files-to-a-single-top-level-class"><a href="#Item25-Limit-source-files-to-a-single-top-level-class" class="headerlink" title="Item25: Limit source files to a single top-level class"></a>Item25: Limit source files to a single top-level class</h1><p>While the Java compiler lets you define <strong>multiple top-level classes in a single source file,</strong> there are no benefits associated with doing so, and there are significant risks. The risks stem from the fact that defining multiple top-level classes in a source file makes it possible to provide <strong>multiple definitions for a class</strong>.</p>
+                <h1 id="Item-26-Don’t-use-raw-types"><a href="#Item-26-Don’t-use-raw-types" class="headerlink" title="Item 26: Don’t use raw types"></a>Item 26: Don’t use raw types</h1><p>It is legal to use raw types (generic types without their type parameters), but you should never do it. <strong>If you use raw types, you lose all the safety and expressiveness benefits of generics.</strong></p>
 <blockquote>
-<p>Which definition gets used is affected by the order in which the source files are passed to the compiler.</p>
+<p>For compatibility, Java designers permit raw types in the first place.</p>
 </blockquote>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Main.java:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>  	System.out.println(Utensil.NAME + Dessert.NAME);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>Utensil.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Two classes defined in one file. Don&#x27;t ever do this!</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Utensil</span> &#123;<br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;pan&quot;</span>;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dessert</span> &#123;<br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;cake&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>Dessert.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Two classes defined in one file. Don&#x27;t ever do this!</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Utensil</span> &#123;<br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;pot&quot;</span>;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dessert</span> &#123;<br>   <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;pie&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>Compile the program with the command <code>javac Main.java Dessert.java</code>, the compilation will fail, and the compiler will tell you that you’ve multiply defined the classes <code>Utensil</code> and <code>Dessert</code>.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol>
-<li><p>Splitting the top-level classes (Utensil and Dessert, in the case of our example) into <strong>separate source files</strong>.</p>
+<h2 id="Terms"><a href="#Terms" class="headerlink" title="Terms"></a>Terms</h2><ul>
+<li><p>A class or interface whose declaration has one or more <em>type parameters</em> is a <strong><em>generic</em> class</strong> or <strong>interface</strong>.</p>
+<blockquote>
+<p>For example, the <code>List</code> interface has a single type parameter, E, representing its element type. The full name of the interface is <code>List&lt;E&gt;</code> (read “list of E”), but people often call it <code>List</code> for short.</p>
+</blockquote>
 </li>
-<li><p>If you are tempted to put multiple top-level classes into a single source file, consider using <strong>static member classes</strong> (Item 24) as an alternative.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Static member classes instead of multiple top-level classes</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>       System.out.println(Utensil.NAME + Dessert.NAME);<br>   &#125;<br>   <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Utensil</span> &#123;<br>       <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;pan&quot;</span>;<br>   &#125;<br>   <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Dessert</span> &#123;<br>       <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;cake&quot;</span>;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<li><p>Generic classes and interfaces are collectively known as <em><strong>generic types</strong></em>.</p>
+</li>
+<li><p>Each generic type defines a set of <em><strong>parameterized types</strong></em>, which consist of the class or interface name followed by an angle-bracketed list of <em>actual type parameters</em> corresponding to the generic type’s formal type parameters.</p>
+<blockquote>
+<p>For example, <code>List&lt;String&gt;</code> (read “list of string”) is a parameterized type representing a list whose elements are of type String. (String is the actual type parameter corresponding to the formal type parameter E.)</p>
+</blockquote>
+</li>
+<li><p>Each generic type defines a <em><strong>raw type</strong></em>, which is the name of the generic type used without any accompanying type parameters.</p>
+<blockquote>
+<p>They exist primarily for compatibility with pre-generics code.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Raw-types-vs-Object-parameterized-types"><a href="#Raw-types-vs-Object-parameterized-types" class="headerlink" title="Raw types vs Object parameterized types"></a>Raw types vs <em>Object</em> parameterized types</h2><p><strong>You lose type safety if you use a raw type such as <code>List</code>, but not if you use a parameterized type such as <code>List&lt;Object&gt;</code>.</strong></p>
+<p>While you shouldn’t use raw types such as <code>List</code>, it is fine to use types that are parameterized to allow insertion of arbitrary objects, such as <code>List&lt;Object&gt;</code>. What is the difference between the raw type <code>List</code> and the parameterized type <code>List&lt;Object&gt;</code>? Loosely speaking, <code>List</code> has <strong>opted out of the generic type system</strong>, while <code>List&lt;Object&gt;</code> has explicitly told the compiler that it is capable of <strong>holding objects of any type</strong>.</p>
+<p>While you can pass a <code>List&lt;String&gt;</code> to a parameter of type <code>List</code>, you can’t pass it to a parameter of type <code>List&lt;Object&gt;</code>. There are <strong>subtyping rules</strong> for generics, and <strong><code>List&lt;String&gt;</code> is a subtype of the raw type <code>List</code>, but not of the parameterized type <code>List&lt;Object&gt;</code></strong> (Item 28).</p>
+<p>Example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>  List&lt;String&gt; strings = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(); unsafeAdd(strings, Integer.valueOf(<span class="hljs-number">42</span>));<br>  <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> strings.get(<span class="hljs-number">0</span>);<br>&#125;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">Test.java:10: warning: [unchecked] unchecked call to add(E) as a member of the raw type List</span><br><span class="hljs-comment">       list.add(o);</span><br><span class="hljs-comment">               ^</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">unsafeAdd1</span><span class="hljs-params">(List list, Object o)</span> &#123; <br>  list.add(o);<br>&#125;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">Test.java:5: error: incompatible types: List&lt;String&gt; cannot be converted to List&lt;Object&gt;</span><br><span class="hljs-comment">   unsafeAdd(strings, Integer.valueOf(42));</span><br><span class="hljs-comment">       ^</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">unsafeAdd2</span><span class="hljs-params">(List&lt;Object&gt; list, Object o)</span> &#123; <br>  list.add(o);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>If the classes are subservient to another class, making them into static member classes is generally the better alternative, because it enhances readability and makes it possible to reduce the accessibility of the classes by declaring them private (Item 15).</p>
+<p>If you run <code>unsafeAdd1</code> version of the program, you get a <code>ClassCastException</code> when the program tries to cast the result of the invocation <code>strings.get(0)</code>, which is an Integer, to a String.</p>
+<p>If you run <code>unsafeAdd2</code> version of the program, and try to recompile the program, you’ll find that it no longer compiles but emits an <em>incompatible types</em> error message.</p>
+<h2 id="Unbounded-wildcard-types"><a href="#Unbounded-wildcard-types" class="headerlink" title="Unbounded wildcard types &lt;?&gt;"></a>Unbounded wildcard types &lt;?&gt;</h2><p>If you want to use a generic type but you don’t know or care what the actual type parameter is, you can use a <strong>question mark</strong> instead.</p>
+<blockquote>
+<p>For example, the unbounded wildcard type for the generic type <code>Set&lt;E&gt;</code> is <code>Set&lt;?&gt;</code> (read “set of some type”). It is the most general parameterized <code>Set</code> type, capable of holding <em>any</em> set.</p>
+</blockquote>
+<blockquote>
+<p><code>List&lt;Integer&gt;</code> and <code>List&lt;String&gt;</code> are not subtypes of <code>List&lt;Object&gt;</code>. So use <code>List&lt;?&gt;</code> as an alternative.</p>
+</blockquote>
+<p>Example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Use of raw type for unknown element type - don&#x27;t do this! </span><br><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numElementsInCommon</span><span class="hljs-params">(Set s1, Set s2)</span> &#123;<br>   <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>   <span class="hljs-keyword">for</span> (Object o1 : s1)<br>       <span class="hljs-keyword">if</span> (s2.contains(o1))<br>           result++;<br>   <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// Uses unbounded wildcard type - typesafe and flexible </span><br><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numElementsInCommon</span><span class="hljs-params">(Set&lt;?&gt; s1, Set&lt;?&gt; s2)</span> &#123; ... &#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><p><strong>You can’t put any element (other than null) into a <code>Collection&lt;?&gt;</code>.</strong></p>
+<h2 id="Exceptions-to-not-using-raw-types"><a href="#Exceptions-to-not-using-raw-types" class="headerlink" title="Exceptions to not using raw types"></a>Exceptions to not using raw types</h2><ol>
+<li><p><strong>You must use raw types in class literals.</strong> The specification does not permit the use of parameterized types (though it does permit array types and primitive types). </p>
+<p>In other words, <code>List.class</code>, <code>String[].class</code>, and <code>int.class</code> are all legal, but <code>List&lt;String&gt;.class</code> and <code>List&lt;?&gt;.class</code> are not.</p>
+</li>
+<li><p><strong>Use the <code>instanceof</code> operator on raw types.</strong> Because generic type information is erased at runtime, it is illegal to use the instanceof operator on parameterized types.</p>
+<blockquote>
+<p>Unbounded wildcard types is permitted when using <code>instanceof</code> operator, but in this case, the angle brackets and question marks are just noise.</p>
+</blockquote>
+<p>Example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Ligitimate use of raw type - instanceof operator</span><br><span class="hljs-keyword">if</span> (o <span class="hljs-keyword">instanceof</span> Set) &#123; <span class="hljs-comment">// Raw type</span><br>  Set&lt;?&gt; s = (Set&lt;?&gt;) o; <span class="hljs-comment">// Wildcard type</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>This is the preferred way to use the</strong> <strong>instanceof</strong> <strong>operator with generic types:</strong></p>
+<p>Note that once you’ve determined that o is a Set, you must cast it to the wildcard type Set&lt;?&gt;, not the raw type Set. This is a checked cast, so it will not cause a compiler warning.</p>
 </li>
 </ol>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p><strong>Never put multiple top-level classes or interfaces in a single source file.</strong> </p>
-<p>Following this rule guarantees that you can’t have <strong>multiple definitions</strong> for a single class at compile time. </p>
-<p>This in turn guarantees that the class files generated by compilation, and the behavior of the resulting program, are <strong>independent of the order</strong> in which the source files are passed to the compiler.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, using raw types can lead to exceptions at runtime, so don’t use them. They are provided only for compatibility and interoperability with legacy code that predates the introduction of generics.</p>
+<p>As a quick review:</p>
+<ul>
+<li><code>Set&lt;Object&gt;</code> is a parameterized type representing a set that can contain objects of <strong>any type</strong>; </li>
+<li><code>Set&lt;?&gt;</code> is a wildcard type representing a set that can contain only objects of some <strong>unknown type</strong>;</li>
+<li><code>Set</code> is a raw type, which opts out of the generic type system.</li>
+</ul>
+<p>The first two are safe, and the last is not.</p>
 
                 
               </div>
@@ -366,8 +405,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-25. Limit source files to a single top-level class</div>
-      <div>https://peixuanhu.github.io/2023/11/28/Java/effective-java/Item25-Limit-source-files-to-a-single-top-level-class/</div>
+      <div>Effective Java-26. Don’t use raw types</div>
+      <div>https://peixuanhu.github.io/2023/11/29/Java/effective-java/Item26-Don’t-use-raw-types/</div>
     </div>
     <div class="license-meta">
       
@@ -379,13 +418,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 28, 2023</div>
+          <div>November 29, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 28, 2023</div>
+          <div>November 29, 2023</div>
         </div>
       
       
@@ -416,18 +455,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/29/Java/effective-java/Item26-Don%E2%80%99t-use-raw-types/" title="Effective Java-26. Don’t use raw types">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-26. Don’t use raw types</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/27/Java/effective-java/Item24-Favor-static-member-classes-over-nonstatic/" title="Effective Java-24. Favor static member classes over nonstatic">
-                        <span class="hidden-mobile">Effective Java-24. Favor static member classes over nonstatic</span>
+                      <a href="/2023/11/28/Java/effective-java/Item25-Limit-source-files-to-a-single-top-level-class/" title="Effective Java-25. Limit source files to a single top-level class">
+                        <span class="hidden-mobile">Effective Java-25. Limit source files to a single top-level class</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
