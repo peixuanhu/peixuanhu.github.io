@@ -226,6 +226,304 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2023/10/30/algorithm/template/4-7.%E6%A0%91%E5%BD%A2DP/" target="_self">
+          算法模板4-7.DP-树形DP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/30/algorithm/template/4-7.%E6%A0%91%E5%BD%A2DP/" target="_self">
+        <div>
+          树形DP一般是DFS的形式。 模板题没有上司的舞会状态表示f(i, 0)和f(i, 1)分别表示在以i为根的子树中不选i和选i的最大值是多少。 状态计算f[i, 0] = sum(max(f[i的子节点, 0], f[i的子节点, 1])) f[i, 1] = sum(f[i的子节点, 0]) 代码12345678910111213141516171819202122232425262728293
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-30 15:44" pubdate>
+              2023-10-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/30/algorithm/template/4-6.%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9DP/" target="_self">
+          算法模板4-6.DP-状态压缩DP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/30/algorithm/template/4-6.%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9DP/" target="_self">
+        <div>
+          状态压缩DP一般数据范围非常小。如蒙德里安的梦想：$1&lt;&#x3D;N, M&lt;&#x3D;11$ 模板题1. 蒙德里安的梦想放1*2的小方块，把长m宽n的矩形放满。 核心：先放横着的，再放竖着的。 总方案数 &#x3D; 只放横着的小方块的合法方案数 如何判断当前方案是否合法？ 所有剩余位置，能否填充满竖着的小方块。可以按列来看，每一列内部所有连续的空着的小方块需要是偶数个。 时间复杂
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-30 15:28" pubdate>
+              2023-10-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/30/design-pattern/24.%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式24-职责链模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/30/design-pattern/24.%E8%81%8C%E8%B4%A3%E9%93%BE%E6%A8%A1%E5%BC%8F/" target="_self">
+        <div>
+          职责链模式定义职责链模式（Chain of Responsibility）：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。 结构图 基本代码Handler 类：定义一个处理请求的接口。 12345678910abstract class Handler &#123;  protected Handle
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-30 11:06" pubdate>
+              2023-10-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/29/algorithm/template/4-5.%E6%95%B0%E4%BD%8D%E7%BB%9F%E8%AE%A1DP/" target="_self">
+          算法模板4-5.DP-数位统计DP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/29/algorithm/template/4-5.%E6%95%B0%E4%BD%8D%E7%BB%9F%E8%AE%A1DP/" target="_self">
+        <div>
+          数位统计DP要点分情况讨论。 模板题：计数问题求数a～b中，0～9出现的次数。 解法类似前缀和的思想。构造一个函数count(n, x)，表示1～n中x出现的次数 ans = count(b, x) - count(a - 1, x) 思路遍历位数，分别求出x在每一位上出现的次数。 设n=abcdefg，求x在第4位上出现的次数： 123456789将第3位确定为x1 &lt;= yyxzzz &
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-29 15:05" pubdate>
+              2023-10-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/29/algorithm/template/4-4.%E8%AE%A1%E6%95%B0%E7%B1%BBDP/" target="_self">
+          算法模板4-4.DP-计数类DP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/29/algorithm/template/4-4.%E8%AE%A1%E6%95%B0%E7%B1%BBDP/" target="_self">
+        <div>
+          计数类DP模板题：整数划分解法一：完全背包问题看作从权重为1～n的物品中选总权重不超过n的物品的完全背包问题，属性为总选法的个数cnt。 1234f[i][j] = f[i - 1][j] + f[i - 1][j - i] + f[i - 1][j - 2i] + ... + f[i - 1][j - si]f[i][j - i] = f[i - 1][j - i] + f[i - 1][j -
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-29 13:46" pubdate>
+              2023-10-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2023/10/29/design-pattern/23.%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" target="_self">
           设计模式23-命令模式
         </a>
@@ -518,302 +816,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" target="_self">
-          算法模板4-1.DP-背包问题
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/22/algorithm/template/4-1.DP-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" target="_self">
-        <div>
-          背包问题通用问题描述给定 N 个物品和容量是为 V 的背包。每一个物品 i 有两个属性：体积 vi 和价值 wi 。 求：在 总体积&lt;=V的情况下，选出一些物品，它们的最大价值之和是多少。 01背包问题问题描述给定 N 个物品和容量是为 V 的背包。每一个物品 i 有两个属性：体积 vi 和价值 wi 。 求：在 总体积&lt;=V的情况下，选出一些物品，它们的最大价值之和是多少。 每件物品
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-22 20:39" pubdate>
-              2023-10-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" target="_self">
-          算法模板4-0.DP理解方式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/22/algorithm/template/4-0.DP%E7%90%86%E8%A7%A3%E6%96%B9%E5%BC%8F/" target="_self">
-        <div>
-          DP理解DP求解过程DP求解过程可以分为两步：状态表示 状态表示思考：问题需要用几维的状态来表示？  背包问题有两维。  f(i, j) 集合f(i, j)表示的是什么集合？  如背包问题：f(i, j)表示所有选法的集合。  属性f(i, j)这个数存的是这个集合的什么属性？min, max, cnt?  如背包问题：f(i, j)表示集合选法对应的价值的最大值。  状态计算思考：如何一步一步地
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-22 20:35" pubdate>
-              2023-10-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" target="_self">
-          算法模板3-6.二分图
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/20/algorithm/template/3-6.%E4%BA%8C%E5%88%86%E5%9B%BE/" target="_self">
-        <div>
-          二分图通俗定义：一个图可以分成两个集合，每个集合内部没有边。 染色法 (DFS)时间复杂度：O(n + m) 使用场景判别一个图是否为二分图。 性质一个图是二分图（等价于这个图可以被2染色），当且仅当图中不含奇数环。 证明 必要性（二分图-&gt;不含奇数环）：反证法 假设有奇数环：把环中每个点依次标记为1, 2, 1, 2, … 标记到最后一个点的时候，应该为1。而它后一个点（也就是第一个点）也
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-20 16:38" pubdate>
-              2023-10-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" target="_self">
-          设计模式21-单例模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/20/design-pattern/21.%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" target="_self">
-        <div>
-          单例模式定义单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。 结构图 基本代码Singleton类，定义一个GetInstance操作，允许客户访问它的唯一实例。GetInstance是一个静态方法，主要负责创建自己的唯一实例。 懒汉式调用getInstance的时候再来创建instance。 V1 线程不安全在多线程的情况下有可能创建多个实例 1234567
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-20 14:21" pubdate>
-              2023-10-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" target="_self">
-          设计模式20-迭代器模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/20/design-pattern/20.%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" target="_self">
-        <div>
-          迭代器模式定义迭代器模式（Iterator），提供一种方法顺序访问一个聚合对象中的各个元素，而又不暴露该对象的内部表示。 结构图 需要有 Iterator 抽象类的原因：遍历方式可能有很多种，需要对不同方式做不同具体实现。 基本代码Aggregate 聚集抽象类： 12345abstract class Aggregate &#123;    // 创建迭代器  public abstract I
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-20 14:20" pubdate>
-              2023-10-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/#board">12</a><a class="extend next" rel="next" href="/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/#board">13</a><a class="extend next" rel="next" href="/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
