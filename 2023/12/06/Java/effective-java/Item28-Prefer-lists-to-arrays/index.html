@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 27: Eliminate unchecked warningsWhen you program with generics, you will see many compiler warnings: unchecked cast warnings, unchecked method invocation warnings, unchecked parameterized vararg">
+    <meta name="description" content="Item28: Prefer lists to arraysDifference between arrays and generic types Arrays are covariant, generics are invariant.  If Sub is a subtype of Super, then the array type Sub[] is a subtype of the arr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-27. Eliminate unchecked warnings">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/30/Java/effective-java/Item27-Eliminate-unchecked-warnings/index.html">
+<meta property="og:title" content="Effective Java-28. Prefer lists to arrays">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/12/06/Java/effective-java/Item28-Prefer-lists-to-arrays/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 27: Eliminate unchecked warningsWhen you program with generics, you will see many compiler warnings: unchecked cast warnings, unchecked method invocation warnings, unchecked parameterized vararg">
+<meta property="og:description" content="Item28: Prefer lists to arraysDifference between arrays and generic types Arrays are covariant, generics are invariant.  If Sub is a subtype of Super, then the array type Sub[] is a subtype of the arr">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-30T00:30:26.958Z">
-<meta property="article:modified_time" content="2023-11-30T00:44:42.231Z">
+<meta property="article:published_time" content="2023-12-06T00:32:23.051Z">
+<meta property="article:modified_time" content="2023-12-06T01:12:58.478Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-27. Eliminate unchecked warnings - Peixuan&#39;s Page</title>
+  <title>Effective Java-28. Prefer lists to arrays - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-27. Eliminate unchecked warnings"></span>
+            <span id="subtitle" data-typed-text="Effective Java-28. Prefer lists to arrays"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-30 08:30" pubdate>
-          November 30, 2023 am
+        <time datetime="2023-12-06 08:32" pubdate>
+          December 6, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k words
+          4k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          26 mins
+          34 mins
         
       </span>
     
@@ -290,34 +290,48 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-27. Eliminate unchecked warnings</h1>
+            <h1 id="seo-header">Effective Java-28. Prefer lists to arrays</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-27-Eliminate-unchecked-warnings"><a href="#Item-27-Eliminate-unchecked-warnings" class="headerlink" title="Item 27: Eliminate unchecked warnings"></a>Item 27: Eliminate unchecked warnings</h1><p>When you program with generics, you will see many compiler warnings: unchecked cast warnings, unchecked method invocation warnings, unchecked parameterized vararg type warnings, and unchecked conversion warnings.</p>
-<h2 id="Rule"><a href="#Rule" class="headerlink" title="Rule"></a>Rule</h2><p><strong>Eliminate every unchecked warning that you can.</strong> If you eliminate all warnings, you are assured that your code is typesafe, which is a very good thing. It means that you won’t get a <code>ClassCastException</code> at runtime.</p>
-<h3 id="Suppress-a-warning"><a href="#Suppress-a-warning" class="headerlink" title="Suppress a warning"></a>Suppress a warning</h3><p><strong>If you can’t eliminate a warning, but you can prove that the code that provoked the warning is typesafe, then (and only then) suppress the warning with an</strong> <strong><code>@SuppressWarnings(&quot;unchecked&quot;)</code></strong> <strong>annotation.</strong></p>
+                <h1 id="Item28-Prefer-lists-to-arrays"><a href="#Item28-Prefer-lists-to-arrays" class="headerlink" title="Item28: Prefer lists to arrays"></a>Item28: Prefer lists to arrays</h1><h2 id="Difference-between-arrays-and-generic-types"><a href="#Difference-between-arrays-and-generic-types" class="headerlink" title="Difference between arrays and generic types"></a>Difference between arrays and generic types</h2><ol>
+<li><p><strong>Arrays are <em>covariant</em>, generics are <em>invariant</em>.</strong></p>
 <blockquote>
-<p>If you suppress warnings without first proving that the code is typesafe, you are giving yourself a false sense of security. The code may compile without emitting any warnings, but it can still throw a <code>ClassCastException</code> at runtime. </p>
-<p>If, however, you ignore unchecked warnings that you know to be safe (instead of suppressing them), you won’t notice when a new warning crops up that represents a real problem. <strong>The new warning will get lost amidst all the false alarms that you didn’t silence.</strong></p>
+<p>If <code>Sub</code> is a subtype of <code>Super</code>, then the array type <code>Sub[]</code> is a subtype of the array type <code>Super[]</code>.</p>
+<p>For any two distinct types <code>Type1</code> and <code>Type2</code>, <code>List&lt;Type1&gt;</code> is neither a subtype nor a supertype of <code>List&lt;Type2&gt;</code>.</p>
 </blockquote>
-<p><strong>Always use the</strong> <strong><code>SuppressWarnings</code></strong> <strong>annotation on the smallest scope possible.</strong> Typically this will be a <strong>variable declaration</strong> or a <strong>very short method</strong> or <strong>constructor</strong>. Never use <code>SuppressWarnings</code> on an entire class.</p>
+</li>
+<li><p><strong>Arrays are <em>reified</em>, generics are implemented by <em>erasure</em>.</strong></p>
+<p>Arrays know and enforce their element type at runtime.</p>
+<p>Generics enforce their type constraints only at compile time and discard (or <em>erase</em>) their element type information at runtime.</p>
+</li>
+</ol>
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>Because of the fundamental differences above, arrays and generics do not mix well.</p>
+<p>For example, <strong>it is illegal to create an array of a generic type, a parameterized type, or a type parameter</strong>. Therefore, none of these array creation expressions are legal: <code>new List&lt;E&gt;[]</code>, <code>new List&lt;String&gt;[]</code>, <code>new E[]</code>. All will result in <em>generic array creation</em> errors at compile time.</p>
 <blockquote>
-<p>If you find yourself using the <code>SuppressWarnings</code> annotation on a method or constructor that’s more than one line long, you may be able to move it onto <strong>a local variable declaration</strong>. You may have to declare a new local variable, but it’s worth it.</p>
+<p>It is legal, though rarely useful, to create arrays of unbounded wildcard types.</p>
 </blockquote>
-<p>**Every time you use a <code>@SuppressWarnings(&quot;unchecked&quot;)</code> annotation, add a comment saying why it is safe to do so. **This will help others understand the code, and more importantly, it will decrease the odds that someone will modify the code so as to make the computation unsafe.</p>
-<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><p>Consider the <code>toArray</code> method, which comes from <code>ArrayList</code>:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> &lt;T&gt; T[] toArray(T[] a) &#123;<br>  <span class="hljs-keyword">if</span> (a.length &lt; size)<br> 	 <span class="hljs-keyword">return</span> (T[]) Arrays.copyOf(elements, size, a.getClass()); System.arraycopy(elements, <span class="hljs-number">0</span>, a, <span class="hljs-number">0</span>, size);<br>  <span class="hljs-keyword">if</span> (a.length &gt; size)<br>    a[size] = <span class="hljs-literal">null</span>;<br>	<span class="hljs-keyword">return</span> a;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Why"><a href="#Why" class="headerlink" title="Why?"></a>Why?</h3><p>Because it isn’t typesafe. If it were legal, casts generated by the compiler in an otherwise correct program could fail at runtime with a <code>ClassCastException</code>. This would violate the fundamental guarantee provided by the generic type system.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Why generic array creation is illegal - won&#x27;t compile! </span><br>List&lt;String&gt;[] stringLists = <span class="hljs-keyword">new</span> <span class="hljs-title class_">List</span>&lt;String&gt;[<span class="hljs-number">1</span>]; <span class="hljs-comment">// Compile-time error, but let&#x27;s pretend it is legal</span><br>List&lt;Integer&gt; intList = List.of(<span class="hljs-number">42</span>);<br>Object[] objects = stringLists;<br>objects[<span class="hljs-number">0</span>] = intList;<br><span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> stringLists[<span class="hljs-number">0</span>].get(<span class="hljs-number">0</span>); <span class="hljs-comment">// ClassCastException</span><br></code></pre></td></tr></table></figure>
 
-<p>If you compile <code>ArrayList</code>, the method generates this warning:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">ArrayList.java:<span class="hljs-number">305</span>: warning: [unchecked] unchecked cast<br>    <span class="hljs-title function_">return</span> <span class="hljs-params">(T[])</span> Arrays.copyOf(elements, size, a.getClass());<br>                               ^<br>    required: T[]<br>    found:    Object[]<br></code></pre></td></tr></table></figure>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>When you get a generic array creation error or an unchecked cast warning on a cast to an array type, the best solution is often to <strong>use the collection type <code>List&lt;E&gt;</code> in preference to the array type <code>E[]</code>.</strong> You might sacrifice some conciseness or performance, but in exchange you get better type safety and interoperability.</p>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><p>For example, suppose you want to write a <code>Chooser</code> class with a constructor that takes a collection, and a single method that returns an element of the collection chosen at random.</p>
+<blockquote>
+<p>Depending on what collection you pass to the constructor, you could use a chooser as a game die, a magic 8-ball, or a data source for a Monte Carlo simulation.</p>
+</blockquote>
+<h5 id="Simplistic-implementation-without-generics"><a href="#Simplistic-implementation-without-generics" class="headerlink" title="Simplistic implementation without generics:"></a>Simplistic implementation without generics:</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Chooser - a class badly in need of generics!</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Chooser</span> &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Object[] choiceArray;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">Chooser</span><span class="hljs-params">(Collection choices)</span> &#123;<br>     choiceArray = choices.toArray();<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">choose</span><span class="hljs-params">()</span> &#123;<br>     <span class="hljs-type">Random</span> <span class="hljs-variable">rnd</span> <span class="hljs-operator">=</span> ThreadLocalRandom.current();<br>     <span class="hljs-keyword">return</span> choiceArray[rnd.nextInt(choiceArray.length)];<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><strong>Solution</strong>: declare a local variable to hold the return value and annotate its declaration, like so:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Adding local variable to reduce scope of @SuppressWarnings</span><br><span class="hljs-keyword">public</span> &lt;T&gt; T[] toArray(T[] a) &#123;<br>   <span class="hljs-keyword">if</span> (a.length &lt; size) &#123;<br>    	<span class="hljs-comment">// This cast is correct because the array we&#x27;re creating // is of the same type as the one passed in, which is T[]. </span><br>      <span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span> T[] result =<br>         (T[]) Arrays.copyOf(elements, size, a.getClass());<br>      <span class="hljs-keyword">return</span> result;<br>   &#125;<br>   System.arraycopy(elements, <span class="hljs-number">0</span>, a, <span class="hljs-number">0</span>, size);<br>   <span class="hljs-keyword">if</span> (a.length &gt; size)<br>       a[size] = <span class="hljs-literal">null</span>;<br>   <span class="hljs-keyword">return</span> a;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>To use this class, you have to cast the choose method’s return value from Object to the desired type every time you use invoke the method, and the cast will fail at runtime if you get the type wrong.</p>
+<h5 id="We-attempt-to-modify-Chooser-to-make-it-generic-Item-29"><a href="#We-attempt-to-modify-Chooser-to-make-it-generic-Item-29" class="headerlink" title="We attempt to modify Chooser to make it generic (Item 29):"></a>We attempt to modify <code>Chooser</code> to make it generic (Item 29):</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// A first cut at making Chooser generic - won&#x27;t compile </span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Chooser</span>&lt;T&gt; &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> T[] choiceArray;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">Chooser</span><span class="hljs-params">(Collection&lt;T&gt; choices)</span> &#123; <br>    choiceArray = (T[]) choices.toArray();<br>  &#125;<br>  <br>  <span class="hljs-comment">// choose method unchanged</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, unchecked warnings are important. Don’t ignore them. Every unchecked warning represents the potential for a <code>ClassCastException</code> at runtime. Do your best to eliminate these warnings. </p>
-<p>If you can’t eliminate an unchecked warning and you can prove that the code that provoked it is typesafe, suppress the warning with a <code>@SuppressWarnings(&quot;unchecked&quot;)</code> annotation in the narrowest possible scope. Record the rationale for your decision to suppress the warning in a comment.</p>
+<p>You get a warning: <code>required: T[], found: Object[]</code>. The compiler is telling you that it can’t vouch for the safety of the cast at runtime because the program won’t know what type T represents—remember, element type information is erased from generics at runtime.</p>
+<p>Will the program work? Yes, but the compiler can’t prove it. You could prove it to yourself, put the proof in a comment and suppress the warning with an annotation, but you’re better off eliminating the cause of warning (Item 27).</p>
+<h5 id="To-eliminate-the-unchecked-cast-warning-use-a-list-instead-of-an-array"><a href="#To-eliminate-the-unchecked-cast-warning-use-a-list-instead-of-an-array" class="headerlink" title="To eliminate the unchecked cast warning, use a list instead of an array:"></a>To eliminate the unchecked cast warning, use a list instead of an array:</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// List-based Chooser - typesafe</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Chooser</span>&lt;T&gt; &#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> List&lt;T&gt; choiceList;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">Chooser</span><span class="hljs-params">(Collection&lt;T&gt; choices)</span> &#123; <br>    choiceList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(choices);<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> T <span class="hljs-title function_">choose</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">Random</span> <span class="hljs-variable">rnd</span> <span class="hljs-operator">=</span> ThreadLocalRandom.current();<br>    <span class="hljs-keyword">return</span> choiceList.get(rnd.nextInt(choiceList.size()));<br>  &#125; <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>This version is a tad more verbose, and perhaps a tad slower, but it’s worth it for the peace of mind that you won’t get a ClassCastException at runtime.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Arrays and generics have very different type rules. Arrays are covariant and reified; generics are invariant and erased. As a consequence, arrays provide runtime type safety but not compile-time type safety, and vice versa for generics. </p>
+<p>As a rule, arrays and generics don’t mix well. If you find yourself mixing them and getting compile-time errors or warnings, your first impulse should be to replace the arrays with lists.</p>
 
                 
               </div>
@@ -363,8 +377,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-27. Eliminate unchecked warnings</div>
-      <div>https://peixuanhu.github.io/2023/11/30/Java/effective-java/Item27-Eliminate-unchecked-warnings/</div>
+      <div>Effective Java-28. Prefer lists to arrays</div>
+      <div>https://peixuanhu.github.io/2023/12/06/Java/effective-java/Item28-Prefer-lists-to-arrays/</div>
     </div>
     <div class="license-meta">
       
@@ -376,13 +390,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 30, 2023</div>
+          <div>December 6, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>November 30, 2023</div>
+          <div>December 6, 2023</div>
         </div>
       
       
@@ -413,18 +427,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/06/Java/effective-java/Item28-Prefer-lists-to-arrays/" title="Effective Java-28. Prefer lists to arrays">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-28. Prefer lists to arrays</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/29/Java/modern-java/java8-others/" title="Java 8-other new features">
-                        <span class="hidden-mobile">Java 8-other new features</span>
+                      <a href="/2023/11/30/Java/effective-java/Item27-Eliminate-unchecked-warnings/" title="Effective Java-27. Eliminate unchecked warnings">
+                        <span class="hidden-mobile">Effective Java-27. Eliminate unchecked warnings</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
