@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 29: Favor generic typesExample12345678910111213141516171819202122232425262728293031&#x2F;&#x2F; Object-based collection - a prime candidate for genericspublic class Stack &amp;#123;  private Object[] elements;">
+    <meta name="description" content="Item 30: Favor generic methodsOccasion 1On occasion, you will need to create an object that is immutable but applicable to many different types. Because generics are implemented by erasure (Item 28),">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-29. Favor generic types">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/12/07/Java/effective-java/Item29-Favor-generic-types/index.html">
+<meta property="og:title" content="Effective Java-30. Favor generic methods">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/12/10/Java/effective-java/Item30-Favor-generic-methods/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 29: Favor generic typesExample12345678910111213141516171819202122232425262728293031&#x2F;&#x2F; Object-based collection - a prime candidate for genericspublic class Stack &amp;#123;  private Object[] elements;">
+<meta property="og:description" content="Item 30: Favor generic methodsOccasion 1On occasion, you will need to create an object that is immutable but applicable to many different types. Because generics are implemented by erasure (Item 28),">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-07T00:32:59.694Z">
-<meta property="article:modified_time" content="2023-12-07T01:16:59.227Z">
+<meta property="article:published_time" content="2023-12-10T02:45:28.551Z">
+<meta property="article:modified_time" content="2023-12-10T03:15:16.018Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-29. Favor generic types - Peixuan&#39;s Page</title>
+  <title>Effective Java-30. Favor generic methods - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-29. Favor generic types"></span>
+            <span id="subtitle" data-typed-text="Effective Java-30. Favor generic methods"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-07 08:32" pubdate>
-          December 7, 2023 am
+        <time datetime="2023-12-10 10:45" pubdate>
+          December 10, 2023 am
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.2k words
+          3.8k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          44 mins
+          32 mins
         
       </span>
     
@@ -290,57 +290,39 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-29. Favor generic types</h1>
+            <h1 id="seo-header">Effective Java-30. Favor generic methods</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-29-Favor-generic-types"><a href="#Item-29-Favor-generic-types" class="headerlink" title="Item 29: Favor generic types"></a>Item 29: Favor generic types</h1><h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Object-based collection - a prime candidate for generics</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Stack</span> &#123;<br>  <span class="hljs-keyword">private</span> Object[] elements;<br>  <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_INITIAL_CAPACITY</span> <span class="hljs-operator">=</span> <span class="hljs-number">16</span>;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">Stack</span><span class="hljs-params">()</span> &#123;<br>    elements = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[DEFAULT_INITIAL_CAPACITY];<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(Object e)</span> &#123; <br>    ensureCapacity(); elements[size++] = e;<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123; <br>    <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>)<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmptyStackException</span>();<br>    <span class="hljs-type">Object</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> elements[--size];<br>    elements[size] = <span class="hljs-literal">null</span>; <span class="hljs-comment">// Eliminate obsolete reference </span><br>    <span class="hljs-keyword">return</span> result;<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span> &#123;<br>     <span class="hljs-keyword">return</span> size == <span class="hljs-number">0</span>;<br>  &#125;<br>  <br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureCapacity</span><span class="hljs-params">()</span> &#123;<br>     <span class="hljs-keyword">if</span> (elements.length == size)<br>         elements = Arrays.copyOf(elements, <span class="hljs-number">2</span> * size + <span class="hljs-number">1</span>);<br>  &#125; <br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>This class should have been parameterized to begin with, but since it wasn’t, we can <em>generify</em> it after the fact.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Initial attempt to generify Stack - won&#x27;t compile! </span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Stack</span>&lt;E&gt; &#123;<br>  <span class="hljs-keyword">private</span> E[] elements;<br>  <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_INITIAL_CAPACITY</span> <span class="hljs-operator">=</span> <span class="hljs-number">16</span>;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-title function_">Stack</span><span class="hljs-params">()</span> &#123;<br>    elements = <span class="hljs-keyword">new</span> <span class="hljs-title class_">E</span>[DEFAULT_INITIAL_CAPACITY];<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(E e)</span> &#123; <br>    ensureCapacity(); elements[size++] = e;<br>  &#125;<br>  <br>  <span class="hljs-keyword">public</span> E <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123; <br>    <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>)<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmptyStackException</span>();<br>    <span class="hljs-type">E</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> elements[--size];<br>    elements[size] = <span class="hljs-literal">null</span>; <span class="hljs-comment">// Eliminate obsolete reference return result;</span><br>  &#125;<br>  ... <span class="hljs-comment">// no changes in isEmpty or ensureCapacity</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>You’ll generally get at least one error or warning:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Stack.java:<span class="hljs-number">8</span>: generic array <span class="hljs-type">creation</span><br>  <span class="hljs-variable">elements</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">E</span>[DEFAULT_INITIAL_CAPACITY];<br>  					 ^<br></code></pre></td></tr></table></figure>
-
-<p>As explained in Item 28, you can’t create an array of a non-reifiable type, such as E. This problem arises every time you write a generic type that is backed by an array.</p>
-<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>The first way: directly circumvents the prohibition on generic array creation: create an array of <code>Object</code> and cast it to the generic array type. Now in place of an error, the compiler will emit a warning. This usage is legal, but it’s not (in general) typesafe:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Stack.java:<span class="hljs-number">8</span>: warning: [unchecked] unchecked cast<br>found: Object[], required: E[]<br>	elements = (E[]) <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[DEFAULT_INITIAL_CAPACITY];<br>								^<br></code></pre></td></tr></table></figure>
-
+                <h1 id="Item-30-Favor-generic-methods"><a href="#Item-30-Favor-generic-methods" class="headerlink" title="Item 30: Favor generic methods"></a>Item 30: Favor generic methods</h1><h2 id="Occasion-1"><a href="#Occasion-1" class="headerlink" title="Occasion 1"></a>Occasion 1</h2><p>On occasion, you will need to create an object that is immutable but applicable to many different types. Because generics are implemented by erasure (Item 28), you can use a single object for all required type parameterizations, but you need to write a <em>static factory method</em> to repeatedly dole out (分发) the object for each requested type parameterization. </p>
 <blockquote>
-<p>The compiler may not be able to prove that your program is typesafe, but you can. You must convince yourself that the unchecked cast will not compromise the type safety of the program. The array in question (elements) is stored in a private field and never returned to the client or passed to any other method. The only elements stored in the array are those passed to the push method, which are of type <code>E</code>, so the unchecked cast can do no harm.</p>
+<p>This pattern, called the <em>generic singleton factory</em>, is used for function objects (Item 42) such as <code>Collections.reverseOrder</code>, and occasionally for collections such as <code>Collections.emptySet</code>.</p>
 </blockquote>
-<p>Once you’ve proved that an unchecked cast is safe, suppress the warning in as narrow a scope as possible (Item 27). With the addition of an annotation to do this, Stack compiles cleanly, and you can use it without explicit casts or fear of a <code>ClassCastException</code>:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// The elements array will contain only E instances from push(E). </span><br><span class="hljs-comment">// This is sufficient to ensure type safety, but the runtime</span><br><span class="hljs-comment">// type of the array won&#x27;t be E[]; it will always be Object[]! </span><br><span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">Stack</span><span class="hljs-params">()</span> &#123;<br>   elements = (E[]) <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[DEFAULT_INITIAL_CAPACITY];<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2"></a>Solution 2</h3><p>The second way to eliminate the generic array creation error in Stack is to change the type of the field elements from <code>E[]</code> to <code>Object[]</code>. If you do this, you’ll get a different error:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Stack.java:<span class="hljs-number">19</span>: incompatible types<br>found: Object, required: E<br>	<span class="hljs-type">E</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> elements[--size];<br>										 ^<br></code></pre></td></tr></table></figure>
-
-<p>You can change this error into a warning by casting the element retrieved from the array to <code>E</code>, but you will get a warning:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Stack.java:<span class="hljs-number">19</span>: warning: [unchecked] unchecked cast<br>found: Object, required: E<br>	<span class="hljs-type">E</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> (E) elements[--size]; <br>												 ^<br></code></pre></td></tr></table></figure>
-
-<p>Because <code>E</code> is a non-reifiable type, there’s no way the compiler can check the cast at runtime. Again, you can easily prove to yourself that the unchecked cast is safe, so it’s appropriate to suppress the warning.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Appropriate suppression of unchecked warning</span><br><span class="hljs-keyword">public</span> E <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123;<br> <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>)<br>     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmptyStackException</span>();<br>	<span class="hljs-comment">// push requires elements to be of type E, so cast is correct </span><br>  <span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span> <br>  <span class="hljs-type">E</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> (E) elements[--size];<br>  elements[size] = <span class="hljs-literal">null</span>; <span class="hljs-comment">// Eliminate obsolete reference</span><br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h2><p>Both techniques for eliminating the generic array creation have their adherents. </p>
-<ul>
-<li><p>The first is more readable: the array is declared to be of type <code>E[]</code>, clearly indicating that it contains only <code>E</code> instances;</p>
-</li>
-<li><p>The first is also more concise: in a typical generic class, you read from the array at many points in the code; </p>
-</li>
-<li><p>The first technique requires only a single cast (where the array is created), while the second requires a separate cast each time an array element is read. </p>
-</li>
-<li><p>However, the first causes <em>heap pollution</em> (Item 32): the runtime type of the array does not match its compile-time type (unless <code>E</code> happens to be <code>Object</code>). </p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Suppose that you want to write an identity function dispenser. </p>
 <blockquote>
-<p>This makes some programmers sufficiently queasy that they opt for the second technique, though the heap pollution is harmless in this situation.</p>
+<p>The libraries provide Function.identity, so there’s no reason to write your own (Item 59), but it is instructive. </p>
 </blockquote>
-</li>
-</ul>
-<p>Overall, the first technique is preferable and more commonly used in practice. </p>
-<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>The great majority of generic types are like our <code>Stack</code> example in that their type parameters have no restrictions: you can create a <code>Stack&lt;Object&gt;</code>, <code>Stack&lt;int[]&gt;</code>, <code>Stack&lt;List&lt;String&gt;&gt;</code>, or <code>Stack</code> of any other object reference type. </p>
-<p>Note that <strong>you can’t create a <code>Stack</code> of a primitive type</strong>: trying to create a <code>Stack&lt;int&gt;</code> or <code>Stack&lt;double&gt;</code> will result in a compile-time error. This is a fundamental limitation of Java’s generic type system. You can work around this restriction by using boxed primitive types (Item 61).</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, generic types are safer and easier to use than types that require casts in client code. When you design new types, make sure that they can be used without such casts. This will often mean making the types generic. </p>
-<p>If you have any existing types that should be generic but aren’t, generify them. This will make life easier for new users of these types without breaking existing clients (Item 26).</p>
+<p>It would be wasteful to create a new identity function object time one is requested, because it’s stateless. If Java’s generics were reified, you would need one identity function per type, but since they’re erased a generic singleton will suffice. Here’s how it looks:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Generic singleton factory pattern</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> UnaryOperator&lt;Object&gt; IDENTITY_FN = (t) -&gt; t;<br><br><span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; UnaryOperator&lt;T&gt; <span class="hljs-title function_">identityFunction</span><span class="hljs-params">()</span> &#123; <br>  <span class="hljs-keyword">return</span> (UnaryOperator&lt;T&gt;) IDENTITY_FN;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>The cast of <code>IDENTITY_FN</code> to (<code>UnaryFunction&lt;T&gt;</code>) generates an unchecked cast warning, as <code>UnaryOperator&lt;Object&gt;</code> is not a <code>UnaryOperator&lt;T&gt;</code> for every T. But the identity function is special: it returns its argument unmodified, so we know that it is typesafe to use it as a UnaryFunction<T>, whatever the value of T. Therefore, we can confidently suppress the unchecked cast warning generated by this cast.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Sample program to exercise generic singleton</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>  <br>   String[] strings = &#123; <span class="hljs-string">&quot;jute&quot;</span>, <span class="hljs-string">&quot;hemp&quot;</span>, <span class="hljs-string">&quot;nylon&quot;</span> &#125;;<br>   UnaryOperator&lt;String&gt; sameString = identityFunction();<br>   <span class="hljs-keyword">for</span> (String s : strings)<br>       System.out.println(sameString.apply(s));<br>  <br>   Number[] numbers = &#123; <span class="hljs-number">1</span>, <span class="hljs-number">2.0</span>, <span class="hljs-number">3L</span> &#125;;<br>   UnaryOperator&lt;Number&gt; sameNumber = identityFunction();<br>   <span class="hljs-keyword">for</span> (Number n : numbers)<br>       System.out.println(sameNumber.apply(n));<br>  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Occasion-2"><a href="#Occasion-2" class="headerlink" title="Occasion 2"></a>Occasion 2</h2><p>It is permissible, though relatively rare, for a type parameter to be bounded by some expression involving that type parameter itself. This is what’s known as a <em><strong>recursive type bound</strong></em>. </p>
+<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><p>A common use of recursive type bounds is in connection with the <code>Comparable</code> interface, which defines a type’s natural ordering (Item 14). In practice, nearly all types can be compared only to elements of their own type. This interface is shown here:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt; &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(T o)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Many methods take a collection of elements implementing <code>Comparable</code> to sort it, search within it, calculate its minimum or maximum, and the like. To do these things, it is required that every element in the collection be comparable to every other element in it, in other words, that the elements of the list be <em>mutually comparable (互相比较)</em>. Here is how to express that constraint:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Using a recursive type bound to express mutual comparability </span><br><span class="hljs-comment">// Returns max value in a collection - uses recursive type bound</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;E <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Comparable</span>&lt;E&gt;&gt; E <span class="hljs-title function_">max</span><span class="hljs-params">(Collection&lt;E&gt; c)</span> &#123; <br>  <span class="hljs-keyword">if</span> (c.isEmpty())<br>  	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Empty collection&quot;</span>);<br>  <span class="hljs-type">E</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>  <span class="hljs-keyword">for</span> (E e : c) &#123;<br>    <span class="hljs-keyword">if</span> (result == <span class="hljs-literal">null</span> || e.compareTo(result) &gt; <span class="hljs-number">0</span>)<br>    	result = Objects.requireNonNull(e);<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>The type bound <code>&lt;E extends Comparable&lt;E&gt;&gt;</code> may be read as “any type E that can be compared to itself,” which corresponds more or less precisely to the notion of mutual comparability.</p>
+<blockquote>
+<p>Note that this method throws IllegalArgumentException if the list is empty. A better alternative would be to return an <code>Optional&lt;E&gt;</code> (Item 55).</p>
+</blockquote>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, generic methods, like generic types, are safer and easier to use than methods requiring their clients to put explicit casts on input parameters and return values. </p>
+<p>Like types, you should make sure that your methods can be used <strong>without casts</strong>, which often means making them generic. </p>
+<p>And like types, you should generify existing methods whose use requires casts. This makes life easier for new users without breaking existing clients (Item 26).</p>
 
                 
               </div>
@@ -386,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-29. Favor generic types</div>
-      <div>https://peixuanhu.github.io/2023/12/07/Java/effective-java/Item29-Favor-generic-types/</div>
+      <div>Effective Java-30. Favor generic methods</div>
+      <div>https://peixuanhu.github.io/2023/12/10/Java/effective-java/Item30-Favor-generic-methods/</div>
     </div>
     <div class="license-meta">
       
@@ -399,13 +381,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 7, 2023</div>
+          <div>December 10, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>December 7, 2023</div>
+          <div>December 10, 2023</div>
         </div>
       
       
@@ -436,18 +418,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/10/Java/effective-java/Item30-Favor-generic-methods/" title="Effective Java-30. Favor generic methods">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-30. Favor generic methods</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/12/06/Java/effective-java/Item28-Prefer-lists-to-arrays/" title="Effective Java-28. Prefer lists to arrays">
-                        <span class="hidden-mobile">Effective Java-28. Prefer lists to arrays</span>
+                      <a href="/2023/12/07/Java/effective-java/Item29-Favor-generic-types/" title="Effective Java-29. Favor generic types">
+                        <span class="hidden-mobile">Effective Java-29. Favor generic types</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
