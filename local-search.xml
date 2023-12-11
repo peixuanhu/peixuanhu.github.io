@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>Effective Java-31. Use bounded wildcards to increase API flexibility</title>
+    <link href="/2023/12/11/Java/effective-java/Item31-Use-bounded-wildcards-to-increase-API-flexibility/"/>
+    <url>/2023/12/11/Java/effective-java/Item31-Use-bounded-wildcards-to-increase-API-flexibility/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Item-31-Use-bounded-wildcards-to-increase-API-flexibility"><a href="#Item-31-Use-bounded-wildcards-to-increase-API-flexibility" class="headerlink" title="Item 31: Use bounded wildcards to increase API flexibility"></a>Item 31: Use bounded wildcards to increase API flexibility</h1><h2 id="Get-and-Put-Principle"><a href="#Get-and-Put-Principle" class="headerlink" title="Get and Put Principle"></a>Get and Put Principle</h2><p><strong>For maximum flexibility, use wildcard types on input parameters that represent producers or consumers.</strong></p><p><strong>PECS</strong> stands for <strong>producer-extends, consumer-super</strong>.</p><blockquote><p>In other words, if a parameterized type represents a T producer, use <code>&lt;? extends T&gt;</code>; if it represents a T consumer, use <code>&lt;? super T&gt;</code>.</p></blockquote><p>Example:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Comparable</span>&lt;? <span class="hljs-built_in">super</span> T&gt;&gt; T <span class="hljs-title function_">max</span><span class="hljs-params">( List&lt;? extends T&gt; list)</span><br></code></pre></td></tr></table></figure><h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><ol><li><p><strong>Do not use bounded wildcard types as return types.</strong> </p><p>Example:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">union</span><span class="hljs-params">(Set&lt;? extends E&gt; s1, Set&lt;? extends E&gt; s2)</span><br></code></pre></td></tr></table></figure><p>The return type is <code>Set&lt;E&gt;</code>.</p></li><li><p><strong>If a type parameter appears only once in a method declaration, replace it with a wildcard.</strong></p><p>If it’s an unbounded type parameter, replace it with an unbounded wildcard; </p><p>if it’s a bounded type parameter, replace it with a bounded wildcard.</p><p>Example:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Two possible declarations for the swap method</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;E&gt; <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(List&lt;E&gt; list, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span>; <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(List&lt;?&gt; list, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span>;<br></code></pre></td></tr></table></figure><blockquote><p>In a public API, the second is better because it’s simpler.</p></blockquote></li></ol><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, using wildcard types in your APIs, while tricky, makes the APIs far more flexible. </p><blockquote><p>If you write a library that will be widely used, the proper use of wildcard types should be considered mandatory. </p></blockquote><p>Remember the basic rule: <strong>producer-extends, consumer-super (PECS)</strong>. </p><p>Also remember <strong>that all comparables and comparators are consumers</strong>.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java</category>
+      
+      <category>Effective Java</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Effective Java-30. Favor generic methods</title>
     <link href="/2023/12/10/Java/effective-java/Item30-Favor-generic-methods/"/>
     <url>/2023/12/10/Java/effective-java/Item30-Favor-generic-methods/</url>

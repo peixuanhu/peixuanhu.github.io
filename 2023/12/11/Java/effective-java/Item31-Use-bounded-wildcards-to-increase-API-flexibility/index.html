@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Item 30: Favor generic methodsOccasion 1On occasion, you will need to create an object that is immutable but applicable to many different types. Because generics are implemented by erasure (Item 28),">
+    <meta name="description" content="Item 31: Use bounded wildcards to increase API flexibilityGet and Put PrincipleFor maximum flexibility, use wildcard types on input parameters that represent producers or consumers. PECS stands for pr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective Java-30. Favor generic methods">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/12/10/Java/effective-java/Item30-Favor-generic-methods/index.html">
+<meta property="og:title" content="Effective Java-31. Use bounded wildcards to increase API flexibility">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/12/11/Java/effective-java/Item31-Use-bounded-wildcards-to-increase-API-flexibility/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Item 30: Favor generic methodsOccasion 1On occasion, you will need to create an object that is immutable but applicable to many different types. Because generics are implemented by erasure (Item 28),">
+<meta property="og:description" content="Item 31: Use bounded wildcards to increase API flexibilityGet and Put PrincipleFor maximum flexibility, use wildcard types on input parameters that represent producers or consumers. PECS stands for pr">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-10T02:45:28.551Z">
-<meta property="article:modified_time" content="2023-12-10T03:15:16.018Z">
+<meta property="article:published_time" content="2023-12-11T04:53:12.521Z">
+<meta property="article:modified_time" content="2023-12-11T05:05:48.070Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Effective Java-30. Favor generic methods - Peixuan&#39;s Page</title>
+  <title>Effective Java-31. Use bounded wildcards to increase API flexibility - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Effective Java-30. Favor generic methods"></span>
+            <span id="subtitle" data-typed-text="Effective Java-31. Use bounded wildcards to increase API flexibility"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-10 10:45" pubdate>
-          December 10, 2023 am
+        <time datetime="2023-12-11 12:53" pubdate>
+          December 11, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.8k words
+          1.3k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          32 mins
+          11 mins
         
       </span>
     
@@ -290,39 +290,45 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Effective Java-30. Favor generic methods</h1>
+            <h1 id="seo-header">Effective Java-31. Use bounded wildcards to increase API flexibility</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Item-30-Favor-generic-methods"><a href="#Item-30-Favor-generic-methods" class="headerlink" title="Item 30: Favor generic methods"></a>Item 30: Favor generic methods</h1><h2 id="Occasion-1"><a href="#Occasion-1" class="headerlink" title="Occasion 1"></a>Occasion 1</h2><p>On occasion, you will need to create an object that is immutable but applicable to many different types. Because generics are implemented by erasure (Item 28), you can use a single object for all required type parameterizations, but you need to write a <em>static factory method</em> to repeatedly dole out (分发) the object for each requested type parameterization. </p>
+                <h1 id="Item-31-Use-bounded-wildcards-to-increase-API-flexibility"><a href="#Item-31-Use-bounded-wildcards-to-increase-API-flexibility" class="headerlink" title="Item 31: Use bounded wildcards to increase API flexibility"></a>Item 31: Use bounded wildcards to increase API flexibility</h1><h2 id="Get-and-Put-Principle"><a href="#Get-and-Put-Principle" class="headerlink" title="Get and Put Principle"></a>Get and Put Principle</h2><p><strong>For maximum flexibility, use wildcard types on input parameters that represent producers or consumers.</strong></p>
+<p><strong>PECS</strong> stands for <strong>producer-extends, consumer-super</strong>.</p>
 <blockquote>
-<p>This pattern, called the <em>generic singleton factory</em>, is used for function objects (Item 42) such as <code>Collections.reverseOrder</code>, and occasionally for collections such as <code>Collections.emptySet</code>.</p>
+<p>In other words, if a parameterized type represents a T producer, use <code>&lt;? extends T&gt;</code>; if it represents a T consumer, use <code>&lt;? super T&gt;</code>.</p>
 </blockquote>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Suppose that you want to write an identity function dispenser. </p>
+<p>Example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Comparable</span>&lt;? <span class="hljs-built_in">super</span> T&gt;&gt; T <span class="hljs-title function_">max</span><span class="hljs-params">( List&lt;? extends T&gt; list)</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><ol>
+<li><p><strong>Do not use bounded wildcard types as return types.</strong> </p>
+<p>Example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">union</span><span class="hljs-params">(Set&lt;? extends E&gt; s1, Set&lt;? extends E&gt; s2)</span><br></code></pre></td></tr></table></figure>
+
+<p>The return type is <code>Set&lt;E&gt;</code>.</p>
+</li>
+<li><p><strong>If a type parameter appears only once in a method declaration, replace it with a wildcard.</strong></p>
+<p>If it’s an unbounded type parameter, replace it with an unbounded wildcard; </p>
+<p>if it’s a bounded type parameter, replace it with a bounded wildcard.</p>
+<p>Example:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Two possible declarations for the swap method</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;E&gt; <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(List&lt;E&gt; list, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span>; <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(List&lt;?&gt; list, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span>;<br></code></pre></td></tr></table></figure>
+
 <blockquote>
-<p>The libraries provide Function.identity, so there’s no reason to write your own (Item 59), but it is instructive. </p>
+<p>In a public API, the second is better because it’s simpler.</p>
 </blockquote>
-<p>It would be wasteful to create a new identity function object time one is requested, because it’s stateless. If Java’s generics were reified, you would need one identity function per type, but since they’re erased a generic singleton will suffice. Here’s how it looks:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Generic singleton factory pattern</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> UnaryOperator&lt;Object&gt; IDENTITY_FN = (t) -&gt; t;<br><br><span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; UnaryOperator&lt;T&gt; <span class="hljs-title function_">identityFunction</span><span class="hljs-params">()</span> &#123; <br>  <span class="hljs-keyword">return</span> (UnaryOperator&lt;T&gt;) IDENTITY_FN;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>The cast of <code>IDENTITY_FN</code> to (<code>UnaryFunction&lt;T&gt;</code>) generates an unchecked cast warning, as <code>UnaryOperator&lt;Object&gt;</code> is not a <code>UnaryOperator&lt;T&gt;</code> for every T. But the identity function is special: it returns its argument unmodified, so we know that it is typesafe to use it as a UnaryFunction<T>, whatever the value of T. Therefore, we can confidently suppress the unchecked cast warning generated by this cast.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Sample program to exercise generic singleton</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>  <br>   String[] strings = &#123; <span class="hljs-string">&quot;jute&quot;</span>, <span class="hljs-string">&quot;hemp&quot;</span>, <span class="hljs-string">&quot;nylon&quot;</span> &#125;;<br>   UnaryOperator&lt;String&gt; sameString = identityFunction();<br>   <span class="hljs-keyword">for</span> (String s : strings)<br>       System.out.println(sameString.apply(s));<br>  <br>   Number[] numbers = &#123; <span class="hljs-number">1</span>, <span class="hljs-number">2.0</span>, <span class="hljs-number">3L</span> &#125;;<br>   UnaryOperator&lt;Number&gt; sameNumber = identityFunction();<br>   <span class="hljs-keyword">for</span> (Number n : numbers)<br>       System.out.println(sameNumber.apply(n));<br>  <br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="Occasion-2"><a href="#Occasion-2" class="headerlink" title="Occasion 2"></a>Occasion 2</h2><p>It is permissible, though relatively rare, for a type parameter to be bounded by some expression involving that type parameter itself. This is what’s known as a <em><strong>recursive type bound</strong></em>. </p>
-<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><p>A common use of recursive type bounds is in connection with the <code>Comparable</code> interface, which defines a type’s natural ordering (Item 14). In practice, nearly all types can be compared only to elements of their own type. This interface is shown here:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt; &#123;<br>  <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(T o)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>Many methods take a collection of elements implementing <code>Comparable</code> to sort it, search within it, calculate its minimum or maximum, and the like. To do these things, it is required that every element in the collection be comparable to every other element in it, in other words, that the elements of the list be <em>mutually comparable (互相比较)</em>. Here is how to express that constraint:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Using a recursive type bound to express mutual comparability </span><br><span class="hljs-comment">// Returns max value in a collection - uses recursive type bound</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;E <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Comparable</span>&lt;E&gt;&gt; E <span class="hljs-title function_">max</span><span class="hljs-params">(Collection&lt;E&gt; c)</span> &#123; <br>  <span class="hljs-keyword">if</span> (c.isEmpty())<br>  	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Empty collection&quot;</span>);<br>  <span class="hljs-type">E</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>  <span class="hljs-keyword">for</span> (E e : c) &#123;<br>    <span class="hljs-keyword">if</span> (result == <span class="hljs-literal">null</span> || e.compareTo(result) &gt; <span class="hljs-number">0</span>)<br>    	result = Objects.requireNonNull(e);<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>The type bound <code>&lt;E extends Comparable&lt;E&gt;&gt;</code> may be read as “any type E that can be compared to itself,” which corresponds more or less precisely to the notion of mutual comparability.</p>
+</li>
+</ol>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, using wildcard types in your APIs, while tricky, makes the APIs far more flexible. </p>
 <blockquote>
-<p>Note that this method throws IllegalArgumentException if the list is empty. A better alternative would be to return an <code>Optional&lt;E&gt;</code> (Item 55).</p>
+<p>If you write a library that will be widely used, the proper use of wildcard types should be considered mandatory. </p>
 </blockquote>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>In summary, generic methods, like generic types, are safer and easier to use than methods requiring their clients to put explicit casts on input parameters and return values. </p>
-<p>Like types, you should make sure that your methods can be used <strong>without casts</strong>, which often means making them generic. </p>
-<p>And like types, you should generify existing methods whose use requires casts. This makes life easier for new users without breaking existing clients (Item 26).</p>
+<p>Remember the basic rule: <strong>producer-extends, consumer-super (PECS)</strong>. </p>
+<p>Also remember <strong>that all comparables and comparators are consumers</strong>.</p>
 
                 
               </div>
@@ -368,8 +374,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Effective Java-30. Favor generic methods</div>
-      <div>https://peixuanhu.github.io/2023/12/10/Java/effective-java/Item30-Favor-generic-methods/</div>
+      <div>Effective Java-31. Use bounded wildcards to increase API flexibility</div>
+      <div>https://peixuanhu.github.io/2023/12/11/Java/effective-java/Item31-Use-bounded-wildcards-to-increase-API-flexibility/</div>
     </div>
     <div class="license-meta">
       
@@ -381,13 +387,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 10, 2023</div>
+          <div>December 11, 2023</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>December 10, 2023</div>
+          <div>December 11, 2023</div>
         </div>
       
       
@@ -418,18 +424,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/11/Java/effective-java/Item31-Use-bounded-wildcards-to-increase-API-flexibility/" title="Effective Java-31. Use bounded wildcards to increase API flexibility">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-31. Use bounded wildcards to increase API flexibility</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/12/07/Java/effective-java/Item29-Favor-generic-types/" title="Effective Java-29. Favor generic types">
-                        <span class="hidden-mobile">Effective Java-29. Favor generic types</span>
+                      <a href="/2023/12/10/Java/effective-java/Item30-Favor-generic-methods/" title="Effective Java-30. Favor generic methods">
+                        <span class="hidden-mobile">Effective Java-30. Favor generic methods</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
