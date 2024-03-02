@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Git常用命令学习推荐一个可视化git学习网站：https:&#x2F;&#x2F;learngitbranching.js.org&#x2F; 常用命令举例本地 作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。 12git branch -f main HEAD~3# git branch -f main HEAD^: 往上移一个  作用：把b及往父亲方向走直到和a的公共祖宗节点之">
+    <meta name="description" content="1. 编程规约1.1 命名风格 POJO类中的任何布尔型变量都不要加is前缀，否则部分框架解析会引起序列化错误。  数据库中需要加is前缀，所以要在&lt;result_map&gt;设置从is_xxx到xxx的映射关系">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git常用命令学习">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/20/Git/git-learning/index.html">
+<meta property="og:title" content="阿里巴巴Java开发手册">
+<meta property="og:url" content="https://peixuanhu.github.io/2023/12/30/book-notes/easy-coding/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Git常用命令学习推荐一个可视化git学习网站：https:&#x2F;&#x2F;learngitbranching.js.org&#x2F; 常用命令举例本地 作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。 12git branch -f main HEAD~3# git branch -f main HEAD^: 往上移一个  作用：把b及往父亲方向走直到和a的公共祖宗节点之">
+<meta property="og:description" content="1. 编程规约1.1 命名风格 POJO类中的任何布尔型变量都不要加is前缀，否则部分框架解析会引起序列化错误。  数据库中需要加is前缀，所以要在&lt;result_map&gt;设置从is_xxx到xxx的映射关系">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-20T12:27:23.800Z">
-<meta property="article:modified_time" content="2023-11-24T01:24:19.441Z">
+<meta property="article:published_time" content="2023-12-30T10:54:09.000Z">
+<meta property="article:modified_time" content="2023-12-30T10:54:09.000Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Git常用命令学习 - Peixuan&#39;s Page</title>
+  <title>阿里巴巴Java开发手册 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Git常用命令学习"></span>
+            <span id="subtitle" data-typed-text="阿里巴巴Java开发手册"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-20 20:27" pubdate>
-          November 20, 2023 pm
+        <time datetime="2023-12-30 18:54" pubdate>
+          December 30, 2023 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          105 words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          15 mins
+          1 mins
         
       </span>
     
@@ -290,76 +290,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Git常用命令学习</h1>
+            <h1 id="seo-header">阿里巴巴Java开发手册</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Git常用命令学习"><a href="#Git常用命令学习" class="headerlink" title="Git常用命令学习"></a>Git常用命令学习</h1><p>推荐一个可视化git学习网站：<a target="_blank" rel="noopener" href="https://learngitbranching.js.org/">https://learngitbranching.js.org/</a></p>
-<h2 id="常用命令举例"><a href="#常用命令举例" class="headerlink" title="常用命令举例"></a>常用命令举例</h2><h3 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h3><ol>
-<li><p>作用：（強制）移動 main 指向從 HEAD 往上數的第三個 parent commit。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch -f main HEAD~3<br><span class="hljs-comment"># git branch -f main HEAD^: 往上移一个</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>作用：把b及往父亲方向走直到和a的公共祖宗节点之前的路径上节点接到a的后面</p>
+                <h1 id="1-编程规约"><a href="#1-编程规约" class="headerlink" title="1. 编程规约"></a>1. 编程规约</h1><h2 id="1-1-命名风格"><a href="#1-1-命名风格" class="headerlink" title="1.1 命名风格"></a>1.1 命名风格</h2><ul>
+<li><p>POJO类中的任何布尔型变量都不要加<code>is</code>前缀，否则部分框架解析会引起序列化错误。</p>
 <blockquote>
-<p>如果b是a的祖宗，则没有效果</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">git rebase a b<br><br><span class="hljs-comment"># 等价于现在HEAD在b，执行以下命令：</span><br>git rebase a<br></code></pre></td></tr></table></figure>
-
-<p>怎么记？rebase a也就是换base为a，把当前commit（b）的base换成a，b接到a的后面</p>
-</li>
-<li><p>从当前commit新建一条分支<code>bugFix</code>，并切换到<code>bugFix</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout -b bugFix<br><span class="hljs-comment"># 等价于：</span><br>git branch bugFix<br>git checkout bugFix<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>取消git修改：<code>git reset</code>或者<code>git revert</code>，例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git reset HEAD~3<br>git revert HEAD<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>把commit a, b, c依次接到当前指针所在commit的后面</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git cherry-pick a b c<br></code></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="远端"><a href="#远端" class="headerlink" title="远端"></a>远端</h3><ol>
-<li><p>表示一個 fetch 以及一個 rebase。用于远端其他人提交新commit之后更新到本地，并与本地自己的更新合并（适用于在同一个分支开发）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git pull --rebase<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>本地在dev分支开发，如果远端master更新了，需要把变更合并到本地dev（本地的master一般不会动，如果动了就加个<code>--rebase</code>）：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout master<br>git pull<br>git rebase dev<br></code></pre></td></tr></table></figure>
-
-
+<p>数据库中需要加<code>is</code>前缀，所以要在<code>&lt;result_map&gt;</code>设置从<code>is_xxx</code>到<code>xxx</code>的映射关系</p>
 </blockquote>
 </li>
-<li><p>建立一個新的 totallyNotMain branch 並且它會 track origin&#x2F;main。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout -b totallyNotMain origin/main<br><span class="hljs-comment"># 等价于</span><br>git branch -u origin/main totallyNotMain<br></code></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>先到我的 repo 中的 “main” branch，抓下所有的 commit，然後到叫作 “origin” 的 remote 的 “main” branch，檢查 remote 的 commit 有沒有跟我的 repo 一致，如果沒有，就更新。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push &lt;remote&gt; &lt;place&gt;<br><span class="hljs-comment"># 如：</span><br>git push origin main<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这个命令就不需要local当前指针一定指向main了</p>
-</blockquote>
-</li>
-<li><p>當我們的 source 以及 destination 是不同的branch的時候用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push origin &lt;<span class="hljs-built_in">source</span>&gt;:&lt;destination&gt;<br></code></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>git 會到 remote 上的 foo branch，抓下所有不在 local 上的 commit，然後將它們放到 local 的 o&#x2F;foo branch。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git fetch origin foo<br></code></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>git pull 表示 fetch 之後再 merge 所 fetch 的 commit，當使用 git fetch 時使用一樣的參數，之後再從 fetch 下來的 commit 所放置的位置做 merge。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">git pull origin foo<br><span class="hljs-comment"># 等价于</span><br>git fetch origin foo; git merge o/foo<br><br>git pull origin bar~1:bugFix<br><span class="hljs-comment"># 等价于</span><br>git fetch origin bar~1:bugFix; git merge bugFix<br></code></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><h3 id="reset-vs-revert"><a href="#reset-vs-revert" class="headerlink" title="reset vs revert"></a>reset vs revert</h3><ol>
-<li><code>reset</code>参数指针为当前指针所在branch需要回退到的位置；而<code>revert</code>参数指针为需要修改的那个指针</li>
-<li><code>reset</code>可以往回退很多个commit；而<code>revert</code>只能取消修改一个commit（后面跟的参数是指针）</li>
-<li><code>reset</code>相当于只把指针往回移动若干步，别人无法看到这个变化；而<code>revert</code>是把当前commit的前一个commit接到当前commit后面，对其他人也可见。</li>
-</ol>
-<h3 id="rebase-vs-merge"><a href="#rebase-vs-merge" class="headerlink" title="rebase vs merge"></a>rebase vs merge</h3><p><code>rebase</code>优点：rebase 使得你的 commit tree 看起來更為簡潔，因為任何的 commit 都在一條直線上面。</p>
-<p><code>rebase</code>缺点：rebase 修改了 commit tree 的歷史紀錄。</p>
+<li></li>
+</ul>
 
                 
               </div>
@@ -378,8 +321,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Git/" class="category-chain-item">Git</a>
+  <a href="/categories/Book-Notes/" class="category-chain-item">Book Notes</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Book-Notes/Easy-Coding/" class="category-chain-item">Easy Coding</a>
+  
+  
+
   
 
       </span>
@@ -398,8 +348,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Git常用命令学习</div>
-      <div>https://peixuanhu.github.io/2023/11/20/Git/git-learning/</div>
+      <div>阿里巴巴Java开发手册</div>
+      <div>https://peixuanhu.github.io/2023/12/30/book-notes/easy-coding/阿里巴巴Java开发手册/</div>
     </div>
     <div class="license-meta">
       
@@ -411,14 +361,9 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 20, 2023</div>
+          <div>December 30, 2023</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>Updated on</div>
-          <div>November 24, 2023</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -448,9 +393,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/21/Java/effective-java/Item18-Favor-composition-over-inheritance/" title="Effective Java-18. Favor composition over inheritance">
+                      <a href="/2024/02/25/financing/%E9%87%91%E9%92%B1%E5%BF%83%E7%90%86%E5%AD%A6/" title="金钱心理学">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Effective Java-18. Favor composition over inheritance</span>
+                        <span class="hidden-mobile">金钱心理学</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -458,8 +403,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/20/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/Intel-and-Motorola/" title="浪潮之巅读书笔记5-英特尔与摩托罗拉">
-                        <span class="hidden-mobile">浪潮之巅读书笔记5-英特尔与摩托罗拉</span>
+                      <a href="/2023/12/30/Git/git-commit-emoji/" title="Git Commit Emoji">
+                        <span class="hidden-mobile">Git Commit Emoji</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
