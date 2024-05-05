@@ -1,0 +1,1 @@
+REST，一种API接口，通常输入输出都是JSON，便于第三方调用或者使用页面JavaScript与之交互。
