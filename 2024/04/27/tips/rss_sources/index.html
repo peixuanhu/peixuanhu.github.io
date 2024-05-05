@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Huffman树问题可以看作一颗完全二叉树。 Huffman树的总代价：对于每个叶子节点n，需要的代价是n所处的层级*n的权重，把它们求和 问题：如何排列所有叶子节点，使得总代价最小 解法：每次挑权重最小的两个节点合并。 可以证明：权重最小的两个点，在树中一定是最深的节点，且可以互为兄弟节点。  证明：  如果最小节点深度不是最深，将其与最深的节点交换位置，代价一定减小； 可以互为兄弟：在最深层可">
+    <meta name="description" content="不错的RSS源：    名称 URL    36氪 https:&#x2F;&#x2F;36kr.com&#x2F;feed   DIYGod - 写代码是热爱，写到世界充满爱! https:&#x2F;&#x2F;diygod.me&#x2F;atom.xml   程序员的喵 https:&#x2F;&#x2F;catcoding.me&#x2F;atom.xml   让小产品的独立变现更简单 - ezindie.com https:&#x2F;&#x2F;www.ezindie.com&#x2F;feed&#x2F;rs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法模板5-2.贪心-Huffman树">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/11/01/algorithm/template/5-2.Huffman%E6%A0%91/index.html">
+<meta property="og:title" content="RSS Sources">
+<meta property="og:url" content="https://peixuanhu.github.io/2024/04/27/tips/rss_sources/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Huffman树问题可以看作一颗完全二叉树。 Huffman树的总代价：对于每个叶子节点n，需要的代价是n所处的层级*n的权重，把它们求和 问题：如何排列所有叶子节点，使得总代价最小 解法：每次挑权重最小的两个节点合并。 可以证明：权重最小的两个点，在树中一定是最深的节点，且可以互为兄弟节点。  证明：  如果最小节点深度不是最深，将其与最深的节点交换位置，代价一定减小； 可以互为兄弟：在最深层可">
+<meta property="og:description" content="不错的RSS源：    名称 URL    36氪 https:&#x2F;&#x2F;36kr.com&#x2F;feed   DIYGod - 写代码是热爱，写到世界充满爱! https:&#x2F;&#x2F;diygod.me&#x2F;atom.xml   程序员的喵 https:&#x2F;&#x2F;catcoding.me&#x2F;atom.xml   让小产品的独立变现更简单 - ezindie.com https:&#x2F;&#x2F;www.ezindie.com&#x2F;feed&#x2F;rs">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-01T05:57:13.468Z">
-<meta property="article:modified_time" content="2023-11-01T07:05:40.581Z">
+<meta property="article:published_time" content="2024-04-27T11:53:44.000Z">
+<meta property="article:modified_time" content="2024-04-27T11:53:44.000Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>算法模板5-2.贪心-Huffman树 - Peixuan&#39;s Page</title>
+  <title>RSS Sources - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="算法模板5-2.贪心-Huffman树"></span>
+            <span id="subtitle" data-typed-text="RSS Sources"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-01 13:57" pubdate>
-          November 1, 2023 pm
+        <time datetime="2024-04-27 19:53" pubdate>
+          April 27, 2024 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          766 words
+          549 words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          7 mins
+          5 mins
         
       </span>
     
@@ -290,29 +290,96 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">算法模板5-2.贪心-Huffman树</h1>
+            <h1 id="seo-header">RSS Sources</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Huffman树"><a href="#Huffman树" class="headerlink" title="Huffman树"></a>Huffman树</h1><p>问题可以看作一颗完全二叉树。</p>
-<p>Huffman树的总代价：对于每个叶子节点n，需要的代价是<code>n所处的层级*n的权重</code>，把它们求和</p>
-<p>问题：如何排列所有叶子节点，使得总代价最小</p>
-<p>解法：每次挑权重最小的两个节点合并。</p>
-<p>可以证明：权重最小的两个点，在树中一定是最深的节点，且可以互为兄弟节点。</p>
-<blockquote>
-<p>证明：</p>
-<ol>
-<li>如果最小节点深度不是最深，将其与最深的节点交换位置，代价一定减小；</li>
-<li>可以互为兄弟：在最深层可以任意交换位置。</li>
-</ol>
-</blockquote>
-<h2 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h2><h3 id="1-合并果子"><a href="#1-合并果子" class="headerlink" title="1. 合并果子"></a>1. 合并果子</h3><blockquote>
-<p>和DP中的石子合并的区别：石子合并必须两堆石子相邻，果子没有这个限制。</p>
-</blockquote>
-<p>Huffman树中所有叶子节点就是要合并的果子堆。</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;queue&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">10010</span>;<br><span class="hljs-type">int</span> n;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);<br>    <br>    priority_queue&lt;<span class="hljs-type">int</span>, vector&lt;<span class="hljs-type">int</span>&gt;, greater&lt;<span class="hljs-type">int</span>&gt;&gt; heap;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i ++)<br>    &#123;<br>        <span class="hljs-type">int</span> t;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;t);<br>        heap.<span class="hljs-built_in">push</span>(t);<br>    &#125;<br>    <br>    <span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (heap.<span class="hljs-built_in">size</span>() &gt; <span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-type">int</span> a = heap.<span class="hljs-built_in">top</span>(); heap.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-type">int</span> b = heap.<span class="hljs-built_in">top</span>(); heap.<span class="hljs-built_in">pop</span>();<br>        res += a + b;<br>        heap.<span class="hljs-built_in">push</span>(a + b);<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, res);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
+                <p>不错的RSS源：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>36氪</td>
+<td><a target="_blank" rel="noopener" href="https://36kr.com/feed">https://36kr.com/feed</a></td>
+</tr>
+<tr>
+<td>DIYGod - 写代码是热爱，写到世界充满爱!</td>
+<td><a target="_blank" rel="noopener" href="https://diygod.me/atom.xml">https://diygod.me/atom.xml</a></td>
+</tr>
+<tr>
+<td>程序员的喵</td>
+<td><a target="_blank" rel="noopener" href="https://catcoding.me/atom.xml">https://catcoding.me/atom.xml</a></td>
+</tr>
+<tr>
+<td>让小产品的独立变现更简单 - ezindie.com</td>
+<td><a target="_blank" rel="noopener" href="https://www.ezindie.com/feed/rss.xml">https://www.ezindie.com/feed/rss.xml</a></td>
+</tr>
+<tr>
+<td>Julia Evans</td>
+<td><a target="_blank" rel="noopener" href="https://jvns.ca/atom.xml">https://jvns.ca/atom.xml</a></td>
+</tr>
+<tr>
+<td>InfoQ 推荐</td>
+<td><a target="_blank" rel="noopener" href="https://plink.anyfeeder.com/infoq/recommend">https://plink.anyfeeder.com/infoq/recommend</a></td>
+</tr>
+<tr>
+<td>三联生活周刊</td>
+<td><a target="_blank" rel="noopener" href="https://plink.anyfeeder.com/weixin/lifeweek">https://plink.anyfeeder.com/weixin/lifeweek</a></td>
+</tr>
+<tr>
+<td>美团技术团队</td>
+<td><a target="_blank" rel="noopener" href="https://tech.meituan.com/feed/">https://tech.meituan.com/feed/</a></td>
+</tr>
+<tr>
+<td>一天一篇经济学人(双语)</td>
+<td><a target="_blank" rel="noopener" href="https://plink.anyfeeder.com/weixin/Economist_fans">https://plink.anyfeeder.com/weixin/Economist_fans</a></td>
+</tr>
+<tr>
+<td>MIT 科技评论 - 本周热榜</td>
+<td><a target="_blank" rel="noopener" href="https://plink.anyfeeder.com/mittrchina/hot">https://plink.anyfeeder.com/mittrchina/hot</a></td>
+</tr>
+<tr>
+<td>构建我的被动收入</td>
+<td><a target="_blank" rel="noopener" href="https://www.bmpi.dev/index.xml">https://www.bmpi.dev/index.xml</a></td>
+</tr>
+<tr>
+<td>阮一峰的网络日志</td>
+<td><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/atom.xml">https://www.ruanyifeng.com/blog/atom.xml</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 
                 
               </div>
@@ -331,15 +398,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/Tips/" class="category-chain-item">Tips</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
   
 
       </span>
@@ -358,8 +418,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>算法模板5-2.贪心-Huffman树</div>
-      <div>https://peixuanhu.github.io/2023/11/01/algorithm/template/5-2.Huffman树/</div>
+      <div>RSS Sources</div>
+      <div>https://peixuanhu.github.io/2024/04/27/tips/rss_sources/</div>
     </div>
     <div class="license-meta">
       
@@ -371,14 +431,9 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 1, 2023</div>
+          <div>April 27, 2024</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>Updated on</div>
-          <div>November 1, 2023</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -408,18 +463,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/03/design-pattern/26.%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/" title="设计模式26-享元模式">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">设计模式26-享元模式</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/01/algorithm/template/5-1.%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" title="算法模板5-1.贪心-区间问题">
-                        <span class="hidden-mobile">算法模板5-1.贪心-区间问题</span>
+                      <a href="/2024/02/25/financing/%E9%87%91%E9%92%B1%E5%BF%83%E7%90%86%E5%AD%A6/" title="金钱心理学">
+                        <span class="hidden-mobile">金钱心理学</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
