@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>1.Introduction</title>
+    <link href="/2024/07/05/Rust/1-Introduction/"/>
+    <url>/2024/07/05/Rust/1-Introduction/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Rust介绍"><a href="#Rust介绍" class="headerlink" title="Rust介绍"></a>Rust介绍</h1><h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>Rust的承诺：<strong>只要程序通过了编译器检查，就不会存在未定义行为。</strong></p><p>悬空指针、双重释放和空指针解引用都能在编译期捕获。数组引用则会受到编译期检查和运行期检查的双重保护。</p><h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>高效并行编程：只要数据不可变，就可以在线程之间自由地共享这些数据。会发生变化的数据则只能使用同步原语访问。</p><p>Rust的快：Rust设计了一些“高性能”的默认选项，并赋予你自主控制内存使用和处理器算力分配方式的能力。</p><h1 id="rustup-和-Cargo"><a href="#rustup-和-Cargo" class="headerlink" title="rustup 和 Cargo"></a><code>rustup</code> 和 <code>Cargo</code></h1><h2 id="rustup"><a href="#rustup" class="headerlink" title="rustup"></a><code>rustup</code></h2><p>安装Rust：详见<code>rustup.rs</code>网站。</p><p>升级Rust版本：运行<code>rustup update</code>命令，即可升级到新版本。</p><h2 id="cargo"><a href="#cargo" class="headerlink" title="cargo"></a><code>cargo</code></h2><p><code>cargo</code>是Rust的编译管理器、包管理器和通用工具。可以用cargo启动新项目、构建和运行程序，并管理代码所依赖的外部库。</p><p>创建新的Rust包：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cargo new &lt;package-name&gt;<br></code></pre></td></tr></table></figure><h2 id="rustc"><a href="#rustc" class="headerlink" title="rustc"></a><code>rustc</code></h2><p><code>rustc</code>是Rust的编译器。通常Cargo会替我们调用此编译器，但有时也需要直接运行它。</p><h2 id="rustdoc"><a href="#rustdoc" class="headerlink" title="rustdoc"></a><code>rustdoc</code></h2><p><code>rustdoc</code>是Rust文档工具。在程序源码中以适当形式的注释编写文档，那么<code>rustdoc</code>就可以从中构建出格式良好的HTML。与<code>rustc</code>一样，通常Cargo会替我们运行<code>rustdoc</code>。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Rust</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>RSS Sources</title>
     <link href="/2024/04/27/tips/rss_sources/"/>
     <url>/2024/04/27/tips/rss_sources/</url>
