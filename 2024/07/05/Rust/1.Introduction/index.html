@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="Rust介绍安全Rust的承诺：只要程序通过了编译器检查，就不会存在未定义行为。 悬空指针、双重释放和空指针解引用都能在编译期捕获。数组引用则会受到编译期检查和运行期检查的双重保护。 性能高效并行编程：只要数据不可变，就可以在线程之间自由地共享这些数据。会发生变化的数据则只能使用同步原语访问。 Rust的快：Rust设计了一些“高性能”的默认选项，并赋予你自主控制内存使用和处理器算力分配方式的能力">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo Doc">
-<meta property="og:url" content="https://peixuanhu.github.io/2023/09/14/tips/Hexo-doc/index.html">
+<meta property="og:title" content="1. Rust Introduction">
+<meta property="og:url" content="https://peixuanhu.github.io/2024/07/05/Rust/1.Introduction/index.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Rust介绍安全Rust的承诺：只要程序通过了编译器检查，就不会存在未定义行为。 悬空指针、双重释放和空指针解引用都能在编译期捕获。数组引用则会受到编译期检查和运行期检查的双重保护。 性能高效并行编程：只要数据不可变，就可以在线程之间自由地共享这些数据。会发生变化的数据则只能使用同步原语访问。 Rust的快：Rust设计了一些“高性能”的默认选项，并赋予你自主控制内存使用和处理器算力分配方式的能力">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-14T03:28:46.000Z">
-<meta property="article:modified_time" content="2024-07-06T13:09:48.684Z">
+<meta property="article:published_time" content="2024-07-05T12:23:28.000Z">
+<meta property="article:modified_time" content="2024-07-06T13:42:27.859Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Hexo Doc - Peixuan&#39;s Page</title>
+  <title>1. Rust Introduction - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hexo Doc"></span>
+            <span id="subtitle" data-typed-text="1. Rust Introduction"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-14 11:28" pubdate>
-          September 14, 2023 am
+        <time datetime="2024-07-05 20:23" pubdate>
+          July 5, 2024 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          466 words
+          896 words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          4 mins
+          8 mins
         
       </span>
     
@@ -290,26 +290,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hexo Doc</h1>
+            <h1 id="seo-header">1. Rust Introduction</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post Title&quot;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="Rust介绍"><a href="#Rust介绍" class="headerlink" title="Rust介绍"></a>Rust介绍</h1><h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>Rust的承诺：<strong>只要程序通过了编译器检查，就不会存在未定义行为。</strong></p>
+<p>悬空指针、双重释放和空指针解引用都能在编译期捕获。数组引用则会受到编译期检查和运行期检查的双重保护。</p>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>高效并行编程：只要数据不可变，就可以在线程之间自由地共享这些数据。会发生变化的数据则只能使用同步原语访问。</p>
+<p>Rust的快：Rust设计了一些“高性能”的默认选项，并赋予你自主控制内存使用和处理器算力分配方式的能力。</p>
+<h1 id="rustup-和-Cargo"><a href="#rustup-和-Cargo" class="headerlink" title="rustup 和 Cargo"></a><code>rustup</code> 和 <code>Cargo</code></h1><h2 id="rustup"><a href="#rustup" class="headerlink" title="rustup"></a><code>rustup</code></h2><p>安装Rust：详见<code>rustup.rs</code>网站。</p>
+<p>升级Rust版本：运行<code>rustup update</code>命令，即可升级到新版本。</p>
+<h2 id="cargo"><a href="#cargo" class="headerlink" title="cargo"></a><code>cargo</code></h2><p><code>cargo</code>是Rust的编译管理器、包管理器和通用工具。可以用cargo启动新项目、构建和运行程序，并管理代码所依赖的外部库。</p>
+<p>创建新的Rust包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cargo new &lt;package-name&gt;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h4 id="Create-and-put-the-new-post-into-subfolder"><a href="#Create-and-put-the-new-post-into-subfolder" class="headerlink" title="Create and put the new post into subfolder"></a>Create and put the new post into subfolder</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post Title&quot;</span> -p path/test_file_name.md<br></code></pre></td></tr></table></figure>
+<h2 id="rustc"><a href="#rustc" class="headerlink" title="rustc"></a><code>rustc</code></h2><p><code>rustc</code>是Rust的编译器。通常Cargo会替我们调用此编译器，但有时也需要直接运行它。</p>
+<h2 id="rustdoc"><a href="#rustdoc" class="headerlink" title="rustdoc"></a><code>rustdoc</code></h2><p><code>rustdoc</code>是Rust文档工具。在程序源码中以适当形式的注释编写文档，那么<code>rustdoc</code>就可以从中构建出格式良好的HTML。与<code>rustc</code>一样，通常Cargo会替我们运行<code>rustdoc</code>。</p>
+<h1 id="Crate"><a href="#Crate" class="headerlink" title="Crate"></a><code>Crate</code></h1><p>一个Rust包，无论是库还是可执行文件，都叫做<code>crate</code>（意思是板条箱）。<code>crates.io</code>上发布了大量免费的可用的包。</p>
+<p><code>Cargo.toml</code>中<code>[dependencies]</code>部分的每一行都给出了<code>crates.io</code>上的<code>crate</code>名称，以及我们项目中想要使用的版本。例：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs toml"><span class="hljs-section">[package]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;demo&quot;</span><br><span class="hljs-attr">version</span> = <span class="hljs-string">&quot;0.1.0&quot;</span><br><span class="hljs-attr">edition</span> = <span class="hljs-string">&quot;2024&quot;</span><br><br><span class="hljs-section">[dependencies]</span><br><span class="hljs-attr">actix-web</span> = <span class="hljs-string">&quot;1.0.8&quot;</span><br><span class="hljs-attr">serde</span> = &#123; version = <span class="hljs-string">&quot;1.0&quot;</span>, features = [<span class="hljs-string">&quot;derive&quot;</span>]&#125;<br><span class="hljs-attr">crossbeam</span> = <span class="hljs-string">&quot;0.8&quot;</span> <span class="hljs-comment"># 提供并发设施</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
                 
               </div>
@@ -328,7 +331,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Tips/" class="category-chain-item">Tips</a>
+  <a href="/categories/Rust/" class="category-chain-item">Rust</a>
   
   
 
@@ -348,8 +351,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hexo Doc</div>
-      <div>https://peixuanhu.github.io/2023/09/14/tips/Hexo-doc/</div>
+      <div>1. Rust Introduction</div>
+      <div>https://peixuanhu.github.io/2024/07/05/Rust/1.Introduction/</div>
     </div>
     <div class="license-meta">
       
@@ -361,7 +364,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>September 14, 2023</div>
+          <div>July 5, 2024</div>
         </div>
       
       
@@ -398,15 +401,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/15/algorithm/LeetCode/3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" title="LeetCode3. 无重复字符的最长子串">
+                      <a href="/2024/07/06/Rust/2.Syntax/" title="2. Rust Syntax">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LeetCode3. 无重复字符的最长子串</span>
+                        <span class="hidden-mobile">2. Rust Syntax</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/04/27/tips/rss_sources/" title="RSS Sources">
+                        <span class="hidden-mobile">RSS Sources</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

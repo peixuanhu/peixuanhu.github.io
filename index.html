@@ -226,13 +226,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/05/Rust/1-Introduction/" target="_self">
-          1.Introduction
+        <a href="/2024/07/06/Rust/2.Syntax/" target="_self">
+          2. Rust Syntax
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/05/Rust/1-Introduction/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/06/Rust/2.Syntax/" target="_self">
+        <div>
+          Rust语法一些Rust语法的小例子：  默认情况下，一经初始化，变量的值就不能改变了，但是在参数名前放置mut关键字，就可以在函数体中赋值给它们。例：函数传参mut n: u64  要想使用某个特型（接口）的方法，就要用use引入它。例如，任何实现了FromStr特型的类型都有一个from_str方法，当调用u64::from_str(&amp;arg)时，要use std::str::From
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-06 21:02" pubdate>
+              2024-07-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Rust/" class="category-chain-item">Rust</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/05/Rust/1.Introduction/" target="_self">
+          1. Rust Introduction
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/05/Rust/1.Introduction/" target="_self">
         <div>
           Rust介绍安全Rust的承诺：只要程序通过了编译器检查，就不会存在未定义行为。 悬空指针、双重释放和空指针解引用都能在编译期捕获。数组引用则会受到编译期检查和运行期检查的双重保护。 性能高效并行编程：只要数据不可变，就可以在线程之间自由地共享这些数据。会发生变化的数据则只能使用同步原语访问。 Rust的快：Rust设计了一些“高性能”的默认选项，并赋予你自主控制内存使用和处理器算力分配方式的能力
         </div>
@@ -697,67 +751,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2023-12-10 11:15" pubdate>
               2023-12-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Java/Effective-Java/" class="category-chain-item">Effective Java</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/12/07/Java/effective-java/Item29-Favor-generic-types/" target="_self">
-          Effective Java-29. Favor generic types
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/07/Java/effective-java/Item29-Favor-generic-types/" target="_self">
-        <div>
-          Item 29: Favor generic typesExample12345678910111213141516171819202122232425262728293031// Object-based collection - a prime candidate for genericspublic class Stack &#123;  private Object[] elements;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-07 09:16" pubdate>
-              2023-12-07
             </time>
           </div>
         
