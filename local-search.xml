@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Just For Fun (只是为了好玩) - Linus自传</title>
+    <link href="/2024/07/07/book-notes/JustForFun/"/>
+    <url>/2024/07/07/book-notes/JustForFun/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>多抓鱼上这本书在高价收购，准备先把想要摘抄的段落记录下来，然后把它卖掉啦。</p></blockquote><p>林纳斯从公司出来时，手里握着一听开了盖的可乐，身上则是一副典型程序员装束：牛仔裤、科技会议上派送的T恤、一成不变的短袜配凉鞋。当我问及短袜配凉鞋是不是程序员的标准着装时，他声称自己在遇见其他程序员之前，就已经喜欢上这种穿法了。他还推测说：“这一定是程序员的天性”。</p><p>游戏能一直引领技术的潮流的原因：游戏总是能够促进硬件的发展。要考验硬件的极限，得靠动作游戏。处理文字的时候，慢上个一两秒你也许不会在意，但是在游戏里，即使是十分之一秒的延迟也会非常明显。</p><p>Unix系统的独特之处，在于它所追求的一整套基本理念。这个操作系统简洁又漂亮，它有“进程”的概念，做任何事情都有一个进程。在Unix系统中，任何事情都是进程使其发生的。此外，就是文件的概念。</p><p>在Unix系统上做的几乎所有事情都是由六个基本操作（系统调用，即对操作系统的调用）完成的。</p><ul><li>fork: 创建子进程。当一个进程调用fork指令时，他就把自己给复制了一份。</li><li>exec: 执行进程。fork新建的子进程一般会用exec执行另一个进程替换掉自己。</li><li>open: 打开文件。</li><li>close: 关闭文件。</li><li>read: 读取文件。</li><li>write: 写入文件。</li></ul><p>就算你要创建复杂的任务，也不需要特别复杂的接口。只要通过一些简单进程之间的交互，就可以创建任何复杂的任务。只需要在简单的进程之间，创建它们的交流渠道——管道(pipe)。</p><p>在一个讨人厌的系统里，你想做任何事情，都需要一些特殊的接口。而Unix系统恰恰相反，它直接把搭建用的模块给你，这些模块足以用来执行任何任务。这就是所谓的“简洁”设计。</p><p>最开始吸引我进入编程世界的，是我研究计算机工作原理的过程。我在其间获得的最大乐趣，就是发现了计算机和数学的异曲同工之妙：你可以创造出一个世界来，一个自主制定规则的新世界。在物理科学中，你会被客观存在的规律所约束，但是在数学和编程中，只要合乎逻辑，什么规则都行得通。</p><p>要开发一个操作系统，就要弄明白那些系统调用的功能，然后写出自己的程序，以自己的方式去实现那些系统调用。一般来说，一个操作系统有好几百个系统调用。有些基础系统调用不光复杂，还得依靠基础设备的支持。比如，如果需要将数据写入磁盘或从磁盘读取数据，就得先创建一个磁盘驱动程序。又比如，要执行open这个系统调用，就必须创建一整套文件系统层来分析文件名，并通过该系统层在磁盘上查找文件。不过一旦写出了一个调用，其他函数就可以借鉴这一套代码了。</p><p>在Unix系统中，shell程序相当于所有程序的母程序。Linux的做法是下载了一个Bourne shell的克隆版，叫Bourne-Again shell。这是Unix系统早期的一个shell，可以从互联网免费下载。也就是后来被称为bash的shell。</p><p>Linux相比Minix，有一个杀手锏功能：分页到磁盘程序。有了这个功能，用户的计算机内存再有限，也可以运行比内存大的程序。也就是说，当计算机内存不足时，可以将计算机较早前被占用的内存挪到磁盘上，记录下这块内存的新路径，然后继续用这块内存来跑原来的程序。Linux的这个特性算是1992年新年伊始的一件大事，火了好几个星期。</p><p>我希望人们能够看到和使用这个系统，并且能无拘无束地修改和完善它，但我同时也想要确保自己能够及时掌握他们所做的任何改动。我希望能一直有权使用源代码，这样的话，一旦有人做出改进，我就可以直接拿来为自己所用。我一直坚信，要使Linux发展成为十全十美的系统，就必须保持免费和开源。一旦牵扯上金钱，一切都会变得云谲波诡。只要不牵扯到金钱，我们这个圈子就不会有贪欲了。</p><p>我们认为，在美国（相比北欧），机遇要多得多，气候更是不必说。我确信美国的员工激励体系比欧洲的实际多了，这也会产生更好的工作成果。在芬兰，如果某个员工比其他人的工作做得更好，老板会遮遮掩掩地多给他一点儿薪水。但要是在美国，老板会直接给他远远高于其他人的薪水。这种方法的确很有效。</p><p>互相竞争的Unix经销商浪费了数年的时间去开发类似的功能，仅仅是因为他们没法拿到相同的代码基资源。独立开发相类似的功能不仅拖了Unix几年时间，还导致了Unix内部的明争暗斗。</p><p>人生的金科玉律：</p><ol><li>己之所欲，施之于人。</li><li>以自己做的事为荣。</li><li>乐在其中。</li></ol><p>知识产权是一项极好的收入来源，为了创造更多的知识产权，大量的金钱会被投入。正如战争在历史上一直是许多发明和工程取得巨大飞跃的进步源泉（当初，人们也是出于纯粹的军事目的才研发计算机的），同样的道理也适用于知识产权的虚拟战争，它促进了工程的进步，还为科技发展带来了前所未见的资源。</p><p>说到技术的未来，真正要紧的是人们到底想要什么。要是把这个琢磨出来了，你就会知道，唯一的问题就是你该如何快速量产这个玩意儿，并且低价出售，让人们不必牺牲他们想要的其他东西就能轻松得到它。</p><p>哈佛大学法学院把开源模式应用到了法学范畴。他们开展了“开放法律”项目，核心理论是：当大量有法律头脑的人聚集起来为一个项目出谋划策，并且能够通过发布和转发收集到海量信息时，最有力的论据就会形成。放在IT领域中，这句话的意思就是：有一百万双眼睛盯着，所有软件的bug都会无所遁形。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Book Notes</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>2. Rust Syntax</title>
     <link href="/2024/07/06/Rust/2.Syntax/"/>
     <url>/2024/07/06/Rust/2.Syntax/</url>
@@ -42,9 +61,9 @@
   
   
   <entry>
-    <title>RSS Sources</title>
-    <link href="/2024/04/27/tips/rss_sources/"/>
-    <url>/2024/04/27/tips/rss_sources/</url>
+    <title>RSS Feeds</title>
+    <link href="/2024/04/27/tips/rss_feeds/"/>
+    <url>/2024/04/27/tips/rss_feeds/</url>
     
     <content type="html"><![CDATA[<p>不错的RSS源：</p><table><thead><tr><th>名称</th><th>URL</th></tr></thead><tbody><tr><td>36氪</td><td><a href="https://36kr.com/feed">https://36kr.com/feed</a></td></tr><tr><td>DIYGod - 写代码是热爱，写到世界充满爱!</td><td><a href="https://diygod.me/atom.xml">https://diygod.me/atom.xml</a></td></tr><tr><td>程序员的喵</td><td><a href="https://catcoding.me/atom.xml">https://catcoding.me/atom.xml</a></td></tr><tr><td>让小产品的独立变现更简单 - ezindie.com</td><td><a href="https://www.ezindie.com/feed/rss.xml">https://www.ezindie.com/feed/rss.xml</a></td></tr><tr><td>Julia Evans</td><td><a href="https://jvns.ca/atom.xml">https://jvns.ca/atom.xml</a></td></tr><tr><td>InfoQ 推荐</td><td><a href="https://plink.anyfeeder.com/infoq/recommend">https://plink.anyfeeder.com/infoq/recommend</a></td></tr><tr><td>三联生活周刊</td><td><a href="https://plink.anyfeeder.com/weixin/lifeweek">https://plink.anyfeeder.com/weixin/lifeweek</a></td></tr><tr><td>美团技术团队</td><td><a href="https://tech.meituan.com/feed/">https://tech.meituan.com/feed/</a></td></tr><tr><td>一天一篇经济学人(双语)</td><td><a href="https://plink.anyfeeder.com/weixin/Economist_fans">https://plink.anyfeeder.com/weixin/Economist_fans</a></td></tr><tr><td>MIT 科技评论 - 本周热榜</td><td><a href="https://plink.anyfeeder.com/mittrchina/hot">https://plink.anyfeeder.com/mittrchina/hot</a></td></tr><tr><td>构建我的被动收入</td><td><a href="https://www.bmpi.dev/index.xml">https://www.bmpi.dev/index.xml</a></td></tr><tr><td>阮一峰的网络日志</td><td><a href="https://www.ruanyifeng.com/blog/atom.xml">https://www.ruanyifeng.com/blog/atom.xml</a></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table>]]></content>
     
@@ -72,26 +91,7 @@
       
       <category>Financing</category>
       
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>阿里巴巴Java开发手册</title>
-    <link href="/2024/01/07/book-notes/easy-coding/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/"/>
-    <url>/2024/01/07/book-notes/easy-coding/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/</url>
-    
-    <content type="html"><![CDATA[<h1 id="1-编程规约"><a href="#1-编程规约" class="headerlink" title="1. 编程规约"></a>1. 编程规约</h1><h2 id="1-1-命名风格"><a href="#1-1-命名风格" class="headerlink" title="1.1 命名风格"></a>1.1 命名风格</h2><ul><li><p>POJO类中的任何布尔型变量都不要加<code>is</code>前缀，否则部分框架解析会引起序列化错误。</p><blockquote><p>数据库中需要加<code>is</code>前缀，所以要在<code>&lt;result_map&gt;</code>设置从<code>is_xxx</code>到<code>xxx</code>的映射关系</p></blockquote></li><li></li></ul>]]></content>
-    
-    
-    <categories>
-      
       <category>Book Notes</category>
-      
-      <category>Easy Coding</category>
       
     </categories>
     
