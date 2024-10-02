@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>主和属的持续音</title>
+    <link href="/2024/10/02/harmony/pedal-note/"/>
+    <url>/2024/10/02/harmony/pedal-note/</url>
+    
+    <content type="html"><![CDATA[<h1 id="主和属的持续音"><a href="#主和属的持续音" class="headerlink" title="主和属的持续音"></a>主和属的持续音</h1><p><strong>当低音用主和属的持续音时，上方用三六度代替和弦。</strong></p><p>一般用在乐曲开头，最低声部</p><ul><li><p>T上会出现T, S, D，且持续音上的TST比较常见</p></li><li><p>D上会出现T, D(7)（S在浪漫派逐渐变得常见）</p></li></ul><p>注意：一定要等到持续音所对应的正确的和弦（如，主或者属）出现，才可以结束这个持续音</p><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ol><li>与上方的和声和旋律产生有趣的摩擦</li><li>使得低音和声有很慢的感觉，控制和声节奏</li><li>有效避免功能的逆进行所带来的问题</li><li>当低音旋律出现一定重复时，考虑前半段加上更低的持续音，后半段就可以让低音旋律动起来了（比如低八度）</li><li>还能削弱终止式的强度</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Music</category>
+      
+      <category>Harmony</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>织体</title>
     <link href="/2024/09/30/harmony/texture/"/>
     <url>/2024/09/30/harmony/texture/</url>
@@ -50,7 +71,7 @@
     <link href="/2024/09/28/harmony/cadence/"/>
     <url>/2024/09/28/harmony/cadence/</url>
     
-    <content type="html"><![CDATA[<h1 id="终止式的条件"><a href="#终止式的条件" class="headerlink" title="终止式的条件"></a>终止式的条件</h1><ol><li><p>跨小节线*</p><blockquote><p>小节线不一定是真正的小节线，视情况而定</p></blockquote></li><li><p>换功能</p><p>D46-35非常常用</p></li></ol><h1 id="终止式类型"><a href="#终止式类型" class="headerlink" title="终止式类型"></a>终止式类型</h1><h2 id="半终止：不是D-D"><a href="#半终止：不是D-D" class="headerlink" title="半终止：不是D -&gt; D"></a>半终止：不是D -&gt; D</h2><p>不是D -&gt; D46-35</p><h2 id="全终止：D-T"><a href="#全终止：D-T" class="headerlink" title="全终止：D -&gt; T"></a>全终止：D -&gt; T</h2><p>D46-35 -&gt; T</p><h1 id="T46-35：D-7-T"><a href="#T46-35：D-7-T" class="headerlink" title="T46-35：D(7)-&gt;T"></a>T46-35：D(7)-&gt;T</h1><p>与D46-35的半终止相对应</p><p>D一般都会有七音</p><h2 id="半终止D46-35上的T-D"><a href="#半终止D46-35上的T-D" class="headerlink" title="半终止D46-35上的T-D:"></a>半终止D46-35上的T-D:</h2><p>低音5上面351(T)到257(D)</p><h2 id="全终止T上的D-7-T"><a href="#全终止T上的D-7-T" class="headerlink" title="全终止T上的D(7)-T:"></a>全终止T上的D(7)-T:</h2><p>低音1上面257(D)到351(T)</p><h1 id="Period-乐段"><a href="#Period-乐段" class="headerlink" title="Period 乐段"></a>Period 乐段</h1><p>乐段：上半句与下半句<strong>等长</strong>，且有明显<strong>呼应</strong>；且上半句结束在半终止，下半句结束在全终止。</p><p>上下半句的前半段可以不一样，仅需要一定的动机联系。</p><p>如果照抄前半段，则从某个点开始<strong>全都不一样</strong>。</p><h2 id="已知半终止，如何写完整句？"><a href="#已知半终止，如何写完整句？" class="headerlink" title="已知半终止，如何写完整句？"></a>已知半终止，如何写完整句？</h2><h3 id="1-简单粗暴二法"><a href="#1-简单粗暴二法" class="headerlink" title="1. 简单粗暴二法"></a>1. 简单粗暴二法</h3><ol><li>照抄提前：前半段照抄，后半段抄一部分，最后在T结束</li><li>照抄压缩：前半段照抄，后半段全抄压缩，最后加上T</li></ol><p>保证最后是T就行</p><h3 id="2-T上的D-7-T削弱终止感"><a href="#2-T上的D-7-T削弱终止感" class="headerlink" title="2. T上的D(7)-T削弱终止感"></a>2. T上的D(7)-T削弱终止感</h3><p>与D46-35呼应</p><h3 id="3-自由发展"><a href="#3-自由发展" class="headerlink" title="3. 自由发展"></a>3. 自由发展</h3><p>前后半段都可以不一样</p><h2 id="已知全终止，如何向前扩充？"><a href="#已知全终止，如何向前扩充？" class="headerlink" title="已知全终止，如何向前扩充？"></a>已知全终止，如何向前扩充？</h2><p>可以用在作曲中觉得太短了，需要加长的情况</p><h3 id="1-简单粗暴二法-1"><a href="#1-简单粗暴二法-1" class="headerlink" title="1. 简单粗暴二法"></a>1. 简单粗暴二法</h3><ol><li>交换：比如最后两音互换</li><li>换尾：最后几个音换成其他音</li></ol><h3 id="2-移位"><a href="#2-移位" class="headerlink" title="2. 移位"></a>2. 移位</h3><p>即平移，如最后的音321移到432</p><h3 id="3-自由"><a href="#3-自由" class="headerlink" title="3. 自由"></a>3. 自由</h3><p>但需要有动机联系</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="终止式的条件"><a href="#终止式的条件" class="headerlink" title="终止式的条件"></a>终止式的条件</h1><ol><li><p>跨小节线*</p><blockquote><p>小节线不一定是真正的小节线，视情况而定</p></blockquote></li><li><p>换功能</p><p>D46-35非常常用</p></li></ol><h1 id="终止式类型"><a href="#终止式类型" class="headerlink" title="终止式类型"></a>终止式类型</h1><h2 id="半终止：不是D-D"><a href="#半终止：不是D-D" class="headerlink" title="半终止：不是D -&gt; D"></a>半终止：不是D -&gt; D</h2><p>不是D -&gt; D46-35</p><h2 id="全终止：D-T"><a href="#全终止：D-T" class="headerlink" title="全终止：D -&gt; T"></a>全终止：D -&gt; T</h2><p>D46-35 -&gt; T</p><blockquote><p>不一定要一个半终止一个全终止，半终止也可以用一个弱一点的全终止代替，比如结束在三音而不是根音。</p></blockquote><h1 id="T46-35：D-7-T"><a href="#T46-35：D-7-T" class="headerlink" title="T46-35：D(7)-&gt;T"></a>T46-35：D(7)-&gt;T</h1><p>与D46-35的半终止相对应</p><p>D一般都会有七音</p><h2 id="半终止D46-35上的T-D"><a href="#半终止D46-35上的T-D" class="headerlink" title="半终止D46-35上的T-D:"></a>半终止D46-35上的T-D:</h2><p>低音5上面351(T)到257(D)</p><h2 id="全终止T上的D-7-T"><a href="#全终止T上的D-7-T" class="headerlink" title="全终止T上的D(7)-T:"></a>全终止T上的D(7)-T:</h2><p>低音1上面257(D)到351(T)</p><h1 id="Period-乐段"><a href="#Period-乐段" class="headerlink" title="Period 乐段"></a>Period 乐段</h1><p>乐段：上半句与下半句<strong>等长</strong>，且有明显<strong>呼应</strong>；且上半句结束在半终止，下半句结束在全终止。</p><p>上下半句的前半段可以不一样，仅需要一定的动机联系。</p><p>如果照抄前半段，则从某个点开始<strong>全都不一样</strong>。</p><h2 id="已知半终止，如何写完整句？"><a href="#已知半终止，如何写完整句？" class="headerlink" title="已知半终止，如何写完整句？"></a>已知半终止，如何写完整句？</h2><h3 id="1-简单粗暴二法"><a href="#1-简单粗暴二法" class="headerlink" title="1. 简单粗暴二法"></a>1. 简单粗暴二法</h3><ol><li>照抄提前：前半段照抄，后半段抄一部分，最后在T结束</li><li>照抄压缩：前半段照抄，后半段全抄压缩，最后加上T</li></ol><p>保证最后是T就行</p><h3 id="2-T上的D-7-T削弱终止感"><a href="#2-T上的D-7-T削弱终止感" class="headerlink" title="2. T上的D(7)-T削弱终止感"></a>2. T上的D(7)-T削弱终止感</h3><p>与D46-35呼应</p><h3 id="3-自由发展"><a href="#3-自由发展" class="headerlink" title="3. 自由发展"></a>3. 自由发展</h3><p>前后半段都可以不一样</p><h2 id="已知全终止，如何向前扩充？"><a href="#已知全终止，如何向前扩充？" class="headerlink" title="已知全终止，如何向前扩充？"></a>已知全终止，如何向前扩充？</h2><p>可以用在作曲中觉得太短了，需要加长的情况</p><h3 id="1-简单粗暴二法-1"><a href="#1-简单粗暴二法-1" class="headerlink" title="1. 简单粗暴二法"></a>1. 简单粗暴二法</h3><ol><li>交换：比如最后两音互换</li><li>换尾：最后几个音换成其他音</li></ol><h3 id="2-移位"><a href="#2-移位" class="headerlink" title="2. 移位"></a>2. 移位</h3><p>即平移，如最后的音321移到432</p><h3 id="3-自由"><a href="#3-自由" class="headerlink" title="3. 自由"></a>3. 自由</h3><p>但需要有动机联系</p><h1 id="如何削弱终止感？"><a href="#如何削弱终止感？" class="headerlink" title="如何削弱终止感？"></a>如何削弱终止感？</h1><ul><li>不用原位而用转位（凑三六度）</li><li>用主和属的持续音</li><li>旋律放在弱拍</li></ul>]]></content>
     
     
     <categories>
