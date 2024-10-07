@@ -5,8 +5,8 @@
   
   <entry>
     <title>对位</title>
-    <link href="/2024/10/07/music/harmony/counterpoint/"/>
-    <url>/2024/10/07/music/harmony/counterpoint/</url>
+    <link href="/2024/10/07/music/counterpoint/"/>
+    <url>/2024/10/07/music/counterpoint/</url>
     
     <content type="html"><![CDATA[<h1 id="三六度"><a href="#三六度" class="headerlink" title="三六度"></a>三六度</h1><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ol><li><p>直接避免在对位中会犯的错误</p><ol><li>不和谐音程的问题，没准备、没解决</li><li>和谐音程的问题，比如平行五八度</li></ol></li><li><p>在两声部的情况下保证和声的完整和唯一性</p><blockquote><p>比如，在五八度的情况下，没有三音，和弦不确定，有可能是大三和弦、小三和弦；而三六度保障了三音的存在，不是根音和三音，就是三音和五音</p></blockquote></li></ol><h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><ul><li><p>两个声部全是三度平行</p></li><li><p>两个声部全是六度平行</p></li><li><p>其中一个声部不动，另一个声部从三度跳到六度&#x2F;从六度跳到三度</p><blockquote><p>通常用在赋格的开头，声部的运动相对少的时候</p></blockquote></li><li><p>两个声部都朝某一方向运动，可以三变六&#x2F;六变三</p><p>如果最近时相差三度：其中一个声部要走三度，另一个声部要走二度</p><p>如果最近时相差六度：两个声部都需要走三度</p><blockquote><p>在赋格中，一般走三度的那个声部在过程中会增加一个二度的经过音</p><p>经过音八度平行也是被允许的</p></blockquote></li><li><p>两个声部中有跳动，实现三变六&#x2F;六变三</p><ul><li><p>一个声部走二度，另一个声部反向跳跃四度</p><blockquote><p>四度、五度跳进不需要准备</p></blockquote></li></ul></li></ul><h1 id="四五度"><a href="#四五度" class="headerlink" title="四五度"></a>四五度</h1><p>总结：四度和五度分别是三度和六度的不稳定状态。</p><h2 id="四度"><a href="#四度" class="headerlink" title="四度"></a>四度</h2><p>在对位的体系里，<strong>四度是一个不和谐音程</strong>。</p><p>把音程看作相对地面（最低音）的不同高度位置的东西。</p><p>把四度看成<em>三度的不稳定状态</em>，迟早要被解决到三度。</p><p>不要直接放一个四度，而是应该先放一个（稳定的）和谐音程（三度或六度），然后把地板（最低音）降低使得它们成为四度关系，再把地板上的四度解决到稳定的和谐音程。</p><p>不和谐音程（张力大，音量大）要出现在强拍上，解决后的和谐音程（张力小，音量小）在弱拍上。</p><h2 id="五度"><a href="#五度" class="headerlink" title="五度"></a>五度</h2><p>五度是一个和谐音程。</p><p>弱点：不具备和声的唯一性（比如，可以是大三也可以是小三）。</p><p>五度和四度的关系：声部可以对调，所以可以把五度看作是<em>六度的不稳定状态</em>，要解决到六度。此时因为声部对调，所以应该把最高音看作天花板，先构造稳定的三度或六度，把天花板移动构造五度，最后把下方的声部解决到六度。</p>]]></content>
     
@@ -40,6 +40,8 @@
       
       <category>巴菲特致股东的信</category>
       
+      <category>巴菲特致股东的信</category>
+      
     </categories>
     
     
@@ -60,6 +62,8 @@
       <category>Financing</category>
       
       <category>Book Notes</category>
+      
+      <category>巴菲特致股东的信</category>
       
       <category>巴菲特致股东的信</category>
       
