@@ -226,13 +226,74 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" target="_self">
+        <a href="/posts/3458e125.html" target="_self">
+          算法模板3-3.树与图的遍历
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/3458e125.html" target="_self">
+        <div>
+          树与图的遍历时间复杂度：O(n + m)，其中 n 表示点数， m 表示边数。 树是特殊的图，同样只需要考虑图的遍历即可。 DFS一般树和图的遍历，每个点只需要遍历一次。 需要一个状态数组 st[]，表示该点是否被遍历过。 代码模板123456789int dfs(int u) &#123;    st[u] = true; // st[u] 表示点u已经遍历过    for (int i = h
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-11 16:55" pubdate>
+              2023-10-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/d477b61a.html" target="_self">
           算法模板3-1.DFS和BFS
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/11/algorithm/template/3-1.DFS%E5%92%8CBFS/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/d477b61a.html" target="_self">
         <div>
           深度优先遍历 (DFS)一条路走到底，无路可走了之后往回退一步，继续找一条其他的路一直往下走。 形势一般为递归。 概念回溯走到底了，返回的过程叫做回溯。 回来的时候要恢复现场。 123456// 恢复现场的代码与修改状态的代码一般是对称的，例：path[u] = i;st[i] = true;dfs(u + 1); // 下一层递归返回之后恢复st[i] = false;path[u] = 0;
         </div>
@@ -258,12 +319,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
   
   
     <span>></span>
     
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
   
   
 
@@ -287,13 +348,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" target="_self">
+        <a href="/posts/86037912.html" target="_self">
           STL总结
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/algorithm/STL%E6%80%BB%E7%BB%93/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/86037912.html" target="_self">
         <div>
           vector, 变长数组，倍增的思想12345678size()  返回元素个数empty()  返回是否为空clear()  清空front()/back()push_back()/pop_back()begin()/end()[]支持比较运算，按字典序  pair&lt;int, int&gt;123first, 第一个元素second, 第二个元素支持比较运算，以first为第一关键字，以s
         </div>
@@ -319,7 +380,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
   
   
 
@@ -341,13 +402,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" target="_self">
+        <a href="/posts/2d6c6193.html" target="_self">
           算法模板2-8.字符串哈希
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/algorithm/template/2-8.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/2d6c6193.html" target="_self">
         <div>
           字符串哈希适用场景快速判断一个字符串中两个区间对应的子串是否完全相同。  除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。  字符串前缀哈希法12345678str = &quot;ABCABCDE&quot;把每一个前缀的哈希值算出来：h[0] = 0h[1] = &quot;A&quot;的哈希值h[2] = &quot;AB&quot;的哈希值h[3] = &q
         </div>
@@ -373,12 +434,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
   
   
     <span>></span>
     
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
   
   
 
@@ -402,13 +463,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" target="_self">
+        <a href="/posts/927b654c.html" target="_self">
           算法模板2-7.哈希
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/algorithm/template/2-7.%E5%93%88%E5%B8%8C/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/927b654c.html" target="_self">
         <div>
           一般哈希适用场景把庞大的值域映射到一个比较小的空间。 如 0~10^9 -&gt; 0~10^5。  与离散化的关系：离散化是需要保序的，可以看作一种特殊的哈希方式  步骤1. x mod nn 即数组长度，它是一个质数，并且这个质数要离2的整数次幂尽可能远。  这样取可以使冲突的概率最小。数学证明待补充  2. 解决冲突有两种方法 拉链法数组的长度即为n，其中每个元素都是一个链表，取模之后结果相
         </div>
@@ -434,12 +495,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
   
   
     <span>></span>
     
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
   
   
 
@@ -463,13 +524,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self">
+        <a href="/posts/3c62176d.html" target="_self">
           设计模式13-建造者模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/design-pattern/13.%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/3c62176d.html" target="_self">
         <div>
           建造者模式定义建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 建造者模式可以将一个产品的内部表象与产品的生成过程分割开来，从而可以使一个建造过程生成具有不同的内部表象的产品对象。 用户只需指定需要建造的类型即可，不需要知道具体建造的过程和细节。 结构图 Director构建一个使用 Builder 接口的对象。 用于控制建造过程，隔离用户与
         </div>
@@ -495,7 +556,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Design-Pattern/" class="category-chain-item">Design Pattern</a>
+  <a href="/categories/design-pattern/" class="category-chain-item">design pattern</a>
   
   
 
@@ -517,13 +578,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/" target="_self">
+        <a href="/posts/63c4c968.html" target="_self">
           算法模板2-6.堆
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/09/algorithm/template/2-6.%E5%A0%86/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/63c4c968.html" target="_self">
         <div>
           堆性质以小根堆为例： 堆中的每一个点都是小于等于左右儿子的。 所以根节点就是整个堆的最小值。 支持的操作 插入一个数 heap[++ size] = x; up(size);  求集合当中的最小值 heap[1]  删除最小值 用整个堆的最后一个元素覆盖堆顶元素： heap[1] = heap[size --]; down(1);  删除任意一个元素 与删除最小值类似，用最后一个元素覆盖下标为k的
         </div>
@@ -549,12 +610,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
   
   
     <span>></span>
     
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
   
   
 
@@ -578,13 +639,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" target="_self">
+        <a href="/posts/89087cc7.html" target="_self">
           算法模板2-5.并查集
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/09/algorithm/template/2-5.%E5%B9%B6%E6%9F%A5%E9%9B%86/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/89087cc7.html" target="_self">
         <div>
           并查集支持的操作在近乎 O(1) 的时间复杂度内支持以下两种操作：  将两个集合合并 询问两个元素是否在一个集合当中  注：有时也用于处理图论相关的问题。 基本原理每个集合用一棵树来表示，树根的编号就是整个集合的编号。每个节点存储它的父节点，p[x] 表示 x 的父节点。 思考问题1: 如何判断树根？1if (p[x] == x) 则为树根  问题2: 如何求x的集合编号？1while (p[x]
         </div>
@@ -610,12 +671,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
   
   
     <span>></span>
     
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
   
   
 
@@ -639,13 +700,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" target="_self">
+        <a href="/posts/ef9bba37.html" target="_self">
           算法模板2-4.Trie树
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/09/algorithm/template/2-4.Trie%E6%A0%91/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/ef9bba37.html" target="_self">
         <div>
           Trie树适用场景是用于高效存储和查找字符串集合中各字符串出现次数的数据结构。 代码模板1234567891011121314151617181920212223242526int son[N][26], cnt[N], idx;// 0号点既是根节点，又是空节点（一个点如果没有子节点，它的son就指向0）// son[][]存储树中每个节点的子节点// cnt[]存储以每个节点结尾的单词数量//
         </div>
@@ -671,12 +732,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
   
   
     <span>></span>
     
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
   
   
 
@@ -700,13 +761,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/09/algorithm/template/2-3.KMP/" target="_self">
+        <a href="/posts/fca2cc32.html" target="_self">
           算法模板2-3.KMP
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/09/algorithm/template/2-3.KMP/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/fca2cc32.html" target="_self">
         <div>
           KMP使用场景有两个字符串 S 和 p，其中 S 是原串（长），p是模板串（短）。 KMP用于字符串匹配：找到 S 中所有与 p 相同的子串，并返回每个子串开头字符的下标。 代码模板123456789101112131415161718// s[]是长文本，p[]是模式串，n是s的长度，m是p的长度// 求模式串的next数组for (int i = 2, j = 0; i &lt;= m; i
         </div>
@@ -732,73 +793,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
   
   
     <span>></span>
     
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" target="_self">
-          算法模板2-2.栈和队列
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/07/algorithm/template/2-2.%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" target="_self">
-        <div>
-          栈LIFO 代码模板12345678910111213141516// tt表示栈顶int stk[N], tt = 0;// 向栈顶插入一个数stk[++ tt] = x;// 从栈顶弹出一个数tt --;// 获得栈顶的值stk[tt];// 判断栈是否为空，如果 tt &gt; 0，则表示不为空if (tt &gt; 0) &#123;    ...&#125;    队列FIFO 普通队列
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-07 20:34" pubdate>
-              2023-10-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Algorithm/Template/" class="category-chain-item">Template</a>
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
   
   
 
