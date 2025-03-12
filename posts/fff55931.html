@@ -1,0 +1,918 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="面向对象编程基础三大特性1. 封装每个对象都包含它能进行操作所需要的所有信息，这个特性称为封装，因此对象不必依赖其他对象来完成自己的操作。 好处 良好的封装能够减少耦合（让某类和调用该类方法的其他类分离） 类内部的实现可以自由地修改（不影响其他的类） 类具有清晰的对外接口（其他类只需要关心这些接口，不用管内部实现）  2. 继承继承定义了类如何相互关联，共享特性（is-a, not has-a）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式0-OOP Basic">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/fff55931.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="面向对象编程基础三大特性1. 封装每个对象都包含它能进行操作所需要的所有信息，这个特性称为封装，因此对象不必依赖其他对象来完成自己的操作。 好处 良好的封装能够减少耦合（让某类和调用该类方法的其他类分离） 类内部的实现可以自由地修改（不影响其他的类） 类具有清晰的对外接口（其他类只需要关心这些接口，不用管内部实现）  2. 继承继承定义了类如何相互关联，共享特性（is-a, not has-a）。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/09/14/lLdVpOa35Z1YWDm.jpg">
+<meta property="article:published_time" content="2023-11-29T07:02:50.000Z">
+<meta property="article:modified_time" content="2025-03-02T14:27:24.815Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>设计模式0-OOP Basic - Peixuan&#39;s Page</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Peixuan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="设计模式0-OOP Basic"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-29 15:02" pubdate>
+          November 29, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          39 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">设计模式0-OOP Basic</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="面向对象编程基础"><a href="#面向对象编程基础" class="headerlink" title="面向对象编程基础"></a>面向对象编程基础</h1><h2 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h2><h4 id="1-封装"><a href="#1-封装" class="headerlink" title="1. 封装"></a>1. 封装</h4><p>每个对象都包含<strong>它能进行操作所需要的所有信息</strong>，这个特性称为封装，因此对象不必依赖其他对象来完成自己的操作。</p>
+<h5 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h5><ul>
+<li>良好的封装能够减少耦合（让某类和调用该类方法的其他类分离）</li>
+<li>类内部的实现可以自由地修改（不影响其他的类）</li>
+<li>类具有清晰的对外接口（其他类只需要关心这些接口，不用管内部实现）</li>
+</ul>
+<h4 id="2-继承"><a href="#2-继承" class="headerlink" title="2. 继承"></a>2. 继承</h4><p>继承定义了类如何<strong>相互关联，共享特性</strong>（is-a, not has-a）。继承的工作方式是，定义父类和子类，或叫作基类和派生类，其中子类继承父类的所有特性。子类不但继承了父类的所有特性，还可以定义新的特性。</p>
+<h5 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h5><ul>
+<li>子类拥有父类非private的属性和功能</li>
+<li>子类具有自己的属性和功能，即子类可以扩展父类没有的属性和功能</li>
+<li>子类还可以以自己的方式实现父类的功能（方法重写）</li>
+</ul>
+<p>protected表示继承时子类可以对基类有完全访问权。</p>
+<p>不用继承的话，如果要修改功能，就必须在<strong>所有重复的方法中修改</strong>（枚举类同理），代码越多，出错的可能就越大，而继承的优点是，继承使得所有子类公共的部分都放在了父类，使得代码得到了共享，这就避免了重复，另外，继承可使得修改或扩展继承而来的实现都较为容易。</p>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>父类变，则子类不得不变</li>
+<li>继承会破坏包装，父类实现细节暴露给子类，这其实是增大了两个类之间的耦合性（继承是一种类与类之间<strong>强耦合</strong>的关系）</li>
+</ul>
+<h4 id="3-多态"><a href="#3-多态" class="headerlink" title="3. 多态"></a>3. 多态</h4><p>多态表示不同的对象可以执行相同的动作，但要通过它们自己的实现代码来执行。</p>
+<h5 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h5><ul>
+<li>子类以父类的身份出现</li>
+<li>子类在工作时以<strong>自己的方式</strong>来实现（子类可以选择使用override关键字，将父类实现替换为它自己的实现，这就是方法重写Override）</li>
+<li>子类以父类的身份出现时，子类<strong>特有的属性和方法不可以使用</strong></li>
+</ul>
+<h2 id="抽象类和接口"><a href="#抽象类和接口" class="headerlink" title="抽象类和接口"></a>抽象类和接口</h2><h4 id="抽象类-方法"><a href="#抽象类-方法" class="headerlink" title="抽象类&#x2F;方法"></a>抽象类&#x2F;方法</h4><p>考虑把实例化没有任何意义的父类改成抽象类；把方法体没有意义的方法改成抽象方法。</p>
+<h5 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h5><ul>
+<li>抽象类不能被实例化（没有意义）</li>
+<li>抽象方法是必须被子类重写的方法（重写之前肯定没有意义）</li>
+<li>如果类中包含抽象方法，那么类就必须定义为抽象类，不论是否还包含其他一般方法</li>
+</ul>
+<h5 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h5><ul>
+<li>应该考虑让抽象类拥有<strong>尽可能多的共同代码</strong>，拥有<strong>尽可能少的数据</strong></li>
+</ul>
+<h5 id="什么时候应该用抽象类？"><a href="#什么时候应该用抽象类？" class="headerlink" title="什么时候应该用抽象类？"></a>什么时候应该用抽象类？</h5><p>抽象类通常代表一个抽象概念，它提供一个<strong>继承的出发点</strong>，当设计一个新的抽象类时，一定是用来继承的。所以，在一个以继承关系形成的等级结构里面，<strong>树叶节点</strong>应当是<strong>具体类</strong>，而<strong>树枝节点</strong>均应当是<strong>抽象类</strong></p>
+<img src="https://s2.loli.net/2023/09/13/VhwuR9FrsnI1SdE.jpg" srcset="/img/loading.gif" lazyload alt="抽象类和具体类.jpg" style="zoom:40%;" />
+
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>接口是把隐式公共方法和属性组合起来，以封装特定功能的一个集合。一旦类实现了接口，类就可以支持接口所指定的所有属性和成员。</p>
+<p>声明接口在语法上与声明抽象类完全相同，但不允许提供接口中任何成员的执行方式。</p>
+<p>实现接口的类就必须要实现接口中的所有方法和属性。</p>
+<p>一个类可以支持多个接口，多个类也可以支持相同的接口。</p>
+<p>接口中的方法或属性前面不能有修饰符、方法没有方法体。</p>
+<h4 id="抽象类vs接口"><a href="#抽象类vs接口" class="headerlink" title="抽象类vs接口"></a>抽象类vs接口</h4><ol>
+<li>抽象类可以给出一些成员的实现，接口却不包含成员的实现</li>
+<li>抽象类的抽象成员可被子类<strong>部分实现</strong>，接口的成员需要实现类<strong>完全实现</strong></li>
+<li>一个类只能继承<strong>一个抽象类</strong>，但可以实现<strong>多个接口</strong></li>
+<li>类是对对象的抽象，<strong>抽象类</strong>是对<strong>类</strong>的抽象，接口是对<strong>行为</strong>的抽象</li>
+<li>如果行为跨越<strong>不同类的对象</strong>，可使用接口；对于一些<strong>相似的类对象</strong>，用继承抽象类<ul>
+<li>接口类似一个功能（如：飞行），实现某接口的不同类之间也许并没有什么关系；而继承抽象类的不同类之间一般关系紧密</li>
+</ul>
+</li>
+<li>从设计角度讲，抽象类是从子类中发现了公共的东西，泛化出父类，然后子类继承父类；而接口是根本不知子类的存在，方法如何实现还不确认，预先定义</li>
+</ol>
+<h2 id="SOLID原则"><a href="#SOLID原则" class="headerlink" title="SOLID原则"></a>SOLID原则</h2><p>SOLID 原则是面向对象 class 设计的五条原则。它们是设计 class 结构时应该遵守的准则和最佳实践。</p>
+<h4 id="1-Single-Responsibility-Principle，单一职责原则"><a href="#1-Single-Responsibility-Principle，单一职责原则" class="headerlink" title="1. Single Responsibility Principle，单一职责原则"></a>1. <strong>S</strong>ingle Responsibility Principle，单一职责原则</h4><p>一个 class 应该只做一件事，一个 class 应该只有一个变化的原因。</p>
+<p>应该只有一个软件定义的潜在改变（数据库逻辑、日志逻辑等）能够影响 class 的定义。</p>
+<p>单一职责适用于<strong>接口、类</strong>，同时也适用于<strong>方法</strong>。例如我们需要修改用户密码，有两种方式可以实现，一种是用「修改用户信息接口」实现修改密码，一种是新起一个接口来实现修改密码功能。在单一职责原则的指导下，一个方法只承担一个职能，所以我们应该新起一个接口来实现修改密码的功能。</p>
+<p>在设计一个类的时候，可以先从粗粒度的类开始设计，等到业务发展到一定规模，我们发现这个粗粒度的类方法和属性太多，且经常修改的时候，我们就可以对这个类进行重构了，将这个类拆分成粒度更细的类，这就是所谓的持续重构。</p>
+<h4 id="2-Open-Close-Principle，开闭原则"><a href="#2-Open-Close-Principle，开闭原则" class="headerlink" title="2. Open Close Principle，开闭原则"></a>2. <strong>O</strong>pen Close Principle，开闭原则</h4><p>一个软件实体，如类、模块和函数应该<strong>对扩展开放</strong>，<strong>对修改关闭</strong>。</p>
+<p>当别人要修改软件功能的时候，使他不能修改我们原有代码，只能新增代码实现软件功能修改的目的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-comment">/*反例*/</span><br><span class="hljs-keyword">if</span>(type == apple)&#123;<br>    <span class="hljs-comment">//deal with apple </span><br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (type == banana)&#123;<br>    <span class="hljs-comment">//deal with banana</span><br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (type == ......)&#123;<br>    <span class="hljs-comment">//......</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*正例*/</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">PeelOff</span> &#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">peelOff</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ApplePeelOff</span> implement PeelOff&#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">peelOff</span><span class="hljs-params">()</span>&#123;<br>  <span class="hljs-comment">//deal with apple</span><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BananaPeelOff</span> implement PeelOff&#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">peelOff</span><span class="hljs-params">()</span>&#123;<br>  <span class="hljs-comment">//deal with banan</span><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PeelOffFactory</span>&#123;<br>    <span class="hljs-keyword">private</span> Map&lt;String, PeelOff&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-comment">//init all the Class that implements PeelOff interface </span><br>   &#125;<br>&#125;<br><br>.....<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">type</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;apple&quot;</span>;<br>    <span class="hljs-type">PeelOff</span> <span class="hljs-variable">peelOff</span> <span class="hljs-operator">=</span> PeelOffFactory.getPeelOff(type);  <span class="hljs-comment">//get ApplePeelOff Class Instance.</span><br>    peelOff.pealOff();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-Liskov-Substitution-Principle，里氏替换原则"><a href="#3-Liskov-Substitution-Principle，里氏替换原则" class="headerlink" title="3. Liskov Substitution Principle，里氏替换原则"></a>3. <strong>L</strong>iskov Substitution Principle，里氏替换原则</h4><p>所有引用基类的地方必须能透明地使用其子类的对象。</p>
+<p>所有父类能出现的地方，子类就可以出现，并且替换了也不会出现任何错误。对使用者来说，能够使用父类的地方，一定可以使用其子类，并且预期结果是一致的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Parent</span> <span class="hljs-variable">obj</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Son</span>();<br><span class="hljs-comment">// 等价于</span><br><span class="hljs-type">Son</span> <span class="hljs-variable">son</span>  <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Son</span>();<br></code></pre></td></tr></table></figure>
+
+<p>父类的约定，不仅仅指的是语法层面上的约定，还包括实现上的约定。有时候父类会在类注释、方法注释里做了相关约定的说明，当你要覆写父类的方法时，需要弄懂这些约定，否则可能会出现问题。例如子类违背父类声明要实现的功能。比如父类某个排序方法是从小到大来排序，你子类的方法竟然写成了从大到小来排序。</p>
+<h4 id="4-Interface-Segregation-Principle，接口隔离原则"><a href="#4-Interface-Segregation-Principle，接口隔离原则" class="headerlink" title="4. Interface Segregation Principle，接口隔离原则"></a>4. <strong>I</strong>nterface Segregation Principle，接口隔离原则</h4><p>类间的依赖关系应该建立在最小的接口上。简单地说：<strong>接口的内容一定要尽可能地小，能有多小就多小。</strong></p>
+<p>很多客户端特定的接口优于一个多用途接口。客户端不应该强制实现他们不需要的函数。</p>
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>减少改动导致的变化风险</li>
+<li>减少无用功能的理解成本</li>
+</ul>
+<h4 id="5-Dependency-Inversion-Principle，依赖倒置原则"><a href="#5-Dependency-Inversion-Principle，依赖倒置原则" class="headerlink" title="5. Dependency Inversion Principle，依赖倒置原则"></a>5. <strong>D</strong>ependency Inversion Principle，依赖倒置原则</h4><p>高层模块不应该依赖底层模块，两者都应该依赖其抽象。抽象不应该依赖细节，即接口或抽象类不依赖于实现类。细节应该依赖抽象，即实现类不应该依赖于接口或抽象类。<strong>简单地说，我们应该面向接口编程。通过抽象成接口，使各个类的实现彼此独立，实现类之间的松耦合。</strong></p>
+<h4 id="各原则间的联系"><a href="#各原则间的联系" class="headerlink" title="各原则间的联系"></a>各原则间的联系</h4><ul>
+<li>单一职责是所有设计原则的基础，开闭原则是设计的终极目标。</li>
+<li>里氏替换原则强调的是子类替换父类后程序运行时的正确性，它用来帮助实现开闭原则。</li>
+<li>而接口隔离原则用来帮助实现里氏替换原则，同时它也体现了单一职责。</li>
+<li>依赖倒置原则是过程式编程与面向对象编程的分水岭，同时它也被用来指导接口隔离原则。</li>
+</ul>
+<p>依赖倒置原则告诉我们要面向接口编程。当我们面向接口编程之后，接口隔离原则和单一职责原则又告诉我们要注意职责的划分，不要什么东西都塞在一起。当我们职责捋得差不多的时候，里氏替换原则告诉我们在使用继承的时候，要注意遵守父类的约定。而上面说的这四个原则，它们的最终目标都是为了实现开闭原则。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ol>
+<li><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/chinese/news/solid-principles/">https://www.freecodecamp.org/chinese/news/solid-principles/</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/350291336">https://zhuanlan.zhihu.com/p/350291336</a></li>
+<li><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/understand-solid-principles/">https://insights.thoughtworks.cn/understand-solid-principles/</a></li>
+</ol>
+<h2 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h2><h3 id="1-识别应用中变化的方面，把它们和不变的方面分开。"><a href="#1-识别应用中变化的方面，把它们和不变的方面分开。" class="headerlink" title="1. 识别应用中变化的方面，把它们和不变的方面分开。"></a>1. 识别应用中变化的方面，把它们和不变的方面分开。</h3><p>如果每次有新需求，某方面的代码就要变，那么这个行为需要抽出来，与其他不变的代码分离。</p>
+<p>把会变化的部分取出并封装，这样以后就可以修改或扩展这个部分，而不会影响其他不需要变化的部分。</p>
+<h3 id="2-针对接口编程，而不是针对实现编程。"><a href="#2-针对接口编程，而不是针对实现编程。" class="headerlink" title="2. 针对接口编程，而不是针对实现编程。"></a>2. 针对接口编程，而不是针对实现编程。</h3><p>这里的接口指的是广义的超类型，包括接口和抽象类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Animal</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> getAnimal(); <span class="hljs-comment">// 抽象类</span><br>a.makeSound(); <span class="hljs-comment">// 抽象方法</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-优先使用组合而非继承。"><a href="#3-优先使用组合而非继承。" class="headerlink" title="3. 优先使用组合而非继承。"></a>3. 优先使用组合而非继承。</h3><p>例：策略模式中的算法族引用就是使用了组合。</p>
+<h3 id="4-尽量做到交互的对象之间的松耦合设计。"><a href="#4-尽量做到交互的对象之间的松耦合设计。" class="headerlink" title="4. 尽量做到交互的对象之间的松耦合设计。"></a>4. 尽量做到交互的对象之间的松耦合设计。</h3><p>当两个对象之间松耦合时，它们可以交互，但是通常对彼此所知甚少。松耦合设计经常给我们带来很多弹性。</p>
+<p>例：观察者模式</p>
+<h3 id="5-类应该对扩展开发，但对修改关闭。"><a href="#5-类应该对扩展开发，但对修改关闭。" class="headerlink" title="5. 类应该对扩展开发，但对修改关闭。"></a>5. 类应该对扩展开发，但对修改关闭。</h3><p>即开放-封闭原则。</p>
+<p>例：装饰者模式</p>
+<h3 id="6-依赖抽象，不依赖具体类。"><a href="#6-依赖抽象，不依赖具体类。" class="headerlink" title="6. 依赖抽象，不依赖具体类。"></a>6. 依赖抽象，不依赖具体类。</h3><p>高层组件（如PizzaStore）不应该依赖于低层组件（如具体Pizza），而应该依赖于抽象（如抽象Pizza）。</p>
+<p>例：工厂方法模式。</p>
+<h2 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h2><p><img src="https://s2.loli.net/2023/09/14/lLdVpOa35Z1YWDm.jpg" srcset="/img/loading.gif" lazyload alt="UML类图图示样例.jpg"></p>
+<h3 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h3><h4 id="矩形框表示"><a href="#矩形框表示" class="headerlink" title="矩形框表示"></a>矩形框表示</h4><ul>
+<li>第一层：类的名称<ul>
+<li>抽象类用斜体显示</li>
+</ul>
+</li>
+<li>第二层：类的特性（字段和属性）</li>
+<li>第三层：类的操作（方法和行为）<ul>
+<li><code>+</code>表示public</li>
+<li><code>-</code>表示private</li>
+<li><code>#</code>表示protected</li>
+</ul>
+</li>
+</ul>
+<h3 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h3><h4 id="矩形框表示-1"><a href="#矩形框表示-1" class="headerlink" title="矩形框表示"></a>矩形框表示</h4><p>顶端有&lt;&lt;interface&gt;&gt;显示</p>
+<ul>
+<li>第一层：接口名称</li>
+<li>第二层：接口方法</li>
+</ul>
+<h4 id="棒棒糖表示"><a href="#棒棒糖表示" class="headerlink" title="棒棒糖表示"></a>棒棒糖表示</h4><p>如图中唐老鸭类实现“讲人话”接口</p>
+<h3 id="类与类、类与接口的关系"><a href="#类与类、类与接口的关系" class="headerlink" title="类与类、类与接口的关系"></a>类与类、类与接口的关系</h3><h4 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h4><ul>
+<li>用<strong>空心三角形+实线</strong>表示</li>
+</ul>
+<h4 id="实现接口"><a href="#实现接口" class="headerlink" title="实现接口"></a>实现接口</h4><ul>
+<li>用<strong>空心三角形+虚线</strong>表示</li>
+</ul>
+<h4 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h4><ul>
+<li>用<strong>实线箭头</strong>表示</li>
+<li>表示一个类<em>知道</em>另一个类（如企鹅需要知道气候的变化）</li>
+<li>可以有基数</li>
+</ul>
+<h4 id="聚合关系"><a href="#聚合关系" class="headerlink" title="聚合关系"></a>聚合关系</h4><ul>
+<li>用<strong>空心菱形+实线箭头</strong>表示</li>
+<li>表示一种弱的<em>拥有</em>关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分（如雁群拥有大雁）</li>
+<li>可以有基数</li>
+</ul>
+<h4 id="合成关系"><a href="#合成关系" class="headerlink" title="合成关系"></a>合成关系</h4><ul>
+<li><p>用<strong>实心菱形+实线箭头</strong>表示</p>
+</li>
+<li><p>表示一种强的<em>拥有</em>关系，体现了严格的部分和整体的关系（如鸟拥有翅膀）</p>
+</li>
+<li><p>部分和整体的生命周期一样</p>
+</li>
+<li><p>合成关系的连线两端还有一个数字’1’和数字’2’，这被称为基数</p>
+</li>
+</ul>
+<h4 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h4><ul>
+<li>用<strong>虚线箭头</strong>表示</li>
+<li>比如动物依赖氧气和水</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>设计模式0-OOP Basic</div>
+      <div>https://peixuanhu.github.io/posts/fff55931.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Peixuan Hu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 29, 2023</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Updated on</div>
+          <div>March 2, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/7f4caf04.html" title="Effective Java-27. Eliminate unchecked warnings">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Effective Java-27. Eliminate unchecked warnings</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/6ed8718.html" title="Java 8-Date-Time API">
+                        <span class="hidden-mobile">Java 8-Date-Time API</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'peixuanhu/peixuanhu.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

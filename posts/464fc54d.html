@@ -1,0 +1,867 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Netty 简介Netty 是一个利用 Java 的高级网络的能力，隐藏了 Java 背后的复杂性然后提供了一个易于使用的 API 的客户端&#x2F;服务器框架。支持应用以较低的成本来获得更大的吞吐量和可用性。  Netty 的技术和方法的特点 设计 针对多种传输类型的统一接口 - 阻塞和非阻塞 简单但更强大的线程模型 真正的无连接的数据报套接字支持 链接逻辑支持复用   易用性 大量的 Jav">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty 学习">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/464fc54d.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="Netty 简介Netty 是一个利用 Java 的高级网络的能力，隐藏了 Java 背后的复杂性然后提供了一个易于使用的 API 的客户端&#x2F;服务器框架。支持应用以较低的成本来获得更大的吞吐量和可用性。  Netty 的技术和方法的特点 设计 针对多种传输类型的统一接口 - 阻塞和非阻塞 简单但更强大的线程模型 真正的无连接的数据报套接字支持 链接逻辑支持复用   易用性 大量的 Jav">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2024/12/18/AjhpwP4bC2ByuH7.png">
+<meta property="article:published_time" content="2024-12-18T03:52:56.000Z">
+<meta property="article:modified_time" content="2025-03-12T06:33:53.856Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2024/12/18/AjhpwP4bC2ByuH7.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Netty 学习 - Peixuan&#39;s Page</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Peixuan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2024/12/18/AjhpwP4bC2ByuH7.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Netty 学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-18 11:52" pubdate>
+          December 18, 2024 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Netty 学习</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Netty-简介"><a href="#Netty-简介" class="headerlink" title="Netty 简介"></a>Netty 简介</h1><p><strong>Netty</strong> 是一个利用 Java 的高级网络的能力，隐藏了 Java 背后的复杂性然后提供了一个易于使用的 API 的客户端&#x2F;服务器框架。支持应用以较低的成本来获得更大的吞吐量和可用性。 </p>
+<h2 id="Netty-的技术和方法的特点"><a href="#Netty-的技术和方法的特点" class="headerlink" title="Netty 的技术和方法的特点"></a>Netty 的技术和方法的特点</h2><ul>
+<li>设计<ul>
+<li>针对多种传输类型的统一接口 - 阻塞和非阻塞</li>
+<li>简单但更强大的线程模型</li>
+<li>真正的无连接的数据报套接字支持</li>
+<li>链接逻辑支持复用</li>
+</ul>
+</li>
+<li>易用性<ul>
+<li>大量的 Javadoc 和 代码实例</li>
+<li>除了在 JDK 1.6 + 额外的限制。（一些特征是只支持在Java 1.7 +。可选的功能可能有额外的限制。）</li>
+</ul>
+</li>
+<li>性能<ul>
+<li>比核心 Java API 更好的吞吐量，较低的延时</li>
+<li>资源消耗更少，这个得益于共享池和重用</li>
+<li>减少内存拷贝</li>
+</ul>
+</li>
+<li>健壮性<ul>
+<li>消除由于慢，快，或重载连接产生的 OutOfMemoryError</li>
+<li>消除经常发现在 NIO 在高速网络中的应用中的不公平的读&#x2F;写比</li>
+</ul>
+</li>
+<li>安全<ul>
+<li>完整的 SSL &#x2F; TLS 和 StartTLS 的支持</li>
+<li>运行在受限的环境例如 Applet 或 OSGI</li>
+</ul>
+</li>
+<li>社区<ul>
+<li>发布的更早和更频繁</li>
+<li>社区驱动</li>
+</ul>
+</li>
+</ul>
+<h1 id="Netty-核心组件"><a href="#Netty-核心组件" class="headerlink" title="Netty 核心组件"></a>Netty 核心组件</h1><h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><p><a target="_blank" rel="noopener" href="http://docs.oracle.com/javase/7/docs/api/java/nio/channels/Channel.html">Channel</a> 是 NIO 基本的结构。它代表了一个用于连接到实体如硬件设备、文件、网络套接字或程序组件,能够执行一个或多个不同的 I&#x2F;O 操作（例如读或写）的开放连接。</p>
+<p>现在，把 Channel 想象成一个可以“打开”或“关闭”，“连接”或“断开”和作为传入和传出数据的运输工具。</p>
+<h2 id="Callback-回调"><a href="#Callback-回调" class="headerlink" title="Callback (回调)"></a>Callback (回调)</h2><p>callback (回调)是一个简单的方法,提供给另一种方法作为引用,这样后者就可以在某个合适的时间调用前者。这种技术被广泛使用在各种编程的情况下,最常见的方法之一通知给其他人操作已完成。</p>
+<p>Netty 内部使用回调处理事件时。一旦这样的回调被触发，事件可以由接口 ChannelHandler 的实现来处理。</p>
+<h2 id="ChannelFuture"><a href="#ChannelFuture" class="headerlink" title="ChannelFuture"></a>ChannelFuture</h2><p><code>Future</code> 提供了另外一种通知应用操作已经完成的方式。这个对象作为一个异步操作结果的占位符,它将在将来的某个时候完成并提供结果。</p>
+<p>JDK 附带接口 <code>java.util.concurrent.Future</code> ，但所提供的实现只允许您手动检查操作是否完成或阻塞了。这是很麻烦的，所以 Netty 提供自己了的实现,<code>ChannelFuture</code>,用于在执行异步操作时使用。</p>
+<p><code>ChannelFuture</code> 提供多个附件方法来允许一个或者多个 <code>ChannelFutureListener</code> 实例。这个回调方法 <code>operationComplete()</code> 会在操作完成时调用。事件监听者能够确认这个操作是否成功或者是错误。如果是后者,我们可以检索到产生的 <code>Throwable</code>。简而言之, <code>ChannelFutureListener</code> 提供的通知机制不需要手动检查操作是否完成的。</p>
+<p>每个 Netty 的 outbound I&#x2F;O 操作都会返回一个 <code>ChannelFuture</code>，这样就不会阻塞。这就是 Netty 所谓的“自底向上的异步和事件驱动”。</p>
+<p>下面例子简单的演示了作为 I&#x2F;O 操作的一部分 ChannelFuture 的返回。当调用 connect() 将会直接是非阻塞的，并且调用在背后完成。由于线程是非阻塞的，所以无需等待操作完成，而可以去干其他事，因此这令资源利用更高效。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Channel</span> <span class="hljs-variable">channel</span> <span class="hljs-operator">=</span> ...;<br><span class="hljs-comment">//不会阻塞</span><br><span class="hljs-type">ChannelFuture</span> <span class="hljs-variable">future</span> <span class="hljs-operator">=</span> channel.connect(            <span class="hljs-comment">//1</span><br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;192.168.0.1&quot;</span>, <span class="hljs-number">25</span>));<br>future.addListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ChannelFutureListener</span>() &#123;  <span class="hljs-comment">//2</span><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">operationComplete</span><span class="hljs-params">(ChannelFuture future)</span> &#123;<br>	    <span class="hljs-keyword">if</span> (future.isSuccess()) &#123;                    <span class="hljs-comment">//3</span><br>	        <span class="hljs-type">ByteBuf</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> Unpooled.copiedBuffer(<br>	                <span class="hljs-string">&quot;Hello&quot;</span>, Charset.defaultCharset()); <span class="hljs-comment">//4</span><br>	        <span class="hljs-type">ChannelFuture</span> <span class="hljs-variable">wf</span> <span class="hljs-operator">=</span> future.channel().writeAndFlush(buffer); <span class="hljs-comment">//5</span><br>	        <span class="hljs-comment">// ...</span><br>	    &#125; <span class="hljs-keyword">else</span> &#123;<br>	        <span class="hljs-type">Throwable</span> <span class="hljs-variable">cause</span> <span class="hljs-operator">=</span> future.cause();        <span class="hljs-comment">//6</span><br>	        cause.printStackTrace();<br>	    &#125;<br>	&#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>异步连接到远程对等节点。调用立即返回并提供 <code>ChannelFuture</code>。</li>
+<li>操作完成后通知注册一个 <code>ChannelFutureListener</code> 。</li>
+<li>当 <code>operationComplete()</code> 调用时检查操作的状态。</li>
+<li>如果成功就创建一个 <code>ByteBuf</code> 来保存数据。</li>
+<li>异步发送数据到远程。<code>再次返回ChannelFuture</code>。</li>
+<li>如果有一个错误则抛出 <code>Throwable</code>,描述错误原因。</li>
+</ol>
+<h2 id="Event-和-Handler"><a href="#Event-和-Handler" class="headerlink" title="Event 和 Handler"></a>Event 和 Handler</h2><p>Netty 使用不同的事件来通知我们更改的状态或操作的状态。这使我们能够根据发生的事件触发适当的行为，如：日志、数据转换、流控制、应用程序逻辑。</p>
+<p>由于 Netty 是一个网络框架，事件跟入站或出站数据流相关。</p>
+<p>因为一些事件可能触发传入的数据或状态的变化包括：</p>
+<ul>
+<li>活动或非活动连接</li>
+<li>数据的读取</li>
+<li>用户事件</li>
+<li>错误</li>
+</ul>
+<p>出站事件是由于在未来操作将触发一个动作。这些包括:</p>
+<ul>
+<li>打开或关闭一个连接到远程</li>
+<li>写或冲刷数据到 socket</li>
+</ul>
+<p>每个事件都可以分配给用户实现处理程序类的方法。这说明了事件驱动的范例可直接转换为应用程序构建块。</p>
+<p>Netty 的 <code>ChannelHandler</code> 是各种处理程序的基本抽象。想象下，<strong>每个处理器实例就是一个回调，用于执行对各种事件的响应。</strong></p>
+<p>下图显示，一个事件可以由一连串的事件处理器来处理。每个 <code>Channel</code> 都有一个关联的 <code>ChannelPipeline</code>，即 <code>ChannelHandler</code> 实例的链。</p>
+<p><img src="https://s2.loli.net/2024/12/18/rmP89aZLR2k1obB.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在此基础之上，Netty 也提供了一组丰富的预定义的处理程序,您可以开箱即用。比如，各种协议的编解码器包括 HTTP 和 SSL&#x2F;TLS。在内部,<code>ChannelHandler</code> 使用事件和 <code>future</code> 本身,创建具有 Netty 特性抽象的消费者。</p>
+<h3 id="Sharable"><a href="#Sharable" class="headerlink" title="@Sharable"></a>@Sharable</h3><p><code>@Sharable</code>注解用于标记<code>ChannelHandler</code>，表明同一个<code>ChannelHandler</code>的实例可以被多次添加到一个或多个<code>ChannelPipeline</code>中，而不会出现竞争条件（race condition）。</p>
+<blockquote>
+<p>如果一个<code>ChannelHandler</code>没有标记<code>@Sharable</code>，在添加到一个<code>ChannelPipeline</code>时，每次都需要创建一个新的handler实例，因为它的成员变量是不可共享的。</p>
+</blockquote>
+<p>使用<code>@Sharable</code>注解的主要场景包括：</p>
+<ol>
+<li><strong>性能提升</strong>：通过共享同一个<code>ChannelHandler</code>实例，可以减少频繁创建handler实例带来的系统开销。</li>
+<li><strong>信息共享</strong>：适用于需要在多个<code>Channel</code>之间共享信息的场景，例如日志服务、计数服务等。</li>
+<li><strong>无状态的Handler</strong>：适用于没有成员变量的encoder、decoder，或者在处理粘包问题时需要共享中间数据、变量的情况。</li>
+</ol>
+<blockquote>
+<p>注意，如果一个<code>ChannelHandler</code>被标记为<code>@Sharable</code>，那么它应该是线程安全的，因为它可能会被多个线程同时访问。</p>
+</blockquote>
+<h2 id="整合"><a href="#整合" class="headerlink" title="整合"></a>整合</h2><h3 id="FUTURE-CALLBACK-和-HANDLER"><a href="#FUTURE-CALLBACK-和-HANDLER" class="headerlink" title="FUTURE, CALLBACK 和 HANDLER"></a>FUTURE, CALLBACK 和 HANDLER</h3><p>Netty 的异步编程模型是建立在 <code>future</code> 和 <code>callback</code> 的概念上的。所有这些元素的协同为自己的设计提供了强大的力量。</p>
+<p>拦截操作和转换入站或出站数据只需要您提供 <code>callback</code> 或 <code>future</code> 返回执行的操作。这使得链操作简单、高效，有利于编写可重用的、通用的代码。一个 Netty 的设计的主要目标是促进“关注点分离”：你的业务逻辑从网络基础设施应用程序中分离。</p>
+<h3 id="SELECTOR-EVENT-和-EVENT-LOOP"><a href="#SELECTOR-EVENT-和-EVENT-LOOP" class="headerlink" title="SELECTOR, EVENT 和 EVENT LOOP"></a>SELECTOR, EVENT 和 EVENT LOOP</h3><p>Netty 通过触发事件从应用程序中抽象出 <code>Selector</code>，从而避免手写调度代码。<code>EventLoop</code> 分配给每个 <code>Channel</code> 来处理所有的事件，包括：</p>
+<ul>
+<li>注册感兴趣的事件</li>
+<li>调度事件到 <code>ChannelHandler</code></li>
+<li>安排进一步行动</li>
+</ul>
+<p><code>EventLoop</code> 本身由一个线程驱动，它为一个 <code>Channel</code> 处理所有的 I&#x2F;O 事件，并且在 <code>EventLoop</code> 的生命周期内不会改变。这个简单而强大的线程模型消除你可能对你的 <code>ChannelHandler</code> 同步的任何关注，这样你就可以专注于提供正确的回调逻辑来执行。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/backend/Netty/" class="category-chain-item">Netty</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Netty 学习</div>
+      <div>https://peixuanhu.github.io/posts/464fc54d.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Peixuan Hu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>December 18, 2024</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Updated on</div>
+          <div>March 12, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/f302f546.html" title="期权投资策略2 - 卖出备兑看涨期权">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">期权投资策略2 - 卖出备兑看涨期权</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/9da1ef6b.html" title="Linux 命令">
+                        <span class="hidden-mobile">Linux 命令</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'peixuanhu/peixuanhu.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

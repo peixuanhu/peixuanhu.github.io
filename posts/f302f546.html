@@ -1,0 +1,933 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="卖出备兑看涨期权，对标的股票应当是稍微看多的，至少是中性的。通过卖出call，投资者可以降低持股风险。如果股票由于某种原因下跌，至少还可以从卖出的call中获得一定的收益。但卖出备兑看涨期权限制了也限制了股票大幅上涨情况下的潜在盈利。 1. 卖出备兑看涨期权的重要性 对下行风险的保护：相比不卖call的情况，多收取了call的权利金，减少了总亏损。 之后的操作：可以考虑再卖出一手call   股价">
+<meta property="og:type" content="article">
+<meta property="og:title" content="期权投资策略2 - 卖出备兑看涨期权">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/f302f546.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="卖出备兑看涨期权，对标的股票应当是稍微看多的，至少是中性的。通过卖出call，投资者可以降低持股风险。如果股票由于某种原因下跌，至少还可以从卖出的call中获得一定的收益。但卖出备兑看涨期权限制了也限制了股票大幅上涨情况下的潜在盈利。 1. 卖出备兑看涨期权的重要性 对下行风险的保护：相比不卖call的情况，多收取了call的权利金，减少了总亏损。 之后的操作：可以考虑再卖出一手call   股价">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2025/03/06/hzic5mvRqeXjSn8.png">
+<meta property="article:published_time" content="2025-03-06T13:47:45.000Z">
+<meta property="article:modified_time" content="2025-03-12T05:17:50.179Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2025/03/06/hzic5mvRqeXjSn8.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>期权投资策略2 - 卖出备兑看涨期权 - Peixuan&#39;s Page</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Peixuan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2025/03/06/hzic5mvRqeXjSn8.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="期权投资策略2 - 卖出备兑看涨期权"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-06 21:47" pubdate>
+          March 6, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          88 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">期权投资策略2 - 卖出备兑看涨期权</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>卖出备兑看涨期权，对标的股票应当是稍微看多的，至少是中性的。通过卖出call，投资者可以降低持股风险。如果股票由于某种原因下跌，至少还可以从卖出的call中获得一定的收益。但卖出备兑看涨期权限制了也限制了股票大幅上涨情况下的潜在盈利。</p>
+<h1 id="1-卖出备兑看涨期权的重要性"><a href="#1-卖出备兑看涨期权的重要性" class="headerlink" title="1. 卖出备兑看涨期权的重要性"></a>1. 卖出备兑看涨期权的重要性</h1><ol>
+<li>对下行风险的保护：相比不卖call的情况，多收取了call的权利金，减少了总亏损。<ol>
+<li>之后的操作：可以考虑再卖出一手call</li>
+</ol>
+</li>
+<li>股价适度上涨时（未涨到行权价）：call的权利金完全收取到，且不用行权（还有股票上涨的一小部分利润）</li>
+<li>股价大幅上涨时：call的权利金完全收取到，并赚取股价与行权价之间的差价。</li>
+</ol>
+<p>下面的公式总结了卖出备兑看涨期权的潜在盈利和盈亏平衡点：</p>
+<figure class="highlight fix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs fix"><span class="hljs-attr">最大潜在盈利 </span>=<span class="hljs-string"> 行权价 - 股价 + 看涨期权价格</span><br><span class="hljs-string">下行盈亏平衡点 = 行权价 - 看涨期权价格</span><br></code></pre></td></tr></table></figure>
+
+<p>图形：<br><img src="https://s2.loli.net/2025/03/06/hzic5mvRqeXjSn8.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="2-卖出备兑看涨期权的哲学"><a href="#2-卖出备兑看涨期权的哲学" class="headerlink" title="2. 卖出备兑看涨期权的哲学"></a>2. 卖出备兑看涨期权的哲学</h1><p>相对于实值卖出备兑来说，虚值卖出备兑能提供更高的潜在收益，但对风险的保护程度则较低。根据在建立合约时该看涨期权实值或虚值的程度，投资者可以建立一个进攻型或防守型的卖出备兑头寸。实值卖出更多地是防守型卖出备兑头寸。</p>
+<p>#3. 卖出备兑的总收益的概念</p>
+<p>实值卖出备兑则更像是一个“总的”头寸，能从相对大的期权权利金中得到好处。如果股价下跌，这个头寸仍然可以盈利，事实上，它甚至可能获得最大盈利。当然，如果股价上涨，实值卖出备兑也可以赚钱，只是其盈利的百分比一般没有虚值卖出备兑的那么大。</p>
+<p>有的备兑卖出者不愿意因为行权而失去他们的股票，因此，他们常常卖出深度虚值的看涨期权，以减小在到期日被指派的可能性。这样的哲学，与其说是在操作卖出备兑策略，不如说是一个股票持有者在就自己所持有的股票而交易期权。</p>
+<p>真正的保守型的卖出备兑是指总头寸是保守的——它的风险更小而盈利的可能性更高。在实值卖出中，即使股票自身不是保守型的，如果期权选择得当，也可以变成一个保守型的总头寸。 </p>
+<h1 id="4-计算投资收益"><a href="#4-计算投资收益" class="headerlink" title="4. 计算投资收益"></a>4. 计算投资收益</h1><p>在建立头寸之前，有三个关于卖出备兑的基本因素需要计算。</p>
+<ul>
+<li>第一个因素是行权收益（return if exercise）。这是在股票被交割的情况下卖出者会得到的投资收益。</li>
+<li>更有利的方法是计算无变化时收益（return if unchanged），即如果期权到期时标的股价不变时的收益。此时，投资者可以使用股价不变收益来对虚值和实值卖出备兑做更公平的比较，这时对股价变动就没有做过多的假设。</li>
+<li>备兑卖出者应当考虑的第三个重要的统计数据是在考虑了所有费用之后的下行盈亏平衡点（downside break-even point）。</li>
+</ul>
+<p>在计算时，手续费也需要被考虑进收益内。备兑期权的卖出者需要记住这一点，更低的手续费率当然会带来更高的收益。</p>
+<h1 id="5-卖出备兑指令的执行"><a href="#5-卖出备兑指令的执行" class="headerlink" title="5. 卖出备兑指令的执行"></a>5. 卖出备兑指令的执行</h1><p>在建立卖出备兑头寸的时候，通常会有这样的问题：应当先交易哪一个？先买股票还是先卖期权？正确的答案是，哪一个都不应当先交易。事实上，想要让卖出备兑的双边都以期望的价格成交，唯一的办法就是同时买入股票和卖出期权。<br>如果先建了一条“腿”​，即先买入了股票，然后再设法卖出期权，或者是反过来，那么投资者就将自己置于风险之中。</p>
+<blockquote>
+<p>最好将卖出备兑头寸视为一个整体的头寸。尤其是实值。</p>
+</blockquote>
+<h1 id="6-选择卖出备兑头寸"><a href="#6-选择卖出备兑头寸" class="headerlink" title="6. 选择卖出备兑头寸"></a>6. 选择卖出备兑头寸</h1><p>由于大多数投资者进行卖出备兑的主要目的都是想在持有股票的同时增加收入，因此在选择卖出哪个期权时，投资的收益就是一个重要的考虑因素。但是，这个决定不能仅考虑收益。股票的波动率越大，所提供的收益就越高，但相应的风险也就越大，因为它们的价格有迅速下跌的可能性。因此，在卖出备兑上，对价格下行的保护也是一个重要的目标。最后，标的股票自身的质量以及它的技术面和基本面的前景也很重要。</p>
+<h2 id="预计收益"><a href="#预计收益" class="headerlink" title="预计收益"></a>预计收益</h2><p>在确定什么是最低的可接受的收益时，一个普遍的规则是，<strong>只有在股价不变收益每个月至少为1%时，才考虑进行卖出备兑交易。</strong></p>
+<ul>
+<li>对于卖出实值备兑期权来说，如果股价上升、保持不变，或者甚至在到期日时略微跌了一点儿，它都能够实现预期的收益。</li>
+<li>对于卖出虚值备兑期权来说，如果股价上升，那就有可能获得更高的潜在收益。但是，如果股价保持不变或者下跌，那么其表现一般而言就要比卖出实值要差。</li>
+</ul>
+<h2 id="策略的重要性"><a href="#策略的重要性" class="headerlink" title="策略的重要性"></a>策略的重要性</h2><p>使用一两个按顺序排列的卖出备兑头寸的名单，每天利用计算机对下面的类别之一或同时进行排序，来帮助建立最有吸引力的保守型卖出备兑。一个名单应当在固定最小下行保护水平（如10%）的情况下，对年化收益进行排序。另一个名单应当在固定可接受的股价不变收益（如12%）的情况下，对下行保护百分比进行排序。</p>
+<p>根据某些数学上的分析，我们有理由相信，在长期中，卖出适度虚值备兑的表现要好于卖出实值备兑。</p>
+<p>在选择卖出备兑上最后一个重要的考虑因素是标的股票自身。建立一个卖出备兑头寸，并不一定是对标的股票看多的。只要不预期标的股票会下跌，就可以建立卖出备兑的头寸。一般而言，如果某个投资者对标的股票的看法是中性或者稍微看多的，那就最好不过了。</p>
+<p>某个卖出备兑的策略家所要达到的结果，是在可接受的收益与下行保护之间寻找一种平衡。在这两者之中，如果有哪一个不能满足他的要求，他就不应当建立这样的策略。如果他对某只股票是看空的，他也不会建立这样的策略。从这点出发，卖出备兑所达到的结果就是某个保守型的卖出备兑程序所要实现的目的：<strong>为某个波动较小的投资组合增加收益，提供保护，降低组合波动率。</strong></p>
+<h1 id="7-就已持有的股票卖出备兑"><a href="#7-就已持有的股票卖出备兑" class="headerlink" title="7. 就已持有的股票卖出备兑"></a>7. 就已持有的股票卖出备兑</h1><p>关于换股：</p>
+<ul>
+<li>可能换成了一个波动更大且不支付股息的股票。虽然静态的卖出备兑收益可能较高，但在做出最终决定时，应该考虑到以波动率为基础来计算的风险。</li>
+<li>卖出者需要寻找能带来最佳总收益的卖出备兑。事实上，月复一月，季复一季，即使没有收益也只就已持有的股票进行卖出备兑，很可能是个错误。</li>
+</ul>
+<p>如果某个投资者不想卖出自己的股票，那么在就这些股票卖出看涨期权时，他就必须非常小心。如果某个投资者因为某种原因（例如税收考虑或是感情上不舍得等）而不能卖出股票时，他就确实不应当就这样的股票卖出看涨期权。对这样的股票持有者来说，买入保护性看跌期权（后文会讨论）也许会是一个更好的策略。</p>
+<h1 id="8-在卖出备兑中对收益和保护分散化"><a href="#8-在卖出备兑中对收益和保护分散化" class="headerlink" title="8. 在卖出备兑中对收益和保护分散化"></a>8. 在卖出备兑中对收益和保护分散化</h1><h2 id="一半实值一半虚值（不同行权价）"><a href="#一半实值一半虚值（不同行权价）" class="headerlink" title="一半实值一半虚值（不同行权价）"></a>一半实值一半虚值（不同行权价）</h2><p>为了尽可能达到分散化的目的，卖出者通常可以对他一半的头寸就一只股票卖出虚值的看涨期权，再对另一半就同一股票卖出实值的看涨期权。对下面这样的股票来说，这种方法特别具有吸引力：这种股票的虚值看涨期权看上去不能提供足够的下行保护，与此同时，它的实值看涨期权又提供不了足够的收益。</p>
+<p>通过卖出这两种看涨期权，该卖出者就有可能解决在只卖出虚值期权或只卖出实值期权时一定会遇到的问题。由于这个“组合的”卖出备兑，当卖出者在一开始不持看空或看多立场时，他不必一定看空（卖出实值）或是看多（卖出虚值）。对一个低波动率、交易价在两个行权价之间的股票来说，这样做常常是有必要的。<br><img src="https://s2.loli.net/2025/03/12/APdi5l92yKhO7Db.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="一半近期一半远期（不同存续期）"><a href="#一半近期一半远期（不同存续期）" class="headerlink" title="一半近期一半远期（不同存续期）"></a>一半近期一半远期（不同存续期）</h2><p>对于大额的持有者来说，通常所做的，不但是要至少卖出两个行权价，还要卖出不同存续期的期权，以实现分散化。例如，三分之一的头寸卖出近期看涨期权，三分之一卖出中期看涨期权，剩余三分之一卖出远期看涨期权</p>
+<p>好处：<br>投资者不再局限于某一系列看涨期权到期时的期权权利金水平。例如，投资者卖出的全部为9个月的看涨期权，并且在它们到期时将它们挪仓，那么他就有可能接受较低的潜在收益。如果在该卖出者要卖出更多看涨期权的时候，期权权利金水平刚好较低，他将会建立一个长达9个月的低于最优值的卖出备兑头寸。<br>如果能将他的交易分散在不同的时段里，即使出现最糟糕的情形，他也只有三分之一的头寸的权利金较低。在随后的3个月里，权利金还有希望会上涨，这样，在他投资组合的下一个三分之一里，他就可以得到相对较好的权利金。</p>
+<h1 id="9-后续行动"><a href="#9-后续行动" class="headerlink" title="9. 后续行动"></a>9. 后续行动</h1><h2 id="股价下跌时采取的保护性行动"><a href="#股价下跌时采取的保护性行动" class="headerlink" title="股价下跌时采取的保护性行动"></a>股价下跌时采取的保护性行动</h2><p>投资者面对标的股价相对显著的下跌而不采取保护性行动，就有可能遭受大笔的亏损。因为卖出备兑是一个潜在盈利有限的策略，投资者应当限制亏损，不然一次亏损可以抵消掉好几次盈利。</p>
+<h3 id="向下挪仓"><a href="#向下挪仓" class="headerlink" title="向下挪仓"></a>向下挪仓</h3><p>通常采取的形式是买回初始卖出的看涨期权，然后再卖出另一个行权价或到期日不同的看涨期权来替代。这种类型的调整叫作<strong>挪仓行动（rolling action）</strong>。当标的股价下跌时，投资者通常买回初始的看涨期权（由于标的股价下跌了，从而获得一定的盈利），然后再以较低的行权价卖出另一种看涨期权。这就是所谓的向下挪仓（rolling down），因为新的期权的行权价较低。</p>
+<ul>
+<li>向下挪仓不仅能在股价进一步下跌时提供更多的保护，还能在股价稳定时产生额外的收入。如果股价进一步下跌、保持不变甚至略为上涨，向下挪仓都是有利的。</li>
+<li>向下挪仓一般会降低卖出备兑的<strong>最大潜在盈利</strong>。不过，当一只股票在下跌时，最大盈利也许是次要的考虑。在这样的情况下，额外的下行保护常常是更紧迫的需要。</li>
+</ul>
+<p><img src="https://s2.loli.net/2025/03/11/YgyFbMRk24UeSIT.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>如果投资者在买入一手看涨期权的同时卖出另一手看涨期权，他就是在执行一个价差指令。后文会对价差进行仔细讨论。不过，备兑卖出者必须意识到，在挪仓的时候，他可以下达价差指令。一般情况下，这样做可以让卖出者的指令得到更好的执行价格。</p>
+</blockquote>
+<h3 id="替代向下挪仓的方法"><a href="#替代向下挪仓的方法" class="headerlink" title="替代向下挪仓的方法"></a>替代向下挪仓的方法</h3><h4 id="部分向下挪仓"><a href="#部分向下挪仓" class="headerlink" title="部分向下挪仓"></a>部分向下挪仓</h4><p>备兑卖出者可以采取另一种方法来得到对市场下跌的额外保护，并且不一定需要锁定亏损。简单地说，该卖出者可以只将他的一部分卖出备兑头寸进行挪仓。</p>
+<p>这个策略一般被称为部分向下挪仓（partial roll-down）​，其中，与更传统的全部向下挪仓（complete roll-down）不同，只有一部分初始的看涨期权向下挪仓了。</p>
+<p>对那些想要向下挪仓但又不想锁定亏损的备兑卖出者，或者是认为股票在到期日之前会有一定反弹的人来说，应当考虑只将他的部分头寸向下挪仓。</p>
+<h4 id="向下挪仓时利用不同的到期月系列"><a href="#向下挪仓时利用不同的到期月系列" class="headerlink" title="向下挪仓时利用不同的到期月系列"></a>向下挪仓时利用不同的到期月系列</h4><p>挪仓到更远的到期月系列的好处是可以得到更多的保护点数。当标的股票就某种技术分析或基本面分析来看变得令人担心时，人们常常采取这一行动。当使用更远期的看涨期权向下挪仓的时候，卖出者是在更长的一段时期里牺牲了他的部分潜在盈利。因此，只有当卖出者认为股票不能够保持现有的价格水平时，他才应当使用更长时期的看涨期权。<br>在向下挪仓到较远期看涨期权的情况里，尤其可以使用部分挪仓的策略。如果只是部分头寸向下挪仓，而当股价反弹时，卖出者仍然有获利的机会。</p>
+<p>如果卖出者因为诸如标的股价突然下跌这种不受他控制的原因而不得不向下挪仓并且锁定亏损的话，事实上他可以挪仓到近期月的合约。这样他就可以在尽可能短的时间里拿回从短期看涨期权中得到的时间价值。</p>
+<h2 id="股票上涨时采取的行动"><a href="#股票上涨时采取的行动" class="headerlink" title="股票上涨时采取的行动"></a>股票上涨时采取的行动</h2><p>一种让备兑卖出者高兴的情况是，标的股票的价格在建立了卖出备兑头寸之后上涨。这种情况下，卖出者可以决定什么都不做，让股票指派行权，从而得到建立这个头寸时所希望的收益。另一方面，如果标的股票价格上涨得非常快，卖出的看涨期权达到了持平价，卖出者也可以提前将头寸平仓，或者将看涨期权向上挪仓。</p>
+<h3 id="向上挪仓"><a href="#向上挪仓" class="headerlink" title="向上挪仓"></a>向上挪仓</h3><p>凡是向上挪仓，总会有支出出现。也就是说，投资者必须存入额外的现金到这个卖出备兑的头寸里去。</p>
+<p>下行盈亏平衡点在向上挪仓时向上移动的数量，总是与挪仓所需的支出数量相等。</p>
+<p>在向上挪仓时，挪到较远的月份常常是有利的，这会减少所需的支出。</p>
+<p><img src="https://s2.loli.net/2025/03/12/YplAg3fOs9bxQLG.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>向上挪仓增加了投资者盈利的潜在可能，但是，也增加了一旦股价朝反向运动就必须面临的风险暴露。因此，它所引进的就不仅是增进收益的可能性，还有风险因素。一般而言，如果不能承受股价至少10%的回调，那就不应当向上挪仓。</p>
+<p>卖出备兑的初始目的在建立头寸时就已经确定。当股票上升，这些目的已经达到时，卖出者就应当仔细考虑，是否要把盈利置身于风险中。</p>
+<blockquote>
+<p>严重但常见的错误：<br>第一，支出（大额的）资金来买回所有的看涨期权，从而使他持有的全部股票都暴露于下跌的风险中。需要注意的是，此时的下跌可能是在前期大幅上涨，以及因为挪仓而不停支出之后发生的。<br>第二，他卖出一些无备兑的虚值看跌期权来得到收入，以减少向上挪仓所带来的支出。后一种行动比前一种更糟，因为整个头寸现在都高度依靠杠杆支撑，一旦股票价格突然下跌，就会导致可怕的损失，程度也许会严重到亏损整个账户中的资产。<br>就像命中注定似的，这样的错误通常出现在股票的价格接近或是到达顶峰的时候。快速上涨之后的下跌总是急剧和令人痛苦的。<br>要避免这类后果可能很严重的错误，最好的方法是：让股票在某一点上被指派行权。然后，使用得到的资金，要么在另一只股票上建立新的头寸，要么换一个策略来使用。</p>
+</blockquote>
+<h3 id="同时平仓看涨期权和股票"><a href="#同时平仓看涨期权和股票" class="headerlink" title="同时平仓看涨期权和股票"></a>同时平仓看涨期权和股票</h3><p>随着股价的上升，卖出的看涨期权将失去它的时间价值，而且有可能在持平价附近交易。卖出者此时（或许离到期日还较远）可以在持平价附近把头寸平仓，买回卖出的看涨期权且卖掉股票。</p>
+<p>提前在持平价卖出备兑平仓的好处是，卖出者在比预期更短的时间里兑现了最大限度的收益。这样做，他就增加了这个头寸上的年化收益率。</p>
+<p>不过这里牵涉到一些如果他把头寸持有至看涨期权到期日就不会遇到的额外开销。第一，买入期权（买回来）的手续费是一笔额外的开支。第二，他将按比行权价更高的价格卖出他的股票，因此，在这笔交易上，他也要付出略高的手续费。如果在到期日前还有股息，且他提前把卖出备兑头寸平仓，他就得不到这个股息。卖出者在提前平仓之前，应当准确地知道他的支出会是多少。</p>
+<h1 id="10-局部抽身策略"><a href="#10-局部抽身策略" class="headerlink" title="10. 局部抽身策略"></a>10. 局部抽身策略</h1><p>当股价上涨，股票有被指派的风险时，就可以应用该策略。如果备兑卖出者希望被指派，那就没有什么问题。但在很多情况下，卖出者都希望买回看涨期权和向上挪仓。在这个策略中，<strong>部分标的股票被卖出了，收回的资金可用来买回备兑看涨期权</strong>。如果愿意的话，此时还可以卖出更高行权价的新看涨期权。</p>
+<p>投资者是在间接地以高价卖出股票。毕竟股票已经上涨了很多，这可能是处理一些股票的好时机。</p>
+<p>这个实践的抽身策略有一些好的特征，其中最大的一点是，投资者通过卖出少量的股票，就让自己不用再担心实值备兑看涨期权的指派问题。该策略可以在备兑看涨期权变得非常深度实值之前就使用。</p>
+<h2 id="到期或接近到期时采取的行动"><a href="#到期或接近到期时采取的行动" class="headerlink" title="到期或接近到期时采取的行动"></a>到期或接近到期时采取的行动</h2><h3 id="向前挪仓"><a href="#向前挪仓" class="headerlink" title="向前挪仓"></a>向前挪仓</h3><p>随着到期日的临近，卖出的看涨期权的时间价值会逐渐消失，备兑卖出者常常会想要向前挪仓（roll forward，买回先前卖出的看涨期权，并卖出行权价相同的较长期看涨期权）。</p>
+<ul>
+<li>对实值看涨期权来说，向前挪仓的最好时间一般是当看涨期权的时间价值完全消失了的时候。</li>
+<li>对虚值看涨期权来说，移入更远的期权系列的正确时间是当近期期权所提供的收益小于更远期看涨期权所提供的收益的时候。<blockquote>
+<p>你可以计算卖出的看涨期权中剩余的日收益，再把它同较长期的看涨期权的日净收益加以比较。如果较长期看涨期权的日收益较高，你就应当向前挪仓。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs gauss">示例：<br>某个投资者持有一个卖出备兑头寸，其中，他就<span class="hljs-number">500</span>股<span class="hljs-built_in">XYZ</span>普通股卖出了<span class="hljs-number">5</span>手<span class="hljs-number">1</span>月<span class="hljs-number">30</span>看涨期权。目前距到期日还有<span class="hljs-number">1</span>个月，有下列的价格存在。<br><span class="hljs-built_in">XYZ</span>普通股股票　<span class="hljs-number">29.50</span><br><span class="hljs-number">1</span>月<span class="hljs-number">30</span>看涨期权　<span class="hljs-number">0.50</span><br><span class="hljs-number">4</span>月<span class="hljs-number">30</span>看涨期权　<span class="hljs-number">2.50</span><br><br>在到期日之前的剩余时间里，备兑看涨期权的卖出者只能得到<span class="hljs-number">0.50</span>点的时间价值。如果他向前挪仓到<span class="hljs-number">4</span>月<span class="hljs-number">30</span>看涨期权，他有可能会更有效地使用资金。要做真正的比较，必须从<span class="hljs-number">4</span>月<span class="hljs-number">30</span>看涨期权的权利金中减去向前挪仓的手续费。<br><br>如果保留<span class="hljs-number">1</span>月<span class="hljs-number">30</span>看涨期权，在<span class="hljs-number">1</span>月到期之前剩余的<span class="hljs-number">30</span>天里，卖出者最多可以获得<span class="hljs-number">250</span>美元。这对应平均每天<span class="hljs-number">8.33</span>美元的收益。挪仓的手续费大约是<span class="hljs-number">100</span>美元，包括买回和再卖出。目前<span class="hljs-number">4</span>月<span class="hljs-number">30</span>看涨期权的时间价值是每手<span class="hljs-number">250</span>美元，这就意味着，在<span class="hljs-number">4</span>月到期之前的<span class="hljs-number">120</span>天里，卖出者可以获得<span class="hljs-number">250</span>美元乘以<span class="hljs-number">5</span>，再减去<span class="hljs-number">100</span>美元的手续费，即<span class="hljs-number">1150</span>美元，除以<span class="hljs-number">120</span>天之后等于每天<span class="hljs-number">9.58</span>美元。因此，去掉手续费之后，<span class="hljs-number">4</span>月<span class="hljs-number">30</span>的日收益还是高于<span class="hljs-number">1</span>月<span class="hljs-number">30</span>的日收益。这时候卖出者应当将他的头寸向前挪仓。<br><br>由于向前挪仓有正的现金流（也就是说，这是一笔收入交易）​，因此这既能增加卖出者的最大潜在盈利，也能降低盈亏平衡点。在上面的示例里，向前挪仓得到的收入是<span class="hljs-number">2</span>点，因此盈亏平衡点就降低了<span class="hljs-number">2</span>点，最大潜在盈利也增加了<span class="hljs-number">2</span>点。<br></code></pre></td></tr></table></figure>
+
+<h3 id="向上挪仓-1"><a href="#向上挪仓-1" class="headerlink" title="向上挪仓"></a>向上挪仓</h3><p>在到期或接近到期时，为了保留股票，投资者也许就不得不卖出高一档行权价的看涨期权。不过，这不一定是一笔支出交易。如果这只股票的波动率足够高，那投资者甚至不花钱就可以向上挪仓，有时甚至还可以得到一些收入。如果真有这样的机会，你千万不要错过。</p>
+<h3 id="向下挪仓-1"><a href="#向下挪仓-1" class="headerlink" title="向下挪仓"></a>向下挪仓</h3><p>在到期或接近到期时的另一个选择是向下挪仓。这出现在当投资者让卖出的看涨期权无价值地到期，股票价格大幅度低于行权价的情况里。卖出者此时需要决定，究竟是卖出低权利金的虚值看涨期权还是卖出较高权利金的实值看涨期权。</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs gauss">示例：<br>在<span class="hljs-number">1</span>月<span class="hljs-number">25</span>看涨期权刚刚无价值地到期之后：<br><span class="hljs-built_in">XYZ</span>的价格是<span class="hljs-number">22</span><br><span class="hljs-built_in">XYZ</span> <span class="hljs-number">7</span>月<span class="hljs-number">25</span>看涨期权的价格是<span class="hljs-number">0.75</span><br><span class="hljs-built_in">XYZ</span> <span class="hljs-number">7</span>月<span class="hljs-number">20</span>看涨期权是<span class="hljs-number">3.50</span><br><br>如果这个投资者现在要卖出<span class="hljs-number">7</span>月<span class="hljs-number">25</span>看涨期权，他就只能得到<span class="hljs-number">0.75</span>点的下行保护。但是，如果<span class="hljs-built_in">XYZ</span>在到期时上涨到<span class="hljs-number">25</span>，那他的最大潜在盈利就会相当大。另一方面，价格为<span class="hljs-number">3.50</span>的<span class="hljs-number">7</span>月<span class="hljs-number">20</span>看涨期权具有很大的吸引力，它提供了相当大的下行保护，而且，它的时间价值为<span class="hljs-number">1.50</span>点，是<span class="hljs-number">7</span>月<span class="hljs-number">25</span>看涨期权的两倍。<br><br>单纯从分析的角度来看，不应当用过去的表现来作为今天决定的基础，但是，在实践中很难按这样的说法去做。如果这个投资者是用较高的价格买入<span class="hljs-built_in">XYZ</span>的，他肯定会偏向于<span class="hljs-number">7</span>月<span class="hljs-number">25</span>看涨期权。但是，如果他用与市价几乎相同的价格买入的<span class="hljs-built_in">XYZ</span>，那他在卖出<span class="hljs-number">7</span>月<span class="hljs-number">20</span>看涨期权时就不会有什么内疚心理。在这里，没有适用于所有情况的绝对规则。<br><br>不过，任何情况下，卖出能维持收益和下行保护之间最好平衡的看涨期权，往往能给投资者带来更大的好处。投资者只有在对标的股票看多（bullish）时才应当卖出<span class="hljs-number">7</span>月<span class="hljs-number">25</span>看涨期权。<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>看多：卖出虚值看涨期权<br>看空：卖出实值看涨期权</p>
+</blockquote>
+<h2 id="避免无备兑的头寸"><a href="#避免无备兑的头寸" class="headerlink" title="避免无备兑的头寸"></a>避免无备兑的头寸</h2><p>如果备兑卖出者在卖出的看涨期权停止交易的那一天考虑要采取任何后续行动的话，他都应当对一条保证金规则非常注意——如果在同一天<strong>卖出另一个看涨期权</strong>，即使先前卖出的期权显然要无价值地到期，但从保证金的角度来看，在周末的时候，这个卖出者会被看作是无备兑的，因此有义务为其无备兑的期权头寸提供质押。</p>
+<h2 id="什么时候让股票被指派行权"><a href="#什么时候让股票被指派行权" class="headerlink" title="什么时候让股票被指派行权"></a>什么时候让股票被指派行权</h2><p>如果满足下面的两个条件，让股票被指派行权的选择一般而言就是最聪明的策略：<br>（1）向前挪仓只能提供很有限的收益；<br>（2）向上或向前挪仓会显著地提高盈亏平衡点，使得该头寸相对来说失去了股价下跌时所需的保护。</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs gauss">示例：<br>某个卖出备兑头寸是通过 按<span class="hljs-number">49</span>买入<span class="hljs-built_in">XYZ</span>股票 和 按<span class="hljs-number">3</span>点卖出<span class="hljs-number">4</span>月<span class="hljs-number">50</span>看涨期权 来建立起来的。因此初始的盈亏平衡点是<span class="hljs-number">46</span>。<br><br>在临近到期日时，假设<span class="hljs-built_in">XYZ</span>上涨到了<span class="hljs-number">56</span>，<span class="hljs-number">4</span>月<span class="hljs-number">50</span>看涨期权的交易价是<span class="hljs-number">6</span>。如果这个投资者想要向前挪仓，现在正是这样做的时候，因为看涨期权处于持平价上。不过，他注意到他的选择是有限的。假设当<span class="hljs-built_in">XYZ</span>是<span class="hljs-number">56</span>时有下列的期权价格存在：<span class="hljs-built_in">XYZ</span> <span class="hljs-number">10</span>月<span class="hljs-number">50</span>看涨期权的价格是<span class="hljs-number">7</span>，<span class="hljs-built_in">XYZ</span> <span class="hljs-number">10</span>月<span class="hljs-number">60</span>看涨期权的价格是<span class="hljs-number">2</span>。<br><br>如果该卖出者试图挪仓到<span class="hljs-number">10</span>月<span class="hljs-number">50</span>看涨期权，那么，在<span class="hljs-number">10</span>月之前，他最多只能得到<span class="hljs-number">1</span>点的额外盈利（这个看涨期权的时间价值）​。它对应的收益率极低，卖出者应当拒绝这个选择，因为如果就其他证券进行卖出备兑交易，可能获得更好的收益。<br>另一方面，如果这个卖出者打算向上和向前挪仓，这需要花费<span class="hljs-number">4</span>点：<span class="hljs-number">6</span>点买回<span class="hljs-number">4</span>月<span class="hljs-number">50</span>，减去从<span class="hljs-number">10</span>月<span class="hljs-number">60</span>中得到的<span class="hljs-number">2</span>点。这个支出意味着他的盈亏平衡点将从初始的<span class="hljs-number">46</span>上移到新的<span class="hljs-number">50</span>。如果普通股股票的价格跌到<span class="hljs-number">54</span>以下，他就会损失掉已经到手的盈利，因为在当前股价为<span class="hljs-number">56</span>时，<span class="hljs-number">10</span>月<span class="hljs-number">60</span>看涨期权只提供了<span class="hljs-number">2</span>点的保护。如果这个卖出者对<span class="hljs-built_in">XYZ</span>的牛市前景不是很有把握的话，他就不应当向上或者向前挪仓。<br></code></pre></td></tr></table></figure>
+
+<h1 id="11-特殊的卖出备兑情形"><a href="#11-特殊的卖出备兑情形" class="headerlink" title="11. 特殊的卖出备兑情形"></a>11. 特殊的卖出备兑情形</h1><h2 id="可转换证券卖出备兑"><a href="#可转换证券卖出备兑" class="headerlink" title="可转换证券卖出备兑"></a>可转换证券卖出备兑</h2><p>可转换证券（Convertible Securities）是一种<strong>兼具债券和股票特性的混合型金融工具</strong>，持有人有权在特定条件下将其转换为发行公司的普通股。常见的类型包括可转换债券（Convertible Bonds）和可转换优先股（Convertible Preferred Shares）。</p>
+<p>使用可转换证券的一个优势是它常常能产生比使用普通股更高的收益（一般股息更高）。可转换债券（convertible bonds）和可转换优先股（convertiblepreferred stocks）就是为了这个目的而常常使用的证券。</p>
+<p>升水是可转换证券的售价与转换过后的股价的差价。一般而言，如果一个可转换证券的升水过高，就不会有人要买它。如果某个可转换证券的升水高于所计算出的价值的15%，那么就可以说它的升水过高了。</p>
+<p>在就可转换证券卖出备兑时的另一个考虑是对指派的处置。如果卖出者被指派，他就会将他的优先股转换成普通股，然后交割普通股股票；或者在市场上卖出优先股，再用所得资金从市场上买入100股普通股股票，按照指派通知交割这些股票。如果该可转换证券有升水，那么第二种选择一般就更可取，因为将优先股转换为普通股会损失优先股中所有的升水；当为可转换债券时，则会损失累积的利息。<br>卖出者同时还应当注意，他的可转换证券是否是可以赎回的（callable）​。如果是的话，具体的赎回条件是什么。一旦可转换证券被该公司赎回，它就不再按其与标的股票的关系而交易，而是按赎回价交易。因此，如果股票急剧上涨，卖出者卖出的期权会产生亏损，而无法从可转换证券处得到任何弥补。如果可转换证券被赎回，一般而言，整个头寸就应当立即平仓，卖掉可转换证券并买回期权。</p>
+<h2 id="权证卖出备兑"><a href="#权证卖出备兑" class="headerlink" title="权证卖出备兑"></a>权证卖出备兑</h2><p>权证（Warrant）是一种<strong>由公司或金融机构发行的金融衍生工具</strong>，赋予持有人在特定时间内以约定的价格（行权价）购买或卖出标的资产（通常是发行公司的股票）的权利。</p>
+<p>权证与期权的区别：</p>
+<table>
+<thead>
+<tr>
+<th><strong>特征</strong></th>
+<th><strong>权证</strong></th>
+<th><strong>期权</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>发行方</strong></td>
+<td>公司或第三方金融机构</td>
+<td>交易所标准化合约（无特定发行人）</td>
+</tr>
+<tr>
+<td><strong>标准化</strong></td>
+<td>条款由发行人定制（非标准化）</td>
+<td>标准化（交易所统一规定）</td>
+</tr>
+<tr>
+<td><strong>稀释效应</strong></td>
+<td>行权时公司需增发新股（股权稀释）</td>
+<td>行权不涉及新股（从市场购买股票）</td>
+</tr>
+<tr>
+<td><strong>流动性</strong></td>
+<td>通常较低（依赖发行人信用）</td>
+<td>较高（交易所集中交易）</td>
+</tr>
+<tr>
+<td><strong>期限</strong></td>
+<td>较长（1-5年）</td>
+<td>较短（通常数月至1年）</td>
+</tr>
+</tbody></table>
+<p>使用权证的好处是，如果它们深度实值，它们就会给现金备兑卖出者带来较高的收益，因为它们只需要较少的投资。</p>
+<p>由于同时有期权和权证交易的股票数量不多，以及核实可获得收益的固有问题，实际进行权证卖出备兑的交易并不常见。不过，在某些情况下，进行<strong>深度实值权证卖出备兑</strong>交易，卖出者确实可以获得一定的好处。一般不建议就平值或虚值的权证卖出备兑，因为如果标的股价下跌，权证会更大比例下跌，从而形成一个高风险的头寸。同时，在这个示例里，如果卖出者向下挪仓到一个行权价比权证行权价更低的期权时，他的投资额就有可能会增加。</p>
+<h2 id="长期期权卖出备兑"><a href="#长期期权卖出备兑" class="headerlink" title="长期期权卖出备兑"></a>长期期权卖出备兑</h2><p>卖出备兑看涨期权的一种形式是通过买入长期期权（LEAPS）看涨期权，并卖出更短期虚值看涨期权的方式来构造的。这个策略与权证卖出备兑很相似。第25章在讨论对角价差时，会更详细地讨论这个策略。</p>
+<h2 id="增额收益的概念（收入挪仓）"><a href="#增额收益的概念（收入挪仓）" class="headerlink" title="增额收益的概念（收入挪仓）"></a>增额收益的概念（收入挪仓）</h2><p>卖出备兑看涨期权的增额收益概念是指，备兑卖出者可以获得股票在今天的股价与目标卖出价格（可能比今天的股价高出许多）之间的增值部分的全部价值。与此同时，卖出者还能从卖出期权过程中获得增额的正收益。</p>
+<p>这个策略并不是只适用于机构资金管理者，也适用于普通投资者。只是投资者的持股数量最好较大（至少是500股，最好是在1000股之上）​。增额收益的概念适用于所有像这样的投资者，他们会一直持有股票（即使中途出现短暂下跌）​，直到股价达到事先确定的、更高的价格，他们才愿意卖出。</p>
+<p>增额收益策略的基本方法是，一开始只就所持有的全部股票中的一部分卖出看涨期权，而且是卖出那些行权价离当前股价最接近的看涨期权。然后，如果股价上涨到更高一级的行权价，投资者就通过增加卖出备兑的数量来实现向上挪仓和获得收入。为收入而挪仓是必不可少的，它是整个策略的关键。最后，当股票达到了目标价格时，股票被指派行权，投资者以目标价卖出了所有股票，此外，他还能额外得到所有期权交易中所积累的总的收入。</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gauss">示例：<br><span class="hljs-built_in">XYZ</span>的价格是<span class="hljs-number">60</span>，投资者持有<span class="hljs-number">1000</span>股，他的目标价格是<span class="hljs-number">80</span>。他可以按每手<span class="hljs-number">7</span>卖出<span class="hljs-number">3</span>手最远期的<span class="hljs-number">60</span>看涨期权。<br>如果<span class="hljs-built_in">XYZ</span>在一个月里涨到了<span class="hljs-number">70</span>，那<span class="hljs-number">3</span>手初始的看涨期权就会被买回去，然后在<span class="hljs-number">70</span>的价格上卖出足够的看涨期权，并产生一笔收入（<span class="hljs-number">5</span>手<span class="hljs-built_in">XYZ</span> <span class="hljs-number">10</span>月<span class="hljs-number">70</span>看涨期权）​。<br>如果股价在下一个月里继续上升到<span class="hljs-number">80</span>，这<span class="hljs-number">5</span>手看涨期权就会被买回去，而此时整个股票头寸都会以目标价格进行卖出备兑（<span class="hljs-number">10</span>手看涨期权）​。<br>如果<span class="hljs-built_in">XYZ</span>的价格保持在<span class="hljs-number">80</span>以上，股票就会被指派行权，所有<span class="hljs-number">1000</span>股股票都会按<span class="hljs-number">80</span>的目标价格卖掉。另外，投资者还可以挣到一路上所有卖出期权而得到的收入。它们的总额达到<span class="hljs-number">2800</span>美元。<br>因此，这个卖出者不仅得到了股票上涨到目标价格的整个增值部分，还得到了卖出期权所产生的增额的、正收益。<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2025/03/12/1OyB6cVKbZ4th2X.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<ol>
+<li>如果股价上涨：向上挪仓；如果股价不变：向前挪仓；</li>
+<li>每次卖出获得的权利金需要高于买入平仓的权利金。</li>
+</ol>
+</blockquote>
+<p>如果目标价格最终被触及，而此时该卖出者希望保留一些股票，当卖出的看涨期权开始失去它们的时间价值时，那就可以使用先前提到的“部分抽身策略”​。当从某个头寸中“抽身”出来后，投资者就可以设定更高的目标价格，开始整个过程的重复。</p>
+<h1 id="12-总结"><a href="#12-总结" class="headerlink" title="12. 总结"></a>12. 总结</h1><p>卖出备兑看涨期权是一个有活力的策略，因为它减少了持有股票所带来的风险，同时也减小了短期市场运动给某个投资者的投资组合所带来的波动性。不过，卖出备兑看涨期权的表现有可能会比只持有股票差，因为股票有可能会大幅上涨，而卖出备兑则对潜在盈利的上限进行了限制。</p>
+<p>相对于卖出虚值看涨期权，卖出实值看涨期权从策略上来说要更为保守一些，因为它得到了更大份额的市场下行保护。</p>
+<p>卖出备兑看涨期权的总收益的概念，是想在各种来源的收入（期权权利金、股票持有权和股息）和市场下行保护之间维持最大的平衡。为了实现这个平衡，通常在股价接近行权价，或稍微实值，或稍微虚值时卖出备兑看涨期权。</p>
+<p>可以卖出一部分虚值看涨期权和另一部分实值看涨期权，以实现收入和保护之间的平衡。</p>
+<p>如果投资者对某只股票是看空的，他就不应当就其卖出看涨期权。卖出者对标的股票应当是略为看多的，或者至少是中性的。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/financing/" class="category-chain-item">financing</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/financing/%E6%9C%9F%E6%9D%83%E6%8A%95%E8%B5%84%E7%AD%96%E7%95%A5/" class="category-chain-item">期权投资策略</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>期权投资策略2 - 卖出备兑看涨期权</div>
+      <div>https://peixuanhu.github.io/posts/f302f546.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Peixuan Hu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 6, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Updated on</div>
+          <div>March 12, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/60d194bc.html" title="Netty in Action 5 - ByteBuf">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Netty in Action 5 - ByteBuf</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/464fc54d.html" title="Netty 学习">
+                        <span class="hidden-mobile">Netty 学习</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'peixuanhu/peixuanhu.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

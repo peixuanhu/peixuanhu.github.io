@@ -1,0 +1,856 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="对于期权而言，评估其适当性尤为重要：期权的买方可能会在短期内亏完其全部资金，而无备兑期权的卖方则可能面临巨大的财务风险。 1. 基本定义期权价格与股票价格之间的关系实值（in-the-money）和虚值（out-of-the-money）。如果股票价格低于看涨期权的行权价，则该看涨期权被称为虚值。如果股票价格高于看涨期权的行权价，则该看涨期权被称为实值。（看跌期权相反） 实值看涨期权的内在价值（i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="期权投资策略1 - 期权定义">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/cd2d07a5.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="对于期权而言，评估其适当性尤为重要：期权的买方可能会在短期内亏完其全部资金，而无备兑期权的卖方则可能面临巨大的财务风险。 1. 基本定义期权价格与股票价格之间的关系实值（in-the-money）和虚值（out-of-the-money）。如果股票价格低于看涨期权的行权价，则该看涨期权被称为虚值。如果股票价格高于看涨期权的行权价，则该看涨期权被称为实值。（看跌期权相反） 实值看涨期权的内在价值（i">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2024/10/13/SdbCQYzjPgZ35my.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/09/JbHAu6RFtWTgY58.png">
+<meta property="article:published_time" content="2024-10-13T07:58:09.000Z">
+<meta property="article:modified_time" content="2025-03-12T03:09:31.826Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2024/10/13/SdbCQYzjPgZ35my.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>期权投资策略1 - 期权定义 - Peixuan&#39;s Page</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Peixuan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="期权投资策略1 - 期权定义"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-13 15:58" pubdate>
+          October 13, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">期权投资策略1 - 期权定义</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>对于期权而言，评估其适当性尤为重要：期权的买方可能会在短期内亏完其全部资金，而无备兑期权的卖方则可能面临巨大的财务风险。</p>
+<h1 id="1-基本定义"><a href="#1-基本定义" class="headerlink" title="1. 基本定义"></a>1. 基本定义</h1><h2 id="期权价格与股票价格之间的关系"><a href="#期权价格与股票价格之间的关系" class="headerlink" title="期权价格与股票价格之间的关系"></a>期权价格与股票价格之间的关系</h2><p><strong>实值（in-the-money）</strong>和<strong>虚值（out-of-the-money）</strong>。如果股票价格低于看涨期权的行权价，则该看涨期权被称为虚值。如果股票价格高于看涨期权的行权价，则该看涨期权被称为实值。（看跌期权相反）</p>
+<p>实值看涨期权的内在价值（intrinsic value）等于股票价格超出行权价的那部分金额。如果该看涨期权是虚值的，则它的内在价值为零。卖出期权的价格一般被称为<strong>权利金（premium）</strong>。权利金与<strong>时间价值权利金[time value premium</strong>，简称为<strong>时间价值（time premium）</strong>]有明显区别。时间价值等于该期权权利金超过其内在价值的那部分金额。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs math">实值看涨期权的时间价值 = 看涨期权的价格 + (行权价 - 股票的价格)<br></code></pre></td></tr></table></figure>
+
+<p>如果看涨期权是虚值的，那么它的权利金和时间价值相等。</p>
+<p>一般来说，当股票价格等于行权价时，期权的时间价值最大。随着期权变为深度实值或虚值，它的时间价值会显著地减小。</p>
+<p><img src="https://s2.loli.net/2024/10/13/SdbCQYzjPgZ35my.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>持平（parity）：按其内在价值进行交易的期权被称为与标的证券持平的期权。</p>
+<h1 id="2-影响期权价格的因素"><a href="#2-影响期权价格的因素" class="headerlink" title="2. 影响期权价格的因素"></a>2. 影响期权价格的因素</h1><p>期权价格与标的股票和该期权条款的性质相关。</p>
+<p>主要可量化因素：</p>
+<ol>
+<li><p>标的股票的价格；</p>
+</li>
+<li><p>期权自身的行权价；</p>
+</li>
+<li><p>该期权的剩余存续期；</p>
+</li>
+<li><p>标的股票的波动率；</p>
+<p>标的股票的波动率越大，期权价格越高。（股票具有能运动到相对更远向上距离的能力）</p>
+</li>
+<li><p>当前无风险利率（例如90天政府债券利率）；</p>
+</li>
+<li><p>标的股票的股息率。</p>
+<p>标的股票的股息越高，它的看涨期权的价格就越低。因为除息（ex-dividend）时，股票价格会减少。</p>
+</li>
+</ol>
+<blockquote>
+<p>还有一些其他因素，比如市场情绪。不过这些影响只会在情绪激动的市场阶段发挥作用。</p>
+</blockquote>
+<h1 id="3-行权和指派：运作机制"><a href="#3-行权和指派：运作机制" class="headerlink" title="3. 行权和指派：运作机制"></a>3. 行权和指派：运作机制</h1><h2 id="预见到指派"><a href="#预见到指派" class="headerlink" title="预见到指派"></a>预见到指派</h2><p>指派往往会在下面的集中情形里出现：</p>
+<ol>
+<li><p>在到期时，看涨期权是实值的；</p>
+<p>自动行权：如果期权在到期时是实值的，那就一定会被指派。</p>
+</li>
+<li><p>在到期前，期权在贴水（discount）交易；</p>
+<p>当看涨期权以持平价或低于持平价交易时，往往就会发生提前行权。套利者（arbitrageurs，场内交易员或会员公司的交易员，他们只需支付很少量的交易费用）会利用这种贴水状态的机会进行交易。</p>
+</li>
+<li><p>标的股票支付高额股息，而且就要分红。</p>
+<p>场内期权的持有者也许会因为预计到股价会下跌，而决定在除息日之前在二级市场卖掉这个期权。卖出的看涨期权数量足够多，期权的价格就有可能变为持平，甚至出现贴水。这样，套利者就有可能买入期权并行权。</p>
+</li>
+</ol>
+<p>此外，当期权没有时间价值时，卖出者可以预期其会被指派。当期权还有时间价值时，它一般就不会被行权。</p>
+<h1 id="4-期权市场"><a href="#4-期权市场" class="headerlink" title="4. 期权市场"></a>4. 期权市场</h1><p>股票市场采用专业商（Specialist）制度来做两件事：</p>
+<ol>
+<li>当某个股票缺乏公众投资者的买入或卖出指令时，他们必须用他们自己持有的头寸来为这个股票做市；</li>
+<li>他们要保管公众订单簿，其中包括公众的买入或卖出现价指令（limit order），以及止损指令（stop order）。</li>
+</ol>
+<p>当场内期权开始交易时，芝加哥期权交易所引进了类似的交易机制，做市商（market-maker）和交易所经纪人（board broker）制度。做市商需要再缺乏公众指令的情况下提供买卖报价以买卖期权。交易所经纪人负责维持限价指令簿。</p>
+<p>美国股票交易所（American Stock Exchange）在其期权交易中使用了专业商制度，但它也有功能与做市商类似的场内交易商（floor trader）。</p>
+<h1 id="5-期权代码学"><a href="#5-期权代码学" class="headerlink" title="5. 期权代码学"></a>5. 期权代码学</h1><p>绝大多数经纪商和报价软件显示的期权如下格式：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">IBM</span> Jan(<span class="hljs-number">21</span>) <span class="hljs-number">2011</span> <span class="hljs-number">45</span> call<br></code></pre></td></tr></table></figure>
+
+<p>其中，IBM为股票代码，Jan为到期月份，21为到期日，2011为到期年度，45为行权价，call为期权类型。</p>
+<h1 id="6-期权交易细节"><a href="#6-期权交易细节" class="headerlink" title="6. 期权交易细节"></a>6. 期权交易细节</h1><ol>
+<li>临近最后交易日，期权交易会变得狂热。投资者应选择还有很多时间剩余时下单，而不是等到期权存续期的最后时间里“冲击”交易。</li>
+<li>期权交易的结算周期是一天。交易是在交易之后的第2个工作日进行结算的。</li>
+<li>期权是以轮转方式（in rotation）开盘交易的。在轮转之中，参与者可以对每个特定的期权系列（如XYZ1月45看涨期权）逐一地申报买价和卖价，直到各种到期日和行权价的所有的call和put都开盘了为止。并不一定要每个系列都有交易发生，只要有买卖报价就行。<br>期权的开盘价一般都是不现实的。<br>大多数期权交易者都不会在轮转时交易，因此一个市价指令有可能会拿到一个很糟糕的价格。想在轮转期间交易应当使用限价指令。</li>
+<li>当标的股票拆股、支付股息时，合约的条款会被调整。可能会导致出现带分数的行权价和每手合约不为100股股票的期权。</li>
+<li>所有的期权都是以每股为基础进行报价的，不管这个期权对应了多少股股票。正常情况下，期权的报价应该对应100股标的股票。但是，假如UVW股票支付了5%的股票股息，那它每手的期权就对应了105股股票。如果该UVW4月38.1 call的售价为3美元（原本行权价是40），那买入它将实际花费315美元（3美元 * 105）。</li>
+<li>标的股票的价格变化会产生新的行权价的期权。随着价格波动，交易所会加挂新的行权价的期权。</li>
+<li>一个或一组投资者在市场的<strong>同侧</strong>（如买call和卖put都是看多）买入或卖出一种股票的期权合约数量不能超出一个限定数量（持仓限额，position limit）。</li>
+<li>在一段特定的时间（一般是5个工作日）里可以行权的合约数量也同样遵守为持仓限额所规定的数量。这样的行权限额（exercise limit）是为了避免某个或某组投资者通过不断地在某一天买入看涨期权，然后第二天将它们行权，反复操作，从而对一个股票进行“逼仓”。</li>
+</ol>
+<h1 id="7-下单"><a href="#7-下单" class="headerlink" title="7. 下单"></a>7. 下单</h1><h2 id="指令的信息"><a href="#指令的信息" class="headerlink" title="指令的信息"></a>指令的信息</h2><p>各种不同的指令都包括：</p>
+<ol>
+<li>这笔交易是买入还是卖出；</li>
+<li>期权是被买入还是卖出；</li>
+<li>是开仓还是平仓；</li>
+<li>是否是价差交易（spread）；</li>
+<li>想要的价格。</li>
+</ol>
+<h2 id="指令的类型"><a href="#指令的类型" class="headerlink" title="指令的类型"></a>指令的类型</h2><ol>
+<li>市价指令（market order）。</li>
+<li>市场无责任指令（market not held order）。这种指令</li>
+<li>限价指令（limit order）。</li>
+<li>止损指令（stop order）。</li>
+<li>止损-限价指令（stop-limit order）。</li>
+<li>撤销前有效指令（good-until-canceled order，GTC）。</li>
+</ol>
+<blockquote>
+<p>通过网络经纪人交易的客户无法使用“市场无责任指令”，也有可能不能使用“止损指令”和“撤销前有效指令”。</p>
+</blockquote>
+<h1 id="8-盈亏图形"><a href="#8-盈亏图形" class="headerlink" title="8. 盈亏图形"></a>8. 盈亏图形</h1><p>表格和图形可以比较直观地说明策略。简单举例：<br><img src="https://s2.loli.net/2024/11/09/JbHAu6RFtWTgY58.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/financing/" class="category-chain-item">financing</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/financing/%E6%9C%9F%E6%9D%83%E6%8A%95%E8%B5%84%E7%AD%96%E7%95%A5/" class="category-chain-item">期权投资策略</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>期权投资策略1 - 期权定义</div>
+      <div>https://peixuanhu.github.io/posts/cd2d07a5.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Peixuan Hu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 13, 2024</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Updated on</div>
+          <div>March 12, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/ab6f0cb4.html" title="CSAPP - Chapter 1 - A Tour of Computer Systems">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CSAPP - Chapter 1 - A Tour of Computer Systems</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/9cf75d1.html" title="对位">
+                        <span class="hidden-mobile">对位</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'peixuanhu/peixuanhu.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
