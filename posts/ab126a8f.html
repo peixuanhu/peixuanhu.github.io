@@ -1,0 +1,852 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ChannelHandler家族The Channel lifecycle12345678910111213141516171819202122public class ChannelLifecycleHandler extends ChannelInboundHandlerAdapter &amp;#123;    @Override    public void channelRegistered(C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty in Action 6 - ChannelHandler &amp; ChannelPipeline">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/ab126a8f.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="ChannelHandler家族The Channel lifecycle12345678910111213141516171819202122public class ChannelLifecycleHandler extends ChannelInboundHandlerAdapter &amp;#123;    @Override    public void channelRegistered(C">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2025/03/12/WAX3UOeYiajfbwB.png">
+<meta property="article:published_time" content="2025-03-12T07:03:08.000Z">
+<meta property="article:modified_time" content="2025-03-18T14:44:32.131Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2025/03/12/WAX3UOeYiajfbwB.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Netty in Action 6 - ChannelHandler &amp; ChannelPipeline - Peixuan&#39;s Page</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Peixuan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2025/03/12/WAX3UOeYiajfbwB.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Netty in Action 6 - ChannelHandler &amp; ChannelPipeline"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-12 15:03" pubdate>
+          March 12, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          77 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Netty in Action 6 - ChannelHandler &amp; ChannelPipeline</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="ChannelHandler家族"><a href="#ChannelHandler家族" class="headerlink" title="ChannelHandler家族"></a>ChannelHandler家族</h1><h2 id="The-Channel-lifecycle"><a href="#The-Channel-lifecycle" class="headerlink" title="The Channel lifecycle"></a>The Channel lifecycle</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChannelLifecycleHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ChannelInboundHandlerAdapter</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">channelRegistered</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        <span class="hljs-comment">// Channel 注册到 EventLoop</span><br>      	<br>    &#125;<br>    <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">channelActive</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        <span class="hljs-comment">// Channel 激活，可以进行I/O操作</span><br>    &#125;<br>    <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">channelInactive</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        <span class="hljs-comment">// Channel 不活跃，无法进行I/O操作</span><br>    &#125;<br>    <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">channelUnregistered</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        <span class="hljs-comment">// Channel 从 EventLoop 中注销</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>As these state changes occur, corresponding events are generated. These are forwarded to ChannelHandlers in the ChannelPipeline, which can then act on them.</p>
+<h2 id="The-ChannelHandler-lifecycle"><a href="#The-ChannelHandler-lifecycle" class="headerlink" title="The ChannelHandler lifecycle"></a>The ChannelHandler lifecycle</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LifecycleHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ChannelInboundHandlerAdapter</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">handlerAdded</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        <span class="hljs-comment">// Handler 被添加到 pipeline 时调用</span><br>        System.out.println(<span class="hljs-string">&quot;Handler added&quot;</span>);<br>    &#125;<br>    <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">handlerRemoved</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        <span class="hljs-comment">// Handler 从 pipeline 中移除时调用</span><br>        System.out.println(<span class="hljs-string">&quot;Handler removed&quot;</span>);<br>    &#125;<br>    <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">exceptionCaught</span><span class="hljs-params">(ChannelHandlerContext ctx, Throwable cause)</span> &#123;<br>        <span class="hljs-comment">// 处理过程中发生异常时调用</span><br>        cause.printStackTrace();<br>        ctx.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="ChannelInboundHandler"><a href="#ChannelInboundHandler" class="headerlink" title="ChannelInboundHandler"></a>ChannelInboundHandler</h3><p>Processes inbound data and state changes of all kinds.</p>
+<ul>
+<li>从前到后执行</li>
+<li>主要用于解码和业务处理<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomInboundHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ChannelInboundHandlerAdapter</span> &#123;<br>    <span class="hljs-comment">// 读取数据</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">channelRead</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 处理接收到的数据</span><br>            processInboundMessage(msg);<br>            <br>            <span class="hljs-comment">// 传递给下一个handler</span><br>            ctx.fireChannelRead(msg);<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            ReferenceCountUtil.release(msg);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-comment">// 读取完成</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">channelReadComplete</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        ctx.flush();<br>        ctx.fireChannelReadComplete();<br>    &#125;<br>    <br>    <span class="hljs-comment">// 连接建立</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">channelActive</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Connection established&quot;</span>);<br>        ctx.fireChannelActive();<br>    &#125;<br>    <br>    <span class="hljs-comment">// 连接断开</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">channelInactive</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Connection closed&quot;</span>);<br>        ctx.fireChannelInactive();<br>    &#125;<br>    <br>    <span class="hljs-comment">// 异常处理</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">exceptionCaught</span><span class="hljs-params">(ChannelHandlerContext ctx, Throwable cause)</span> &#123;<br>        cause.printStackTrace();<br>        ctx.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+如果用<code>SimpleChannelInboundHandler</code>，它会自动完成资源的释放。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Sharable</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleDiscardHandler</span> <br>  <span class="hljs-keyword">extends</span> <span class="hljs-title class_">SimpleChannelInboundHandler</span>&lt;Object&gt; &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">channelRead0</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> &#123;<br>        <span class="hljs-comment">// No need to do anything special</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="ChannelOutboundHandler"><a href="#ChannelOutboundHandler" class="headerlink" title="ChannelOutboundHandler"></a>ChannelOutboundHandler</h3><p>Processes outbound data and allows interception of all operations.</p>
+<ul>
+<li>从后到前执行</li>
+<li>主要用于编码和发送前处理<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomOutboundHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ChannelOutboundHandlerAdapter</span> &#123;<br>    <span class="hljs-comment">// 写数据</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">write</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg, </span><br><span class="hljs-params">                     ChannelPromise promise)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 处理要发送的数据</span><br>            <span class="hljs-type">Object</span> <span class="hljs-variable">processedMsg</span> <span class="hljs-operator">=</span> processOutboundMessage(msg);<br>            <br>            <span class="hljs-comment">// 继续传递</span><br>            ctx.write(processedMsg, promise);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            promise.setFailure(e);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-comment">// 刷新</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">flush</span><span class="hljs-params">(ChannelHandlerContext ctx)</span> &#123;<br>        ctx.flush();<br>    &#125;<br>    <br>    <span class="hljs-comment">// 连接</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">connect</span><span class="hljs-params">(ChannelHandlerContext ctx, </span><br><span class="hljs-params">                       SocketAddress remoteAddress,</span><br><span class="hljs-params">                       SocketAddress localAddress, </span><br><span class="hljs-params">                       ChannelPromise promise)</span> &#123;<br>        <span class="hljs-comment">// 处理连接</span><br>        ctx.connect(remoteAddress, localAddress, promise);<br>    &#125;<br>    <br>    <span class="hljs-comment">// 断开连接</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">disconnect</span><span class="hljs-params">(ChannelHandlerContext ctx, ChannelPromise promise)</span> &#123;<br>        ctx.disconnect(promise);<br>    &#125;<br>    <br>    <span class="hljs-comment">// 关闭</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">close</span><span class="hljs-params">(ChannelHandlerContext ctx, ChannelPromise promise)</span> &#123;<br>        ctx.close(promise);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>ChannelPromise与ChannelFuture</p>
+<p>ChannelOutboundHandler中的大部分方法都需要一个ChannelPromise参数，以便在操作完成时得到通知。ChannelPromise是ChannelFuture的一个子类，其定义了一些可写的方法，如setSuccess()和setFailure()，从而使ChannelFuture不可变。</p>
+</blockquote>
+<p>Channel和ChannelPipeline的事件流是从头到尾的；<br>ChannelHandlerContext的事件流是从当前ChannelHandler开始往后的。</p>
+<h3 id="ChannelHandlerAdapter"><a href="#ChannelHandlerAdapter" class="headerlink" title="ChannelHandlerAdapter"></a>ChannelHandlerAdapter</h3><p>ChannelInboundHandlerAdapter和ChannelOutboundHandlerAdapter类分别提供了ChannelInboundHandler和ChannelOutboundHandler的基本实现。</p>
+<p><img src="https://s2.loli.net/2025/03/12/kJPd9S5a8Vmvywc.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>ChannelHandlerAdapter还提供了实用方法isSharable()。如果其对应的实现被标注为Sharable，那么这个方法将返回true，表示它可以被添加到多个ChannelPipeline中。</p>
+<p>在ChannelInboundHandlerAdapter和ChannelOutboundHandlerAdapter中所提供的方法体调用了其相关联的ChannelHandlerContext上的等效方法，从而将事件转发到了ChannelPipeline中的下一个ChannelHandler中。</p>
+<h1 id="ChannelPipeline接口"><a href="#ChannelPipeline接口" class="headerlink" title="ChannelPipeline接口"></a>ChannelPipeline接口</h1><p>ChannelPipeline是一个拦截流经Channel的入站和出站事件的ChannelHandler实例链。</p>
+<p>每一个新创建的Channel都将会被分配一个新的ChannelPipeline。这项关联是永久性的；Channel既不能附加另外一个ChannelPipeline，也不能分离其当前的。在Netty组件的生命周期中，这是一项固定的操作，不需要开发人员的任何干预。</p>
+<p>根据事件的起源，事件将会被ChannelInboundHandler或者ChannelOutboundHandler处理。随后，通过调用ChannelHandlerContext实现，它将被转发给同一超类型的下一个ChannelHandler。</p>
+<p><img src="https://s2.loli.net/2025/03/12/28wICQaWAtldJNn.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在ChannelPipeline传播事件时，它会测试ChannelPipeline中的下一个ChannelHandler的类型是否和事件的运动方向相匹配。如果不匹配，ChannelPipeline将跳过该ChannelHandler并前进到下一个，直到它找到和该事件所期望的方向相匹配的为止。​（当然，ChannelHandler也可以同时实现ChannelInboundHandler接口和ChannelOutboundHandler接口。​）</p>
+<p>ChannelHandler可以通过添加、删除或者替换其他的ChannelHandler来实时地修改ChannelPipeline的布局。​（它也可以将它自己从ChannelPipeline中移除。​）这是Channel- Handler最重要的能力之一。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">ChannelPipeline</span> <span class="hljs-variable">pipeline</span> <span class="hljs-operator">=</span> ..;<br><span class="hljs-type">FirstHandler</span> <span class="hljs-variable">firstHandler</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FirstHandler</span>(); ← -- 创建一个FirstHandler 的实例 pipeline.addLast(<span class="hljs-string">&quot;handler1&quot;</span>, firstHandler);　 ← -- 将该实例作为<span class="hljs-string">&quot;handler1&quot;</span> 添加到ChannelPipeline 中 <br>pipeline.addFirst(<span class="hljs-string">&quot;handler2&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">SecondHandler</span>());　 ← -- 将一个SecondHandler的实例作为<span class="hljs-string">&quot;handler2&quot;</span>添加到ChannelPipeline的第一个槽中。这意味着它将被放置在已有的<span class="hljs-string">&quot;handler1&quot;</span>之前 <br>pipeline.addLast(<span class="hljs-string">&quot;handler3&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ThirdHandler</span>());　 ← -- 将一个ThirdHandler 的实例作为<span class="hljs-string">&quot;handler3&quot;</span>添加到ChannelPipeline 的最后一个槽中　 <br>...<br>pipeline.remove(<span class="hljs-string">&quot;handler3&quot;</span>);　 ← -- 通过名称移除<span class="hljs-string">&quot;handler3&quot;</span>　 <br>pipeline.remove(firstHandler);　 ← -- 通过引 用移除FirstHandler（它是唯一的，所以不需要它的名称）　<br>pipeline.replace(<span class="hljs-string">&quot;handler2&quot;</span>, <span class="hljs-string">&quot;handler4&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ForthHandler</span>()); ← -- 将SecondHandler(<span class="hljs-string">&quot;handler2&quot;</span>)替换为FourthHandler:<span class="hljs-string">&quot;handler4&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ChannelHandler的执行和阻塞<br>通常ChannelPipeline中的每一个ChannelHandler都是通过它的EventLoop（I&#x2F;O线程）来处理传递给它的事件的。所以至关重要的是不要阻塞这个线程，因为这会对整体的I&#x2F;O处理产生负面的影响。<br>但有时可能需要与那些使用阻塞API的遗留代码进行交互。对于这种情况，ChannelPipeline有一些接受一个EventExecutorGroup的add()方法。如果一个事件被传递给一个自定义的EventExecutorGroup，它将<strong>被包含在这个EventExecutorGroup中的某个EventExecutor所处理</strong>，从而<strong>被从该Channel本身的EventLoop中移除</strong>。对于这种用例，Netty提供了一个叫DefaultEventExecutorGroup的默认实现。</p>
+</blockquote>
+<p>总结一下：</p>
+<ul>
+<li>ChannelPipeline保存了与Channel相关联的ChannelHandler；</li>
+<li>ChannelPipeline可以根据需要，通过添加或者删除ChannelHandler来动态地修改；</li>
+<li>ChannelPipeline有着丰富的API用以被调用，以响应入站和出站事件。</li>
+</ul>
+<h1 id="ChannelHandlerContext"><a href="#ChannelHandlerContext" class="headerlink" title="ChannelHandlerContext"></a>ChannelHandlerContext</h1><p><img src="https://s2.loli.net/2025/03/12/D9ZHiyL7oS16CAn.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>ChannelHandlerContext代表了ChannelHandler和ChannelPipeline之间的关联，每当有ChannelHandler添加到ChannelPipeline中时，都会创建ChannelHandlerContext。ChannelHandlerContext的主要功能是管理它所关联的ChannelHandler和在同一个ChannelPipeline中的其他ChannelHandler之间的交互。<br>ChannelHandler可以通知其所属的ChannelPipeline中的下一个ChannelHandler，甚至可以动态修改它所属的ChannelPipeline。</p>
+<p>ChannelHandlerContext有很多的方法，其中一些方法也存在于Channel和ChannelPipeline本身上，但是有一点重要的不同。</p>
+<ul>
+<li>如果调用Channel或者ChannelPipeline上的这些方法，它们将沿着<strong>整个ChannelPipeline</strong>进行传播。</li>
+<li>而调用位于ChannelHandlerContext上的相同方法，则将从<strong>当前所关联的ChannelHandler</strong>开始，并且只会传播给位于该ChannelPipeline中的<strong>下一个</strong>能够处理该事件的ChannelHandler。</li>
+</ul>
+<p>为什么会想要从ChannelPipeline中的某个特定点开始传播事件呢？</p>
+<ul>
+<li>为了减少将事件传经对它不感兴趣的ChannelHandler所带来的开销。</li>
+<li>为了避免将事件传经那些可能会对它感兴趣的ChannelHandler。</li>
+</ul>
+<p>当使用ChannelHandlerContext的API的时候，请牢记以下两点：</p>
+<ul>
+<li>ChannelHandlerContext和ChannelHandler之间的关联（绑定）是永远不会改变的，所以缓存对它的引用是安全的；</li>
+<li>如同我们在本节开头所解释的一样，相对于其他类的同名方法，ChannelHandlerContext的方法将产生更短的事件流，应该尽可能地利用这个特性来获得最大的性能。</li>
+</ul>
+<p>只应该在确定了你的ChannelHandler是线程安全的时才使用@Sharable注解。</p>
+<p>为何要共享同一个ChannelHandler？<br>在多个ChannelPipeline中安装同一个ChannelHandler的一个常见的原因是用于收集跨越多个Channel的统计信息。</p>
+<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><h2 id="入站异常"><a href="#入站异常" class="headerlink" title="入站异常"></a>入站异常</h2><p>需要在ChannelInboundHandler实现中重写下面的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InboundExceptionHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ChannelInboundHandlerAdapter</span> &#123;<br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">exceptionCaught</span><span class="hljs-params">(ChannelHandlerContext ctx, Throwable cause)</span> &#123; 　　　<br>		cause.printStackTrace();<br>		ctx.close();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>因为异常将会继续按照入站方向流动（就像所有的入站事件一样）​，所以实现了前面所示逻辑的ChannelInboundHandler通常位于ChannelPipeline的最后。这确保了所有的入站异常都总是会被处理，无论它们可能会发生在ChannelPipeline中的什么位置。</p>
+<ul>
+<li>ChannelHandler.exceptionCaught()的默认实现是简单地将当前异常转发给ChannelPipeline中的下一个ChannelHandler；</li>
+<li>如果异常到达了ChannelPipeline的尾端，它将会被记录为未被处理；</li>
+<li>要想定义自定义的处理逻辑，你需要重写exceptionCaught()方法。然后你需要决定是否需要将该异常传播出去。</li>
+</ul>
+<h2 id="出站异常"><a href="#出站异常" class="headerlink" title="出站异常"></a>出站异常</h2><p>用于处理出站操作中的正常完成以及异常的选项，都基于以下的通知机制。</p>
+<p>每个出站操作都将返回一个ChannelFuture。注册到ChannelFuture的Channel-FutureListener将在操作完成时被通知该操作是成功了还是出错了。</p>
+<p>几乎所有的ChannelOutboundHandler上的方法都会传入一个ChannelPromise的实例。作为ChannelFuture的子类，ChannelPromise也可以被分配用于异步通知的监听器。但是，ChannelPromise还具有提供立即通知的可写方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">ChannelPromise <span class="hljs-title function_">setSuccess</span><span class="hljs-params">()</span>;<br>ChannelPromise <span class="hljs-title function_">setFailure</span><span class="hljs-params">(Throwable cause)</span>;<br></code></pre></td></tr></table></figure>
+
+<p>添加ChannelFutureListener只需要调用ChannelFuture实例上的addListener(ChannelFutureListener)方法。</p>
+<p>第一种（最常用的）方式是，调用出站操作（如write()方法）所返回的ChannelFuture上的addListener()方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">ChannelFuture</span> <span class="hljs-variable">future</span> <span class="hljs-operator">=</span> channel.write(someMessage); <br>future.addListener(<br>	<span class="hljs-keyword">new</span> <span class="hljs-title class_">ChannelFutureListener</span>() &#123;<br>		<span class="hljs-meta">@Override</span><br>		<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">operationComplete</span><span class="hljs-params">(ChannelFuture f)</span> &#123;<br>			<span class="hljs-keyword">if</span> (!f.isSuccess()) &#123;<br>				f.cause().printStackTrace();<br>				f.channel().close();<br>			&#125; <br>		&#125;<br>	&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>第二种方式是将ChannelFutureListener添加到即将作为参数传递给ChannelOutboundHandler的方法的ChannelPromise。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OutboundExceptionHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ChannelOutboundHandlerAdapter</span> &#123; 　<br>	<span class="hljs-meta">@Override</span> 　<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">write</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg, ChannelPromise promise)</span> &#123; <br>		promise.addListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ChannelFutureListener</span>() &#123; 　　　<br>			<span class="hljs-meta">@Override</span> 　　　<br>			<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">operationComplete</span><span class="hljs-params">(ChannelFuture f)</span> &#123; 　　<br>				<span class="hljs-keyword">if</span> (!f.isSuccess()) &#123; 　　<br>					f.cause().printStackTrace(); 　　　　　<br>					f.channel().close(); 　　　　　　<br>				&#125; 　　　　<br>			&#125; 　　　<br>		&#125;); 　<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于细致的异常处理，第一种方式，在调用出站操作时添加ChannelFutureListener更合适。<br>而对于一般的异常处理，第二种方式，自定义的ChannelOutboundHandler实现的方式更加的简单。</p>
+<p>如果你的ChannelOutboundHandler本身抛出了异常会发生什么呢？在这种情况下，Netty本身会通知任何已经注册到对应ChannelPromise的监听器。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/backend/Netty/" class="category-chain-item">Netty</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Netty in Action 6 - ChannelHandler &amp; ChannelPipeline</div>
+      <div>https://peixuanhu.github.io/posts/ab126a8f.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Peixuan Hu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 12, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Updated on</div>
+          <div>March 18, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/b7fae525.html" title="Netty in Action 7 - EventLoop and threading model">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Netty in Action 7 - EventLoop and threading model</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/60d194bc.html" title="Netty in Action 5 - ByteBuf">
+                        <span class="hidden-mobile">Netty in Action 5 - ByteBuf</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'peixuanhu/peixuanhu.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

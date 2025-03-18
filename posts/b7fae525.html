@@ -1,0 +1,889 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="EventLoop 是框架实现高性能、异步事件驱动架构的核心组件之一。它负责处理网络 I&#x2F;O 事件、用户任务调度以及线程管理，是 Netty 实现高效并发的基础。 1. 线程模型基本的线程池化模式可以描述为：从池的空闲线程列表中选择一个Thread，并且指派它去运行一个已提交的任务（一个Runnable的实现）​；当任务完成时，将该Thread返回给该列表，使其可被重用。 虽然池化和重用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty in Action 7 - EventLoop and threading model">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/b7fae525.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="EventLoop 是框架实现高性能、异步事件驱动架构的核心组件之一。它负责处理网络 I&#x2F;O 事件、用户任务调度以及线程管理，是 Netty 实现高效并发的基础。 1. 线程模型基本的线程池化模式可以描述为：从池的空闲线程列表中选择一个Thread，并且指派它去运行一个已提交的任务（一个Runnable的实现）​；当任务完成时，将该Thread返回给该列表，使其可被重用。 虽然池化和重用">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2025/03/18/LmuQ1rjyPTZWwEB.png">
+<meta property="article:published_time" content="2025-03-15T12:46:36.000Z">
+<meta property="article:modified_time" content="2025-03-18T14:44:32.132Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2025/03/18/LmuQ1rjyPTZWwEB.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Netty in Action 7 - EventLoop and threading model - Peixuan&#39;s Page</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Peixuan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2025/03/18/LmuQ1rjyPTZWwEB.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Netty in Action 7 - EventLoop and threading model"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-15 20:46" pubdate>
+          March 15, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          46 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Netty in Action 7 - EventLoop and threading model</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>EventLoop</strong> 是框架实现高性能、异步事件驱动架构的核心组件之一。它负责处理网络 I&#x2F;O 事件、用户任务调度以及线程管理，是 Netty 实现高效并发的基础。</p>
+<h1 id="1-线程模型"><a href="#1-线程模型" class="headerlink" title="1. 线程模型"></a>1. 线程模型</h1><p>基本的线程池化模式可以描述为：从池的空闲线程列表中选择一个Thread，并且指派它去运行一个已提交的任务（一个Runnable的实现）​；当任务完成时，将该Thread返回给该列表，使其可被重用。<br><img src="https://s2.loli.net/2025/03/14/LIMBfbu1CcAeR8W.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>虽然池化和重用线程相对于简单地为每个任务都创建和销毁线程是一种进步，但是它并不能消除由上下文切换所带来的开销，其将随着线程数量的增加很快变得明显，并且在高负载下愈演愈烈。此外，仅仅由于应用程序的整体复杂性或者并发需求，在项目的生命周期内也可能会出现其他和线程相关的问题。</p>
+<p>Netty的线程模型帮助简化了这些问题。</p>
+<h1 id="2-EventLoop接口"><a href="#2-EventLoop接口" class="headerlink" title="2. EventLoop接口"></a>2. EventLoop接口</h1><p>事件循环的基本思想，其中每个任务都是一个Runnable的实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">while</span> (!terminated) &#123;<br>	List&lt;Runnable&gt; readyEvents = blockUntilEventsReady();　<span class="hljs-comment">// 阻塞，直到有事件已经就绪可被运行 　</span><br>	<span class="hljs-keyword">for</span> (Runnable ev: readyEvents) &#123; 　　<br>		ev.run();　 <span class="hljs-comment">// 循环遍历，并处理所有的事件 </span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个模型中，一个<code>EventLoop</code>将由一个永远都不会改变的<code>Thread</code>驱动，同时任务（<code>Runnable</code>或者<code>Callable</code>）可以直接提交给<code>EventLoop</code>实现，以立即执行或者调度执行。根据配置和可用核心的不同，可能会创建多个<code>EventLoop</code>实例用以优化资源的使用，并且单个<code>EventLoop</code>可能会被指派用于服务多个<code>Channel</code>。</p>
+<blockquote>
+<p>事件&#x2F;任务的执行顺序：事件和任务是以先进先出（FIFO）的顺序执行的。这样可以通过保证字节内容总是按正确的顺序被处理，消除潜在的数据损坏的可能性。</p>
+</blockquote>
+<h1 id="3-任务调度"><a href="#3-任务调度" class="headerlink" title="3. 任务调度"></a>3. 任务调度</h1><h2 id="JDK任务调度API"><a href="#JDK任务调度API" class="headerlink" title="JDK任务调度API"></a>JDK任务调度API</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">ScheduledExecutorService</span> <span class="hljs-variable">executor</span> <span class="hljs-operator">=</span> 　<br>Executors.newScheduledThreadPool(<span class="hljs-number">10</span>);<span class="hljs-comment">// 创建一个其线程池具有10 个线程的ScheduledExecutorService</span><br>ScheduledFuture&lt;?&gt; future = executor.schedule( 　<br>	<span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() &#123;　<span class="hljs-comment">// 创建一个R unnable，以供调度稍后执行 </span><br>	<span class="hljs-meta">@Override</span> 　<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123; <br>		System.out.println(<span class="hljs-string">&quot;60 seconds later&quot;</span>);<span class="hljs-comment">// 该任务要打印的消息 　</span><br>	&#125;<br>&#125;, <span class="hljs-number">60</span>, TimeUnit.SECONDS);<span class="hljs-comment">// 调度任务在从现在开始的60 秒之后执行 </span><br>... <br>executor.shutdown();<span class="hljs-comment">// 一旦调度任务执行完成，就关闭ScheduledExecutorService 以释放资源</span><br></code></pre></td></tr></table></figure>
+<p>虽然ScheduledExecutorServiceAPI是直截了当的，但是在高负载下它将带来性能上的负担。</p>
+<h2 id="使用EventLoop调度任务"><a href="#使用EventLoop调度任务" class="headerlink" title="使用EventLoop调度任务"></a>使用EventLoop调度任务</h2><p>ScheduledExecutorService的实现具有局限性，例如，事实上作为线程池管理的一部分，将会有额外的线程创建。如果有大量任务被紧凑地调度，那么这将成为一个瓶颈。Netty通过Channel的EventLoop实现任务调度解决了这一问题。</p>
+<p>使用EventLoop调度任务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Channel</span> <span class="hljs-variable">ch</span> <span class="hljs-operator">=</span> ...<br>ScheduledFuture&lt;?&gt; future = ch.eventLoop().schedule( <span class="hljs-comment">// 创建一个Runnable以供调度稍后执行 　</span><br>	<span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() &#123; <br>	<span class="hljs-meta">@Override</span> 　<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123; <span class="hljs-comment">// 要执行的代码 　　</span><br>		System.out.println(<span class="hljs-string">&quot;60 seconds later&quot;</span>);　 　<br>	&#125; <br>&#125;, <span class="hljs-number">60</span>, TimeUnit.SECONDS);　 <span class="hljs-comment">// 调度任务在从现在开始的60 秒之后执行</span><br></code></pre></td></tr></table></figure>
+
+<p>使用EventLoop调度周期性任务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Channel</span> <span class="hljs-variable">ch</span> <span class="hljs-operator">=</span> ...<br>ScheduledFuture&lt;?&gt; future = ch.eventLoop().scheduleAtFixedRate( <span class="hljs-comment">// 创建一个Runnable，以供调度稍后执行 </span><br>	<span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() &#123; 　<br>	<span class="hljs-meta">@Override</span> 　<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123; 　<br>		System.out.println(<span class="hljs-string">&quot;Run every 60 seconds&quot;</span>);　 <span class="hljs-comment">// 这将一直运行，直到ScheduledFuture 被取消 　</span><br>	&#125; <br>&#125;, <span class="hljs-number">60</span>, <span class="hljs-number">60</span>, TimeUnit.Seconds);　 <span class="hljs-comment">// 调度在60 秒之后，并且以后每间隔60 秒运行</span><br></code></pre></td></tr></table></figure>
+
+<p>使用ScheduledFuture取消任务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">ScheduledFuture&lt;?&gt; future = ch.eventLoop().scheduleAtFixedRate(...); <span class="hljs-comment">// 调度任务，并获得所返回的ScheduledFuture </span><br><span class="hljs-comment">// Some other code that runs... </span><br><span class="hljs-type">boolean</span> <span class="hljs-variable">mayInterruptIfRunning</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>; <br>future.cancel(mayInterruptIfRunning);　 <span class="hljs-comment">// 取消该任务，防止它再次运行</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="4-实现细节"><a href="#4-实现细节" class="headerlink" title="4. 实现细节"></a>4. 实现细节</h1><h2 id="线程管理"><a href="#线程管理" class="headerlink" title="线程管理"></a>线程管理</h2><p>每个EventLoop都有它自已的任务队列，独立于任何其他的EventLoop。</p>
+<p><img src="https://s2.loli.net/2025/03/15/xYCOK7vqPD5oTib.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>永远不要将一个长时间运行的任务放入到执行队列中，因为它将阻塞需要在同一线程上执行的任何其他任务。如果必须要进行阻塞调用或者执行长时间运行的任务，我们建议使用一个专门的EventExecutor。​</p>
+</blockquote>
+<h2 id="EventLoop-线程的分配"><a href="#EventLoop-线程的分配" class="headerlink" title="EventLoop&#x2F;线程的分配"></a>EventLoop&#x2F;线程的分配</h2><p>服务于Channel的I&#x2F;O和事件的EventLoop包含在EventLoopGroup中。根据不同的传输实现，EventLoop的创建和分配方式也不同。</p>
+<h3 id="异步传输"><a href="#异步传输" class="headerlink" title="异步传输"></a>异步传输</h3><p>异步传输实现只使用了少量的EventLoop（以及和它们相关联的Thread）​，而且在当前的线程模型中，它们可能会被多个Channel所共享。这使得可以通过尽可能少量的Thread来支撑大量的Channel，而不是每个Channel分配一个Thread。<br><img src="https://s2.loli.net/2025/03/18/LmuQ1rjyPTZWwEB.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>EventLoopGroup负责为每个新创建的Channel分配一个EventLoop。在当前实现中，使用顺序循环（round-robin）的方式进行分配以获取一个均衡的分布，并且<strong>相同的EventLoop可能会被分配给多个Channel</strong>。​<br><strong>一旦一个Channel被分配给一个EventLoop，它将在它的整个生命周期中都使用这个EventLoop（以及相关联的Thread）​。</strong>请牢记这一点，因为它可以使你从担忧你的Channel- Handler实现中的线程安全和同步问题中解脱出来。</p>
+<blockquote>
+<p>EventLoop的分配方式对ThreadLocal的使用的影响。因为一个EventLoop通常会被用于支撑多个Channel，所以对于所有相关联的Channel来说，ThreadLocal都将是一样的。这使得它对于实现状态追踪等功能来说是个糟糕的选择。然而，在一些无状态的上下文中，它仍然可以被用于在多个Channel之间共享一些重度的或者代价昂贵的对象，甚至是事件。</p>
+</blockquote>
+<h3 id="阻塞传输"><a href="#阻塞传输" class="headerlink" title="阻塞传输"></a>阻塞传输</h3><p><img src="https://s2.loli.net/2025/03/18/xGFgDv8w6E21HKR.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>这里每一个Channel都将被分配给一个EventLoop（以及它的Thread）​。</p>
+<p>正如同之前一样，得到的保证是每个Channel的I&#x2F;O事件都将只会被一个Thread（用于支撑该Channel的EventLoop的那个Thread）处理。这也是另一个Netty设计一致性的例子，这种设计上的一致性对Netty的可靠性和易用性做出了巨大贡献。</p>
+<h1 id="附：AI总结"><a href="#附：AI总结" class="headerlink" title="附：AI总结"></a>附：AI总结</h1><h3 id="1-EventLoop-的核心作用"><a href="#1-EventLoop-的核心作用" class="headerlink" title="1. EventLoop 的核心作用"></a><strong>1. EventLoop 的核心作用</strong></h3><p>EventLoop 的核心设计目标是通过<strong>单线程处理多个 Channel 的 I&#x2F;O 事件和任务</strong>，避免多线程竞争，同时减少上下文切换开销。其职责包括：</p>
+<ol>
+<li><p><strong>处理 I&#x2F;O 事件</strong>：如数据读取（<code>channelRead</code>）、连接建立（<code>channelActive</code>）、异常捕获（<code>exceptionCaught</code>）。</p>
+</li>
+<li><p><strong>执行用户任务</strong>：提交到 EventLoop 的普通任务（<code>Runnable</code>）或定时任务（<code>ScheduledFuture</code>）。</p>
+</li>
+<li><p><strong>管理 Channel 生命周期</strong>：将 Channel 注册到 EventLoop，并绑定到特定的线程。</p>
+</li>
+</ol>
+<h3 id="2-EventLoop-的线程模型"><a href="#2-EventLoop-的线程模型" class="headerlink" title="2. EventLoop 的线程模型"></a><strong>2. EventLoop 的线程模型</strong></h3><h4 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a><strong>基本结构</strong></h4><ul>
+<li><p><strong>单线程单 EventLoop</strong>：<br>每个 EventLoop 绑定一个独立的线程（如 <code>NioEventLoop</code>），该线程负责处理所有绑定到该 EventLoop 的 Channel 的 I&#x2F;O 事件和任务。</p>
+</li>
+<li><p><strong>线程复用</strong>：<br>一个 EventLoop 可以管理多个 Channel（基于多路复用技术如 <code>Selector</code>），但每个 Channel 只会注册到一个 EventLoop，确保线程安全。</p>
+</li>
+</ul>
+<h4 id="与-EventLoopGroup-的关系"><a href="#与-EventLoopGroup-的关系" class="headerlink" title="与 EventLoopGroup 的关系"></a><strong>与 EventLoopGroup 的关系</strong></h4><ul>
+<li><strong>EventLoopGroup</strong>：<br>一组 EventLoop 的集合，用于分配和管理多个 EventLoop。例如：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建一个包含 4 个 EventLoop 的 EventLoopGroup</span><br><span class="hljs-type">EventLoopGroup</span> <span class="hljs-variable">group</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NioEventLoopGroup</span>(<span class="hljs-number">4</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Channel 分配规则</strong>：<br>新 Channel 会通过轮询（Round-Robin）方式分配到 EventLoopGroup 中的某个 EventLoop，确保负载均衡。</li>
+</ul>
+<h3 id="3-EventLoop-的工作流程"><a href="#3-EventLoop-的工作流程" class="headerlink" title="3. EventLoop 的工作流程"></a><strong>3. EventLoop 的工作流程</strong></h3><p>EventLoop 内部采用经典的 <strong>Reactor 模式</strong>，运行流程如下：</p>
+<ol>
+<li><p><strong>事件循环（Loop）</strong>：<br>线程持续轮询注册的 Channel 的 I&#x2F;O 事件（如 <code>OP_READ</code>、<code>OP_WRITE</code>）。</p>
+</li>
+<li><p><strong>事件分发</strong>：<br>当检测到事件时，触发对应的 <code>ChannelHandler</code> 处理（如 <code>channelRead()</code>）。</p>
+</li>
+<li><p><strong>任务执行</strong>：<br>处理完 I&#x2F;O 事件后，执行用户提交的任务队列中的任务（如 <code>Runnable</code>）。</p>
+</li>
+<li><p><strong>定时任务调度</strong>：<br>检查并执行到期的定时任务（如 <code>scheduleAtFixedRate()</code>）。</p>
+</li>
+</ol>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a><strong>代码示例</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">EventLoop</span> <span class="hljs-variable">eventLoop</span> <span class="hljs-operator">=</span> channel.eventLoop();<br><span class="hljs-comment">// 提交普通任务</span><br>eventLoop.execute(() -&gt; System.out.println(<span class="hljs-string">&quot;Task executed by EventLoop&quot;</span>));<br><span class="hljs-comment">// 提交定时任务（5秒后执行）</span><br>eventLoop.schedule(() -&gt; System.out.println(<span class="hljs-string">&quot;Delayed task&quot;</span>), <span class="hljs-number">5</span>, TimeUnit.SECONDS);<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-EventLoop-的实现类"><a href="#4-EventLoop-的实现类" class="headerlink" title="4. EventLoop 的实现类"></a><strong>4. EventLoop 的实现类</strong></h3><p>Netty 提供了多种 EventLoop 实现，支持不同的 I&#x2F;O 模型：</p>
+<ol>
+<li><p><strong>NioEventLoop</strong>：<br>基于 Java NIO 的 <code>Selector</code> 实现，适用于大多数场景。</p>
+</li>
+<li><p><strong>EpollEventLoop</strong>：<br>基于 Linux 的 <code>epoll</code> 系统调用（需依赖 <code>netty-transport-native-epoll</code>），性能更高，适合 Linux 环境。</p>
+</li>
+<li><p><strong>KQueueEventLoop</strong>：<br>基于 BSD&#x2F;macOS 的 <code>kqueue</code> 系统调用，适用于 macOS 环境。</p>
+</li>
+</ol>
+<h4 id="配置示例"><a href="#配置示例" class="headerlink" title="配置示例"></a><strong>配置示例</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 使用 EpollEventLoopGroup（Linux 环境）</span><br><span class="hljs-type">EventLoopGroup</span> <span class="hljs-variable">group</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EpollEventLoopGroup</span>();<br></code></pre></td></tr></table></figure>
+<h3 id="5-EventLoop-的优势"><a href="#5-EventLoop-的优势" class="headerlink" title="5. EventLoop 的优势"></a><strong>5. EventLoop 的优势</strong></h3><ol>
+<li><p><strong>高性能</strong>：单线程处理多个 Channel，减少线程切换和锁竞争。</p>
+</li>
+<li><p><strong>低延迟</strong>： I&#x2F;O 事件和任务在同一线程中顺序执行，避免多线程同步问题。</p>
+</li>
+<li><p><strong>资源高效</strong>： 少量线程即可支持高并发连接（如经典的 1 个 EventLoop 处理 10k+ 连接）。</p>
+</li>
+<li><p><strong>简化并发编程</strong>： 用户无需手动处理线程同步，所有绑定到同一 EventLoop 的操作都是线程安全的。</p>
+</li>
+</ol>
+<h3 id="6-关键设计细节"><a href="#6-关键设计细节" class="headerlink" title="6. 关键设计细节"></a><strong>6. 关键设计细节</strong></h3><h4 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a><strong>任务队列</strong></h4><ul>
+<li><p>每个 EventLoop 维护一个任务队列（<code>Task Queue</code>），用于存放用户提交的 <code>Runnable</code> 任务。</p>
+</li>
+<li><p>任务按提交顺序执行，保证线程安全性。</p>
+</li>
+</ul>
+<h4 id="Selector-空轮询-Bug-规避"><a href="#Selector-空轮询-Bug-规避" class="headerlink" title="Selector 空轮询 Bug 规避"></a><strong>Selector 空轮询 Bug 规避</strong></h4><ul>
+<li>Netty 通过计数器和重建 Selector 的机制，规避了 Java NIO 中可能出现的 Selector 空轮询导致的 CPU 100% 问题。</li>
+</ul>
+<h4 id="线程绑定"><a href="#线程绑定" class="headerlink" title="线程绑定"></a><strong>线程绑定</strong></h4><ul>
+<li><p>EventLoop 的线程在首次执行任务时才会启动（懒加载），且一旦启动不会更换线程。</p>
+</li>
+<li><p>所有与 Channel 相关的操作必须由绑定的 EventLoop 线程执行，否则 Netty 会将任务转发到正确的线程。</p>
+</li>
+</ul>
+<h3 id="7-典型应用场景"><a href="#7-典型应用场景" class="headerlink" title="7. 典型应用场景"></a><strong>7. 典型应用场景</strong></h3><ol>
+<li><p><strong>高并发服务器</strong>： 如 HTTP 服务器、游戏服务器，通过少量 EventLoop 线程处理海量连接。</p>
+</li>
+<li><p><strong>实时通信</strong>： WebSocket 或自定义协议，利用 EventLoop 的低延迟特性。</p>
+</li>
+<li><p><strong>任务调度</strong>： 替代 <code>ScheduledExecutorService</code>，统一管理定时任务和 I&#x2F;O 事件。</p>
+</li>
+</ol>
+<h3 id="8-最佳实践"><a href="#8-最佳实践" class="headerlink" title="8. 最佳实践"></a><strong>8. 最佳实践</strong></h3><ol>
+<li><p><strong>避免阻塞 EventLoop 线程</strong>： 不要在 <code>ChannelHandler</code> 中执行耗时操作（如数据库查询），否则会阻塞整个 EventLoop。</p>
+</li>
+<li><p><strong>合理配置线程数</strong>： EventLoopGroup 的线程数通常设置为 CPU 核心数 * 2（根据 I&#x2F;O 密集或计算密集调整）。</p>
+</li>
+<li><p><strong>使用业务线程池</strong>： 耗时任务应提交到独立的业务线程池，避免影响 EventLoop。</p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/backend/Netty/" class="category-chain-item">Netty</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Netty in Action 7 - EventLoop and threading model</div>
+      <div>https://peixuanhu.github.io/posts/b7fae525.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Peixuan Hu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 15, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Updated on</div>
+          <div>March 18, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/ab126a8f.html" title="Netty in Action 6 - ChannelHandler &amp; ChannelPipeline">
+                        <span class="hidden-mobile">Netty in Action 6 - ChannelHandler &amp; ChannelPipeline</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'peixuanhu/peixuanhu.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
