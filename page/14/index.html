@@ -226,15 +226,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/ef9bba37.html" target="_self">
-          算法模板2-4.Trie树
+        <a href="/posts/a211d8a2.html" target="_self">
+          算法模板3-4.最短路
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/ef9bba37.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/a211d8a2.html" target="_self">
         <div>
-          Trie树适用场景是用于高效存储和查找字符串集合中各字符串出现次数的数据结构。 代码模板1234567891011121314151617181920212223242526int son[N][26], cnt[N], idx;// 0号点既是根节点，又是空节点（一个点如果没有子节点，它的son就指向0）// son[][]存储树中每个节点的子节点// cnt[]存储以每个节点结尾的单词数量//
+          最短路源点：起点，汇点：终点 n: 点数，m: 边数 稠密图：m ~ n^2^，稀疏图：m ~ n  难点：建图，如何把原问题抽象成最短路问题，如何把原模型抽象成图，如何定义点和边   最短路问题只需要考虑有向图。无向图只需要连两条对称的边就可以。  边权为1的最短路比较特殊，可以用BFS来求。单源和多源都可以。 单源最短路求从一个点到其他所有点的最短路。 所有边权都是正数朴素Dijkstra算法
         </div>
       </a>
 
@@ -242,8 +242,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-09 13:53" pubdate>
-              2023-10-09
+            <time datetime="2023-10-14 12:00" pubdate>
+              2023-10-14
             </time>
           </div>
         
@@ -287,15 +287,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/fca2cc32.html" target="_self">
-          算法模板2-3.KMP
+        <a href="/posts/3e8b9fd.html" target="_self">
+          cpp算法相关写法总结
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/fca2cc32.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/3e8b9fd.html" target="_self">
         <div>
-          KMP使用场景有两个字符串 S 和 p，其中 S 是原串（长），p是模板串（短）。 KMP用于字符串匹配：找到 S 中所有与 p 相同的子串，并返回每个子串开头字符的下标。 代码模板123456789101112131415161718// s[]是长文本，p[]是模式串，n是s的长度，m是p的长度// 求模式串的next数组for (int i = 2, j = 0; i &lt;= m; i
+          输入输入一行字符串到一个字符数组例： abc def ghi 到 char str[1000] 写法： 12char str[1000];gets(str);  https://www.programiz.com/cpp-programming/library-function/cstdio/gets 用scanf读入一个字母 - 推荐读成字符串的形式例： Q 2 3 写法： 1234char o
         </div>
       </a>
 
@@ -303,8 +303,62 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-09 12:41" pubdate>
-              2023-10-09
+            <time datetime="2023-10-12 17:34" pubdate>
+              2023-10-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/35683d73.html" target="_self">
+          算法模板3-2.树与图的存储
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/35683d73.html" target="_self">
+        <div>
+          树和图的存储树是一种特殊的图：无环连通图。与图的存储方式相同。 对于无向图中的边ab，存储两条有向边a-&gt;b, b-&gt;a。 因此我们可以只考虑有向图的存储。 存储方法一：邻接矩阵1g[a][b] 存储边a-&gt;b的权重(int)/有无(bool)  邻接矩阵不能存重边，不过一般存最短的就行。 存储方法二：邻接表1234567891011121314const int N = 100
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-12 13:38" pubdate>
+              2023-10-12
             </time>
           </div>
         
@@ -348,15 +402,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/f726e612.html" target="_self">
-          算法模板2-2.栈和队列
+        <a href="/posts/f46f279f.html" target="_self">
+          设计模式16-状态模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/f726e612.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/f46f279f.html" target="_self">
         <div>
-          栈LIFO 代码模板12345678910111213141516// tt表示栈顶int stk[N], tt = 0;// 向栈顶插入一个数stk[++ tt] = x;// 从栈顶弹出一个数tt --;// 获得栈顶的值stk[tt];// 判断栈是否为空，如果 tt &gt; 0，则表示不为空if (tt &gt; 0) &#123;    ...&#125;    队列FIFO 普通队列
+          状态模式定义状态模式（State），当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。  状态模式主要解决的是当控制一个对象状态转换的条件表达式过于复杂时的情况。把状态的判断逻辑转移到表示不同状态的一系列类当中，可以把复杂的判断逻辑简化。  结构图 State 类：抽象状态类，定义一个接口以封装与 Context 的一个特定状态相关的行为。 ConcreteState 类：具
         </div>
       </a>
 
@@ -364,130 +418,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-07 20:34" pubdate>
-              2023-10-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/594dd557.html" target="_self">
-          算法模板2-1.链表
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/594dd557.html" target="_self">
-        <div>
-          实现方式结构体+指针123456struct Node &#123;    int val;    Node *next;&#125;;auto n = new Node(); // 非常慢  即动态链表。 一般面试中用得较多，笔试不常用，因为new操作效率低。 数组模拟（常用）即静态链表。 单链表主要用途：邻接表。 邻接表应用：存储树和图。 实现e[N]: 存储每个点的 val。ne[N]：存储
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-07 16:12" pubdate>
-              2023-10-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/90d63b5a.html" target="_self">
-          设计模式12-外观模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/90d63b5a.html" target="_self">
-        <div>
-          外观模式定义外观模式（Facade），为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。 结构图 基本代码四个子系统的类： 123456789101112131415161718192021222324// 子系统1class SubSystemOne &#123;    public void methodOne() &#123;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-07 12:24" pubdate>
-              2023-10-07
+            <time datetime="2023-10-12 09:51" pubdate>
+              2023-10-12
             </time>
           </div>
         
@@ -524,15 +456,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/d9143548.html" target="_self">
-          算法模板1-7.区间合并模板
+        <a href="/posts/3458e125.html" target="_self">
+          算法模板3-3.树与图的遍历
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/d9143548.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/3458e125.html" target="_self">
         <div>
-          区间合并快速地将有交集的区间合并。 跟区间有关的问题，大概率会用到贪心。按照端点排序。 应用场景有若干个区间，若其中某些区间有交集，则将它们合并。 步骤类似贪心。  按区间左端点从小到大排序 当前维护的区间，左端点 st，右端点 ed。第i个区间（左端点 l，右端点 r）与当前维护区间的关系： st &lt;&#x3D; l &lt;&#x3D; r &lt;&#x3D; ed &#x3D;&gt
+          树与图的遍历时间复杂度：O(n + m)，其中 n 表示点数， m 表示边数。 树是特殊的图，同样只需要考虑图的遍历即可。 DFS一般树和图的遍历，每个点只需要遍历一次。 需要一个状态数组 st[]，表示该点是否被遍历过。 代码模板123456789int dfs(int u) &#123;    st[u] = true; // st[u] 表示点u已经遍历过    for (int i = h
         </div>
       </a>
 
@@ -540,8 +472,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-06 21:59" pubdate>
-              2023-10-06
+            <time datetime="2023-10-11 16:55" pubdate>
+              2023-10-11
             </time>
           </div>
         
@@ -585,15 +517,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/1d57d4c3.html" target="_self">
-          算法模板1-1.排序模板
+        <a href="/posts/d477b61a.html" target="_self">
+          算法模板3-1.DFS和BFS
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/1d57d4c3.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/d477b61a.html" target="_self">
         <div>
-          快速排序时间复杂度平均，最好：O(nlogn) 最坏：O(n^2) 代码模板从小到大： 1234567891011void quick_sort(int q[], int l, int r) &#123;    if (l &gt;= r) return;        int i = l - 1, j = r + 1, x = q[l + r &gt;&gt; 1];    while (i &
+          深度优先遍历 (DFS)一条路走到底，无路可走了之后往回退一步，继续找一条其他的路一直往下走。 形势一般为递归。 概念回溯走到底了，返回的过程叫做回溯。 回来的时候要恢复现场。 123456// 恢复现场的代码与修改状态的代码一般是对称的，例：path[u] = i;st[i] = true;dfs(u + 1); // 下一层递归返回之后恢复st[i] = false;path[u] = 0;
         </div>
       </a>
 
@@ -601,8 +533,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-06 21:09" pubdate>
-              2023-10-06
+            <time datetime="2023-10-11 16:53" pubdate>
+              2023-10-11
             </time>
           </div>
         
@@ -646,15 +578,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/7ea9f791.html" target="_self">
-          算法模板1-2.二分模板
+        <a href="/posts/86037912.html" target="_self">
+          STL总结
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/7ea9f791.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/86037912.html" target="_self">
         <div>
-          整数二分check函数： 123bool check(int x) &#123;    // 检查arr[x]是否满足某种性质&#125;  区间[l, r]被划分成[l, mid]和[mid + 1, r]时使用（要找的是右半段的最左边那个点）： 12345678int binary_search(int l, int r) &#123;    while (l &lt; r) &#123;
+          vector, 变长数组，倍增的思想12345678size()  返回元素个数empty()  返回是否为空clear()  清空front()/back()push_back()/pop_back()begin()/end()[]支持比较运算，按字典序  pair&lt;int, int&gt;123first, 第一个元素second, 第二个元素支持比较运算，以first为第一关键字，以s
         </div>
       </a>
 
@@ -662,8 +594,62 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-06 21:09" pubdate>
-              2023-10-06
+            <time datetime="2023-10-10 15:48" pubdate>
+              2023-10-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/2d6c6193.html" target="_self">
+          算法模板2-8.字符串哈希
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/2d6c6193.html" target="_self">
+        <div>
+          字符串哈希适用场景快速判断一个字符串中两个区间对应的子串是否完全相同。  除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。  字符串前缀哈希法12345678str = &quot;ABCABCDE&quot;把每一个前缀的哈希值算出来：h[0] = 0h[1] = &quot;A&quot;的哈希值h[2] = &quot;AB&quot;的哈希值h[3] = &q
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-10 15:37" pubdate>
+              2023-10-10
             </time>
           </div>
         
@@ -707,15 +693,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/1384a50.html" target="_self">
-          算法模板1-3.前缀和与差分模板
+        <a href="/posts/927b654c.html" target="_self">
+          算法模板2-7.哈希
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/1384a50.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/927b654c.html" target="_self">
         <div>
-          前缀和一维前缀和问题给定a数组，需要构造S数组，使得：S[i] = a[1] + a[2] + ... a[i] (i = 1, 2, ...), S[0] = 0  注：a数组下标从1开始，S[i]也从1算起，且S[0]必须赋值0（当l&#x3D;1时会用到，S[l - 1] &#x3D; S[0]）  如何构造 S[i] ?从前往后推： 12for (int i = 1; i &lt;= n;
+          一般哈希适用场景把庞大的值域映射到一个比较小的空间。 如 0~10^9 -&gt; 0~10^5。  与离散化的关系：离散化是需要保序的，可以看作一种特殊的哈希方式  步骤1. x mod nn 即数组长度，它是一个质数，并且这个质数要离2的整数次幂尽可能远。  这样取可以使冲突的概率最小。数学证明待补充  2. 解决冲突有两种方法 拉链法数组的长度即为n，其中每个元素都是一个链表，取模之后结果相
         </div>
       </a>
 
@@ -723,8 +709,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-06 21:09" pubdate>
-              2023-10-06
+            <time datetime="2023-10-10 15:24" pubdate>
+              2023-10-10
             </time>
           </div>
         
@@ -768,15 +754,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/9490f6c1.html" target="_self">
-          算法模板1-4.双指针模板
+        <a href="/posts/3c62176d.html" target="_self">
+          设计模式13-建造者模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/9490f6c1.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/3c62176d.html" target="_self">
         <div>
-          双指针算法代码模板12345for (int i = 0, j = 0; i &lt; n; i ++) &#123;    while (j &lt;=  i &amp;&amp; check(i, j)) j ++; // j在合法范围内且满足特定条件，继续往后走        // 具体问题的逻辑&#125;  常见问题分类 对于一个序列，用两个指针维护一段区间 对于两个序列，维护某种次序，
+          建造者模式定义建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 建造者模式可以将一个产品的内部表象与产品的生成过程分割开来，从而可以使一个建造过程生成具有不同的内部表象的产品对象。 用户只需指定需要建造的类型即可，不需要知道具体建造的过程和细节。 结构图 Director构建一个使用 Builder 接口的对象。 用于控制建造过程，隔离用户与
         </div>
       </a>
 
@@ -784,8 +770,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-06 21:09" pubdate>
-              2023-10-06
+            <time datetime="2023-10-10 00:29" pubdate>
+              2023-10-10
             </time>
           </div>
         
@@ -800,15 +786,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
   
 
       </span>
@@ -827,7 +806,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/13/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/#board">12</a><a class="page-number" href="/page/13/#board">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/#board">15</a><a class="page-number" href="/page/16/#board">16</a><a class="page-number" href="/page/17/#board">17</a><a class="extend next" rel="next" href="/page/15/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/13/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/#board">12</a><a class="page-number" href="/page/13/#board">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/#board">15</a><a class="page-number" href="/page/16/#board">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/#board">18</a><a class="extend next" rel="next" href="/page/15/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

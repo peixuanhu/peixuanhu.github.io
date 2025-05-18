@@ -226,15 +226,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/b9bf3db3.html" target="_self">
-          Effective Java-1. Consider static factory methods instead of constructors
+        <a href="/posts/22bb60a3.html" target="_self">
+          Effective Java-9. Prefer try-with-resources to try-finally
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/b9bf3db3.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/22bb60a3.html" target="_self">
         <div>
-          Item 1: Consider static factory methods instead of constructors优势1. 静态工厂方法有名称能够确切描述被返回的对象。 2. 不必在每次调用它们时都创建一个新对象与享元模式类似。节约资源。 3. 可以返回原返回类型的任何子类型的对象通过接口来引用被返回的对象，而不是通过它的实现类。 4. 所返回的对象的类可以随着每次调用而发生变化，取决
+          Item 9: Prefer try-with-resources to try-finallyBackgroundThe Java libraries include many resources that must be closed manually by invok- ing a close method. Examples include InputStream, OutputStrea
         </div>
       </a>
 
@@ -242,8 +242,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-10 14:40" pubdate>
-              2023-11-10
+            <time datetime="2023-11-21 09:22" pubdate>
+              2023-11-21
             </time>
           </div>
         
@@ -294,15 +294,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/e779b37f.html" target="_self">
-          Effective Java-3. Enforce the singleton property with a private constructor or an enum type
+        <a href="/posts/2a49d2f.html" target="_self">
+          Effective Java-10. Obey the general contract when overriding equals
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/e779b37f.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/2a49d2f.html" target="_self">
         <div>
-          Item 3: Enforce the singleton property with a private constructor or an enum typeBackgroundA singleton is simply a class that is instantiated exactly once. Singletons typically represent either a stat
+          Item 10: Obey the general contract when overriding equalsConditions for not overriding the equals method Each instance of the class is inherently unique. This is true for classes such as Thread that r
         </div>
       </a>
 
@@ -310,8 +310,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-10 14:39" pubdate>
-              2023-11-10
+            <time datetime="2023-11-21 09:21" pubdate>
+              2023-11-21
             </time>
           </div>
         
@@ -362,15 +362,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/10de1e0.html" target="_self">
-          Effective Java-4. Enforce noninstantiability with a private constructor
+        <a href="/posts/ab4afd12.html" target="_self">
+          Effective Java-11. Always override hashCode when you override equals
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/10de1e0.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/ab4afd12.html" target="_self">
         <div>
-          Item 4:  Enforce noninstantiability with a private constructorBackgroundWrite a class that is just a grouping of static methods and static fields. Such utility classes were not designed to be instanti
+          Item 11: Always override hashCode when you override equalsGeneral contract for hashCode When the hashCode method is invoked on an object repeatedly during an execution of an application, it must consi
         </div>
       </a>
 
@@ -378,8 +378,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-10 14:39" pubdate>
-              2023-11-10
+            <time datetime="2023-11-21 09:21" pubdate>
+              2023-11-21
             </time>
           </div>
         
@@ -430,15 +430,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/54699746.html" target="_self">
-          MyBatis常用标签
+        <a href="/posts/b017352e.html" target="_self">
+          Effective Java-12. Always override toString
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/54699746.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/b017352e.html" target="_self">
         <div>
-          顶级元素文档：https://mybatis.org/mybatis-3/zh/sqlmap-xml.html SQL 映射文件只有很少的几个顶级元素（按照应被定义的顺序列出）：  cache：该命名空间的缓存配置 cache-ref：引用其它命名空间的缓存配置 resultMap：描述如何从数据库结果集中加载对象，是最复杂也是最强大的元素 parameterMap：老式风格的参数映射。此元素已被
+          Item 12: Always override toStringWhile Object provides an implementation of the toString method, the string that it returns is generally not what the user of your class wants to see. It consists of th
         </div>
       </a>
 
@@ -446,8 +446,144 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-08 10:07" pubdate>
-              2023-11-08
+            <time datetime="2023-11-21 09:21" pubdate>
+              2023-11-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/effective-java/" class="category-chain-item">effective-java</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/7e171cef.html" target="_self">
+          Effective Java-15. Minimize the accessibility of classes and members
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/7e171cef.html" target="_self">
+        <div>
+          Item 15: Minimize the accessibility of classes and membersThe single most important factor that distinguishes a well-designed component from a poorly designed one is the degree to which the component
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-20 10:29" pubdate>
+              2023-11-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/effective-java/" class="category-chain-item">effective-java</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/d653de15.html" target="_self">
+          IoC容器
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/d653de15.html" target="_self">
+        <div>
+          IoC容器什么是容器？容器是一种为某种特定组件的运行提供必要支持的一个软件环境。例如，Tomcat就是一个Servlet容器，它可以为Servlet的运行提供运行环境。类似Docker这样的软件也是一个容器，它提供了必要的Linux环境以便运行一个特定的Linux进程。 Spring的核心就是提供了一个IoC容器，它可以管理所有轻量级的JavaBean组件，提供的底层服务包括组件的生命周期管理、配
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-19 22:01" pubdate>
+              2023-11-19
             </time>
           </div>
         
@@ -467,69 +603,15 @@
   
     <span>></span>
     
-  <a href="/categories/backend/MyBatis/" class="category-chain-item">MyBatis</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/86821ae5.html" target="_self">
-          MyBatis中#{}和${}的区别是什么？
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/86821ae5.html" target="_self">
-        <div>
-          动态 sql 是 MyBatis 的主要特性之一，在 mapper 中定义的参数传到 xml 中之后，在查询之前 MyBatis 会对其进行动态解析。MyBatis 为我们提供了两种支持动态 sql 的语法：#{} 以及 ${}。 一句话回答#{}是预编译处理，${}是字符串替换。 详细解释 MyBatis在处理#{}时，会将SQL中的#{}替换为?号，使用PreparedStatement的se
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-08 10:07" pubdate>
-              2023-11-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  <a href="/categories/backend/Spring/" class="category-chain-item">Spring</a>
   
   
     <span>></span>
     
-  <a href="/categories/backend/MyBatis/" class="category-chain-item">MyBatis</a>
+  <a href="/categories/backend/Spring/IoC/" class="category-chain-item">IoC</a>
   
+  
+
   
 
   
@@ -552,15 +634,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/906539fa.html" target="_self">
-          码出高效读书笔记2-面向对象
+        <a href="/posts/3250a264.html" target="_self">
+          浪潮之巅读书笔记3-苹果与微软
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/906539fa.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/3250a264.html" target="_self">
         <div>
-          面向对象类访问权限控制  如果不允许外部直接通过 new 创建对象，构造方法必须是 private。 工具类不允许有 public 或 default 构造方法。  this和super  在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。  由于 this 和 super都在实例化阶段调用，所以不能在静态方法
+          Apple大事记1976 苹果计算机公司成立，推出Apple I个人电脑。 1977 推出第一款系列个人电脑Apple II。 1984 推出采用图像视窗界面操作系统的麦金托什(Macintosh)电脑。 1985 乔布斯和新CEO斯卡利开始权力斗争，前者失败离开苹果公司。 1994 苹果告微软的视窗操作系统抄袭麦金托什操作系统，官司最终和解。 1997 乔布斯以顾问的身份回到苹果公司，经过权力斗
         </div>
       </a>
 
@@ -568,8 +650,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-08 10:02" pubdate>
-              2023-11-08
+            <time datetime="2023-11-19 21:39" pubdate>
+              2023-11-19
             </time>
           </div>
         
@@ -584,20 +666,74 @@
     
       <span class="category-chain">
         
-  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  <a href="/categories/book-notes/" class="category-chain-item">book notes</a>
   
   
     <span>></span>
     
-  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/" class="category-chain-item">浪潮之巅</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/ca3ef48c.html" target="_self">
+          浪潮之巅读书笔记4-信息产业的发展规律
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/ca3ef48c.html" target="_self">
+        <div>
+          信息产业的生态链摩尔定律计算机和整个IT行业的发展比传统工业要快得多。比尔·盖茨说，如果汽车工业能够像计算机领域一样发展，那么今天，买一辆汽车只需要25美元，一升汽油能跑400公里。 英特尔公司的创始人戈登·摩尔(Gordon Moore) 博士最早看到了这个现象。在1965年，他就提出，至多在10年内，集成电路的集成度会每两年翻一番。后来，大家把这个周期缩短到18个月。 当今世界经济的前五大行业
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-19 21:39" pubdate>
+              2023-11-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/book-notes/" class="category-chain-item">book notes</a>
   
   
     <span>></span>
     
-  <a href="/categories/programming-language/Java/OOP/" class="category-chain-item">OOP</a>
+  <a href="/categories/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/" class="category-chain-item">浪潮之巅</a>
   
-  
-
   
 
   
@@ -610,13 +746,6 @@
           </div>
         
         
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Easy-Coding/">#Easy Coding</a>
-            
-          </div>
-        
       </div>
     </article>
   </div>
@@ -627,15 +756,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/16da4355.html" target="_self">
-          算法模板6-1.数学-数论
+        <a href="/posts/e4aa2245.html" target="_self">
+          浪潮之巅读书笔记2-硅谷
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/16da4355.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/e4aa2245.html" target="_self">
         <div>
-          质数定义对所有大于1的整数，如果只包含1和本身这两个约数，就被称为质数，或者叫素数。  所有&lt;&#x3D;1的数，既不是质数也不是合数  判定：试除法朴素做法时间复杂度$O(n)$ 123456789bool is_prime(int n)&#123;    if (n &lt; 2) return false;        for (int i = 2; i &lt; n; i ++)
+          “八叛徒”与硅谷肖克利半导体公司1947年，肖克利发现了半导体P-N结的单向导电等诸多特性，并利用这一原理发明了晶体管。同 时巴丁和布拉顿也发现了一种三极管。从此，人类进人半导体时代。这三名科学家后来获得了诺贝尔物理学奖，那也是贝尔实验室所获得的众多诺贝尔奖中的第一个。 1956年，肖克利搬到加州的山景城，以便照顾住在帕洛阿尔托乡下的母亲。他的朋友贝克曼出资，肖克利在加州办起了自己的实验室一一肖克
         </div>
       </a>
 
@@ -643,8 +772,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-07 11:06" pubdate>
-              2023-11-07
+            <time datetime="2023-11-15 21:31" pubdate>
+              2023-11-15
             </time>
           </div>
         
@@ -659,12 +788,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  <a href="/categories/book-notes/" class="category-chain-item">book notes</a>
   
   
     <span>></span>
     
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
+  <a href="/categories/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/" class="category-chain-item">浪潮之巅</a>
   
   
 
@@ -688,15 +817,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/f95aacf0.html" target="_self">
-          设计模式28-访问者模式
+        <a href="/posts/24c6c64a.html" target="_self">
+          浪潮之巅读书笔记1-AT&amp;T与IBM
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/f95aacf0.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/24c6c64a.html" target="_self">
         <div>
-          访问者模式定义访问者模式（Visitor），表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。 结构图 访问者模式适用于数据结构相对稳定（Element种类数量不变）的系统。 它把数据结构和作用于结构上的操作之间的耦合解脱开，使得操作集合可以相对自由地演化。 基本代码Visitor类：为该对象结构中ConcreteElement的每一个类声明
+          AT&amp;T大事记1875 贝尔和沃森发明电话。 1877 美国贝尔电话公司成立。 1880 贝尔长途电话业务开通。 1892 长途电话业务进入美国中部芝加哥地区。 1913 和美国政府达成第一次反垄断协议。 1915 电话业务进入美国西部旧金山地区。 1925 贝尔实验室成立。 1972 UNIX操作系统和C语言诞生于贝尔实验室。 1982 美国司法部打赢了长达8年的针对贝尔电话公司的反垄断
         </div>
       </a>
 
@@ -704,8 +833,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-05 23:49" pubdate>
-              2023-11-05
+            <time datetime="2023-11-15 21:24" pubdate>
+              2023-11-15
             </time>
           </div>
         
@@ -720,116 +849,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
+  <a href="/categories/book-notes/" class="category-chain-item">book notes</a>
   
   
-
-      </span>
+    <span>></span>
     
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/bf4710f3.html" target="_self">
-          算法时空复杂度分析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/bf4710f3.html" target="_self">
-        <div>
-          时间复杂度由数据范围反推算法复杂度以及算法内容一般ACM或者笔试题的时间限制是1秒或2秒。在这种情况下，C++代码中的操作次数控制在 $10^7∼10^8$ 为最佳。 下面给出在不同数据范围下，代码的时间复杂度和算法该如何选择：  $n≤30$ &#x3D;&gt; 指数级别：dfs+剪枝，状态压缩DP $n≤100$ &#x3D;&gt; $O(n^3)$：Floyd，DP，高斯消元 $n≤10
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-04 15:43" pubdate>
-              2023-11-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  <a href="/categories/book-notes/%E6%B5%AA%E6%BD%AE%E4%B9%8B%E5%B7%85/" class="category-chain-item">浪潮之巅</a>
   
   
 
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/87e8a40d.html" target="_self">
-          设计模式15-抽象工厂模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/87e8a40d.html" target="_self">
-        <div>
-          抽象工厂模式定义抽象工厂模式（Abstract Factory），提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。  与工厂方法模式的区别： 以操作不同数据库为例：只有一个User类和User操作类的时候，是只需要工厂方法模式的，但现在显然你数据库中有很多的表，而SQL Server与Access又是两大不同的分类，所以解决这种涉及多个产品系列的问题，有一个专门的工厂模式叫抽象
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-04 10:37" pubdate>
-              2023-11-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
-  
   
 
       </span>
@@ -848,7 +876,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/8/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/#board">17</a><a class="extend next" rel="next" href="/page/10/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/8/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/#board">18</a><a class="extend next" rel="next" href="/page/10/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

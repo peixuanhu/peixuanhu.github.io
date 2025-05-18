@@ -226,15 +226,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/35683d73.html" target="_self">
-          算法模板3-2.树与图的存储
+        <a href="/posts/98bf06c9.html" target="_self">
+          算法模板4-0.DP理解方式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/35683d73.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/98bf06c9.html" target="_self">
         <div>
-          树和图的存储树是一种特殊的图：无环连通图。与图的存储方式相同。 对于无向图中的边ab，存储两条有向边a-&gt;b, b-&gt;a。 因此我们可以只考虑有向图的存储。 存储方法一：邻接矩阵1g[a][b] 存储边a-&gt;b的权重(int)/有无(bool)  邻接矩阵不能存重边，不过一般存最短的就行。 存储方法二：邻接表1234567891011121314const int N = 100
+          DP理解DP求解过程DP求解过程可以分为两步：状态表示 状态表示思考：问题需要用几维的状态来表示？  背包问题有两维。  f(i, j) 集合f(i, j)表示的是什么集合？  如背包问题：f(i, j)表示所有选法的集合。  属性f(i, j)这个数存的是这个集合的什么属性？min, max, cnt?  如背包问题：f(i, j)表示集合选法对应的价值的最大值。  状态计算思考：如何一步一步地
         </div>
       </a>
 
@@ -242,8 +242,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-12 13:38" pubdate>
-              2023-10-12
+            <time datetime="2023-10-26 10:43" pubdate>
+              2023-10-26
             </time>
           </div>
         
@@ -266,6 +266,13 @@
   <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
   
   
+    <span>></span>
+    
+  <a href="/categories/algorithm/template/dp/" class="category-chain-item">dp</a>
+  
+  
+
+  
 
   
 
@@ -287,15 +294,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/f46f279f.html" target="_self">
-          设计模式16-状态模式
+        <a href="/posts/2047b357.html" target="_self">
+          设计模式22-桥接模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/f46f279f.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/2047b357.html" target="_self">
         <div>
-          状态模式定义状态模式（State），当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。  状态模式主要解决的是当控制一个对象状态转换的条件表达式过于复杂时的情况。把状态的判断逻辑转移到表示不同状态的一系列类当中，可以把复杂的判断逻辑简化。  结构图 State 类：抽象状态类，定义一个接口以封装与 Context 的一个特定状态相关的行为。 ConcreteState 类：具
+          合成&#x2F;聚合复用原则 (CARP)定义合成／聚合复用原则（CARP），尽量使用合成 (Composition)／聚合 (Aggregation)，尽量不要使用类继承。 合成和聚合 聚合表示一种弱的’拥有’关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分。  如：大雁是群居动物，所以每只大雁都是属于一个雁群，一个雁群可以有多只大雁，所以大雁和雁群是聚合关系。   合成则是一种强
         </div>
       </a>
 
@@ -303,8 +310,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-12 09:51" pubdate>
-              2023-10-12
+            <time datetime="2023-10-26 09:49" pubdate>
+              2023-10-26
             </time>
           </div>
         
@@ -341,15 +348,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/3458e125.html" target="_self">
-          算法模板3-3.树与图的遍历
+        <a href="/posts/d549d88.html" target="_self">
+          算法模板4-1.DP-背包问题
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/3458e125.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/d549d88.html" target="_self">
         <div>
-          树与图的遍历时间复杂度：O(n + m)，其中 n 表示点数， m 表示边数。 树是特殊的图，同样只需要考虑图的遍历即可。 DFS一般树和图的遍历，每个点只需要遍历一次。 需要一个状态数组 st[]，表示该点是否被遍历过。 代码模板123456789int dfs(int u) &#123;    st[u] = true; // st[u] 表示点u已经遍历过    for (int i = h
+          背包问题通用问题描述给定 N 个物品和容量是为 V 的背包。每一个物品 i 有两个属性：体积 vi 和价值 wi 。 求：在 总体积&lt;=V的情况下，选出一些物品，它们的最大价值之和是多少。 01背包问题问题描述给定 N 个物品和容量是为 V 的背包。每一个物品 i 有两个属性：体积 vi 和价值 wi 。 求：在 总体积&lt;=V的情况下，选出一些物品，它们的最大价值之和是多少。 每件物品
         </div>
       </a>
 
@@ -357,8 +364,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-11 16:55" pubdate>
-              2023-10-11
+            <time datetime="2023-10-23 16:31" pubdate>
+              2023-10-23
             </time>
           </div>
         
@@ -381,181 +388,12 @@
   <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
   
   
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/d477b61a.html" target="_self">
-          算法模板3-1.DFS和BFS
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/d477b61a.html" target="_self">
-        <div>
-          深度优先遍历 (DFS)一条路走到底，无路可走了之后往回退一步，继续找一条其他的路一直往下走。 形势一般为递归。 概念回溯走到底了，返回的过程叫做回溯。 回来的时候要恢复现场。 123456// 恢复现场的代码与修改状态的代码一般是对称的，例：path[u] = i;st[i] = true;dfs(u + 1); // 下一层递归返回之后恢复st[i] = false;path[u] = 0;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-11 16:53" pubdate>
-              2023-10-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
     <span>></span>
     
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
+  <a href="/categories/algorithm/template/dp/" class="category-chain-item">dp</a>
   
   
 
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/86037912.html" target="_self">
-          STL总结
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/86037912.html" target="_self">
-        <div>
-          vector, 变长数组，倍增的思想12345678size()  返回元素个数empty()  返回是否为空clear()  清空front()/back()push_back()/pop_back()begin()/end()[]支持比较运算，按字典序  pair&lt;int, int&gt;123first, 第一个元素second, 第二个元素支持比较运算，以first为第一关键字，以s
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-10 15:48" pubdate>
-              2023-10-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/2d6c6193.html" target="_self">
-          算法模板2-8.字符串哈希
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/2d6c6193.html" target="_self">
-        <div>
-          字符串哈希适用场景快速判断一个字符串中两个区间对应的子串是否完全相同。  除了求一个字符串的循环节只能用KMP之外，大部分时候字符串哈希都能代替KMP。  字符串前缀哈希法12345678str = &quot;ABCABCDE&quot;把每一个前缀的哈希值算出来：h[0] = 0h[1] = &quot;A&quot;的哈希值h[2] = &quot;AB&quot;的哈希值h[3] = &q
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-10 15:37" pubdate>
-              2023-10-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
   
 
   
@@ -578,15 +416,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/927b654c.html" target="_self">
-          算法模板2-7.哈希
+        <a href="/posts/fb74e26e.html" target="_self">
+          设计模式21-单例模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/927b654c.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/fb74e26e.html" target="_self">
         <div>
-          一般哈希适用场景把庞大的值域映射到一个比较小的空间。 如 0~10^9 -&gt; 0~10^5。  与离散化的关系：离散化是需要保序的，可以看作一种特殊的哈希方式  步骤1. x mod nn 即数组长度，它是一个质数，并且这个质数要离2的整数次幂尽可能远。  这样取可以使冲突的概率最小。数学证明待补充  2. 解决冲突有两种方法 拉链法数组的长度即为n，其中每个元素都是一个链表，取模之后结果相
+          单例模式定义单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。 结构图 基本代码Singleton类，定义一个GetInstance操作，允许客户访问它的唯一实例。GetInstance是一个静态方法，主要负责创建自己的唯一实例。 懒汉式调用getInstance的时候再来创建instance。 V1 线程不安全在多线程的情况下有可能创建多个实例 1234567
         </div>
       </a>
 
@@ -594,69 +432,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-10 15:24" pubdate>
-              2023-10-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/3c62176d.html" target="_self">
-          设计模式13-建造者模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/3c62176d.html" target="_self">
-        <div>
-          建造者模式定义建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 建造者模式可以将一个产品的内部表象与产品的生成过程分割开来，从而可以使一个建造过程生成具有不同的内部表象的产品对象。 用户只需指定需要建造的类型即可，不需要知道具体建造的过程和细节。 结构图 Director构建一个使用 Builder 接口的对象。 用于控制建造过程，隔离用户与
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-10 00:29" pubdate>
-              2023-10-10
+            <time datetime="2023-10-23 10:16" pubdate>
+              2023-10-23
             </time>
           </div>
         
@@ -693,15 +470,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/63c4c968.html" target="_self">
-          算法模板2-6.堆
+        <a href="/posts/9f5052e9.html" target="_self">
+          算法模板3-6.二分图
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/63c4c968.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/9f5052e9.html" target="_self">
         <div>
-          堆性质以小根堆为例： 堆中的每一个点都是小于等于左右儿子的。 所以根节点就是整个堆的最小值。 支持的操作 插入一个数 heap[++ size] = x; up(size);  求集合当中的最小值 heap[1]  删除最小值 用整个堆的最后一个元素覆盖堆顶元素： heap[1] = heap[size --]; down(1);  删除任意一个元素 与删除最小值类似，用最后一个元素覆盖下标为k的
+          二分图通俗定义：一个图可以分成两个集合，每个集合内部没有边。 染色法 (DFS)时间复杂度：O(n + m) 使用场景判别一个图是否为二分图。 性质一个图是二分图（等价于这个图可以被2染色），当且仅当图中不含奇数环。 证明 必要性（二分图-&gt;不含奇数环）：反证法 假设有奇数环：把环中每个点依次标记为1, 2, 1, 2, … 标记到最后一个点的时候，应该为1。而它后一个点（也就是第一个点）也
         </div>
       </a>
 
@@ -709,8 +486,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-09 17:18" pubdate>
-              2023-10-09
+            <time datetime="2023-10-20 16:38" pubdate>
+              2023-10-20
             </time>
           </div>
         
@@ -754,15 +531,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/89087cc7.html" target="_self">
-          算法模板2-5.并查集
+        <a href="/posts/ebaa2fa0.html" target="_self">
+          设计模式20-迭代器模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/89087cc7.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/ebaa2fa0.html" target="_self">
         <div>
-          并查集支持的操作在近乎 O(1) 的时间复杂度内支持以下两种操作：  将两个集合合并 询问两个元素是否在一个集合当中  注：有时也用于处理图论相关的问题。 基本原理每个集合用一棵树来表示，树根的编号就是整个集合的编号。每个节点存储它的父节点，p[x] 表示 x 的父节点。 思考问题1: 如何判断树根？1if (p[x] == x) 则为树根  问题2: 如何求x的集合编号？1while (p[x]
+          迭代器模式定义迭代器模式（Iterator），提供一种方法顺序访问一个聚合对象中的各个元素，而又不暴露该对象的内部表示。 结构图 需要有 Iterator 抽象类的原因：遍历方式可能有很多种，需要对不同方式做不同具体实现。 基本代码Aggregate 聚集抽象类： 12345abstract class Aggregate &#123;    // 创建迭代器  public abstract I
         </div>
       </a>
 
@@ -770,8 +547,224 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-09 15:52" pubdate>
-              2023-10-09
+            <time datetime="2023-10-20 14:20" pubdate>
+              2023-10-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/f7b71d8d.html" target="_self">
+          设计模式19-组合模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/f7b71d8d.html" target="_self">
+        <div>
+          组合模式定义组合模式（Composite），将对象组合成树形结构以表示’部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。 结构图 Component 接口&#x2F;抽象类：为组合中的对象声明接口，在适当情况下，实现所有类共有接口的默认行为。声明一个接口用于访问和管理 Component 的子部件。 Leaf 类：在组合中表示叶节点，无子节点。 Composite 类
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-19 13:15" pubdate>
+              2023-10-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/b47e0b1e.html" target="_self">
+          设计模式18-备忘录模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/b47e0b1e.html" target="_self">
+        <div>
+          备忘录模式定义备忘录（Memento）：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。  如：游戏中的存档。不破坏封装性即不把过多的细节暴露给客户端  结构图 Originator（发起人）：负责创建一个备忘录 Memento，用以记录当前时刻它的内部状态，并可使用备忘录恢复内部状态。Originator 可根据需要决定 Me
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-18 12:01" pubdate>
+              2023-10-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/442e6974.html" target="_self">
+          设计模式17-适配器模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/442e6974.html" target="_self">
+        <div>
+          适配器模式定义适配器模式（Adapter），将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。  类似于国标转英标的转接头。  适用场景和时机场景系统的数据和行为都相同或类似，但接口不统一时，我们应该考虑用适配器，目的是使控制范围之外的一个原有对象与某个接口匹配。客户代码可以统一调用同一接口就行了，更简单、更直接、更紧凑。 适配
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-15 17:24" pubdate>
+              2023-10-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/23133f7d.html" target="_self">
+          算法模板3-5.最小生成树
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/23133f7d.html" target="_self">
+        <div>
+          最小生成树定义：一个连通加权无向图中，一棵没有环的、权值最小的生成树。 注：权重的正负对最小生成树问题没有影响。  应用举例：已知若干个城市的坐标，要在城市间铺设公路，使得各个城市能够连通，且公路长度最小。  Prim算法 和Dijkstra算法的形式非常类似。  朴素版Prim算法时间复杂度：O(n^2 + m) ，适合稠密图 步骤12345678集合S: 存储当前已经在连通块中的所有点
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-14 20:25" pubdate>
+              2023-10-14
             </time>
           </div>
         
@@ -813,7 +806,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/12/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/#board">14</a><a class="page-number" href="/page/15/#board">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/#board">17</a><a class="extend next" rel="next" href="/page/14/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/12/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/#board">14</a><a class="page-number" href="/page/15/#board">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/#board">18</a><a class="extend next" rel="next" href="/page/14/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

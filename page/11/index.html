@@ -226,15 +226,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/2ce0a12a.html" target="_self">
-          算法模板4-7.DP-树形DP
+        <a href="/posts/bf4710f3.html" target="_self">
+          算法时空复杂度分析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/2ce0a12a.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/bf4710f3.html" target="_self">
         <div>
-          树形DP一般是DFS的形式。 模板题没有上司的舞会状态表示f(i, 0)和f(i, 1)分别表示在以i为根的子树中不选i和选i的最大值是多少。 状态计算f[i, 0] = sum(max(f[i的子节点, 0], f[i的子节点, 1])) f[i, 1] = sum(f[i的子节点, 0]) 代码12345678910111213141516171819202122232425262728293
+          时间复杂度由数据范围反推算法复杂度以及算法内容一般ACM或者笔试题的时间限制是1秒或2秒。在这种情况下，C++代码中的操作次数控制在 $10^7∼10^8$ 为最佳。 下面给出在不同数据范围下，代码的时间复杂度和算法该如何选择：  $n≤30$ &#x3D;&gt; 指数级别：dfs+剪枝，状态压缩DP $n≤100$ &#x3D;&gt; $O(n^3)$：Floyd，DP，高斯消元 $n≤10
         </div>
       </a>
 
@@ -242,8 +242,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-30 15:44" pubdate>
-              2023-10-30
+            <time datetime="2023-11-04 15:43" pubdate>
+              2023-11-04
             </time>
           </div>
         
@@ -260,13 +260,6 @@
         
   <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
   
 
       </span>
@@ -287,15 +280,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/a0874cea.html" target="_self">
-          算法模板4-6.DP-状态压缩DP
+        <a href="/posts/87e8a40d.html" target="_self">
+          设计模式15-抽象工厂模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/a0874cea.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/87e8a40d.html" target="_self">
         <div>
-          状态压缩DP一般数据范围非常小。如蒙德里安的梦想：$1&lt;&#x3D;N, M&lt;&#x3D;11$ 模板题1. 蒙德里安的梦想放1*2的小方块，把长m宽n的矩形放满。 核心：先放横着的，再放竖着的。 总方案数 &#x3D; 只放横着的小方块的合法方案数 如何判断当前方案是否合法？ 所有剩余位置，能否填充满竖着的小方块。可以按列来看，每一列内部所有连续的空着的小方块需要是偶数个。 时间复杂
+          抽象工厂模式定义抽象工厂模式（Abstract Factory），提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。  与工厂方法模式的区别： 以操作不同数据库为例：只有一个User类和User操作类的时候，是只需要工厂方法模式的，但现在显然你数据库中有很多的表，而SQL Server与Access又是两大不同的分类，所以解决这种涉及多个产品系列的问题，有一个专门的工厂模式叫抽象
         </div>
       </a>
 
@@ -303,69 +296,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-30 15:28" pubdate>
-              2023-10-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/730f7444.html" target="_self">
-          设计模式24-职责链模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/730f7444.html" target="_self">
-        <div>
-          职责链模式定义职责链模式（Chain of Responsibility）：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。  Netty中的ChannelHandler, ChannelPipeline用到了职责链模式。  结构图 基本代码Handler 类：定义一个处理请求的接口。 12345678
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-30 11:06" pubdate>
-              2023-10-30
+            <time datetime="2023-11-04 10:37" pubdate>
+              2023-11-04
             </time>
           </div>
         
@@ -402,15 +334,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/97ab2a1f.html" target="_self">
-          算法模板4-5.DP-数位统计DP
+        <a href="/posts/6ba28d2e.html" target="_self">
+          设计模式27-解释器模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/97ab2a1f.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/6ba28d2e.html" target="_self">
         <div>
-          数位统计DP要点分情况讨论。 模板题：计数问题求数a～b中，0～9出现的次数。 解法类似前缀和的思想。构造一个函数count(n, x)，表示1～n中x出现的次数 ans = count(b, x) - count(a - 1, x) 思路遍历位数，分别求出x在每一位上出现的次数。 设n=abcdefg，求x在第4位上出现的次数： 123456789将第3位确定为x1 &lt;= yyxzzz &
+          解释器模式定义解释器模式（interpreter），给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。 结构图 基本代码AbstractExpression类：声明一个抽象的解释操作，为抽象语法树中的所有节点所共享 12345abstract class AbstractExpression &#123;    // 解释操作  public abst
         </div>
       </a>
 
@@ -418,130 +350,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-29 16:37" pubdate>
-              2023-10-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/c539c0da.html" target="_self">
-          算法模板4-4.DP-计数类DP
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/c539c0da.html" target="_self">
-        <div>
-          计数类DP模板题：整数划分解法一：完全背包问题看作从权重为1～n的物品中选总权重不超过n的物品的完全背包问题，属性为总选法的个数cnt。 1234f[i][j] = f[i - 1][j] + f[i - 1][j - i] + f[i - 1][j - 2i] + ... + f[i - 1][j - si]f[i][j - i] = f[i - 1][j - i] + f[i - 1][j -
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-29 15:04" pubdate>
-              2023-10-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/936974fa.html" target="_self">
-          设计模式23-命令模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/936974fa.html" target="_self">
-        <div>
-          命令模式定义命令模式（Command），将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化，对请求排队或记录请求日志，以及支持可撤销的操作。 结构图 基本代码Command 类：用来声明执行操作的接口 123456789101112abstract class Command &#123;    protected Receiver receiver;    public Comma
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-29 11:39" pubdate>
-              2023-10-29
+            <time datetime="2023-11-04 10:19" pubdate>
+              2023-11-04
             </time>
           </div>
         
@@ -578,15 +388,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/157417db.html" target="_self">
-          算法模板4-3.DP-区间DP
+        <a href="/posts/aef7ba51.html" target="_self">
+          算法模板5-5.贪心-推公式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/157417db.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/aef7ba51.html" target="_self">
         <div>
-          区间DP状态分析状态表示f(i, j)一般表示从i到j这个区间中的方案。 要点要保证每次枚举的时候等式右侧的状态已经被更新过了。 所以按照区间长度从小到大来枚举。 三重循环：  区间长度从小到大 区间左端点（右端点可以通过左端点和长度算出来） 左右端点之间的分界点  模板题石子合并时间复杂度：O(n^3)，状态表示2维O(n^2) * 状态计算枚举分界线O(n) 状态分析状态表示 集合：所有将第i
+          推公式模板题耍杂技的牛算法按照wi+si从小到大的顺序排，最大的危险系数一定是最小的 证明显然算法得出的答案 &gt;&#x3D; 最优解。 下面证明算法得出的答案 &lt;&#x3D; 最优解： 假设不是按照wi+si从小到大排序，那么从上到下，一定存在两头相邻的牛：w[i] + s[i] &gt; w[i + 1] + s[i + 1]。交换这两头牛，不影响其他牛的危险系数。  对于第i头牛：
         </div>
       </a>
 
@@ -594,8 +404,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-26 12:42" pubdate>
-              2023-10-26
+            <time datetime="2023-11-03 20:35" pubdate>
+              2023-11-03
             </time>
           </div>
         
@@ -639,15 +449,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/40472d26.html" target="_self">
-          算法模板4-2.DP-线性DP
+        <a href="/posts/9424a82c.html" target="_self">
+          算法模板5-4.贪心-绝对值不等式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/40472d26.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/9424a82c.html" target="_self">
         <div>
-          线性DPDP的递推顺序是线性的。  比如：f(i, j)中i和j是从小到大递增。 背包问题就是线性DP。  模板题数字三角形f(i, j)表示走到第i行第j列时的最大路径 方程：f(i, j) = max(f[i - 1][j], f[i - 1][j - 1]) + a[i][j] 最长上升子序列f[i]表示所有以第i个数结尾的上升子序列长度的最大值 从0到i-1枚举倒数第二位j，找到最长的f[
+          绝对值不等式模板题货仓选址思路总距离： 1234f(x) = |x1 - x| + |x2 - x| + ... + |xn - x| 求最小值= (|x1 - x| + |xn - x|) + (|x2 - x| + |xn-1 - x|) + ... 两两分组&gt;= (xn - x1) + (xn-1 - x2) + ... 当x在每组的两个数之间时，等号成立商店数量为奇数时，x取中位数，
         </div>
       </a>
 
@@ -655,8 +465,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-26 12:22" pubdate>
-              2023-10-26
+            <time datetime="2023-11-03 19:39" pubdate>
+              2023-11-03
             </time>
           </div>
         
@@ -700,15 +510,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/98bf06c9.html" target="_self">
-          算法模板4-0.DP理解方式
+        <a href="/posts/fb840512.html" target="_self">
+          算法模板5-3.贪心-排序不等式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/98bf06c9.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/fb840512.html" target="_self">
         <div>
-          DP理解DP求解过程DP求解过程可以分为两步：状态表示 状态表示思考：问题需要用几维的状态来表示？  背包问题有两维。  f(i, j) 集合f(i, j)表示的是什么集合？  如背包问题：f(i, j)表示所有选法的集合。  属性f(i, j)这个数存的是这个集合的什么属性？min, max, cnt?  如背包问题：f(i, j)表示集合选法对应的价值的最大值。  状态计算思考：如何一步一步地
+          排序不等式模板题排队打水思路总等待时间：t1 * (n-1) + t2 * (n-2) + ... + tn * 0 时间长的人放在后面，时间短的人放在前面 代码12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;typedef l
         </div>
       </a>
 
@@ -716,8 +526,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-26 10:43" pubdate>
-              2023-10-26
+            <time datetime="2023-11-03 19:02" pubdate>
+              2023-11-03
             </time>
           </div>
         
@@ -761,15 +571,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/2047b357.html" target="_self">
-          设计模式22-桥接模式
+        <a href="/posts/8e44fdda.html" target="_self">
+          设计模式26-享元模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/2047b357.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/8e44fdda.html" target="_self">
         <div>
-          合成&#x2F;聚合复用原则 (CARP)定义合成／聚合复用原则（CARP），尽量使用合成 (Composition)／聚合 (Aggregation)，尽量不要使用类继承。 合成和聚合 聚合表示一种弱的’拥有’关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分。  如：大雁是群居动物，所以每只大雁都是属于一个雁群，一个雁群可以有多只大雁，所以大雁和雁群是聚合关系。   合成则是一种强
+          享元模式定义享元模式（Flyweight），运用共享技术有效地支持大量细粒度的对象。 结构图 基本代码Flyweight类：所有具体享元类的超类&#x2F;接口 123abstract class Flyweight &#123;  public abstract void operation(int extrinsicstate);&#125;  ConcreteFlyweight：继承Flyw
         </div>
       </a>
 
@@ -777,8 +587,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-26 09:49" pubdate>
-              2023-10-26
+            <time datetime="2023-11-03 14:16" pubdate>
+              2023-11-03
             </time>
           </div>
         
@@ -795,6 +605,182 @@
         
   <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
   
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/dec2734b.html" target="_self">
+          设计模式2-策略模式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/dec2734b.html" target="_self">
+        <div>
+          策略模式定义它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。 策略模式结构图 策略模式基本代码Strategy类，定义所有支持的算法的公共接口： 12345// 抽象算法类abstract class Strategy &#123;    // 算法方法    public abstract void algorithmInterface();
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-01 15:55" pubdate>
+              2023-11-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/d4eb8437.html" target="_self">
+          算法模板5-2.贪心-Huffman树
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/d4eb8437.html" target="_self">
+        <div>
+          Huffman树问题可以看作一颗完全二叉树。 Huffman树的总代价：对于每个叶子节点n，需要的代价是n所处的层级*n的权重，把它们求和 问题：如何排列所有叶子节点，使得总代价最小 解法：每次挑权重最小的两个节点合并。 可以证明：权重最小的两个点，在树中一定是最深的节点，且可以互为兄弟节点。  证明：  如果最小节点深度不是最深，将其与最深的节点交换位置，代价一定减小； 可以互为兄弟：在最深层可
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-01 15:05" pubdate>
+              2023-11-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/208cad05.html" target="_self">
+          算法模板5-1.贪心-区间问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/208cad05.html" target="_self">
+        <div>
+          区间问题思路考虑按照左端点&#x2F;右端点排序。 模板题1. 区间选点算法 将所有区间按右端点从小到大排序 枚举每个区间 如果区间不包含当前点x，取区间右端点作为x 如果区间包含当前点x，跳过该区间    证明 证明技巧：要证A&#x3D;B, 可以证A&gt;&#x3D;B &amp;&amp; A&lt;&#x3D;B  设点数最小值为ans，上述算法得出的值为cnt。  证ans &lt;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-01 13:56" pubdate>
+              2023-11-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
+  
+  
+
   
 
       </span>
@@ -813,7 +799,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/10/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#board">9</a><a class="page-number" href="/page/10/#board">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/#board">12</a><a class="page-number" href="/page/13/#board">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/#board">17</a><a class="extend next" rel="next" href="/page/12/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/10/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#board">9</a><a class="page-number" href="/page/10/#board">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/#board">12</a><a class="page-number" href="/page/13/#board">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/#board">18</a><a class="extend next" rel="next" href="/page/12/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

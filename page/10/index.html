@@ -226,15 +226,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/6ba28d2e.html" target="_self">
-          设计模式27-解释器模式
+        <a href="/posts/38d6a603.html" target="_self">
+          Effective Java-6. Avoid creating unnecessary objects
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/6ba28d2e.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/38d6a603.html" target="_self">
         <div>
-          解释器模式定义解释器模式（interpreter），给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。 结构图 基本代码AbstractExpression类：声明一个抽象的解释操作，为抽象语法树中的所有节点所共享 12345abstract class AbstractExpression &#123;    // 解释操作  public abst
+          Item 6: Avoid creating unnecessary objectsReuse object instead of creating new equivalent objectIt is often appropriate to reuse a single object instead of creating a new functionally equivalent objec
         </div>
       </a>
 
@@ -242,8 +242,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-04 10:19" pubdate>
-              2023-11-04
+            <time datetime="2023-11-11 10:26" pubdate>
+              2023-11-11
             </time>
           </div>
         
@@ -258,8 +258,22 @@
     
       <span class="category-chain">
         
-  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/effective-java/" class="category-chain-item">effective-java</a>
+  
+  
+
+  
+
   
 
       </span>
@@ -280,15 +294,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/aef7ba51.html" target="_self">
-          算法模板5-5.贪心-推公式
+        <a href="/posts/fd75d695.html" target="_self">
+          Effective Java-7. Eliminate obsolete object references
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/aef7ba51.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/fd75d695.html" target="_self">
         <div>
-          推公式模板题耍杂技的牛算法按照wi+si从小到大的顺序排，最大的危险系数一定是最小的 证明显然算法得出的答案 &gt;&#x3D; 最优解。 下面证明算法得出的答案 &lt;&#x3D; 最优解： 假设不是按照wi+si从小到大排序，那么从上到下，一定存在两头相邻的牛：w[i] + s[i] &gt; w[i + 1] + s[i + 1]。交换这两头牛，不影响其他牛的危险系数。  对于第i头牛：
+          Item 7: Eliminate obsolete object referencesExample of memory leak1234567891011121314151617181920212223242526// Can you spot the &quot;memory leak&quot;?public class Stack &#123;  private Object[] ele
         </div>
       </a>
 
@@ -296,8 +310,477 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-03 20:35" pubdate>
-              2023-11-03
+            <time datetime="2023-11-10 15:51" pubdate>
+              2023-11-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/effective-java/" class="category-chain-item">effective-java</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/b9bf3db3.html" target="_self">
+          Effective Java-1. Consider static factory methods instead of constructors
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/b9bf3db3.html" target="_self">
+        <div>
+          Item 1: Consider static factory methods instead of constructors优势1. 静态工厂方法有名称能够确切描述被返回的对象。 2. 不必在每次调用它们时都创建一个新对象与享元模式类似。节约资源。 3. 可以返回原返回类型的任何子类型的对象通过接口来引用被返回的对象，而不是通过它的实现类。 4. 所返回的对象的类可以随着每次调用而发生变化，取决
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-10 14:40" pubdate>
+              2023-11-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/effective-java/" class="category-chain-item">effective-java</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/e779b37f.html" target="_self">
+          Effective Java-3. Enforce the singleton property with a private constructor or an enum type
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/e779b37f.html" target="_self">
+        <div>
+          Item 3: Enforce the singleton property with a private constructor or an enum typeBackgroundA singleton is simply a class that is instantiated exactly once. Singletons typically represent either a stat
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-10 14:39" pubdate>
+              2023-11-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/effective-java/" class="category-chain-item">effective-java</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/10de1e0.html" target="_self">
+          Effective Java-4. Enforce noninstantiability with a private constructor
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/10de1e0.html" target="_self">
+        <div>
+          Item 4:  Enforce noninstantiability with a private constructorBackgroundWrite a class that is just a grouping of static methods and static fields. Such utility classes were not designed to be instanti
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-10 14:39" pubdate>
+              2023-11-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/effective-java/" class="category-chain-item">effective-java</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/54699746.html" target="_self">
+          MyBatis常用标签
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/54699746.html" target="_self">
+        <div>
+          顶级元素文档：https://mybatis.org/mybatis-3/zh/sqlmap-xml.html SQL 映射文件只有很少的几个顶级元素（按照应被定义的顺序列出）：  cache：该命名空间的缓存配置 cache-ref：引用其它命名空间的缓存配置 resultMap：描述如何从数据库结果集中加载对象，是最复杂也是最强大的元素 parameterMap：老式风格的参数映射。此元素已被
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-08 10:07" pubdate>
+              2023-11-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/backend/MyBatis/" class="category-chain-item">MyBatis</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/86821ae5.html" target="_self">
+          MyBatis中#{}和${}的区别是什么？
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/86821ae5.html" target="_self">
+        <div>
+          动态 sql 是 MyBatis 的主要特性之一，在 mapper 中定义的参数传到 xml 中之后，在查询之前 MyBatis 会对其进行动态解析。MyBatis 为我们提供了两种支持动态 sql 的语法：#{} 以及 ${}。 一句话回答#{}是预编译处理，${}是字符串替换。 详细解释 MyBatis在处理#{}时，会将SQL中的#{}替换为?号，使用PreparedStatement的se
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-08 10:07" pubdate>
+              2023-11-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/backend/MyBatis/" class="category-chain-item">MyBatis</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/906539fa.html" target="_self">
+          码出高效读书笔记2-面向对象
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/906539fa.html" target="_self">
+        <div>
+          面向对象类访问权限控制  如果不允许外部直接通过 new 创建对象，构造方法必须是 private。 工具类不允许有 public 或 default 构造方法。  this和super  在一个构造方法中， this 和 super 只能出现一个，且只能出现一次，否则在实例化对象时，会因子类调用到多个父类构造方法而造成混乱。  由于 this 和 super都在实例化阶段调用，所以不能在静态方法
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-08 10:02" pubdate>
+              2023-11-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/OOP/" class="category-chain-item">OOP</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Easy-Coding/">#Easy Coding</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/16da4355.html" target="_self">
+          算法模板6-1.数学-数论
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/16da4355.html" target="_self">
+        <div>
+          质数定义对所有大于1的整数，如果只包含1和本身这两个约数，就被称为质数，或者叫素数。  所有&lt;&#x3D;1的数，既不是质数也不是合数  判定：试除法朴素做法时间复杂度$O(n)$ 123456789bool is_prime(int n)&#123;    if (n &lt; 2) return false;        for (int i = 2; i &lt; n; i ++)
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-07 11:06" pubdate>
+              2023-11-07
             </time>
           </div>
         
@@ -341,15 +824,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/9424a82c.html" target="_self">
-          算法模板5-4.贪心-绝对值不等式
+        <a href="/posts/f95aacf0.html" target="_self">
+          设计模式28-访问者模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/9424a82c.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/f95aacf0.html" target="_self">
         <div>
-          绝对值不等式模板题货仓选址思路总距离： 1234f(x) = |x1 - x| + |x2 - x| + ... + |xn - x| 求最小值= (|x1 - x| + |xn - x|) + (|x2 - x| + |xn-1 - x|) + ... 两两分组&gt;= (xn - x1) + (xn-1 - x2) + ... 当x在每组的两个数之间时，等号成立商店数量为奇数时，x取中位数，
+          访问者模式定义访问者模式（Visitor），表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。 结构图 访问者模式适用于数据结构相对稳定（Element种类数量不变）的系统。 它把数据结构和作用于结构上的操作之间的耦合解脱开，使得操作集合可以相对自由地演化。 基本代码Visitor类：为该对象结构中ConcreteElement的每一个类声明
         </div>
       </a>
 
@@ -357,421 +840,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-03 19:39" pubdate>
-              2023-11-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/fb840512.html" target="_self">
-          算法模板5-3.贪心-排序不等式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/fb840512.html" target="_self">
-        <div>
-          排序不等式模板题排队打水思路总等待时间：t1 * (n-1) + t2 * (n-2) + ... + tn * 0 时间长的人放在后面，时间短的人放在前面 代码12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;typedef l
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-03 19:02" pubdate>
-              2023-11-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/8e44fdda.html" target="_self">
-          设计模式26-享元模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/8e44fdda.html" target="_self">
-        <div>
-          享元模式定义享元模式（Flyweight），运用共享技术有效地支持大量细粒度的对象。 结构图 基本代码Flyweight类：所有具体享元类的超类&#x2F;接口 123abstract class Flyweight &#123;  public abstract void operation(int extrinsicstate);&#125;  ConcreteFlyweight：继承Flyw
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-03 14:16" pubdate>
-              2023-11-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/dec2734b.html" target="_self">
-          设计模式2-策略模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/dec2734b.html" target="_self">
-        <div>
-          策略模式定义它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。 策略模式结构图 策略模式基本代码Strategy类，定义所有支持的算法的公共接口： 12345// 抽象算法类abstract class Strategy &#123;    // 算法方法    public abstract void algorithmInterface();
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-01 15:55" pubdate>
-              2023-11-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/d4eb8437.html" target="_self">
-          算法模板5-2.贪心-Huffman树
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/d4eb8437.html" target="_self">
-        <div>
-          Huffman树问题可以看作一颗完全二叉树。 Huffman树的总代价：对于每个叶子节点n，需要的代价是n所处的层级*n的权重，把它们求和 问题：如何排列所有叶子节点，使得总代价最小 解法：每次挑权重最小的两个节点合并。 可以证明：权重最小的两个点，在树中一定是最深的节点，且可以互为兄弟节点。  证明：  如果最小节点深度不是最深，将其与最深的节点交换位置，代价一定减小； 可以互为兄弟：在最深层可
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-01 15:05" pubdate>
-              2023-11-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/208cad05.html" target="_self">
-          算法模板5-1.贪心-区间问题
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/208cad05.html" target="_self">
-        <div>
-          区间问题思路考虑按照左端点&#x2F;右端点排序。 模板题1. 区间选点算法 将所有区间按右端点从小到大排序 枚举每个区间 如果区间不包含当前点x，取区间右端点作为x 如果区间包含当前点x，跳过该区间    证明 证明技巧：要证A&#x3D;B, 可以证A&gt;&#x3D;B &amp;&amp; A&lt;&#x3D;B  设点数最小值为ans，上述算法得出的值为cnt。  证ans &lt;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-01 13:56" pubdate>
-              2023-11-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/10b04145.html" target="_self">
-          算法模板4-8.DP-记忆化搜索
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/10b04145.html" target="_self">
-        <div>
-          记忆化搜索模板题滑雪前提：图是拓扑图，不存在环（循环依赖）。 时间复杂度：O(n^2) 状态表示f[i, j]表示所有从点(i, j)开始滑的路径长度的最大值。 状态计算分成四个子集，分别为往四个方向滑的路径的最大值。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#in
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-01 10:20" pubdate>
-              2023-11-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/5f671627.html" target="_self">
-          设计模式25-中介者模式
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/5f671627.html" target="_self">
-        <div>
-          中介者模式迪米特法则的实现。 通过中介者对象，可以将系统的网状结构变成以中介者为中心的星状结构，每个具体对象不再通过直接的联系与另一个对象发生相互作用，而是通过”中介者”对象与另一个对象发生相互作用。  如联合国可以作为各个国家的中介者，用来转发消息，而不是让各个国家直接通信。  定义中介者模式（Mediator），用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-01 09:48" pubdate>
-              2023-11-01
+            <time datetime="2023-11-05 23:49" pubdate>
+              2023-11-05
             </time>
           </div>
         
@@ -806,7 +876,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/9/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/#board">17</a><a class="extend next" rel="next" href="/page/11/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/9/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/#board">18</a><a class="extend next" rel="next" href="/page/11/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 卖出未备兑看跌期权看跌期权的买家有权利按照行权价卖出股票，看跌期权的卖出者就有义务按照行权价买入股票。通过承担了这样的义务，他可以收到看跌期权权利金。如果标的股票上涨，看跌期权无价值到期，卖出的看跌期权不会被指派，因此他可以得到同收到的权利金数量相等的最大盈利。他有很大的下行方向风险，因为股票有可能会大幅下跌，卖出的看跌期权因此会增值，导致大笔亏损。  卖出无备兑看跌期权的策略在许多方面都和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="期权投资策略19 - 卖出看跌期权">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/5b04f987.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="1. 卖出未备兑看跌期权看跌期权的买家有权利按照行权价卖出股票，看跌期权的卖出者就有义务按照行权价买入股票。通过承担了这样的义务，他可以收到看跌期权权利金。如果标的股票上涨，看跌期权无价值到期，卖出的看跌期权不会被指派，因此他可以得到同收到的权利金数量相等的最大盈利。他有很大的下行方向风险，因为股票有可能会大幅下跌，卖出的看跌期权因此会增值，导致大笔亏损。  卖出无备兑看跌期权的策略在许多方面都和">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2025/03/30/izpPlOxd628CefD.png">
+<meta property="article:published_time" content="2025-03-29T16:20:10.000Z">
+<meta property="article:modified_time" content="2025-05-10T16:37:01.944Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2025/03/30/izpPlOxd628CefD.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>期权投资策略19 - 卖出看跌期权 - Peixuan&#39;s Page</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Peixuan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2025/03/30/izpPlOxd628CefD.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="期权投资策略19 - 卖出看跌期权"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-30 00:20" pubdate>
+          March 30, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">期权投资策略19 - 卖出看跌期权</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-卖出未备兑看跌期权"><a href="#1-卖出未备兑看跌期权" class="headerlink" title="1. 卖出未备兑看跌期权"></a>1. 卖出未备兑看跌期权</h1><p>看跌期权的买家有权利按照行权价卖出股票，看跌期权的卖出者就有义务按照行权价买入股票。通过承担了这样的义务，他可以收到看跌期权权利金。如果标的股票上涨，看跌期权无价值到期，卖出的看跌期权不会被指派，因此他可以得到同收到的权利金数量相等的最大盈利。他有很大的下行方向风险，因为股票有可能会大幅下跌，卖出的看跌期权因此会增值，导致大笔亏损。</p>
+<p><img src="https://s2.loli.net/2025/03/30/izpPlOxd628CefD.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>卖出无备兑看跌期权的策略在许多方面都和卖出备兑看涨期权的策略相像。你可以注意到它们的盈利图的形状相同，这就是说这两个策略是相等的。</p>
+<p>卖出裸看跌期权的质押要求和卖出裸看涨期权是一样的。这个质押要求等于目前股票价格的20%加上看跌期权的权利金再减去任何虚值的数量。</p>
+<p>交易者在两个策略中对标的股票都是看多的，或者至少是中性的。如果标的股票向上运动，未备兑看跌期权的卖出者就有盈利，也许是收入的全部权利金。如果标的股票在到期日没有变化（中性）​，看跌期权的卖出者在最初卖出这个期权时所收入的全部权利金就变成了他的盈利。</p>
+<h2 id="实值-or-虚值？"><a href="#实值-or-虚值？" class="headerlink" title="实值 or 虚值？"></a>实值 or 虚值？</h2><p>保守策略：卖出虚值看跌期权，实现最大盈利的概率更大。开始时卖出虚值看跌期权，它同卖出实值备兑看涨期权是相等的。<br>激进策略：一开始就卖出实值看跌期权。实值看跌期权的卖出者在开始时就可以收到较大数量的权利金，如果标的股票上涨得足够高，他可以得到一大笔盈利。使用这种方法增加了潜在盈利，因此也承担了更大的风险。如果标的股票下跌，实值看跌期权的卖出者亏钱的速度会比一开始卖出虚值看跌期权的情形更快。</p>
+<h2 id="卖出备兑看涨期权与卖出裸看跌期权的对比"><a href="#卖出备兑看涨期权与卖出裸看跌期权的对比" class="headerlink" title="卖出备兑看涨期权与卖出裸看跌期权的对比"></a>卖出备兑看涨期权与卖出裸看跌期权的对比</h2><ol>
+<li>卖出裸看跌期权一般需要的投资比较少，因为交易者只需要股票价格的20%加上权利金作为质押，而卖出备兑看涨期权所使用的保证金需要50%的质押。</li>
+<li>裸看跌期权卖出者实际上并没有现金投资，他使用的是质押。因此，他可以通过现有的投资组合的价值来帮助他卖出裸看跌期权，投资组合中的资产可以是股票、债券或者政府发行的证券。不过，任何亏损都会导致支出，因而可能影响到他的投资组合。交易者可以用现金账户卖出裸看跌期权，他只是需要在账户中存入与这个看跌期权行权价相等的现金或现金等价物。这叫做“以现金为基础的卖出看跌期权”​（cash-based put writing）​。</li>
+<li>备兑看涨期权的卖出者有标的股票的股息收入，而裸看跌期权的卖出者则没有。在某些情况里，这个数目可能相当可观，但是，同样应当指出，高收益股票的看跌期权会有较高的价值，裸看跌期权的卖出者因此在一开始就会有更高的权利金。</li>
+</ol>
+<p>严格地从收益率的角度来看，卖出裸看跌期权的表现要比卖出备兑看涨期权更好。</p>
+<h1 id="2-后续行动"><a href="#2-后续行动" class="headerlink" title="2. 后续行动"></a>2. 后续行动</h1><p>如果标的股票价格下跌，裸看跌期权的卖出者就应当采取保护性的后续行动。最简单的后续行动就是如果股票下跌，就承担少量亏损，将头寸平仓。由于实值看跌期权往往会很快失去时间价值，如果股票朝对他不利的方向运动，他会发现他的亏损常常相当小。在上面的示例里，XYZ为50时看跌期权为4。如果股票跌到45，卖出者有可能相当容易就可以用5.50或6点将这个看跌期权买回来，从而只承担相当小的亏损。</p>
+<p>在卖出备兑看涨期权策略里，我们曾建议策略家应当在可能的情况下尽量向下挪仓。这样做而不是将备兑看涨期权头寸平仓的理由之一是平仓手续费会很大。在卖出裸看跌期权中不存在这样的手续费劣势。当交易者选择了裸看跌期权头寸时，他只是买回看跌期权。因此，<strong>对裸看跌期权卖出者来说，向下挪仓就不是那么有利</strong>。在这个时候，他也可以向下挪仓，卖出一手行权价为45的看跌期权。但是，也许在其他股票里有更好的卖出看跌期权的机会，他没有理由要继续保留在XYZ这只股票中的头寸。</p>
+<h1 id="3-对卖出裸看跌期权进行评价"><a href="#3-对卖出裸看跌期权进行评价" class="headerlink" title="3. 对卖出裸看跌期权进行评价"></a>3. 对卖出裸看跌期权进行评价</h1><p>计算卖出裸看跌期权的潜在收益不像计算卖出备兑看涨期权的潜在收益那么直截了当。原因是质押要求会随着股票价格的变化会变化，因为任何裸期权头寸都是要逐日盯市的。最保守的方法是<strong>在账户中放进足够的质押，以防标的股票下跌导致追加保证金</strong>。用这种方法，裸看跌期权卖出者就不会因为没有满足保证金要求而被迫提前平仓。</p>
+<h2 id="最大潜在盈利与下行保护"><a href="#最大潜在盈利与下行保护" class="headerlink" title="最大潜在盈利与下行保护"></a>最大潜在盈利与下行保护</h2><p>正如卖出备兑看涨期权的情况一样，交易者可以构造出若干不同的卖出裸看跌期权。其中之一可以是最高潜在收益。另一种可以是能提供最多下行方向保护的卖出看跌期权；也就是说，那些亏损机会最小的。</p>
+<p><strong>在考虑最大潜在收益的时候，交易者应当下功夫保证至少在下行运动方面有某些余地。</strong><br>如果XYZ的价格是50，XYZ 1月100看跌期权的售价也就会是50，它无疑会有非常大的最大潜在盈利。但是，这里对下行运动没有提供任何的保护余地，交易者显然不应当卖出这样一手看跌期权。处理这类问题的一个简单方法是，<strong>如果看跌期权没有提供至少5%的下行保护，那就不要使用这样的期权。另外，交易者也应当拒绝无变化时收益低于5%的这种情况。</strong></p>
+<p><strong>另外一种选择涉及下行方向最大限度的保护，使用它的时候也必须进行某种审视。</strong><br>XYZ的价格为70，XYZ 1月50看跌期权的售价最多不会超过0.50。因此，在这种情况里，交易者几乎不可能亏钱；要出现亏损，股票必须下跌20点。不过，从这个头寸里实际上得不到什么，几乎可以肯定不会有投资者想要卖出这样深度虚值的看跌期权。</p>
+<p>在选择卖出看跌期权时，必须有一个起码的可以接受的收益水平。例如，交易者可以决定，为了选这个头寸来进行最大的下行方向的保护，这个头寸必须至少提供12%的年收益率。有了这样的要求，就可以排除掉上面所说的极端情况。<br>收益最高的卖出看跌期权应当是较为激进名单的首选，在下行方向提供最高百分比保护的则应当成为较为保守的名单的首选。在最为严谨的意义上，应当正确地使用一个将标的股票的波动率结合在内的更为高级的技巧。在第28章论述数学运用时我们将介绍这样的技巧。</p>
+<h1 id="4-按低于市价买入股票"><a href="#4-按低于市价买入股票" class="headerlink" title="4. 按低于市价买入股票"></a>4. 按低于市价买入股票</h1><p>除了像在前面的讨论里那样将卖出裸看跌期权看作一种独立的策略之外，实际上想要得到股票的投资者常常也可以卖出裸看跌期权。</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gauss">示例<br><br><span class="hljs-built_in">XYZ</span>是一只价值<span class="hljs-number">60</span>美元的股票，投资者觉得如果在<span class="hljs-number">55</span>的价格上就值得买入。他在市场上放了一个限价<span class="hljs-number">55</span>的公开买入指令。<span class="hljs-number">3</span>个月之后，<span class="hljs-built_in">XYZ</span>的价格下跌到<span class="hljs-number">57</span>，但没有跌得更低。之后它反转方向，大幅度上涨，于是限价买入指令从来没有被启动过，投资者失去了这次机会。<br></code></pre></td></tr></table></figure>
+
+<p>这个假想的投资者可以使用一手裸看跌期权来为他服务。假定当XYZ最初在60的时候，这个投资者不是放置一个公开限价指令，而是卖出一手3个月的裸看跌期权，价格为5点。这样，只要XYZ在到期时价格低于60，他就可以按60的价格买入股票。也就是说，他必须为这个股票付60的价格。但由于他在卖出看跌期权时已经收到了5点，他的净成本就是55。因此，即使XYZ在到期日的价格为57，而且从来没有低于过这个价格，这个投资者仍然可以55的成本买到XYZ。</p>
+<p>当然，如果XYZ立刻上涨，而且在到期日时价格高于60，这个看跌期权就不会被指派，投资者也不能持有XYZ。不过，他仍然能从卖出看跌期权中得到500美元，看跌期权现在没有任何价值了。因此，由于采取了行动而不只是等待，看跌期权的卖出者在他的投资中起了更为积极的作用。他至少为他的努力得到了某种收益，即使他没有能够买到股票。</p>
+<p>如果XYZ的价格不是上涨，而是显著下跌，例如，在到期日跌到了40，这个投资者就不得不按55的净成本买入这个股票，因而有了当前的账面亏损。不过，他本来就打算按55的价格买入这个股票，因此，在这种情况中，这个看跌期权卖出者同那个使用限价买入指令的投资者所得到的结果是一样的。</p>
+<p>这个技巧对许多最终想要持有股票的投资者都有用处。大规模投资组合的管理者和个体投资者都可以发现以这个目的卖出看跌期权是一种有用的策略。</p>
+<h2 id="必须小心"><a href="#必须小心" class="headerlink" title="必须小心"></a>必须小心</h2><p>尽管卖出裸看跌期权看上去似乎性质温和，由于以下的两个原因，它有可能是非常危险的：​<br>（1）如果标的股票暴跌，就有可能出现巨额的亏损；​<br>（2）因为质押要求相当低，所以有高度的杠杆效应。</p>
+<p><strong>在裸看跌期权的策略上，不管标的股票的“质量”如何，都不要在你的账户中过分地使用杠杆。</strong></p>
+<h1 id="5-卖出备兑看跌期权"><a href="#5-卖出备兑看跌期权" class="headerlink" title="5. 卖出备兑看跌期权"></a>5. 卖出备兑看跌期权</h1><p>按照定义，当投资者还相应持有一手看跌期权，其行权价等于或高于其卖出的看跌期权时，其卖出的看跌期权才是备兑的。这是一个价差。不过，就保证金的目的而言，如果投资者在卖出一手看跌期权的同时也在卖空标的股票，他就是备兑的。</p>
+<p>备兑看跌期权卖出者必须就标的股票支付股息，如果有这样的股息存在的话。卖出无备兑看涨期权比起这个策略有一个好处：它的手续费要低得多。</p>
+<p>看涨期权的时间价值一般比看跌期权要高，因此，裸看涨期权卖出者能得到更多的时间价值。卖出备兑看跌期权是一个很少有人使用的策略，它不如卖出裸看涨期权。</p>
+<h1 id="6-卖出看跌期权比率"><a href="#6-卖出看跌期权比率" class="headerlink" title="6. 卖出看跌期权比率"></a>6. 卖出看跌期权比率</h1><p>卖出看跌期权比率包括卖空标的股票，再加上每卖空100股股票就卖出2手看跌期权。这个策略的盈利图的形状同卖出看涨期权比率的图形一模一样，它在卖出的期权的行权价上获得最大潜在盈利，标的股票无论在哪个方向运动得太远，都会出现大量的潜在亏损。</p>
+<p>不过，看涨期权比率价差要好得多。看涨期权比率卖出者有股息收入，看跌期权比率卖出者则必须支付股息。此外，看涨期权比率卖出者一般能得到更大数量的时间价值，因为看涨期权比看跌期权有更多的时间价值。所以，卖出看跌期权比率不是一个值得使用的策略。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/financing/" class="category-chain-item">financing</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/financing/%E6%9C%9F%E6%9D%83%E6%8A%95%E8%B5%84%E7%AD%96%E7%95%A5/" class="category-chain-item">期权投资策略</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>期权投资策略19 - 卖出看跌期权</div>
+      <div>https://peixuanhu.github.io/posts/5b04f987.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Peixuan Hu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 30, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Updated on</div>
+          <div>May 11, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/446165c1.html" title="期权投资策略6 - 卖出看涨期权比率">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">期权投资策略6 - 卖出看涨期权比率</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/df19d329.html" title="MySQL知识总结">
+                        <span class="hidden-mobile">MySQL知识总结</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'peixuanhu/peixuanhu.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

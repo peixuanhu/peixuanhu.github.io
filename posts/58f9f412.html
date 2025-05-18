@@ -1,0 +1,866 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Peixuan Hu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一般而言，投资者用于买入看涨期权的资金不应当超过其风险资本的15%，因为它涉及相对大的风险。 1. 为什么要买入看涨期权为投资组合增加某种上行潜在收益有些投资者买入看涨期权是想在把风险控制在一个固定金额的情况下，为其组合增加某种上行潜在收益。例如，如果某个投资者在想限制下行风险时通常只购买低波动率、保守型的股票，那么，他也许可以考虑将小部分现金放到波动性更大的股票的看涨期权上。 在不错过市场的情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="期权投资策略3 - 买入看涨期权">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/58f9f412.html">
+<meta property="og:site_name" content="Peixuan&#39;s Page">
+<meta property="og:description" content="一般而言，投资者用于买入看涨期权的资金不应当超过其风险资本的15%，因为它涉及相对大的风险。 1. 为什么要买入看涨期权为投资组合增加某种上行潜在收益有些投资者买入看涨期权是想在把风险控制在一个固定金额的情况下，为其组合增加某种上行潜在收益。例如，如果某个投资者在想限制下行风险时通常只购买低波动率、保守型的股票，那么，他也许可以考虑将小部分现金放到波动性更大的股票的看涨期权上。 在不错过市场的情况">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2025/04/13/nAsySvrxiBhLeIF.png">
+<meta property="article:published_time" content="2025-03-13T12:28:09.000Z">
+<meta property="article:modified_time" content="2025-05-10T16:37:01.945Z">
+<meta property="article:author" content="Peixuan Hu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2025/04/13/nAsySvrxiBhLeIF.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>期权投资策略3 - 买入看涨期权 - Peixuan&#39;s Page</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"peixuanhu.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Peixuan&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s2.loli.net/2025/04/13/nAsySvrxiBhLeIF.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="期权投资策略3 - 买入看涨期权"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-13 20:28" pubdate>
+          March 13, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          70 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">期权投资策略3 - 买入看涨期权</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>一般而言，投资者用于买入看涨期权的资金不应当超过其风险资本的15%，因为它涉及相对大的风险。</p>
+<h1 id="1-为什么要买入看涨期权"><a href="#1-为什么要买入看涨期权" class="headerlink" title="1. 为什么要买入看涨期权"></a>1. 为什么要买入看涨期权</h1><h2 id="为投资组合增加某种上行潜在收益"><a href="#为投资组合增加某种上行潜在收益" class="headerlink" title="为投资组合增加某种上行潜在收益"></a>为投资组合增加某种上行潜在收益</h2><p>有些投资者买入看涨期权是想在把风险控制在一个固定金额的情况下，为其组合增加某种上行潜在收益。<br>例如，如果某个投资者在想限制下行风险时通常只购买低波动率、保守型的股票，那么，他也许可以考虑将小部分现金放到波动性更大的股票的看涨期权上。</p>
+<h2 id="在不错过市场的情况下按合理的价格买入股票"><a href="#在不错过市场的情况下按合理的价格买入股票" class="headerlink" title="在不错过市场的情况下按合理的价格买入股票"></a>在不错过市场的情况下按合理的价格买入股票</h2><p>假定投资者知道在不远的将来，他会有一笔足以购买某一股票的现金（可能是卖掉他的房子，也可能是定期存款到期）。但是，因为他觉得股票价格马上会上涨，所以他想现在就买入这只股票。如果他现在手里只有小笔现金，那他可以先买入看涨期权。买入看涨期权所需的投资额要远远小于买入股票。然后，在他得到他知道会得到的现金后，他就可以将看涨期权行权，买入股票。这样，在他实际有钱买入股票之前，他已经加入到该股票的上涨运动中了。</p>
+<h1 id="2-买入看涨期权的风险和收益"><a href="#2-买入看涨期权的风险和收益" class="headerlink" title="2. 买入看涨期权的风险和收益"></a>2. 买入看涨期权的风险和收益</h1><ul>
+<li>看涨期权买家的最好同盟是标的股票的向上运动，因此标的股票的挑选就成了看涨期权买家要做的最重要选择。对买入看涨期权来说，抓住正确的时机非常重要。</li>
+<li>看涨期权买家还会有另一个同盟军：如果他的看涨期权的标的股票价格变得波动很大，看涨期权的价格就会上涨，以反映这种变化。</li>
+</ul>
+<p>相对于购买实值看涨期权，购买虚值看涨期权的潜在风险和潜在收益都更大。对看涨期权的买家来说，绝对的以金额来衡量的价格不应当是一个决定因素。如果某个投资者的资金只够买入最便宜的看涨期权，他就不应当用这个策略来进行投机。</p>
+<p>就百分比来看，当股票上升幅度不大时，实值看涨期权能够提供更好的收益，而虚值看涨期权则在股票价格上升幅度更大的情况下会表现更好。</p>
+<p>对看涨期权的买家来说，剩余存续期的长短也有关系。如果股票价格与行权价相当接近，那么，近期看涨期权就会紧跟标的股票的价格运动，因此，它的收益最高，风险也最大。远期看涨期权，由于它距到期日还有很长时间，因而风险最小，百分比收益也最小。中期看涨期权的风险和收益都是中等的，因而通常最有买入的吸引力。</p>
+<p>许多时候，投资者买入较长期看涨期权的原因是因为它的价格只比中期看涨期权高出1或者1.5点。他觉得多支付这一点钱而得到3个月的额外时间是值得的。不过，这种想问题的方法是不对的，因为大多数看涨期权的买家都不会持有期权超过60天或90天。因此，即使多花1个点就可以得到长期看涨期权的想法似乎挺吸引人，但也会是一笔不必要的花费。</p>
+<h2 id="时机"><a href="#时机" class="headerlink" title="时机"></a>时机</h2><p>如果投资者相当肯定标的股票马上就会上涨，他就应当努力得到更多的收益，而不必那么担心风险。这就意味着应买入短期的、稍稍虚值的看涨期权。</p>
+<blockquote>
+<p>无论在什么情况下，投资者一般都不要买入离到期只有一个星期的虚值看涨期权。</p>
+</blockquote>
+<p>如果投资者在时机把握上非常欠缺，他就应当买入长期的看涨期权，这样，如果他对时机的把握差错很大，可以降低他的风险。</p>
+<h2 id="Delta"><a href="#Delta" class="headerlink" title="Delta"></a>Delta</h2><blockquote>
+<p>当股票价格与看涨期权行权价相同时，时间价值最高；它是实值或虚值程度最浅的期权；期权的价格不是线性因时减值的，随着到期日的临近，时间价值消失的速度会更快。</p>
+</blockquote>
+<p>买家应当熟悉看涨期权的另一个特性，就是期权的对冲比率（delta）​。简单地说，期权的delta就是当标的股票运动1点时，看涨期权的价格会上涨或下跌的数量。</p>
+<blockquote>
+<p>delta是价格曲线的正切线的斜率。</p>
+</blockquote>
+<p>当股票价格等于行权价时，delta一般是0.50或者0.60。对期限很长的看涨期权来说，如果期权是平值的，它的delta会更大一些。<br>当标的股票的价格比看涨期权的行权价高很多时，这个看涨期权的delta就接近于1。<br>深度虚值看涨期权的delta接近于零。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs abnf">示例<br>如果XYZ是<span class="hljs-number">47.50</span>，而看涨期权的买家预计标的股票价格会有一个快速但可能有限的上涨，他应当买入<span class="hljs-number">45</span>看涨期权呢，还是<span class="hljs-number">50</span>看涨期权呢？delta也许可以帮助他做出决定。<br><br>XYZ <span class="hljs-number">7</span>月<span class="hljs-number">45</span>看涨期权：价格<span class="hljs-operator">=</span><span class="hljs-number">3.50</span> delta<span class="hljs-operator">=</span><span class="hljs-number">0.65</span><br>XYZ <span class="hljs-number">7</span>月<span class="hljs-number">50</span>看涨期权：价格<span class="hljs-operator">=</span><span class="hljs-number">1.00</span> delta<span class="hljs-operator">=</span><span class="hljs-number">0.25</span><br>让我们作一个简单但不怎么准确的假设，让事情变得容易一些。假设delta在短期内保持不变。<br><br>XYZ上涨了<span class="hljs-number">1.50</span>点，<span class="hljs-number">7</span>月<span class="hljs-number">45</span>看涨期权会相应上涨<span class="hljs-number">0.97</span>点（<span class="hljs-number">1.50</span>×<span class="hljs-number">0.65</span>）​，<span class="hljs-number">7</span>月<span class="hljs-number">50</span>看涨期权会对应上涨<span class="hljs-number">0.37</span>点（<span class="hljs-number">1.50</span>×<span class="hljs-number">0.25</span>）​。因此，如果<span class="hljs-number">7</span>月<span class="hljs-number">45</span>看涨期权的价格上升了<span class="hljs-number">0.97</span>，那么它就增值了<span class="hljs-number">28</span>%。而如果<span class="hljs-number">7</span>月<span class="hljs-number">50</span>看涨期权的价格上升了<span class="hljs-number">0.37</span>，那它就增值了<span class="hljs-number">37</span>%。所以，在这个简单的示例中，买入<span class="hljs-number">7</span>月<span class="hljs-number">50</span>看涨期权看起来更有利可图。当然，在实际的投资分析中，应当把手续费考虑进去。<br></code></pre></td></tr></table></figure>
+
+<h1 id="3-买什么样的期权"><a href="#3-买什么样的期权" class="headerlink" title="3. 买什么样的期权"></a>3. 买什么样的期权</h1><p>规则：策略的期限越短，用来交易这个策略的工具的delta就应当越高。</p>
+<h2 id="日内交易"><a href="#日内交易" class="headerlink" title="日内交易"></a>日内交易</h2><p>根据统计资料，大多数做日内交易的人都是赔钱的。事实上，也有盈利的日内交易者，这其实只需要比许多人工作得更努力一些。</p>
+<p>许多日内交易者试图在他们的策略里使用期权。这些日内交易者显然被期权所具有的杠杆效应所吸引，但是，他们也常常在期权交易中赔钱。</p>
+<p>许多希望使用期权的日内交易者没有意识到，<strong>就日内交易而言，应当使用delta值最高的工具。这个工具就是delta为1.0的标的资产。</strong></p>
+<p>如果某个日内交易者坚持要使用期权，那就应当买入短期实值期权，因为它的delta在所有期权中最高，最好delta接近0.90或者更高。这样的期权对标的物的小幅度运动也能有迅速的反应。</p>
+<h2 id="短线交易"><a href="#短线交易" class="headerlink" title="短线交易"></a>短线交易</h2><p>假定某个投资者想通过使用某个策略来达到持有标的物1~2个星期的目的，就像在日内交易的情况中一样，在这种情况里，他也需要较高的delta值。不过，由于持有周期比日内交易要长，并且期权降低了发生超出预期的大幅度下跌的风险，因此，此时交易期权而不是单纯交易标的物会更合适一些。</p>
+<p><strong>他应当买入的依然是短期实值期权，因为它的delta值最大，对标的股票运动的反应最直接。这些期权的delta值非常高，一般在0.80之上。</strong> 在这种情况里应当使用高delta值期权的理由之一是，投资者对日内交易的时机或者特短期的交易方法相当有把握。如果选股的方法在把握时机方面有高度的精确性，那么，就应当使用高delta值的期权。</p>
+<h2 id="中线交易"><a href="#中线交易" class="headerlink" title="中线交易"></a>中线交易</h2><p><strong>随着投资者交易策略周期的拉长，使用较低delta值的期权就更为合适。</strong></p>
+<p>例如，投资者有可能使用某个基于市场情绪的交易方法，而市场情绪通常不是一个精确的指标，它显示的是在一个重大转折点的总趋势变化。该指标对价格短期运动的时机把握是不精确的，因为情绪的极端变化需要一定时间才能在标的物的方向变化上体现。</p>
+<p>因此，这些策略的投资者应当使用delta较小的期权。想在几个星期、几个月甚至更长时间里持有头寸的投资者，应当知道在这段时间里很可能会出现大的价格变化，那他就需要这样的期权来限制风险。因此，<strong>在这种情况下，他就应当使用平值期权。</strong></p>
+<h2 id="长线交易"><a href="#长线交易" class="headerlink" title="长线交易"></a>长线交易</h2><p><strong>如果投资者的策略是个长期策略，他就应当考虑delta更低的期权。</strong> 这样的策略在把握时机的能力方面一般都很模糊，例如，根据对某个公司基本面的泛泛了解而选择买入它的股票。极端情况下，它甚至可以用到“买入并持有”的策略中。</p>
+<p><strong>一般我们不提倡买入虚值期权，但是，对期限很长的策略来说，投资者可以考虑选择略为虚值的期权，或者至少是存续期较长的平值期权。</strong> 无论是哪种情况，相对于我们在上面为其他策略推荐的期权来说，这里使用的期权的delta值都会比较小。</p>
+<h1 id="4-高级选择标准"><a href="#4-高级选择标准" class="headerlink" title="4. 高级选择标准"></a>4. 高级选择标准</h1><p>在实际操作中，在某个具体的时刻，投资者通常不会只对一只股票看多。事实上，他也希望有一份看涨期权的名单，这些看涨期权在任何时候都是“最好的”买入对象。使用某些选择股票的方法，或者是技术面的，或者是基本面的，他可以选出3~4种看起来能提供最好收益的看涨期权。这份名单里的看涨期权应当按潜在收益的大小排序。</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs mel">示例：<br>有两只股票，它们都有场内看涨期权：波动性不大的NVS和波动性相当大的VVS。因为波动性大的股票的看涨期权的价格会比波动性小的高，因此就有可能有下面的价格：<br>NVS: <span class="hljs-number">40</span> NVS <span class="hljs-number">7</span>月<span class="hljs-number">40</span>看涨期权: <span class="hljs-number">2</span><br>VVS: <span class="hljs-number">40</span> VVS <span class="hljs-number">7</span>月<span class="hljs-number">40</span>看涨期权: <span class="hljs-number">4</span><br><br>在这个示例里，如果在到期时每只股票都上涨了<span class="hljs-number">10</span>%，NVS和VVS的价格都会是<span class="hljs-number">44</span>(只有内在价值)。因此，NVS <span class="hljs-number">7</span>月<span class="hljs-number">40</span>看涨期权就会价值<span class="hljs-number">4</span>，也就是说，价格涨了一倍，潜在盈利是<span class="hljs-number">100</span>%。同时，VVS <span class="hljs-number">7</span>月<span class="hljs-number">40</span>看涨期权也会价值<span class="hljs-number">4</span>，对看涨期权的买家来说，盈利是<span class="hljs-number">0</span>%。<br><br>-----<br>这样的分析会使得投资者认为买入NVS <span class="hljs-number">7</span>月<span class="hljs-number">40</span>看涨期权更合算。这样的结论可能是错的，因为在对这两只股票的潜在变化进行排序时，基于的是一个错误的假设。假设这两只股票在到期时都有<span class="hljs-number">10</span>%的运动概率是不对的。相对于波动率更低的股票来说，波动率更高的股票自然有大得多的上涨<span class="hljs-number">10</span>%（或者更多）的机会。任何只考虑标的股票的百分比变化而不考虑它们的波动率，并由此得到的期权排序，都是没有价值的，因而不能被采用。<br><br>对这两个<span class="hljs-number">7</span>月<span class="hljs-number">40</span>看涨期权的正确比较方法是使用标的股票的实际波动率。假定波动率较大的股票VVS在<span class="hljs-number">7</span>月到期以前的时间里会有<span class="hljs-number">15</span>%的运动，而波动率较小的股票NVS在同样的时段内预计只有<span class="hljs-number">5</span>%的运动。利用这一信息，看涨期权的买家可以得出这样的结论：VVS <span class="hljs-number">7</span>月<span class="hljs-number">40</span>看涨期权更值得买。<br><br>-----<br>假定在我们的示例里波动率较大VVS股票在<span class="hljs-number">90</span>天内有可能会上涨<span class="hljs-number">12</span>%，而波动率较小的NVS股票在<span class="hljs-number">90</span>天的潜在上涨率只有<span class="hljs-number">4</span>%。<br><br><span class="hljs-number">90</span>天后的价格：<br>VVS: <span class="hljs-number">44.8</span>(上升<span class="hljs-number">12</span>%) VVS <span class="hljs-number">7</span>月<span class="hljs-number">40</span>看涨期权: <span class="hljs-number">6</span>(上升<span class="hljs-number">50</span>%)<br>NVS: <span class="hljs-number">41.6</span>(上升<span class="hljs-number">4</span>%) NVS <span class="hljs-number">7</span>月<span class="hljs-number">40</span>看涨期权: <span class="hljs-number">2.5</span>(上升<span class="hljs-number">25</span>%)<br><br>由于<span class="hljs-number">90</span>天后看涨期权还有一段时间才到期，因此它们都还有时间价值。VVS看涨期权中的时间价值会更大一些，因为标的股票的波动率更大。使用这种分析方法，仍然是应当买入VVS的看涨期权。<br></code></pre></td></tr></table></figure>
+
+<p>对看涨期权的买家来说，潜在收益的正确排序方法可以表达如下：</p>
+<ol>
+<li>假定每只股票在一个固定的时段（30、60或90天）内都会根据其波动率而上涨；</li>
+<li>对每次上涨后的看涨期权价格进行估计；</li>
+<li>按照进攻型买入方式对所有潜在的买入看涨期权行为按最高百分比收益机会进行排序；</li>
+<li>假定每只股票的价格都会跟随其波动率而下跌；</li>
+<li>对每次下跌后的看涨期权价格进行估计；</li>
+<li>按照收益&#x2F;风险比（用第5步得出的亏损百分比去除第2步得出的收益百分比）对所有可购买的看涨期权排序。</li>
+</ol>
+<blockquote>
+<p>从第3步得出的名单会产生比较激进的购买方式，因为它只考虑了潜在收益。从第6步得出的名单的投机性会比较小一些。<br>这个分析的方法自动结合了前面所设定的标准，例如<strong>买入短期虚值看涨期权称为进攻型的购买方式，买入长期实值看涨期权称为保守型的购买方式。</strong></p>
+</blockquote>
+<h2 id="被高估或被低估的看涨期权"><a href="#被高估或被低估的看涨期权" class="headerlink" title="被高估或被低估的看涨期权"></a>被高估或被低估的看涨期权</h2><p>有现成的公式可以预测出一个看涨期权应当有什么样的价格，这些公式是以<strong>股票价格与行权价之间的关系、剩余存续期，以及标的股票的波动率</strong>为根据的。</p>
+<p>在现实中，看涨期权的实际价格会与由这些公式所计算出的价格有所不同。如果看涨期权的实际卖价高于其“合理”​（计算出的）价格，这个看涨期权就视为被高估的（overpriced）​。如果看涨期权的实际交易价格低于其“合理”价格，它就视为被低估的（underpriced）​。</p>
+<p>如果该看涨期权确实是被高估的，那么就可以用既能降低它们的成本又能保留上行潜在盈利的策略。不过这个策略要求在买入看涨期权之外，再建立一个看跌期权价差。我们将在第23章讨论看涨期权和看跌期权组合的价差时对其进行介绍。</p>
+<h2 id="时间价值是一个误称"><a href="#时间价值是一个误称" class="headerlink" title="时间价值是一个误称"></a>时间价值是一个误称</h2><p>期权的价格中不是内在价值的那部分，也就是我们通常叫做“时间价值”的那部分，实际上并不只是由时间价值构成的。的确，随着到期日的临近，时间最终会夺走期权价格中的这部分价值。但是，<strong>当期权离到期日还有相当长的时间时，期权价值中更重要的一个组成部分实际上是波动率。</strong></p>
+<p>经过谨慎地分析，如果期权的买家考虑的不只是在到期日时会发生什么，而且是在这个期权的存续过程中将发生什么，那么他就有可能会得到非常好的结果。</p>
+<h2 id="看涨期权买家的烦恼"><a href="#看涨期权买家的烦恼" class="headerlink" title="看涨期权买家的烦恼"></a>看涨期权买家的烦恼</h2><p>当一个波动率相当大的股票迅速运动了3点或4点的时候，投资者似乎常常不能从中获得厚利。其中的原因比我们现在能解释的要更复杂一些，虽然它们与delta、因时减值和标的股票的波动率有紧密的联系。我们将在第36章里讨论它们，在你开始大量买入看涨期权之前，应当首先读一下那一章。</p>
+<h1 id="5-后续行动"><a href="#5-后续行动" class="headerlink" title="5. 后续行动"></a>5. 后续行动</h1><p>当标的股票价格下跌时，看涨期权买家最简单的后续行动就是卖掉他手里的看涨期权以止损。人有一种自然的心理，想要把头寸留在手里，希望股票会涨回到或者是超过行权价。大部分时候，在股票表现很差的情况里，采取止损的办法对买家最有利。投资者应对根据标的股票自身的技术走势来决定他的出场点。例如，<strong>如果它跌破了支撑位，那么期权的持有者就应当下达一个市价指令（不是持有）来卖出他的看涨期权。</strong></p>
+<p>事实上，<strong>在所持的看涨期权增值后取走部分盈利常常是个明智的行为</strong>。例如，如果有人按3的价格买入了一些看涨期权，这些期权后来价值5，那么按5的价格将他的头寸卖掉三分之一或是一半以拿走部分盈利，对这个看涨期权持有人是有好处的。<strong>这样做之后，常常更容易让盈利在账户上滚动。而一般来说，让盈利滚动是成功交易的关键之一。</strong></p>
+<h2 id="锁住盈利"><a href="#锁住盈利" class="headerlink" title="锁住盈利"></a>锁住盈利</h2><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">示例</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">某个投资者在标的股票是48时，以3点买入了一手XYZ 10月50看涨期权。股票随后涨到了58。这个买家也许应当考虑将他的10月50看涨期权卖掉（这个期权现在可能值9点）​，又或者是采取其他一些行动，其中有的会涉及10月60看涨期权，它的售价是3点。</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">最初的交易</span><span class="hljs-punctuation">:</span><br><span class="hljs-attribute">XYZ股票</span><span class="hljs-punctuation">:</span> <span class="hljs-string">48</span><br><span class="hljs-attribute">买入XYZ 10月50看涨期权</span><span class="hljs-punctuation">:</span> <span class="hljs-string">3</span><br><br><span class="hljs-attribute">现有价格</span><span class="hljs-punctuation">:</span><br><span class="hljs-attribute">XYZ股票</span><span class="hljs-punctuation">:</span> <span class="hljs-string">58</span><br><span class="hljs-attribute">XYZ 10月50看涨期权</span><span class="hljs-punctuation">:</span> <span class="hljs-string">9</span><br><span class="hljs-attribute">XYZ 10月60看涨期权</span><span class="hljs-punctuation">:</span> <span class="hljs-string">3</span><br><br></code></pre></td></tr></table></figure>
+
+<p>在这个时候，这个看涨期权的买家可能会采取以下四种基本行动中的某一种：</p>
+<ol>
+<li>卖出买入的看涨期权，将头寸平仓，从而拿走盈利；</li>
+<li>卖出持有的10月50看涨期权，用部分收入买入10月60看涨期权；</li>
+<li>构建一个价差头寸，持有10月50看涨期权的同时，再卖出10月60看涨期权；</li>
+<li>什么都不做，继续持有10月50看涨期权。</li>
+</ol>
+<p>如果选择第1种：<br>他就有6点的盈利，再去掉手续费。不过这样的话，他的头寸就不复存在了，他不会再从这个看涨期权中得到好处，也不会损失任何已经得到的盈利。他将6点的盈利兑现了。这是上面四种方法中最不激进的一种。如果标的股票价格继续上涨，涨到63以上，其他3种策略的表现都会比将把全部看涨期权平仓的做法要好。但是，如果标的股票价格不是上涨而是下跌了，并在到期日时跌到了50以下，那么这个行动所带来的盈利是四种方法中最多的。</p>
+<p>如果选择第4种：<br>如果一直持有看涨期权至到期日，这个策略就是四种策略中风险最大的。如果XYZ在到期时跌到了50以下，只有这个策略会产生亏损。不过，如果标的股票价格继续上涨，这个看涨期权就会积累更多的盈利。每个看涨期权的买家都知道全部平仓或什么都不做这两种策略的后果，并且希望找到一种替代方法，这种方法应该可以减少他的某些风险，但又不会完全放弃潜在盈利。剩下的这两种策略就是为了这个目的而设计的：它们限制了总的风险，同时又为进一步的盈利提供了机会，这个进一步的盈利在数量上应该大于全部平仓可以获得的盈利。</p>
+<p>如果选择第2种：<br>持有者卖掉当前持有的10月50看涨期权，然后用一部分收入买入次高行权价的看涨期权，这种策略叫作向上挪仓（roll up）​。在这个示例里，他可以按9卖掉1手10月50看涨期权，收回最初投资的3点，再用剩余的收入按每手3点的价格买入2手10月60看涨期权。因此，有的时候投机者通过向上挪仓，可以在收回全部初始投资的同时，还能增加其持有的看涨期权数量。在这一步完成之后，无论它们的价格如何，10月60看涨期权都代表了纯粹的盈利。按这种方式“向上挪仓”的买家从本质上说是在用别人的钱进行投机。他把自己的钱放回了自己的口袋，使用积累的盈利来博取进一步的收益。在到期时，如果XYZ大幅度上升，这个策略的表现就会最好。但如果XYZ保持在目前的价格上，也就是停留在53以上，没有上涨到63以上，这个策略的表现就会是四个策略中最差的。</p>
+<p>如果选择第3种：<br>在继续持有10月50看涨期权的同时，卖出10月60看涨期权。这就构造了一个所谓的牛市价差（bull spread）​。<br>这个价差是没有风险的，因为该价差中买入的那条腿，也就是10月50看涨期权，花费的是3点，而价差中卖出的那条腿，也就是10月60看涨期权，通过卖出而收入了3点。即使在到期日标的股票价格跌到50以下，所有看涨期权都无价值到期，除了手续费之外，这个交易者也不会再损失任何东西。另一方面，这个价差的最大潜在盈利是10点，也就是50与60这两个行权价之间的差。如果在到期日XYZ高于60，这个最大潜在盈利就会实现。因为在这个时候，无论标的股票价格高于60多少，10月50看涨期权的价值都会比10月60看涨期权高出10点。如果XYZ保持相对不变，在到期时高于较低的行权价，但又不比较高的行权价高出多少，这个策略就会是四种策略中表现最好的。有趣的是，<strong>无论在到期时股票的价位如何，这个策略都不会是四个策略中表现最差的</strong>。例如，如果XYZ跌到了50以下，这个策略没有风险，因而优于“什么都不做”的策略。如果XYZ有显著的上涨，这个价差就会产生10点的盈利，这就比“平仓”策略所提供的6点盈利要好。</p>
+<p><img src="https://s2.loli.net/2025/04/09/v75IKdEQ2tb14gY.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://s2.loli.net/2025/04/09/xiQyeVmoGh3OWFE.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>注：​“W”表示在这个价格上该策略是最糟的策略，​“B”表示在这个价格上该策略是最佳策略。</p>
+</blockquote>
+<p>当然，投资者可以对这些策略中的任何一个进行调整。例如，他可以决定卖出一半的看涨期权多头头寸，收回大部分初始投资，并继续持有剩下的看涨期权多头头寸。这让他能从市场的后续上涨中继续获益。卖出一部分头寸并保留剩余头寸的做法被称为“部分获利出场”​（taking a partial profit）​。当标的资产价格大幅上涨时，这个策略和上面所有的策略（除“上面都不做”以外）都会少赚很多钱。</p>
+<h2 id="防范行动"><a href="#防范行动" class="headerlink" title="防范行动"></a>防范行动</h2><p>当标的股票价格下跌时，看涨期权的买家有时会使用下面的两种策略。两者都涉及价差策略，也就是说，同时买入和卖出同一标的股票上的不同看涨期权。</p>
+<h3 id="向下均摊"><a href="#向下均摊" class="headerlink" title="向下均摊"></a>向下均摊</h3><p>按当前价格买入更多的看涨期权，拉低成本。但这样需要股价在期权到期前大幅反弹才能盈利。</p>
+<h3 id="向下挪仓"><a href="#向下挪仓" class="headerlink" title="向下挪仓"></a>向下挪仓</h3><p>如果期权的持有者拥有一个期权，这个期权目前有未兑现的亏损时，这样做就有可能大大增加当股票价格有一个相对小的反弹时得到一笔有限盈利的机会。在某些情况下，投资者可以在不增加风险，或者只增加很小风险的情况下实施这个策略。</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs gauss">示例<br>最初用<span class="hljs-number">3</span>点买入<span class="hljs-number">1</span>手<span class="hljs-built_in">XYZ</span> <span class="hljs-number">10</span>月<span class="hljs-number">35</span>看涨期权<br><br>此时股价下跌到<span class="hljs-number">32</span>：<br><span class="hljs-built_in">XYZ</span>: <span class="hljs-number">32</span><br><span class="hljs-built_in">XYZ</span> <span class="hljs-number">10</span>月<span class="hljs-number">35</span>看涨期权: <span class="hljs-number">1.5</span><br><span class="hljs-built_in">XYZ</span> <span class="hljs-number">10</span>月<span class="hljs-number">30</span>看涨期权: <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<p>投资者可以卖出2手10月35看涨期权，与此同时，买入1手10月30看涨期权。如果不考虑手续费，这样做不需要额外的投资。这是实施向下挪仓策略的关键：<strong>投资者可以通过基本相等的钱买入1手行权价较低的看涨期权，同时卖出2手行权价较高的看涨期权</strong>。</p>
+<p>通过这个交易，交易者显著地降低了自己的盈亏平衡点（38 -&gt; 33），却没有增加风险。不过，最大潜在盈利却因此而受到限制：如果标的股票大幅反弹，他就不能在这个机会中大幅获利了。</p>
+<blockquote>
+<p>风险暴露的改善，也就是盈亏平衡点和最大亏损价格的降低，是以牺牲部分潜在盈利为代价的。</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2025/04/13/nAsySvrxiBhLeIF.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>这个示例特别有吸引力，因为建立这个价差不需要额外的资金。不过，在许多情况下，投资者会发现把买入的看涨期权变成价差时的收支并不相等。会出现一些支出。这一事实并不是说不应当改变策略，因为只需要小部分的额外投资，就可以显著地增加在股票反弹时达到盈亏平衡甚至得到盈利的机会。</p>
+<h3 id="建立跨期价差"><a href="#建立跨期价差" class="headerlink" title="建立跨期价差"></a>建立跨期价差</h3><p>当标的股票价格下跌时，某个中期或远期看涨期权的持有者可以<strong>卖出一手相同行权价，但存续期更短的看涨期权</strong>。这就构造出了所谓的跨期价差。这样做的理由是，如果近期的看涨期权无价值到期，那这个买家买入看涨期权的总成本就降低了。如果股票价格上涨，这个看涨期权买家的盈利机会就增加。</p>
+<p>这个策略使用起来不像前一个那么有吸引力。如果在7月到期日之前XYZ上涨，投资者就可能面临两个亏损的头寸。例如，假定在下个星期XYZ反弹回到36。他按1点卖出的看涨期权的售价就会更高，从而在卖出的7月35看涨期权的交易中产生未兑现的亏损。此外，10月35看涨期权的价格可能还没有涨回到最初的3点，因此，价差的另一条腿上也有未兑现的亏损。</p>
+<p>总之，在使用这个策略时要格外小心。因为如果在近期期权到期之前标的股票迅速上涨，这个价差就会在两条腿上都有亏损。请注意，前面的价差策略就不会发生这样的情况。即使XYZ迅速上升，它也可以从反弹中得到一定的盈利。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/financing/" class="category-chain-item">financing</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/financing/%E6%9C%9F%E6%9D%83%E6%8A%95%E8%B5%84%E7%AD%96%E7%95%A5/" class="category-chain-item">期权投资策略</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>期权投资策略3 - 买入看涨期权</div>
+      <div>https://peixuanhu.github.io/posts/58f9f412.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Peixuan Hu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 13, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Updated on</div>
+          <div>May 11, 2025</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/b7fae525.html" title="Netty in Action 7 - EventLoop and threading model">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Netty in Action 7 - EventLoop and threading model</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/ab126a8f.html" title="Netty in Action 6 - ChannelHandler &amp; ChannelPipeline">
+                        <span class="hidden-mobile">Netty in Action 6 - ChannelHandler &amp; ChannelPipeline</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'peixuanhu/peixuanhu.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

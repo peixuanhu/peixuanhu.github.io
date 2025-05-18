@@ -226,15 +226,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/df19d329.html" target="_self">
-          MySQL知识总结
+        <a href="/posts/eb76c54e.html" target="_self">
+          Prometheus的pull和push
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/df19d329.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/eb76c54e.html" target="_self">
         <div>
-          存储引擎：MyISAM 和 InnoDB 有什么区别？总结：  InnoDB 支持行级别的锁粒度，MyISAM 不支持，只支持表级别的锁粒度。 MyISAM 不提供事务支持。InnoDB 提供事务支持，实现了 SQL 标准定义了四个隔离级别。 MyISAM 不支持外键，而 InnoDB 支持。 MyISAM 不支持 MVCC，而 InnoDB 支持。 虽然 MyISAM 引擎和 InnoDB 引擎
+          Prometheus采用的是主动拉取(Pull)数据的方式,但也支持推送(Push)数据。 拉取(Pull)模式 - 主要方式:Prometheus server定期从配置的目标(targets)抓取指标数据被监控对象需要暴露HTTP接口(&#x2F;metrics)供Prometheus拉取优点:简单可靠,监控解耦,方便排查问题适用于大多数监控场景 推送(Push)模式 - 辅助方式:通过Pus
         </div>
       </a>
 
@@ -242,8 +242,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-23 11:41" pubdate>
-              2025-03-23
+            <time datetime="2025-05-18 15:52" pubdate>
+              2025-05-18
             </time>
           </div>
         
@@ -258,15 +258,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/database/" class="category-chain-item">database</a>
+  <a href="/categories/devops/" class="category-chain-item">devops</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/database/MySQL/" class="category-chain-item">MySQL</a>
-  
-  
-
   
 
       </span>
@@ -284,24 +277,18 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/b7fae525.html" target="_self">
-          <img src="https://s2.loli.net/2025/03/18/LmuQ1rjyPTZWwEB.png" srcset="/img/loading.gif" lazyload alt="Netty in Action 7 - EventLoop and threading model">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
+    <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/b7fae525.html" target="_self">
-          Netty in Action 7 - EventLoop and threading model
+        <a href="/posts/ef972355.html" target="_self">
+          比较策略模式、装饰器模式和适配器模式
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/posts/b7fae525.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/ef972355.html" target="_self">
         <div>
-          EventLoop 是框架实现高性能、异步事件驱动架构的核心组件之一。它负责处理网络 I&#x2F;O 事件、用户任务调度以及线程管理，是 Netty 实现高效并发的基础。 1. 线程模型基本的线程池化模式可以描述为：从池的空闲线程列表中选择一个Thread，并且指派它去运行一个已提交的任务（一个Runnable的实现）​；当任务完成时，将该Thread返回给该列表，使其可被重用。 虽然池化和重用
+          策略模式定义一系列算法，并使它们可以互相替换。重点是算法的切换。 123456789101112131415161718192021222324252627282930313233343536373839// 策略模式示例：不同的支付方式public interface PaymentStrategy &#123;    void pay(int amount);&#125;public clas
         </div>
       </a>
 
@@ -309,8 +296,116 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-15 20:46" pubdate>
-              2025-03-15
+            <time datetime="2025-05-18 13:55" pubdate>
+              2025-05-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/design-pattern/" class="category-chain-item">design-pattern</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/6407ef8f.html" target="_self">
+          用户态和内核态
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/6407ef8f.html" target="_self">
+        <div>
+          用户态和内核态的区别用户态（User Mode）：  权限受限 不能直接访问硬件 不能执行特权指令 程序崩溃只影响当前进程  内核态（Kernel Mode）：  最高权限 可以直接访问硬件 可以执行特权指令 崩溃会导致系统宕机  用户态切换到内核态的3种方式用户态 -&gt; 内核态的切换（陷入内核）：  系统调用（System Call） 异常（Exception） 外部中断（Interrup
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-13 01:16" pubdate>
+              2025-05-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OS/" class="category-chain-item">OS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/53bb55f0.html" target="_self">
+          Spring 7种事务传播行为（Transaction Propagation）
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/53bb55f0.html" target="_self">
+        <div>
+          REQUIRED（默认） 1234567891011@Transactional(propagation = Propagation.REQUIRED)public class UserService &#123;        // 如果当前没有事务，就创建一个新事务    // 如果当前存在事务，就加入到这个事务中    @Transactional    public void create
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-11 01:39" pubdate>
+              2025-05-11
             </time>
           </div>
         
@@ -330,74 +425,7 @@
   
     <span>></span>
     
-  <a href="/categories/backend/Netty/" class="category-chain-item">Netty</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/ab126a8f.html" target="_self">
-          <img src="https://s2.loli.net/2025/03/12/WAX3UOeYiajfbwB.png" srcset="/img/loading.gif" lazyload alt="Netty in Action 6 - ChannelHandler &amp; ChannelPipeline">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/ab126a8f.html" target="_self">
-          Netty in Action 6 - ChannelHandler &amp; ChannelPipeline
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/posts/ab126a8f.html" target="_self">
-        <div>
-          ChannelHandler家族The Channel lifecycle12345678910111213141516171819202122public class ChannelLifecycleHandler extends ChannelInboundHandlerAdapter &#123;    @Override    public void channelRegistered(C
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-12 15:03" pubdate>
-              2025-03-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/backend/" class="category-chain-item">backend</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/backend/Netty/" class="category-chain-item">Netty</a>
+  <a href="/categories/backend/Spring/" class="category-chain-item">Spring</a>
   
   
 
@@ -421,15 +449,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/60d194bc.html" target="_self">
-          Netty in Action 5 - ByteBuf
+        <a href="/posts/db6f03b7.html" target="_self">
+          Java线程池的工作流程、7个参数、4种常见的线程池
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/60d194bc.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/db6f03b7.html" target="_self">
         <div>
-          The main points we covered in this chapter:  The use of distinct read and write indices to control data access Different approaches to memory usage—backing arrays and direct buffers The aggregate view
+          线程池的工作流程12345678910111213141516171819202122public class ThreadPoolExecutor &#123;    // 工作流程：    // 1. 如果核心线程数未满，创建核心线程执行任务    // 2. 如果核心线程数已满，将任务放入队列    // 3. 如果队列已满，创建非核心线程执行任务    // 4. 如果非核心线程数也达到最
         </div>
       </a>
 
@@ -437,8 +465,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-11 21:35" pubdate>
-              2025-03-11
+            <time datetime="2025-05-11 01:36" pubdate>
+              2025-05-11
             </time>
           </div>
         
@@ -453,12 +481,80 @@
     
       <span class="category-chain">
         
-  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
   
   
     <span>></span>
     
-  <a href="/categories/backend/Netty/" class="category-chain-item">Netty</a>
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/concurrent/" class="category-chain-item">concurrent</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/52e45240.html" target="_self">
+          Java实现代理的2种方式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/52e45240.html" target="_self">
+        <div>
+          Java中实现代理主要有两种方式：JDK动态代理和字节码增强（比如CGLIB）。 1.  JDK动态代理12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455// 1. 定义接口public interface UserService &#123;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-11 01:30" pubdate>
+              2025-05-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
   
   
 
@@ -479,24 +575,18 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/f302f546.html" target="_self">
-          <img src="https://s2.loli.net/2025/03/06/hzic5mvRqeXjSn8.png" srcset="/img/loading.gif" lazyload alt="期权投资策略2 - 卖出备兑看涨期权">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
+    <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/posts/f302f546.html" target="_self">
-          期权投资策略2 - 卖出备兑看涨期权
+        <a href="/posts/3eb72480.html" target="_self">
+          Spring Bean的4个生命周期
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/posts/f302f546.html" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/3eb72480.html" target="_self">
         <div>
-          卖出备兑看涨期权，对标的股票应当是稍微看多的，至少是中性的。通过卖出call，投资者可以降低持股风险。如果股票由于某种原因下跌，至少还可以从卖出的call中获得一定的收益。但卖出备兑看涨期权限制了也限制了股票大幅上涨情况下的潜在盈利。 1. 卖出备兑看涨期权的重要性 对下行风险的保护：相比不卖call的情况，多收取了call的权利金，减少了总亏损。 之后的操作：可以考虑再卖出一手call   股价
+          Spring Bean 的生命周期分为实例化(Instantiation)、属性赋值(Population)、初始化(Initialization)和销毁(Destruction)四个阶段。  实例化阶段（Instantiation） 123456789101112131415161718192021222324252627282930313233343536// 1. 使用@Component等
         </div>
       </a>
 
@@ -504,8 +594,190 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-06 21:47" pubdate>
-              2025-03-06
+            <time datetime="2025-05-11 01:23" pubdate>
+              2025-05-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/backend/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/bc410d1f.html" target="_self">
+          Spring 如何通过三级缓存解决循环依赖？
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/bc410d1f.html" target="_self">
+        <div>
+          三级缓存的定义：  一级缓存（singletonObjects）：存放最终形态的 Bean（已经实例化、属性填充、初始化），单例池，为“Spring 的单例属性”⽽⽣。一般情况我们获取 Bean 都是从这里获取的，但是并不是所有的 Bean 都在单例池里面，例如原型 Bean 就不在里面。 二级缓存（earlySingletonObjects）：存放过渡 Bean（半成品，尚未属性填充），也就是三
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-11 01:17" pubdate>
+              2025-05-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/backend/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/e8b83873.html" target="_self">
+          Continuous Controller (CC)
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/e8b83873.html" target="_self">
+        <div>
+          在MIDI（Musical Instrument Digital Interface）协议中，CC（Continuous Controller）控制器用于实时调节音色参数。 CC1（动态控制器 &#x2F; Modulation）** 功能：   动态控制：通常对应音源的交叉淡化（X-fade），通过混合不同力度层的采样，实现音色的自然过渡（如从弱到强的渐强效果）。例如，在弦乐连奏中，CC1调整运
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-05 00:10" pubdate>
+              2025-05-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/music/" class="category-chain-item">music</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/posts/446165c1.html" target="_self">
+          <img src="https://s2.loli.net/2025/04/14/qSmgH8AvpbNsF34.png" srcset="/img/loading.gif" lazyload alt="期权投资策略6 - 卖出看涨期权比率">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/446165c1.html" target="_self">
+          期权投资策略6 - 卖出看涨期权比率
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/posts/446165c1.html" target="_self">
+        <div>
+          1. 卖出看涨期权比率简单地说，卖出看涨期权比率（ratio call writing）是这样一种策略，投资者持有一定数量的标的股票，同时他卖出了更多股数的看涨期权。因此，卖出的看涨期权所对应的股数与已持有的股数之间就有了一个比率。最常见的比率是2：1，在这种比率上，投资者持有100股标的股票，同时卖出2手看涨期权。 一般而言，某个投资者在建立卖出看涨期权比率头寸的时候，他应当对标的股票的前景保持
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-04-13 23:47" pubdate>
+              2025-04-13
             </time>
           </div>
         
@@ -543,301 +815,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/464fc54d.html" target="_self">
-          <img src="https://s2.loli.net/2024/12/18/AjhpwP4bC2ByuH7.png" srcset="/img/loading.gif" lazyload alt="Netty 学习">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/464fc54d.html" target="_self">
-          Netty 学习
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/posts/464fc54d.html" target="_self">
-        <div>
-          Netty 简介Netty 是一个利用 Java 的高级网络的能力，隐藏了 Java 背后的复杂性然后提供了一个易于使用的 API 的客户端&#x2F;服务器框架。支持应用以较低的成本来获得更大的吞吐量和可用性。  Netty 的技术和方法的特点 设计 针对多种传输类型的统一接口 - 阻塞和非阻塞 简单但更强大的线程模型 真正的无连接的数据报套接字支持 链接逻辑支持复用   易用性 大量的 Jav
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-12-18 11:52" pubdate>
-              2024-12-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/backend/" class="category-chain-item">backend</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/backend/Netty/" class="category-chain-item">Netty</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/9da1ef6b.html" target="_self">
-          Linux 命令
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/9da1ef6b.html" target="_self">
-        <div>
-          命令通用格式：command -options arguments 几个简单命令 date: 显示当前时间和日期 cal: 显示当前月份的日历 df: 磁盘的当前可用空间 free: 查看可用内存容量 exit: 结束终端会话，也可使用ctrl-D pwd: 输出当前的工作目录名称  cdcd $&#123;dir&#125;: 修改目录。一些有用的便捷写法：  cd: 将当前工作目录更改为用户主
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-12-15 22:38" pubdate>
-              2024-12-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/ed1d4064.html" target="_self">
-          Search &amp; Pagination
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/ed1d4064.html" target="_self">
-        <div>
-          When to use the useSearchParams() hook vs. the searchParams prop? You might have noticed you used two different ways to extract search params. Whether you use one or the other depends on whether you’r
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-12-11 20:55" pubdate>
-              2024-12-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/full-stack/" class="category-chain-item">full stack</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/full-stack/Next-js/" class="category-chain-item">Next.js</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/8c500a47.html" target="_self">
-          学历无用论
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/8c500a47.html" target="_self">
-        <div>
-          美国式的人才雇佣方法在日本，不论是职员还是公司，都有一个根深蒂固的看法，就是一个人一生只能在一家公司工作。从自古以来的儒教精神来看，这相当于“忠臣不事二主”。一旦雇佣关系成立，就要在那里“奉公”工作到最后。而在美国依靠投标制度产生的雇佣关系中，什么时候都需要对照“求职申请表”对职员做出评价。即便是对好不容易招来的职员，如果公司一旦发现他并不能达到“求职申请表”的要求，公司就会在说明理由后将其辞退。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-12-01 09:20" pubdate>
-              2024-12-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/book-notes/" class="category-chain-item">book notes</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/85e79a17.html" target="_self">
-          一些全栈工具
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/85e79a17.html" target="_self">
-        <div>
-          create-t3-appA easier way to start a full-stack, typesafe Next.js app. 1npm create t3-app@latest  VercelBuild and deploy web projects with automatic scaling and support for modern web technologies lik
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-11-19 21:57" pubdate>
-              2024-11-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/full-stack/" class="category-chain-item">full stack</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/#board">17</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/#board">18</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
