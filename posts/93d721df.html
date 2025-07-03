@@ -16,23 +16,25 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="KMP使用场景有两个字符串 S 和 p，其中 S 是原串（长），p是模板串（短）。 KMP用于字符串匹配：找到 S 中所有与 p 相同的子串，并返回每个子串开头字符的下标。 代码模板123456789101112131415161718&#x2F;&#x2F; s[]是长文本，p[]是模式串，n是s的长度，m是p的长度&#x2F;&#x2F; 求模式串的next数组for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i">
+    <meta name="description" content="1. 看涨期权价差策略介绍在价差交易中，投资者在买入一个期权的同时卖出另一个期权，两个期权的标的物相同，其他条款有不同。进行价差交易的基本思想是，策略家通过卖出一个看涨期权来减少买入另一个看涨期权的风险。如果买入的看涨期权的到期日与卖出的看涨期权的到期日相同或是更远时，价差中卖出的看涨期权可以被视为是备兑的。 所有的价差都可以归为3个大的类别：垂直的、水平的、或者是对角的。垂直价差（vertica">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法模板2-3.KMP">
-<meta property="og:url" content="https://peixuanhu.github.io/posts/fca2cc32.html">
+<meta property="og:title" content="期权投资策略7 - 看涨期权牛市价差">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/93d721df.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="KMP使用场景有两个字符串 S 和 p，其中 S 是原串（长），p是模板串（短）。 KMP用于字符串匹配：找到 S 中所有与 p 相同的子串，并返回每个子串开头字符的下标。 代码模板123456789101112131415161718&#x2F;&#x2F; s[]是长文本，p[]是模式串，n是s的长度，m是p的长度&#x2F;&#x2F; 求模式串的next数组for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i">
+<meta property="og:description" content="1. 看涨期权价差策略介绍在价差交易中，投资者在买入一个期权的同时卖出另一个期权，两个期权的标的物相同，其他条款有不同。进行价差交易的基本思想是，策略家通过卖出一个看涨期权来减少买入另一个看涨期权的风险。如果买入的看涨期权的到期日与卖出的看涨期权的到期日相同或是更远时，价差中卖出的看涨期权可以被视为是备兑的。 所有的价差都可以归为3个大的类别：垂直的、水平的、或者是对角的。垂直价差（vertica">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-09T04:41:44.000Z">
-<meta property="article:modified_time" content="2025-07-03T07:15:13.368Z">
+<meta property="og:image" content="https://s2.loli.net/2025/07/03/N9RWl34pZxHP726.png">
+<meta property="article:published_time" content="2025-04-20T14:23:45.000Z">
+<meta property="article:modified_time" content="2025-07-03T07:17:58.957Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2025/07/03/N9RWl34pZxHP726.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>算法模板2-3.KMP - Peixuan&#39;s Page</title>
+  <title>期权投资策略7 - 看涨期权牛市价差 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -192,13 +194,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://s2.loli.net/2025/07/03/N9RWl34pZxHP726.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="算法模板2-3.KMP"></span>
+            <span id="subtitle" data-typed-text="期权投资策略7 - 看涨期权牛市价差"></span>
           
         </div>
 
@@ -209,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-09 12:41" pubdate>
-          October 9, 2023 pm
+        <time datetime="2025-04-20 22:23" pubdate>
+          April 20, 2025 pm
         </time>
       </span>
     
@@ -221,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          3.4k words
         
       </span>
     
@@ -232,7 +234,7 @@
         
         
         
-          10 mins
+          29 mins
         
       </span>
     
@@ -290,28 +292,46 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">算法模板2-3.KMP</h1>
+            <h1 id="seo-header">期权投资策略7 - 看涨期权牛市价差</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>有两个字符串 <code>S</code> 和 <code>p</code>，其中 <code>S</code> 是原串（长），<code>p</code>是模板串（短）。</p>
-<p>KMP用于字符串匹配：找到 <code>S</code> 中所有与 <code>p</code> 相同的子串，并返回每个子串开头字符的下标。</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// s[]是长文本，p[]是模式串，n是s的长度，m是p的长度</span><br><br><span class="hljs-comment">// 求模式串的next数组</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123; <span class="hljs-comment">// i从2开始的原因：ne[1]不用算，ne[1]=0，第一个字母失败了只能从头开始</span><br>  <span class="hljs-keyword">while</span> (j &amp;&amp; p[i] != p[j + <span class="hljs-number">1</span>]) j = ne[j];<br>  <span class="hljs-keyword">if</span> (p[i] == p[j + <span class="hljs-number">1</span>]) j ++;<br>  ne[i] = j; <span class="hljs-comment">// 记录当前i对应的ne[i]</span><br>&#125;<br><br><span class="hljs-comment">// 匹配</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">0</span>; i &lt;= n; i ++) &#123;<br>  <span class="hljs-keyword">while</span> (j &amp;&amp; s[i] != p[j + <span class="hljs-number">1</span>]) j = ne[j]; <span class="hljs-comment">// j没有回到第一个字符且s[i]和p[j + 1]不能匹配：一直往后移动p串使得p[j + 1]之前的子串是匹配的</span><br>  <span class="hljs-keyword">if</span> (s[i] == p[j + <span class="hljs-number">1</span>]) j ++; <span class="hljs-comment">// 如果匹配了，j往后移动</span><br>  <span class="hljs-keyword">if</span> (j == m) &#123; <span class="hljs-comment">// 整个p串都匹配成功</span><br>    j = ne[j]; <span class="hljs-comment">// j还得退一步（试了下如果不加也能ac，因为在下一次循环的while中如果不匹配的话，反正也会执行j=ne[j]的？）</span><br>    <span class="hljs-comment">// 匹配成功之后的逻辑</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="1-看涨期权价差策略介绍"><a href="#1-看涨期权价差策略介绍" class="headerlink" title="1. 看涨期权价差策略介绍"></a>1. 看涨期权价差策略介绍</h1><p>在价差交易中，投资者在买入一个期权的同时卖出另一个期权，两个期权的标的物相同，其他条款有不同。<br>进行价差交易的基本思想是，策略家通过卖出一个看涨期权来减少买入另一个看涨期权的风险。<br>如果买入的看涨期权的到期日与卖出的看涨期权的到期日相同或是更远时，价差中卖出的看涨期权可以被视为是备兑的。</p>
+<p>所有的价差都可以归为3个大的类别：垂直的、水平的、或者是对角的。<br>垂直价差（vertical spread）所涉及的是到期日相同但行权价不同的期权。例如，买入XYZ 10月30看涨期权，同时卖出10月35看涨期权。<br>水平价差（horizontal spread）的看涨期权的行权价相同，但到期日不同。例如，卖出XYZ 1月35看涨期权，同时买入XYZ 4月35看涨期权。<br>对角价差（diagonal spread）是垂直价差与水平价差的结合，它是由行权价和到期日都不同的看涨期权组成的。</p>
+<h2 id="价差指令"><a href="#价差指令" class="headerlink" title="价差指令"></a>价差指令</h2><p>备兑卖出者每次挪仓的时候，不管是向上、向下还是向前，他都应当下达价差交易指令，以求得更好的执行价格。</p>
+<p>当下达价差指令的时候，必须明确指定要买入和卖出的期权。另外还有两项必须指明的东西：价差执行价格，以及这个价格是收入还是支出。</p>
+<p>牛市价差是最流行的价差形式之一。在这类的价差交易里，投资者<strong>买入1手行权价的看涨期权，同时卖出1手行权价更高的看涨期权</strong>。一般来说，两手期权的到期日相同。这是一个垂直价差。当标的股票上涨时，牛市价差就会盈利，因此这是一个看多的头寸。这个价差的潜在盈利和潜在风险都是有限的。虽然两者从百分比上来看都相当可观，但风险不会超过净投资。事实上，相对于直接买入1手相似的看涨期权，1手牛市价差所要求的投资金额要小一些，因此其最大潜在亏损金额也要小一些。</p>
+<p><img src="https://s2.loli.net/2025/07/03/N9RWl34pZxHP726.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>建立这个头寸的投资者对标的股票是看多的，但是，一般而言，他是在寻找一种对冲的途径。建立牛市价差的策略家是看多的，但不是过度看多。</p>
+<figure class="highlight fix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs fix"><span class="hljs-attr">盈亏平衡点</span>=<span class="hljs-string">较低行权价+价差的净支出最大潜在盈利=较高行权价–较低行权价-价差的净支出</span><br></code></pre></td></tr></table></figure>
 
-<p>想不清楚的话拿个例子模拟一下：</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">s</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;abababc&quot;</span><br><span class="hljs-attribute">p</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;abababab&quot;</span><br></code></pre></td></tr></table></figure>
+<p>如果进行大量的看涨期权价差交易，手续费的占比就会降低。由于这个原因，一般建议投资者每次至少交易5手期权价差。</p>
+<h1 id="2-激进的程度"><a href="#2-激进的程度" class="headerlink" title="2. 激进的程度"></a>2. 激进的程度</h1><h2 id="激进的牛市价差"><a href="#激进的牛市价差" class="headerlink" title="激进的牛市价差"></a>激进的牛市价差</h2><p>最常用的牛市价差是一种激进的类型。在建立价差的时候，股票价格一般比较高的行权价低很多。如果股票价格在到期时上涨得足够高，这种激进的牛市价差一般能够产生相当可观的收益率。</p>
+<p>如果标的普通股股票在价差建立时非常接近较低的行权价，激进的牛市价差就最有吸引力。</p>
+<h2 id="极端激进的牛市价差"><a href="#极端激进的牛市价差" class="headerlink" title="极端激进的牛市价差"></a>极端激进的牛市价差</h2><p>一种非常激进的牛市价差是“虚值”价差。在建立价差时，两个看涨期权都是虚值的。建立这样的价差成本很低，如果股票在到期时能够上涨到较高的行权价，潜在盈利就很大。</p>
+<p>如果要采用这样的策略，所投入的资金应当只占该交易者的投机基金的一个非常小的比例。</p>
+<h2 id="不激进的牛市价差"><a href="#不激进的牛市价差" class="headerlink" title="不激进的牛市价差"></a>不激进的牛市价差</h2><p>“实值”价差是一种不激进的牛市价差。在这种情况里，两个看涨期权都是实值的。这个头寸的激进程度要小得多，因为它有很大的可能会实现最大潜在盈利，虽然它的潜在盈利与更为激进的牛市价差相比要小得多。</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gauss">示例<br><span class="hljs-built_in">XYZ</span>的价格是<span class="hljs-number">37</span>，<span class="hljs-number">10</span>月<span class="hljs-number">30</span>看涨期权的价格是<span class="hljs-number">7</span>，<span class="hljs-number">10</span>月<span class="hljs-number">35</span>看涨期权是<span class="hljs-number">4</span>。<br>这两个期权都是实值的，建立价差的成本是<span class="hljs-number">3</span>点（支出）。<br>最大潜在盈利是<span class="hljs-number">2</span>点，而且只要<span class="hljs-built_in">XYZ</span>在到期时高于<span class="hljs-number">35</span>，就能实现这个最大盈利。<br></code></pre></td></tr></table></figure>
 
+<h1 id="3-牛市价差的排序"><a href="#3-牛市价差的排序" class="headerlink" title="3. 牛市价差的排序"></a>3. 牛市价差的排序</h1><p>在任何对牛市价差的排序中，重要的是，不要根据它们在到期时的最大潜在盈利来区别它们的好坏。如果根据到期时的最大潜在盈利来排序，那一定会给深度虚值价差最大的权重，而它们的最大潜在盈利实际上很难实现。</p>
+<p>更好的方法是在分析中排除掉那些最大盈利价格与当前股票价格距离太远的价差。一个考虑了股票运动的简单方法是，假定股票在到期时上涨的幅度等于平值看涨期权中的时间价值的2倍。因为波动率越大的股票，它的期权的时间价值就越大，这样的方法是一种将波动率结合到分析中的简单尝试。</p>
+<h2 id="进一步的考虑"><a href="#进一步的考虑" class="headerlink" title="进一步的考虑"></a>进一步的考虑</h2><p>有的时候，买入的看涨期权的到期日比卖出的看涨期权的到期日更远会有好处。这样的头寸通常被称作对角价差。</p>
+<p>牛市价差对（快速）交易者并不适合，除非期权的剩余存续期很短。如果某个投机者对标的股票短期看多，那么他直接买入看涨期权比建立牛市价差要更好一些。</p>
+<p>如果投资者预期标的股票会迅速上涨，那更好的策略是只买入看涨期权。总的来说，相对于只买入看涨期权，牛市价差是一个不那么激进的策略。股票的短期运动以及大幅度的持续上涨运动，对牛市价差不会有什么影响。不过，如果股票价格在到期前有缓慢的、数量不大的上涨，那价差的表现就会比只买入看涨期权要好。此外，价差的实际风险金额要更小一些。因为其最初建立时所需的支出要更小。</p>
+<h1 id="4-后续行动"><a href="#4-后续行动" class="headerlink" title="4. 后续行动"></a>4. 后续行动</h1><h2 id="价格下跌"><a href="#价格下跌" class="headerlink" title="价格下跌"></a>价格下跌</h2><p>如果股票价格下跌，有的价差交易者喜欢把卖出的看涨期权买回来，以锁住空头腿的盈利。他们会继续持有看涨期权多头，并希望标的股票价格会上涨，从而也能从价差的多头腿处获利。</p>
+<p>如果它能以1&#x2F;8或1&#x2F;16买回，那在买回这个先前卖出的看涨期权时，投资者几乎没有损失什么。不过，如果卖出的看涨期权的价值要远远大于这个金额，那他就不应当太快地把它买回来</p>
+<h2 id="价格上涨"><a href="#价格上涨" class="headerlink" title="价格上涨"></a>价格上涨</h2><p>如果股票价格上涨，投资者一定不能拆散他的价差，即不能卖出先前买入的看涨期权，并希望股票价格会下跌，从而在卖出的期权中也获取收益。这样做的风险太大了。</p>
+<p>对看涨期权牛市价差来说，唯一能够锁住盈利的方法是买入相随的看跌期权熊市价差（bear spread）。</p>
+<h1 id="5-牛市价差的其他用途"><a href="#5-牛市价差的其他用途" class="headerlink" title="5. 牛市价差的其他用途"></a>5. 牛市价差的其他用途</h1><p>如果一个投资者只是买入看涨期权并且发现他面临未兑现的亏损，他可以通过“向下挪仓”为一个牛市价差，从而显著地提高他恢复到盈亏平衡的机会。如果他有未兑现的盈利，他可以在次高的行权价上卖出看涨期权，从而构造出一个牛市价差，以锁住他的部分盈利。</p>
+<p>一个面对未兑现亏损的普通股股票的持有者也可以利用牛市价差来降低他实现盈亏平衡的价格。使用期权，他实现盈亏平衡或者盈利的机会就大得多。<br><img src="https://s2.loli.net/2025/07/03/Rj96pKtPLZBenrM.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gauss">【示例】<br>某个投资者按<span class="hljs-number">48</span>买入<span class="hljs-number">100</span>股<span class="hljs-built_in">XYZ</span>，股票后来跌到<span class="hljs-number">42</span>，于是他面临着未兑现的亏损。<br>为了达到盈亏平衡，股票必须上涨<span class="hljs-number">6</span>点。不过，如果<span class="hljs-built_in">XYZ</span>有场内期权交易的话，他可以显著地降低他的盈亏平衡价格。<br>现有的价格是：<br><span class="hljs-built_in">XYZ</span>普通股股票：<span class="hljs-number">42</span><br><span class="hljs-built_in">XYZ</span> <span class="hljs-number">10</span>月<span class="hljs-number">40</span>看涨期权：<span class="hljs-number">4</span><br><span class="hljs-built_in">XYZ</span> <span class="hljs-number">10</span>月<span class="hljs-number">45</span>看涨期权：<span class="hljs-number">2</span><br>股票持有者可以买入<span class="hljs-number">1</span>手<span class="hljs-number">10</span>月<span class="hljs-number">40</span>看涨期权，同时卖出<span class="hljs-number">2</span>手<span class="hljs-number">10</span>月<span class="hljs-number">45</span>看涨期权，从而改进他的总头寸。<br></code></pre></td></tr></table></figure>
 
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="暴力算法"><a href="#暴力算法" class="headerlink" title="暴力算法"></a>暴力算法</h3><h4 id="时间复杂度-O-n-2"><a href="#时间复杂度-O-n-2" class="headerlink" title="时间复杂度 O(n^2)"></a>时间复杂度 <code>O(n^2)</code></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp">S[N], p[M]<br><br>vector&lt;<span class="hljs-type">int</span>&gt; res;<br>  <br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;<br>  <span class="hljs-type">bool</span> flag = <span class="hljs-literal">true</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j ++)<br>    <span class="hljs-keyword">if</span> (S[i + j - <span class="hljs-number">1</span>] != p[j]) &#123;<br>      flag = <span class="hljs-literal">false</span>;<br>      <span class="hljs-keyword">break</span>;<br>    &#125;<br>  <span class="hljs-keyword">if</span> (flag) res.<span class="hljs-built_in">push_back</span>(i);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><h4 id="时间复杂度-O-n"><a href="#时间复杂度-O-n" class="headerlink" title="时间复杂度 O(n)"></a>时间复杂度 <code>O(n)</code></h4><p>分析：在 <code>i</code> 循环 <code>n</code> 次的过程中，每次循环 <code>j</code> 最多会+1，<code>j</code> 总共最多会+n，因此 <code>j=ne[j]</code> 再怎么减都最多减n</p>
-<p>故总的时间复杂度是 <code>2n</code>，是 <code>O(n)</code> 的。</p>
-<h4 id="next-数组"><a href="#next-数组" class="headerlink" title="next 数组"></a><code>next</code> 数组</h4><p>对于模板串 <code>p</code> 中的每一个字符 <code>p[i]</code>，都进行一个预处理：求出一个最大长度 <code>x</code>，使得以 <code>p[i]</code> 为结尾的长度为 <code>x</code> 的子串和 <code>p</code> 开头的长度为 <code>x</code> 的子串相等。</p>
-<p><code>next[i] = j</code> 含义：<code>p[1, ..., j] = p[i - j + 1, ..., i]</code></p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>模板中两个字符串的下标都是从1开始。</p>
-<p><code>p</code> 中每次和<code>S[i]</code> 匹配的是 <code>p[j + 1]</code>，可以理解为 <code>j</code> 比 <code>i</code> 往前错一位，每次都只是试探一下 <code>p[j+1]</code> 能不能和 <code>S[i]</code> 匹配。</p>
+<p>这个由卖出备兑和牛市价差组合起来的策略有时也可以用来单独交易（开仓）。</p>
+<p>牛市价差也可以用来“代替”卖出备兑。如果一个期权是实值的，而且不包含或者包含很少的时间价值，那么就可以用买它来代替买入股票。投资者可以就买入的深度实值看涨期权而卖出另一手期权，一手较为接近平值的看涨期权。这样一个头寸的盈利特征同一手卖出备兑的盈利特征非常相像，因为买入的那手看涨期权“模仿了”买入股票。当然，这个头寸事实上是一手牛市价差，其中，买入的看涨期权是一手相当实值的期权，而卖出的看涨期权则更接近于平值。</p>
+<p>显然，投资者不会将他所有的钱都放进这样一个头寸里，而放弃卖出备兑。因为在使用牛市价差时，他就有可能在一个较小的下跌过程中亏损掉其全部投资。而如果使用卖出备兑策略，即使经历严重的市场下跌，投资者仍然持有股票。不过，如果在牛市价差中投入一笔比他在卖出备兑中需要投资的数目小得多的钱，那么投资者有可能得到某种折衷。他仍然可以保持相同的潜在盈利。<strong>投资者剩下的资金可以投资于固定收益证券。</strong></p>
+<p>牛市价差提供了同样金额的盈利、同样的盈亏平衡点，较少的手续费、较小的潜在风险，以及从投资的固定收益证券中得到的利息收入。<strong>虽然你不是总能找到深度实值看涨期权来“代替”买入股票，但只要有这样的期权存在，策略家就应当考虑使用牛市价差而不是卖出备兑。</strong></p>
+<h1 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h1><p>牛市价差是一种最简单和最常用的价差形式。在一个稍微看多的环境里，它的表现会最好。不过，牛市价差不会一下子就扩展到它的最大潜在盈利。因此，对短线交易来说，直接买入看涨期权是更好的选择。除了用来在标的股票小幅上涨时盈利之外，牛市价差还在许多情况里都有更为精密的应用。看涨期权的买家和股票的买家都可以使用牛市价差来“向下挪仓”​，从而为他们的头寸产生较低的新盈亏平衡点。在某种情况里，当有深度实值看涨期权存在的时候，备兑卖出者也可以使用牛市价差来代替卖出备兑。</p>
 
                 
               </div>
@@ -330,20 +350,13 @@
     
       <span class="category-chain">
         
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  <a href="/categories/financing/" class="category-chain-item">financing</a>
   
   
     <span>></span>
     
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
+  <a href="/categories/financing/%E6%9C%9F%E6%9D%83%E6%8A%95%E8%B5%84%E7%AD%96%E7%95%A5/" class="category-chain-item">期权投资策略</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/data-structure/" class="category-chain-item">data-structure</a>
-  
-  
-
   
 
   
@@ -364,8 +377,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>算法模板2-3.KMP</div>
-      <div>https://peixuanhu.github.io/posts/fca2cc32.html</div>
+      <div>期权投资策略7 - 看涨期权牛市价差</div>
+      <div>https://peixuanhu.github.io/posts/93d721df.html</div>
     </div>
     <div class="license-meta">
       
@@ -377,7 +390,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 9, 2023</div>
+          <div>April 20, 2025</div>
         </div>
       
       
@@ -414,9 +427,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/ef9bba37.html" title="算法模板2-4.Trie树">
+                      <a href="/posts/e8b83873.html" title="Continuous Controller (CC)">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法模板2-4.Trie树</span>
+                        <span class="hidden-mobile">Continuous Controller (CC)</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -424,8 +437,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/f726e612.html" title="算法模板2-2.栈和队列">
-                        <span class="hidden-mobile">算法模板2-2.栈和队列</span>
+                      <a href="/posts/446165c1.html" title="期权投资策略6 - 卖出看涨期权比率">
+                        <span class="hidden-mobile">期权投资策略6 - 卖出看涨期权比率</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

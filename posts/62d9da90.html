@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="KMP使用场景有两个字符串 S 和 p，其中 S 是原串（长），p是模板串（短）。 KMP用于字符串匹配：找到 S 中所有与 p 相同的子串，并返回每个子串开头字符的下标。 代码模板123456789101112131415161718&#x2F;&#x2F; s[]是长文本，p[]是模式串，n是s的长度，m是p的长度&#x2F;&#x2F; 求模式串的next数组for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i">
+    <meta name="description" content="那不勒斯和弦（Neapolitan chord）是古典音乐理论中的一种重要的和弦类型。 基本构成 结构：那不勒斯和弦是一个大三和弦，建立在降II级音上 记号：通常用N6或♭II6表示 转位：几乎总是以第一转位的形式出现  功能特性 调性功能：属于下属功能组，常用作主导和弦的准备 解决倾向：通常解决到属和弦（V级）或属七和弦（V7） 色彩效果：带有特殊的和声色彩，比普通的下属和弦更加丰富  实际应用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法模板2-3.KMP">
-<meta property="og:url" content="https://peixuanhu.github.io/posts/fca2cc32.html">
+<meta property="og:title" content="那不勒斯和弦">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/62d9da90.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="KMP使用场景有两个字符串 S 和 p，其中 S 是原串（长），p是模板串（短）。 KMP用于字符串匹配：找到 S 中所有与 p 相同的子串，并返回每个子串开头字符的下标。 代码模板123456789101112131415161718&#x2F;&#x2F; s[]是长文本，p[]是模式串，n是s的长度，m是p的长度&#x2F;&#x2F; 求模式串的next数组for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i">
+<meta property="og:description" content="那不勒斯和弦（Neapolitan chord）是古典音乐理论中的一种重要的和弦类型。 基本构成 结构：那不勒斯和弦是一个大三和弦，建立在降II级音上 记号：通常用N6或♭II6表示 转位：几乎总是以第一转位的形式出现  功能特性 调性功能：属于下属功能组，常用作主导和弦的准备 解决倾向：通常解决到属和弦（V级）或属七和弦（V7） 色彩效果：带有特殊的和声色彩，比普通的下属和弦更加丰富  实际应用">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-09T04:41:44.000Z">
-<meta property="article:modified_time" content="2025-07-03T07:15:13.368Z">
+<meta property="article:published_time" content="2025-06-14T08:15:12.000Z">
+<meta property="article:modified_time" content="2025-07-03T07:15:13.832Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>算法模板2-3.KMP - Peixuan&#39;s Page</title>
+  <title>那不勒斯和弦 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="算法模板2-3.KMP"></span>
+            <span id="subtitle" data-typed-text="那不勒斯和弦"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-09 12:41" pubdate>
-          October 9, 2023 pm
+        <time datetime="2025-06-14 16:15" pubdate>
+          June 14, 2025 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          328 words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          10 mins
+          3 mins
         
       </span>
     
@@ -290,28 +290,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">算法模板2-3.KMP</h1>
+            <h1 id="seo-header">那不勒斯和弦</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>有两个字符串 <code>S</code> 和 <code>p</code>，其中 <code>S</code> 是原串（长），<code>p</code>是模板串（短）。</p>
-<p>KMP用于字符串匹配：找到 <code>S</code> 中所有与 <code>p</code> 相同的子串，并返回每个子串开头字符的下标。</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// s[]是长文本，p[]是模式串，n是s的长度，m是p的长度</span><br><br><span class="hljs-comment">// 求模式串的next数组</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123; <span class="hljs-comment">// i从2开始的原因：ne[1]不用算，ne[1]=0，第一个字母失败了只能从头开始</span><br>  <span class="hljs-keyword">while</span> (j &amp;&amp; p[i] != p[j + <span class="hljs-number">1</span>]) j = ne[j];<br>  <span class="hljs-keyword">if</span> (p[i] == p[j + <span class="hljs-number">1</span>]) j ++;<br>  ne[i] = j; <span class="hljs-comment">// 记录当前i对应的ne[i]</span><br>&#125;<br><br><span class="hljs-comment">// 匹配</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">0</span>; i &lt;= n; i ++) &#123;<br>  <span class="hljs-keyword">while</span> (j &amp;&amp; s[i] != p[j + <span class="hljs-number">1</span>]) j = ne[j]; <span class="hljs-comment">// j没有回到第一个字符且s[i]和p[j + 1]不能匹配：一直往后移动p串使得p[j + 1]之前的子串是匹配的</span><br>  <span class="hljs-keyword">if</span> (s[i] == p[j + <span class="hljs-number">1</span>]) j ++; <span class="hljs-comment">// 如果匹配了，j往后移动</span><br>  <span class="hljs-keyword">if</span> (j == m) &#123; <span class="hljs-comment">// 整个p串都匹配成功</span><br>    j = ne[j]; <span class="hljs-comment">// j还得退一步（试了下如果不加也能ac，因为在下一次循环的while中如果不匹配的话，反正也会执行j=ne[j]的？）</span><br>    <span class="hljs-comment">// 匹配成功之后的逻辑</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>想不清楚的话拿个例子模拟一下：</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">s</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;abababc&quot;</span><br><span class="hljs-attribute">p</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;abababab&quot;</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="暴力算法"><a href="#暴力算法" class="headerlink" title="暴力算法"></a>暴力算法</h3><h4 id="时间复杂度-O-n-2"><a href="#时间复杂度-O-n-2" class="headerlink" title="时间复杂度 O(n^2)"></a>时间复杂度 <code>O(n^2)</code></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp">S[N], p[M]<br><br>vector&lt;<span class="hljs-type">int</span>&gt; res;<br>  <br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;<br>  <span class="hljs-type">bool</span> flag = <span class="hljs-literal">true</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j ++)<br>    <span class="hljs-keyword">if</span> (S[i + j - <span class="hljs-number">1</span>] != p[j]) &#123;<br>      flag = <span class="hljs-literal">false</span>;<br>      <span class="hljs-keyword">break</span>;<br>    &#125;<br>  <span class="hljs-keyword">if</span> (flag) res.<span class="hljs-built_in">push_back</span>(i);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><h4 id="时间复杂度-O-n"><a href="#时间复杂度-O-n" class="headerlink" title="时间复杂度 O(n)"></a>时间复杂度 <code>O(n)</code></h4><p>分析：在 <code>i</code> 循环 <code>n</code> 次的过程中，每次循环 <code>j</code> 最多会+1，<code>j</code> 总共最多会+n，因此 <code>j=ne[j]</code> 再怎么减都最多减n</p>
-<p>故总的时间复杂度是 <code>2n</code>，是 <code>O(n)</code> 的。</p>
-<h4 id="next-数组"><a href="#next-数组" class="headerlink" title="next 数组"></a><code>next</code> 数组</h4><p>对于模板串 <code>p</code> 中的每一个字符 <code>p[i]</code>，都进行一个预处理：求出一个最大长度 <code>x</code>，使得以 <code>p[i]</code> 为结尾的长度为 <code>x</code> 的子串和 <code>p</code> 开头的长度为 <code>x</code> 的子串相等。</p>
-<p><code>next[i] = j</code> 含义：<code>p[1, ..., j] = p[i - j + 1, ..., i]</code></p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>模板中两个字符串的下标都是从1开始。</p>
-<p><code>p</code> 中每次和<code>S[i]</code> 匹配的是 <code>p[j + 1]</code>，可以理解为 <code>j</code> 比 <code>i</code> 往前错一位，每次都只是试探一下 <code>p[j+1]</code> 能不能和 <code>S[i]</code> 匹配。</p>
+                <p>那不勒斯和弦（Neapolitan chord）是古典音乐理论中的一种重要的和弦类型。</p>
+<h2 id="基本构成"><a href="#基本构成" class="headerlink" title="基本构成"></a>基本构成</h2><ul>
+<li><strong>结构</strong>：那不勒斯和弦是一个大三和弦，建立在降II级音上</li>
+<li><strong>记号</strong>：通常用N6或♭II6表示</li>
+<li><strong>转位</strong>：几乎总是以第一转位的形式出现</li>
+</ul>
+<h2 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h2><ul>
+<li><strong>调性功能</strong>：属于下属功能组，常用作主导和弦的准备</li>
+<li><strong>解决倾向</strong>：通常解决到属和弦（V级）或属七和弦（V7）</li>
+<li><strong>色彩效果</strong>：带有特殊的和声色彩，比普通的下属和弦更加丰富</li>
+</ul>
+<h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2><ul>
+<li><strong>古典时期</strong>：在巴洛克和古典主义音乐中广泛使用</li>
+<li><strong>浪漫时期</strong>：被浪漫主义作曲家进一步发展和运用</li>
+<li><strong>现代音乐</strong>：在爵士乐和流行音乐中也有应用</li>
+</ul>
+<h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><p>以C大调为例：</p>
+<ul>
+<li>普通的II级和弦是Dm</li>
+<li>那不勒斯和弦则是D♭大三和弦的第一转位，即F-A♭-D♭</li>
+</ul>
+<p>注：</p>
+<ol>
+<li>通常用在小调里</li>
+<li>可在转调时使用</li>
+<li>具有非常紧张、不和谐的特性</li>
+</ol>
 
                 
               </div>
@@ -330,20 +340,13 @@
     
       <span class="category-chain">
         
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  <a href="/categories/music/" class="category-chain-item">music</a>
   
   
     <span>></span>
     
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
+  <a href="/categories/music/harmony/" class="category-chain-item">harmony</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/data-structure/" class="category-chain-item">data-structure</a>
-  
-  
-
   
 
   
@@ -364,8 +367,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>算法模板2-3.KMP</div>
-      <div>https://peixuanhu.github.io/posts/fca2cc32.html</div>
+      <div>那不勒斯和弦</div>
+      <div>https://peixuanhu.github.io/posts/62d9da90.html</div>
     </div>
     <div class="license-meta">
       
@@ -377,7 +380,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 9, 2023</div>
+          <div>June 14, 2025</div>
         </div>
       
       
@@ -414,18 +417,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/ef9bba37.html" title="算法模板2-4.Trie树">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法模板2-4.Trie树</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/f726e612.html" title="算法模板2-2.栈和队列">
-                        <span class="hidden-mobile">算法模板2-2.栈和队列</span>
+                      <a href="/posts/6c6944b1.html" title="T46和K46的区别">
+                        <span class="hidden-mobile">T46和K46的区别</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

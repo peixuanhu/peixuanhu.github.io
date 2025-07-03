@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="KMP使用场景有两个字符串 S 和 p，其中 S 是原串（长），p是模板串（短）。 KMP用于字符串匹配：找到 S 中所有与 p 相同的子串，并返回每个子串开头字符的下标。 代码模板123456789101112131415161718&#x2F;&#x2F; s[]是长文本，p[]是模式串，n是s的长度，m是p的长度&#x2F;&#x2F; 求模式串的next数组for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i">
+    <meta name="description" content="符号含义 T46 &#x3D; 主功能四六和弦（Tonic 6&#x2F;4）  K46 &#x3D; 终止四六和弦（Kadential 6&#x2F;4，德语Kadenz &#x3D; 终止）   这两个都是1级的四六和弦，但功能和用法完全不同。  T46（主功能四六和弦）基本特征 真正的主功能：具有主和弦的稳定性  结构稳定：可以独立存在  功能明确：承担主功能角色   典型用法进行示例： 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法模板2-3.KMP">
-<meta property="og:url" content="https://peixuanhu.github.io/posts/fca2cc32.html">
+<meta property="og:title" content="T46和K46的区别">
+<meta property="og:url" content="https://peixuanhu.github.io/posts/6c6944b1.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="KMP使用场景有两个字符串 S 和 p，其中 S 是原串（长），p是模板串（短）。 KMP用于字符串匹配：找到 S 中所有与 p 相同的子串，并返回每个子串开头字符的下标。 代码模板123456789101112131415161718&#x2F;&#x2F; s[]是长文本，p[]是模式串，n是s的长度，m是p的长度&#x2F;&#x2F; 求模式串的next数组for (int i &#x3D; 2, j &#x3D; 0; i &lt;&#x3D; m; i">
+<meta property="og:description" content="符号含义 T46 &#x3D; 主功能四六和弦（Tonic 6&#x2F;4）  K46 &#x3D; 终止四六和弦（Kadential 6&#x2F;4，德语Kadenz &#x3D; 终止）   这两个都是1级的四六和弦，但功能和用法完全不同。  T46（主功能四六和弦）基本特征 真正的主功能：具有主和弦的稳定性  结构稳定：可以独立存在  功能明确：承担主功能角色   典型用法进行示例： 1">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-09T04:41:44.000Z">
-<meta property="article:modified_time" content="2025-07-03T07:15:13.368Z">
+<meta property="article:published_time" content="2025-06-07T18:23:30.000Z">
+<meta property="article:modified_time" content="2025-07-03T07:21:45.981Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>算法模板2-3.KMP - Peixuan&#39;s Page</title>
+  <title>T46和K46的区别 - Peixuan&#39;s Page</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="算法模板2-3.KMP"></span>
+            <span id="subtitle" data-typed-text="T46和K46的区别"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-09 12:41" pubdate>
-          October 9, 2023 pm
+        <time datetime="2025-06-08 02:23" pubdate>
+          June 8, 2025 am
         </time>
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          10 mins
+          9 mins
         
       </span>
     
@@ -290,28 +290,178 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">算法模板2-3.KMP</h1>
+            <h1 id="seo-header">T46和K46的区别</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>有两个字符串 <code>S</code> 和 <code>p</code>，其中 <code>S</code> 是原串（长），<code>p</code>是模板串（短）。</p>
-<p>KMP用于字符串匹配：找到 <code>S</code> 中所有与 <code>p</code> 相同的子串，并返回每个子串开头字符的下标。</p>
-<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// s[]是长文本，p[]是模式串，n是s的长度，m是p的长度</span><br><br><span class="hljs-comment">// 求模式串的next数组</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123; <span class="hljs-comment">// i从2开始的原因：ne[1]不用算，ne[1]=0，第一个字母失败了只能从头开始</span><br>  <span class="hljs-keyword">while</span> (j &amp;&amp; p[i] != p[j + <span class="hljs-number">1</span>]) j = ne[j];<br>  <span class="hljs-keyword">if</span> (p[i] == p[j + <span class="hljs-number">1</span>]) j ++;<br>  ne[i] = j; <span class="hljs-comment">// 记录当前i对应的ne[i]</span><br>&#125;<br><br><span class="hljs-comment">// 匹配</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">0</span>; i &lt;= n; i ++) &#123;<br>  <span class="hljs-keyword">while</span> (j &amp;&amp; s[i] != p[j + <span class="hljs-number">1</span>]) j = ne[j]; <span class="hljs-comment">// j没有回到第一个字符且s[i]和p[j + 1]不能匹配：一直往后移动p串使得p[j + 1]之前的子串是匹配的</span><br>  <span class="hljs-keyword">if</span> (s[i] == p[j + <span class="hljs-number">1</span>]) j ++; <span class="hljs-comment">// 如果匹配了，j往后移动</span><br>  <span class="hljs-keyword">if</span> (j == m) &#123; <span class="hljs-comment">// 整个p串都匹配成功</span><br>    j = ne[j]; <span class="hljs-comment">// j还得退一步（试了下如果不加也能ac，因为在下一次循环的while中如果不匹配的话，反正也会执行j=ne[j]的？）</span><br>    <span class="hljs-comment">// 匹配成功之后的逻辑</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h2 id="符号含义"><a href="#符号含义" class="headerlink" title="符号含义"></a>符号含义</h2><ul>
+<li><p>T46 &#x3D; 主功能四六和弦（Tonic 6&#x2F;4）</p>
+</li>
+<li><p>K46 &#x3D; 终止四六和弦（Kadential 6&#x2F;4，德语Kadenz &#x3D; 终止）</p>
+</li>
+</ul>
+<p>这两个都是1级的四六和弦，但功能和用法完全不同。</p>
+<hr>
+<h2 id="T46（主功能四六和弦）"><a href="#T46（主功能四六和弦）" class="headerlink" title="T46（主功能四六和弦）"></a>T46（主功能四六和弦）</h2><h3 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h3><ul>
+<li><p>真正的主功能：具有主和弦的稳定性</p>
+</li>
+<li><p>结构稳定：可以独立存在</p>
+</li>
+<li><p>功能明确：承担主功能角色</p>
+</li>
+</ul>
+<h3 id="典型用法"><a href="#典型用法" class="headerlink" title="典型用法"></a>典型用法</h3><p>进行示例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">V - T46 - vi - IV - V - <span class="hljs-selector-tag">I</span><br>    ↑<br>   作为主功能出现<br></code></pre></td></tr></table></figure>
 
-<p>想不清楚的话拿个例子模拟一下：</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">s</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;abababc&quot;</span><br><span class="hljs-attribute">p</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;abababab&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="声部特点"><a href="#声部特点" class="headerlink" title="声部特点"></a>声部特点</h3><ul>
+<li><p>低音（五音）：相对稳定，不急于解决</p>
+</li>
+<li><p>可以跳进：低音可以跳跃进入</p>
+</li>
+<li><p>时值较长：通常占据较长时值</p>
+</li>
+</ul>
+<hr>
+<h2 id="K46（终止四六和弦）"><a href="#K46（终止四六和弦）" class="headerlink" title="K46（终止四六和弦）"></a>K46（终止四六和弦）</h2><h3 id="基本特征-1"><a href="#基本特征-1" class="headerlink" title="基本特征"></a>基本特征</h3><ul>
+<li><p>属功能性质：虽然是主和弦音，但功能类似属和弦</p>
+</li>
+<li><p>高度不稳定：必须解决到V级和弦</p>
+</li>
+<li><p>过渡性质：是向属和弦的过渡</p>
+</li>
+</ul>
+<h3 id="典型用法-1"><a href="#典型用法-1" class="headerlink" title="典型用法"></a>典型用法</h3><p>经典终止式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">I</span> - K46 - V - <span class="hljs-selector-tag">I</span><br>    ↑     ↑<br>  准备  解决<br></code></pre></td></tr></table></figure>
+
+<h3 id="声部特点-1"><a href="#声部特点-1" class="headerlink" title="声部特点"></a>声部特点</h3><ul>
+<li><p>低音（五音）：必须级进下行到导音</p>
+</li>
+<li><p>级进进入：低音通常级进进入</p>
+</li>
+<li><p>强拍位置：出现在强拍上</p>
+</li>
+<li><p>短时值：通常时值较短，快速过渡</p>
+</li>
+</ul>
+<hr>
+<h2 id="关键区别对比"><a href="#关键区别对比" class="headerlink" title="关键区别对比"></a>关键区别对比</h2><table>
+<thead>
+<tr>
+<th>方面</th>
+<th>T46</th>
+<th>K46</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>功能性质</td>
+<td>真正的主功能</td>
+<td>属功能倾向</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>相对稳定</td>
+<td>高度不稳定</td>
+</tr>
+<tr>
+<td>解决需求</td>
+<td>不强制解决</td>
+<td>必须解决到V</td>
+</tr>
+<tr>
+<td>低音进行</td>
+<td>可跳跃</td>
+<td>必须级进下行</td>
+</tr>
+<tr>
+<td>节拍位置</td>
+<td>任意</td>
+<td>通常在强拍</td>
+</tr>
+<tr>
+<td>后续和弦</td>
+<td>自由</td>
+<td>必须是V</td>
+</tr>
+<tr>
+<td>时值长短</td>
+<td>可长可短</td>
+<td>通常较短</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="实际辨别方法"><a href="#实际辨别方法" class="headerlink" title="实际辨别方法"></a>实际辨别方法</h2><h3 id="看前后和弦关系"><a href="#看前后和弦关系" class="headerlink" title="看前后和弦关系"></a>看前后和弦关系</h3><p>T46的情况：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">...</span> - V - I⁶₄ - vi - <span class="hljs-string">...</span><br>           ↑<br>         T46<br></code></pre></td></tr></table></figure>
+
+<p>K46的情况：  </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">... - <span class="hljs-selector-tag">I</span> - <span class="hljs-selector-tag">I</span>⁶₄ - V - <span class="hljs-selector-tag">I</span><br>           ↑<br>         K46<br></code></pre></td></tr></table></figure>
 
 
+<h3 id="看低音声部进行"><a href="#看低音声部进行" class="headerlink" title="看低音声部进行"></a>看低音声部进行</h3><p>T46：低音可以跳跃</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">G → C → <span class="hljs-selector-tag">A</span> → F ...<br></code></pre></td></tr></table></figure>
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="暴力算法"><a href="#暴力算法" class="headerlink" title="暴力算法"></a>暴力算法</h3><h4 id="时间复杂度-O-n-2"><a href="#时间复杂度-O-n-2" class="headerlink" title="时间复杂度 O(n^2)"></a>时间复杂度 <code>O(n^2)</code></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp">S[N], p[M]<br><br>vector&lt;<span class="hljs-type">int</span>&gt; res;<br>  <br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;<br>  <span class="hljs-type">bool</span> flag = <span class="hljs-literal">true</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j ++)<br>    <span class="hljs-keyword">if</span> (S[i + j - <span class="hljs-number">1</span>] != p[j]) &#123;<br>      flag = <span class="hljs-literal">false</span>;<br>      <span class="hljs-keyword">break</span>;<br>    &#125;<br>  <span class="hljs-keyword">if</span> (flag) res.<span class="hljs-built_in">push_back</span>(i);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><h4 id="时间复杂度-O-n"><a href="#时间复杂度-O-n" class="headerlink" title="时间复杂度 O(n)"></a>时间复杂度 <code>O(n)</code></h4><p>分析：在 <code>i</code> 循环 <code>n</code> 次的过程中，每次循环 <code>j</code> 最多会+1，<code>j</code> 总共最多会+n，因此 <code>j=ne[j]</code> 再怎么减都最多减n</p>
-<p>故总的时间复杂度是 <code>2n</code>，是 <code>O(n)</code> 的。</p>
-<h4 id="next-数组"><a href="#next-数组" class="headerlink" title="next 数组"></a><code>next</code> 数组</h4><p>对于模板串 <code>p</code> 中的每一个字符 <code>p[i]</code>，都进行一个预处理：求出一个最大长度 <code>x</code>，使得以 <code>p[i]</code> 为结尾的长度为 <code>x</code> 的子串和 <code>p</code> 开头的长度为 <code>x</code> 的子串相等。</p>
-<p><code>next[i] = j</code> 含义：<code>p[1, ..., j] = p[i - j + 1, ..., i]</code></p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>模板中两个字符串的下标都是从1开始。</p>
-<p><code>p</code> 中每次和<code>S[i]</code> 匹配的是 <code>p[j + 1]</code>，可以理解为 <code>j</code> 比 <code>i</code> 往前错一位，每次都只是试探一下 <code>p[j+1]</code> 能不能和 <code>S[i]</code> 匹配。</p>
+<p>K46：低音必须级进  </p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">C</span> → G → F<span class="hljs-comment"># → G</span><br>↑   ↑<br>K46 V<br></code></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="听觉差异"><a href="#听觉差异" class="headerlink" title="听觉差异"></a>听觉差异</h2><h3 id="T46的音响效果"><a href="#T46的音响效果" class="headerlink" title="T46的音响效果"></a>T46的音响效果</h3><ul>
+<li>柔和稳定</li>
+<li>主调色彩明显</li>
+<li>不急迫感</li>
+</ul>
+<h3 id="K46的音响效果"><a href="#K46的音响效果" class="headerlink" title="K46的音响效果"></a>K46的音响效果</h3><ul>
+<li>紧张等待</li>
+<li>强烈的向前推动力</li>
+<li>“悬而未决”的感觉</li>
+</ul>
+<hr>
+<h2 id="分析实例"><a href="#分析实例" class="headerlink" title="分析实例"></a>分析实例</h2><h3 id="巴赫众赞歌中的K46"><a href="#巴赫众赞歌中的K46" class="headerlink" title="巴赫众赞歌中的K46"></a>巴赫众赞歌中的K46</h3><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">和声进行：<span class="hljs-built_in">I</span> <span class="hljs-operator">-</span> <span class="hljs-variable">K46</span> <span class="hljs-operator">-</span> <span class="hljs-variable">V</span> <span class="hljs-operator">-</span> <span class="hljs-built_in">I</span><br><br>低音线：  <span class="hljs-built_in">C</span> <span class="hljs-operator">-</span>  <span class="hljs-variable">G</span>  <span class="hljs-operator">-</span> <span class="hljs-variable">B</span> <span class="hljs-operator">-</span> <span class="hljs-built_in">C</span><br></code></pre></td></tr></table></figure>
+
+<p>明显的终止准备功能</p>
+<h3 id="莫扎特奏鸣曲中的T46"><a href="#莫扎特奏鸣曲中的T46" class="headerlink" title="莫扎特奏鸣曲中的T46"></a>莫扎特奏鸣曲中的T46</h3><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">和声进行：<span class="hljs-variable">V</span> <span class="hljs-operator">-</span> <span class="hljs-variable">T46</span> <span class="hljs-operator">-</span> <span class="hljs-variable">vi</span> <span class="hljs-operator">-</span> <span class="hljs-variable">ii</span> <span class="hljs-operator">-</span> <span class="hljs-variable">V</span><br><br>低音线：  <span class="hljs-variable">G</span> <span class="hljs-operator">-</span>  <span class="hljs-built_in">C</span>  <span class="hljs-operator">-</span> <span class="hljs-variable">A</span>  <span class="hljs-operator">-</span> <span class="hljs-built_in">D</span> <span class="hljs-operator">-</span> <span class="hljs-variable">G</span><br></code></pre></td></tr></table></figure>
+
+<p>T46作为稳定的主功能出现</p>
+<hr>
+<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><h3 id="1-功能判断"><a href="#1-功能判断" class="headerlink" title="1. 功能判断"></a>1. 功能判断</h3><p>关键看后续和弦：</p>
+<ul>
+<li><p>如果后面是V → 很可能是K46</p>
+</li>
+<li><p>如果后面不是V → 很可能是T46</p>
+</li>
+</ul>
+<h3 id="2-低音分析"><a href="#2-低音分析" class="headerlink" title="2. 低音分析"></a>2. 低音分析</h3><p>观察低音声部的进行方向：</p>
+<ul>
+<li><p>级进下行到导音 → K46</p>
+</li>
+<li><p>其他进行 → T46</p>
+</li>
+</ul>
+<h3 id="3-和声语境"><a href="#3-和声语境" class="headerlink" title="3. 和声语境"></a>3. 和声语境</h3><p>分析整体和声语境：</p>
+<ul>
+<li><p>在终止式附近 → 倾向于K46</p>
+</li>
+<li><p>在乐句中间 → 倾向于T46</p>
+</li>
+</ul>
+<hr>
+<h2 id="实践练习"><a href="#实践练习" class="headerlink" title="实践练习"></a>实践练习</h2><h3 id="键盘练习"><a href="#键盘练习" class="headerlink" title="键盘练习"></a>键盘练习</h3><ol>
+<li><p>弹奏：I - K46 - V - I（感受紧张-解决）</p>
+</li>
+<li><p>弹奏：V - T46 - vi - IV（感受稳定的主功能）</p>
+</li>
+</ol>
+<h3 id="听辨练习"><a href="#听辨练习" class="headerlink" title="听辨练习"></a>听辨练习</h3><p>听古典作品中的四六和弦，判断是T46还是K46</p>
+<h3 id="分析练习"><a href="#分析练习" class="headerlink" title="分析练习"></a>分析练习</h3><p>找出熟悉的乐曲中的四六和弦，分析其功能类型</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>核心区别：</p>
+<ul>
+<li><p>T46 &#x3D; 主功能，相对稳定</p>
+</li>
+<li><p>K46 &#x3D; 属功能倾向，高度不稳定，必须解决</p>
+</li>
+</ul>
 
                 
               </div>
@@ -330,20 +480,13 @@
     
       <span class="category-chain">
         
-  <a href="/categories/algorithm/" class="category-chain-item">algorithm</a>
+  <a href="/categories/music/" class="category-chain-item">music</a>
   
   
     <span>></span>
     
-  <a href="/categories/algorithm/template/" class="category-chain-item">template</a>
+  <a href="/categories/music/harmony/" class="category-chain-item">harmony</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/algorithm/template/data-structure/" class="category-chain-item">data-structure</a>
-  
-  
-
   
 
   
@@ -364,8 +507,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>算法模板2-3.KMP</div>
-      <div>https://peixuanhu.github.io/posts/fca2cc32.html</div>
+      <div>T46和K46的区别</div>
+      <div>https://peixuanhu.github.io/posts/6c6944b1.html</div>
     </div>
     <div class="license-meta">
       
@@ -377,7 +520,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 9, 2023</div>
+          <div>June 8, 2025</div>
         </div>
       
       
@@ -414,9 +557,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/ef9bba37.html" title="算法模板2-4.Trie树">
+                      <a href="/posts/62d9da90.html" title="那不勒斯和弦">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法模板2-4.Trie树</span>
+                        <span class="hidden-mobile">那不勒斯和弦</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -424,8 +567,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/f726e612.html" title="算法模板2-2.栈和队列">
-                        <span class="hidden-mobile">算法模板2-2.栈和队列</span>
+                      <a href="/posts/eb76c54e.html" title="Prometheus的pull和push">
+                        <span class="hidden-mobile">Prometheus的pull和push</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,15 +16,15 @@
   <meta name="author" content="Peixuan Hu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Prometheus采用的是主动拉取(Pull)数据的方式,但也支持推送(Push)数据。 拉取(Pull)模式 - 主要方式:Prometheus server定期从配置的目标(targets)抓取指标数据被监控对象需要暴露HTTP接口(&#x2F;metrics)供Prometheus拉取优点:简单可靠,监控解耦,方便排查问题适用于大多数监控场景 推送(Push)模式 - 辅助方式:通过Pus">
+    <meta name="description" content="Prometheus采用的是主动拉取(Pull)数据的方式,但也支持推送(Push)数据。 拉取(Pull)模式 - 主要方式:Prometheus server定期从配置的目标(targets)抓取指标数据被监控对象需要暴露HTTP接口(&#x2F;metrics)供Prometheus拉取 优点:简单可靠,监控解耦,方便排查问题适用于大多数监控场景 推送(Push)模式 - 辅助方式:通过Pu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Prometheus的pull和push">
 <meta property="og:url" content="https://peixuanhu.github.io/posts/eb76c54e.html">
 <meta property="og:site_name" content="Peixuan&#39;s Page">
-<meta property="og:description" content="Prometheus采用的是主动拉取(Pull)数据的方式,但也支持推送(Push)数据。 拉取(Pull)模式 - 主要方式:Prometheus server定期从配置的目标(targets)抓取指标数据被监控对象需要暴露HTTP接口(&#x2F;metrics)供Prometheus拉取优点:简单可靠,监控解耦,方便排查问题适用于大多数监控场景 推送(Push)模式 - 辅助方式:通过Pus">
+<meta property="og:description" content="Prometheus采用的是主动拉取(Pull)数据的方式,但也支持推送(Push)数据。 拉取(Pull)模式 - 主要方式:Prometheus server定期从配置的目标(targets)抓取指标数据被监控对象需要暴露HTTP接口(&#x2F;metrics)供Prometheus拉取 优点:简单可靠,监控解耦,方便排查问题适用于大多数监控场景 推送(Push)模式 - 辅助方式:通过Pu">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-18T07:52:48.000Z">
-<meta property="article:modified_time" content="2025-05-18T17:08:33.434Z">
+<meta property="article:modified_time" content="2025-07-03T05:58:08.426Z">
 <meta property="article:author" content="Peixuan Hu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -296,12 +296,29 @@
               <div class="markdown-body">
                 
                 <p>Prometheus采用的是主动拉取(Pull)数据的方式,但也支持推送(Push)数据。</p>
-<h1 id="拉取-Pull-模式-主要方式"><a href="#拉取-Pull-模式-主要方式" class="headerlink" title="拉取(Pull)模式 - 主要方式:"></a>拉取(Pull)模式 - 主要方式:</h1><p>Prometheus server定期从配置的目标(targets)抓取指标数据<br>被监控对象需要暴露HTTP接口(&#x2F;metrics)供Prometheus拉取<br>优点:简单可靠,监控解耦,方便排查问题<br>适用于大多数监控场景</p>
-<h1 id="推送-Push-模式-辅助方式"><a href="#推送-Push-模式-辅助方式" class="headerlink" title="推送(Push)模式 - 辅助方式:"></a>推送(Push)模式 - 辅助方式:</h1><p>通过Pushgateway组件实现<br>被监控对象主动将数据推送到Pushgateway<br>Prometheus再从Pushgateway拉取数据<br>适用于:<br>短期jobs<br>防火墙内部服务<br>批处理任务</p>
-<p>总结:</p>
-<p>Pull是Prometheus的主要数据采集方式<br>Push通过Pushgateway实现,用于特殊场景<br>两种方式可以混合使用,根据实际需求选择</p>
-<h1 id="Pull适用场景："><a href="#Pull适用场景：" class="headerlink" title="Pull适用场景："></a>Pull适用场景：</h1><h2 id="长期运行的服务"><a href="#长期运行的服务" class="headerlink" title="长期运行的服务"></a>长期运行的服务</h2><p>如：<br>Web服务器<br>数据库<br>持续运行的应用程序<br>固定的基础设施监控</p>
-<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>服务状态可感知(up&#x2F;down)<br>便于服务发现<br>监控与应用解耦<br>数据采集可控<br>调试方便(可直接访问metrics接口)</p>
+<h1 id="拉取-Pull-模式-主要方式"><a href="#拉取-Pull-模式-主要方式" class="headerlink" title="拉取(Pull)模式 - 主要方式:"></a>拉取(Pull)模式 - 主要方式:</h1><p>Prometheus server定期从配置的目标(targets)抓取指标数据<br>被监控对象需要暴露HTTP接口(&#x2F;metrics)供Prometheus拉取</p>
+<p>优点:<br>简单可靠,监控解耦,方便排查问题<br>适用于大多数监控场景</p>
+<h1 id="推送-Push-模式-辅助方式"><a href="#推送-Push-模式-辅助方式" class="headerlink" title="推送(Push)模式 - 辅助方式:"></a>推送(Push)模式 - 辅助方式:</h1><p>通过Pushgateway组件实现<br>被监控对象主动将数据推送到Pushgateway<br>Prometheus再从Pushgateway拉取数据</p>
+<p>适用于:<br>短期jobs<br>防火墙内部服务<br>批处理任务</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h1><ul>
+<li>Pull是Prometheus的主要数据采集方式</li>
+<li>Push通过Pushgateway实现,用于特殊场景</li>
+</ul>
+<p>两种方式可以混合使用,根据实际需求选择</p>
+<h1 id="Pull适用场景："><a href="#Pull适用场景：" class="headerlink" title="Pull适用场景："></a>Pull适用场景：</h1><h2 id="长期运行的服务"><a href="#长期运行的服务" class="headerlink" title="长期运行的服务"></a>长期运行的服务</h2><p>如：</p>
+<ul>
+<li>Web服务器</li>
+<li>数据库</li>
+<li>持续运行的应用程序</li>
+<li>固定的基础设施监控</li>
+</ul>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><ul>
+<li>服务状态可感知(up&#x2F;down)</li>
+<li>便于服务发现</li>
+<li>监控与应用解耦</li>
+<li>数据采集可控</li>
+<li>调试方便(可直接访问metrics接口)</li>
+</ul>
 <h1 id="Push适用场景："><a href="#Push适用场景：" class="headerlink" title="Push适用场景："></a>Push适用场景：</h1><h2 id="短期任务-批处理作业："><a href="#短期任务-批处理作业：" class="headerlink" title="短期任务&#x2F;批处理作业："></a>短期任务&#x2F;批处理作业：</h2><p>定时任务<br>批处理程序<br>一次性任务</p>
 <h2 id="网络限制情况："><a href="#网络限制情况：" class="headerlink" title="网络限制情况："></a>网络限制情况：</h2><p>防火墙后的服务<br>动态IP&#x2F;端口的服务<br>无法直接访问的服务</p>
 <h2 id="不适合暴露HTTP端口的场景："><a href="#不适合暴露HTTP端口的场景：" class="headerlink" title="不适合暴露HTTP端口的场景："></a>不适合暴露HTTP端口的场景：</h2><p>物联网设备<br>移动应用<br>边缘计算节点</p>
@@ -362,7 +379,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Updated on</div>
-          <div>May 19, 2025</div>
+          <div>July 3, 2025</div>
         </div>
       
       
@@ -392,6 +409,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/6c6944b1.html" title="T46和K46的区别">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">T46和K46的区别</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
