@@ -226,6 +226,250 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/posts/6407ef8f.html" target="_self">
+          用户态和内核态
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/6407ef8f.html" target="_self">
+        <div>
+          用户态和内核态的区别用户态（User Mode）：  权限受限 不能直接访问硬件 不能执行特权指令 程序崩溃只影响当前进程  内核态（Kernel Mode）：  最高权限 可以直接访问硬件 可以执行特权指令 崩溃会导致系统宕机  用户态切换到内核态的3种方式用户态 -&gt; 内核态的切换（陷入内核）：  系统调用（System Call） 异常（Exception） 外部中断（Interrup
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-13 01:16" pubdate>
+              2025-05-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OS/" class="category-chain-item">OS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/53bb55f0.html" target="_self">
+          Spring 7种事务传播行为（Transaction Propagation）
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/53bb55f0.html" target="_self">
+        <div>
+          REQUIRED（默认） 1234567891011@Transactional(propagation = Propagation.REQUIRED)public class UserService &#123;        // 如果当前没有事务，就创建一个新事务    // 如果当前存在事务，就加入到这个事务中    @Transactional    public void create
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-11 01:39" pubdate>
+              2025-05-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/backend/" class="category-chain-item">backend</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/backend/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/db6f03b7.html" target="_self">
+          Java线程池的工作流程、7个参数、4种常见的线程池
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/db6f03b7.html" target="_self">
+        <div>
+          线程池的工作流程12345678910111213141516171819202122public class ThreadPoolExecutor &#123;    // 工作流程：    // 1. 如果核心线程数未满，创建核心线程执行任务    // 2. 如果核心线程数已满，将任务放入队列    // 3. 如果队列已满，创建非核心线程执行任务    // 4. 如果非核心线程数也达到最
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-11 01:36" pubdate>
+              2025-05-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/concurrent/" class="category-chain-item">concurrent</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/52e45240.html" target="_self">
+          Java实现代理的2种方式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/52e45240.html" target="_self">
+        <div>
+          Java中实现代理主要有两种方式：JDK动态代理和字节码增强（比如CGLIB）。 1.  JDK动态代理12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455// 1. 定义接口public interface UserService &#123;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-11 01:30" pubdate>
+              2025-05-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming-language/" class="category-chain-item">programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/programming-language/Java/" class="category-chain-item">Java</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/posts/3eb72480.html" target="_self">
           Spring Bean的4个生命周期
         </a>
@@ -597,273 +841,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/df19d329.html" target="_self">
-          MySQL知识总结
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/df19d329.html" target="_self">
-        <div>
-          存储引擎：MyISAM 和 InnoDB 有什么区别？总结：  InnoDB 支持行级别的锁粒度，MyISAM 不支持，只支持表级别的锁粒度。 MyISAM 不提供事务支持。InnoDB 提供事务支持，实现了 SQL 标准定义了四个隔离级别。 MyISAM 不支持外键，而 InnoDB 支持。 MyISAM 不支持 MVCC，而 InnoDB 支持。 虽然 MyISAM 引擎和 InnoDB 引擎
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-23 11:41" pubdate>
-              2025-03-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/database/" class="category-chain-item">database</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/database/MySQL/" class="category-chain-item">MySQL</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/b7fae525.html" target="_self">
-          <img src="https://s2.loli.net/2025/03/18/LmuQ1rjyPTZWwEB.png" srcset="/img/loading.gif" lazyload alt="Netty in Action 7 - EventLoop and threading model">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/b7fae525.html" target="_self">
-          Netty in Action 7 - EventLoop and threading model
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/posts/b7fae525.html" target="_self">
-        <div>
-          EventLoop 是框架实现高性能、异步事件驱动架构的核心组件之一。它负责处理网络 I&#x2F;O 事件、用户任务调度以及线程管理，是 Netty 实现高效并发的基础。 1. 线程模型基本的线程池化模式可以描述为：从池的空闲线程列表中选择一个Thread，并且指派它去运行一个已提交的任务（一个Runnable的实现）​；当任务完成时，将该Thread返回给该列表，使其可被重用。 虽然池化和重用
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-15 20:46" pubdate>
-              2025-03-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/backend/" class="category-chain-item">backend</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/backend/Netty/" class="category-chain-item">Netty</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/58f9f412.html" target="_self">
-          <img src="https://s2.loli.net/2025/04/13/nAsySvrxiBhLeIF.png" srcset="/img/loading.gif" lazyload alt="期权投资策略3 - 买入看涨期权">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/58f9f412.html" target="_self">
-          期权投资策略3 - 买入看涨期权
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/posts/58f9f412.html" target="_self">
-        <div>
-          一般而言，投资者用于买入看涨期权的资金不应当超过其风险资本的15%，因为它涉及相对大的风险。 1. 为什么要买入看涨期权为投资组合增加某种上行潜在收益有些投资者买入看涨期权是想在把风险控制在一个固定金额的情况下，为其组合增加某种上行潜在收益。例如，如果某个投资者在想限制下行风险时通常只购买低波动率、保守型的股票，那么，他也许可以考虑将小部分现金放到波动性更大的股票的看涨期权上。 在不错过市场的情况
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-13 20:28" pubdate>
-              2025-03-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/financing/" class="category-chain-item">financing</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/financing/%E6%9C%9F%E6%9D%83%E6%8A%95%E8%B5%84%E7%AD%96%E7%95%A5/" class="category-chain-item">期权投资策略</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/posts/ab126a8f.html" target="_self">
-          <img src="https://s2.loli.net/2025/03/12/WAX3UOeYiajfbwB.png" srcset="/img/loading.gif" lazyload alt="Netty in Action 6 - ChannelHandler &amp; ChannelPipeline">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/ab126a8f.html" target="_self">
-          Netty in Action 6 - ChannelHandler &amp; ChannelPipeline
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/posts/ab126a8f.html" target="_self">
-        <div>
-          ChannelHandler家族The Channel lifecycle12345678910111213141516171819202122public class ChannelLifecycleHandler extends ChannelInboundHandlerAdapter &#123;    @Override    public void channelRegistered(C
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-12 15:03" pubdate>
-              2025-03-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/backend/" class="category-chain-item">backend</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/backend/Netty/" class="category-chain-item">Netty</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/#board">18</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/#board">19</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
