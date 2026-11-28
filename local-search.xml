@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>效果器笔记｜Sidechain 侧链压缩</title>
+    <link href="/posts/86abbb4c.html"/>
+    <url>/posts/86abbb4c.html</url>
+    
+    <content type="html"><![CDATA[<p>今天接触到了效果器的 Sidechain（侧链）。用底鼓和贝斯来理解最直观：底鼓一响，贝斯就往下收一点，随后慢慢回到原来的音量。底鼓的起音因此更容易听清，贝斯在两拍之间还能撑住低频。</p><span id="more"></span><h2 id="底鼓触发，贝斯被压低"><a href="#底鼓触发，贝斯被压低" class="headerlink" title="底鼓触发，贝斯被压低"></a>底鼓触发，贝斯被压低</h2><p>Sidechain 指效果器用来检测信号的一条控制路径。压缩器通常检测正在处理的那条音轨。接入外部侧链后，压缩器可以用另一条音轨的电平来决定什么时候压缩、压多少。在这个例子里，压缩器插在贝斯轨上，底鼓送进侧链输入，所以<strong>底鼓负责触发，贝斯的音量发生变化</strong>。底鼓一击超过门限，贝斯就会被压低。这个短暂压低音量的动作也叫 <em>ducking</em>。 <a href="https://www.steinberg.help/r/cubase-artist/15.0/en/cubase_nuendo/topics/audio_effects/audio_effects_sidechain_input_using_compressor_t.html">Steinberg 的侧链压缩示例</a></p><h2 id="四个参数怎么听"><a href="#四个参数怎么听" class="headerlink" title="四个参数怎么听"></a>四个参数怎么听</h2><table><thead><tr><th>参数</th><th>听什么</th></tr></thead><tbody><tr><td>Threshold（门限）</td><td>底鼓要多响才会触发。门限调低，较轻的底鼓也可能触发。</td></tr><tr><td>Ratio（压缩比）</td><td>底鼓超过门限后，贝斯会被压下多少。固定门限和输入电平时，压缩比越高，降幅越大。</td></tr><tr><td>Attack（起动时间）</td><td>贝斯被压下去有多快。较快的起动能给底鼓的起音腾出空间。</td></tr><tr><td>Release（释放时间）</td><td>底鼓信号降下来以后，贝斯的音量回升有多快。释放时间拉长，贝斯会更晚恢复，回升也更容易听出节奏感。</td></tr></tbody></table><p>只想让底鼓清楚一点，可以从较浅的压缩开始。想做出电子音乐里明显的抽吸感（<em>pumping</em>），可以把侧链用在持续的合成器铺底（Pad）上，再跟着拍子调释放时间，让音量在两次底鼓之间回升。人声也可以触发伴奏轨上的压缩器，让伴奏在说话或演唱时短暂降低。 <a href="https://www.steinberg.help/r/cubase-pro/cubaseplugref/15.0/en/_shared/topics/plug_ref/compressor_r.html">Steinberg 的 Compressor 参数说明</a></p><h2 id="对比试听"><a href="#对比试听" class="headerlink" title="对比试听"></a>对比试听</h2><p>两段都是同一组底鼓和合成贝斯。试听时可以跟着底鼓数拍，注意每一下底鼓之后，贝斯的音量有没有回升。第二段把侧链压缩做得比较明显，方便听出变化。</p><p><strong>A · 关闭侧链压缩</strong></p><p><audio controls preload="none" aria-label="A：关闭侧链压缩" src="/audio/sidechain/before.m4a"></audio></p><p><strong>B · 开启侧链压缩</strong></p><p><audio controls preload="none" aria-label="B：开启侧链压缩" src="/audio/sidechain/after.m4a"></audio></p><h2 id="Cubase-实操"><a href="#Cubase-实操" class="headerlink" title="Cubase 实操"></a>Cubase 实操</h2><ol><li>在贝斯轨的 Inserts（插入效果）里加一个支持外部侧链的 Compressor。</li><li>在 Compressor 面板启用 Side-Chain，打开侧链路由设置，把底鼓轨选为触发源。</li><li>播放时看 Gain Reduction（增益衰减）表。调低 Threshold，直到表头跟着底鼓跳动。再一边旁通对比，一边调 Release，听贝斯什么时候恢复。</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>music</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>效果器</tag>
+      
+      <tag>混音</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>期权投资策略24 - 看跌期权比率价差</title>
     <link href="/posts/5a33aa82.html"/>
     <url>/posts/5a33aa82.html</url>
